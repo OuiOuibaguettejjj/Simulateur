@@ -87,35 +87,22 @@ export default {
 
     const assetResponse = await env.ASSETS.fetch(request);
     const pathname = url.pathname;
-    const isHtml = assetResponse.headers.get("content-type")?.includes("text/html");
-    if (!isHtml) return secure(assetResponse);
+    const needsEnhancements = /^(?:\/outil|\/conversion)\//.test(pathname) && assetResponse.headers.get("content-type")?.includes("text/html");
+    if (!needsEnhancements) return secure(assetResponse);
 
-    const needsCalculatorEnhancements = /^(?:\/outil|\/conversion)\//.test(pathname);
     let hasEnhancements = false;
-    let hasAdsenseMeta = false;
-
     const transformed = new HTMLRewriter()
       .on("script", {
         element(element) {
           const src = element.getAttribute("src");
-          if (src === "/enter-calcul.js" || src === "https://simulateur.site/enter-calcul.js") {
-            hasEnhancements = true;
-          }
-        }
-      })
-      .on('meta[name="google-adsense-account"]', {
-        element() {
-          hasAdsenseMeta = true;
+          if (src === "/enter-calcul.js" || src === "https://simulateur.site/enter-calcul.js") hasEnhancements = true;
         }
       })
       .on("head", {
         element(element) {
           element.onEndTag(() => {
-            if (!hasAdsenseMeta) {
-              element.append('<meta name="google-adsense-account" content="ca-pub-2924580037451268">', { html: true });
-            }
-            if (needsCalculatorEnhancements && !hasEnhancements) {
-              element.append('<script src="/enter-calcul.js" defer></script>', { html: true });
+            if (!hasEnhancements) {
+              element.before('<script src="/enter-calcul.js" defer></script>', { html: true });
             }
           });
         }
