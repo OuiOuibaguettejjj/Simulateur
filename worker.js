@@ -112,16 +112,16 @@ export default {
       })
       .on("head", {
         element(element) {
-          element.onEndTag(() => {
+          element.onEndTag(endTag => {
             if (!hasAdsense) {
-              element.before(
+              endTag.before(
                 '<script async nonce="' + nonce + '" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2924580037451268" crossorigin="anonymous"></script>',
                 { html: true }
               );
             }
 
             if (needsCalculatorEnhancements && !hasEnhancements) {
-              element.before('<script nonce="' + nonce + '" src="/enter-calcul.js" defer></script>', { html: true });
+              endTag.before('<script nonce="' + nonce + '" src="/enter-calcul.js" defer></script>', { html: true });
             }
           });
         }
