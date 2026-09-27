@@ -49,7 +49,7 @@
       ["rendement-locatif","Rendement locatif","Calculer la rentabilité d’un bien."],
       ["plus-value-immobiliere","Plus-value immobilière","Estimer une plus-value à la revente."]
     ]],
-    "impot-sur-le-revenu":["Fiscalité","/fiscalite/",[
+    "succession":["Fiscalité","/fiscalite/",[["donation","Droits de donation","Estimer les droits selon le lien de parenté."],["impot-sur-le-revenu","Impôt sur le revenu","Estimer l’impôt sur le revenu."],["assurance-vie","Assurance-vie","Comprendre le traitement fiscal de l’assurance-vie."]]],\n    "impot-sur-le-revenu":["Fiscalité","/fiscalite/",[
       ["tva","TVA : HT ↔ TTC","Calculer HT, TTC et TVA."],
       ["plus-value-mobiliere","Plus-value mobilière","Estimer l’imposition d’une plus-value."],
       ["donation","Donation","Estimer les droits selon le lien familial."],
