@@ -178,7 +178,7 @@ function taxFor(l,base){
      ...(second? [{label:"Au-delà de 24 430 €",taxable:second,rate:.45,duty:second*.45}]:[])
    ]};
  }
- const rate=(l==="neveu"||l==="collateral55")?.55:.60;
+ const rate=(l==="neveu"||l==="collateral55") ? .55 : .60;
  return {total:base*rate,rows:base>0?[{label:"Taux unique",taxable:base,rate,duty:base*rate}]:[]};
 }
 
