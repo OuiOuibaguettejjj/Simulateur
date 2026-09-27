@@ -112,10 +112,10 @@ export default {
         element(element) {
           element.onEndTag(() => {
             if (!hasAdsenseMeta) {
-              element.before('<meta name="google-adsense-account" content="ca-pub-2924580037451268">', { html: true });
+              element.append('<meta name="google-adsense-account" content="ca-pub-2924580037451268">', { html: true });
             }
             if (needsCalculatorEnhancements && !hasEnhancements) {
-              element.before('<script src="/enter-calcul.js" defer></script>', { html: true });
+              element.append('<script src="/enter-calcul.js" defer></script>', { html: true });
             }
           });
         }
