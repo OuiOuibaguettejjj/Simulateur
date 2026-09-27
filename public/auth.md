@@ -17,7 +17,9 @@ Credential use:
 
 ## Agent registration
 
-There is currently no agent account registration or provisioning endpoint because the public API does not require agent credentials.
+Registration/provisioning endpoint: None.
+
+No agent account registration or credential provisioning is required for the currently public resources.
 
 No OAuth Authorization Server or OAuth Protected Resource Metadata is advertised at this time. OAuth credentials should not be inferred from this document.
 
