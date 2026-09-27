@@ -69,7 +69,8 @@ export default {
           }),
           {
             "Access-Control-Allow-Origin": "https://simulateur.site",
-            "Link": "</.well-known/api-catalog>; rel="api-catalog", </api/devises/openapi.json>; rel="service-desc"; type="application/vnd.oai.openapi+json;version=3.1", </api/devises/docs/>; rel="service-doc"; type="text/html", </api/devises>; rel="describedby"
+            "Vary": "Origin",
+            "Link": '</.well-known/api-catalog>; rel="api-catalog", </api/devises/openapi.json>; rel="service-desc"; type="application/vnd.oai.openapi+json;version=3.1", </api/devises/docs/>; rel="service-doc"; type="text/html", </api/devises>; rel="describedby"'
           }
         );
       } catch {
