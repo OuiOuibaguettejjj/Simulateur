@@ -1,0 +1,57 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Simulateur API - Devises",
+    "version": "1.0.0",
+    "description": "Returns the latest ECB reference exchange rates used by Simulateur."
+  },
+  "servers": [
+    {
+      "url": "https://simulateur.site"
+    }
+  ],
+  "paths": {
+    "/api/devises": {
+      "get": {
+        "summary": "Get latest ECB exchange rates",
+        "operationId": "getExchangeRates",
+        "responses": {
+          "200": {
+            "description": "Latest exchange rates with EUR as the base currency.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["date", "rates", "source"],
+                  "properties": {
+                    "date": {
+                      "type": "string",
+                      "description": "ECB observation date."
+                    },
+                    "rates": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "number"
+                      },
+                      "description": "Currency rates expressed against EUR."
+                    },
+                    "source": {
+                      "type": "string",
+                      "const": "BCE"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "The ECB source is unavailable."
+          },
+          "405": {
+            "description": "Method not allowed."
+          }
+        }
+      }
+    }
+  }
+}
