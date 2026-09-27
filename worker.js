@@ -87,28 +87,60 @@ export default {
 
     const assetResponse = await env.ASSETS.fetch(request);
     const pathname = url.pathname;
-    const needsEnhancements = /^(?:\/outil|\/conversion)\//.test(pathname) && assetResponse.headers.get("content-type")?.includes("text/html");
-    if (!needsEnhancements) return secure(assetResponse);
+    const isHtml = assetResponse.headers.get("content-type")?.includes("text/html");
+    if (!isHtml) return secure(assetResponse);
 
+    const needsCalculatorEnhancements = /^(?:\/outil|\/conversion)\//.test(pathname);
+    const nonce = crypto.randomUUID().replaceAll("-", "");
     let hasEnhancements = false;
+    let hasAdsense = false;
+
     const transformed = new HTMLRewriter()
       .on("script", {
         element(element) {
           const src = element.getAttribute("src");
-          if (src === "/enter-calcul.js" || src === "https://simulateur.site/enter-calcul.js") hasEnhancements = true;
+          element.setAttribute("nonce", nonce);
+
+          if (src === "/enter-calcul.js" || src === "https://simulateur.site/enter-calcul.js") {
+            hasEnhancements = true;
+          }
+
+          if (src?.includes("pagead2.googlesyndication.com/pagead/js/adsbygoogle.js")) {
+            hasAdsense = true;
+          }
         }
       })
       .on("head", {
         element(element) {
           element.onEndTag(() => {
-            if (!hasEnhancements) {
-              element.before('<script src="/enter-calcul.js" defer></script>', { html: true });
+            if (!hasAdsense) {
+              element.before(
+                '<script async nonce="' + nonce + '" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2924580037451268" crossorigin="anonymous"></script>',
+                { html: true }
+              );
+            }
+
+            if (needsCalculatorEnhancements && !hasEnhancements) {
+              element.before('<script nonce="' + nonce + '" src="/enter-calcul.js" defer></script>', { html: true });
             }
           });
         }
       })
       .transform(assetResponse);
 
-    return secure(transformed);
+    const adsenseCsp = [
+      "default-src 'self' https:",
+      "base-uri 'self'",
+      "object-src 'none'",
+      "frame-ancestors 'none'",
+      "form-action 'self'",
+      "img-src 'self' data: https:",
+      "font-src 'self' https:",
+      "connect-src 'self' https:",
+      "style-src 'self' 'unsafe-inline' https:",
+      "script-src 'nonce-" + nonce + "' 'unsafe-inline' 'unsafe-eval' 'strict-dynamic' https: http:"
+    ].join("; ");
+
+    return secure(transformed, { "Content-Security-Policy": adsenseCsp });
   }
 };
