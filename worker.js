@@ -94,6 +94,7 @@ export default {
     const nonce = crypto.randomUUID().replaceAll("-", "");
     let hasEnhancements = false;
     let hasAdsense = false;
+    let hasAdsenseMeta = false;
 
     const transformed = new HTMLRewriter()
       .on("script", {
@@ -110,9 +111,26 @@ export default {
           }
         }
       })
+      .on("meta", {
+        element(element) {
+          if (
+            element.getAttribute("name")?.toLowerCase() === "google-adsense-account" &&
+            element.getAttribute("content") === "ca-pub-2924580037451268"
+          ) {
+            hasAdsenseMeta = true;
+          }
+        }
+      })
       .on("head", {
         element(element) {
           element.onEndTag(endTag => {
+            if (!hasAdsenseMeta) {
+              endTag.before(
+                '<meta name="google-adsense-account" content="ca-pub-2924580037451268">',
+                { html: true }
+              );
+            }
+
             if (!hasAdsense) {
               endTag.before(
                 '<script async nonce="' + nonce + '" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2924580037451268" crossorigin="anonymous"></script>',
