@@ -54,7 +54,8 @@
 <select id="lien">
 <option value="enfant">Enfant</option>
 <option value="ascendant">Parent ou autre ascendant</option>
-<option value="petit">Petit-enfant ou arrière-petit-enfant</option>
+<option value="petit">Petit-enfant ou arrière-petit-enfant (sans représentation)</option>
+<option value="petitRepresentation">Petit-enfant ou arrière-petit-enfant par représentation</option>
 <option value="frere">Frère ou sœur</option>
 <option value="neveu">Neveu ou nièce</option>
 <option value="collateral55">Autre parent jusqu'au 4e degré</option>
@@ -74,6 +75,11 @@
 <option value="non">Non</option>
 <option value="oui">Oui — célibataire/veuf/divorcé/séparé, + de 50 ans ou invalide, et cohabitation de 5 ans</option>
 </select>
+</div>
+<div id="representationBox" class="field" style="display:none">
+<label for="representationCount">Nombre de représentants issus de la même souche</label>
+<input id="representationCount" type="number" min="1" step="1" value="1" placeholder="1">
+<p class="succession-help">En cas de représentation, l'abattement de 100 000 € applicable à la souche représentée est réparti entre les représentants. Indiquez le nombre de représentants concernés par cette souche.</p>
 </div>
 
 <details class="succession-details">
@@ -194,6 +200,7 @@ window.TOOL={
  calc:function(){
    const part=Number(document.getElementById("part").value)||0;
    const lien=document.getElementById("lien").value;
+   const representationCount=Math.max(1,Math.floor(Number(document.getElementById("representationCount").value)||1));
    const handicap=document.getElementById("handicap").value==="oui";
    const siblingExempt=document.getElementById("siblingExempt").value==="oui";
    const abUsed=Math.max(0,Number(document.getElementById("abUsed").value)||0);
@@ -201,6 +208,7 @@ window.TOOL={
    const priorRights=Math.max(0,Number(document.getElementById("priorRights").value)||0);
 
    if(!Number.isFinite(part)||part<0) return "Renseignez une part nette valide.";
+   if(lien==="petitRepresentation" && (!Number.isFinite(representationCount)||representationCount<1)) return "Indiquez un nombre de représentants valide.";
    if([abUsed,priorTaxable,priorRights].some(v=>!Number.isFinite(v)||v<0)) return "Vérifiez les montants de donations antérieures.";
 
    if(lien==="conjoint"){
@@ -215,6 +223,7 @@ window.TOOL={
      enfant:100000,
      ascendant:100000,
      petit:1594,
+     petitRepresentation:100000/representationCount,
      frere:15932,
      neveu:7967,
      collateral55:1594,
@@ -263,9 +272,11 @@ window.TOOL={
 
 document.getElementById("lien").addEventListener("change",function(){
  document.getElementById("siblingBox").style.display=this.value==="frere"?"block":"none";
+ document.getElementById("representationBox").style.display=this.value==="petitRepresentation"?"block":"none";
 });
 document.addEventListener("DOMContentLoaded",function(){
  document.getElementById("siblingBox").style.display=document.getElementById("lien").value==="frere"?"block":"none";
+ document.getElementById("representationBox").style.display=document.getElementById("lien").value==="petitRepresentation"?"block":"none";
 });
 </script>
 </body>
