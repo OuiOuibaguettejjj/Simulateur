@@ -1,1 +1,268 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Calculateur droits de succession 2026 | Simulateur</title><meta name="description" content="Estimez les droits sur la part nette reçue selon le lien de parenté."><link rel="canonical" href="https://simulateur.site/outil/succession/"><link rel="stylesheet" href="/styles.css"><script src="/simulateurs.js" defer></script><script src="/enter-calcul.js" defer></script></head><body><header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a href="/conversions/">Conversions</a><a href="/comparateurs/">Comparateurs</a><a href="/a-propos/">À propos</a></nav></div></header><main><div class="wrap"><div class="breadcrumb"><a href="/calculateurs/">Calculateurs</a> · Calculateur droits de succession 2026</div><div class="tool"><div class="eyebrow" id="ey"></div><h1 id="title"></h1><p class="tool-intro" id="intro"></p><div id="fields"></div><button class="button-main" onclick="Simulateurs.calc()">Calculer</button><div class="result" id="result">Saisissez vos données puis lancez le calcul.</div><div class="formula"><strong>Méthode et sources</strong><p id="source"></p></div></div></div><section class="content-section"><h2>Comment sont calculés les droits de succession ?</h2><p>Le montant dépend principalement de la part nette reçue et du lien de parenté avec le défunt. Un abattement est appliqué avant le barème correspondant au lien de parenté.</p><p>En ligne directe, le barème est progressif. Les frères et sœurs, neveux et nièces et autres bénéficiaires relèvent de règles différentes. Certaines personnes ou certains biens peuvent également bénéficier d'exonérations.</p><h2>Pourquoi cette estimation est volontairement simple</h2><p>Une succession réelle peut nécessiter de tenir compte du conjoint ou partenaire, d'un testament, de donations antérieures, d'une assurance-vie, du patrimoine du défunt et de la situation des héritiers. Le résultat de cette page ne remplace donc pas le calcul complet d'une succession.</p><p><a href="https://www.service-public.fr/particuliers/vosdroits/R47789" target="_blank" rel="noopener">Source officielle : Service-Public — simulateur des droits de succession</a></p></section></main><footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cgu/">CGU</a></div></div></footer><script>const F={text:(i,l,p="")=>'<div class="field"><label for="'+i+'">'+l+'</label><input id="'+i+'" type="number" min="0" step="any" placeholder="'+p+'"></div>',select:(i,l,o)=>'<div class="field"><label for="'+i+'">'+l+'</label><select id="'+i+'">'+o.map(x=>'<option value="'+x[0]+'">'+x[1]+'</option>').join('')+'</select></div>',row:a=>'<div class="row">'+a.join('')+'</div>'};window.TOOL={ey:"PATRIMOINE",title:"Calculateur droits de succession 2026",intro:"Estimez les droits sur la part nette reçue selon le lien de parenté.",fields:function(){return F.row([F.text("part","Part nette reçue (€)","200000"),F.select("lien","Lien",[["enfant","Enfant / parent"],["frere","Frère ou sœur"],["neveu","Neveu / nièce"],["autre","Autre"]])])+F.row([F.select("handicap","Abattement handicap",[["non","Non"],["oui","Oui"]])])},calc:function(){const p=+this.$('part').value||0,l=this.$('lien').value,h=this.$('handicap').value==='oui';if(p<0)return 'Renseignez une part valide.';const ab={enfant:100000,frere:15932,neveu:7967,autre:0}[l]+(h?159325:0),x=Math.max(0,p-ab);let t=0;if(l==='enfant'){const b=[[8072,.05],[12109,.10],[15932,.15],[552324,.20],[902838,.30],[1805677,.40],[Infinity,.45]];let q=0;for(const z of b){const v=Math.max(0,Math.min(x,z[0])-q);t+=v*z[1];q=z[0];if(x<=z[0])break}}else if(l==='frere')t=Math.min(x,24430)*.35+Math.max(0,x-24430)*.45;else t=x*(l==='neveu'?.55:.60);return '<strong>Droits estimés : '+this.euro(t)+'</strong><br><br>Abattement : '+this.euro(ab)+'<br>Part taxable : '+this.euro(x)+'<br>Net après droits : '+this.euro(p-t)+'<p class="small">Les exonérations particulières, conjoint/Pacs, assurance-vie et donations antérieures ne sont pas reproduites.</p>'},source:"Service-Public : les droits dépendent du lien de parenté et des abattements. Abattements usuels : 100 000 € en ligne directe, 15 932 € entre frères/sœurs, 7 967 € entre oncle/tante et neveu/nièce ; abattement supplémentaire de 159 325 € pour personne handicapée. Vérifiez la situation complète auprès d’un notaire."};window.addEventListener("DOMContentLoaded",()=>Simulateurs.render());</script></body></html>
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Calculateur droits de succession 2026 | Simulateur</title>
+<meta name="description" content="Calculez une estimation détaillée des droits de succession 2026 selon le lien de parenté, les abattements, une éventuelle exonération et les donations antérieures de moins de 15 ans.">
+<link rel="canonical" href="https://simulateur.site/outil/succession/">
+<link rel="stylesheet" href="/styles.css">
+<script src="/simulateurs.js" defer></script>
+<script src="/enter-calcul.js" defer></script>
+<style>
+.succession-help{font-size:.84rem;color:var(--muted);margin:-7px 0 18px}
+.succession-details{margin-top:20px;border:1px solid var(--line);border-radius:11px;background:#fff}
+.succession-details summary{cursor:pointer;padding:14px 16px;font-weight:900}
+.succession-details .details-body{padding:0 16px 16px}
+.tax-breakdown{margin-top:18px;border:1px solid var(--line);border-radius:11px;overflow:hidden;background:#fff}
+.tax-breakdown table{width:100%;border-collapse:collapse;font-size:.88rem}
+.tax-breakdown th,.tax-breakdown td{padding:9px 11px;border-bottom:1px solid var(--line);text-align:right}
+.tax-breakdown th:first-child,.tax-breakdown td:first-child{text-align:left}
+.tax-breakdown tr:last-child td{border-bottom:0}
+.tax-breakdown th{background:#f0eadf;font-size:.76rem;text-transform:uppercase;letter-spacing:.06em}
+.tax-note{margin-top:12px;font-size:.8rem;color:var(--muted)}
+.source-links{margin:8px 0 0;padding-left:18px}
+.source-links li{margin:4px 0}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+<a class="logo" href="/">Simulateur<span>.</span></a>
+<nav class="navlinks">
+<a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a href="/conversions/">Conversions</a><a href="/comparateurs/">Comparateurs</a><a href="/a-propos/">À propos</a>
+</nav>
+</div></header>
+
+<main>
+<div class="wrap">
+<div class="breadcrumb"><a href="/calculateurs/">Calculateurs</a> · Calculateur droits de succession 2026</div>
+
+<div class="tool">
+<div class="eyebrow">PATRIMOINE</div>
+<h1>Calculateur droits de succession 2026</h1>
+<p class="tool-intro">Estimez les droits à payer sur la part nette recueillie, avec le barème 2026, les principaux abattements et les exonérations les plus courantes.</p>
+
+<div class="field">
+<label for="part">Part nette reçue (€)</label>
+<input id="part" type="number" min="0" step="1" placeholder="200000" value="200000">
+</div>
+<p class="succession-help">Il s'agit de la valeur nette revenant à ce bénéficiaire après prise en compte du passif de la succession. Si vous partez du patrimoine brut du défunt, le calcul est différent.</p>
+
+<div class="row">
+<div class="field">
+<label for="lien">Lien avec le défunt</label>
+<select id="lien">
+<option value="enfant">Enfant</option>
+<option value="ascendant">Parent ou autre ascendant</option>
+<option value="petit">Petit-enfant ou arrière-petit-enfant</option>
+<option value="frere">Frère ou sœur</option>
+<option value="neveu">Neveu ou nièce</option>
+<option value="collateral55">Autre parent jusqu'au 4e degré</option>
+<option value="autre">Autre personne / sans lien</option>
+<option value="conjoint">Époux ou partenaire de PACS</option>
+</select>
+</div>
+<div class="field">
+<label for="handicap">Bénéficiaire en situation de handicap ouvrant droit à l'abattement spécifique</label>
+<select id="handicap"><option value="non">Non</option><option value="oui">Oui</option></select>
+</div>
+</div>
+
+<div id="siblingBox" class="field" style="display:none">
+<label for="siblingExempt">Frère ou sœur : conditions d'exonération remplies</label>
+<select id="siblingExempt">
+<option value="non">Non</option>
+<option value="oui">Oui — célibataire/veuf/divorcé/séparé, + de 50 ans ou invalide, et cohabitation de 5 ans</option>
+</select>
+</div>
+
+<details class="succession-details">
+<summary>Prendre en compte les donations de moins de 15 ans</summary>
+<div class="details-body">
+<p class="succession-help">Les donations antérieures entre le même donateur et le même bénéficiaire peuvent réduire l'abattement disponible et les tranches du barème. Laissez 0 si aucune donation concernée n'existe ou si vous souhaitez une estimation simplifiée.</p>
+<div class="row">
+<div class="field">
+<label for="abUsed">Abattement déjà utilisé sur ces donations (€)</label>
+<input id="abUsed" type="number" min="0" step="1" value="0" placeholder="0">
+</div>
+<div class="field">
+<label for="priorTaxable">Part taxable déjà soumise aux droits (€)</label>
+<input id="priorTaxable" type="number" min="0" step="1" value="0" placeholder="0">
+</div>
+</div>
+<div class="field">
+<label for="priorRights">Droits déjà acquittés sur ces donations (€)</label>
+<input id="priorRights" type="number" min="0" step="1" value="0" placeholder="0">
+</div>
+<p class="succession-help">Ces trois montants doivent correspondre aux donations de moins de 15 ans faites par le même donateur au même bénéficiaire. Une donation de plus de 15 ans n'est en principe plus rappelée fiscalement.</p>
+</div>
+</details>
+
+<button class="button-main" onclick="Simulateurs.calc()">Calculer</button>
+<div class="result" id="result">Saisissez vos données puis lancez le calcul.</div>
+
+<div class="formula">
+<strong>Méthode et sources</strong>
+<p id="source">Le calcul applique les règles françaises de taxation des mutations à titre gratuit vérifiées pour 2026. La part taxable est arrondie à l'euro près avant application du tarif.</p>
+<ul class="source-links">
+<li><a href="https://www.impots.gouv.fr/particulier/questions/comment-dois-je-calculer-les-droits-de-succession" target="_blank" rel="noopener">impots.gouv.fr — Comment calculer les droits de succession ?</a></li>
+<li><a href="https://www.service-public.fr/particuliers/vosdroits/F14198" target="_blank" rel="noopener">Service-Public — Évaluation de la succession et calcul des droits</a></li>
+<li><a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000053779457" target="_blank" rel="noopener">Légifrance — Code général des impôts, articles 777 et suivants</a></li>
+<li><a href="https://bofip.impots.gouv.fr/bofip/1767-PGP.html/identifiant=BOI-ENR-DMTG-10-50-50-20230711" target="_blank" rel="noopener">BOFiP — Donations antérieures et rappel fiscal sur 15 ans</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+<section class="content-section">
+<h2>Comment sont calculés les droits de succession ?</h2>
+<p>Le calcul porte sur la <strong>part nette revenant à chaque bénéficiaire</strong>. Un abattement dépendant du lien avec le défunt est d'abord appliqué, puis le solde taxable est soumis au tarif correspondant.</p>
+<p>En ligne directe, le barème est progressif de 5 % à 45 %. Les frères et sœurs relèvent d'un barème de 35 % puis 45 %, tandis que les parents jusqu'au 4e degré sont taxés à 55 % et les autres bénéficiaires à 60 %.</p>
+
+<h2>Les principaux abattements pris en compte</h2>
+<p>En 2026, l'abattement est notamment de <strong>100 000 €</strong> pour un enfant ou un ascendant, <strong>15 932 €</strong> pour un frère ou une sœur, <strong>7 967 €</strong> pour un neveu ou une nièce et <strong>1 594 €</strong> lorsqu'aucun autre abattement personnel ne s'applique. Un abattement supplémentaire de <strong>159 325 €</strong> peut s'appliquer à une personne handicapée remplissant les conditions légales.</p>
+
+<h2>Cas exonérés ou particuliers</h2>
+<p>Le conjoint survivant et le partenaire de PACS sont exonérés de droits de succession. Un frère ou une sœur peut également être exonéré si les conditions cumulatives prévues par la loi sont remplies. L'assurance-vie, les transmissions d'entreprise, le démembrement, certaines donations et plusieurs exonérations spécifiques obéissent à des règles particulières qui ne sont pas entièrement reproduites ici.</p>
+
+<h2>Une estimation fiscale, pas un règlement de succession</h2>
+<p>Le simulateur estime les droits dus sur une part donnée. Il ne détermine pas la dévolution civile, la réserve héréditaire, la répartition entre héritiers ou la valeur fiscale de chaque actif. Pour une succession complexe, le calcul de référence reste celui effectué dans le cadre de la déclaration de succession.</p>
+
+<p><a href="https://www.service-public.fr/particuliers/vosdroits/R47789" target="_blank" rel="noopener"><strong>Voir le simulateur officiel de Service-Public</strong></a></p>
+</section>
+</main>
+
+<footer><div class="wrap"><div class="footerlinks">
+<a href="/">Accueil</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cgu/">CGU</a>
+</div></div></footer>
+
+<script>
+const F={
+ text:(i,l,p="")=>'<div class="field"><label for="'+i+'">'+l+'</label><input id="'+i+'" type="number" min="0" step="1" placeholder="'+p+'"></div>',
+ select:(i,l,o)=>'<div class="field"><label for="'+i+'">'+l+'</label><select id="'+i+'">'+o.map(x=>'<option value="'+x[0]+'">'+x[1]+'</option>').join('')+'</select></div>',
+ row:a=>'<div class="row">'+a.join('')+'</div>'
+};
+
+function euro(v){return Number(v).toLocaleString("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:0});}
+function roundEuro(v){return Math.round(Number(v)||0);}
+function progressive(base){
+ const brackets=[
+  [8072,.05,"0 à 8 072 €"],
+  [12109,.10,"8 072 à 12 109 €"],
+  [15932,.15,"12 109 à 15 932 €"],
+  [552324,.20,"15 932 à 552 324 €"],
+  [902838,.30,"552 324 à 902 838 €"],
+  [1805677,.40,"902 838 à 1 805 677 €"],
+  [Infinity,.45,"Au-delà de 1 805 677 €"]
+ ];
+ let total=0,from=0,rows=[];
+ for(const [to,rate,label] of brackets){
+   const taxable=Math.max(0,Math.min(base,to)-from);
+   const duty=taxable*rate;
+   if(taxable>0) rows.push({label,taxable,rate,duty});
+   total+=duty;
+   from=to;
+   if(base<=to) break;
+ }
+ return {total,rows};
+}
+function taxFor(l,base){
+ if(l==="enfant"||l==="ascendant"||l==="petit"||l==="petit"){
+   return progressive(base);
+ }
+ if(l==="frere"){
+   const first=Math.min(base,24430);
+   const second=Math.max(0,base-24430);
+   return {total:first*.35+second*.45,rows:[
+     ...(first? [{label:"Jusqu'à 24 430 €",taxable:first,rate:.35,duty:first*.35}]:[]),
+     ...(second? [{label:"Au-delà de 24 430 €",taxable:second,rate:.45,duty:second*.45}]:[])
+   ]};
+ }
+ const rate=(l==="neveu"||l==="collateral55")?.55:.60;
+ return {total:base*rate,rows:base>0?[{label:"Taux unique",taxable:base,rate,duty:base*rate}]:[]};
+}
+
+window.TOOL={
+ ey:"PATRIMOINE",
+ title:"Calculateur droits de succession 2026",
+ intro:"Estimez les droits à payer sur la part nette recueillie, avec les principaux abattements et les règles fiscales 2026.",
+ fields:function(){return "";},
+ calc:function(){
+   const part=Number(document.getElementById("part").value)||0;
+   const lien=document.getElementById("lien").value;
+   const handicap=document.getElementById("handicap").value==="oui";
+   const siblingExempt=document.getElementById("siblingExempt").value==="oui";
+   const abUsed=Math.max(0,Number(document.getElementById("abUsed").value)||0);
+   const priorTaxable=Math.max(0,Number(document.getElementById("priorTaxable").value)||0);
+   const priorRights=Math.max(0,Number(document.getElementById("priorRights").value)||0);
+
+   if(!Number.isFinite(part)||part<0) return "Renseignez une part nette valide.";
+   if([abUsed,priorTaxable,priorRights].some(v=>!Number.isFinite(v)||v<0)) return "Vérifiez les montants de donations antérieures.";
+
+   if(lien==="conjoint"){
+     return '<strong>Droits de succession estimés : 0 €</strong><br><br>Le conjoint survivant et le partenaire de PACS sont exonérés de droits de succession.<p class="small">Le résultat concerne les droits de succession, pas les éventuels frais civils ou notariaux.</p>';
+   }
+
+   if(lien==="frere" && siblingExempt){
+     return '<strong>Droits de succession estimés : 0 €</strong><br><br>Le frère ou la sœur est exonéré lorsque les conditions légales cumulatives sont remplies : notamment situation familiale, âge ou invalidité et cohabitation habituelle avec le défunt pendant les 5 années précédant le décès.<p class="small">Le simulateur vous demande de confirmer vous-même ces conditions ; il ne constitue pas une vérification juridique de leur réalité.</p>';
+   }
+
+   const standard={
+     enfant:100000,
+     ascendant:100000,
+     petit:1594,
+     frere:15932,
+     neveu:7967,
+     collateral55:1594,
+     autre:1594
+   }[lien]||1594;
+
+   const disability=handicap?159325:0;
+   const totalAllowance=Math.max(0,standard+disability);
+   const remainingAllowance=Math.max(0,totalAllowance-abUsed);
+   const currentTaxable=roundEuro(Math.max(0,part-remainingAllowance));
+
+   const totalTaxable=roundEuro(priorTaxable+currentTaxable);
+   const calc=taxFor(lien,totalTaxable);
+   const totalTheoreticalRights=roundEuro(calc.total);
+   const currentRights=roundEuro(Math.max(0,totalTheoreticalRights-priorRights));
+
+   const netAfter=Math.max(0,part-currentRights);
+   const effectiveRate=part>0?currentRights/part:0;
+   const marginal=calc.rows.length?calc.rows[calc.rows.length-1].rate:0;
+
+   let rows="";
+   if(calc.rows.length){
+     rows='<div class="tax-breakdown"><table><thead><tr><th>Tranche</th><th>Base</th><th>Taux</th><th>Droits</th></tr></thead><tbody>'+
+       calc.rows.map(r=>'<tr><td>'+r.label+'</td><td>'+euro(r.taxable)+'</td><td>'+Math.round(r.rate*100)+' %</td><td>'+euro(r.duty)+'</td></tr>').join('')+
+       '<tr><td><strong>Total théorique sur la base rappelée</strong></td><td>'+euro(totalTaxable)+'</td><td>—</td><td><strong>'+euro(totalTheoreticalRights)+'</strong></td></tr>'+
+       '</tbody></table></div>';
+   }
+
+   const priorInfo=(priorTaxable>0||priorRights>0||abUsed>0)
+     ?'<br><span class="small">Après prise en compte des donations de moins de 15 ans déclarées ci-dessus : '+euro(priorTaxable)+' de part taxable antérieure et '+euro(priorRights)+' de droits déjà acquittés.</span>'
+     :"";
+
+   return '<div class="result-main"><strong>Droits de succession estimés : '+euro(currentRights)+'</strong>'+
+     '<div class="takeaway"><div class="takeaway-title">À retenir</div><div class="takeaway-grid">'+
+     '<div class="takeaway-item"><small>Part nette reçue</small><strong>'+euro(part)+'</strong></div>'+
+     '<div class="takeaway-item"><small>Abattement disponible</small><strong>'+euro(remainingAllowance)+'</strong></div>'+
+     '<div class="takeaway-item"><small>Part taxable actuelle</small><strong>'+euro(currentTaxable)+'</strong></div>'+
+     '</div></div>'+
+     rows+
+     '<p class="tax-note">Base taxable actuelle : '+euro(currentTaxable)+'. Base fiscale reconstituée avec les donations rappelées : '+euro(totalTaxable)+'. Taux marginal de la base reconstituée : '+Math.round(marginal*100)+' %. Taux effectif sur la part reçue : '+(effectiveRate*100).toLocaleString("fr-FR",{maximumFractionDigits:1})+' %.'+
+     priorInfo+
+     '</p><p><strong>Net après droits : '+euro(netAfter)+'</strong></p>'+
+     '<p class="small">La base taxable est arrondie à l’euro près avant application du tarif. Le calcul des donations antérieures suppose que les montants saisis concernent le même donateur et le même bénéficiaire et qu’ils sont correctement documentés.</p></div>';
+   }
+};
+
+document.getElementById("lien").addEventListener("change",function(){
+ document.getElementById("siblingBox").style.display=this.value==="frere"?"block":"none";
+});
+document.addEventListener("DOMContentLoaded",function(){
+ document.getElementById("siblingBox").style.display=document.getElementById("lien").value==="frere"?"block":"none";
+});
+</script>
+</body>
+</html>
