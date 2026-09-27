@@ -90,3 +90,40 @@ footer{border-top:1px solid var(--ink);padding:30px 0;background:#eee9df}
 @media(max-width:650px){.takeaway-grid,.scenario-grid{grid-template-columns:1fr}}
 
 .popular-grid .popular-card{min-height:205px;position:relative;border-width:2px}.popular-grid .popular-card:first-child,.popular-grid .popular-card:nth-child(2){border-top:5px solid var(--accent)}.popular-card:after{content:"";position:absolute;top:13px;right:13px;width:7px;height:7px;border-radius:50%;background:var(--accent)}
+
+/* Succession — premium calculator UI */
+.succession-shell{max-width:920px;margin:auto;border-radius:24px;overflow:hidden;box-shadow:0 24px 70px rgba(23,23,19,.12);border:1px solid var(--ink);background:var(--card)}
+.succession-hero{padding:44px 46px 34px;background:linear-gradient(135deg,#17483d 0%,#123a32 58%,#102f2a 100%);color:#fff;position:relative;overflow:hidden}
+.succession-hero:after{content:"€";position:absolute;right:35px;top:-55px;font-size:15rem;line-height:1;font-weight:950;color:rgba(255,255,255,.055);transform:rotate(8deg)}
+.succession-hero .eyebrow{color:#ffb29f}
+.succession-hero h1{position:relative;z-index:1;font-size:clamp(2.7rem,6vw,4.9rem);line-height:.94;letter-spacing:-.075em;max-width:760px;margin:0 0 15px}
+.succession-hero .tool-intro{position:relative;z-index:1;color:#dbe6df;max-width:650px;font-size:1.05rem;margin:0}
+.trust-row{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.trust-row span{font-size:.76rem;font-weight:800;padding:7px 10px;border:1px solid rgba(255,255,255,.22);border-radius:999px;background:rgba(255,255,255,.07)}
+.succession-tool{max-width:none;border:0;border-radius:0;box-shadow:none;padding:38px 46px 44px;border-top:1px solid rgba(23,23,19,.12)}
+.succession-tool .field label{font-size:.9rem}
+.succession-tool .field input,.succession-tool .field select{min-height:48px;border-color:#c8c0b3;background:#fff}
+.succession-tool .field input:hover,.succession-tool .field select:hover{border-color:var(--accent)}
+.succession-tool .button-main{min-height:52px;font-size:1rem;letter-spacing:-.01em;box-shadow:0 5px 0 #bd321c;transition:transform .12s,box-shadow .12s}
+.succession-tool .button-main:hover{transform:translateY(2px);box-shadow:0 3px 0 #bd321c}
+.succession-tool .button-main span{font-size:1.2em;margin-left:5px}
+.privacy-note{text-align:center;color:var(--muted);font-size:.75rem;margin:10px 0 0}
+.succession-tool .result{background:linear-gradient(145deg,#f4f7f4,#edf3ef);border-color:#b9c9bf;padding:24px}
+.succession-tool .result-main>strong{font-size:clamp(1.7rem,4vw,2.25rem);letter-spacing:-.045em}
+.succession-tool .takeaway{border-color:#17483d;background:#edf3ef}
+.succession-tool .takeaway-item{box-shadow:0 1px 2px rgba(23,23,19,.05)}
+.succession-tool .tax-breakdown{box-shadow:0 3px 12px rgba(23,23,19,.04)}
+.succession-content{max-width:920px;margin:52px auto 0;padding:0 24px}
+.content-intro{border-top:1px solid var(--ink);padding-top:24px;margin-bottom:30px}
+.content-intro h2{font-size:clamp(2rem,4vw,3rem);line-height:1;letter-spacing:-.06em;margin:0 0 10px}
+.content-intro p{color:var(--muted);margin:0}
+.succession-details{background:#fbfaf6;border-color:#cfc7ba}
+.succession-details summary{list-style:none}
+.succession-details summary::-webkit-details-marker{display:none}
+.succession-details summary:after{content:"+";float:right;font-size:1.3rem;line-height:1}
+.succession-details[open] summary:after{content:"−"}
+@media(max-width:650px){
+ .succession-hero{padding:32px 22px 28px}.succession-hero h1{font-size:3rem}.succession-hero:after{right:-5px;font-size:9rem}
+ .succession-tool{padding:27px 20px 32px}.succession-content{padding:0 20px}
+ .trust-row{gap:6px}.trust-row span{font-size:.7rem}
+}
