@@ -130,12 +130,12 @@
       if(!tool){ $("result").textContent="Calculateur indisponible."; return; }
       try{
         $("ey").textContent=tool.ey||"";
-        $("title").textContent=tool.title||"";
-        $("intro").textContent=tool.intro||"";
+        $("title").textContent=tool.displayTitle||tool.title||"";
+        $("intro").textContent=tool.displayIntro||tool.intro||"";
         const renderedFields=typeof tool.fields==="function"?tool.fields():"";
         if(renderedFields) $("fields").innerHTML=renderedFields;
         $("source").textContent=tool.source||"";
-        document.title=(tool.title||"Simulateur")+" | Simulateur";
+        document.title=(tool.seoTitle||tool.title||"Simulateur")+" | Simulateur";
         const slug=(location.pathname.match(/\/outil\/([^/]+)/)||[])[1];
         const group=slug&&groups[slug];
         addBreadcrumbSchema(tool,slug,group);
