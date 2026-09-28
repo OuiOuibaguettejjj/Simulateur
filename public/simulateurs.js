@@ -96,6 +96,7 @@
     const itemList=[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"}];
     if(group) itemList.push({"@type":"ListItem","position":2,"name":group[0],"item":"https://simulateur.site"+group[1]});
     itemList.push({"@type":"ListItem","position":itemList.length+1,"name":tool.title||document.title,"item":location.href.split("#")[0]});
+    if([...document.querySelectorAll('script[type="application/ld+json"]')].some(node=>/"@type"\s*:\s*"BreadcrumbList"/.test(node.textContent||""))) return;
     const script=document.createElement("script");
     script.type="application/ld+json";
     script.textContent=JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":itemList});
@@ -136,7 +137,6 @@
         const renderedFields=typeof tool.fields==="function"?tool.fields():"";
         if(renderedFields) $("fields").innerHTML=renderedFields;
         $("source").textContent=tool.source||"";
-        document.title=(tool.seoTitle||tool.title||"Simulateur")+" | Simulateur";
         const slug=(location.pathname.match(/\/outil\/([^/]+)/)||[])[1];
         const group=slug&&groups[slug];
         addBreadcrumbSchema(tool,slug,group);
