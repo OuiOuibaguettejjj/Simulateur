@@ -82,7 +82,7 @@ window.TOOL={
      ["aidBelowForfait","Vous percevez une aide au logement inférieure au forfait applicable"],
      ["forfait","Vous percevez une aide au logement au moins égale au forfait, êtes logé(e) gratuitement ou êtes propriétaire dans une situation soumise au forfait"]
    ])
-   +F.number("housingAid","Montant mensuel de l'aide au logement (€) — uniquement si elle est inférieure au forfait","0")
+   +F.number("housingAid","Montant mensuel de l’aide au logement (€) — uniquement si elle est inférieure au forfait","0")
    +'<h3 style="margin-top:2rem">Ressources des trois mois de référence</h3><p class="small">Pour les salaires et revenus de remplacement concernés, utilisez le montant net social indiqué sur les documents de l’organisme payeur. Ajoutez les autres ressources que vous devez déclarer à la Caf afin d’obtenir une estimation plus complète.</p>'
    +F.row([F.number("m1","Mois 1 (€)","0"),F.number("m2","Mois 2 (€)","0"),F.number("m3","Mois 3 (€)","0")]);
  },
@@ -107,7 +107,7 @@ window.TOOL={
      +"Montant forfaitaire : "+RSAEngine.money(r.forfait)+"<br>"
      +"Moyenne des ressources des 3 mois : "+RSAEngine.money(r.averageResources)+"<br>"
      +"Déduction logement : "+RSAEngine.money(r.logement)+"<br>"
-     +"<p class='small'>Calcul indicatif : montant forfaitaire − moyenne des ressources − forfait logement. Le droit réel dépend de l'ensemble des règles et ressources applicables à votre foyer.</p>";
+     +"<p class='small'>Calcul indicatif : montant forfaitaire − moyenne des ressources − forfait logement. Le droit réel dépend de l’ensemble des règles et ressources applicables à votre foyer.</p>";
  },
  source:"Paramètres vérifiés pour le barème du 1er avril 2026 au 31 mars 2027. Sources : CAF et Code de l'action sociale et des familles sur Légifrance. Le montant net social est la référence à utiliser pour les ressources concernées."
 };
