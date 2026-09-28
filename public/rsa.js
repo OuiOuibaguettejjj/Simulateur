@@ -15,9 +15,19 @@
   function money(n){ return Number(n).toLocaleString("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:2}); }
   function housingFlat(people){ return people<=1 ? PARAMS.housing.one : people===2 ? PARAMS.housing.two : PARAMS.housing.threePlus; }
   function householdBase(single, dependents, majoration){
-    if(majoration && single) return PARAMS.majorationBase + Math.max(0, dependents) * PARAMS.majorationChildIncrease;
-    return single ? PARAMS.base + Math.max(0, dependents) * PARAMS.childIncrease
-                  : PARAMS.base * 1.5 + Math.max(0, dependents) * PARAMS.coupleChildIncrease;
+    const d = Math.max(0, dependents);
+
+    if(majoration && single){
+      return round2(PARAMS.majorationBase + d * PARAMS.majorationChildIncrease);
+    }
+
+    // Official Caf amounts for 2026, avoiding percentage-rounding discrepancies.
+    const singleAmounts = [651.69, 977.54, 1173.05, 1433.73];
+    const coupleAmounts = [977.54, 1173.05, 1368.56, 1629.24];
+    const amounts = single ? singleAmounts : coupleAmounts;
+
+    if(d <= 3) return amounts[d];
+    return round2(amounts[3] + (d - 3) * PARAMS.childIncrease);
   }
   function validNumber(v){ return Number.isFinite(Number(v)) && Number(v)>=0; }
 
