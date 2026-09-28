@@ -66,6 +66,6 @@ assert.equal(calc({ housing: "aidBelowForfait", housingAid: 78.21 }).eligible, f
 assert.equal(calc({ months: ["", 0, 0] }).eligible, false);
 assert.equal(calc({ months: [100, "", 300] }).eligible, false);
 assert.equal(calc({ months: [100, 200, ""] }).eligible, false);
-assert.equal(calc({ age: 18, youngActive: "yes", student: "no" }).eligible, true);
+assert.equal(calc({ age: 18, youngActive: "yes", student: "no" }).eligible, true);\nassert.equal(calc({ asOf: "2026-04-01" }).eligible, true);\nassert.equal(calc({ asOf: "2027-03-31" }).eligible, true);\nassert.equal(calc({ asOf: "2026-03-31" }).eligible, false);\nassert.equal(calc({ asOf: "2027-04-01" }).eligible, false);
 
 console.log("RSA deterministic tests passed.");
