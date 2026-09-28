@@ -57,6 +57,6 @@ assert.equal(calc({ status: "single", dependents: 3, housing: "forfait" }).logem
 assert.equal(calc({ housing: "aidBelowForfait", housingAid: 50 }).logement, 50);
 assert.equal(calc({ age: 17 }).eligible, false);
 assert.equal(calc({ resident: "no" }).eligible, false);
-assert.equal(calc({ student: "yes" }).eligible, false);
+assert.equal(calc({ student: "yes" }).eligible, false);\nassert.equal(calc({ months: [100, 200, 300] }).averageResources, 200);\nassert.equal(calc({ months: [1000, 1000, 1000] }).rsa, 0);\nassert.equal(calc({ housing: "aidBelowForfait", housingAid: 78.21 }).eligible, false);\nassert.equal(calc({ age: 18, youngActive: "yes", student: "no" }).eligible, true);
 
 console.log("RSA deterministic tests passed.");
