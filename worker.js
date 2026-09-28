@@ -66,7 +66,7 @@ export default {
         }
 
         return secure(
-          new Response(JSON.stringify({ date, rates, source: "BCE" }), {
+          new Response(JSON.stringify({ dates, rates, source: "BCE" }), {
             headers: {
               "Content-Type": "application/json; charset=utf-8",
               "Cache-Control": "public, max-age=21600"
