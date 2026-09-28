@@ -1,4 +1,6 @@
-const fs=require("fs"),path=require("path"),vm=require("vm");
+import fs from "node:fs";
+import path from "node:path";
+import vm from "node:vm";
 const root=path.join(process.cwd(),"public","outil");
 const sim=fs.readFileSync(path.join(process.cwd(),"public","simulateurs.js"),"utf8");
 function walk(d){const o=[];for(const e of fs.readdirSync(d,{withFileTypes:true})){const p=path.join(d,e.name);if(e.isDirectory())o.push(...walk(p));else if(e.name==="index.html")o.push(p)}return o}
