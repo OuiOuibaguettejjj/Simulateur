@@ -3,7 +3,7 @@
     effectiveFrom: "2026-04-01",
     effectiveTo: "2027-03-31",
     base: 651.69,
-    childIncrease: 260.68,
+    childIncrease: 260.68,\n    coupleChildIncrease: 195.51,
     majorationBase: 836.85,
     majorationChildIncrease: 278.95,
     housing: { one: 78.20, two: 156.41, threePlus: 193.55 },
@@ -16,7 +16,7 @@
   function householdBase(single, dependents, majoration){
     if(majoration && single) return PARAMS.majorationBase + Math.max(0, dependents) * PARAMS.majorationChildIncrease;
     return single ? PARAMS.base + Math.max(0, dependents) * PARAMS.childIncrease
-                  : PARAMS.base * 1.5 + Math.max(0, dependents-0) * PARAMS.childIncrease;
+                  : PARAMS.base * 1.5 + Math.max(0, dependents) * PARAMS.coupleChildIncrease;
   }
   function validNumber(v){ return Number.isFinite(Number(v)) && Number(v)>=0; }
 
