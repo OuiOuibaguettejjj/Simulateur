@@ -48,7 +48,7 @@ export default {
         const dateIndex = header.indexOf("TIME_PERIOD");
 
         const rates = { EUR: 1 };
-        let date = "";
+        const dates = { EUR: null };
 
         for (const line of lines) {
           const columns = line.split(",");
@@ -60,8 +60,9 @@ export default {
           ) {
             const value = Number(columns[valueIndex]);
             if (!Number.isFinite(value)) continue;
-            rates[columns[currencyIndex]] = value;
-            date = columns[dateIndex] || date;
+            const currency = columns[currencyIndex];
+            rates[currency] = value;
+            dates[currency] = columns[dateIndex] || null;
           }
         }
 
@@ -78,7 +79,8 @@ export default {
             "Link": '</.well-known/api-catalog>; rel="api-catalog", </api/devises/openapi.json>; rel="service-desc"; type="application/vnd.oai.openapi+json;version=3.1", </api/devises/docs/>; rel="service-doc"; type="text/html", </api/devises>; rel="describedby"'
           }
         );
-      } catch {
+      } catch (error) {
+        console.error({ event: "ecb_exchange_rates_fetch_failed", message: error instanceof Error ? error.message : String(error) });
         return secure(
           new Response(JSON.stringify({ error: "source_unavailable" }), {
             status: 502,
