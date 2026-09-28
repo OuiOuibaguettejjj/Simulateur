@@ -1,7 +1,7 @@
 # Règles de calcul — Simulateur RSA
 
 ## Périmètre
-Version de référence : barème RSA du 1er avril 2026 au 31 mars 2027.
+Version de référence : barème RSA du 1er avril 2026 au 31 mars 2027. Dernière vérification : 28 septembre 2026.
 
 Le simulateur fournit une estimation indicative et volontairement simplifiée. Il ne reproduit pas l'intégralité du dossier individuel Caf.
 
