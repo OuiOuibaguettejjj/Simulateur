@@ -10,7 +10,7 @@ function jsonLdScript(data) {
   return '<script type="application/ld+json">' + JSON.stringify(data).replace(/</g, "\\u003c") + '</script>';
 }
 function hasJsonLdType(html, type) {
-  return [...html.matchAll(/<script[^>]*type=["']application\\/ld\\+json["'][^>]*>([\\s\\S]*?)<\\/script>/gi)]
+  return [...html.matchAll(/<script[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)]
     .some(m => new RegExp('"@type"\\s*:\\s*"' + type + '"').test(m[1]));
 }
 function metaDescription(html) {
