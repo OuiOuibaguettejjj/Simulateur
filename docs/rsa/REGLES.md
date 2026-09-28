@@ -3,7 +3,7 @@
 ## Périmètre
 Version de référence : barème RSA du 1er avril 2026 au 31 mars 2027.
 
-Le simulateur fournit une estimation indicative. Il ne reproduit pas l'intégralité du dossier individuel Caf.
+Le simulateur fournit une estimation indicative et volontairement simplifiée. Il ne reproduit pas l'intégralité du dossier individuel Caf.
 
 ## Paramètres 2026
 - Personne seule, 0 charge : 651,69 €
@@ -21,12 +21,21 @@ Le simulateur fournit une estimation indicative. Il ne reproduit pas l'intégral
 - Forfait logement : 78,20 € / 156,41 € / 193,55 € selon la taille du foyer.
 
 ## Formule d'estimation
-RSA estimé = montant forfaitaire - moyenne des ressources des trois mois de référence - forfait logement.
+RSA estimé = montant forfaitaire - moyenne des ressources des trois mois de référence - déduction logement.
 
 Le résultat est plafonné à zéro.
 
+La réglementation actuelle prévoit une période de référence M-4 à M-2 pour le calcul du droit. Le simulateur demande trois montants mensuels correspondant à cette période et en calcule la moyenne.
+
 ## Ressources
-L'utilisateur saisit trois montants mensuels correspondant aux ressources à retenir pour l'estimation. Pour les salaires et revenus de remplacement concernés, le montant net social est la référence déclarative.
+L'utilisateur saisit directement le total des ressources à retenir pour chacun des trois mois. Pour les salaires et revenus de remplacement concernés, le montant net social est la référence déclarative.
+
+Cette approche évite de prétendre reproduire toutes les règles de prise en compte par catégorie, mais elle suppose que l'utilisateur a correctement identifié les ressources à retenir. Certaines prestations et certains revenus font l'objet de règles spécifiques.
+
+## Logement
+- aucune aide personnelle au logement et charge de logement : déduction 0 € ;
+- aide au logement inférieure au forfait applicable : déduction de l'aide effectivement perçue ;
+- aide au logement au moins égale au forfait, logement gratuit ou propriété dans les situations concernées : déduction du forfait légal.
 
 ## Éligibilité simplifiée
 Le simulateur vérifie :
@@ -36,4 +45,4 @@ Le simulateur vérifie :
 - statut étudiant ;
 - cohérence de la majoration pour isolement.
 
-Les conditions individuelles complètes restent du ressort de la Caf.
+Il ne vérifie pas automatiquement toutes les conditions liées à la nationalité/droit au séjour, à la durée exacte de résidence, aux congés ou disponibilités, ni toutes les situations particulières prévues par le CASF. Ces points doivent être vérifiés auprès de la Caf.
