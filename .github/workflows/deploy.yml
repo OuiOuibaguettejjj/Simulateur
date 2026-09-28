@@ -26,6 +26,12 @@ jobs:
       - name: Pre-render calculator SEO HTML
         run: node scripts/prerender-tools.mjs
 
+      - name: Verify prerender idempotency
+        run: |
+          cp -a public /tmp/public-after-first-prerender
+          node scripts/prerender-tools.mjs
+          diff -qr /tmp/public-after-first-prerender public
+
       - name: Verify commit and consistency before production
         run: |
           test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
@@ -81,26 +87,59 @@ jobs:
             }
             return files;
           }
-          for (const file of walk('public/outil')) {
-            const html = fs.readFileSync(file, 'utf8');
-            if (!/window\.TOOL\s*=/.test(html)) continue;
-            checked++;
-            const h1 = html.match(/<h1\b[^>]*\bid=["']title["'][^>]*>([\s\S]*?)<\/h1>/i);
-            if (!h1 || !h1[1].replace(/<[^>]+>/g, '').trim()) errors.push(file + ': empty #title H1');
-            const source = html.match(/<p\b[^>]*\bid=["']source["'][^>]*>([\s\S]*?)<\/p>/i);
-            if (!source || !source[1].replace(/<[^>]+>/g, '').trim()) errors.push(file + ': empty #source');
-            const fields = html.match(/<div\b[^>]*\bid=["']fields["']([^>]*)>([\s\S]*?)<\/div>/i);
-            if (!fields) errors.push(file + ': missing #fields');
-            else if (!/\bhidden(?:\s*=|\b)/i.test(fields[1]) && !/<(?:input|select|textarea|button)\b/i.test(fields[2])) errors.push(file + ': empty #fields');
-            const jsonLd = [...html.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)].map(m => m[1]);
-            const breadcrumbCount = jsonLd.filter(s => /"@type"\s*:\s*"BreadcrumbList"/.test(s)).length;
-            const webApplicationCount = jsonLd.filter(s => /"@type"\s*:\s*"WebApplication"/.test(s)).length;
-            if (breadcrumbCount !== 1) errors.push(file + ': expected exactly one BreadcrumbList, found ' + breadcrumbCount);
-            if (webApplicationCount !== 1) errors.push(file + ': expected exactly one WebApplication, found ' + webApplicationCount);
-            const titleCount = [...html.matchAll(/<title\b[^>]*>[\s\S]*?<\/title>/gi)].length;
-            if (titleCount !== 1) errors.push(file + ': expected exactly one title, found ' + titleCount);
+          function jsonLdBlocks(html) {
+            return [...html.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)].map(m => {
+              try { return JSON.parse(m[1]); }
+              catch (e) { errors.push('Invalid JSON-LD in ' + currentFile + ': ' + e.message); return null; }
+            }).filter(Boolean);
           }
-          console.log('Prerender SEO guard checked ' + checked + ' calculator pages.');
+          function canonicalOf(html) {
+            const matches = [...html.matchAll(/<link[^>]+rel=["']canonical["'][^>]+href=["']([^"']+)["']/gi)];
+            return matches.length === 1 ? matches[0][1] : null;
+          }
+          let currentFile = '';
+          for (const file of walk('public/outil')) {
+            currentFile = file;
+            const html = fs.readFileSync(file, 'utf8');
+            const hasTool = /window\.TOOL\s*=/.test(html);
+            if (hasTool) {
+              checked++;
+              const h1 = html.match(/<h1\b[^>]*\bid=["']title["'][^>]*>([\s\S]*?)<\/h1>/i);
+              if (!h1 || !h1[1].replace(/<[^>]+>/g, '').trim()) errors.push(file + ': empty #title H1');
+              const source = html.match(/<p\b[^>]*\bid=["']source["'][^>]*>([\s\S]*?)<\/p>/i);
+              if (!source || !source[1].replace(/<[^>]+>/g, '').trim()) errors.push(file + ': empty #source');
+              const fields = html.match(/<div\b[^>]*\bid=["']fields["']([^>]*)>([\s\S]*?)<\/div>/i);
+              if (!fields) errors.push(file + ': missing #fields');
+              else if (!/\bhidden(?:\s*=|\b)/i.test(fields[1]) && !/<(?:input|select|textarea|button)\b/i.test(fields[2])) errors.push(file + ': empty #fields');
+              const titleCount = [...html.matchAll(/<title\b[^>]*>[\s\S]*?<\/title>/gi)].length;
+              if (titleCount !== 1) errors.push(file + ': expected exactly one title, found ' + titleCount);
+              const jsonLd = jsonLdBlocks(html);
+              const breadcrumbCount = jsonLd.filter(s => s && s['@type'] === 'BreadcrumbList').length;
+              const webApplicationCount = jsonLd.filter(s => s && s['@type'] === 'WebApplication').length;
+              if (breadcrumbCount !== 1) errors.push(file + ': expected exactly one BreadcrumbList, found ' + breadcrumbCount);
+              if (webApplicationCount !== 1) errors.push(file + ': expected exactly one WebApplication, found ' + webApplicationCount);
+              const breadcrumb = html.match(/<div\b[^>]*class=["']breadcrumb["'][^>]*>([\s\S]*?)<\/div>/i);
+              if (!breadcrumb || !/<a\b[^>]*href=["']\/["'][^>]*>\s*Accueil\s*<\/a>/i.test(breadcrumb[1])) errors.push(file + ': visible breadcrumb missing Accueil link');
+            }
+            const blocks = jsonLdBlocks(html);
+            const breadcrumbs = blocks.filter(s => s && s['@type'] === 'BreadcrumbList');
+            if (breadcrumbs.length) {
+              const canonical = canonicalOf(html);
+              if (!canonical) errors.push(file + ': BreadcrumbList cannot be validated without exactly one canonical');
+              for (const bc of breadcrumbs) {
+                const items = Array.isArray(bc.itemListElement) ? bc.itemListElement : [];
+                const positions = items.map(x => x && x.position);
+                if (!positions.every((p, i) => p === i + 1)) errors.push(file + ': BreadcrumbList positions must be consecutive 1..n');
+                const names = items.map(x => x && x.name);
+                const urls = items.map(x => x && x.item);
+                if (new Set(names).size !== names.length) errors.push(file + ': BreadcrumbList contains duplicate names');
+                if (new Set(urls).size !== urls.length) errors.push(file + ': BreadcrumbList contains duplicate URLs');
+                if (!items[0] || items[0].name !== 'Accueil') errors.push(file + ': BreadcrumbList first item must be Accueil');
+                if (canonical && (!items.length || items[items.length - 1].item !== canonical)) errors.push(file + ': BreadcrumbList last URL differs from canonical');
+              }
+            }
+          }
+          console.log('Prerender SEO guard checked ' + checked + ' calculator pages and validated existing BreadcrumbList blocks.');
           if (errors.length) { console.error(errors.join('\n')); process.exit(1); }
           NODE
 
