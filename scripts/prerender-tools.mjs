@@ -55,8 +55,7 @@ h=h.replace(/(<p[^>]+id=["']intro["'][^>]*>)[\s\S]*?(<\/p>)/i,(_,a,b)=>a+esc(int
 h=h.replace(/(<p[^>]+id=["']source["'][^>]*>)[\s\S]*?(<\/p>)/i,(_,a,b)=>a+esc(t.source||"")+b);
 if(typeof t.fields==="function"){
   const f=t.fields();
-  if(!f) throw Error(file+": champs vides");
-  h=replaceElementContents(h,"div","fields",f);
+  if(f) h=replaceElementContents(h,"div","fields",f);
 }
 const g=groups[slug]||["Calculateurs","/calculateurs/"];
 const breadcrumb='<div class="breadcrumb"><a href="/">Accueil</a> · <a href="'+g[1]+'">'+esc(g[0])+'</a> · '+esc(title)+'</div>';
