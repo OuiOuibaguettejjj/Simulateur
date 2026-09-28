@@ -37,10 +37,10 @@
 <p>Au 1er avril 2026, le montant forfaitaire est de 651,69 € pour une personne seule sans personne à charge et de 977,54 € pour un couple sans personne à charge. Il augmente selon le nombre de personnes à charge. Une majoration existe dans certaines situations de parent isolé.</p>
 
 <h2>Le logement peut réduire le RSA</h2>
-<p>Le forfait logement s'applique notamment lorsque le foyer perçoit une aide personnelle au logement ou lorsqu'il est logé gratuitement ou propriétaire dans les situations prévues par les règles applicables. Son montant dépend de la taille du foyer.</p>
+<p>Le logement peut réduire le RSA. Lorsque l'aide au logement est inférieure au forfait applicable, c'est l'aide elle-même qui est déduite ; lorsqu'elle atteint ou dépasse le forfait, ou en cas d'absence de charge de logement dans les situations prévues, le forfait correspondant à la taille du foyer est retenu.</p>
 
 <h2>Une estimation, pas une décision de la Caf</h2>
-<p>Le calcul présenté est indicatif. La Caf détermine le droit réel à partir de la situation complète du foyer, des ressources effectivement prises en compte et des règles applicables au moment de l'examen. Certaines situations particulières peuvent modifier le résultat.</p>
+<p>Le calcul présenté est indicatif et volontairement simplifié : il demande directement le total des ressources à retenir pour chacun des trois mois. La Caf détermine le droit réel à partir de la situation complète du foyer, des catégories de ressources et des règles particulières applicables au moment de l'examen.</p>
 
 <h2>Questions fréquentes</h2>
 <h3>Quel revenu faut-il renseigner ?</h3>
@@ -79,8 +79,10 @@ window.TOOL={
    +F.select("majoration","Situation susceptible d'ouvrir droit à la majoration pour isolement ?",[["no","Non"],["yes","Oui"]])
    +F.select("housing","Situation de logement",[
      ["none","Vous payez votre logement sans aide personnelle au logement"],
-     ["forfait","Vous percevez une aide au logement, êtes logé(e) gratuitement ou êtes propriétaire dans une situation soumise au forfait"]
+     ["aidBelowForfait","Vous percevez une aide au logement inférieure au forfait applicable"],
+     ["forfait","Vous percevez une aide au logement au moins égale au forfait, êtes logé(e) gratuitement ou êtes propriétaire dans une situation soumise au forfait"]
    ])
+   +F.number("housingAid","Montant mensuel de l'aide au logement (€) — uniquement si elle est inférieure au forfait","0")
    +'<h3 style="margin-top:2rem">Ressources des trois mois de référence</h3><p class="small">Pour les salaires et revenus de remplacement concernés, utilisez le montant net social indiqué sur les documents de l'organisme payeur. Ajoutez les autres ressources que vous devez déclarer à la Caf afin d'obtenir une estimation plus complète.</p>'
    +F.row([F.number("m1","Mois 1 (€)","0"),F.number("m2","Mois 2 (€)","0"),F.number("m3","Mois 3 (€)","0")]);
  },
@@ -95,6 +97,7 @@ window.TOOL={
      resident:this.$("resident").value,
      majoration:this.$("majoration").value,
      housing:this.$("housing").value,
+     housingAid:this.$("housingAid").value,
      months:[this.$("m1").value,this.$("m2").value,this.$("m3").value]
    };
    if(input.dependents<0 || !Number.isInteger(input.dependents)) return "Le nombre de personnes à charge doit être un nombre entier positif.";
@@ -103,7 +106,7 @@ window.TOOL={
    return "<strong>"+RSAEngine.money(r.rsa)+" / mois</strong><br><br>"
      +"Montant forfaitaire : "+RSAEngine.money(r.forfait)+"<br>"
      +"Moyenne des ressources des 3 mois : "+RSAEngine.money(r.averageResources)+"<br>"
-     +"Forfait logement : "+RSAEngine.money(r.logement)+"<br>"
+     +"Déduction logement : "+RSAEngine.money(r.logement)+"<br>"
      +"<p class='small'>Calcul indicatif : montant forfaitaire − moyenne des ressources − forfait logement. Le droit réel dépend de l'ensemble des règles et ressources applicables à votre foyer.</p>";
  },
  source:"Paramètres vérifiés pour le barème du 1er avril 2026 au 31 mars 2027. Sources : CAF et Code de l'action sociale et des familles sur Légifrance. Le montant net social est la référence à utiliser pour les ressources concernées."
