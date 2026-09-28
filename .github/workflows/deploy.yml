@@ -1,4 +1,5 @@
 name: Deploy Simulateur to Cloudflare
+# SEO prerender runs before all production checks.
 
 on:
   push:
