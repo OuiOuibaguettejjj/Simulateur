@@ -65,6 +65,45 @@ jobs:
           console.log(`Consistency guard passed: ${urls.length} sitemap URLs; ${changed.length} public files changed.`);
           NODE
 
+      - name: Verify prerendered SEO HTML
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+          const errors = [];
+          let checked = 0;
+          function walk(dir) {
+            const files = [];
+            for (const entry of fs.readdirSync(dir, {withFileTypes:true})) {
+              const p = path.join(dir, entry.name);
+              if (entry.isDirectory()) files.push(...walk(p));
+              else if (entry.isFile() && entry.name === 'index.html') files.push(p);
+            }
+            return files;
+          }
+          for (const file of walk('public/outil')) {
+            const html = fs.readFileSync(file, 'utf8');
+            if (!/window\.TOOL\s*=/.test(html)) continue;
+            checked++;
+            const h1 = html.match(/<h1\b[^>]*\bid=["']title["'][^>]*>([\s\S]*?)<\/h1>/i);
+            if (!h1 || !h1[1].replace(/<[^>]+>/g, '').trim()) errors.push(file + ': empty #title H1');
+            const source = html.match(/<p\b[^>]*\bid=["']source["'][^>]*>([\s\S]*?)<\/p>/i);
+            if (!source || !source[1].replace(/<[^>]+>/g, '').trim()) errors.push(file + ': empty #source');
+            const fields = html.match(/<div\b[^>]*\bid=["']fields["']([^>]*)>([\s\S]*?)<\/div>/i);
+            if (!fields) errors.push(file + ': missing #fields');
+            else if (!/\bhidden(?:\s*=|\b)/i.test(fields[1]) && !/<(?:input|select|textarea|button)\b/i.test(fields[2])) errors.push(file + ': empty #fields');
+            const jsonLd = [...html.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)].map(m => m[1]);
+            const breadcrumbCount = jsonLd.filter(s => /"@type"\s*:\s*"BreadcrumbList"/.test(s)).length;
+            const webApplicationCount = jsonLd.filter(s => /"@type"\s*:\s*"WebApplication"/.test(s)).length;
+            if (breadcrumbCount !== 1) errors.push(file + ': expected exactly one BreadcrumbList, found ' + breadcrumbCount);
+            if (webApplicationCount !== 1) errors.push(file + ': expected exactly one WebApplication, found ' + webApplicationCount);
+            const titleCount = [...html.matchAll(/<title\b[^>]*>[\s\S]*?<\/title>/gi)].length;
+            if (titleCount !== 1) errors.push(file + ': expected exactly one title, found ' + titleCount);
+          }
+          console.log('Prerender SEO guard checked ' + checked + ' calculator pages.');
+          if (errors.length) { console.error(errors.join('\n')); process.exit(1); }
+          NODE
+
       - name: Validate complete static site
         run: |
           node <<'NODE'
