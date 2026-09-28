@@ -25,14 +25,17 @@ export default {
     const url = new URL(request.url);
 
     if (url.pathname === "/api/devises") {
-      if (request.method !== "GET") {
-        return secure(new Response("Method Not Allowed", { status: 405 }), { Allow: "GET" });
+      if (request.method !== "GET" && request.method !== "HEAD") {
+        return secure(new Response("Method Not Allowed", { status: 405 }), { Allow: "GET, HEAD" });
       }
 
       try {
         const response = await fetch(
           "https://data-api.ecb.europa.eu/service/data/EXR/D..EUR.SP00.A?format=csvdata&lastNObservations=1",
-          { cf: { cacheTtl: 21600, cacheEverything: true } }
+          {
+            cf: { cacheTtl: 21600, cacheEverything: true },
+            signal: AbortSignal.timeout(10000)
+          }
         );
 
         if (!response.ok) throw new Error("ECB request failed");
@@ -55,7 +58,9 @@ export default {
             columns[currencyIndex] &&
             columns[valueIndex]
           ) {
-            rates[columns[currencyIndex]] = Number(columns[valueIndex]);
+            const value = Number(columns[valueIndex]);
+            if (!Number.isFinite(value)) continue;
+            rates[columns[currencyIndex]] = value;
             date = columns[dateIndex] || date;
           }
         }
