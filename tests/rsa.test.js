@@ -60,7 +60,7 @@ assert.equal(calc({ resident: "no" }).eligible, false);
 assert.equal(calc({ student: "yes" }).eligible, false);
 assert.equal(calc({ months: [100, 200, 300] }).averageResources, 200);
 assert.equal(calc({ months: [1000, 1000, 1000] }).rsa, 0);
-assert.equal(calc({ housing: "aidBelowForfait", housingAid: 78.21 }).eligible, false);
+assert.equal(calc({ housing: "aidBelowForfait", housingAid: 78.21 }).eligible, false);\n\n// Empty resource fields must not be silently interpreted as 0 €.\nassert.equal(calc({ months: ["", 0, 0] }).eligible, false);\nassert.equal(calc({ months: [100, "", 300] }).eligible, false);\nassert.equal(calc({ months: [100, 200, ""] }).eligible, false);
 assert.equal(calc({ age: 18, youngActive: "yes", student: "no" }).eligible, true);
 
 console.log("RSA deterministic tests passed.");
