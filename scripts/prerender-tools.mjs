@@ -79,7 +79,7 @@ if(!hasJsonLdType(h,"WebApplication")){
     offers:{price:"0",priceCurrency:"EUR"}
   })+"</head>");
 }
-if(!hasBC(h)){const c=(h.match(/<link[^>]+rel=["']canonical["'][^>]+href=["']([^"']+)["']/i)||[])[1]||"https://simulateur.site/outil/"+slug+"/";const bm=h.match(/<div[^>]+class=["']breadcrumb["'][^>]*>([\s\S]*?)<\/div>/i),links=bm?[...bm[1].matchAll(/<a[^>]+href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)]:[],items=[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"}];if(links[0])items.push({"@type":"ListItem","position":2,"name":links[0][2].replace(/<[^>]+>/g,"").trim(),"item":new URL(links[0][1],"https://simulateur.site").href});items.push({"@type":"ListItem","position":items.length+1,"name":title,"item":c});h=h.replace(/<\/head>/i,jsonLdScript({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":items})+"</head>")}
+if(!hasBC(h)){const items=[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":g[0],"item":new URL(g[1],"https://simulateur.site").href},{"@type":"ListItem","position":3,"name":title,"item":canonical}];h=h.replace(/<\/head>/i,jsonLdScript({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":items})+"</head>")}
 if(!/<section[^>]+class=["']related-tools["']/i.test(h)){
   const related=relatedToolsMarkup(slug);
   if(related) h=h.replace(/<\/main>/i,related+"</main>");
