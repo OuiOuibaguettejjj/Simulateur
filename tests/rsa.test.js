@@ -58,5 +58,9 @@ assert.equal(calc({ housing: "aidBelowForfait", housingAid: 50 }).logement, 50);
 assert.equal(calc({ age: 17 }).eligible, false);
 assert.equal(calc({ resident: "no" }).eligible, false);
 assert.equal(calc({ student: "yes" }).eligible, false);
+assert.equal(calc({ months: [100, 200, 300] }).averageResources, 200);
+assert.equal(calc({ months: [1000, 1000, 1000] }).rsa, 0);
+assert.equal(calc({ housing: "aidBelowForfait", housingAid: 78.21 }).eligible, false);
+assert.equal(calc({ age: 18, youngActive: "yes", student: "no" }).eligible, true);
 
 console.log("RSA deterministic tests passed.");
