@@ -23,6 +23,21 @@ function applicationCategory(group) {
     : "UtilitiesApplication";
 }
 function groupsOf(s){const m=s.match(/const groups=({[\s\S]*?})\s*;\s*function addBreadcrumbSchema/);return m?vm.runInNewContext("("+m[1]+")"):{}}
+function replaceElementContents(html, tag, id, content) {
+  const open = new RegExp('<' + tag + '\\b[^>]*\\bid=["\\']' + id + '["\\'][^>]*>', 'i').exec(html);
+  if (!open) return html;
+  const openEnd = open.index + open[0].length;
+  const tags = new RegExp('</?' + tag + '\\b[^>]*>', 'gi');
+  tags.lastIndex = openEnd;
+  let depth = 1;
+  let match;
+  while ((match = tags.exec(html))) {
+    if (/^<\//.test(match[0])) depth--;
+    else depth++;
+    if (depth === 0) return html.slice(0, openEnd) + content + html.slice(match.index);
+  }
+  throw new Error('Unclosed #' + id + ' container');
+}
 function hasBC(h){return [...h.matchAll(/<script[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)].some(m=>/"@type"\s*:\s*"BreadcrumbList"/.test(m[1]))}
 const groups=groupsOf(sim);let changed=0,skipped=0;
 for(const file of walk(root)){const old=fs.readFileSync(file,"utf8");let h=old;const slug=path.basename(path.dirname(file)),t=toolOf(h,file);if(!t){skipped++;continue}const title=t.displayTitle||t.title||"",intro=t.displayIntro||t.intro||"";if(!title)throw Error(file+": titre vide");
@@ -31,8 +46,16 @@ h=h.replace(/(<div[^>]+id=["']ey["'][^>]*>)[\s\S]*?(<\/div>)/i,(_,a,b)=>a+esc(t.
 h=h.replace(/(<h1[^>]+id=["']title["'][^>]*>)[\s\S]*?(<\/h1>)/i,(_,a,b)=>a+esc(title)+b);
 h=h.replace(/(<p[^>]+id=["']intro["'][^>]*>)[\s\S]*?(<\/p>)/i,(_,a,b)=>a+esc(intro)+b);
 h=h.replace(/(<p[^>]+id=["']source["'][^>]*>)[\s\S]*?(<\/p>)/i,(_,a,b)=>a+esc(t.source||"")+b);
-const fm=h.match(/<div([^>]*id=["']fields["'][^>]*)>([\s\S]*?)<\/div>/i);if(fm&&!/\bhidden\b/i.test(fm[1])&&!fm[2].trim()&&typeof t.fields==="function"){const f=t.fields();if(!f)throw Error(file+": champs vides");h=h.replace(fm[0],"<div"+fm[1]+">"+f+"</div>")}
-if(!/<div[^>]+class=["']breadcrumb["']/i.test(h)){const g=groups[slug]||["Calculateurs","/calculateurs/"];h=h.replace(/(<main\b[^>]*>[\s\S]*?<div[^>]+class=["']wrap["'][^>]*>)/i,"$1<div class=\"breadcrumb\"><a href=\""+g[1]+"\">"+esc(g[0])+"</a> · "+esc(title)+"</div>")}
+if(typeof t.fields==="function"){
+  const f=t.fields();
+  if(!f) throw Error(file+": champs vides");
+  h=replaceElementContents(h,"div","fields",f);
+}
+if(!/<div[^>]+class=["']breadcrumb["']/i.test(h)){
+  const g=groups[slug]||["Calculateurs","/calculateurs/"];
+  h=h.replace(/(<main\b[^>]*>[\s\S]*?<div[^>]+class=["']wrap["'][^>]*>)/i,
+    "$1<div class=\"breadcrumb\"><a href=\"/\">Accueil</a> · <a href=\""+g[1]+"\">"+esc(g[0])+"</a> · "+esc(title)+"</div>");
+}
 const canonical=(h.match(/<link[^>]+rel=["']canonical["'][^>]+href=["']([^"']+)["']/i)||[])[1]||"https://simulateur.site/outil/"+slug+"/";
 if(!hasJsonLdType(h,"WebApplication")){
   h=h.replace(/<\/head>/i,jsonLdScript({
@@ -48,6 +71,6 @@ if(!hasJsonLdType(h,"WebApplication")){
     offers:{price:"0",priceCurrency:"EUR"}
   })+"</head>");
 }
-if(!hasBC(h)){const c=(h.match(/<link[^>]+rel=["']canonical["'][^>]+href=["']([^"']+)["']/i)||[])[1]||"https://simulateur.site/outil/"+slug+"/";const bm=h.match(/<div[^>]+class=["']breadcrumb["'][^>]*>([\s\S]*?)<\/div>/i),links=bm?[...bm[1].matchAll(/<a[^>]+href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)]:[],items=[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"}];if(links[0])items.push({"@type":"ListItem","position":2,"name":links[0][2].replace(/<[^>]+>/g,"").trim(),"item":new URL(links[0][1],"https://simulateur.site").href});items.push({"@type":"ListItem","position":items.length+1,"name":title,"item":c});h=h.replace(/<\/head>/i,'<script type="application/ld+json">'+JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":items})+"</script></head>")}
+if(!hasBC(h)){const c=(h.match(/<link[^>]+rel=["']canonical["'][^>]+href=["']([^"']+)["']/i)||[])[1]||"https://simulateur.site/outil/"+slug+"/";const bm=h.match(/<div[^>]+class=["']breadcrumb["'][^>]*>([\s\S]*?)<\/div>/i),links=bm?[...bm[1].matchAll(/<a[^>]+href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)]:[],items=[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"}];if(links[0])items.push({"@type":"ListItem","position":2,"name":links[0][2].replace(/<[^>]+>/g,"").trim(),"item":new URL(links[0][1],"https://simulateur.site").href});items.push({"@type":"ListItem","position":items.length+1,"name":title,"item":c});h=h.replace(/<\/head>/i,jsonLdScript({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":items})+"</head>")}
 if(h!==old){fs.writeFileSync(file,h.endsWith("\n")?h:h+"\n");changed++}}
 console.log("SEO prerender: "+changed+" pages updated; "+skipped+" static-special pages skipped.");
