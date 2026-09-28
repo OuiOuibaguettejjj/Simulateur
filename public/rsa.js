@@ -29,7 +29,7 @@
     if(d <= 3) return amounts[d];
     return round2(amounts[3] + (d - 3) * PARAMS.childIncrease);
   }
-  function validNumber(v){ return Number.isFinite(Number(v)) && Number(v)>=0; }
+  function validNumber(v){\n    if(typeof v === "string" && v.trim() === "") return false;\n    return Number.isFinite(Number(v)) && Number(v)>=0;\n  }
 
   window.RSAEngine = {
     params: PARAMS,
