@@ -1,1 +1,151 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Calculateur indemnité de précarité CDD 2026 | Simulateur</title><meta name="description" content="Estimez l'indemnité de fin de contrat d'un CDD ou d'une mission d'intérim."><link rel="canonical" href="https://simulateur.site/outil/indemnite-precarite/"><link rel="stylesheet" href="/styles.css"><script src="/simulateurs.js" defer></script><script src="/enter-calcul.js" defer></script></head><body><main><div class="wrap"><div class="tool"><div class="eyebrow" id="ey"></div><h1 id="title"></h1><p id="intro"></p><div id="fields"></div><button class="button-main" onclick="Simulateurs.calc()">Calculer</button><div class="result" id="result">Saisissez vos données puis lancez le calcul.</div><div class="formula"><strong>Méthode et sources</strong><p id="source"></p></div></div></div></main><script>const F={text:(i,l,p="")=>'<div class="field"><label for="'+i+'">'+l+'</label><input id="'+i+'" type="number" min="0" step="0.01" placeholder="'+p+'"></div>',select:(i,l,o)=>'<div class="field"><label for="'+i+'">'+l+'</label><select id="'+i+'">'+o.map(x=>'<option value="'+x[0]+'">'+x[1]+'</option>').join('')+'</select></div>',row:a=>'<div class="row">'+a.join('')+'</div>'};window.TOOL={ey:"TRAVAIL",title:"Calculateur d'indemnité de précarité",intro:"Estimez la prime de fin de CDD ou de mission d'intérim.",fields:function(){return F.row([F.select("contrat","Contrat",[["cdd","CDD"],["interim","Intérim"]]),F.text("rem","Rémunération brute totale versée (€)","20000"),F.select("taux","Taux",[["10","10 % — cas général"],["6","6 % — si les conditions conventionnelles sont remplies"],["0","0 % — indemnité non due"]])])},calc:function(){const r=+this.$("rem").value||0,t=+this.$("taux").value||0;if(r<0)return"Renseignez une rémunération valide.";return"<strong>"+this.euro(r*t/100)+"</strong> d'indemnité estimée<br><small>Base : "+this.euro(r)+" × "+this.num(t)+" %</small>"},source:"Service-Public propose un simulateur pour les CDD et l'intérim. Le cas général est de 10 % de la rémunération brute totale ; un taux de 6 % peut être prévu par convention collective dans les conditions légales. Plusieurs exceptions existent."};window.addEventListener("DOMContentLoaded",()=>Simulateurs.render());</script></body></html>
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Calculateur indemnité de précarité CDD et intérim 2026 | Simulateur</title>
+<meta name="description" content="Calculez votre indemnité de fin de CDD ou de mission d'intérim en 2026. Estimation selon la rémunération brute, le taux applicable et les principales exceptions.">
+<link rel="canonical" href="https://simulateur.site/outil/indemnite-precarite/">
+<link rel="stylesheet" href="/styles.css">
+<style>
+.ip{max-width:920px;margin:auto}.ip-hero{background:var(--card);border:1px solid var(--ink);border-radius:18px;padding:38px 40px;box-shadow:var(--shadow);margin-bottom:18px}.ip-hero h1{font-size:clamp(2.7rem,6vw,4.8rem);line-height:.94;letter-spacing:-.07em;margin:0 0 14px;max-width:800px}.ip-hero .lead{margin:0;max-width:730px}.ip-trust{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}.ip-trust span{padding:7px 10px;border:1px solid var(--line);border-radius:999px;background:#fff;font-size:.76rem;font-weight:800}.ip-card{background:var(--card);border:1px solid var(--ink);border-radius:16px;padding:28px 32px;margin:18px 0;box-shadow:0 2px 0 rgba(23,23,19,.05)}.ip-card h2{margin:0 0 14px;font-size:1.8rem;letter-spacing:-.04em}.ip-note{padding:15px 17px;background:#f0eadf;border-left:4px solid var(--accent);border-radius:0 10px 10px 0;margin:16px 0}.ip-result{margin-top:20px;padding:24px;border:1px solid #b9c9bf;border-radius:14px;background:linear-gradient(145deg,#f4f7f4,#edf3ef)}.ip-big{font-size:clamp(1.9rem,5vw,2.8rem);font-weight:950;letter-spacing:-.05em}.ip-details{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}.ip-detail{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px}.ip-detail small{display:block;color:var(--muted)}.ip-detail strong{display:block;margin-top:2px}.ip-error{margin-top:15px;padding:13px;border:1px solid #e7bcbc;background:#fff3f3;color:#8d1c1c;border-radius:10px}.ip-example{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.ip-example>div{padding:17px;border:1px solid var(--line);border-radius:12px;background:#fff}.ip-example strong{font-size:1.2rem}.ip-list{padding-left:20px}.ip-list li{margin:8px 0}.ip-faq details{border-top:1px solid var(--line);padding:16px 0}.ip-faq details:last-child{border-bottom:1px solid var(--line)}.ip-faq summary{cursor:pointer;font-weight:900}.ip-small{font-size:.88rem;color:var(--muted)}.ip-source{font-size:.86rem;color:var(--muted)}@media(max-width:650px){.ip-hero{padding:28px 21px}.ip-card{padding:23px 19px}.ip-details,.ip-example{grid-template-columns:1fr}.ip-hero h1{font-size:3rem}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a href="/conversions/">Conversions</a><a href="/comparateurs/">Comparateurs</a><a href="/a-propos/">À propos</a></nav></div></header>
+
+<main>
+<div class="wrap ip">
+<div class="breadcrumb"><a href="/">Accueil</a> · <a href="/travail/">Travail</a> · Indemnité de précarité</div>
+
+<section class="ip-hero">
+<div class="eyebrow">TRAVAIL · CDD & INTÉRIM</div>
+<h1>Calculateur d'indemnité de précarité</h1>
+<p class="lead">Estimez l'indemnité versée à la fin d'un CDD ou d'une mission d'intérim à partir de la rémunération brute totale et du taux applicable.</p>
+<div class="ip-trust"><span>Règles 2026</span><span>Calcul instantané</span><span>Sources officielles</span><span>Aucune donnée envoyée</span></div>
+</section>
+
+<section class="ip-card" aria-labelledby="calc-title">
+<h2 id="calc-title">Calculez votre indemnité</h2>
+<div class="ip-note"><strong>Le calcul dépend du contrat.</strong> Pour un CDD, le taux est en principe de 10 % et peut être ramené à 6 % dans les conditions prévues par les textes collectifs. Pour une mission d'intérim, l'indemnité de fin de mission est en principe d'au moins 10 %.</div>
+<form id="form" novalidate>
+<div class="row">
+<div class="field"><label for="contract">Type de contrat</label><select id="contract"><option value="cdd">CDD</option><option value="interim">Intérim</option></select></div>
+<div class="field"><label for="gross">Rémunération brute totale (€)</label><input id="gross" type="number" min="0" step="0.01" inputmode="decimal" placeholder="20 000" required></div>
+</div>
+<div class="field" id="rate-wrap"><label for="rate">Taux d'indemnité</label><select id="rate"><option value="10">10 % — cas général</option><option value="6">6 % — si les conditions collectives sont remplies</option></select></div>
+<button class="button-main" type="submit">Calculer mon indemnité</button>
+<p class="ip-small" style="text-align:center;margin:10px 0 0">Estimation indicative : votre convention collective ou votre situation peut prévoir une règle différente.</p>
+<div id="error" class="ip-error" hidden role="alert"></div>
+<div id="result" class="ip-result" hidden aria-live="polite"></div>
+</form>
+</section>
+
+<section class="ip-card">
+<h2>Comment fonctionne le calcul ?</h2>
+<p>La prime de précarité, appelée <strong>indemnité de fin de contrat</strong> pour un CDD, est destinée à compenser la précarité liée à la fin du contrat. En principe, elle correspond à <strong>10 % de la rémunération brute totale versée pendant le contrat</strong>.</p>
+<p>Dans certains cas, un accord ou une convention collective peut prévoir un taux de <strong>6 %</strong>, avec des contreparties notamment en matière de formation. Le taux applicable doit donc être vérifié dans les textes collectifs qui concernent votre emploi.</p>
+<p>Pour l'intérim, l'indemnité de fin de mission est en principe au moins égale à <strong>10 % de la rémunération totale brute</strong>. Des dispositions conventionnelles peuvent prévoir un montant plus favorable.</p>
+<div class="ip-note"><strong>Formule :</strong> rémunération brute totale × taux d'indemnité. Exemple : 20 000 € × 10 % = 2 000 €.</div>
+</section>
+
+<section class="ip-card">
+<h2>Quand la prime de précarité n'est-elle pas due ?</h2>
+<p>Le droit à l'indemnité dépend du type de contrat et de la manière dont il se termine. Pour un CDD, les principales situations d'exclusion comprennent notamment :</p>
+<ul class="ip-list">
+<li>l'embauche en CDI à l'issue du CDD, dans les conditions prévues par le Code du travail ;</li>
+<li>le refus, dans certaines conditions, d'un CDI proposé pour le même emploi ou un emploi similaire avec une rémunération au moins équivalente ;</li>
+<li>la rupture anticipée du CDD à l'initiative du salarié ;</li>
+<li>la faute grave ou la force majeure dans les cas prévus par les textes ;</li>
+<li>certains CDD pour lesquels la loi exclut l'indemnité, notamment certains contrats saisonniers, d'usage ou contrats aidés.</li>
+</ul>
+<p class="ip-small">Il existe des règles spécifiques selon la nature exacte du contrat et la convention collective applicable. Cette page ne permet pas, à elle seule, de déterminer si vous avez juridiquement droit à l'indemnité.</p>
+</section>
+
+<section class="ip-card">
+<h2>Exemples de calcul</h2>
+<div class="ip-example">
+<div><div class="eyebrow">CDD · 10 %</div><p>Rémunération brute totale : <strong>20 000 €</strong></p><p>20 000 × 10 % = <strong>2 000 €</strong></p></div>
+<div><div class="eyebrow">CDD · 6 %</div><p>Rémunération brute totale : <strong>20 000 €</strong></p><p>20 000 × 6 % = <strong>1 200 €</strong></p></div>
+</div>
+<p class="ip-small">Ces exemples illustrent uniquement la formule. Ils ne déterminent pas le taux applicable à un contrat réel.</p>
+</section>
+
+<section class="ip-card">
+<h2>Quelle rémunération faut-il prendre en compte ?</h2>
+<p>Le calcul porte sur la rémunération brute totale versée pendant le contrat selon les règles applicables. Il ne s'agit donc pas simplement du dernier salaire mensuel. Les éléments de rémunération à retenir peuvent dépendre de leur nature et des dispositions applicables à votre contrat.</p>
+<p>Pour une situation réelle, vérifiez les bulletins de salaire, le contrat de travail et la convention collective applicable avant de retenir une base de calcul.</p>
+</section>
+
+<section class="ip-card ip-faq">
+<h2>Questions fréquentes</h2>
+<details><summary>La prime de précarité est-elle toujours de 10 % ?</summary><p>Non. Pour un CDD, 10 % constitue le taux minimal de droit commun, mais il peut être ramené à 6 % dans les conditions prévues par un accord ou une convention collective, avec des contreparties. Pour l'intérim, l'indemnité de fin de mission est en principe d'au moins 10 %.</p></details>
+<details><summary>La prime de précarité est-elle calculée sur le salaire net ?</summary><p>Non : la formule de référence utilise la rémunération brute totale, selon les règles applicables au contrat.</p></details>
+<details><summary>La prime de précarité est-elle due après un CDD transformé en CDI ?</summary><p>En principe, non lorsque le contrat se poursuit par un CDI dans les conditions prévues par le Code du travail.</p></details>
+<details><summary>Un contrat saisonnier ouvre-t-il droit à la prime de précarité ?</summary><p>En principe, non. Une convention collective peut toutefois prévoir une indemnité ou une règle plus favorable.</p></details>
+<details><summary>Et pour une mission d'intérim ?</summary><p>L'indemnité de fin de mission est en principe égale à au moins 10 % de la rémunération totale brute due au salarié. Des règles particulières peuvent s'appliquer selon la mission et les textes collectifs.</p></details>
+</section>
+
+<section class="ip-card">
+<h2>Sources officielles</h2>
+<ul class="ip-list">
+<li><a href="https://www.service-public.fr/particuliers/vosdroits/F803" target="_blank" rel="noopener noreferrer">Service-Public — Prime de précarité à la fin d'un CDD</a></li>\n<li><a href="https://www.service-public.fr/particuliers/vosdroits/R63884" target="_blank" rel="noopener noreferrer">Service-Public — Simulateur officiel de l'indemnité de précarité</a></li>
+<li><a href="https://code.travail.gouv.fr/contribution/dans-le-cadre-dun-cdd-quel-est-le-montant-de-lindemnite-de-fin-de-contrat" target="_blank" rel="noopener noreferrer">Code du travail numérique — Indemnité de fin de CDD</a></li>
+<li><a href="https://code.travail.gouv.fr/code-du-travail/l1243-8" target="_blank" rel="noopener noreferrer">Code du travail numérique — Article L1243-8</a></li>
+<li><a href="https://code.travail.gouv.fr/code-du-travail/l1251-32" target="_blank" rel="noopener noreferrer">Code du travail numérique — Article L1251-32 (intérim)</a></li>
+</ul>
+<p class="ip-source">Dernière vérification des règles affichées : septembre 2026. Les textes officiels et votre convention collective restent la référence pour une situation individuelle.</p>
+</section>
+</div>
+
+<section class="content-section" style="max-width:920px;margin:52px auto 0;padding:0 24px">
+<h2>Indemnité de précarité : ce qu'il faut retenir</h2>
+<p>L'indemnité de fin de CDD est versée lorsque les conditions légales sont réunies. Son montant est calculé à partir de la rémunération brute totale versée pendant le contrat. Le taux de droit commun est de 10 %, avec la possibilité d'un taux de 6 % dans certaines situations prévues par les textes collectifs.</p>
+<p>La fin d'un CDD ne suffit toutefois pas à elle seule pour conclure que la prime est due : la nature du contrat, le motif de fin de contrat et les éventuelles dispositions conventionnelles doivent être examinés.</p>
+<h2>Prime de précarité et intérim</h2>
+<p>Pour une mission de travail temporaire, on parle d'indemnité de fin de mission. Elle est en principe calculée à hauteur d'au moins 10 % de la rémunération totale brute due au salarié. Des règles particulières peuvent s'appliquer à certaines missions.</p>
+<h2>Une estimation, pas un avis juridique</h2>
+<p>Le calculateur fournit une estimation arithmétique à partir des données saisies. Il ne remplace pas la vérification de votre contrat, de votre convention collective et des règles applicables à votre situation.</p>
+</section>
+</main>
+
+<footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cgu/">CGU</a></div></div></footer>
+
+<script>
+(function(){
+const form=document.getElementById("form"),contract=document.getElementById("contract"),rate=document.getElementById("rate"),rateWrap=document.getElementById("rate-wrap"),gross=document.getElementById("gross"),result=document.getElementById("result"),error=document.getElementById("error");
+function updateRate(){
+  const interim=contract.value==="interim";
+  rateWrap.hidden=interim;
+  if(interim) rate.value="10";
+}
+contract.addEventListener("change",updateRate);
+updateRate();
+form.addEventListener("submit",function(e){
+  e.preventDefault(); error.hidden=true; result.hidden=true;
+  const base=Number(gross.value);
+  const taux=Number(rate.value);
+  if(!Number.isFinite(base)||base<0){error.textContent="Renseignez une rémunération brute totale valide.";error.hidden=false;return;}
+  if(base===0){result.innerHTML='<div class="ip-big">0,00 €</div><p><strong>Indemnité estimée</strong></p><p class="ip-small">Avec une rémunération brute totale de 0 €, le calcul donne 0 €.</p>';result.hidden=false;return;}
+  const montant=base*taux/100;
+  const fmt=new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:2});
+  const pct=new Intl.NumberFormat("fr-FR",{maximumFractionDigits:2}).format(taux);
+  const type=contract.value==="interim"?"Indemnité de fin de mission":"Indemnité de fin de contrat";
+  result.innerHTML='<div class="ip-big">'+fmt.format(montant)+'</div><p><strong>'+type+' estimée</strong></p><div class="ip-details"><div class="ip-detail"><small>Rémunération brute</small><strong>'+fmt.format(base)+'</strong></div><div class="ip-detail"><small>Taux appliqué</small><strong>'+pct+' %</strong></div><div class="ip-detail"><small>Formule</small><strong>'+fmt.format(base)+' × '+pct+' %</strong></div></div><p class="ip-small">Le résultat est une estimation du montant calculé. Il ne confirme pas à lui seul que l'indemnité est juridiquement due.</p>';
+  result.hidden=false;
+  result.scrollIntoView({behavior:"smooth",block:"nearest"});
+});
+})();
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"La prime de précarité est-elle toujours de 10 % ?","acceptedAnswer":{"@type":"Answer","text":"Pour un CDD, 10 % est le taux minimal de droit commun, mais il peut être ramené à 6 % dans certaines conditions prévues par les textes collectifs. Pour l'intérim, l'indemnité de fin de mission est en principe d'au moins 10 %."}},
+{"@type":"Question","name":"La prime de précarité est-elle calculée sur le salaire net ?","acceptedAnswer":{"@type":"Answer","text":"Non. La formule de référence utilise la rémunération brute totale selon les règles applicables au contrat."}},
+{"@type":"Question","name":"La prime de précarité est-elle due après un CDD transformé en CDI ?","acceptedAnswer":{"@type":"Answer","text":"En principe, non lorsque le contrat se poursuit par un CDI dans les conditions prévues par le Code du travail."}},
+{"@type":"Question","name":"Un contrat saisonnier ouvre-t-il droit à la prime de précarité ?","acceptedAnswer":{"@type":"Answer","text":"En principe, non. Une convention collective peut toutefois prévoir une indemnité ou une règle plus favorable."}},
+{"@type":"Question","name":"Et pour une mission d'intérim ?","acceptedAnswer":{"@type":"Answer","text":"L'indemnité de fin de mission est en principe égale à au moins 10 % de la rémunération totale brute due au salarié. Des règles particulières peuvent s'appliquer."}}
+]}
+</script>
+</body>
+</html>
