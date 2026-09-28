@@ -32,11 +32,35 @@ jobs:
 
       - name: Verify special pages unchanged
         run: |
-          set -euo pipefail
-          for file in             public/outil/interets-composes/index.html             public/outil/signe-astrologique/index.html             public/outil/preavis-demission/index.html             public/outil/tva/index.html
-          do
-            git diff --quiet -- "$file"
-          done
+          node <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+          const cp = require('child_process');
+
+          function walk(dir) {
+            const files = [];
+            for (const entry of fs.readdirSync(dir, {withFileTypes:true})) {
+              const p = path.join(dir, entry.name);
+              if (entry.isDirectory()) files.push(...walk(p));
+              else if (entry.isFile() && entry.name === 'index.html') files.push(p);
+            }
+            return files;
+          }
+
+          const special = walk('public/outil').filter(file => {
+            const html = fs.readFileSync(file, 'utf8');
+            return !/window\.TOOL\s*=/.test(html);
+          });
+
+          for (const file of special) {
+            const base = cp.execFileSync('git', ['show', 'HEAD:' + file], {encoding:'utf8'});
+            const current = fs.readFileSync(file, 'utf8');
+            if (base !== current) throw new Error('special page modified: ' + file);
+          }
+
+          console.log('Verified ' + special.length + ' static-special pages unchanged.');
+          if (special.length !== 4) process.exit(1);
+          NODE
 
       - name: Verify prerendered SEO HTML
         run: |
