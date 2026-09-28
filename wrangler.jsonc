@@ -10,7 +10,11 @@
     "not_found_handling": "404-page",
     "run_worker_first": ["/api/devises"]
   },
-  "observability": {\n    "enabled": true,\n    "head_sampling_rate": 1\n  },\n  "routes": [
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  },
+  "routes": [
     { "pattern": "simulateur.site/*", "zone_name": "simulateur.site" }
   ]
 }
