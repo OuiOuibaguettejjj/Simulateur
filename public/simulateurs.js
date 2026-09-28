@@ -135,7 +135,7 @@
         $("title").textContent=tool.displayTitle||tool.title||"";
         $("intro").textContent=tool.displayIntro||tool.intro||"";
         const renderedFields=typeof tool.fields==="function"?tool.fields():"";
-        if(renderedFields) $("fields").innerHTML=renderedFields;
+        if(renderedFields && !$("fields").children.length) $("fields").innerHTML=renderedFields;
         $("source").textContent=tool.source||"";
         const slug=(location.pathname.match(/\/outil\/([^/]+)/)||[])[1];
         const group=slug&&groups[slug];
