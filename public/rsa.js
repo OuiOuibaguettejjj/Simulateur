@@ -34,6 +34,11 @@
   window.RSAEngine = {
     params: PARAMS,
     calculate(input){
+      const asOf = input.asOf || new Date().toISOString().slice(0,10);
+      if (asOf < PARAMS.effectiveFrom || asOf > PARAMS.effectiveTo) {
+        return {eligible:false,reason:"Le barème RSA utilisé par ce simulateur n'est pas valable à cette date. Vérifiez le barème actuellement applicable."};
+      }
+
       const age=Number(input.age);
       const dependents=Number(input.dependents);
       const single=input.status==="single";
