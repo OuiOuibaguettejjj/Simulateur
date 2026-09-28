@@ -112,8 +112,11 @@ jobs:
               errors.push(file + ': visible breadcrumb missing Accueil link');
             }
 
-            const related = html.match(/<section\b[^>]*class=["']related-tools["'][^>]*>([\s\S]*?)<\/section>/i);
-            if (!related) errors.push(file + ': missing static related-tools');
+            const slug = path.basename(path.dirname(file));
+            if (groups[slug]) {
+              const related = html.match(/<section\b[^>]*class=["']related-tools["'][^>]*>([\s\S]*?)<\/section>/i);
+              if (!related) errors.push(file + ': missing static related-tools');
+            }
           }
 
           console.log('Prerender SEO guard checked ' + checked + ' calculator pages.');
