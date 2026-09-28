@@ -69,6 +69,9 @@ jobs:
           const path = require('path');
           const errors = [];
           let checked = 0;
+          const sim = fs.readFileSync('public/simulateurs.js', 'utf8');
+          const groupsMatch = sim.match(/const groups=({[\s\S]*?})\s*;\s*function addBreadcrumbSchema/);
+          const groups = groupsMatch ? Function('return (' + groupsMatch[1] + ')')() : {};
 
           function walk(dir) {
             const files = [];
