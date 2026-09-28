@@ -22,11 +22,14 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": ["date", "rates", "source"],
+                  "required": ["dates", "rates", "source"],
                   "properties": {
-                    "date": {
-                      "type": "string",
-                      "description": "ECB observation date."
+                    "dates": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": ["string", "null"]
+                      },
+                      "description": "ECB observation date for each currency."
                     },
                     "rates": {
                       "type": "object",
