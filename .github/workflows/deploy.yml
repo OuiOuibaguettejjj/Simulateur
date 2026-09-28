@@ -57,8 +57,7 @@ jobs:
             const current = fs.readFileSync(file, 'utf8');
             if (parent.length >= 2000 && current.length < parent.length * 0.65) errors.push(`destructive HTML shrink detected: ${file} (${parent.length} -> ${current.length} bytes)`);
           }
-          if (errors.length) { console.error(errors.join('
-')); process.exit(1); }
+          if (errors.length) { console.error(errors.join('\n')); process.exit(1); }
           console.log(`Consistency guard passed: ${urls.length} sitemap URLs; ${changed.length} public files changed.`);
           NODE
 
@@ -184,7 +183,7 @@ jobs:
           console.log('Validated ' + files.length + ' HTML pages and ' + toolCount + ' calculator pages.');
 
           if (errors.length) {
-            console.error(errors.join('\\n'));
+            console.error(errors.join('\n'));
             process.exit(1);
           }
           NODE
