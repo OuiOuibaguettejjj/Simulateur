@@ -24,7 +24,7 @@ function applicationCategory(group) {
 }
 function groupsOf(s){const m=s.match(/const groups=({[\s\S]*?})\s*;\s*function addBreadcrumbSchema/);return m?vm.runInNewContext("("+m[1]+")"):{}}
 function replaceElementContents(html, tag, id, content) {
-  const open = new RegExp('<' + tag + '\\b[^>]*\\bid=["\\']' + id + '["\\'][^>]*>', 'i').exec(html);
+  const open = new RegExp(`<${tag}\\b[^>]*\\bid=["']${id}["'][^>]*>`, 'i').exec(html);
   if (!open) return html;
   const openEnd = open.index + open[0].length;
   const tags = new RegExp('</?' + tag + '\\b[^>]*>', 'gi');
