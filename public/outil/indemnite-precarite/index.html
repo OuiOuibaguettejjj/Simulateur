@@ -131,7 +131,7 @@ form.addEventListener("submit",function(e){
   const fmt=new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:2});
   const pct=new Intl.NumberFormat("fr-FR",{maximumFractionDigits:2}).format(taux);
   const type=contract.value==="interim"?"Indemnité de fin de mission":"Indemnité de fin de contrat";
-  result.innerHTML='<div class="ip-big">'+fmt.format(montant)+'</div><p><strong>'+type+' estimée</strong></p><div class="ip-details"><div class="ip-detail"><small>Rémunération brute</small><strong>'+fmt.format(base)+'</strong></div><div class="ip-detail"><small>Taux appliqué</small><strong>'+pct+' %</strong></div><div class="ip-detail"><small>Formule</small><strong>'+fmt.format(base)+' × '+pct+' %</strong></div></div><p class="ip-small">Le résultat est une estimation du montant calculé. Il ne confirme pas à lui seul que l'indemnité est juridiquement due.</p>';
+  result.innerHTML='<div class="ip-big">'+fmt.format(montant)+'</div><p><strong>'+type+' estimée</strong></p><div class="ip-details"><div class="ip-detail"><small>Rémunération brute</small><strong>'+fmt.format(base)+'</strong></div><div class="ip-detail"><small>Taux appliqué</small><strong>'+pct+' %</strong></div><div class="ip-detail"><small>Formule</small><strong>'+fmt.format(base)+' × '+pct+' %</strong></div></div><p class="ip-small">Le résultat est une estimation du montant calculé. Il ne confirme pas à lui seul que l\'indemnité est juridiquement due.</p>';
   result.hidden=false;
   result.scrollIntoView({behavior:"smooth",block:"nearest"});
 });
