@@ -54,7 +54,7 @@ assert.equal(calc({ status: "single", months: [300, 300, 300] }).rsa, 351.69);
 assert.equal(calc({ status: "single", dependents: 5 }).forfait, 1955.09);
 assert.equal(calc({ status: "couple", dependents: 5 }).forfait, 2150.60);
 assert.equal(calc({ status: "single", dependents: 3, housing: "forfait" }).logement, 193.55);
-assert.equal(calc({ housing: "aidBelowForfait", housingAid: 100 }).logement, 100);
+assert.equal(calc({ housing: "aidBelowForfait", housingAid: 50 }).logement, 50);
 assert.equal(calc({ age: 17 }).eligible, false);
 assert.equal(calc({ resident: "no" }).eligible, false);
 assert.equal(calc({ student: "yes" }).eligible, false);
