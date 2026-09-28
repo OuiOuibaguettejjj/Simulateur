@@ -38,6 +38,13 @@ function replaceElementContents(html, tag, id, content) {
   }
   throw new Error('Unclosed #' + id + ' container');
 }
+function relatedToolsMarkup(slug) {
+  const data = groups[slug];
+  if (!data) return "";
+  return '<section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Calculs associés</h2><div class="related-links">' +
+    data[2].map(x => '<a class="related-link" href="/outil/' + x[0] + '/"><strong>' + esc(x[1]) + '</strong><span>' + esc(x[2]) + '</span></a>').join("") +
+    '</div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="' + data[1] + '">' + esc(data[0]) + '</a>.</p></div></section>';
+}
 function hasBC(h){return [...h.matchAll(/<script[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)].some(m=>/"@type"\s*:\s*"BreadcrumbList"/.test(m[1]))}
 const groups=groupsOf(sim);let changed=0,skipped=0;
 for(const file of walk(root)){const old=fs.readFileSync(file,"utf8");let h=old;const slug=path.basename(path.dirname(file)),t=toolOf(h,file);if(!t){skipped++;continue}const title=t.displayTitle||t.title||"",intro=t.displayIntro||t.intro||"";if(!title)throw Error(file+": titre vide");
@@ -72,5 +79,9 @@ if(!hasJsonLdType(h,"WebApplication")){
   })+"</head>");
 }
 if(!hasBC(h)){const c=(h.match(/<link[^>]+rel=["']canonical["'][^>]+href=["']([^"']+)["']/i)||[])[1]||"https://simulateur.site/outil/"+slug+"/";const bm=h.match(/<div[^>]+class=["']breadcrumb["'][^>]*>([\s\S]*?)<\/div>/i),links=bm?[...bm[1].matchAll(/<a[^>]+href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)]:[],items=[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"}];if(links[0])items.push({"@type":"ListItem","position":2,"name":links[0][2].replace(/<[^>]+>/g,"").trim(),"item":new URL(links[0][1],"https://simulateur.site").href});items.push({"@type":"ListItem","position":items.length+1,"name":title,"item":c});h=h.replace(/<\/head>/i,jsonLdScript({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":items})+"</head>")}
+if(!/<section[^>]+class=["']related-tools["']/i.test(h)){
+  const related=relatedToolsMarkup(slug);
+  if(related) h=h.replace(/<\/main>/i,related+"</main>");
+}
 if(h!==old){fs.writeFileSync(file,h.endsWith("\n")?h:h+"\n");changed++}}
 console.log("SEO prerender: "+changed+" pages updated; "+skipped+" static-special pages skipped.");
