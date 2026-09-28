@@ -58,10 +58,12 @@ if(typeof t.fields==="function"){
   if(!f) throw Error(file+": champs vides");
   h=replaceElementContents(h,"div","fields",f);
 }
-if(!/<div[^>]+class=["']breadcrumb["']/i.test(h)){
-  const g=groups[slug]||["Calculateurs","/calculateurs/"];
-  h=h.replace(/(<main\b[^>]*>[\s\S]*?<div[^>]+class=["']wrap["'][^>]*>)/i,
-    "$1<div class=\"breadcrumb\"><a href=\"/\">Accueil</a> · <a href=\""+g[1]+"\">"+esc(g[0])+"</a> · "+esc(title)+"</div>");
+const g=groups[slug]||["Calculateurs","/calculateurs/"];
+const breadcrumb='<div class="breadcrumb"><a href="/">Accueil</a> · <a href="'+g[1]+'">'+esc(g[0])+'</a> · '+esc(title)+'</div>';
+if(/<div[^>]+class=["']breadcrumb["']/i.test(h)){
+  h=h.replace(/<div[^>]+class=["']breadcrumb["'][^>]*>[\s\S]*?<\/div>/i,breadcrumb);
+}else{
+  h=h.replace(/(<main\b[^>]*>[\s\S]*?<div[^>]+class=["']wrap["'][^>]*>)/i,"$1"+breadcrumb);
 }
 const canonical=(h.match(/<link[^>]+rel=["']canonical["'][^>]+href=["']([^"']+)["']/i)||[])[1]||"https://simulateur.site/outil/"+slug+"/";
 if(!hasJsonLdType(h,"WebApplication")){
