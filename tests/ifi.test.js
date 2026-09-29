@@ -36,7 +36,11 @@ for (const value of ["", 0, 500000, 800001, 1000000, 1250000, 1299999, 1300000])
 }
 
 // Exemples officiels Service-Public : 1 350 000 € (avec décote) et 1 500 000 €.
-assert.equal(ifi(1300001), 1250.02);\nassert.match(run(1300001), /Décote estimée/);\nassert.doesNotMatch(run(1300001), /Non assujetti/);\n\nassert.equal(ifi(1350000), 2225);
+assert.equal(ifi(1300001), 1250.02);
+assert.match(run(1300001), /Décote estimée/);
+assert.doesNotMatch(run(1300001), /Non assujetti/);
+
+assert.equal(ifi(1350000), 2225);
 assert.match(run(1350000), /Décote estimée : €625\.00/);
 assert.equal(ifi(1500000), 3900);
 assert.doesNotMatch(run(1500000), /Décote/);
