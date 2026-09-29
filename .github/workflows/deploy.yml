@@ -42,6 +42,9 @@ jobs:
           node scripts/normalize-layout.mjs
           diff -qr /tmp/public-after-first-normalize public
 
+      - name: Check layout consistency (warnings only)
+        run: node scripts/check-layout.mjs
+
       - name: Verify commit and consistency before production
         run: |
           test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
