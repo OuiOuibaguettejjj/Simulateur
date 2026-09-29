@@ -59,6 +59,7 @@ main{padding:50px 0 90px}
 .breadcrumb{font-size:.84rem;font-weight:800;margin-bottom:18px;color:var(--muted)}
 .article{max-width:850px;margin:auto;background:var(--card);border:1px solid var(--ink);border-radius:16px;padding:38px;box-shadow:var(--shadow)}
 .content-section{max-width:800px;margin:45px auto 0;padding:0 24px}
+.wrap .content-section,.wrap .related-tools{padding-left:0;padding-right:0}
 .article h1{font-size:clamp(2.6rem,6vw,4.8rem);line-height:.95;letter-spacing:-.07em}
 .article h2{margin-top:34px}
 footer{border-top:1px solid var(--ink);padding:30px 0;background:#eee9df}
@@ -114,7 +115,7 @@ footer{border-top:1px solid var(--ink);padding:30px 0;background:#eee9df}
 .succession-tool .takeaway{border-color:#17483d;background:#edf3ef}
 .succession-tool .takeaway-item{box-shadow:0 1px 2px rgba(23,23,19,.05)}
 .succession-tool .tax-breakdown{box-shadow:0 3px 12px rgba(23,23,19,.04)}
-.succession-content{max-width:920px;margin:52px auto 0;padding:0 24px}
+.succession-content{max-width:920px;margin:52px auto 0}
 .content-intro{border-top:1px solid var(--ink);padding-top:24px;margin-bottom:30px}
 .content-intro h2{font-size:clamp(2rem,4vw,3rem);line-height:1;letter-spacing:-.06em;margin:0 0 10px}
 .content-intro p{color:var(--muted);margin:0}
@@ -125,6 +126,6 @@ footer{border-top:1px solid var(--ink);padding:30px 0;background:#eee9df}
 .succession-details[open] summary:after{content:"−"}
 @media(max-width:650px){
  .succession-hero{padding:32px 22px 28px}.succession-hero h1{font-size:3rem}.succession-hero:after{right:-5px;font-size:9rem}
- .succession-tool{padding:27px 20px 32px}.succession-content{padding:0 20px}
+ .succession-tool{padding:27px 20px 32px}
  .trust-row{gap:6px}.trust-row span{font-size:.7rem}
 }
