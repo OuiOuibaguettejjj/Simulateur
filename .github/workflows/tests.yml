@@ -1,0 +1,25 @@
+name: Tests
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "public/outil/**"
+      - "public/*.js"
+      - "tests/**"
+      - ".github/workflows/tests.yml"
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+
+      - name: Test calculateur IFI
+        run: node tests/ifi.test.js
