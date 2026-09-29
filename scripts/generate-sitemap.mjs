@@ -1,11 +1,10 @@
-#!/usr/bin/env node
 import fs from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 
-const ROOT = ".";
+const ROOT = "public";
 const SITE = "https://simulateur.site";
-const EXCLUDED_PREFIXES = ["api/"];
+const EXCLUDED_PREFIXES = ["public/api/"];
 
 function walk(dir) {
   const files = [];
@@ -18,50 +17,47 @@ function walk(dir) {
 }
 
 function isIndexablePage(file) {
-  return (file === "index.html" || file.endsWith("/index.html"))
-    && file !== "404.html"
+  return (file === "public/index.html" || file.endsWith("/index.html"))
+    && file !== "public/404.html"
     && !EXCLUDED_PREFIXES.some(prefix => file.startsWith(prefix));
 }
 
 function routeFromFile(file) {
-  if (file === "index.html") return "/";
-  return "/" + file.slice(0, -"index.html".length);
+  if (file === "public/index.html") return "/";
+  return "/" + file.slice("public/".length, -"index.html".length);
 }
 
 function lastModified(file) {
-  const value = execFileSync(
-    "git",
-    ["log", "-1", "--format=%cs", "--", file],
-    { encoding: "utf8" }
-  ).trim();
-
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) {
-    throw new Error("Unable to determine Git last modification date for " + file);
+  const date = execFileSync("git", ["log", "-1", "--format=%cs", "--", file], { encoding: "utf8" }).trim();
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+    throw new Error(`Unable to determine valid Git last-modified date for ${file}: ${date}`);
   }
-  return value;
+  return date;
 }
 
 const pages = walk(ROOT)
   .filter(isIndexablePage)
-  .sort((a, b) => routeFromFile(a).localeCompare(routeFromFile(b)));
+  .map(file => ({ route: routeFromFile(file), lastmod: lastModified(file) }))
+  .sort((a, b) => a.route.localeCompare(b.route));
 
-const entries = pages.map(file => {
-  const route = routeFromFile(file);
-  return [
-    "  <url>",
-    `    <loc>${SITE}${route}</loc>`,
-    `    <lastmod>${lastModified(file)}</lastmod>`,
-    "  </url>"
-  ].join("\n");
-});
+const seen = new Set();
+for (const page of pages) {
+  if (seen.has(page.route)) throw new Error(`Duplicate sitemap route: ${page.route}`);
+  seen.add(page.route);
+}
 
 const sitemap = [
   '<?xml version="1.0" encoding="UTF-8"?>',
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-  ...entries,
+  ...pages.flatMap(page => [
+    "  <url>",
+    `    <loc>${SITE}${page.route}</loc>`,
+    `    <lastmod>${page.lastmod}</lastmod>`,
+    "  </url>"
+  ]),
   "</urlset>",
   ""
 ].join("\n");
 
-fs.writeFileSync("sitemap.xml", sitemap, "utf8");
+fs.writeFileSync(path.join(ROOT, "sitemap.xml"), sitemap, "utf8");
 console.log(`Generated sitemap.xml with ${pages.length} URLs using Git last-modified dates.`);
