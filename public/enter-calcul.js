@@ -61,6 +61,17 @@
     "plus-value-mobiliere":["impot-sur-le-revenu","comparateur-placements","epargne"],
     "indemnites-maladie":["indemnites-maternite-paternite","salaire-brut-net","are-chomage"],
     "indemnites-maternite-paternite":["indemnites-maladie","salaire-brut-net","prime-activite"]
+    "age":["difference-dates","temps","age-retraite"],
+    "calculatrice":["pourcentage","moyenne","fractions"],
+    "cout-km":["consommation-carburant","frais-kilometriques","vitesse"],
+    "electricite":["prix-unitaire","consommation-carburant","moyenne"],
+    "median-mode":["moyenne","moyenne-ponderee","calculatrice"],
+    "moyenne-ponderee":["moyenne","median-mode","proportion"],
+    "moyenne":["moyenne-ponderee","median-mode","pourcentage"],
+    "ratio":["pourcentage","proportion","coefficient"],
+    "signe-astrologique":["age","difference-dates","temps"],
+    "surface":["perimetre","calculatrice","proportion"],
+    "vitesse":["consommation-carburant","cout-km","temps-calcul"],
   };
 
   const INFO = {
