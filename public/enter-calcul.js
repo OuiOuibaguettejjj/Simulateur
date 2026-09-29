@@ -135,7 +135,18 @@
     "succession":["Succession","Estimer les droits selon les paramètres renseignés."],
     "plus-value-mobiliere":["Plus-value mobilière","Estimer la fiscalité d'une plus-value sur titres."],
     "indemnites-maladie":["IJ maladie","Estimer les indemnités journalières en cas d'arrêt."],
-    "indemnites-maternite-paternite":["IJ maternité / paternité","Estimer les indemnités journalières correspondantes."]
+    "indemnites-maternite-paternite":["IJ maternité / paternité","Estimer les indemnités journalières correspondantes."],
+    "age":["Calcul d'âge","Calculer précisément un âge à partir d'une date de naissance."],
+    "calculatrice":["Calculatrice en ligne","Effectuer rapidement des calculs courants directement en ligne."],
+    "cout-km":["Coût au kilomètre","Calculer le coût d'utilisation d'un véhicule au kilomètre."],
+    "electricite":["Facture d'électricité","Estimer le coût annuel selon la consommation, l'abonnement et le prix du kWh."],
+    "median-mode":["Médiane et mode","Calculer la médiane et le mode d'une série de valeurs."],
+    "moyenne-ponderee":["Moyenne pondérée","Calculer une moyenne en tenant compte du poids de chaque valeur."],
+    "moyenne":["Moyenne","Calculer la moyenne arithmétique d'une série de valeurs."],
+    "ratio":["Ratio","Calculer et interpréter un ratio entre deux valeurs."],
+    "signe-astrologique":["Signe astrologique et ascendant","Trouver son signe solaire et son ascendant selon la date, l'heure et le lieu de naissance."],
+    "surface":["Calcul de surface","Calculer la surface d'une figure ou d'une zone."],
+    "vitesse":["Calcul de vitesse","Calculer une vitesse à partir d'une distance et d'une durée."]
   };
 
   const CONVERSIONS=new Set(["devises","poids","longueur","volume","temperature"]);
@@ -158,6 +169,7 @@
   }
 
   function renderRelatedTools(){
+    if(document.querySelector('.related-tools')) return;
     const tool=document.querySelector('.tool, .pv');
     if(!tool || tool.dataset.relatedMounted) return;
 
