@@ -12,8 +12,8 @@ const HEADER =
   '<header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a>' +
   '<nav class="navlinks" aria-label="Navigation principale">' +
   '<a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a>' +
-  '<a href="/conversions/">Conversions</a><a href="/comparateurs/">Comparateurs</a>' +
-  '<a href="/a-propos/">À propos</a></nav></div></header>';
+  '<a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a>' +
+  '</nav></div></header>';
 
 const FOOTER =
   '<footer><div class="wrap"><div class="footerlinks">' +
