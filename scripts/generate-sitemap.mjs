@@ -3,9 +3,9 @@ import fs from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 
-const ROOT = "public";
+const ROOT = ".";
 const SITE = "https://simulateur.site";
-const EXCLUDED_PREFIXES = ["public/api/"];
+const EXCLUDED_PREFIXES = ["api/"];
 
 function walk(dir) {
   const files = [];
@@ -18,14 +18,14 @@ function walk(dir) {
 }
 
 function isIndexablePage(file) {
-  return (file === "public/index.html" || file.endsWith("/index.html"))
-    && file !== "public/404.html"
+  return (file === "index.html" || file.endsWith("/index.html"))
+    && file !== "404.html"
     && !EXCLUDED_PREFIXES.some(prefix => file.startsWith(prefix));
 }
 
 function routeFromFile(file) {
-  if (file === "public/index.html") return "/";
-  return "/" + file.slice("public/".length, -"index.html".length);
+  if (file === "index.html") return "/";
+  return "/" + file.slice(0, -"index.html".length);
 }
 
 function lastModified(file) {
@@ -63,5 +63,5 @@ const sitemap = [
   ""
 ].join("\n");
 
-fs.writeFileSync(path.join(ROOT, "sitemap.xml"), sitemap, "utf8");
+fs.writeFileSync("sitemap.xml", sitemap, "utf8");
 console.log(`Generated sitemap.xml with ${pages.length} URLs using Git last-modified dates.`);
