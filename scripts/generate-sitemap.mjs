@@ -6,6 +6,12 @@ const ROOT = "public";
 const SITE = "https://simulateur.site";
 const EXCLUDED_PREFIXES = ["public/api/"];
 
+// This restoration commit rebuilt the public tree without changing page content.
+// It must not become the apparent last modification date of every restored page.
+const IGNORED_COMMITS = new Set([
+  "2dc2ac88a7e12e26240d935011c8ad5ebba944a8"
+]);
+
 function walk(dir) {
   const files = [];
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -28,11 +34,22 @@ function routeFromFile(file) {
 }
 
 function lastModified(file) {
-  const date = execFileSync("git", ["log", "-1", "--format=%cs", "--", file], { encoding: "utf8" }).trim();
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
-    throw new Error(`Unable to determine valid Git last-modified date for ${file}: ${date}`);
+  const history = execFileSync(
+    "git",
+    ["log", "--format=%H%x09%cs", "--", file],
+    { encoding: "utf8" }
+  ).trim().split(/\r?\n/).filter(Boolean);
+
+  for (const entry of history) {
+    const [sha, date] = entry.split("\t");
+    if (IGNORED_COMMITS.has(sha)) continue;
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+      throw new Error(`Unable to determine valid Git last-modified date for ${file}: ${date}`);
+    }
+    return date;
   }
-  return date;
+
+  throw new Error(`No valid Git last-modified date found for ${file}`);
 }
 
 const pages = walk(ROOT)
