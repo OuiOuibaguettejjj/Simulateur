@@ -1,4 +1,4 @@
-Contact: mailto:contact.simulateur.site@gmail.com
+Contact: mailto:simulateur.site@gmail.com
 Canonical: https://simulateur.site/.well-known/security.txt
 Expires: 2027-09-01T00:00:00Z
 Preferred-Languages: fr, en
