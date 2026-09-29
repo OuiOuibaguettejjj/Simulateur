@@ -35,6 +35,13 @@ jobs:
           node scripts/prerender-tools.mjs
           diff -qr /tmp/public-after-first-prerender public
 
+      - name: Normalize shared layout (header, footer)
+        run: |
+          node scripts/normalize-layout.mjs
+          cp -a public /tmp/public-after-first-normalize
+          node scripts/normalize-layout.mjs
+          diff -qr /tmp/public-after-first-normalize public
+
       - name: Verify commit and consistency before production
         run: |
           test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
