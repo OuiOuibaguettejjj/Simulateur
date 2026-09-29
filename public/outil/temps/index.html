@@ -152,7 +152,7 @@
   const pad=n=>String(n).padStart(2,"0");
   const number=n=>Number(n).toLocaleString("fr-FR",{maximumFractionDigits:6});
   const plural=(n,s,p)=>Math.abs(n)===1?s:p;
-  const unitText=(n,u)=>number(n)+" "+(Math.abs(n)===1?u:u+"s");
+  const unitText=(n,u)=>number(n)+" "+(Math.abs(n)===1?u:(u==="mois"?"mois":u+"s"));
   const parseDate=value=>{
     if(!/^\d{4}-\d{2}-\d{2}$/.test(value)) return null;
     const [y,m,d]=value.split("-").map(Number);
@@ -210,7 +210,7 @@
     if(compound==="single"){
       const v=Number(document.getElementById("convertValue").value),u=document.getElementById("convertUnit").value;
       if(!Number.isFinite(v)||v<0) return null;
-      return {seconds:v*({seconds:1,minutes:60,hours:3600,days:86400,weeks:604800}[u]),label:number(v)+" "+u};
+      const seconds=v*({seconds:1,minutes:60,hours:3600,days:86400,weeks:604800}[u]);\n      if(!Number.isFinite(seconds)) return null;\n      return {seconds,label:number(v)+" "+u};
     }
     const ids=compound==="hm"?["compoundH","compoundM"]:compound==="hms"?["compoundH","compoundM","compoundS"]:["compoundM","compoundS"];
     const vals=ids.map(id=>Number(document.getElementById(id).value||0));
@@ -274,7 +274,7 @@
       const start=parseDateTime(document.getElementById("addDateTime").value);
       if(!start) return "Saisissez une date et une heure de départ valides.";
       const vals=["addYears","addMonths","addDays","addHours","addMinutes","addSeconds"].map(id=>Number(document.getElementById(id).value||0));
-      if(vals.some(v=>!Number.isFinite(v))) return "Vérifiez les durées saisies.";
+      if(vals.some(v=>!Number.isFinite(v)||!Number.isInteger(v))) return "Les années, mois, jours, heures, minutes et secondes doivent être des nombres entiers.";
       let p=addCalendarMonths(start,vals[0],vals[1]);
       const base=toDateTime(p)+((vals[2]*86400+vals[3]*3600+vals[4]*60+vals[5])*1000);
       const result=new Date(base);
