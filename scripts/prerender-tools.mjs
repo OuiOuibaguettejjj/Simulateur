@@ -53,7 +53,7 @@ h=h.replace(/(<div[^>]+id=["']ey["'][^>]*>)[\s\S]*?(<\/div>)/i,(_,a,b)=>a+esc(t.
 h=h.replace(/(<h1[^>]+id=["']title["'][^>]*>)[\s\S]*?(<\/h1>)/i,(_,a,b)=>a+esc(title)+b);
 h=h.replace(/(<p[^>]+id=["']intro["'][^>]*>)[\s\S]*?(<\/p>)/i,(_,a,b)=>a+esc(intro)+b);
 h=h.replace(/(<p[^>]+id=["']source["'][^>]*>)[\s\S]*?(<\/p>)/i,(_,a,b)=>a+esc(t.source||"")+b);
-if(typeof t.fields==="function"){
+if(typeof t.fields==="function" && slug !== "temps"){
   const f=t.fields();
   if(f) h=replaceElementContents(h,"div","fields",f);
 }
