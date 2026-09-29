@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Convertisseur Mo Go : octets, Ko, Mo, Go, To, Gio | Simulateur</title>
-<meta name="description" content="Convertissez facilement des octets, Ko, Mo, Go, To et unités binaires comme Mio et Gio. Convertisseur de données gratuit, rapide et précis.">
+<title>Convertisseur Ko Mo Go : octets, Mo, Go, To, Gio | Simulateur</title>
+<meta name="description" content="Conversion Ko Mo Go en ligne : convertissez octets, Ko, Mo, Go, To et unités binaires (Kio, Mio, Gio, Tio). Tableau d’équivalences et différence entre Go et Gio.">
 <link rel="canonical" href="https://simulateur.site/conversion/donnees/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/styles.css">
@@ -29,7 +29,7 @@
 
 <section class="tool data-converter">
 <div class="eyebrow">CONVERSION DE DONNÉES</div>
-<h1>Convertisseur Mo, Go et octets</h1>
+<h1>Convertisseur Ko, Mo, Go et octets</h1>
 <p class="tool-intro">Convertissez rapidement une quantité de données entre octets, Ko, Mo, Go, To et unités binaires. Choisissez l'unité de départ et l'unité d'arrivée.</p>
 
 <div class="conversion-grid">
@@ -59,6 +59,8 @@
 <button type="button" data-value="1" data-from="mo" data-to="go">1 Mo → Go</button>
 <button type="button" data-value="1" data-from="go" data-to="gio">1 Go → Gio</button>
 <button type="button" data-value="1" data-from="gio" data-to="go">1 Gio → Go</button>
+<button type="button" data-value="1" data-from="to" data-to="gio">1 To → Gio</button>
+<button type="button" data-value="1" data-from="ko" data-to="o">1 Ko → octets</button>
 </div>
 </div>
 
@@ -76,6 +78,20 @@
 <h2>Quelle différence entre Go et Gio ?</h2>
 <p>Dans le système décimal, les préfixes kilo, méga, giga et téra utilisent des puissances de 10 : 1 Go correspond à 1 000 Mo et 1 000 000 000 octets. Les préfixes binaires utilisent des puissances de 2 : 1 Gio correspond à 1 024 Mio et 1 073 741 824 octets.</p>
 
+<h2>Tableau des équivalences Ko, Mo, Go, To</h2>
+<table>
+<thead><tr><th>Unité décimale (SI)</th><th>Valeur</th><th>Unité binaire</th><th>Valeur</th></tr></thead>
+<tbody>
+<tr><td>1 Ko</td><td>1 000 octets</td><td>1 Kio</td><td>1 024 octets</td></tr>
+<tr><td>1 Mo</td><td>1 000 Ko = 1 000 000 octets</td><td>1 Mio</td><td>1 024 Kio = 1 048 576 octets</td></tr>
+<tr><td>1 Go</td><td>1 000 Mo = 1 000 000 000 octets</td><td>1 Gio</td><td>1 024 Mio = 1 073 741 824 octets</td></tr>
+<tr><td>1 To</td><td>1 000 Go = 10<sup>12</sup> octets</td><td>1 Tio</td><td>1 024 Gio = 1 099 511 627 776 octets</td></tr>
+</tbody>
+</table>
+
+<h2>Pourquoi un disque de 1 To affiche environ 931 Go dans Windows ?</h2>
+<p>Les fabricants annoncent la capacité en unités décimales : 1 To = 1 000 000 000 000 octets. Windows affiche cette taille en base 1 024 (donc en Gio) tout en écrivant « Go » : 1 000 000 000 000 ÷ 1 073 741 824 ≈ 931,32. Le disque n'a rien perdu, seule l'unité de mesure diffère.</p>
+<p>Même écart pour d'autres capacités : 500 Go ≈ 465,66 Gio et 256 Go ≈ 238,42 Gio. L'écart relatif est d'environ 7 % au niveau du Go, et il augmente avec la taille de l'unité (environ 2,4 % pour un Mo, près de 10 % pour un To).</p>
 <details class="data-faq">
 <summary>Exemples de conversions</summary>
 <ul>
