@@ -210,7 +210,9 @@
     if(compound==="single"){
       const v=Number(document.getElementById("convertValue").value),u=document.getElementById("convertUnit").value;
       if(!Number.isFinite(v)||v<0) return null;
-      const seconds=v*({seconds:1,minutes:60,hours:3600,days:86400,weeks:604800}[u]);\n      if(!Number.isFinite(seconds)) return null;\n      return {seconds,label:number(v)+" "+u};
+      const seconds=v*({seconds:1,minutes:60,hours:3600,days:86400,weeks:604800}[u]);
+      if(!Number.isFinite(seconds)) return null;
+      return {seconds,label:number(v)+" "+u};
     }
     const ids=compound==="hm"?["compoundH","compoundM"]:compound==="hms"?["compoundH","compoundM","compoundS"]:["compoundM","compoundS"];
     const vals=ids.map(id=>Number(document.getElementById(id).value||0));
