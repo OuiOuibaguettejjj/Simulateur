@@ -6,10 +6,11 @@ const ROOT = "public";
 const SITE = "https://simulateur.site";
 const EXCLUDED_PREFIXES = ["public/api/"];
 
-// This restoration commit rebuilt the public tree without changing page content.
-// It must not become the apparent last modification date of every restored page.
+// These restoration/tree-migration commits rebuilt the public tree without changing page content.
+// They must not become the apparent last modification date of restored pages.
 const IGNORED_COMMITS = new Set([
-  "2dc2ac88a7e12e26240d935011c8ad5ebba944a8"
+  "2dc2ac88a7e12e26240d935011c8ad5ebba944a8",
+  "977851feb8ef88b3c4c41307eeee2a5b915a1874"
 ]);
 
 function walk(dir) {
