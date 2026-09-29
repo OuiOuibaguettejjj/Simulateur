@@ -118,19 +118,6 @@
     host.insertBefore(b,host.firstElementChild);
   }
 
-  function addRelatedTools(slug,group){
-    const data=groups[slug];
-    if(!data || document.querySelector(".related-tools")) return;
-    const host=document.querySelector("main");
-    if(!host) return;
-    const section=document.createElement("section");
-    section.className="related-tools";
-    section.innerHTML='<div><div class="eyebrow">À VOIR AUSSI</div><h2>Calculs associés</h2><div class="related-links">'+
-      data[2].map(x=>'<a class="related-link" href="/outil/'+x[0]+'/"><strong>'+x[1]+'</strong><span>'+x[2]+"</span></a>").join("")+
-      '</div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="'+data[1]+'">'+data[0]+"</a>.</p></div>";
-    host.appendChild(section);
-  }
-
   window.Simulateurs={
     render(){
       const tool=window.TOOL;
@@ -146,7 +133,6 @@
         const group=slug&&groups[slug];
         addBreadcrumbSchema(tool,slug,group);
         addVisibleBreadcrumb(tool,group);
-        addRelatedTools(slug,group);
       }catch(error){
         $("result").textContent="Impossible de charger ce calculateur.";
         console.error("Simulateurs.render:",error);
