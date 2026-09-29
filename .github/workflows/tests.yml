@@ -23,3 +23,9 @@ jobs:
 
       - name: Test calculateur IFI
         run: node tests/ifi.test.js
+
+      - name: Test calculateur impôt
+        run: node tests/impot.test.js
+
+      - name: Test calculateur RSA
+        run: node tests/rsa.test.js
