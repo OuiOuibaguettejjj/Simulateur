@@ -20,6 +20,13 @@ function secure(response, extra = {}) {
   });
 }
 
+function cacheStaticAsset(response, pathname) {
+  if (!/\.(?:css|js)$/i.test(pathname)) return response;
+  return secure(response, {
+    "Cache-Control": "no-cache, must-revalidate"
+  });
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -93,6 +100,9 @@ export default {
       }
     }
 
-    return secure(await env.ASSETS.fetch(request));
+    return cacheStaticAsset(
+      await env.ASSETS.fetch(request),
+      url.pathname
+    );
   }
 };
