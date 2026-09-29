@@ -1,1 +1,193 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Convertisseur de données : octets, Ko, Mo, Go, To | Simulateur</title><meta name="description" content="Convertissez octets, Ko, Mo, Go et To rapidement avec un convertisseur gratuit."><link rel="canonical" href="https://simulateur.site/conversion/donnees/"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/styles.css"></head><body><header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks"><a href="/calculateurs/">Calculateurs</a><a href="/conversions/">Conversions</a><a href="/comparateurs/">Comparateurs</a></nav></div></header><main><div class="wrap"><section class="tool"><div class="eyebrow">CONVERSION</div><h1>Convertisseur de données</h1><p class="tool-intro">Convertissez octets, Ko, Mo, Go et To. Convention utilisée : 1 Ko = 1 024 octets.</p><div class="row"><div class="field"><label for="v">Valeur</label><input id="v" type="number" step="any" placeholder="1"></div><div class="field"><label for="from">De</label><select id="from"></select></div></div><div class="field"><label for="to">Vers</label><select id="to"></select></div><button class="button-main" id="go">Convertir</button><div class="result" id="r" aria-live="polite">—</div></section></div><section class="related-tools"><div><div class="eyebrow">CONVERSIONS</div><h2>Autres conversions</h2></div><div class="related-links"><a class="related-link" href="/conversion/poids/">Poids →</a><a class="related-link" href="/conversion/longueur/">Longueur →</a><a class="related-link" href="/conversion/volume/">Volume →</a><a class="related-link" href="/conversion/devises/">Devises →</a></div></section></main><footer><div class="wrap"><a href="/">Accueil</a></div></footer><script>const U={o:1,ko:1024,mo:1024**2,go:1024**3,to:1024**4},N={o:'octet',ko:'Ko',mo:'Mo',go:'Go',to:'To'};for(const id of ['from','to'])for(const k in U){const o=document.createElement('option');o.value=k;o.textContent=N[k];document.querySelector('#'+id).append(o)}from.value='go';to.value='mo';document.querySelector('#go').onclick=()=>{const x=Number(v.value);if(!Number.isFinite(x)||x<0){r.textContent='Saisissez une valeur valide.';return}r.innerHTML='<strong>'+(x*U[from.value]/U[to.value]).toLocaleString('fr-FR',{maximumFractionDigits:10})+' '+N[to.value]+'</strong>'}</script></body></html>
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Convertisseur Mo Go : octets, Ko, Mo, Go, To, Gio | Simulateur</title>
+<meta name="description" content="Convertissez facilement des octets, Ko, Mo, Go, To et unités binaires comme Mio et Gio. Convertisseur de données gratuit, rapide et précis.">
+<link rel="canonical" href="https://simulateur.site/conversion/donnees/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/styles.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Convertisseur de données","url":"https://simulateur.site/conversion/donnees/","applicationCategory":"UtilitiesApplication","operatingSystem":"All","description":"Convertisseur de données permettant de convertir des octets, Ko, Mo, Go, To et des unités binaires comme Kio, Mio, Gio et Tio.","isAccessibleForFree":true,"inLanguage":"fr"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Conversions","item":"https://simulateur.site/conversions/"},{"@type":"ListItem","position":2,"name":"Données","item":"https://simulateur.site/conversion/donnees/"}]}</script>
+</head>
+<body>
+<header>
+<div class="wrap nav">
+<a class="logo" href="/">Simulateur<span>.</span></a>
+<nav class="navlinks" aria-label="Navigation principale">
+<a href="/calculateurs/">Calculateurs</a>
+<a href="/conversions/">Conversions</a>
+<a href="/comparateurs/">Comparateurs</a>
+</nav>
+</div>
+</header>
+
+<main>
+<div class="wrap">
+<div class="breadcrumb"><a href="/conversions/">Conversions</a> → Données</div>
+
+<section class="tool data-converter">
+<div class="eyebrow">CONVERSION DE DONNÉES</div>
+<h1>Convertisseur Mo, Go et octets</h1>
+<p class="tool-intro">Convertissez rapidement une quantité de données entre octets, Ko, Mo, Go, To et unités binaires. Choisissez l'unité de départ et l'unité d'arrivée.</p>
+
+<div class="conversion-grid">
+<div class="field">
+<label for="v">Valeur</label>
+<input id="v" type="number" step="any" min="0" inputmode="decimal" placeholder="1" autocomplete="off">
+</div>
+<div class="field">
+<label for="from">De</label>
+<select id="from" aria-label="Unité de départ"></select>
+</div>
+<div class="field">
+<label for="to">Vers</label>
+<select id="to" aria-label="Unité d'arrivée"></select>
+</div>
+</div>
+
+<button class="button-main" id="go" type="button">Convertir</button>
+<p class="enter-note">Astuce : appuyez sur Entrée pour convertir.</p>
+
+<div class="result result-main" id="r" aria-live="polite" aria-atomic="true">—</div>
+
+<div class="quick-conversions" aria-label="Conversions rapides">
+<strong>Conversions courantes</strong>
+<div class="quick-grid">
+<button type="button" data-value="1" data-from="go" data-to="mo">1 Go → Mo</button>
+<button type="button" data-value="1" data-from="mo" data-to="go">1 Mo → Go</button>
+<button type="button" data-value="1" data-from="go" data-to="gio">1 Go → Gio</button>
+<button type="button" data-value="1" data-from="gio" data-to="go">1 Gio → Go</button>
+</div>
+</div>
+
+<div class="formula">
+<strong>À propos des unités</strong>
+<p>Les préfixes SI kilo, méga, giga et téra correspondent respectivement à 10³, 10⁶, 10⁹ et 10¹². Pour les puissances de 2, les préfixes recommandés sont kibi, mébi, gibi et tébi : 1 Kio = 1 024 octets, 1 Mio = 1 024 Kio et 1 Gio = 1 024 Mio.</p>
+<p class="source-note">Référence : <a href="https://www.bipm.org/fr/si-brochure-9">Bureau international des poids et mesures (BIPM)</a>, Brochure sur le SI.</p>
+</div>
+</section>
+
+<section class="content-section data-content">
+<h2>Convertir des Mo en Go, des Go en Mo et plus</h2>
+<p>Ce convertisseur permet de passer simplement d'une unité de stockage ou de quantité de données à une autre. Vous pouvez notamment convertir des <strong>Mo en Go</strong>, des <strong>Go en Mo</strong>, des octets en Ko, Mo ou Go, ou encore utiliser les unités binaires Mio et Gio.</p>
+
+<h2>Quelle différence entre Go et Gio ?</h2>
+<p>Dans le système décimal, les préfixes kilo, méga, giga et téra utilisent des puissances de 10 : 1 Go correspond à 1 000 Mo et 1 000 000 000 octets. Les préfixes binaires utilisent des puissances de 2 : 1 Gio correspond à 1 024 Mio et 1 073 741 824 octets.</p>
+
+<details class="data-faq">
+<summary>Exemples de conversions</summary>
+<ul>
+<li>1 Go = 1 000 Mo en notation décimale.</li>
+<li>1 Gio = 1 024 Mio en notation binaire.</li>
+<li>1 To = 1 000 Go en notation décimale.</li>
+<li>1 Tio = 1 024 Gio en notation binaire.</li>
+</ul>
+</details>
+</section>
+
+<section class="related-tools">
+<div>
+<div class="eyebrow">CONVERSIONS</div>
+<h2>Autres conversions</h2>
+</div>
+<div class="related-links">
+<a class="related-link" href="/conversion/poids/">Poids →</a>
+<a class="related-link" href="/conversion/longueur/">Longueur →</a>
+<a class="related-link" href="/conversion/volume/">Volume →</a>
+<a class="related-link" href="/conversion/devises/">Devises →</a>
+</div>
+</section>
+</div>
+</main>
+
+<footer>
+<div class="wrap footerlinks">
+<a href="/mentions-legales/">Mentions légales</a>
+<a href="/confidentialite/">Confidentialité</a>
+</div>
+</footer>
+
+<style>
+.data-converter{max-width:860px}
+.conversion-grid{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:14px}
+.enter-note{margin:8px 0 0;text-align:center;color:var(--muted);font-size:.78rem}
+.quick-conversions{margin-top:18px;padding:18px;border:1px solid var(--line);border-radius:12px;background:#fbfaf6}
+.quick-conversions>strong{display:block;margin-bottom:10px}
+.quick-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.quick-grid button{border:1px solid var(--ink);border-radius:9px;padding:10px;background:#fff;font:inherit;font-size:.88rem;font-weight:800;cursor:pointer}
+.quick-grid button:hover{background:var(--accent);color:#fff}
+.data-content{max-width:860px}
+.data-content h2{font-size:clamp(1.7rem,4vw,2.5rem);line-height:1;letter-spacing:-.055em;margin:0 0 12px}
+.data-content h2:not(:first-child){margin-top:34px}
+.data-content p{color:var(--muted)}
+.data-faq{margin-top:24px;padding:16px 18px;border:1px solid var(--ink);border-radius:12px;background:var(--card)}
+.data-faq summary{font-weight:900;cursor:pointer}
+.data-faq ul{margin-bottom:0}
+.source-note{font-size:.8rem;margin-bottom:0}
+.source-note a{font-weight:800}
+@media(max-width:650px){
+.conversion-grid{grid-template-columns:1fr}
+.quick-grid{grid-template-columns:1fr}
+.data-converter{padding:25px 20px}
+}
+</style>
+
+<script>
+const UNITS={
+o:{label:'octet',value:1,group:'Décimal'},
+ko:{label:'Ko',value:1e3,group:'Décimal'},
+mo:{label:'Mo',value:1e6,group:'Décimal'},
+go:{label:'Go',value:1e9,group:'Décimal'},
+to:{label:'To',value:1e12,group:'Décimal'},
+kio:{label:'Kio',value:2**10,group:'Binaire'},
+mio:{label:'Mio',value:2**20,group:'Binaire'},
+gio:{label:'Gio',value:2**30,group:'Binaire'},
+tio:{label:'Tio',value:2**40,group:'Binaire'}
+};
+const from=document.getElementById('from');
+const to=document.getElementById('to');
+const valueInput=document.getElementById('v');
+const result=document.getElementById('r');
+
+function fillSelect(select){
+for(const [key,unit] of Object.entries(UNITS)){
+const option=document.createElement('option');
+option.value=key;
+option.textContent=unit.label+' — '+unit.group;
+select.append(option);
+}
+}
+fillSelect(from);
+fillSelect(to);
+from.value='go';
+to.value='mo';
+
+function formatNumber(value){
+return value.toLocaleString('fr-FR',{maximumFractionDigits:12});
+}
+
+function convert(){
+const value=Number(valueInput.value);
+if(!Number.isFinite(value)||value<0){
+result.textContent='Saisissez une valeur valide.';
+return;
+}
+const converted=value*UNITS[from.value].value/UNITS[to.value].value;
+result.innerHTML='<strong>'+formatNumber(converted)+' '+UNITS[to.value].label+'</strong><br><span>'+formatNumber(value)+' '+UNITS[from.value].label+' = '+formatNumber(converted)+' '+UNITS[to.value].label+'</span>';
+}
+
+document.getElementById('go').addEventListener('click',convert);
+valueInput.addEventListener('keydown',event=>{if(event.key==='Enter')convert();});
+document.querySelectorAll('[data-value]').forEach(button=>{
+button.addEventListener('click',()=>{
+valueInput.value=button.dataset.value;
+from.value=button.dataset.from;
+to.value=button.dataset.to;
+convert();
+});
+});
+</script>
+</body>
+</html>
