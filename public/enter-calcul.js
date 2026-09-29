@@ -149,7 +149,35 @@
     "vitesse":["Calcul de vitesse","Calculer une vitesse à partir d'une distance et d'une durée."]
   };
 
-  const CONVERSIONS=new Set(["devises","poids","longueur","volume","temperature"]);
+  Object.assign(RELATED,{
+    "smic":["salaire-brut-net","salaire-horaire"],
+    "taux-endettement":["capacite-emprunt","pret-immobilier"],
+    "indemnite-precarite":["preavis-demission","rupture-conventionnelle"],
+    "heures-supplementaires":["salaire-brut-net","salaire-horaire"],
+    "temps-partiel":["salaire-brut-net","salaire-horaire"],
+    "prelevement-source":["impot-sur-le-revenu","salaire-brut-net"],
+    "ifi":["plus-value-immobiliere","frais-de-notaire"],
+    "epargne-reglementee":["interets-composes","epargne-mensuelle"],
+    "assurance-vie":["interets-composes","epargne-mensuelle"],
+    "per":["interets-composes","retraite-simplifiee"],
+    "aire":["surface","perimetre","longueur"],
+    "donnees":["poids","longueur","volume"]
+  });
+  Object.assign(INFO,{
+    "aire":["Convertisseur d'aire","Convertir mm², cm², m², km², hectares et acres."],
+    "donnees":["Convertisseur de données","Convertir octets, Ko, Mo, Go, To et unités binaires."],
+    "smic":["SMIC","Estimer le montant du SMIC selon la période."],
+    "taux-endettement":["Taux d'endettement","Calculer le taux d'endettement à partir des revenus et charges."],
+    "indemnite-precarite":["Indemnité de précarité","Estimer l'indemnité de fin de contrat."],
+    "heures-supplementaires":["Heures supplémentaires","Estimer la rémunération des heures supplémentaires."],
+    "temps-partiel":["Temps partiel","Estimer le salaire correspondant à un temps de travail partiel."],
+    "prelevement-source":["Prélèvement à la source","Estimer le prélèvement à la source à partir des éléments renseignés."],
+    "ifi":["IFI","Estimer l'impôt sur la fortune immobilière selon le patrimoine déclaré."],
+    "epargne-reglementee":["Épargne réglementée","Explorer l'évolution d'une épargne placée sur un produit réglementé."],
+    "assurance-vie":["Assurance-vie","Explorer une projection simple de l'épargne en assurance-vie."],
+    "per":["PER","Explorer une projection simple de l'épargne retraite."]
+  });
+  const CONVERSIONS=new Set(["devises","poids","longueur","volume","temperature","aire","donnees"]);
   const pathFor=slug=>(CONVERSIONS.has(slug)?"/conversion/":"/outil/")+slug+"/";
 
   function enableEnterToCalculate(){
