@@ -4,6 +4,11 @@
   const num=value=>Number(value).toLocaleString("fr-FR",{maximumFractionDigits:2});
 
   const groups={
+    "temps":["Temps","/temps/",[
+      ["difference-dates","Différence entre deux dates","Calculer l’écart entre deux dates."],
+      ["temps-travail","Temps de travail","Calculer une durée de travail."],
+      ["age","Calcul d’âge","Calculer précisément un âge."]
+    ]],
     "rsa":["Protection sociale","/simulateurs/",[["prime-activite","Prime d’activité","Estimer la prime d’activité."],["salaire-brut-net","Salaire brut ↔ net","Estimer le salaire net."],["are-chomage","Allocation chômage ARE","Obtenir une estimation indicative de l’ARE."],["succession","Droits de succession","Estimer les droits selon la situation."]]],
     "smic":["Salaire","/salaire/",[["salaire-brut-net","Salaire brut ↔ net","Estimer le net avant impôt."],["salaire-horaire","Salaire horaire","Calculer le taux horaire."]]],
     "taux-endettement":["Immobilier","/immobilier/",[["capacite-emprunt","Capacité d’emprunt","Estimer le capital empruntable."],["pret-immobilier","Prêt immobilier","Calculer mensualité et coût du crédit."]]],
