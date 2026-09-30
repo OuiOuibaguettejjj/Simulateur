@@ -72,7 +72,7 @@ jobs:
             if (meta !== 1) errors.push(file + ': expected exactly one AdSense account meta, found ' + meta);
           }
           console.log('Verified AdSense markers on ' + walk(root).length + ' HTML pages.');
-          if (errors.length) { console.error(errors.join('\\n')); process.exit(1); }
+          if (errors.length) { console.error(errors.join('\n')); process.exit(1); }
           NODE
 
       - name: Check layout consistency (warnings only)
