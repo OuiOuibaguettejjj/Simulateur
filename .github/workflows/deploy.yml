@@ -42,6 +42,41 @@ jobs:
           node scripts/normalize-layout.mjs
           diff -qr /tmp/public-after-first-normalize public
 
+      - name: Prepare AdSense HTML
+        run: |
+          node scripts/prepare-adsense.mjs
+          cp -a public /tmp/public-after-first-adsense
+          node scripts/prepare-adsense.mjs
+          diff -qr /tmp/public-after-first-adsense public
+
+      - name: Verify AdSense HTML markers
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+          const root = 'public';
+          const errors = [];
+          function walk(dir, out = []) {
+            for (const entry of fs.readdirSync(dir, {withFileTypes:true})) {
+              const file = path.join(dir, entry.name);
+              if (entry.isDirectory()) {
+                if (!(dir === root && ['.well-known','api'].includes(entry.name))) walk(file, out);
+              } else if (entry.isFile() && (entry.name === 'index.html' || (dir === root && entry.name === '404.html'))) out.push(file);
+            }
+            return out;
+          }
+          for (const file of walk(root)) {
+            const html = fs.readFileSync(file, 'utf8');
+            const head = (html.match(/<head\\b[^>]*>[\\s\\S]*?<\\/head>/i) || [''])[0];
+            const meta = (head.match(/<meta\\b[^>]*name=["']google-adsense-account["'][^>]*>/gi) || []).length;
+            const script = (head.match(/<script\\b[^>]*src=["'][^"']*pagead\\.googlesyndication\\.com\\/pagead\\/js\\/adsbygoogle\\.js[^"']*["'][^>]*><\\/script>/gi) || []).length;
+            if (meta !== 1) errors.push(file + ': expected exactly one AdSense account meta, found ' + meta);
+            if (script !== 1) errors.push(file + ': expected exactly one adsbygoogle.js script, found ' + script);
+          }
+          console.log('Verified AdSense markers on ' + walk(root).length + ' HTML pages.');
+          if (errors.length) { console.error(errors.join('\\n')); process.exit(1); }
+          NODE
+
       - name: Check layout consistency (warnings only)
         run: node scripts/check-layout.mjs
 
@@ -315,6 +350,13 @@ jobs:
             for(const file of files){
               const route='/'+file.slice('public/'.length).replace(/\/index\.html$/,'/');
               const page=await browser.newPage();
+              await page.route('**/*', route => {
+                const hostname = new URL(route.request().url()).hostname;
+                if (/^(?:[^.]+\.)*(?:googlesyndication\.com|googletagservices\.com|googleadservices\.com|doubleclick\.net|fundingchoices\.google\.com|adtrafficquality\.google)$/i.test(hostname)) {
+                  return route.abort();
+                }
+                return route.continue();
+              });
           async function populate(page) {
             await page.locator('input').evaluateAll((inputs) => {
               for (const input of inputs) {
@@ -338,7 +380,7 @@ jobs:
               await page.route('**/api/devises', route => route.fulfill({status:200, contentType:'application/json', body:JSON.stringify({date:'2026-09-25', rates:{EUR:1,USD:1.17,GBP:0.87,CHF:0.94}})}));
               const consoleErrors=[];
               const pageErrors=[];
-              page.on('console',m=>{if(m.type()==='error' && !/cloudflareinsights|beacon\.min\.js/i.test(m.text())) consoleErrors.push(m.text())});
+              page.on('console',m=>{if(m.type()==='error' && !/cloudflareinsights|beacon\.min\.js|googlesyndication\.com|googletagservices\.com|googleadservices\.com|doubleclick\.net|fundingchoices\.google\.com|adtrafficquality\.google|ERR_BLOCKED_BY_CLIENT/i.test(m.text())) consoleErrors.push(m.text())});
               page.on('pageerror',e=>pageErrors.push(String(e)));
               try{
                 const response=await page.goto('http://127.0.0.1:4173'+route,{waitUntil:'load',timeout:10000});
@@ -397,6 +439,110 @@ jobs:
           echo "Received: $actual"
           exit 1
 
+      - name: Verify production AdSense integration
+        run: |
+          node <<'NODE'
+          const https = require('https');
+          function get(url) {
+            return new Promise((resolve, reject) => {
+              https.get(url, response => {
+                let body = '';
+                response.setEncoding('utf8');
+                response.on('data', chunk => body += chunk);
+                response.on('end', () => resolve({status: response.statusCode, headers: response.headers, body}));
+              }).on('error', reject);
+            });
+          }
+          (async () => {
+            const page = await get('https://simulateur.site/');
+            if (page.status !== 200) throw new Error('Homepage HTTP ' + page.status);
+            const head = (page.body.match(/<head\\b[^>]*>[\\s\\S]*?<\\/head>/i) || [''])[0];
+            const meta = (head.match(/<meta\\b[^>]*name=["']google-adsense-account["'][^>]*>/gi) || []).length;
+            const script = (head.match(/<script\\b[^>]*src=["'][^"']*pagead\\.googlesyndication\\.com\\/pagead\\/js\\/adsbygoogle\\.js[^"']*["'][^>]*><\\/script>/gi) || []).length;
+            if (meta !== 1 || script !== 1) throw new Error('Homepage AdSense markers invalid: meta=' + meta + ', script=' + script);
+            console.log('Production homepage AdSense markers verified.');
+          })().catch(error => { console.error(error.message); process.exit(1); });
+          NODE
+
+      - name: Verify production ads.txt
+        run: |
+          set -euo pipefail
+          curl -fsSL -D /tmp/ads-headers.txt -o /tmp/ads-body.txt https://simulateur.site/ads.txt
+          grep -Eq '^HTTP/[0-9.]+ 200        run: |
+          npm install --no-save playwright@1.55.0 >/dev/null 2>&1
+          npx playwright install chromium >/dev/null 2>&1
+          node <<'NODE'
+          const fs = require('fs');
+          const { chromium } = require('playwright');
+
+          function walk(dir, out=[]) {
+            for (const e of fs.readdirSync(dir,{withFileTypes:true})) {
+              const p=dir+'/'+e.name;
+              if(e.isDirectory()) walk(p,out);
+              else if(e.isFile() && p.endsWith('.html')) out.push(p);
+            }
+            return out;
+          }
+
+          (async()=>{
+            const files=walk('public');
+            const browser=await chromium.launch({headless:true});
+            const errors=[];
+            for(const file of files){
+              const route='/'+file.slice('public/'.length).replace(/\/index\.html$/,'/');
+              const page=await browser.newPage();
+          async function populate(page) {
+            await page.locator('input').evaluateAll((inputs) => {
+              for (const input of inputs) {
+                if (input.type === 'date') input.value = '2020-01-15';
+                else if (input.type === 'number') input.value = input.min && Number(input.min) > 10 ? input.min : '10';
+                else if (input.type !== 'hidden') input.value = 'test';
+                input.dispatchEvent(new Event('input', {bubbles:true}));
+                input.dispatchEvent(new Event('change', {bubbles:true}));
+              }
+            });
+            await page.locator('select').evaluateAll((selects) => {
+              for (const select of selects) {
+                if (select.options.length) {
+                  select.selectedIndex = 0;
+                  select.dispatchEvent(new Event('change', {bubbles:true}));
+                }
+              }
+            });
+          }
+
+              const consoleErrors=[];
+              const pageErrors=[];
+              page.on('console',m=>{if(m.type()==='error' && !/cloudflareinsights|beacon\.min\.js|googlesyndication\.com|googletagservices\.com|googleadservices\.com|doubleclick\.net|fundingchoices\.google\.com|adtrafficquality\.google|ERR_BLOCKED_BY_CLIENT/i.test(m.text())) consoleErrors.push(m.text())});
+              page.on('pageerror',e=>pageErrors.push(String(e)));
+              try{
+                const response=await page.goto('https://simulateur.site'+route,{waitUntil:'domcontentloaded',timeout:20000});
+                if(!response || response.status()!==200) errors.push(file+': production HTTP '+(response&&response.status()));
+                if(!(await page.title())) errors.push(file+': production empty title');
+                if(file.startsWith('public/outil/')){
+                  await populate(page);
+                  const buttons=page.locator('button');
+                  const n=await buttons.count();
+                  if(n===0) errors.push(file+': production no button');
+                  for(let i=0;i<n;i++){
+                    try{await buttons.nth(i).click({timeout:2000}); await page.waitForTimeout(50);}catch(e){errors.push(file+': production button '+i+' click failed: '+e.message)}
+                  }
+                }
+                if(consoleErrors.length) errors.push(file+': production console.error: '+consoleErrors.join(' | '));
+                if(pageErrors.length) errors.push(file+': production pageerror: '+pageErrors.join(' | '));
+              }catch(e){errors.push(file+': production '+e.message)}
+              await page.close();
+            }
+            await browser.close();
+            console.log('Production smoke-tested '+files.length+' public HTML pages, including '+files.filter(f=>f.startsWith('public/outil/')).length+' calculators.');
+            if(errors.length){console.error(errors.join('\n'));process.exit(1)}
+          })();
+          NODE
+ /tmp/ads-headers.txt
+          grep -iEq '^content-type: text/plain(;|$)' /tmp/ads-headers.txt
+          test "$(cat /tmp/ads-body.txt)" = "google.com, pub-2924580037451268, DIRECT, f08c47fec0942fa0"
+          echo "Production ads.txt verified."
+
       - name: Smoke-test production after deploy
         run: |
           npm install --no-save playwright@1.55.0 >/dev/null 2>&1
@@ -443,7 +589,7 @@ jobs:
 
               const consoleErrors=[];
               const pageErrors=[];
-              page.on('console',m=>{if(m.type()==='error' && !/cloudflareinsights|beacon\.min\.js/i.test(m.text())) consoleErrors.push(m.text())});
+              page.on('console',m=>{if(m.type()==='error' && !/cloudflareinsights|beacon\.min\.js|googlesyndication\.com|googletagservices\.com|googleadservices\.com|doubleclick\.net|fundingchoices\.google\.com|adtrafficquality\.google|ERR_BLOCKED_BY_CLIENT/i.test(m.text())) consoleErrors.push(m.text())});
               page.on('pageerror',e=>pageErrors.push(String(e)));
               try{
                 const response=await page.goto('https://simulateur.site'+route,{waitUntil:'domcontentloaded',timeout:20000});
