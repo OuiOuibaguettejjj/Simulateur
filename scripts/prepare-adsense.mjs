@@ -29,7 +29,7 @@ function normalize(html, file) {
 
   // Supprime les occurrences existantes pour garantir exactement un exemplaire dans le head.
   let out = html.replace(/<meta\b[^>]*name=["']google-adsense-account["'][^>]*>\s*/gi, "");
-  out = out.replace(/<script\b[^>]*src=["'][^"']*pagead\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js[^"']*["'][^>]*><\/script>\s*/gi, "");
+  out = out.replace(/<script\b[^>]*src=["'][^"']*pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js[^"']*["'][^>]*><\/script>\s*/gi, "");
 
   const headMatch = /<head\b[^>]*>([\s\S]*?)<\/head>/i.exec(out);
   if (!headMatch) throw new Error(file + ": structure du head invalide après normalisation");
@@ -43,7 +43,7 @@ function verify(html, file) {
   const head = /<head\b[^>]*>([\s\S]*?)<\/head>/i.exec(html);
   if (!head) throw new Error(file + ": head absent");
   const meta = (head[1].match(/<meta\b[^>]*name=["']google-adsense-account["'][^>]*>/gi) || []);
-  const scripts = (head[1].match(/<script\b[^>]*src=["'][^"']*pagead\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js[^"']*["'][^>]*><\/script>/gi) || []);
+  const scripts = (head[1].match(/<script\b[^>]*src=["'][^"']*pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js[^"']*["'][^>]*><\/script>/gi) || []);
   if (meta.length !== 1) throw new Error(file + ": attendu exactement une meta google-adsense-account, trouvé " + meta.length);
   if (scripts.length !== 1) throw new Error(file + ": attendu exactement un script adsbygoogle.js, trouvé " + scripts.length);
 }
