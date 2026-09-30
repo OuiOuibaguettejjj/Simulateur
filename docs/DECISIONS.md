@@ -11,3 +11,6 @@ Les données saisies sont traitées côté navigateur et ne sont pas envoyées �
 
 ## MEP
 Aucune mise en production n'est effectuée dans le cadre de cette implémentation initiale.
+
+## Préparation AdSense
+L'intégration publicitaire est préparée via un fichier `ads.txt`, les marqueurs éditeur dans le `<head>`, une CSP dédiée et des contrôles de pipeline. Aucun bloc publicitaire `adsbygoogle` n'est ajouté à ce stade. Les smoke tests bloquent les requêtes publicitaires afin d'éviter de générer des impressions pendant les validations automatisées.
