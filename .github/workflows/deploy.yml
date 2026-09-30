@@ -464,9 +464,11 @@ jobs:
       - name: Verify production ads.txt
         run: |
           set -euo pipefail
-          curl -fsSL -D /tmp/ads-headers.txt -o /tmp/ads-body.txt https://simulateur.site/ads.txt
-          grep -Eq '^HTTP/[0-9.]+ 200$' /tmp/ads-headers.txt
-          grep -iEq '^content-type: text/plain(;|$)' /tmp/ads-headers.txt
+          status="$(curl -fsSL -o /tmp/ads-body.txt -w '%{http_code}' https://simulateur.site/ads.txt)"
+          test "$status" = "200"
+          content_type="$(curl -fsSI https://simulateur.site/ads.txt | awk -F': ' 'BEGIN{IGNORECASE=1} /^content-type:/ {print $2}' | tr -d '\r' | tail -n 1)"
+          echo "Production ads.txt Content-Type: $content_type"
+          printf '%s' "$content_type" | grep -Eiq '^text/plain(;|$)'
           test "$(cat /tmp/ads-body.txt)" = "google.com, pub-2924580037451268, DIRECT, f08c47fec0942fa0"
           echo "Production ads.txt verified."
 
