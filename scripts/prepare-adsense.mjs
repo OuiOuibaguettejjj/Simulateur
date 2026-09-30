@@ -29,7 +29,7 @@ function normalize(html, file) {
   // Supprime le marqueur et les retours à la ligne qui l'entourent afin que
   // sa réinsertion soit toujours byte-identique au passage suivant.
   let out = html.replace(
-    /\r?\n[ \t]*<meta\b[^>]*name=["']google-adsense-account["'][^>]*>[ \t]*\r?\n?/gi,
+    /\r?\n[ \t]*<meta\b[^>]*name=["']google-adsense-account["'][^>]*>/gi,
     ""
   );
   out = out.replace(/<meta\b[^>]*name=["']google-adsense-account["'][^>]*>[ \t]*/gi, "");
