@@ -468,77 +468,7 @@ jobs:
         run: |
           set -euo pipefail
           curl -fsSL -D /tmp/ads-headers.txt -o /tmp/ads-body.txt https://simulateur.site/ads.txt
-          grep -Eq '^HTTP/[0-9.]+ 200        run: |
-          npm install --no-save playwright@1.55.0 >/dev/null 2>&1
-          npx playwright install chromium >/dev/null 2>&1
-          node <<'NODE'
-          const fs = require('fs');
-          const { chromium } = require('playwright');
-
-          function walk(dir, out=[]) {
-            for (const e of fs.readdirSync(dir,{withFileTypes:true})) {
-              const p=dir+'/'+e.name;
-              if(e.isDirectory()) walk(p,out);
-              else if(e.isFile() && p.endsWith('.html')) out.push(p);
-            }
-            return out;
-          }
-
-          (async()=>{
-            const files=walk('public');
-            const browser=await chromium.launch({headless:true});
-            const errors=[];
-            for(const file of files){
-              const route='/'+file.slice('public/'.length).replace(/\/index\.html$/,'/');
-              const page=await browser.newPage();
-          async function populate(page) {
-            await page.locator('input').evaluateAll((inputs) => {
-              for (const input of inputs) {
-                if (input.type === 'date') input.value = '2020-01-15';
-                else if (input.type === 'number') input.value = input.min && Number(input.min) > 10 ? input.min : '10';
-                else if (input.type !== 'hidden') input.value = 'test';
-                input.dispatchEvent(new Event('input', {bubbles:true}));
-                input.dispatchEvent(new Event('change', {bubbles:true}));
-              }
-            });
-            await page.locator('select').evaluateAll((selects) => {
-              for (const select of selects) {
-                if (select.options.length) {
-                  select.selectedIndex = 0;
-                  select.dispatchEvent(new Event('change', {bubbles:true}));
-                }
-              }
-            });
-          }
-
-              const consoleErrors=[];
-              const pageErrors=[];
-              page.on('console',m=>{if(m.type()==='error' && !/cloudflareinsights|beacon\.min\.js|googlesyndication\.com|googletagservices\.com|googleadservices\.com|doubleclick\.net|fundingchoices\.google\.com|adtrafficquality\.google|ERR_BLOCKED_BY_CLIENT/i.test(m.text())) consoleErrors.push(m.text())});
-              page.on('pageerror',e=>pageErrors.push(String(e)));
-              try{
-                const response=await page.goto('https://simulateur.site'+route,{waitUntil:'domcontentloaded',timeout:20000});
-                if(!response || response.status()!==200) errors.push(file+': production HTTP '+(response&&response.status()));
-                if(!(await page.title())) errors.push(file+': production empty title');
-                if(file.startsWith('public/outil/')){
-                  await populate(page);
-                  const buttons=page.locator('button');
-                  const n=await buttons.count();
-                  if(n===0) errors.push(file+': production no button');
-                  for(let i=0;i<n;i++){
-                    try{await buttons.nth(i).click({timeout:2000}); await page.waitForTimeout(50);}catch(e){errors.push(file+': production button '+i+' click failed: '+e.message)}
-                  }
-                }
-                if(consoleErrors.length) errors.push(file+': production console.error: '+consoleErrors.join(' | '));
-                if(pageErrors.length) errors.push(file+': production pageerror: '+pageErrors.join(' | '));
-              }catch(e){errors.push(file+': production '+e.message)}
-              await page.close();
-            }
-            await browser.close();
-            console.log('Production smoke-tested '+files.length+' public HTML pages, including '+files.filter(f=>f.startsWith('public/outil/')).length+' calculators.');
-            if(errors.length){console.error(errors.join('\n'));process.exit(1)}
-          })();
-          NODE
- /tmp/ads-headers.txt
+          grep -Eq '^HTTP/[0-9.]+ 200$' /tmp/ads-headers.txt
           grep -iEq '^content-type: text/plain(;|$)' /tmp/ads-headers.txt
           test "$(cat /tmp/ads-body.txt)" = "google.com, pub-2924580037451268, DIRECT, f08c47fec0942fa0"
           echo "Production ads.txt verified."
@@ -567,6 +497,13 @@ jobs:
             for(const file of files){
               const route='/'+file.slice('public/'.length).replace(/\/index\.html$/,'/');
               const page=await browser.newPage();
+              await page.route('**/*', route => {
+                const hostname = new URL(route.request().url()).hostname;
+                if (/^(?:[^.]+\.)*(?:googlesyndication\.com|googletagservices\.com|googleadservices\.com|doubleclick\.net|fundingchoices\.google\.com|fundingchoicesmessages\.google\.com|adtrafficquality\.google)$/i.test(hostname)) {
+                  return route.abort();
+                }
+                return route.continue();
+              });
           async function populate(page) {
             await page.locator('input').evaluateAll((inputs) => {
               for (const input of inputs) {
