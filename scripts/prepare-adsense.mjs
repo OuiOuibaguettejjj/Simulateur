@@ -26,13 +26,19 @@ function normalize(html, file) {
     throw new Error(file + ": <head> ou <meta name=viewport> introuvable");
   }
 
-  // Supprime les occurrences existantes pour garantir exactement un exemplaire dans le head.
-  let out = html.replace(/<meta\b[^>]*name=["']google-adsense-account["'][^>]*>\s*/gi, "");
+  // Supprime le marqueur et les retours à la ligne qui l'entourent afin que
+  // sa réinsertion soit toujours byte-identique au passage suivant.
+  let out = html.replace(
+    /\r?\n[ \t]*<meta\b[^>]*name=["']google-adsense-account["'][^>]*>[ \t]*\r?\n?/gi,
+    ""
+  );
+  out = out.replace(/<meta\b[^>]*name=["']google-adsense-account["'][^>]*>[ \t]*/gi, "");
 
   const headMatch = /<head\b[^>]*>([\s\S]*?)<\/head>/i.exec(out);
   if (!headMatch) throw new Error(file + ": structure du head invalide après normalisation");
   const vp = /<meta\b[^>]*name=["']viewport["'][^>]*>/i.exec(headMatch[1]);
   if (!vp) throw new Error(file + ": structure du head invalide après normalisation");
+
   const insertAt = headMatch.index + headMatch[0].indexOf(vp[0]) + vp[0].length;
   return out.slice(0, insertAt) + "\n" + META + out.slice(insertAt);
 }
