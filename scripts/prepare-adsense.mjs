@@ -21,28 +21,28 @@ function walk(dir, out = []) {
 }
 
 function normalize(html, file) {
-  const head = /<head\\b[^>]*>([\\s\\S]*?)<\\/head>/i.exec(html);
-  const viewport = /<meta\\b[^>]*name=["']viewport["'][^>]*>/i.exec(html);
+  const head = /<head\b[^>]*>([\s\S]*?)<\/head>/i.exec(html);
+  const viewport = /<meta\b[^>]*name=["']viewport["'][^>]*>/i.exec(html);
   if (!head || !viewport || viewport.index < head.index || viewport.index > head.index + head[0].length) {
     throw new Error(file + ": <head> ou <meta name=viewport> introuvable");
   }
 
   // Supprime les occurrences existantes pour garantir exactement un exemplaire dans le head.
-  let out = html.replace(/<meta\\b[^>]*name=["']google-adsense-account["'][^>]*>\\s*/gi, "");
-  out = out.replace(/<script\\b[^>]*src=["'][^"']*pagead\\.googlesyndication\\.com\\/pagead\\/js\\/adsbygoogle\\.js[^"']*["'][^>]*><\\/script>\\s*/gi, "");
+  let out = html.replace(/<meta\b[^>]*name=["']google-adsense-account["'][^>]*>\s*/gi, "");
+  out = out.replace(/<script\b[^>]*src=["'][^"']*pagead\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js[^"']*["'][^>]*><\/script>\s*/gi, "");
 
-  const headMatch = /<head\\b[^>]*>([\\s\\S]*?)<\\/head>/i.exec(out);
-  const vp = /<meta\\b[^>]*name=["']viewport["'][^>]*>/i.exec(headMatch[1]);
+  const headMatch = /<head\b[^>]*>([\s\S]*?)<\/head>/i.exec(out);
+  const vp = /<meta\b[^>]*name=["']viewport["'][^>]*>/i.exec(headMatch[1]);
   if (!headMatch || !vp) throw new Error(file + ": structure du head invalide après normalisation");
   const insertAt = headMatch.index + headMatch[0].indexOf(vp[0]) + vp[0].length;
   return out.slice(0, insertAt) + "\n" + META + "\n" + SCRIPT + out.slice(insertAt);
 }
 
 function verify(html, file) {
-  const head = /<head\\b[^>]*>([\\s\\S]*?)<\\/head>/i.exec(html);
+  const head = /<head\b[^>]*>([\s\S]*?)<\/head>/i.exec(html);
   if (!head) throw new Error(file + ": head absent");
-  const meta = (head[1].match(/<meta\\b[^>]*name=["']google-adsense-account["'][^>]*>/gi) || []);
-  const scripts = (head[1].match(/<script\\b[^>]*src=["'][^"']*pagead\\.googlesyndication\\.com\\/pagead\\/js\\/adsbygoogle\\.js[^"']*["'][^>]*><\\/script>/gi) || []);
+  const meta = (head[1].match(/<meta\b[^>]*name=["']google-adsense-account["'][^>]*>/gi) || []);
+  const scripts = (head[1].match(/<script\b[^>]*src=["'][^"']*pagead\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js[^"']*["'][^>]*><\/script>/gi) || []);
   if (meta.length !== 1) throw new Error(file + ": attendu exactement une meta google-adsense-account, trouvé " + meta.length);
   if (scripts.length !== 1) throw new Error(file + ": attendu exactement un script adsbygoogle.js, trouvé " + scripts.length);
 }
