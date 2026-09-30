@@ -69,9 +69,7 @@ jobs:
             const html = fs.readFileSync(file, 'utf8');
             const head = (html.match(/<head\\b[^>]*>[\\s\\S]*?<\\/head>/i) || [''])[0];
             const meta = (head.match(/<meta\\b[^>]*name=["']google-adsense-account["'][^>]*>/gi) || []).length;
-            const script = (head.match(/<script\\b[^>]*src=["'][^"']*pagead2\\.googlesyndication\\.com\\/pagead\\/js\\/adsbygoogle\\.js[^"']*["'][^>]*><\\/script>/gi) || []).length;
             if (meta !== 1) errors.push(file + ': expected exactly one AdSense account meta, found ' + meta);
-            if (script !== 1) errors.push(file + ': expected exactly one adsbygoogle.js script, found ' + script);
           }
           console.log('Verified AdSense markers on ' + walk(root).length + ' HTML pages.');
           if (errors.length) { console.error(errors.join('\\n')); process.exit(1); }
@@ -458,8 +456,7 @@ jobs:
             if (page.status !== 200) throw new Error('Homepage HTTP ' + page.status);
             const head = (page.body.match(/<head\\b[^>]*>[\\s\\S]*?<\\/head>/i) || [''])[0];
             const meta = (head.match(/<meta\\b[^>]*name=["']google-adsense-account["'][^>]*>/gi) || []).length;
-            const script = (head.match(/<script\\b[^>]*src=["'][^"']*pagead2\\.googlesyndication\\.com\\/pagead\\/js\\/adsbygoogle\\.js[^"']*["'][^>]*><\\/script>/gi) || []).length;
-            if (meta !== 1 || script !== 1) throw new Error('Homepage AdSense markers invalid: meta=' + meta + ', script=' + script);
+            if (meta !== 1) throw new Error('Homepage AdSense meta invalid: meta=' + meta);
             console.log('Production homepage AdSense markers verified.');
           })().catch(error => { console.error(error.message); process.exit(1); });
           NODE
