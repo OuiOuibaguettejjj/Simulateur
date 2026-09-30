@@ -32,8 +32,9 @@ function normalize(html, file) {
   out = out.replace(/<script\b[^>]*src=["'][^"']*pagead\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js[^"']*["'][^>]*><\/script>\s*/gi, "");
 
   const headMatch = /<head\b[^>]*>([\s\S]*?)<\/head>/i.exec(out);
+  if (!headMatch) throw new Error(file + ": structure du head invalide après normalisation");
   const vp = /<meta\b[^>]*name=["']viewport["'][^>]*>/i.exec(headMatch[1]);
-  if (!headMatch || !vp) throw new Error(file + ": structure du head invalide après normalisation");
+  if (!vp) throw new Error(file + ": structure du head invalide après normalisation");
   const insertAt = headMatch.index + headMatch[0].indexOf(vp[0]) + vp[0].length;
   return out.slice(0, insertAt) + "\n" + META + "\n" + SCRIPT + out.slice(insertAt);
 }
