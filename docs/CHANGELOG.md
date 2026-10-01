@@ -1,7 +1,7 @@
-## 2026-10-01 — Capacité d’emprunt HTML-first
-- Correction de la compatibilité du calculateur avec le nouveau contrat HTML-first.
-- Le calculateur n’appelle plus le moteur de rendu legacy `Simulateurs.render()` ni `Simulateurs.calc()`.
-- Le calcul reste local à la page afin de préserver le HTML serveur et d’éviter une dépendance au renderer historique.
+## 2026-10-01 — Capacité d’emprunt premium
+- Refonte du calculateur de capacité d’emprunt immobilier : formulaire enrichi, assurance emprunteur, apport, comparaison 15/20/25 ans et résultats détaillés.
+- SEO renforcé avec contenu HTML serveur, données structurées WebApplication/BreadcrumbList, FAQ, sources officielles et maillage interne.
+- Compatibilité conservée avec le moteur legacy de pré-rendu afin de ne pas modifier le pipeline de déploiement ni le runtime commun des autres simulateurs.
 - Aucun changement de route, de Worker, de configuration Cloudflare ou de dépendance externe.
 
 # Changelog
