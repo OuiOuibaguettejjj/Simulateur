@@ -70,42 +70,67 @@
 <script>
 (function(){
 const euro=v=>Number(v).toLocaleString("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:2});
-const people=document.getElementById("people"),count=document.getElementById("count"),modeInputs=document.querySelectorAll('input[name="mode"]');
+const pct=v=>Number(v).toLocaleString("fr-FR",{maximumFractionDigits:2});
+const people=document.getElementById("people"),count=document.getElementById("count"),modeInputs=document.querySelectorAll('input[name="mode"]'),results=document.getElementById("results");
 function mode(){return document.querySelector('input[name="mode"]:checked').value}
+function defaultShares(n){
+ const base=Math.floor((100/n)*100)/100,shares=Array(n).fill(base);
+ shares[n-1]=Math.round((100-base*(n-1))*100)/100;
+ return shares;
+}
 function renderPeople(){
- let n=Math.min(12,Math.max(2,Math.round(Number(count.value)||2))); count.value=n;
+ const n=Math.min(12,Math.max(2,Math.round(Number(count.value)||2))); count.value=n;
  const old=[...people.querySelectorAll(".person")].map(row=>({name:row.querySelector(".pname").value,paid:row.querySelector(".paid").value,share:row.querySelector(".share").value}));
- people.innerHTML="";
+ const defaults=defaultShares(n); people.replaceChildren();
  for(let i=0;i<n;i++){
   const d=document.createElement("div");d.className="person";
-  d.innerHTML='<input class="pname" aria-label="Nom du participant '+(i+1)+'" value="'+(old[i]?.name||("Personne "+(i+1)))+'"><input class="share" aria-label="Part du participant '+(i+1)+' en pourcentage" type="number" min="0" max="100" step="0.01" value="'+(old[i]?.share||(100/n).toFixed(2))+'"><input class="paid" aria-label="Montant déjà payé par le participant '+(i+1)+'" type="number" min="0" step="0.01" value="'+(old[i]?.paid||0)+'">';
-  people.appendChild(d);
+  const name=document.createElement("input");name.className="pname";name.type="text";name.setAttribute("aria-label","Nom du participant "+(i+1));name.value=old[i]?.name ?? ("Personne "+(i+1));
+  const share=document.createElement("input");share.className="share";share.type="number";share.min="0";share.max="100";share.step="0.01";share.setAttribute("aria-label","Part du participant "+(i+1)+" en pourcentage");share.value=old[i]?.share ?? defaults[i];
+  const paid=document.createElement("input");paid.className="paid";paid.type="number";paid.min="0";paid.step="0.01";paid.setAttribute("aria-label","Montant déjà payé par le participant "+(i+1));paid.value=old[i]?.paid ?? "0";
+  d.append(name,share,paid);people.appendChild(d);
  }
- updateMode();
+ updateMode(); calculate();
 }
 function updateMode(){people.querySelectorAll(".share").forEach(x=>x.disabled=mode()==="equal")}
 function calculate(){
- const total=Math.max(0,Number(document.getElementById("total").value)||0), rows=[...people.querySelectorAll(".person")];
- if(!rows.length){return}
+ const total=Math.max(0,Number(document.getElementById("total").value)||0),rows=[...people.querySelectorAll(".person")];
+ if(!rows.length)return;
  const names=rows.map((r,i)=>r.querySelector(".pname").value.trim()||("Personne "+(i+1)));
  const paid=rows.map(r=>Math.max(0,Number(r.querySelector(".paid").value)||0));
  let shares;
  if(mode()==="equal") shares=rows.map(()=>100/rows.length);
- else {shares=rows.map(r=>Math.max(0,Number(r.querySelector(".share").value)||0));const sum=shares.reduce((a,b)=>a+b,0);if(Math.abs(sum-100)>.01){document.getElementById("results").innerHTML='<strong>Répartition invalide.</strong><p>Les parts personnalisées doivent totaliser 100 %. Total actuel : '+sum.toLocaleString("fr-FR",{maximumFractionDigits:2})+' %.</p>';return}}
- const dues=shares.map(p=>total*p/100), balances=dues.map((d,i)=>paid[i]-d);
- const totalPaid=paid.reduce((a,b)=>a+b,0);
+ else{
+  shares=rows.map(r=>Math.max(0,Number(r.querySelector(".share").value)||0));
+  const sum=shares.reduce((a,b)=>a+b,0);
+  if(Math.abs(sum-100)>.01){results.innerHTML='<strong>Répartition invalide.</strong><p>Les parts personnalisées doivent totaliser 100 %. Total actuel : '+pct(sum)+' %.</p>';return}
+ }
+ const dues=shares.map(p=>total*p/100),balances=dues.map((d,i)=>paid[i]-d),totalPaid=paid.reduce((a,b)=>a+b,0);
  let creditors=balances.map((b,i)=>({i,amount:b})).filter(x=>x.amount>.005).sort((a,b)=>b.amount-a.amount);
- let debtors=balances.map((b,i)=>({i,amount:-b})).filter(x=>x.amount>.005).sort((a,b)=>b.amount-a.amount);
- const transfers=[];
- let di=0,ci=0;
- while(di<debtors.length&&ci<creditors.length){const amount=Math.min(debtors[di].amount,creditors[ci].amount);transfers.push(names[debtors[di].i]+" → "+names[creditors[ci].i]+" : "+euro(amount));debtors[di].amount-=amount;creditors[ci].amount-=amount;if(debtors[di].amount<.005)di++;if(creditors[ci].amount<.005)ci++}
- const rowsHtml=names.map((name,i)=>'<tr><td>'+escapeHtml(name)+'</td><td>'+shares[i].toLocaleString("fr-FR",{maximumFractionDigits:2})+' %</td><td>'+euro(dues[i])+'</td><td>'+euro(paid[i])+'</td><td class="'+(balances[i]>=0?"positive":"negative")+'">'+(balances[i]>=0?"+":"")+euro(balances[i])+'</td></tr>').join("");
- document.getElementById("results").innerHTML='<h2>Répartition</h2><div class="result-kpi"><div class="result-card primary"><small>Total</small><strong>'+euro(total)+'</strong></div><div class="result-card"><small>Part moyenne</small><strong>'+euro(total/rows.length)+'</strong></div><div class="result-card"><small>Déjà payé</small><strong>'+euro(totalPaid)+'</strong></div></div><table class="result-table"><thead><tr><th>Participant</th><th>Part</th><th>Doit supporter</th><th>Déjà payé</th><th>Solde</th></tr></thead><tbody>'+rowsHtml+'</tbody></table><div class="transfers"><h3>Remboursements à effectuer</h3>'+(transfers.length?transfers.map(x=>'<p>'+escapeHtml(x)+'</p>').join(""):'<p>Les paiements correspondent exactement aux parts calculées.</p>')+'</div>';
+ let debtors=balances.map((b,i)=>({i,amount:-b.amount})).filter(x=>x.amount>.005).sort((a,b)=>b.amount-a.amount);
+ const transfers=[];let di=0,ci=0;
+ while(di<debtors.length&&ci<creditors.length){
+  const amount=Math.min(debtors[di].amount,creditors[ci].amount);
+  transfers.push({from:names[debtors[di].i],to:names[creditors[ci].i],amount});
+  debtors[di].amount-=amount;creditors[ci].amount-=amount;
+  if(debtors[di].amount<.005)di++;if(creditors[ci].amount<.005)ci++;
+ }
+ const remaining=Math.max(0,total-totalPaid),overpaid=Math.max(0,totalPaid-total);
+ const status=remaining>.005
+  ? '<div class="status-note"><strong>Reste à payer : '+euro(remaining)+'</strong>. Les montants déjà avancés sont pris en compte ; ce montant n’a pas encore été payé.</div>'
+  : overpaid>.005
+  ? '<div class="status-note"><strong>Surpaiement : '+euro(overpaid)+'</strong>. Les paiements saisis dépassent le montant total de la dépense.</div>'
+  : '<div class="status-note">La totalité de la dépense est couverte par les paiements saisis.</div>';
+ const rowsHtml=names.map((name,i)=>'<tr><td>'+escapeHtml(name)+'</td><td>'+pct(shares[i])+' %</td><td>'+euro(dues[i])+'</td><td>'+euro(paid[i])+'</td><td class="'+(balances[i]>=0?"positive":"negative")+'">'+(balances[i]>=0?"+":"")+euro(balances[i])+'</td></tr>').join("");
+ const transferHtml=transfers.length?transfers.map(x=>'<p>'+escapeHtml(x.from)+' → '+escapeHtml(x.to)+' : '+euro(x.amount)+'</p>').join(""):'<p>Aucun remboursement entre participants n’est nécessaire sur les paiements déjà saisis.</p>';
+ results.innerHTML='<h2>Répartition</h2><div class="result-kpi"><div class="result-card primary"><small>Total</small><strong>'+euro(total)+'</strong></div><div class="result-card"><small>Part moyenne</small><strong>'+euro(total/rows.length)+'</strong></div><div class="result-card"><small>Déjà payé</small><strong>'+euro(totalPaid)+'</strong></div></div>'+status+'<table class="result-table"><thead><tr><th>Participant</th><th>Part</th><th>Doit supporter</th><th>Déjà payé</th><th>Solde</th></tr></thead><tbody>'+rowsHtml+'</tbody></table><div class="transfers"><h3>Remboursements à effectuer</h3>'+transferHtml+'</div>';
 }
 function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
-count.addEventListener("input",renderPeople);modeInputs.forEach(x=>x.addEventListener("change",()=>{updateMode();calculate()}));
-people.addEventListener("input",calculate);document.getElementById("total").addEventListener("input",calculate);document.getElementById("calculate").addEventListener("click",calculate);
-renderPeople();calculate();
+count.addEventListener("change",renderPeople);
+modeInputs.forEach(x=>x.addEventListener("change",()=>{if(mode()==="custom"){const rows=[...people.querySelectorAll(".share")],shares=defaultShares(rows.length);rows.forEach((input,i)=>input.value=shares[i])}updateMode();calculate()}));
+people.addEventListener("input",calculate);
+document.getElementById("total").addEventListener("input",calculate);
+document.getElementById("calculate").addEventListener("click",calculate);
+renderPeople();
 })();
 </script>
 </body>
