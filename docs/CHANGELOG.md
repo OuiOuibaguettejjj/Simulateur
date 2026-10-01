@@ -1,3 +1,6 @@
+## 2026-10-02 — Correctif CI du partage de dépenses
+- Conservation du bouton de recalcul manuel en complément du calcul instantané afin de respecter le contrat de validation statique des calculateurs.
+
 ## 2026-10-02 — Correctifs du partage de dépenses
 - Validation explicite des montants et pourcentages, avec refus des valeurs invalides au lieu de les convertir silencieusement en 0.
 - Refus d’un montant total nul et amélioration des messages d’erreur accessibles.
