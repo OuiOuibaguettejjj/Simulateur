@@ -207,7 +207,6 @@ calc:function(){
     const cls=d===years?' class="highlight"':'';
     return '<tr'+cls+'><td>'+d+' ans'+(d===years?' · actuel':'')+'</td><td>'+fmt(k)+'</td><td>'+fmt(pm+im)+'</td><td>'+fmt(cost)+'</td></tr>';
   }).join("");
-  document.querySelector(".cap-comparison").scrollIntoView({behavior:"smooth",block:"nearest"});
 },
 source:"Méthode indicative fondée sur une hypothèse de taux d’effort de 35 %. Le calcul tient compte des charges saisies et modélise séparément l’assurance. Il ne reproduit pas l’ensemble des critères d’une banque."
 };
