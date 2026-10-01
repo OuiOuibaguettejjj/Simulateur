@@ -1,3 +1,9 @@
+## 2026-10-01 — Capacité d’emprunt HTML-first
+- Correction de la compatibilité du calculateur avec le nouveau contrat HTML-first.
+- Le calculateur n’appelle plus le moteur de rendu legacy `Simulateurs.render()` ni `Simulateurs.calc()`.
+- Le calcul reste local à la page afin de préserver le HTML serveur et d’éviter une dépendance au renderer historique.
+- Aucun changement de route, de Worker, de configuration Cloudflare ou de dépendance externe.
+
 # Changelog
 
 ## 2026-09-28 — Simulateur RSA
