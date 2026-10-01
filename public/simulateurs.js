@@ -120,6 +120,7 @@
 
   window.Simulateurs={
     render(){
+      if(document.querySelector('meta[name="calculator-rendering"][content="static"]')) return;
       const tool=window.TOOL;
       if(!tool){ $("result").textContent="Calculateur indisponible."; return; }
       try{
