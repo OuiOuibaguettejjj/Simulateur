@@ -226,7 +226,7 @@
     const svg=$("chart"),W=900,H=330,pad={l:54,r:18,t:18,b:36};
     svg.querySelectorAll(".generated").forEach(n=>n.remove());
     const points=data.annual;
-    const max=Math.max(data.capital,...points.map(x=>x.interest+0.0001),1);
+    const max=Math.max(...points.map(x=>Math.max(x.balance,x.interest)),1);
     const x=i=>pad.l+(W-pad.l-pad.r)*(i/Math.max(1,points.length-1));
     const y=v=>H-pad.b-(H-pad.t-pad.b)*(v/max);
     const line=(key)=>points.map((d,i)=>(i?"L":"M")+x(i).toFixed(1)+" "+y(d[key]).toFixed(1)).join(" ");
