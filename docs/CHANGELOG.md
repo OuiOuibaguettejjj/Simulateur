@@ -1,3 +1,9 @@
+## 2026-10-01 — Convertisseurs température et angles
+- Refonte du convertisseur de température avec conversion bidirectionnelle Celsius, Fahrenheit et Kelvin, interface plus claire et contenu SEO enrichi.
+- Ajout du convertisseur d’angles degrés, radians et grades.
+- Ajout du maillage interne depuis la page Conversions et l’accueil.
+- Aucun changement de Worker, de configuration Cloudflare ou de dépendance externe.
+
 ## 2026-10-01 — Capacité d’emprunt premium
 - Refonte du calculateur de capacité d’emprunt immobilier : formulaire enrichi, assurance emprunteur, apport, comparaison 15/20/25 ans et résultats détaillés.
 - SEO renforcé avec contenu HTML serveur, données structurées WebApplication/BreadcrumbList, FAQ, sources officielles et maillage interne.
