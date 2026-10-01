@@ -42,6 +42,7 @@
 <div class="person-head"><span>Participant</span><span>Part (%)</span><span>Déjà payé (€)</span></div>
 <div class="people" id="people"></div>
 <p class="share-note">Les paiements déjà effectués servent à calculer les remboursements. Lorsque la dépense est entièrement couverte, une personne ayant avancé plus que sa part peut être remboursée par les autres participants.</p>
+<button class="button-main share-button" id="calculate" type="button">Recalculer la répartition</button>
 </div>
 <div class="share-result" id="results" aria-live="polite"></div>
 </section>
@@ -144,6 +145,7 @@ count.addEventListener("change",renderPeople);
 modeInputs.forEach(x=>x.addEventListener("change",()=>{updateMode();calculate()}));
 people.addEventListener("input",calculate);
 document.getElementById("total").addEventListener("input",calculate);
+document.getElementById("calculate").addEventListener("click",calculate);
 renderPeople();
 })();
 </script>
