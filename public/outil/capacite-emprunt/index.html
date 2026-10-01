@@ -98,7 +98,7 @@
 <div class="field cap-field"><label for="assurance">Assurance emprunteur (% / an)</label><input id="assurance" type="number" min="0" max="5" step=".01" value=".20" inputmode="decimal"><small>Hypothèse simplifiée appliquée au capital emprunté.</small></div>
 <div class="field cap-field"><label for="apport">Apport disponible (€)</label><input id="apport" type="number" min="0" step="500" value="30000" inputmode="decimal"><small>L’apport augmente votre budget global, mais ne remplace pas l’analyse bancaire.</small></div>
 </div>
-<div class="cap-action"><button class="button-main" type="button" onclick="Simulateurs.calc()">Calculer ma capacité d’emprunt</button></div>
+<div class="cap-action"><button class="button-main" type="button" id="calculate">Calculer ma capacité d’emprunt</button></div>
 <p class="cap-note">Estimation indicative · aucune donnée saisie n’est envoyée à un service externe par ce calculateur.</p>
 </div>
 
@@ -162,58 +162,88 @@
 </main>
 
 <script>
-window.TOOL={
-$:id=>document.getElementById(id),
-euro:v=>Number(v).toLocaleString("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:2}),
-num:v=>Number(v).toLocaleString("fr-FR",{maximumFractionDigits:2}),
-ey:"IMMOBILIER",
-title:"Calculateur de capacité d’emprunt immobilier",
-seoTitle:"Calculateur capacité d’emprunt immobilier 2026",
-intro:"Estimez votre mensualité maximale, votre capital empruntable et votre budget immobilier.",
-fields:()=>"",
-calc:function(){
-  const r=+this.$("revenus").value;
-  const charges=+this.$("charges").value;
-  const rate=+this.$("taux").value;
-  const years=+this.$("duree").value;
-  const ins=+this.$("assurance").value;
-  const apport=+this.$("apport").value;
-  if(!(r>0)||charges<0||rate<0||years<1||years>30||ins<0||apport<0)return"Valeurs invalides.";
-  const maxCharge=r*.35;
-  const available=maxCharge-charges;
-  const monthlyRate=rate/1200;
-  const insuranceRate=ins/1200;
-  const n=years*12;
-  if(available<=0){
-    $("result").innerHTML='<div class="result-kicker">Votre estimation</div><div class="result-main"><strong>0 €</strong></div><p class="cap-status">La mensualité disponible est nulle ou négative avec les charges indiquées.</p>';
-    $("comparison").innerHTML='<tr><td colspan="4">Aucun capital disponible avec les données saisies.</td></tr>';
-    return;
+(function(){
+  const $=id=>document.getElementById(id);
+  const euro=v=>Number(v).toLocaleString("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:2});
+  const num=v=>Number(v).toLocaleString("fr-FR",{maximumFractionDigits:2});
+
+  function read(){
+    return {
+      revenus:+$("revenus").value,
+      charges:+$("charges").value,
+      rate:+$("taux").value,
+      years:+$("duree").value,
+      insurance:+$("assurance").value,
+      apport:+$("apport").value
+    };
   }
-  const factor=monthlyRate?monthlyRate/(1-Math.pow(1+monthlyRate,-n)):1/n;
-  const capital=available/(factor+insuranceRate);
-  const principalPayment=capital*factor;
-  const insurancePayment=capital*insuranceRate;
-  const totalPaid=(principalPayment+insurancePayment)*n;
-  const interest=totalPaid-capital-insurancePayment*n;
-  const budget=capital+apport;
-  const ratio=((charges+principalPayment+insurancePayment)/r)*100;
-  const fmt=v=>this.euro(v);
-  const ratioText=this.num(ratio)+" %";
-  $("result").innerHTML='<div class="result-kicker">Capital empruntable estimé</div><div class="result-main"><strong>'+fmt(capital)+'</strong></div><div class="cap-stats"><div class="cap-stat"><small>Mensualité totale</small><strong>'+fmt(principalPayment+insurancePayment)+'</strong></div><div class="cap-stat"><small>Budget avec apport</small><strong>'+fmt(budget)+'</strong></div><div class="cap-stat"><small>Taux d’effort simulé</small><strong>'+ratioText+'</strong></div><div class="cap-stat"><small>Intérêts estimés</small><strong>'+fmt(Math.max(0,interest))+'</strong></div></div><div class="cap-meter"><span style="width:'+Math.min(100,ratio/35*100)+'%"></span></div><div class="cap-status">'+(ratio<=35.0001?'Simulation à 35 % ou moins de taux d’effort.':'Les charges dépassent l’hypothèse de 35 %.')+' Assurance estimée : '+fmt(insurancePayment)+' / mois.</div>';
-  const durations=[15,20,25];
-  $("comparison").innerHTML=durations.map(d=>{
-    const dn=d*12;
-    const f=monthlyRate?monthlyRate/(1-Math.pow(1+monthlyRate,-dn)):1/dn;
-    const k=available/(f+insuranceRate);
-    const pm=k*f, im=k*insuranceRate;
-    const total=(pm+im)*dn;
-    const cost=Math.max(0,total-k);
-    const cls=d===years?' class="highlight"':'';
-    return '<tr'+cls+'><td>'+d+' ans'+(d===years?' · actuel':'')+'</td><td>'+fmt(k)+'</td><td>'+fmt(pm+im)+'</td><td>'+fmt(cost)+'</td></tr>';
-  }).join("");
-},
-source:"Méthode indicative fondée sur une hypothèse de taux d’effort de 35 %. Le calcul tient compte des charges saisies et modélise séparément l’assurance. Il ne reproduit pas l’ensemble des critères d’une banque."
-};
+
+  function valid(d){
+    return d.revenus>0 && d.charges>=0 && d.rate>=0 && d.years>=1 && d.years<=30 &&
+      d.insurance>=0 && d.apport>=0;
+  }
+
+  function factor(rate,months){
+    return rate ? rate/(1-Math.pow(1+rate,-months)) : 1/months;
+  }
+
+  function scenario(d,years){
+    const n=years*12;
+    const monthlyRate=d.rate/1200;
+    const insuranceRate=d.insurance/1200;
+    const f=factor(monthlyRate,n);
+    const available=Math.max(0,d.revenus*.35-d.charges);
+    const capital=available/(f+insuranceRate);
+    const principal=capital*f;
+    const insurance=capital*insuranceRate;
+    const total=(principal+insurance)*n;
+    const interest=Math.max(0,principal*n-capital);
+    return {capital,principal,insurance,total,interest,cost:interest+insurance*n};
+  }
+
+  function render(){
+    const d=read();
+    if(!valid(d)){
+      $("result").innerHTML='<div class="result-kicker">Votre estimation</div><div class="result-main"><strong>Vérifiez vos données</strong></div><p class="cap-status">Saisissez des valeurs positives et une durée comprise entre 1 et 30 ans.</p>';
+      $("comparison").innerHTML='<tr><td colspan="4">Corrigez les données pour afficher la comparaison.</td></tr>';
+      return;
+    }
+
+    const available=d.revenus*.35-d.charges;
+    if(available<=0){
+      $("result").innerHTML='<div class="result-kicker">Votre estimation</div><div class="result-main"><strong>0 €</strong></div><p class="cap-status">Aucune mensualité n’est disponible avec les charges indiquées dans cette hypothèse de 35 %.</p>';
+      $("comparison").innerHTML='<tr><td colspan="4">Aucun capital disponible avec les données saisies.</td></tr>';
+      return;
+    }
+
+    const s=scenario(d,d.years);
+    const budget=s.capital+d.apport;
+    const ratio=((d.charges+s.principal+s.insurance)/d.revenus)*100;
+    const meter=Math.min(100,Math.max(0,ratio/35*100));
+
+    $("result").innerHTML=
+      '<div class="result-kicker">Capital empruntable estimé</div>'+
+      '<div class="result-main"><strong>'+euro(s.capital)+'</strong></div>'+
+      '<div class="cap-stats">'+
+        '<div class="cap-stat"><small>Mensualité totale</small><strong>'+euro(s.principal+s.insurance)+'</strong></div>'+
+        '<div class="cap-stat"><small>Budget avec apport</small><strong>'+euro(budget)+'</strong></div>'+
+        '<div class="cap-stat"><small>Taux d’effort simulé</small><strong>'+num(ratio)+' %</strong></div>'+
+        '<div class="cap-stat"><small>Intérêts estimés</small><strong>'+euro(s.interest)+'</strong></div>'+
+      '</div>'+
+      '<div class="cap-meter" aria-label="Taux d’effort simulé de '+num(ratio)+' % sur 35 %"><span style="width:'+meter+'%"></span></div>'+
+      '<div class="cap-status">Hypothèse de 35 % respectée. Assurance estimée : '+euro(s.insurance)+' / mois.</div>';
+
+    $("comparison").innerHTML=[15,20,25].map(years=>{
+      const x=scenario(d,years);
+      const cls=years===d.years?' class="highlight"':'';
+      return '<tr'+cls+'><td>'+years+' ans'+(years===d.years?' · actuel':'')+'</td><td>'+euro(x.capital)+'</td><td>'+euro(x.principal+x.insurance)+'</td><td>'+euro(x.cost)+'</td></tr>';
+    }).join("");
+  }
+
+  $("calculate").addEventListener("click",render);
+  ["revenus","charges","taux","duree","assurance","apport"].forEach(id=>$(id).addEventListener("input",render));
+  render();
+})();
 </script>
 <script src="/enter-calcul.js" defer></script>
 </body>
