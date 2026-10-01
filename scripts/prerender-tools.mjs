@@ -46,8 +46,14 @@ function relatedToolsMarkup(slug) {
     '</div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="' + data[1] + '">' + esc(data[0]) + '</a>.</p></div></section>';
 }
 function hasBC(h){return [...h.matchAll(/<script[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)].some(m=>/"@type"\s*:\s*"BreadcrumbList"/.test(m[1]))}
-const groups=groupsOf(sim);let changed=0,skipped=0;
-for(const file of walk(root)){const old=fs.readFileSync(file,"utf8");let h=old;const slug=path.basename(path.dirname(file)),t=toolOf(h,file);if(!t){skipped++;continue}const title=t.displayTitle||t.title||"",intro=t.displayIntro||t.intro||"";if(!title)throw Error(file+": titre vide");
+const groups=groupsOf(sim);let changed=0,skipped=0,staticSkipped=0;
+for(const file of walk(root)){
+  const old=fs.readFileSync(file,"utf8");
+  // HTML-first calculators own their SEO/interface markup; legacy prerender must not rewrite them.
+  if(/<meta\\b[^>]*name=["\x27]calculator-rendering["\x27][^>]*content=["\x27]static["\x27][^>]*>/i.test(old)){
+    skipped++; staticSkipped++; continue;
+  }
+  let h=old;const slug=path.basename(path.dirname(file)),t=toolOf(h,file);if(!t){skipped++;continue}const title=t.displayTitle||t.title||"",intro=t.displayIntro||t.intro||"";if(!title)throw Error(file+": titre vide");
 h=h.replace(/(<title>)[\s\S]*?(<\/title>)/i,(_,a,b)=>a+esc(t.seoTitle||t.title||title)+" | Simulateur"+b);
 h=h.replace(/(<div[^>]+id=["']ey["'][^>]*>)[\s\S]*?(<\/div>)/i,(_,a,b)=>a+esc(t.ey||"")+b);
 h=h.replace(/(<h1[^>]+id=["']title["'][^>]*>)[\s\S]*?(<\/h1>)/i,(_,a,b)=>a+esc(title)+b);
@@ -85,4 +91,4 @@ if(!/<section[^>]+class=["']related-tools["']/i.test(h)){
   if(related) h=h.replace(/<\/main>/i,related+"</main>");
 }
 if(h!==old){fs.writeFileSync(file,h.endsWith("\n")?h:h+"\n");changed++}}
-console.log("SEO prerender: "+changed+" pages updated; "+skipped+" static-special pages skipped.");
+console.log("SEO prerender: "+changed+" legacy pages updated; "+skipped+" pages skipped ("+staticSkipped+" HTML-first calculators).");
