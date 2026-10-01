@@ -87,7 +87,9 @@ function allocateCents(totalCents,shares){
  return cents;
 }
 function renderPeople(){
- const rawCount=String(count.value).trim(),parsedCount=Number(rawCount);\n if(rawCount===""||!Number.isInteger(parsedCount)||parsedCount<2||parsedCount>12){ results.innerHTML="<div class=\"status-note\" role=\"alert\"><strong>Nombre de personnes invalide.</strong><p>Saisissez un nombre entier compris entre 2 et 12.</p></div>"; return; }\n const n=parsedCount; count.value=n;
+ const rawCount=String(count.value).trim(),parsedCount=Number(rawCount);
+ if(rawCount===""||!Number.isInteger(parsedCount)||parsedCount<2||parsedCount>12){ results.innerHTML="<div class=\"status-note\" role=\"alert\"><strong>Nombre de personnes invalide.</strong><p>Saisissez un nombre entier compris entre 2 et 12.</p></div>"; return; }
+ const n=parsedCount; count.value=n;
  const old=[...people.querySelectorAll(".person")].map(row=>({name:row.querySelector(".pname").value,paid:row.querySelector(".paid").value}));
  const defaults=defaultShares(n); people.replaceChildren();
  for(let i=0;i<n;i++){
