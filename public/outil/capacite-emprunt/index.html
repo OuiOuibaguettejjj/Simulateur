@@ -163,7 +163,10 @@
 </main>
 
 <script>
-window.TOOL={
+window.CapaciteEmprunt={
+$:id=>document.getElementById(id),
+euro:v=>Number(v).toLocaleString("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:2}),
+num:v=>Number(v).toLocaleString("fr-FR",{maximumFractionDigits:2}),
 ey:"IMMOBILIER",
 title:"Calculateur de capacité d’emprunt immobilier",
 intro:"Estimez votre mensualité maximale, votre capital empruntable et votre budget immobilier.",
@@ -211,8 +214,6 @@ calc:function(){
 },
 source:"Méthode indicative fondée sur une hypothèse de taux d’effort de 35 %. Le calcul tient compte des charges saisies et modélise séparément l’assurance. Il ne reproduit pas l’ensemble des critères d’une banque."
 };
-window.CapaciteEmprunt=window.CapaciteEmprunt||{};
-window.CapaciteEmprunt.calc=window.TOOL.calc.bind({$:id=>document.getElementById(id),euro:v=>Number(v).toLocaleString("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:2}),num:v=>Number(v).toLocaleString("fr-FR",{maximumFractionDigits:2})});
 </script>
 <script src="/enter-calcul.js" defer></script>
 </body>
