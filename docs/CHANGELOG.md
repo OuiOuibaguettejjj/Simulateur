@@ -1,3 +1,10 @@
+## 2026-10-02 — Correctifs du partage de dépenses
+- Validation explicite des montants et pourcentages, avec refus des valeurs invalides au lieu de les convertir silencieusement en 0.
+- Refus d’un montant total nul et amélioration des messages d’erreur accessibles.
+- Simplification de l’UX avec calcul en temps réel, sans bouton redondant.
+- Amélioration de la sémantique et de l’affichage mobile du tableau et des participants.
+- Clarification des textes sur les remboursements lorsque la dépense est totalement couverte.
+
 ## 2026-10-02 — Partage de dépenses premium
 - Refonte du calculateur de partage de dépenses avec une interface HTML statique plus complète.
 - Ajout des parts égales ou personnalisées, jusqu’à 12 participants, des noms et des montants déjà payés.
