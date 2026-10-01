@@ -1,3 +1,8 @@
+## 2026-10-02 — FAQ pédagogique des convertisseurs
+- Ajout d’une FAQ courte et pédagogique aux pages température et angles.
+- Ajout de repères historiques et d’explications sur l’usage des différentes unités, sans modifier le moteur de conversion.
+- Aucun changement de Worker, de configuration Cloudflare ou de dépendance externe.
+
 ## 2026-10-01 — Convertisseurs température et angles
 - Refonte du convertisseur de température avec conversion bidirectionnelle Celsius, Fahrenheit et Kelvin, interface plus claire et contenu SEO enrichi.
 - Ajout du convertisseur d’angles degrés, radians et grades.
