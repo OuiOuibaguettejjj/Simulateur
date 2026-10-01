@@ -1,3 +1,7 @@
+## 2026-10-02 — Nettoyage du partage de dépenses
+- Suppression de la fonction `toCents()` inutilisée, sans changement du comportement du calculateur.
+- Aucun changement de Worker, de configuration Cloudflare ou de dépendance externe.
+
 ## 2026-10-02 — Durcissement du partage de dépenses
 - Validation stricte des parts personnalisées à 100,00 % afin d’éviter toute incohérence d’arrondi dans les montants dus.
 - Refus des nombres de participants non entiers au lieu de les arrondir silencieusement.

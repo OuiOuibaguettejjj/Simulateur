@@ -78,7 +78,6 @@ function defaultShares(n){
  return shares;
 }
 function parseCents(value){const raw=String(value).trim();if(raw==="")return null;const n=Number(raw);return Number.isFinite(n)&&n>=0?Math.round(n*100):null}
-function toCents(value){const cents=parseCents(value);return cents===null?0:cents}
 function allocateCents(totalCents,shares){
  const exact=shares.map(share=>totalCents*share/100);
  const cents=exact.map(Math.floor);
