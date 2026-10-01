@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Calculateur capacité d’emprunt immobilier 2026 | Simulateur</title>
 <meta name="description" content="Calculez votre capacité d’emprunt immobilier en 2026 : mensualité maximale, capital empruntable, taux d’effort, apport et comparaison 15, 20 ou 25 ans.">
-<meta name="calculator-rendering" content="static">
 <link rel="canonical" href="https://simulateur.site/outil/capacite-emprunt/">
 <link rel="stylesheet" href="/styles.css">
 <script type="application/ld+json">
@@ -99,7 +98,7 @@
 <div class="field cap-field"><label for="assurance">Assurance emprunteur (% / an)</label><input id="assurance" type="number" min="0" max="5" step=".01" value=".20" inputmode="decimal"><small>Hypothèse simplifiée appliquée au capital emprunté.</small></div>
 <div class="field cap-field"><label for="apport">Apport disponible (€)</label><input id="apport" type="number" min="0" step="500" value="30000" inputmode="decimal"><small>L’apport augmente votre budget global, mais ne remplace pas l’analyse bancaire.</small></div>
 </div>
-<div class="cap-action"><button class="button-main" type="button" onclick="CapaciteEmprunt.calc()">Calculer ma capacité d’emprunt</button></div>
+<div class="cap-action"><button class="button-main" type="button" onclick="Simulateurs.calc()">Calculer ma capacité d’emprunt</button></div>
 <p class="cap-note">Estimation indicative · aucune donnée saisie n’est envoyée à un service externe par ce calculateur.</p>
 </div>
 
@@ -146,7 +145,7 @@
 <details><summary>Faut-il inclure l’assurance emprunteur ?</summary><p>Oui pour une estimation cohérente du coût du financement. Ici, l’assurance est modélisée séparément comme un pourcentage annuel du capital emprunté ; les contrats réels peuvent être calculés selon d’autres modalités.</p></details>
 </div>
 
-<div class="cap-related">
+<section class="cap-related related-tools">
 <h2>À poursuivre sur Simulateur</h2>
 <div class="cap-related-grid">
 <a class="related-link" href="/outil/pret-immobilier/"><strong>Prêt immobilier</strong><span>Mensualité, intérêts, assurance et coût total.</span></a>
@@ -163,12 +162,13 @@
 </main>
 
 <script>
-window.CapaciteEmprunt={
+window.TOOL={
 $:id=>document.getElementById(id),
 euro:v=>Number(v).toLocaleString("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:2}),
 num:v=>Number(v).toLocaleString("fr-FR",{maximumFractionDigits:2}),
 ey:"IMMOBILIER",
 title:"Calculateur de capacité d’emprunt immobilier",
+seoTitle:"Calculateur capacité d’emprunt immobilier 2026",
 intro:"Estimez votre mensualité maximale, votre capital empruntable et votre budget immobilier.",
 fields:()=>"",
 calc:function(){
