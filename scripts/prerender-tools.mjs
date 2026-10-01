@@ -50,7 +50,7 @@ const groups=groupsOf(sim);let changed=0,skipped=0,staticSkipped=0;
 for(const file of walk(root)){
   const old=fs.readFileSync(file,"utf8");
   // HTML-first calculators own their SEO/interface markup; legacy prerender must not rewrite them.
-  if(/<meta\\b[^>]*name=["\x27]calculator-rendering["\x27][^>]*content=["\x27]static["\x27][^>]*>/i.test(old)){
+  if(/<meta\b[^>]*name=["\x27]calculator-rendering["\x27][^>]*content=["\x27]static["\x27][^>]*>/i.test(old)){
     skipped++; staticSkipped++; continue;
   }
   let h=old;const slug=path.basename(path.dirname(file)),t=toolOf(h,file);if(!t){skipped++;continue}const title=t.displayTitle||t.title||"",intro=t.displayIntro||t.intro||"";if(!title)throw Error(file+": titre vide");
