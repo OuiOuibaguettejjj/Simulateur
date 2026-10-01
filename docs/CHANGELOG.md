@@ -1,3 +1,10 @@
+## 2026-10-02 — Partage de dépenses premium
+- Refonte du calculateur de partage de dépenses avec une interface HTML statique plus complète.
+- Ajout des parts égales ou personnalisées, jusqu’à 12 participants, des noms et des montants déjà payés.
+- Ajout du calcul des soldes et des remboursements entre participants.
+- Renforcement du SEO avec WebApplication, BreadcrumbList, contenu éditorial et FAQ.
+- Runtime local dédié, sans modification du Worker, de Cloudflare ou des dépendances externes.
+
 ## 2026-10-02 — FAQ pédagogique des convertisseurs
 - Ajout d’une FAQ courte et pédagogique aux pages température et angles.
 - Ajout de repères historiques et d’explications sur l’usage des différentes unités, sans modifier le moteur de conversion.
