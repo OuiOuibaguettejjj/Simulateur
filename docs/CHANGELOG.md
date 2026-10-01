@@ -1,4 +1,7 @@
-## 2026-10-02 — Correctif CI du partage de dépenses
+## 2026-10-02 — Durcissement du partage de dépenses
+- Validation stricte des parts personnalisées à 100,00 % afin d’éviter toute incohérence d’arrondi dans les montants dus.
+- Refus des nombres de participants non entiers au lieu de les arrondir silencieusement.
+- Aucun changement de Worker, de configuration Cloudflare ou de dépendance externe.\n\n## 2026-10-02 — Correctif CI du partage de dépenses
 - Conservation du bouton de recalcul manuel en complément du calcul instantané afin de respecter le contrat de validation statique des calculateurs.
 
 ## 2026-10-02 — Correctifs du partage de dépenses

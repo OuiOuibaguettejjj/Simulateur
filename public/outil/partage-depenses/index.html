@@ -33,7 +33,7 @@
 <p class="lead-small">Indiquez le montant total, puis renseignez les participants et leurs paiements éventuels.</p>
 <div class="share-fields">
 <div class="share-field"><label for="total">Montant total <span aria-hidden="true">€</span></label><input id="total" type="number" min="0" step="0.01" value="120" inputmode="decimal"></div>
-<div class="share-field"><label for="count">Nombre de personnes</label><input id="count" type="number" min="2" max="12" step="1" value="3" inputmode="numeric"></div>
+<div class="share-field"><label for="count">Nombre de personnes</label><input id="count" type="number" min="2" max="12" step="1" value="3" inputmode="numeric" aria-describedby="count-help"><small id="count-help" class="share-note">De 2 à 12 personnes, nombre entier.</small></div>
 </div>
 <fieldset class="share-field" style="border:0;padding:0;margin:0 0 20px"><legend style="display:block;font-weight:900;margin-bottom:7px">Mode de répartition</legend><div class="mode-row">
 <label><input type="radio" name="mode" value="equal" checked> Parts égales</label>
@@ -87,7 +87,7 @@ function allocateCents(totalCents,shares){
  return cents;
 }
 function renderPeople(){
- const n=Math.min(12,Math.max(2,Math.round(Number(count.value)||2))); count.value=n;
+ const rawCount=String(count.value).trim(),parsedCount=Number(rawCount);\n if(rawCount===""||!Number.isInteger(parsedCount)||parsedCount<2||parsedCount>12){ results.innerHTML="<div class=\"status-note\" role=\"alert\"><strong>Nombre de personnes invalide.</strong><p>Saisissez un nombre entier compris entre 2 et 12.</p></div>"; return; }\n const n=parsedCount; count.value=n;
  const old=[...people.querySelectorAll(".person")].map(row=>({name:row.querySelector(".pname").value,paid:row.querySelector(".paid").value}));
  const defaults=defaultShares(n); people.replaceChildren();
  for(let i=0;i<n;i++){
@@ -114,7 +114,7 @@ function calculate(){
   if(shares.some(v=>v===null)){results.innerHTML="<div class=\"status-note\" role=\"alert\"><strong>Part invalide.</strong><p>Chaque pourcentage doit être un nombre compris entre 0 et 100.</p></div>";return}
   if(shares.some(v=>v>100)){results.innerHTML="<div class=\"status-note\" role=\"alert\"><strong>Part invalide.</strong><p>Chaque pourcentage doit être compris entre 0 et 100.</p></div>";return}
   const sum=shares.reduce((a,b)=>a+b,0);
-  if(Math.abs(sum-100)>.01){results.innerHTML='<strong>Répartition invalide.</strong><p>Les parts personnalisées doivent totaliser 100 %. Total actuel : '+pct(sum)+' %.</p>';return}
+  if(Math.round(sum*100)!==10000){results.innerHTML='<strong>Répartition invalide.</strong><p>Les parts personnalisées doivent totaliser 100 %. Total actuel : '+pct(sum)+' %.</p>';return}
  }
  const dueCents=allocateCents(totalCents,shares);
  const balances=dueCents.map((due,i)=>paidCents[i]-due),totalPaidCents=paidCents.reduce((a,b)=>a+b,0);
