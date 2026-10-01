@@ -99,7 +99,7 @@
 <div class="field cap-field"><label for="assurance">Assurance emprunteur (% / an)</label><input id="assurance" type="number" min="0" max="5" step=".01" value=".20" inputmode="decimal"><small>Hypothèse simplifiée appliquée au capital emprunté.</small></div>
 <div class="field cap-field"><label for="apport">Apport disponible (€)</label><input id="apport" type="number" min="0" step="500" value="30000" inputmode="decimal"><small>L’apport augmente votre budget global, mais ne remplace pas l’analyse bancaire.</small></div>
 </div>
-<div class="cap-action"><button class="button-main" type="button" onclick="Simulateurs.calc()">Calculer ma capacité d’emprunt</button></div>
+<div class="cap-action"><button class="button-main" type="button" onclick="CapaciteEmprunt.calc()">Calculer ma capacité d’emprunt</button></div>
 <p class="cap-note">Estimation indicative · aucune donnée saisie n’est envoyée à un service externe par ce calculateur.</p>
 </div>
 
@@ -211,7 +211,8 @@ calc:function(){
 },
 source:"Méthode indicative fondée sur une hypothèse de taux d’effort de 35 %. Le calcul tient compte des charges saisies et modélise séparément l’assurance. Il ne reproduit pas l’ensemble des critères d’une banque."
 };
-window.addEventListener("DOMContentLoaded",()=>Simulateurs.render());
+window.CapaciteEmprunt=window.CapaciteEmprunt||{};
+window.CapaciteEmprunt.calc=window.TOOL.calc.bind({$:id=>document.getElementById(id),euro:v=>Number(v).toLocaleString("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:2}),num:v=>Number(v).toLocaleString("fr-FR",{maximumFractionDigits:2})});
 </script>
 <script src="/enter-calcul.js" defer></script>
 </body>
