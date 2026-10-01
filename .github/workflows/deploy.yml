@@ -26,6 +26,33 @@ jobs:
       - name: Generate sitemap
         run: node scripts/generate-sitemap.mjs
 
+      - name: Validate calculator rendering contract
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const cp = require('child_process');
+          const errors = [];
+          const changed = cp.execFileSync('git', ['diff', '--name-status', 'HEAD^', 'HEAD', '--', 'public/outil'], {encoding:'utf8'}).trim();
+          for (const line of changed ? changed.split(/\r?\n/) : []) {
+            const parts = line.split(/\t+/);
+            const status = parts[0];
+            const file = parts[parts.length - 1];
+            if (!file.endsWith('/index.html')) continue;
+            let html = '';
+            try { html = fs.readFileSync(file, 'utf8'); } catch { continue; }
+            const isStatic = /<meta\b[^>]*name=["']calculator-rendering["'][^>]*content=["']static["'][^>]*>/i.test(html);
+            if (status.startsWith('A') && !isStatic) errors.push(file + ': new calculator pages must use the HTML-first rendering contract');
+            if (isStatic) {
+              if (!/<h1\b[^>]*>[\s\S]*?\S[\s\S]*?<\/h1>/i.test(html)) errors.push(file + ': HTML-first calculator requires a non-empty H1');
+              if (!/<meta\b[^>]*name=["']description["'][^>]*content=["'][^"']+["']/i.test(html)) errors.push(file + ': HTML-first calculator requires a meta description');
+              if (!/<link\b[^>]*rel=["']canonical["'][^>]*href=["'][^"']+["']/i.test(html)) errors.push(file + ': HTML-first calculator requires a canonical');
+              if (!/<(?:input|select|textarea|button)\b/i.test(html)) errors.push(file + ': HTML-first calculator requires visible calculator controls');
+            }
+          }
+          if (errors.length) { console.error(errors.join('\n')); process.exit(1); }
+          console.log('Calculator rendering contract validated: new calculators are HTML-first; legacy pages remain supported during migration.');
+          NODE
+
       - name: Pre-render calculator SEO HTML
         run: node scripts/prerender-tools.mjs
 
@@ -148,24 +175,36 @@ jobs:
             currentFile = file;
             const html = fs.readFileSync(file, 'utf8');
             const hasTool = /window\.TOOL\s*=/.test(html);
-            if (hasTool) {
+            const isStatic = /<meta\b[^>]*name=["']calculator-rendering["'][^>]*content=["']static["'][^>]*>/i.test(html);
+            if (hasTool || isStatic) {
               checked++;
-              const h1 = html.match(/<h1\b[^>]*\bid=["']title["'][^>]*>([\s\S]*?)<\/h1>/i);
-              if (!h1 || !h1[1].replace(/<[^>]+>/g, '').trim()) errors.push(file + ': empty #title H1');
-              const source = html.match(/<p\b[^>]*\bid=["']source["'][^>]*>([\s\S]*?)<\/p>/i);
-              if (!source || !source[1].replace(/<[^>]+>/g, '').trim()) errors.push(file + ': empty #source');
-              const fields = html.match(/<div\b[^>]*\bid=["']fields["']([^>]*)>([\s\S]*?)<\/div>/i);
-              if (!fields) errors.push(file + ': missing #fields');
-              else if (!/\bhidden(?:\s*=|\b)/i.test(fields[1]) && !/<(?:input|select|textarea|button)\b/i.test(fields[2])) errors.push(file + ': empty #fields');
+              const title = html.match(/<title\b[^>]*>([\s\S]*?)<\/title>/i);
+              if (!title || !title[1].replace(/<[^>]+>/g, "").trim()) errors.push(file + ": empty title");
+              const description = html.match(/<meta\b[^>]*name=["']description["'][^>]*content=["']([^"']+)["']/i);
+              if (!description || !description[1].trim()) errors.push(file + ": empty meta description");
               const titleCount = [...html.matchAll(/<title\b[^>]*>[\s\S]*?<\/title>/gi)].length;
-              if (titleCount !== 1) errors.push(file + ': expected exactly one title, found ' + titleCount);
+              if (titleCount !== 1) errors.push(file + ": expected exactly one title, found " + titleCount);
               const jsonLd = jsonLdBlocks(html);
               const breadcrumbCount = jsonLd.filter(s => s && s['@type'] === 'BreadcrumbList').length;
               const webApplicationCount = jsonLd.filter(s => s && s['@type'] === 'WebApplication').length;
-              if (breadcrumbCount !== 1) errors.push(file + ': expected exactly one BreadcrumbList, found ' + breadcrumbCount);
-              if (webApplicationCount !== 1) errors.push(file + ': expected exactly one WebApplication, found ' + webApplicationCount);
+              if (breadcrumbCount !== 1) errors.push(file + ": expected exactly one BreadcrumbList, found " + breadcrumbCount);
+              if (webApplicationCount !== 1) errors.push(file + ": expected exactly one WebApplication, found " + webApplicationCount);
               const breadcrumb = html.match(/<div\b[^>]*class=["']breadcrumb["'][^>]*>([\s\S]*?)<\/div>/i);
-              if (!breadcrumb || !/<a\b[^>]*href=["']\/["'][^>]*>\s*Accueil\s*<\/a>/i.test(breadcrumb[1])) errors.push(file + ': visible breadcrumb missing Accueil link');
+              if (!breadcrumb || !/<a\b[^>]*href=["']\/["'][^>]*>\s*Accueil\s*<\/a>/i.test(breadcrumb[1])) errors.push(file + ": visible breadcrumb missing Accueil link");
+              if (isStatic) {
+                const h1 = html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i);
+                if (!h1 || !h1[1].replace(/<[^>]+>/g, "").trim()) errors.push(file + ": empty H1");
+                if (!/<(?:input|select|textarea|button)\b/i.test(html)) errors.push(file + ": missing calculator controls");
+                if (!/(?:class=["'][^"']*source[^"']*["']|id=["']source["'])[^>]*>[\s\S]*?\S/i.test(html)) errors.push(file + ": missing source/limitations content");
+              } else {
+                const h1 = html.match(/<h1\b[^>]*\bid=["']title["'][^>]*>([\s\S]*?)<\/h1>/i);
+                if (!h1 || !h1[1].replace(/<[^>]+>/g, "").trim()) errors.push(file + ": empty #title H1");
+                const source = html.match(/<p\b[^>]*\bid=["']source["'][^>]*>([\s\S]*?)<\/p>/i);
+                if (!source || !source[1].replace(/<[^>]+>/g, "").trim()) errors.push(file + ": empty #source");
+                const fields = html.match(/<div\b[^>]*\bid=["']fields["']([^>]*)>([\s\S]*?)<\/div>/i);
+                if (!fields) errors.push(file + ": missing #fields");
+                else if (!/\bhidden(?:\s*=|\b)/i.test(fields[1]) && !/<(?:input|select|textarea|button)\b/i.test(fields[2])) errors.push(file + ": empty #fields");
+              }
             }
             const blocks = jsonLdBlocks(html);
             const breadcrumbs = blocks.filter(s => s && s['@type'] === 'BreadcrumbList');
