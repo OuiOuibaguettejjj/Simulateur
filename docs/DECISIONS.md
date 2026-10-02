@@ -1,5 +1,10 @@
 # Décisions techniques
 
+## Partage de dépenses : formats numériques utilisateur
+Les champs de montant, nombre de personnes et pourcentage refusent la notation scientifique afin de rester cohérents avec les formats décimaux affichés. Le parsing des pourcentages reprend le traitement des espaces et espaces insécables des autres champs numériques. Les pourcentages personnalisés restent limités à deux décimales.
+
+# Décisions techniques
+
 ## RSA : moteur séparé de l'interface
 Le moteur RSA est placé dans `public/rsa.js` afin de séparer les règles métier du HTML et de faciliter les contrôles et futures mises à jour réglementaires.
 

@@ -79,7 +79,7 @@ function defaultShares(n){
 }
 function parseDecimal(value){
  const raw=String(value).trim().replace(/[\u00a0\s]/g,"");
- if(raw==="")return null;
+ if(raw===""||/[eE]/.test(raw))return null;
  const normalized=raw.includes(",")?raw.replace(/\./g,"").replace(",","."):raw;
  const n=Number(normalized);
  return Number.isFinite(n)?n:null;
@@ -87,9 +87,9 @@ function parseDecimal(value){
 function parseCents(value){const n=parseDecimal(value);return n!==null&&n>=0?Math.round(n*100):null}
 function parseNumber(value){return parseDecimal(value)}
 function parsePercentage(value){
- const raw=String(value).trim().replace(/[\\u00a0\\s]/g,"");
- if(raw==="")return null;
- const normalized=raw.includes(",")?raw.replace(/\\./g,"").replace(",","."):raw;
+ const raw=String(value).trim().replace(/[\u00a0\s]/g,"");
+ if(raw===""||/[eE]/.test(raw))return null;
+ const normalized=raw.includes(",")?raw.replace(/\./g,"").replace(",","."):raw;
  const decimalPart=normalized.split(".")[1]||"";
  if(decimalPart.length>2)return null;
  const n=Number(normalized);

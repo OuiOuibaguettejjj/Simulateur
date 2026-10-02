@@ -1,3 +1,8 @@
+## 2026-10-02 — Robustesse des saisies du partage de dépenses
+- Correction du parsing des pourcentages personnalisés afin de traiter correctement les espaces et espaces insécables comme les autres champs numériques.
+- Refus de la notation scientifique dans les champs numériques utilisateur afin de respecter les formats de saisie affichés et la règle de précision des pourcentages.
+- Aucun changement de Worker, de configuration Cloudflare ou de dépendance externe.
+
 ## 2026-10-02 — Nettoyage du partage de dépenses
 - Suppression de la fonction `toCents()` inutilisée, sans changement du comportement du calculateur.
 - Aucun changement de Worker, de configuration Cloudflare ou de dépendance externe.
