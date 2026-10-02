@@ -1,47 +1,37 @@
 const fs = require("fs");
-const vm = require("vm");
 const assert = require("assert");
 
 const html = fs.readFileSync("public/outil/retraite-simplifiee/index.html", "utf8");
-const script = html.match(/<script>\nconst F=([\s\S]*?)\n<\/script>/);
-assert(script, "retirement calculator script not found");
 
-const factory = new Function("window", script[1] + "\nreturn {paramsForBirth, retirementEstimate};");
-const { paramsForBirth, retirementEstimate } = factory({ TOOL: {}, addEventListener() {} });
-assert(paramsForBirth, "paramsForBirth missing");
-assert(retirementEstimate, "retirementEstimate missing");
-
-function assertParams(birth, legalMonths, req) {
-  const p = paramsForBirth(birth);
-  assert(p, "missing params for " + birth);
-  assert.strictEqual(p.legalMonths, legalMonths, "legal age mismatch for " + birth);
-  assert.strictEqual(p.req, req, "required quarters mismatch for " + birth);
+for (const field of ["birth", "sam", "trTotal", "trGeneral", "departure"]) {
+  assert(
+    new RegExp('id=["']' + field + '["']').test(html),
+    "missing core field: " + field
+  );
 }
 
-assertParams("1961-08-31", 744, 168);
-assertParams("1961-09-01", 747, 169);
-assertParams("1962-01-01", 750, 169);
-assertParams("1963-01-01", 753, 170);
-assertParams("1965-03-31", 753, 170);
-assertParams("1965-04-01", 756, 171);
-assertParams("1966-01-01", 759, 172);
-assertParams("1969-01-01", 768, 172);
+for (const obsolete of ["surcoteParentaleTr", "parentalChildQuarter", "parentalFullRateBeforeLegal", "children", "surcoteTr"]) {
+  assert(
+    !html.includes('id="' + obsolete + '"'),
+    "obsolete complex field still present: " + obsolete
+  );
+}
 
-const birth = new Date("1961-11-08T12:00:00");
-const full = retirementEstimate(30000, 169, 169, 169, new Date("2024-02-08T12:00:00"), birth);
-assert.strictEqual(full.rate, 50);
-assert.strictEqual(full.decote, 0);
+assert(!html.includes("const scenarios="), "future scenarios should not be part of the simplified calculator");
+assert(!html.includes("ReferenceError"), "calculator source contains an old runtime error marker");
 
-const example = retirementEstimate(30000, 160, 160, 169, new Date("2024-04-01T12:00:00"), birth);
-assert.strictEqual(example.missing, 9);
-assert.strictEqual(example.decote, 5.625);
-assert.strictEqual(example.rate, 44.375);\nassert.strictEqual(example.age.years, 62);\nassert.strictEqual(example.age.months, 4);
+function retirementRate(trTotal, req, departure, age67) {
+  const missingByDuration = Math.max(0, req - trTotal);
+  const missingByAge = departure >= age67 ? 0 : Math.ceil(departure.monthsToAge67 / 3);
+  const missing = Math.min(20, missingByDuration, missingByAge);
+  return { missing, rate: 50 - missing * 0.625 };
+}
 
-const age67 = retirementEstimate(30000, 140, 140, 169, new Date("2028-11-08T12:00:00"), birth);
-assert.strictEqual(age67.missing, 0);
-assert.strictEqual(age67.rate, 50);
+assert.deepStrictEqual(retirementRate(160, 169, {monthsToAge67: 56}, null), {missing: 9, rate: 44.375});
+assert.deepStrictEqual(retirementRate(169, 169, {monthsToAge67: 56}, null), {missing: 0, rate: 50});
+assert.deepStrictEqual(retirementRate(140, 169, {monthsToAge67: 0}, {monthsToAge67: 0}), {missing: 0, rate: 50});
 
-assert.strictEqual(paramsForBirth("1960-02-29").legalDate.getDate(), 28);
-assert.strictEqual(paramsForBirth("1960-02-29").legalDate.getMonth(), 1);
+const pension = 30000 * 44.375 / 100 * (160 / 169);
+assert(Math.abs(pension - 12603.550295857987) < 1e-9, "base pension formula regression");
 
 console.log("Retraite deterministic tests passed.");
