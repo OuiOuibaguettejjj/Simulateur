@@ -96,14 +96,14 @@ fields:function(){
   F.text("trGeneral","Trimestres d'assurance au régime général","172","1","400")
  ])+
  F.row([
-  F.text("age","Âge de départ envisagé (années)","64","0.25","75"),
+  F.date("departure","Date de départ envisagée"),
   F.text("surcoteTr","Trimestres déjà acquis pour la surcote","0","1","80"),
   F.text("surcoteParentaleTr","Trimestres de surcote parentale acquis","0","1","4")
  ])+
- F.select("children","Nombre d'enfants pour la majoration de 10 % à partir de 3 enfants",[["0","0 à 2 enfants"],["3","3 enfants ou plus"]])+F.select("parentalChildQuarter","Au moins un trimestre acquis pour enfant",[["0","Non"],["1","Oui"]])+F.select("parentalFullRateBeforeLegal","Taux plein acquis avant l’âge légal pour la surcote parentale",[["0","Non"],["1","Oui"]]);
+ F.select("children","Vous remplissez les conditions de la majoration de 10 % (3 enfants ou plus)",[["0","0 à 2 enfants"],["3","3 enfants ou plus"]])+F.select("parentalChildQuarter","Au moins un trimestre acquis pour enfant",[["0","Non"],["1","Oui"]])+F.select("parentalFullRateBeforeLegal","Taux plein acquis avant l’âge légal pour la surcote parentale",[["0","Non"],["1","Oui"]]);
 },
 calc:function(){
- const birth=this.$("birth").value,s=Number(this.$("sam").value),trTotal=Number(this.$("trTotal").value),trGeneral=Number(this.$("trGeneral").value),age=Number(this.$("age").value),surcoteTr=Number(this.$("surcoteTr").value),surcoteParentaleTr=Number(this.$("surcoteParentaleTr").value),children=Number(this.$("children").value),parentalChildQuarter=Number(this.$("parentalChildQuarter").value),parentalFullRateBeforeLegal=Number(this.$("parentalFullRateBeforeLegal").value);
+ const birth=this.$("birth").value,departure=this.$("departure").value,s=Number(this.$("sam").value),trTotal=Number(this.$("trTotal").value),trGeneral=Number(this.$("trGeneral").value),surcoteTr=Number(this.$("surcoteTr").value),surcoteParentaleTr=Number(this.$("surcoteParentaleTr").value),children=Number(this.$("children").value),parentalChildQuarter=Number(this.$("parentalChildQuarter").value),parentalFullRateBeforeLegal=Number(this.$("parentalFullRateBeforeLegal").value);
  const p=paramsForBirth(birth);
  if(!p||!Number.isFinite(s)||s<=0||s>1000000||!Number.isInteger(trTotal)||trTotal<0||trTotal>400||!Number.isInteger(trGeneral)||trGeneral<0||trGeneral>400||trGeneral>trTotal||!Number.isFinite(age)||age<50||age>75||!Number.isInteger(surcoteTr)||surcoteTr<0 ||surcoteTr>80||surcoteTr>Math.max(0,trTotal-p.req)||!Number.isInteger(surcoteParentaleTr)||surcoteParentaleTr<0||surcoteParentaleTr>4||!Number.isInteger(children)||!Number.isInteger(parentalChildQuarter)||parentalChildQuarter<0||parentalChildQuarter>1||!Number.isInteger(parentalFullRateBeforeLegal)||parentalFullRateBeforeLegal<0||parentalFullRateBeforeLegal>1||surcoteTr>0&&age<=p.legal||surcoteParentaleTr>0&&(birth<"1965-04-02"||age<p.legal||parentalChildQuarter!==1||parentalFullRateBeforeLegal!==1)){
    return '<div class="result-error"><strong>Valeurs invalides.</strong><br>Vérifiez votre date de naissance, votre revenu et vos trimestres.</div>';
