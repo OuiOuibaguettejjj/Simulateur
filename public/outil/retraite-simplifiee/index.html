@@ -24,7 +24,7 @@
 </div></div></div>
 
 <section class="content-section retirement-content">
-<div class="content-intro"><h2>Comprendre votre estimation</h2><p>Le calculateur estime uniquement la retraite de base. Il distingue le taux de liquidation, la proratisation selon la durée d'assurance et les effets simplifiés d'une décote ou d'une surcote.</p></div>
+<div class="content-intro"><h2>Comprendre votre estimation</h2><p>Le calculateur estime uniquement la retraite de base. Il distingue le taux de liquidation, la proratisation selon la durée d'assurance et l’effet simplifié d’une décote.</p></div>
 <h2>Ce que le calculateur prend en compte</h2>
 <div class="retirement-cards">
 <div><strong>Revenu annuel moyen</strong><p>Vous indiquez directement une estimation du revenu annuel moyen retenu. Le calculateur ne reconstitue pas vos meilleures années.</p></div>
@@ -44,7 +44,7 @@
 <script>
 const F={
 text:(i,l,p="",step="1",max="")=>'<div class="field"><label for="'+i+'">'+l+'</label><input id="'+i+'" type="number" min="0" step="'+step+'"'+(max?' max="'+max+'"':'')+' placeholder="'+p+'"></div>',
-date:(i,l)=>'<div class="field"><label for="'+i+'">'+l+'</label><input id="'+i+'" type="date"></div>',
+date:(i,l,min="",max="")=>'<div class="field"><label for="'+i+'">'+l+'</label><input id="'+i+'" type="date"'+(min?' min="'+min+'"':"")+(max?' max="'+max+'"':"")+'> </div>',
 row:a=>'<div class="row">'+a.join('')+'</div>'
 };
 
@@ -121,14 +121,14 @@ title:"Simulateur retraite 2026",
 intro:"Estimez votre retraite de base à partir de votre carrière et de votre date de départ.",
 fields:function(){
   return F.row([
-    F.date("birth","Date de naissance"),
+    F.date("birth","Date de naissance","1955-01-01","2100-12-31"),
     F.text("sam","Revenu annuel moyen (€)","30000","100","1000000")
   ])+
   F.row([
     F.text("trTotal","Trimestres d'assurance tous régimes","172","1","400"),
     F.text("trGeneral","Trimestres d'assurance au régime général","172","1","400")
   ])+
-  F.date("departure","Date de départ envisagée");
+  F.date("departure","Date de départ envisagée (1er du mois)","2026-09-01");
 },
 calc:function(){
   const birthValue=this.$("birth").value;
@@ -151,7 +151,7 @@ calc:function(){
     return '<div class="result-error"><strong>Date de départ invalide.</strong><br>La date de départ doit être postérieure à votre date de naissance.</div>';
   }
 
-  if(departure<p.legalDate){
+  if(departure.getDate()!==1){\n    return '<div class="result-error"><strong>Date de départ invalide.</strong><br>Le point de départ simulé doit être fixé au premier jour d’un mois.</div>';\n  }\n\n  if(departure<new Date("2026-09-01T12:00:00")){\n    return '<div class="result-error"><strong>Date de départ hors périmètre.</strong><br>Cette version applique les règles des retraites prenant effet à partir du 1er septembre 2026.</div>';\n  }\n\n  if(departure<p.legalDate){
     return '<div class="result-error"><strong>Le départ est trop précoce.</strong><br>Dans le cadre général simulé ici, votre âge légal est de '+formatAge(p.legalMonths)+'.</div>';
   }
 

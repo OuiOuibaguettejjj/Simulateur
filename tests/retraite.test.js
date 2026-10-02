@@ -1,5 +1,6 @@
 const fs = require("fs");
 const assert = require("assert");
+const vm = require("vm");
 
 const html = fs.readFileSync("public/outil/retraite-simplifiee/index.html", "utf8");
 
@@ -13,20 +14,63 @@ for (const obsolete of ["surcoteParentaleTr", "parentalChildQuarter", "parentalF
 
 assert(!html.includes("const scenarios="), "future scenarios should not be part of the simplified calculator");
 assert(html.includes("p.year<1955||p.year>2100"), "birth year must stay within the stated simulation scope");
-assert(!html.includes("effets simplifiés d&#39;une décote ou d&#39;une surcote"), "intro must not promise surcote calculation");
+assert(!/Comprendre votre estimation[\s\S]*?surcote/i.test(html), "intro must not promise a surcote calculation");
+assert(html.includes('Date de départ envisagée (1er du mois)'), "departure date must be explicitly month-based");
+assert(html.includes('departure.getDate()!==1'), "departure date must be validated as the first day of a month");
+assert(html.includes('2026-09-01T12:00:00'), "calculator must state the September 2026 rules scope");
 
-function retirementRate(trTotal, req, monthsToAge67) {
-  const missingByDuration = Math.max(0, req - trTotal);
-  const missingByAge = Math.ceil(Math.max(0, monthsToAge67) / 3);
-  const missing = Math.min(20, missingByDuration, missingByAge);
-  return { missing, rate: 50 - missing * 0.625 };
+const script = [...html.matchAll(/<script>([\s\S]*?)<\/script>/gi)][0]?.[1];
+assert(script, "calculator script missing");
+
+const context = {
+  window: { addEventListener() {} },
+  document: {
+    getElementById() { return {value:"", children:{length:0}, textContent:""}; },
+    querySelectorAll() { return []; },
+    createElement() { return {}; },
+    addEventListener() {}
+  },
+  console,
+  URL, Number, Math, Date, Intl, JSON, String, Boolean, Array, Object, RegExp,
+  parseInt, parseFloat, isFinite, isNaN, setTimeout, clearTimeout
+};
+vm.runInNewContext(script, context, {timeout:1000});
+
+const params = context.paramsForBirth;
+const estimate = context.retirementEstimate;
+assert(params && estimate, "core retirement functions must be executable");
+
+const cases = [
+  ["1961-08-31", 62 * 12, 168],
+  ["1961-09-01", 62 * 12 + 3, 169],
+  ["1964-01-01", 62 * 12 + 9, 170],
+  ["1965-03-31", 62 * 12 + 9, 170],
+  ["1965-04-01", 63 * 12, 171],
+  ["1966-01-01", 63 * 12 + 3, 172],
+  ["1969-01-01", 64 * 12, 172]
+];
+for (const [birth, legalMonths, req] of cases) {
+  const p = params(birth);
+  assert(p, "missing parameters for " + birth);
+  assert.strictEqual(p.legalMonths, legalMonths, "legal age regression " + birth);
+  assert.strictEqual(p.req, req, "required quarters regression " + birth);
 }
 
-assert.deepStrictEqual(retirementRate(160, 169, 56), {missing:9, rate:44.375});
-assert.deepStrictEqual(retirementRate(169, 169, 56), {missing:0, rate:50});
-assert.deepStrictEqual(retirementRate(140, 169, 0), {missing:0, rate:50});
+assert.strictEqual(params("1954-12-31"), null, "births before 1955 must be outside scope");
+assert.strictEqual(params("2101-01-01").year, 2101, "params helper may parse future dates before final UI scope validation");
 
-const pension = 30000 * 44.375 / 100 * (160 / 169);
-assert(Math.abs(pension - 12603.550295857987) < 1e-9, "base pension formula regression");
+const birth = new Date("1964-01-16T12:00:00");
+const departure = new Date("2027-01-01T12:00:00");
+const r = estimate(160, 160, 170, 170, departure, birth);
+assert.strictEqual(r.missing, 10, "decote must use the smaller missing-quarter count");
+assert.strictEqual(r.rate, 43.75, "decote rate regression");
+assert(Math.abs(r.pension - (30000 * 43.75 / 100 * (160 / 170))) < 1e-9, "full pension formula regression");
+
+const full = estimate(170, 170, 170, 170, new Date("2031-01-01T12:00:00"), birth);
+assert.strictEqual(full.rate, 50, "full-rate regression");
+assert.strictEqual(full.missing, 0, "no decote at full rate");
+
+const age67 = estimate(140, 140, 170, 170, new Date("2031-01-01T12:00:00"), birth);
+assert.strictEqual(age67.missing, 0, "no decote at 67");
 
 console.log("Retraite deterministic tests passed.");
