@@ -136,7 +136,7 @@
 <section class="compare">
 <h2>Quel impact de la durée ?</h2>
 <p>À capital et taux identiques, une durée plus longue réduit la mensualité mais augmente généralement le coût des intérêts.</p>
-<table class="compare-table"><thead><tr><th>Durée</th><th>Mensualité hors assurance</th><th>Intérêts</th><th>Coût assurance</th><th>Coût du financement</th></tr></thead><tbody id="compareBody"></tbody></table>
+<table class="compare-table"><thead><tr><th>Durée</th><th>Mensualité hors assurance</th><th>Intérêts</th><th>Coût assurance</th><th>Intérêts + assurance</th></tr></thead><tbody id="compareBody"></tbody></table>
 </section>
 
 <section class="schedule">
@@ -190,7 +190,7 @@
   const $=id=>document.getElementById(id);
   const money=v=>Number(v).toLocaleString("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:0});
   const number=v=>Number(v).toLocaleString("fr-FR",{maximumFractionDigits:2});
-  const vals=ids=>Object.fromEntries(ids.map(id=>[id,Number($(id).value)||0]));
+  const vals=ids=>Object.fromEntries(ids.map(id=>{const raw=$(id).value;return [id,raw===""?0:Number(raw)];}));
 
   function loan(capital,annualRate,years,insuranceRate){
     const n=Math.max(1,Math.round(years*12));
@@ -220,12 +220,12 @@
   function valid(){
     const c=Number($("capital").value),r=Number($("taux").value),y=Number($("duree").value),a=Number($("assurance").value),f=Number($("frais").value);
     const income=Number($("revenus").value),charges=Number($("charges").value);
-    return Number.isFinite(c)&&c>=1000&&
+    return Number.isFinite(c)&&c>=1000&&c<=1e12&&
       Number.isFinite(r)&&r>=0&&r<=30&&
       Number.isFinite(y)&&Number.isInteger(y)&&y>=1&&y<=30&&
       Number.isFinite(a)&&a>=0&&a<=10&&
       Number.isFinite(f)&&f>=0&&
-      (income===""||Number.isFinite(income))&&income>=0&&
+      Number.isFinite(income)&&income>=0&&
       Number.isFinite(charges)&&charges>=0;
   }
 
