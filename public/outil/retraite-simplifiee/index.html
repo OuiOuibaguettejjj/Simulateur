@@ -15,7 +15,7 @@
 <div class="retirement-shell">
 <div class="retirement-hero"><div class="eyebrow" id="ey">RETRAITE · 2026</div><h1 id="title">Simulateur retraite</h1><p id="intro">Estimez votre pension de base et visualisez l'effet de votre âge de départ, de la décote ou de la surcote.</p><div class="retirement-badges"><span>Retraite de base</span><span>Décote &amp; surcote</span><span>3 scénarios</span></div></div>
 <div class="retirement-form">
-<div class="retirement-section-title"><strong>1. Votre carrière</strong><span>Les données doivent correspondre au régime général</span></div>
+<div class="retirement-section-title"><strong>1. Votre carrière</strong><span>Renseignez séparément vos trimestres tous régimes et au régime général</span></div>
 <div id="fields"></div>
 <button class="button-main" onclick="Simulateurs.calc()">Calculer ma retraite</button>
 <p class="privacy-note">Calcul effectué dans votre navigateur · aucune donnée personnelle n'est envoyée.</p>
@@ -27,15 +27,15 @@
 <div class="content-intro"><h2>Comprendre votre estimation</h2><p>Le calculateur estime uniquement la retraite de base. Il distingue le taux de liquidation, la proratisation selon la durée d'assurance et les effets simplifiés d'une décote ou d'une surcote.</p></div>
 <h2>Ce que le calculateur prend en compte</h2>
 <div class="retirement-cards">
-<div><strong>Revenu annuel moyen</strong><p>Vous indiquez directement le revenu annuel moyen retenu. Le nombre d'années de référence peut être 25, 24 ou 23 selon votre situation.</p></div>
-<div><strong>Durée d'assurance</strong><p>Les trimestres saisis servent à la fois à déterminer la proratisation et, avant 67 ans, l'éventuelle décote.</p></div>
+<div><strong>Revenu annuel moyen</strong><p>Vous indiquez directement une estimation du revenu annuel moyen retenu. Le calculateur ne reconstitue pas vos meilleures années.</p></div>
+<div><strong>Durée d'assurance</strong><p>Les trimestres <strong>tous régimes</strong> servent au taux et à la décote ; les trimestres <strong>au régime général</strong> servent à la proratisation de la retraite de base.</p></div>
 <div><strong>Âge de départ</strong><p>Le résultat compare aussi un départ immédiat avec des départs un, deux et trois ans plus tard.</p></div>
 </div>
 <h2>Les limites de cette simulation</h2>
 <p>Cette estimation ne reconstitue pas votre relevé de carrière et ne calcule pas la retraite complémentaire Agirc-Arrco. Elle ne traite pas individuellement les carrières longues, le handicap, l'inaptitude, la pénibilité, les règles particulières de certains régimes, ni l'ensemble des majorations et minima sociaux.</p>
-<p>La surcote est calculée à partir des trimestres que vous indiquez comme effectivement éligibles, après l’âge légal et après avoir atteint la durée d’assurance requise. Les scénarios futurs ajoutent au maximum quatre trimestres de surcote par année dans cette hypothèse simplifiée.</p>
+<p>La surcote est calculée à partir des trimestres que vous indiquez comme effectivement éligibles, après l’âge légal, après avoir atteint la durée d’assurance requise et en continuant à travailler. Les scénarios futurs sont indicatifs : ils supposent quatre trimestres supplémentaires par année et ne reconstituent pas votre relevé de carrière.</p>
 <h2>Particularité des règles 2026 pour certains parents</h2>
-<p>Depuis le 1er septembre 2026, le revenu annuel moyen peut être calculé sur les 24 meilleures années pour certains parents bénéficiant d'une majoration de durée d'assurance pour un enfant, et sur 23 années pour deux enfants ou plus. Le calculateur vous permet de sélectionner le nombre d'années correspondant à votre situation, mais il ne détermine pas votre éligibilité à cette règle.</p>
+<p>Depuis le 1er septembre 2026, le revenu annuel moyen peut être calculé sur les 24 meilleures années pour certains parents bénéficiant d'une majoration de durée d'assurance pour un enfant, et sur 23 années pour deux enfants ou plus. Le calculateur ne détermine pas votre éligibilité à cette règle et vous demande directement le revenu annuel moyen estimé.</p>
 <h2>Sources officielles</h2>
 <p class="source-links"><a href="https://www.lassuranceretraite.fr/portail-info/portail-info/home/actif/montant-retraite/montant-retraite.html" target="_blank" rel="noopener">Assurance retraite — calcul de la retraite de base</a> · <a href="https://www.lassuranceretraite.fr/portail-info/home/actif/vie-personnelle-retraite/parentalite-droits-retraite.html" target="_blank" rel="noopener">Assurance retraite — droits liés aux enfants</a> · <a href="https://www.service-public.fr/particuliers/vosdroits/F21552" target="_blank" rel="noopener">Service-Public.fr — retraite du salarié</a></p>
 <p><small>Estimation indicative : les règles et votre relevé de carrière peuvent modifier le montant réel. Vérifiez votre situation auprès de votre caisse de retraite.</small></p>
@@ -107,7 +107,7 @@ calc:function(){
  }
  if(age<p.legal)return '<div class="result-error"><strong>L’âge de départ est inférieur à l’âge légal estimé.</strong><br>Pour une retraite prenant effet à partir du 1er septembre 2026, votre âge légal est de '+p.legal.toFixed(2).replace(".25"," ans et 3 mois").replace(".5"," ans et 6 mois").replace(".75"," ans et 9 mois")+'.</div>';
  const r=retirementEstimate(s,trTotal,trGeneral,p.req,age,p.legal,children,surcoteTr);
- const scenarios=[1,2,3].map(y=>{const futureTotal=Math.min(400,trTotal+4*y);const futureGeneral=Math.min(400,trGeneral+4*y);const futureSurcote=age+y>=p.legal?surcoteTr+Math.max(0,futureTotal-p.req-surcoteTr):0;return {y,x:retirementEstimate(s,futureTotal,futureGeneral,p.req,age+y,p.legal,children,futureSurcote)};});
+ const scenarios=[1,2,3].map(y=>{const futureTotal=Math.min(400,trTotal+4*y);const futureGeneral=Math.min(400,trGeneral+4*y);const futureAge=age+y;const futureEligible=Math.max(0,Math.min(4*y, futureTotal-p.req));const futureSurcote=age>=p.legal?surcoteTr+futureEligible:Math.max(0,futureTotal-p.req);return {y,x:retirementEstimate(s,futureTotal,futureGeneral,p.req,futureAge,p.legal,children,futureSurcote)};});
  const monthly=r.pension/12;
  const status=r.quartersSurcote>0?"Surcote estimée":"Décote / taux plein selon votre durée";
  return '<div class="result-main"><span class="result-label">Pension de base estimée</span><strong>'+this.euro(r.pension)+' brut/an</strong><div class="result-monthly">≈ '+this.euro(monthly)+' brut/mois</div></div>'+
