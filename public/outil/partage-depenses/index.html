@@ -86,6 +86,15 @@ function parseDecimal(value){
 }
 function parseCents(value){const n=parseDecimal(value);return n!==null&&n>=0?Math.round(n*100):null}
 function parseNumber(value){return parseDecimal(value)}
+function parsePercentage(value){
+ const raw=String(value).trim().replace(/[\\u00a0\\s]/g,"");
+ if(raw==="")return null;
+ const normalized=raw.includes(",")?raw.replace(/\\./g,"").replace(",","."):raw;
+ const decimalPart=normalized.split(".")[1]||"";
+ if(decimalPart.length>2)return null;
+ const n=Number(normalized);
+ return Number.isFinite(n)?n:null;
+}
 function allocateCents(totalCents,shares){
  const exact=shares.map(share=>totalCents*share/100);
  const cents=exact.map(Math.floor);
@@ -102,7 +111,7 @@ function renderPeople(){
  let shares=defaults;
  if(mode()==="custom"&&old.length){
   const weights=Array.from({length:n},(_,i)=>{
-   if(i<old.length){const v=parseNumber(old[i].share);if(v!==null&&v>=0)return v;}
+   if(i<old.length){const v=parsePercentage(old[i].share);if(v!==null&&v>=0)return v;}
    return defaults[i];
   });
   const weightSum=weights.reduce((a,b)=>a+b,0);
@@ -133,8 +142,12 @@ function calculate(){
  let shares;
  if(mode()==="equal") shares=rows.map(()=>100/rows.length);
  else{
-  shares=rows.map(r=>{const raw=r.querySelector(".share").value.trim();const n=parseNumber(raw);return raw!==""&&n!==null&&n>=0?n:null});
-  if(shares.some(v=>v===null)){results.innerHTML="<div class=\"status-note\" role=\"alert\"><strong>Part invalide.</strong><p>Chaque pourcentage doit être un nombre compris entre 0 et 100.</p></div>";return}
+  shares=rows.map(r=>{const raw=r.querySelector(".share").value.trim();const n=parsePercentage(raw);return raw!==""&&n!==null&&n>=0?n:null});
+  if(shares.some(v=>v===null)){
+   const invalidPrecision=rows.some(r=>{const raw=r.querySelector(".share").value.trim();return raw!==""&&parseDecimal(raw)!==null&&parsePercentage(raw)===null});
+   results.innerHTML="<div class=\"status-note\" role=\"alert\"><strong>Part invalide.</strong><p>"+(invalidPrecision?"Chaque pourcentage doit comporter au maximum 2 décimales.":"Chaque pourcentage doit être un nombre compris entre 0 et 100.")+"</p></div>";
+   return
+  }
   if(shares.some(v=>v>100)){results.innerHTML="<div class=\"status-note\" role=\"alert\"><strong>Part invalide.</strong><p>Chaque pourcentage doit être compris entre 0 et 100.</p></div>";return}
   const sum=shares.reduce((a,b)=>a+b,0);
   if(Math.round(sum*100)!==10000){results.innerHTML='<strong>Répartition invalide.</strong><p>Les parts personnalisées doivent totaliser 100 %. Total actuel : '+pct(sum)+' %.</p>';return}
