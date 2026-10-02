@@ -13,59 +13,52 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Vie quotidienne","item":"https://simulateur.site/vie-quotidienne/"},{"@type":"ListItem","position":3,"name":"Partage de dépenses","item":"https://simulateur.site/outil/partage-depenses/"}]}
 </script>
-<style>
-.share-page{max-width:1080px;margin:auto}.share-hero{background:linear-gradient(135deg,#243b53,#172a3a);color:#fff;border-radius:22px;padding:40px 42px 36px;box-shadow:0 22px 60px rgba(23,23,19,.14)}.share-hero .eyebrow{color:#ffb29f}.share-hero h1{max-width:820px;margin:0 0 14px;font-size:clamp(2.5rem,6vw,4.8rem);line-height:.95;letter-spacing:-.07em}.share-hero p{max-width:730px;color:#dce5ec;margin:0;font-size:1.03rem}.share-trust{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}.share-trust span{padding:7px 10px;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:rgba(255,255,255,.06);font-size:.75rem;font-weight:800}.share-box{margin-top:18px;background:var(--card);border:1px solid var(--ink);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}.share-form{padding:30px}.share-form h2,.share-result h2{margin:0 0 6px;font-size:1.35rem;letter-spacing:-.035em}.lead-small{margin:0 0 22px;color:var(--muted);font-size:.9rem}.share-fields{display:grid;grid-template-columns:repeat(2,1fr);gap:0 16px}.share-field{margin-bottom:16px}.share-field label{display:block;font-weight:900;margin-bottom:7px}.share-field input,.share-field select{width:100%;min-height:48px;padding:10px 12px;border:1px solid var(--ink);border-radius:9px;background:#fff;font:inherit}.share-field input:focus,.share-field select:focus{outline:3px solid var(--accent-soft);border-color:var(--accent)}.mode-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 20px}.mode-row label{display:flex;align-items:center;gap:8px;padding:12px;border:1px solid var(--line);border-radius:10px;cursor:pointer;font-weight:800}.mode-row label:has(input:checked){border-color:var(--accent);background:#f0f5f2}.people{display:grid;gap:9px}.person{display:grid;grid-template-columns:minmax(100px,1.2fr) 110px 110px;gap:9px;align-items:center}.person input{width:100%;min-height:44px;padding:9px 10px;border:1px solid var(--line);border-radius:8px;font:inherit}.person-head{display:grid;grid-template-columns:minmax(100px,1.2fr) 110px 110px;gap:9px;color:var(--muted);font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;margin-bottom:5px}.share-note{font-size:.78rem;color:var(--muted);margin:5px 0 17px}.share-button{min-height:52px}.share-result{padding:30px;background:#f7f4ec;border-top:1px solid var(--line)}.result-kpi{display:grid;grid-template-columns:1fr 1fr;gap:10px}.result-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px}.result-card small{display:block;color:var(--muted);font-size:.76rem;margin-bottom:5px}.result-card strong{display:block;font-size:1.25rem}.result-card.primary{background:#243b53;color:#fff;border-color:#243b53}.result-card.primary small{color:#dce5ec}.result-card.primary strong{font-size:1.7rem}.result-table{width:100%;border-collapse:collapse;margin-top:18px;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:.86rem}.result-table th,.result-table td{padding:11px 10px;border-bottom:1px solid var(--line);text-align:right}.result-table th:first-child,.result-table td:first-child{text-align:left}.result-table th{font-size:.72rem;color:var(--muted);text-transform:uppercase}.result-table tr:last-child td{border-bottom:0}.positive{font-weight:900}.negative{font-weight:900}.transfers{margin-top:14px;padding:16px;background:#fff;border:1px solid var(--line);border-radius:12px}.transfers h3{margin:0 0 8px;font-size:1rem}.transfers p{margin:5px 0;font-size:.87rem}.share-content{max-width:850px;margin:48px auto 0}.share-content h2{font-size:clamp(1.7rem,4vw,2.5rem);letter-spacing:-.05em;line-height:1;margin:38px 0 10px}.share-content h2:first-child{margin-top:0}.share-content p{color:#44413b}.share-content li{margin:7px 0}.share-faq{border-top:1px solid var(--ink);margin-top:42px;padding-top:10px}.share-faq details{border-bottom:1px solid var(--line);padding:15px 0}.share-faq summary{cursor:pointer;font-weight:900}.share-source{font-size:.82rem;color:var(--muted);margin-top:28px;padding:16px;border-left:4px solid var(--accent);background:#f0eadf}@media(max-width:720px){.share-hero{padding:32px 22px}.share-hero h1{font-size:3rem}.share-form,.share-result{padding:24px 18px}.share-fields,.result-kpi,.mode-row{grid-template-columns:1fr}.person{grid-template-columns:1fr}.person-head{display:none}}
-</style>
+
 </head>
 <body>
 <header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a href="/conversions/">Conversions</a><a href="/comparateurs/">Comparateurs</a><a href="/a-propos/">À propos</a></nav></div></header>
-<main><div class="share-page">
+<main>
 <div class="breadcrumb"><a href="/vie-quotidienne/">Vie quotidienne</a> · Partage de dépenses</div>
-<section class="share-hero">
+<section class="tool" aria-labelledby="title">
 <div class="eyebrow">VIE QUOTIDIENNE</div>
-<h1>Qui doit combien ? Partagez vos dépenses simplement</h1>
-<p>Répartissez une addition, des vacances, un loyer ou une dépense commune entre plusieurs personnes. Vous pouvez utiliser des parts égales ou personnalisées et tenir compte de ce que chacun a déjà payé.</p>
-<div class="share-trust"><span>✓ Calcul instantané</span><span>✓ Jusqu'à 12 participants</span><span>✓ Parts personnalisées</span><span>✓ Calcul des remboursements</span></div>
-</section>
-<section class="share-box" aria-labelledby="share-title">
-<div class="share-form">
-<h2 id="share-title">Votre dépense</h2>
-<p class="lead-small">Indiquez le montant total, puis renseignez les participants et leurs paiements éventuels.</p>
-<div class="share-fields">
-<div class="share-field"><label for="total">Montant total <span aria-hidden="true">€</span></label><input id="total" type="text" value="120" inputmode="decimal" autocomplete="off"></div>
-<div class="share-field"><label for="count">Nombre de personnes</label><input id="count" type="number" min="2" max="12" step="1" value="3" inputmode="numeric" aria-describedby="count-help"><small id="count-help" class="share-note">De 2 à 12 personnes, nombre entier.</small></div>
+<h1 id="title">Calculateur de partage de dépenses</h1>
+<p class="tool-intro">Répartissez une dépense entre 2 à 12 personnes et calculez automatiquement qui doit payer ou être remboursé.</p>
+<div class="row">
+<div class="field"><label for="total">Montant total (€)</label><input id="total" type="text" value="120" inputmode="decimal" autocomplete="off"></div>
+<div class="field"><label for="count">Nombre de personnes</label><input id="count" type="number" min="2" max="12" step="1" value="3" inputmode="numeric" aria-describedby="count-help"><small id="count-help" class="status-note">De 2 à 12 personnes.</small></div>
 </div>
-<fieldset class="share-field" style="border:0;padding:0;margin:0 0 20px"><legend style="display:block;font-weight:900;margin-bottom:7px">Mode de répartition</legend><div class="mode-row">
+<fieldset class="field" style="border:0;padding:0">
+<legend><strong>Mode de répartition</strong></legend>
+<div class="row">
 <label><input type="radio" name="mode" value="equal" checked> Parts égales</label>
 <label><input type="radio" name="mode" value="custom"> Parts personnalisées</label>
-</div></fieldset>
-<div class="person-head"><span>Participant</span><span>Part (%)</span><span>Déjà payé (€)</span></div>
-<div class="people" id="people"></div>
-<p class="share-note">Les paiements déjà effectués servent à calculer les remboursements. Lorsque la dépense est entièrement couverte, une personne ayant avancé plus que sa part peut être remboursée par les autres participants.</p>
-<button class="button-main share-button" id="calculate" type="button">Recalculer la répartition</button>
 </div>
-<div class="share-result" id="results" aria-live="polite"></div>
+</fieldset>
+<div class="field">
+<label>Participants</label>
+<p class="status-note">Indiquez ce que chacun a déjà payé. En mode personnalisé, les parts doivent totaliser 100 %.</p>
+<div class="calculator-people-head"><span>Participant</span><span>Part (%)</span><span>Déjà payé (€)</span></div>
+<div class="calculator-people" id="people"></div>
+</div>
+<div class="calculator-data"><strong>Vos données restent sur votre appareil</strong><p>Les montants et noms saisis servent uniquement au calcul dans votre navigateur. Aucune inscription n'est nécessaire.</p></div>
+<div id="results" class="result" aria-live="polite"></div>
 </section>
-<section class="share-content">
+<section class="content-section">
 <h2>Comment fonctionne le partage de dépenses ?</h2>
-<p>Le calculateur détermine d'abord la part théorique de chaque participant. En parts égales, le montant est simplement divisé par le nombre de personnes. En parts personnalisées, chaque participant reçoit la proportion que vous avez indiquée.</p>
-<p>Si certains participants ont déjà avancé de l'argent, le calculateur compare leur paiement à leur part finale. Lorsque le montant total est entièrement couvert, il indique alors qui doit encore payer et qui doit être remboursé, ce qui permet de simplifier le règlement de la dépense.</p>
-<h2>Exemple : une dépense de 120 € à trois</h2>
-<p>Avec trois personnes et des parts égales, chacun doit supporter 40 €. Si Alice a payé 80 €, Bob 20 € et Charlie 20 €, Alice a avancé 40 € de trop : Bob et Charlie doivent chacun lui verser 20 €.</p>
-<h2>À quoi sert ce calculateur ?</h2>
-<ul><li>Partager une addition de restaurant entre amis.</li><li>Répartir les dépenses d'un week-end ou de vacances.</li><li>Calculer les charges communes d'un logement.</li><li>Répartir une dépense selon des proportions différentes.</li><li>Déterminer les remboursements après plusieurs avances.</li></ul>
-<div class="share-faq">
+<p>Le calculateur détermine la part de chaque participant, puis compare cette part au montant déjà payé. Il indique ensuite les paiements ou remboursements nécessaires pour équilibrer la dépense.</p>
+<h2>Exemple</h2>
+<p>Pour une dépense de 120 € à trois, chacun doit supporter 40 €. Si Alice a payé 80 €, Bob 20 € et Charlie 20 €, Bob et Charlie doivent chacun verser 20 € à Alice.</p>
+<div class="calculator-faq">
 <h2>Questions fréquentes</h2>
-<details><summary>Comment partager une dépense à parts égales ?</summary><p>Indiquez le montant total et le nombre de participants, puis sélectionnez « Parts égales ». Chaque personne supportera la même fraction de la dépense.</p></details>
-<details><summary>Peut-on répartir une dépense selon des pourcentages différents ?</summary><p>Oui. Le mode « Parts personnalisées » permet d'attribuer une part différente à chaque participant. Les pourcentages doivent totaliser 100 %.</p></details>
-<details><summary>Comment savoir qui doit rembourser qui ?</summary><p>Renseignez ce que chaque personne a déjà payé. Une fois la dépense totalement couverte, le calculateur compare chaque paiement à la part réellement due et propose les transferts nécessaires.</p></details>
-<details><summary>Peut-on partager une dépense entre plus de trois personnes ?</summary><p>Oui. Le calculateur accepte jusqu'à 12 participants et adapte automatiquement le formulaire au nombre choisi.</p></details>
-<details><summary>Quelle est la différence entre « part » et « montant déjà payé » ?</summary><p>La part correspond à ce que chacun devrait finalement supporter. Le montant déjà payé correspond à l'argent réellement avancé. La différence entre les deux détermine le remboursement ou le paiement restant.</p></details>
-<div class="share-source"><strong>Méthode de calcul</strong><br>Répartition arithmétique du montant saisi. Lorsque la dépense est totalement couverte, les remboursements sont déterminés à partir de la différence entre la part théorique de chacun et son paiement déjà effectué. Le calculateur ne nécessite aucune donnée personnelle ni inscription.</div>
+<details><summary>Comment partager une dépense à parts égales ?</summary><p>Indiquez le montant et le nombre de personnes, puis laissez le mode « Parts égales ». Le montant est réparti équitablement, au centime près.</p></details>
+<details><summary>Peut-on utiliser des pourcentages différents ?</summary><p>Oui. Sélectionnez « Parts personnalisées » et indiquez la part de chaque participant. Le total doit être exactement de 100 %.</p></details>
+<details><summary>Comment savoir qui doit rembourser qui ?</summary><p>Renseignez les montants déjà payés. Le calculateur compare ensuite chaque paiement à la part due et propose les transferts nécessaires.</p></details>
+<details><summary>Que se passe-t-il si la dépense n'est pas encore entièrement payée ?</summary><p>Le calculateur distingue les remboursements entre participants du montant qui reste à régler auprès du bénéficiaire de la dépense.</p></details>
+<details><summary>Combien de personnes peut-on ajouter ?</summary><p>Le calculateur accepte de 2 à 12 participants.</p></details>
 </div>
+<div class="calculator-data"><strong>Méthode de calcul</strong><p>Les parts sont converties en centimes afin de limiter les erreurs d'arrondi. Les remboursements sont calculés à partir de la différence entre la part due et le montant déjà payé.</p></div>
 </section>
-</div></main>
-<footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cgu/">CGU</a></div></div></footer>
+</main><footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cgu/">CGU</a></div></div></footer>
 <script>
 (function(){
 const euroCents=c=> (c/100).toLocaleString("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:2});
