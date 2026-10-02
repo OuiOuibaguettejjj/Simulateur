@@ -154,3 +154,18 @@ footer{border-top:1px solid var(--ink);padding:30px 0;background:#eee9df}
 .scenario{background:#fff}.scenario-title{color:var(--accent)}.scenario-item span{display:block;margin-top:3px;color:var(--muted);font-size:.78rem}
 .retirement-content{max-width:920px}.retirement-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0 40px}.retirement-cards>div{padding:20px;border:1px solid var(--ink);border-radius:12px;background:var(--card);box-shadow:0 2px 0 rgba(23,23,19,.08)}.retirement-cards strong{font-size:1rem}.retirement-cards p{margin:7px 0 0;color:var(--muted);font-size:.9rem}
 @media(max-width:650px){.retirement-hero{padding:32px 22px 28px}.retirement-hero h1{font-size:3rem}.retirement-hero:after{right:-5px;font-size:9rem}.retirement-form{padding:27px 20px 32px}.retirement-section-title{display:block}.retirement-section-title span{display:block;margin-top:4px}.retirement-metrics,.retirement-cards,.retirement-takeaway .takeaway-grid{grid-template-columns:1fr}}
+
+/* Retraite — informations et FAQ */
+.retirement-info-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:12px;margin:34px 0 42px}
+.retirement-note{padding:20px 22px;border:1px solid var(--accent2);border-radius:12px;background:#edf3ef}
+.retirement-note strong{display:block;font-size:1rem}
+.retirement-note p{margin:6px 0 0;color:#4f554f;font-size:.9rem;line-height:1.5}
+.retirement-note-light{border-color:var(--line);background:var(--card)}
+.retirement-faq{border-top:1px solid var(--ink);margin-top:18px}
+.retirement-faq details{border-bottom:1px solid var(--line)}
+.retirement-faq summary{cursor:pointer;list-style:none;padding:17px 38px 17px 0;font-weight:900;position:relative}
+.retirement-faq summary::-webkit-details-marker{display:none}
+.retirement-faq summary:after{content:"+";position:absolute;right:4px;top:14px;font-size:1.25rem;font-weight:500}
+.retirement-faq details[open] summary:after{content:"−"}
+.retirement-faq p{max-width:760px;margin:0 0 17px;color:var(--muted);font-size:.92rem;padding-right:30px}
+@media(max-width:650px){.retirement-info-grid{grid-template-columns:1fr;margin-bottom:34px}.retirement-note{padding:18px}}

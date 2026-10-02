@@ -14,6 +14,9 @@ for (const obsolete of ["surcoteParentaleTr", "parentalChildQuarter", "parentalF
 
 assert(!html.includes("const scenarios="), "future scenarios should not be part of the simplified calculator");
 assert(html.includes("p.year<1955||p.year>2100"), "birth year must stay within the stated simulation scope");
+assert(html.includes("Questions fréquentes"), "FAQ must be present");
+assert((html.match(/<details>/g)||[]).length === 6, "FAQ must stay concise");
+assert(html.includes("À savoir"), "key data note must be present");
 const intro = (html.match(/<div class="content-intro">([\s\S]*?)<\/div>/i) || [,""])[1];
 assert(!/surcote/i.test(intro), "intro must not promise a surcote calculation");
 assert(html.includes('Date de départ envisagée (1er du mois)'), "departure date must be explicitly month-based");
