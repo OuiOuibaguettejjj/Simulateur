@@ -356,7 +356,7 @@ jobs:
           NODE
 
       - name: Run deterministic calculator tests
-        run: node tests/rsa.test.js
+        run: node tests/rsa.test.js && node tests/retraite.test.js
 
       - name: Smoke-test every calculator in Chromium
         run: |
