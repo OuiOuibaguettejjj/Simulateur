@@ -68,7 +68,8 @@ function addMonths(date,months){
 function paramsForBirth(value){
   const d=parseDate(value);
   if(!d) return null;
-  const y=d.getFullYear(),m=d.getMonth()+1;\n  if(y<1955||y>2100) return null;
+  const y=d.getFullYear(),m=d.getMonth()+1;
+  if(y<1955||y>2100) return null;
   let legalMonths,req;
   if(y<=1957){legalMonths=62*12;req=166}
   else if(y<=1960){legalMonths=62*12;req=167}
