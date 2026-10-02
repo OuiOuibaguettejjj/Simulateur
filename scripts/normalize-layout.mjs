@@ -34,12 +34,23 @@ function walk(dir, out = []) {
   return out;
 }
 
-function normalize(html) {
+function normalize(html, isCalculator = false) {
   const warnings = [];
   let out = html;
 
   const body = /<body\b[^>]*>/i.exec(out);
   if (!body) return { html, warnings: ["pas de balise <body>, page ignorée"] };
+
+  // Inject the shared keyboard mechanism on every calculator/conversion page.
+  // This also covers future pages automatically through the common layout step.
+  if (isCalculator && !/<script[^>]+src=["']\/enter-calcul\.js["'][^>]*>/i.test(out)) {
+    const headClose = /<\/head>/i.exec(out);
+    if (headClose) {
+      out = out.slice(0, headClose.index) + '<script src="/enter-calcul.js" defer></script>' + out.slice(headClose.index);
+    } else {
+      warnings.push("balise </head> absente, mécanisme Entrée non injecté");
+    }
+  }
 
   // En-tête
   const headerCount = (out.match(/<header\b/gi) || []).length;
@@ -81,7 +92,9 @@ let warned = 0;
 const files = walk(root);
 for (const file of files) {
   const old = fs.readFileSync(file, "utf8");
-  const { html, warnings } = normalize(old);
+  const relative = path.relative(root, file).replaceAll(path.sep, "/");
+  const isCalculator = relative.startsWith("outil/") || relative.startsWith("conversion/");
+  const { html, warnings } = normalize(old, isCalculator);
   for (const w of warnings) {
     warned++;
     console.warn("normalize-layout: " + path.relative(process.cwd(), file) + " : " + w);

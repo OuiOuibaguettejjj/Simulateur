@@ -1,3 +1,8 @@
+## 2026-10-02 — Mécanisme Entrée commun aux calculateurs
+- Généralisation du raccourci Entrée via le socle partagé enter-calcul.js : détection automatique du bouton principal du calculateur courant, sans dépendre d'une classe de conteneur spécifique.
+- Injection automatique de enter-calcul.js par le normaliseur de layout sur toutes les pages /outil/ et /conversion/, y compris les futurs calculateurs ajoutés au dépôt.
+- Aucun changement du moteur de calcul, des routes, du Worker, de Cloudflare ou des dépendances externes.
+
 ## 2026-10-02 — Uniformisation du calcul au clavier
 - Rattachement du calculateur Partage de dépenses au mécanisme commun `enter-calcul.js` afin que la touche Entrée déclenche le calcul comme sur les calculateurs utilisant le socle commun.
 - Aucun changement du moteur de calcul, du Worker, de Cloudflare ou des dépendances externes.
