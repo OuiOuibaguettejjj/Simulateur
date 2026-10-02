@@ -29,3 +29,6 @@ jobs:
 
       - name: Test calculateur RSA
         run: node tests/rsa.test.js
+
+      - name: Test calculateur retraite
+        run: node tests/retraite.test.js
