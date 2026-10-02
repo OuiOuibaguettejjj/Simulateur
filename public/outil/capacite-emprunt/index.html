@@ -179,8 +179,12 @@
   }
 
   function valid(d){
-    return d.revenus>0 && d.charges>=0 && d.rate>=0 && d.years>=1 && d.years<=30 &&
-      d.insurance>=0 && d.apport>=0;
+    return Number.isFinite(d.revenus) && Number.isFinite(d.charges) &&
+      Number.isFinite(d.rate) && Number.isFinite(d.years) &&
+      Number.isFinite(d.insurance) && Number.isFinite(d.apport) &&
+      d.revenus>0 && d.charges>=0 && d.rate>=0 && d.rate<=20 &&
+      d.years>=1 && d.years<=30 && d.insurance>=0 && d.insurance<=5 &&
+      d.apport>=0;
   }
 
   function factor(rate,months){
