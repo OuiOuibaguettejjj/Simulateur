@@ -116,8 +116,8 @@ function renderPeople(){
  for(let i=0;i<n;i++){
   const d=document.createElement("div");d.className="person";
   const name=document.createElement("input");name.className="pname";name.type="text";name.setAttribute("aria-label","Nom du participant "+(i+1));name.value=old[i]?.name ?? ("Personne "+(i+1));
-  const share=document.createElement("input");share.className="share";share.type="number";share.min="0";share.max="100";share.step="0.01";share.setAttribute("aria-label","Part du participant "+(i+1)+" en pourcentage");share.value=shares[i];
-  const paid=document.createElement("input");paid.className="paid";paid.type="number";paid.min="0";paid.step="0.01";paid.setAttribute("aria-label","Montant déjà payé par le participant "+(i+1));paid.value=old[i]?.paid ?? "0";
+  const share=document.createElement("input");share.className="share";share.type="text";share.inputMode="decimal";share.autocomplete="off";share.setAttribute("aria-label","Part du participant "+(i+1)+" en pourcentage");share.value=shares[i];
+  const paid=document.createElement("input");paid.className="paid";paid.type="text";paid.inputMode="decimal";paid.autocomplete="off";paid.setAttribute("aria-label","Montant déjà payé par le participant "+(i+1));paid.value=old[i]?.paid ?? "0";
   d.append(name,share,paid);people.appendChild(d);
  }
  updateMode();calculate();
