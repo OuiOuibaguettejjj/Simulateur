@@ -138,3 +138,19 @@ footer{border-top:1px solid var(--ink);padding:30px 0;background:#eee9df}
  .navlinks a{padding:7px 8px;white-space:nowrap}
  .navlinks .nav-extra{display:none}
 }
+
+/* Retraite — calculateur premium */
+.retirement-shell{max-width:920px;margin:auto;border:1px solid var(--ink);border-radius:24px;overflow:hidden;background:var(--card);box-shadow:0 24px 70px rgba(23,23,19,.12)}
+.retirement-hero{padding:42px 46px 34px;background:linear-gradient(135deg,#17483d,#102f2a);color:#fff;position:relative;overflow:hidden}
+.retirement-hero:after{content:"€";position:absolute;right:35px;top:-60px;font-size:15rem;font-weight:950;line-height:1;color:rgba(255,255,255,.05);transform:rotate(8deg)}
+.retirement-hero .eyebrow{color:#ffb29f}.retirement-hero h1{position:relative;z-index:1;font-size:clamp(2.8rem,6vw,5rem);line-height:.93;letter-spacing:-.075em;margin:0 0 14px}.retirement-hero p{position:relative;z-index:1;color:#dbe6df;max-width:680px;font-size:1.06rem;margin:0}
+.retirement-badges{position:relative;z-index:1;display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}.retirement-badges span{font-size:.75rem;font-weight:800;padding:7px 10px;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:rgba(255,255,255,.07)}
+.retirement-form{padding:36px 46px 42px}.retirement-section-title{display:flex;justify-content:space-between;gap:15px;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:11px;margin-bottom:20px}.retirement-section-title strong{font-size:1.15rem}.retirement-section-title span{font-size:.78rem;color:var(--muted)}
+.retirement-result{background:linear-gradient(145deg,#f4f7f4,#edf3ef);border-color:#b9c9bf;padding:24px}.result-label{display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:.13em;font-weight:950;color:var(--accent2);margin-bottom:4px}.result-monthly{font-size:1.08rem;margin-top:4px}.result-error{line-height:1.5}
+.retirement-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}.retirement-metrics>div{padding:12px;border:1px solid var(--line);border-radius:9px;background:#fff}.retirement-metrics span{display:block;color:var(--muted);font-size:.76rem}.retirement-metrics strong{display:block;margin-top:2px}
+.retirement-takeaway{border-color:var(--accent2);background:#edf3ef}.retirement-takeaway .takeaway-grid{grid-template-columns:repeat(3,1fr)}
+.retirement-takeaway .takeaway-item{box-shadow:0 1px 2px rgba(23,23,19,.05)}
+.retirement-takeaway .takeaway-title{color:var(--accent2)}
+.scenario{background:#fff}.scenario-title{color:var(--accent)}.scenario-item span{display:block;margin-top:3px;color:var(--muted);font-size:.78rem}
+.retirement-content{max-width:920px}.retirement-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0 40px}.retirement-cards>div{padding:20px;border:1px solid var(--ink);border-radius:12px;background:var(--card);box-shadow:0 2px 0 rgba(23,23,19,.08)}.retirement-cards strong{font-size:1rem}.retirement-cards p{margin:7px 0 0;color:var(--muted);font-size:.9rem}
+@media(max-width:650px){.retirement-hero{padding:32px 22px 28px}.retirement-hero h1{font-size:3rem}.retirement-hero:after{right:-5px;font-size:9rem}.retirement-form{padding:27px 20px 32px}.retirement-section-title{display:block}.retirement-section-title span{display:block;margin-top:4px}.retirement-metrics,.retirement-cards,.retirement-takeaway .takeaway-grid{grid-template-columns:1fr}}
