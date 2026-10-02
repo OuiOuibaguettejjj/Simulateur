@@ -65,7 +65,7 @@ assert.strictEqual(params("2101-01-01"), null, "births after 2100 must be outsid
 
 const birth = new Date("1964-01-16T12:00:00");
 const departure = new Date("2027-01-01T12:00:00");
-const r = estimate(160, 160, 170, 170, departure, birth);
+const r = estimate(30000, 160, 170, 170, departure, birth);
 assert.strictEqual(r.missing, 10, "decote must use the smaller missing-quarter count");
 assert.strictEqual(r.rate, 43.75, "decote rate regression");
 assert(Math.abs(r.pension - (30000 * 43.75 / 100 * (160 / 170))) < 1e-9, "full pension formula regression");
