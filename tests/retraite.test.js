@@ -58,7 +58,7 @@ for (const [birth, legalMonths, req] of cases) {
 }
 
 assert.strictEqual(params("1954-12-31"), null, "births before 1955 must be outside scope");
-assert.strictEqual(params("2101-01-01").year, 2101, "params helper may parse future dates before final UI scope validation");
+assert.strictEqual(params("2101-01-01"), null, "births after 2100 must be outside scope");
 
 const birth = new Date("1964-01-16T12:00:00");
 const departure = new Date("2027-01-01T12:00:00");
