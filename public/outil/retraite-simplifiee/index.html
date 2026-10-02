@@ -49,12 +49,6 @@ date:(i,l)=>'<div class="field"><label for="'+i+'">'+l+'</label><input id="'+i+'
 select:(i,l,o)=>'<div class="field"><label for="'+i+'">'+l+'</label><select id="'+i+'">'+o.map(x=>'<option value="'+x[0]+'">'+x[1]+'</option>').join('')+'</select></div>',
 row:a=>'<div class="row">'+a.join('')+'</div>'
 };
-const RETRAITE_2026=[
- [1958,1960,62,167],[1961,1961.66,62,168],[1961.67,1961.99,62.25,169],
- [1962,1962,62.5,169],[1963,1963,62.75,170],[1964,1964,62.75,170],
- [1965,1965.24,62.75,170],[1965.25,1965.99,63,171],[1966,1966,63.25,172],
- [1967,1967,63.5,172],[1968,1968,63.75,172],[1969,2100,64,172]
-];
 function paramsForBirth(value){
  const d=new Date(value+"T12:00:00");
  if(!Number.isFinite(d.getTime())) return null;
@@ -130,5 +124,4 @@ source:"Le calcul utilise la date de naissance pour déterminer l’âge légal 
 };
 function formatAge(v){const y=Math.floor(v),m=Math.round((v-y)*12);return m?y+" ans et "+m+" mois":y+" ans";}
 window.addEventListener("DOMContentLoaded",()=>Simulateurs.render());
-</script>
 </script></body></html>
