@@ -1,1 +1,105 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Simulateur retraite simplifié 2026 | Simulateur</title><meta name="description" content="Estimez la retraite de base d'un salarié du privé à partir du salaire moyen et des trimestres."><link rel="canonical" href="https://simulateur.site/outil/retraite-simplifiee/"><link rel="stylesheet" href="/styles.css"><script src="/simulateurs.js" defer></script><script src="/enter-calcul.js" defer></script></head><body><header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a href="/conversions/">Conversions</a><a href="/comparateurs/">Comparateurs</a><a href="/a-propos/">À propos</a></nav></div></header><main><div class="wrap"><div class="breadcrumb"><a href="/calculateurs/">Calculateurs</a> · Simulateur retraite simplifié 2026</div><div class="tool"><div class="eyebrow" id="ey"></div><h1 id="title"></h1><p class="tool-intro" id="intro"></p><div id="fields"></div><button class="button-main" onclick="Simulateurs.calc()">Calculer</button><div class="result" id="result">Saisissez vos données puis lancez le calcul.</div><div class="formula"><strong>Méthode et sources</strong><p id="source"></p></div></div></div><section class="content-section"><h2>Une estimation de la retraite de base</h2><p>Pour un salarié du privé, la pension de retraite de base repose notamment sur le salaire annuel moyen, le taux de liquidation et le nombre de trimestres retenus par rapport à la durée requise.</p><p>Le taux plein de la retraite de base peut atteindre <strong>50 %</strong>. Une décote peut réduire ce taux lorsque les conditions du taux plein ne sont pas réunies et que le départ intervient avant l'âge d'annulation de la décote.</p><h2>Ce que ce calcul ne comprend pas</h2><p>Cette version ne reconstitue pas une carrière complète et n'intègre pas la retraite complémentaire Agirc-Arrco, les majorations, les périodes assimilées ou les dispositifs de départ anticipé. Elle sert donc à obtenir un ordre de grandeur, pas une estimation personnalisée de retraite.</p><p><a href="https://www.service-public.fr/particuliers/vosdroits/F21552" target="_blank" rel="noopener">Source officielle : Service-Public — retraite du salarié du secteur privé</a></p></section></main><footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cgu/">CGU</a></div></div></footer><script>const F={text:(i,l,p="")=>'<div class="field"><label for="'+i+'">'+l+'</label><input id="'+i+'" type="number" min="0" step="any" placeholder="'+p+'"></div>',select:(i,l,o)=>'<div class="field"><label for="'+i+'">'+l+'</label><select id="'+i+'">'+o.map(x=>'<option value="'+x[0]+'">'+x[1]+'</option>').join('')+'</select></div>',row:a=>'<div class="row">'+a.join('')+'</div>'};window.TOOL={ey:"RETRAITE",title:"Simulateur retraite simplifié 2026",intro:"Estimez la retraite de base d'un salarié du privé à partir du salaire moyen et des trimestres.",fields:function(){return F.row([F.text("sam","Salaire annuel moyen 25 meilleures années (€)","30000"),F.text("tr","Trimestres validés","170"),F.text("req","Trimestres requis","170"),F.text("age","Âge de départ","64")])},calc:function(){const s=+this.$('sam').value||0,tr=Math.max(0,+this.$('tr').value||0),req=Math.max(1,+this.$('req').value||0),age=+this.$('age').value||0;if(s<=0||age<=0)return 'Renseignez des valeurs valides.';const miss=Math.max(0,Math.min(20,Math.ceil(Math.min(req-tr,Math.max(0,67-age)*4)))),rate=age>=67?50:Math.max(37.5,50-miss*.625),p=s*rate/100*Math.min(tr/req,1);return '<strong>'+this.euro(p)+' brut/an</strong><br>≈ '+this.euro(p/12)+' brut/mois<br><br>Taux de liquidation : '+rate.toFixed(3)+' %<br>Ratio de trimestres : '+Math.min(tr,req)+' / '+req+'<p class="small">Retraite de base uniquement. Agirc-Arrco, majorations et dispositifs de départ anticipé ne sont pas intégrés.</p>'},source:"Service-Public : retraite de base = salaire annuel moyen des 25 meilleures années × taux × trimestres validés/ durée requise. Le taux maximal est 50 % ; avant 67 ans, la décote est de 0,625 point par trimestre manquant, avec un maximum de 20 trimestres."};window.addEventListener("DOMContentLoaded",()=>Simulateurs.render());</script></body></html>
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Simulateur retraite 2026 : pension de base, décote et surcote | Simulateur</title>
+<meta name="description" content="Estimez votre retraite de base en 2026 : pension brute, taux, décote, surcote et comparaison de plusieurs âges de départ.">
+<link rel="canonical" href="https://simulateur.site/outil/retraite-simplifiee/">
+<link rel="stylesheet" href="/styles.css">
+<script src="/simulateurs.js" defer></script><script src="/enter-calcul.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","@id":"https://simulateur.site/outil/retraite-simplifiee/#application","name":"Simulateur retraite 2026","url":"https://simulateur.site/outil/retraite-simplifiee/","applicationCategory":"Calculator","operatingSystem":"Web","inLanguage":"fr-FR","description":"Estimation indicative de la retraite de base d'un salarié du privé, avec prise en compte de la décote, de la surcote et de plusieurs scénarios d'âge de départ."}</script>
+</head>
+<body><header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header>
+<main><div class="wrap">
+<div class="breadcrumb"><a href="/calculateurs/">Calculateurs</a> · Retraite</div>
+<div class="retirement-shell">
+<div class="retirement-hero"><div class="eyebrow">RETRAITE · 2026</div><h1 id="title">Simulateur retraite</h1><p id="intro">Estimez votre pension de base et visualisez l'effet de votre âge de départ, de la décote ou de la surcote.</p><div class="retirement-badges"><span>Retraite de base</span><span>Décote &amp; surcote</span><span>3 scénarios</span></div></div>
+<div class="retirement-form">
+<div class="retirement-section-title"><strong>1. Votre carrière</strong><span>Les données doivent correspondre au régime général</span></div>
+<div id="fields"></div>
+<button class="button-main" onclick="Simulateurs.calc()">Calculer ma retraite</button>
+<p class="privacy-note">Calcul effectué dans votre navigateur · aucune donnée personnelle n'est envoyée.</p>
+<div class="result retirement-result" id="result">Renseignez vos données puis lancez le calcul.</div>
+<div class="formula"><strong>Méthode et sources</strong><p id="source"></p></div>
+</div></div></div>
+
+<section class="content-section retirement-content">
+<div class="content-intro"><h2>Comprendre votre estimation</h2><p>Le calculateur estime uniquement la retraite de base. Il distingue le taux de liquidation, la proratisation selon la durée d'assurance et les effets simplifiés d'une décote ou d'une surcote.</p></div>
+<h2>Ce que le calculateur prend en compte</h2>
+<div class="retirement-cards">
+<div><strong>Revenu annuel moyen</strong><p>Vous indiquez directement le revenu annuel moyen retenu. Le nombre d'années de référence peut être 25, 24 ou 23 selon votre situation.</p></div>
+<div><strong>Durée d'assurance</strong><p>Les trimestres saisis servent à la fois à déterminer la proratisation et, avant 67 ans, l'éventuelle décote.</p></div>
+<div><strong>Âge de départ</strong><p>Le résultat compare aussi un départ immédiat avec des départs un, deux et trois ans plus tard.</p></div>
+</div>
+<h2>Les limites de cette simulation</h2>
+<p>Cette estimation ne reconstitue pas votre relevé de carrière et ne calcule pas la retraite complémentaire Agirc-Arrco. Elle ne traite pas individuellement les carrières longues, le handicap, l'inaptitude, la pénibilité, les règles particulières de certains régimes, ni l'ensemble des majorations et minima sociaux.</p>
+<p>La surcote présentée dans les scénarios est une estimation simplifiée : elle suppose quatre trimestres supplémentaires par année travaillée. Les trimestres réellement retenus et les conditions de départ doivent être vérifiés sur votre relevé de carrière.</p>
+<h2>Particularité des règles 2026 pour certains parents</h2>
+<p>Depuis le 1er septembre 2026, le revenu annuel moyen peut être calculé sur les 24 meilleures années pour certains parents bénéficiant d'une majoration de durée d'assurance pour un enfant, et sur 23 années pour deux enfants ou plus. Le calculateur vous permet de sélectionner le nombre d'années correspondant à votre situation, mais il ne détermine pas votre éligibilité à cette règle.</p>
+<h2>Sources officielles</h2>
+<p class="source-links"><a href="https://www.lassuranceretraite.fr/portail-info/portail-info/home/actif/montant-retraite/montant-retraite.html" target="_blank" rel="noopener">Assurance retraite — calcul de la retraite de base</a> · <a href="https://www.lassuranceretraite.fr/portail-info/home/actif/vie-personnelle-retraite/parentalite-droits-retraite.html" target="_blank" rel="noopener">Assurance retraite — droits liés aux enfants</a> · <a href="https://www.service-public.fr/particuliers/vosdroits/F21552" target="_blank" rel="noopener">Service-Public.fr — retraite du salarié</a></p>
+<p><small>Estimation indicative : les règles et votre relevé de carrière peuvent modifier le montant réel. Vérifiez votre situation auprès de votre caisse de retraite.</small></p>
+</section></main>
+<footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer>
+
+<script>
+const F={
+text:(i,l,p="",step="1",max="")=>'<div class="field"><label for="'+i+'">'+l+'</label><input id="'+i+'" type="number" min="0" step="'+step+'"'+(max?' max="'+max+'"':'')+' placeholder="'+p+'"></div>',
+select:(i,l,o)=>'<div class="field"><label for="'+i+'">'+l+'</label><select id="'+i+'">'+o.map(x=>'<option value="'+x[0]+'">'+x[1]+'</option>').join('')+'</select></div>',
+row:a=>'<div class="row">'+a.join('')+'</div>'
+};
+function retirementEstimate(s,tr,req,age,legal,children){
+ const missing=Math.max(0,Math.min(20,Math.ceil(Math.min(req-tr,Math.max(0,67-age)*4))));
+ const decote=age>=67?0:missing*.625;
+ const rate=Math.max(37.5,50-decote);
+ const prorata=Math.min(tr/req,1);
+ const quartersSurcote=(age>=legal&&tr>req)?Math.floor(tr-req):0;
+ const surcote=quartersSurcote*1.25;
+ const base=s*rate/100*prorata;
+ const pension=base*(1+surcote/100)*(children>=3?1.10:1);
+ return {pension,base,rate,missing,decote,prorata,quartersSurcote,surcote};
+}
+window.TOOL={
+ey:"RETRAITE · 2026",
+title:"Simulateur retraite 2026",
+intro:"Estimez votre pension de base, sa décote ou sa surcote, puis comparez plusieurs âges de départ.",
+fields:function(){
+ return F.row([
+  F.text("sam","Revenu annuel moyen (€)","30000","100000"),
+  F.select("annees","Années retenues pour le revenu moyen",[["25","25 meilleures années"],["24","24 meilleures années"],["23","23 meilleures années"]])
+ ])+
+ F.row([
+  F.text("tr","Trimestres d'assurance au régime général","170","1"),
+  F.text("req","Trimestres requis pour le taux plein","170","1")
+ ])+
+ F.row([
+  F.text("legal","Âge légal de départ (années)","64","0.25","70"),
+  F.text("age","Âge de départ envisagé (années)","64","0.25","75")
+ ])+
+ F.select("children","Nombre d'enfants pour la majoration de 10 % à partir de 3 enfants",[["0","0 à 2 enfants"],["3","3 enfants ou plus"]]);
+},
+calc:function(){
+ const s=Number(this.$("sam").value),tr=Number(this.$("tr").value),req=Number(this.$("req").value),legal=Number(this.$("legal").value),age=Number(this.$("age").value),children=Number(this.$("children").value),annees=Number(this.$("annees").value);
+ if(!Number.isFinite(s)||s<=0||s>1000000||!Number.isInteger(tr)||tr<0||tr>400||!Number.isInteger(req)||req<1||req>200||!Number.isFinite(legal)||legal<50||legal>70||!Number.isFinite(age)||age<50||age>75||!Number.isFinite(children)||!Number.isFinite(annees)||tr>400){
+   return '<div class="result-error"><strong>Valeurs invalides.</strong><br>Vérifiez le revenu, les trimestres et les âges saisis.</div>';
+ }
+ if(age<legal)return '<div class="result-error"><strong>L’âge de départ est inférieur à l’âge légal saisi.</strong><br>Pour cette simulation générale, augmentez l’âge de départ ou vérifiez votre âge légal.</div>';
+ const r=retirementEstimate(s,tr,req,age,legal,children);
+ const scenarios=[1,2,3].map(y=>{const x=retirementEstimate(s,tr+4*y,req,age+y,legal,children);return {y,x};});
+ const monthly=r.pension/12;
+ const status=r.quartersSurcote>0?"Surcote estimée":"Décote / taux plein selon votre durée";
+ const ratio=Math.min(tr,req);
+ return '<div class="result-main"><span class="result-label">Pension de base estimée</span><strong>'+this.euro(r.pension)+' brut/an</strong><div class="result-monthly">≈ '+this.euro(monthly)+' brut/mois</div></div>'+
+ '<div class="takeaway retirement-takeaway"><div class="takeaway-title">'+status+'</div><div class="takeaway-grid">'+
+ '<div class="takeaway-item"><small>Taux de liquidation</small><strong>'+r.rate.toFixed(3)+' %</strong></div>'+
+ '<div class="takeaway-item"><small>Durée prise en compte</small><strong>'+ratio+' / '+req+' trimestres</strong></div>'+
+ '<div class="takeaway-item"><small>Effet décote</small><strong>'+ (r.decote>0?"−"+r.decote.toFixed(3)+" point":"Aucune") +'</strong></div>'+
+ '</div></div>'+
+ '<div class="retirement-metrics"><div><span>Proratisation</span><strong>'+ (r.prorata*100).toFixed(1)+' %</strong></div><div><span>Surcote</span><strong>'+ (r.surcote>0?"+"+r.surcote.toFixed(2)+" %":"Aucune") +'</strong></div><div><span>Années retenues</span><strong>'+annees+'</strong></div></div>'+
+ '<div class="scenario"><div class="scenario-title">Si vous repoussez votre départ</div><div class="scenario-grid">'+scenarios.map(z=>'<div class="scenario-item"><small>Départ dans '+z.y+' an'+(z.y>1?'s':'')+'</small><strong>'+this.euro(z.x.pension/12)+' / mois</strong><span>'+ (z.x.surcote>0?"Surcote +"+z.x.surcote.toFixed(2)+" %":"Taux "+z.x.rate.toFixed(3)+" %") +'</span></div>').join('')+'</div></div>'+
+ '<p class="small">Retraite de base uniquement. Le montant réel dépend de votre carrière, des règles applicables à votre génération et des droits effectivement retenus par votre caisse.</p>';
+},
+source:"Principe officiel : revenu annuel moyen × taux de la pension × durée d’assurance au régime général / durée requise, avec un taux maximal de 50 %. La décote est limitée à 20 trimestres. Les scénarios de surcote sont volontairement simplifiés."
+};
+window.addEventListener("DOMContentLoaded",()=>Simulateurs.render());
+</script></body></html>
