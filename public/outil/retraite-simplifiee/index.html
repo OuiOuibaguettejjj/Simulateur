@@ -152,7 +152,15 @@ calc:function(){
     return '<div class="result-error"><strong>Date de départ invalide.</strong><br>La date de départ doit être postérieure à votre date de naissance.</div>';
   }
 
-  if(departure.getDate()!==1){\n    return '<div class="result-error"><strong>Date de départ invalide.</strong><br>Le point de départ simulé doit être fixé au premier jour d’un mois.</div>';\n  }\n\n  if(departure<new Date("2026-09-01T12:00:00")){\n    return '<div class="result-error"><strong>Date de départ hors périmètre.</strong><br>Cette version applique les règles des retraites prenant effet à partir du 1er septembre 2026.</div>';\n  }\n\n  if(departure<p.legalDate){
+  if(departure.getDate()!==1){
+    return '<div class="result-error"><strong>Date de départ invalide.</strong><br>Le point de départ simulé doit être fixé au premier jour d’un mois.</div>';
+  }
+
+  if(departure<new Date("2026-09-01T12:00:00")){
+    return '<div class="result-error"><strong>Date de départ hors périmètre.</strong><br>Cette version applique les règles des retraites prenant effet à partir du 1er septembre 2026.</div>';
+  }
+
+  if(departure<p.legalDate){
     return '<div class="result-error"><strong>Le départ est trop précoce.</strong><br>Dans le cadre général simulé ici, votre âge légal est de '+formatAge(p.legalMonths)+'.</div>';
   }
 
