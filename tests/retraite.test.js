@@ -23,17 +23,12 @@ assert(html.includes('Date de départ envisagée (1er du mois)'), "departure dat
 assert(html.includes('departure.getDate()!==1'), "departure date must be validated as the first day of a month");
 assert(html.includes('2026-09-01T12:00:00'), "calculator must state the September 2026 rules scope");
 
-const script = [...html.matchAll(/<script>([\s\S]*?)<\/script>/gi)][0]?.[1];
-assert(script, "calculator script missing");
+const start = html.indexOf("function parseDate");
+const end = html.indexOf("window.TOOL=");
+assert(start >= 0 && end > start, "core calculator functions must remain extractable");
+const script = html.slice(start, end);
 
 const context = {
-  window: { addEventListener() {} },
-  document: {
-    getElementById() { return {value:"", children:{length:0}, textContent:""}; },
-    querySelectorAll() { return []; },
-    createElement() { return {}; },
-    addEventListener() {}
-  },
   console,
   URL, Number, Math, Date, Intl, JSON, String, Boolean, Array, Object, RegExp,
   parseInt, parseFloat, isFinite, isNaN, setTimeout, clearTimeout
