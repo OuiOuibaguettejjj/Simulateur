@@ -6,22 +6,8 @@ const html = fs.readFileSync("public/outil/retraite-simplifiee/index.html", "utf
 const script = html.match(/<script>\nconst F=([\s\S]*?)\n<\/script>/);
 assert(script, "retirement calculator script not found");
 
-const context = {
-  window: { TOOL: {}, addEventListener() {} },
-  console,
-  Date,
-  Number,
-  Math,
-  Intl,
-  String,
-  Object,
-  Array
-};
-vm.createContext(context);
-vm.runInContext(script[1] + "\nthis.__paramsForBirth=paramsForBirth; this.__retirementEstimate=retirementEstimate;", context);
-
-const paramsForBirth = context.__paramsForBirth;
-const retirementEstimate = context.__retirementEstimate;
+const factory = new Function("window", script[1] + "\nreturn {paramsForBirth, retirementEstimate};");
+const { paramsForBirth, retirementEstimate } = factory({ TOOL: {}, addEventListener() {} });
 assert(paramsForBirth, "paramsForBirth missing");
 assert(retirementEstimate, "retirementEstimate missing");
 
@@ -49,7 +35,7 @@ assert.strictEqual(full.decote, 0);
 const example = retirementEstimate(30000, 160, 160, 169, new Date("2024-04-01T12:00:00"), birth);
 assert.strictEqual(example.missing, 9);
 assert.strictEqual(example.decote, 5.625);
-assert.strictEqual(example.rate, 44.375);
+assert.strictEqual(example.rate, 44.375);\nassert.strictEqual(example.age.years, 62);\nassert.strictEqual(example.age.months, 4);
 
 const age67 = retirementEstimate(30000, 140, 140, 169, new Date("2028-11-08T12:00:00"), birth);
 assert.strictEqual(age67.missing, 0);
