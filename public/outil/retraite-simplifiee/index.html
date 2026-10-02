@@ -95,12 +95,10 @@ function completedMonthsBetween(start,end){
 }
 
 function ageAt(birth,date){
-  let years=date.getFullYear()-birth.getFullYear();
-  const anniversary=new Date(date.getFullYear(),birth.getMonth(),birth.getDate(),12);
-  if(date<anniversary) years--;
-  let months=(date.getFullYear()-birth.getFullYear())*12+(date.getMonth()-birth.getMonth());
-  if(date.getDate()<birth.getDate()) months--;
-  return {years:Math.max(0,years),months:Math.max(0,months)};
+  let totalMonths=(date.getFullYear()-birth.getFullYear())*12+(date.getMonth()-birth.getMonth());
+  if(date.getDate()<birth.getDate()) totalMonths--;
+  totalMonths=Math.max(0,totalMonths);
+  return {years:Math.floor(totalMonths/12),months:totalMonths%12};
 }
 
 function retirementEstimate(s,trTotal,trGeneral,req,departure,birth){
