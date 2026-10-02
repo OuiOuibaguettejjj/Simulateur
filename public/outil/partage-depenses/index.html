@@ -32,7 +32,7 @@
 <h2 id="share-title">Votre dépense</h2>
 <p class="lead-small">Indiquez le montant total, puis renseignez les participants et leurs paiements éventuels.</p>
 <div class="share-fields">
-<div class="share-field"><label for="total">Montant total <span aria-hidden="true">€</span></label><input id="total" type="number" min="0" step="0.01" value="120" inputmode="decimal"></div>
+<div class="share-field"><label for="total">Montant total <span aria-hidden="true">€</span></label><input id="total" type="text" value="120" inputmode="decimal" autocomplete="off"></div>
 <div class="share-field"><label for="count">Nombre de personnes</label><input id="count" type="number" min="2" max="12" step="1" value="3" inputmode="numeric" aria-describedby="count-help"><small id="count-help" class="share-note">De 2 à 12 personnes, nombre entier.</small></div>
 </div>
 <fieldset class="share-field" style="border:0;padding:0;margin:0 0 20px"><legend style="display:block;font-weight:900;margin-bottom:7px">Mode de répartition</legend><div class="mode-row">
@@ -77,8 +77,15 @@ function defaultShares(n){
  shares[n-1]=Math.round((100-base*(n-1))*100)/100;
  return shares;
 }
-function parseCents(value){const raw=String(value).trim().replace(",", ".");if(raw==="")return null;const n=Number(raw);return Number.isFinite(n)&&n>=0?Math.round(n*100):null}
-function parseNumber(value){const raw=String(value).trim().replace(",", ".");if(raw==="")return null;const n=Number(raw);return Number.isFinite(n)?n:null}
+function parseDecimal(value){
+ const raw=String(value).trim().replace(/[\u00a0\s]/g,"");
+ if(raw==="")return null;
+ const normalized=raw.includes(",")?raw.replace(/\./g,"").replace(",","."):raw;
+ const n=Number(normalized);
+ return Number.isFinite(n)?n:null;
+}
+function parseCents(value){const n=parseDecimal(value);return n!==null&&n>=0?Math.round(n*100):null}
+function parseNumber(value){return parseDecimal(value)}
 function allocateCents(totalCents,shares){
  const exact=shares.map(share=>totalCents*share/100);
  const cents=exact.map(Math.floor);
@@ -90,12 +97,26 @@ function renderPeople(){
  const rawCount=String(count.value).trim(),parsedCount=parseNumber(rawCount);
  if(rawCount===""||!Number.isInteger(parsedCount)||parsedCount<2||parsedCount>12){ results.innerHTML="<div class=\"status-note\" role=\"alert\"><strong>Nombre de personnes invalide.</strong><p>Saisissez un nombre entier compris entre 2 et 12.</p></div>"; return; }
  const n=parsedCount; count.value=n;
- const old=[...people.querySelectorAll(".person")].map(row=>({name:row.querySelector(".pname").value,paid:row.querySelector(".paid").value}));
- const defaults=defaultShares(n); people.replaceChildren();
+ const old=[...people.querySelectorAll(".person")].map(row=>({name:row.querySelector(".pname").value,paid:row.querySelector(".paid").value,share:row.querySelector(".share").value}));
+ const defaults=defaultShares(n);
+ let shares=defaults;
+ if(mode()==="custom"&&old.length){
+  const weights=Array.from({length:n},(_,i)=>{
+   if(i<old.length){const v=parseNumber(old[i].share);if(v!==null&&v>=0)return v;}
+   return defaults[i];
+  });
+  const weightSum=weights.reduce((a,b)=>a+b,0);
+  if(weightSum>0){
+   shares=weights.map(v=>Math.floor((v/weightSum*100)*100)/100);
+   const assigned=shares.reduce((a,b)=>a+b,0);
+   shares[n-1]=Math.round((shares[n-1]+(100-assigned))*100)/100;
+  }
+ }
+ people.replaceChildren();
  for(let i=0;i<n;i++){
   const d=document.createElement("div");d.className="person";
   const name=document.createElement("input");name.className="pname";name.type="text";name.setAttribute("aria-label","Nom du participant "+(i+1));name.value=old[i]?.name ?? ("Personne "+(i+1));
-  const share=document.createElement("input");share.className="share";share.type="number";share.min="0";share.max="100";share.step="0.01";share.setAttribute("aria-label","Part du participant "+(i+1)+" en pourcentage");share.value=defaults[i];
+  const share=document.createElement("input");share.className="share";share.type="number";share.min="0";share.max="100";share.step="0.01";share.setAttribute("aria-label","Part du participant "+(i+1)+" en pourcentage");share.value=shares[i];
   const paid=document.createElement("input");paid.className="paid";paid.type="number";paid.min="0";paid.step="0.01";paid.setAttribute("aria-label","Montant déjà payé par le participant "+(i+1));paid.value=old[i]?.paid ?? "0";
   d.append(name,share,paid);people.appendChild(d);
  }
@@ -147,7 +168,7 @@ count.addEventListener("change",renderPeople);
 modeInputs.forEach(x=>x.addEventListener("change",()=>{updateMode();calculate()}));
 people.addEventListener("input",calculate);
 document.getElementById("total").addEventListener("input",calculate);
-document.getElementById("calculate").addEventListener("click",()=>{const n=parseNumber(count.value);if(n===null||!Number.isInteger(n)||n<2||n>12){renderPeople();return}calculate();});
+document.getElementById("calculate").addEventListener("click",()=>{const n=parseNumber(count.value);if(n===null||!Number.isInteger(n)||n<2||n>12){renderPeople();return}if(people.querySelectorAll(".person").length!==n){renderPeople();return}calculate();});
 renderPeople();
 })();
 </script>
