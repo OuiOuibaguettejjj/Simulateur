@@ -218,8 +218,15 @@
   }
 
   function valid(){
-    const c=Number($("capital").value),r=Number($("taux").value),y=Number($("duree").value),a=Number($("assurance").value),f=Number($("frais").value)||0;
-    return Number.isFinite(c)&&c>=1000&&Number.isFinite(r)&&r>=0&&r<=30&&Number.isFinite(y)&&y>=1&&y<=30&&Number.isFinite(a)&&a>=0&&a<=10&&f>=0;
+    const c=Number($("capital").value),r=Number($("taux").value),y=Number($("duree").value),a=Number($("assurance").value),f=Number($("frais").value);
+    const income=Number($("revenus").value),charges=Number($("charges").value);
+    return Number.isFinite(c)&&c>=1000&&
+      Number.isFinite(r)&&r>=0&&r<=30&&
+      Number.isFinite(y)&&Number.isInteger(y)&&y>=1&&y<=30&&
+      Number.isFinite(a)&&a>=0&&a<=10&&
+      Number.isFinite(f)&&f>=0&&
+      (income===""||Number.isFinite(income))&&income>=0&&
+      Number.isFinite(charges)&&charges>=0;
   }
 
   function drawChart(data){
