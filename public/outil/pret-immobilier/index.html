@@ -156,7 +156,7 @@
 <ul>
 <li><strong>Mensualité :</strong> somme versée périodiquement pour rembourser le prêt et, selon le cas, l'assurance.</li>
 <li><strong>Intérêts :</strong> rémunération du capital prêté calculée selon le taux nominal.</li>
-<li><strong>Coût du financement :</strong> dans cette simulation, intérêts + assurance + frais que vous avez saisis.</li>
+<li><strong>Coût total de la simulation :</strong> intérêts + assurance + frais que vous avez saisis, en plus du capital emprunté.</li>
 <li><strong>TAEG :</strong> indicateur réglementaire qui sert à comparer le coût global d'une offre de crédit en intégrant les frais pertinents selon les règles applicables.</li>
 </ul>
 
@@ -259,6 +259,17 @@
   function calculate(){
     if(!valid()){
       $("monthly").textContent="Valeurs invalides";
+      $("monthlyEx").textContent="—";
+      $("totalPaid").textContent="—";
+      $("interest").textContent="—";
+      $("insuranceCost").textContent="—";
+      $("fees").textContent="—";
+      $("debtBox").hidden=true;
+      $("debtBox").textContent="";
+      $("compareBody").innerHTML="";
+      $("scheduleBody").innerHTML="";
+      const svg=$("chart");
+      svg.querySelectorAll(".generated").forEach(n=>n.remove());
       return;
     }
     const {capital,taux,duree,assurance,frais,revenus,charges}=vals(["capital","taux","duree","assurance","frais","revenus","charges"]);
