@@ -140,7 +140,7 @@ calc:function(){
   const trGeneral=Number(this.$("trGeneral").value);
   const p=paramsForBirth(birthValue);
 
-  if(!p||!departure||!Number.isFinite(s)||s<=0||s>1000000||
+  if(!p||p.year<1955||p.year>2100||!departure||!Number.isFinite(s)||s<=0||s>1000000||
      !Number.isInteger(trTotal)||trTotal<0||trTotal>400||
      !Number.isInteger(trGeneral)||trGeneral<0||trGeneral>400||
      trGeneral>trTotal){
