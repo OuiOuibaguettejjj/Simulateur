@@ -76,7 +76,8 @@ function retirementEstimate(s,trTotal,trGeneral,req,age,legal,children,surcoteTr
  const rate=Math.max(37.5,50-decote);
  const prorata=Math.min(trGeneral/req,1);
  const quartersSurcote=age>legal?surcoteTr:0;
- const surcote=quartersSurcote*1.25;\n const surcoteParentale=Math.min(5,surcoteParentaleTr*1.25);
+ const surcote=quartersSurcote*1.25;
+ const surcoteParentale=Math.min(5,surcoteParentaleTr*1.25);
  const base=s*rate/100*prorata;
  const pension=base*(1+surcote/100)*(1+surcoteParentale/100)*(children>=3?1.10:1);
  return {pension,base,rate,missing,decote,prorata,quartersSurcote,surcote,surcoteParentale};
