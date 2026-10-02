@@ -3,8 +3,8 @@ const assert = require("assert");
 
 const html = fs.readFileSync("public/outil/retraite-simplifiee/index.html", "utf8");
 
-for (const field of ["birth", "sam", "trTotal", "trGeneral", "departure"]) {
-  assert(html.includes('id="' + field + '"'), "missing core field: " + field);
+for (const field of ['F.date("birth"', 'F.text("sam"', 'F.text("trTotal"', 'F.text("trGeneral"', 'F.date("departure"']) {
+  assert(html.includes(field), "missing core field reference: " + field);
 }
 
 for (const obsolete of ["surcoteParentaleTr", "parentalChildQuarter", "parentalFullRateBeforeLegal", "children", "surcoteTr"]) {
