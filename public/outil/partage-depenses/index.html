@@ -80,7 +80,13 @@ function defaultShares(n){
 function parseDecimal(value){
  const raw=String(value).trim().replace(/[\u00a0\s]/g,"");
  if(raw===""||/[eE]/.test(raw))return null;
- const normalized=raw.includes(",")?raw.replace(/\./g,"").replace(",","."):raw;
+ let normalized=raw;
+ if(raw.includes(",")){
+  normalized=raw.replace(/\./g,"").replace(",",".");
+ }else if((raw.match(/\./g)||[]).length===1){
+  const decimals=raw.split(".")[1]||"";
+  normalized=decimals.length<=2?raw:raw.replace(/\./g,"");
+ }
  const n=Number(normalized);
  return Number.isFinite(n)?n:null;
 }
@@ -155,25 +161,27 @@ function calculate(){
  const dueCents=allocateCents(totalCents,shares);
  const balances=dueCents.map((due,i)=>paidCents[i]-due),totalPaidCents=paidCents.reduce((a,b)=>a+b,0);
  const remaining=Math.max(0,totalCents-totalPaidCents),overpaid=Math.max(0,totalPaidCents-totalCents),fullyPaid=totalPaidCents===totalCents;
+ const creditors=balances.map((b,i)=>({i,amount:b})).filter(x=>x.amount>0).sort((a,b)=>b.amount-a.amount);
+ const debtors=balances.map((b,i)=>({i,amount:-b})).filter(x=>x.amount>0).sort((a,b)=>b.amount-a.amount);
  const transfers=[];
- if(fullyPaid){
-  let creditors=balances.map((b,i)=>({i,amount:b})).filter(x=>x.amount>0).sort((a,b)=>b.amount-a.amount);
-  let debtors=balances.map((b,i)=>({i,amount:-b.amount})).filter(x=>x.amount>0).sort((a,b)=>b.amount-a.amount);
-  let di=0,ci=0;
-  while(di<debtors.length&&ci<creditors.length){
-   const amount=Math.min(debtors[di].amount,creditors[ci].amount);
-   transfers.push({from:names[debtors[di].i],to:names[creditors[ci].i],amount});
-   debtors[di].amount-=amount;creditors[ci].amount-=amount;
-   if(debtors[di].amount===0)di++;if(creditors[ci].amount===0)ci++;
-  }
+ let di=0,ci=0;
+ while(di<debtors.length&&ci<creditors.length){
+  const amount=Math.min(debtors[di].amount,creditors[ci].amount);
+  transfers.push({from:names[debtors[di].i],to:names[creditors[ci].i],amount});
+  debtors[di].amount-=amount;creditors[ci].amount-=amount;
+  if(debtors[di].amount===0)di++;
+  if(creditors[ci].amount===0)ci++;
  }
+ const externalRemaining=debtors.slice(di).reduce((sum,x)=>sum+x.amount,0);
+ const externalRefund=creditors.slice(ci).reduce((sum,x)=>sum+x.amount,0);
  const status=remaining>0
-  ? '<div class="status-note"><strong>Reste à payer : '+euroCents(remaining)+'</strong>. Aucun remboursement final entre participants n’est calculé tant que la dépense totale n’est pas entièrement couverte.</div>'
+  ? '<div class="status-note"><strong>Reste à payer : '+euroCents(remaining)+'</strong>. Les remboursements entre participants sont calculés dès maintenant ; le solde restant doit encore être payé au bénéficiaire de la dépense.</div>'
   : overpaid>0
-  ? '<div class="status-note"><strong>Surpaiement : '+euroCents(overpaid)+'</strong>. Les paiements saisis dépassent le montant total ; vérifiez le remboursement éventuel par le bénéficiaire de la dépense.</div>'
+  ? '<div class="status-note"><strong>Surpaiement : '+euroCents(overpaid)+'</strong>. Les remboursements entre participants sont calculés ; le surplus doit être remboursé par le bénéficiaire de la dépense.</div>'
   : '<div class="status-note">La totalité de la dépense est couverte. Les remboursements entre participants peuvent être réglés.</div>';
  const rowsHtml=names.map((name,i)=>'<tr><td>'+escapeHtml(name)+'</td><td>'+pct(shares[i])+' %</td><td>'+euroCents(dueCents[i])+'</td><td>'+euroCents(paidCents[i])+'</td><td class="'+(balances[i]>=0?"positive":"negative")+'">'+(balances[i]>=0?"+":"")+euroCents(balances[i])+'</td></tr>').join("");
- const transferHtml=transfers.length?transfers.map(x=>'<p>'+escapeHtml(x.from)+' → '+escapeHtml(x.to)+' : '+euroCents(x.amount)+'</p>').join(""):fullyPaid?'<p>Les paiements correspondent exactement aux parts calculées.</p>':'<p>À effectuer une fois la dépense totalement couverte.</p>';
+ const transferHtml=transfers.length?transfers.map(x=>'<p>'+escapeHtml(x.from)+' → '+escapeHtml(x.to)+' : '+euroCents(x.amount)+'</p>').join(""):'<p>Aucun transfert entre participants nécessaire.</p>';
+ const externalHtml=externalRemaining>0?'<p><strong>À payer au bénéficiaire : '+euroCents(externalRemaining)+'</strong></p>':externalRefund>0?'<p><strong>À récupérer du bénéficiaire : '+euroCents(externalRefund)+'</strong></p>':fullyPaid?'<p>Les paiements correspondent exactement aux parts calculées.</p>':'';
  results.innerHTML='<h2>Répartition</h2><div class="result-kpi"><div class="result-card primary"><small>Total</small><strong>'+euroCents(totalCents)+'</strong></div><div class="result-card"><small>Déjà payé</small><strong>'+euroCents(totalPaidCents)+'</strong></div></div>'+status+'<table class="result-table"><caption style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Détail de la répartition par participant</caption><thead><tr><th>Participant</th><th>Part</th><th>Doit supporter</th><th>Déjà payé</th><th>Solde</th></tr></thead><tbody>'+rowsHtml+'</tbody></table><div class="transfers"><h3>Remboursements à effectuer</h3>'+transferHtml+'</div>';
 }
 function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
