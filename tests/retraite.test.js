@@ -18,9 +18,10 @@ const context = {
   Array
 };
 vm.createContext(context);
-vm.runInContext(script[1], context);
+vm.runInContext(script[1] + "\nthis.__paramsForBirth=paramsForBirth; this.__retirementEstimate=retirementEstimate;", context);
 
-const { paramsForBirth, retirementEstimate } = context;
+const paramsForBirth = context.__paramsForBirth;
+const retirementEstimate = context.__retirementEstimate;
 assert(paramsForBirth, "paramsForBirth missing");
 assert(retirementEstimate, "retirementEstimate missing");
 
