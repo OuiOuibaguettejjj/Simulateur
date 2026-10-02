@@ -56,7 +56,12 @@ function parseDate(value){
 
 function addMonths(date,months){
   const d=new Date(date.getTime());
-  d.setMonth(d.getMonth()+months);
+  const targetMonth=d.getMonth()+months;
+  const day=d.getDate();
+  d.setDate(1);
+  d.setMonth(targetMonth);
+  const lastDay=new Date(d.getFullYear(),d.getMonth()+1,0).getDate();
+  d.setDate(Math.min(day,lastDay));
   return d;
 }
 
@@ -148,7 +153,7 @@ calc:function(){
   }
 
   if(departure<p.legalDate){
-    return '<div class="result-error"><strong>Le départ est trop précoce.</strong><br>Dans le cadre général simulé ici, votre âge légal est de '+formatAge(p.legalMonths)+'.';
+    return '<div class="result-error"><strong>Le départ est trop précoce.</strong><br>Dans le cadre général simulé ici, votre âge légal est de '+formatAge(p.legalMonths)+'.</div>';
   }
 
   const r=retirementEstimate(s,trTotal,trGeneral,p.req,departure,birth);
@@ -175,4 +180,4 @@ function formatAge(totalMonths){
 }
 
 window.addEventListener("DOMContentLoaded",()=>Simulateurs.render());
-</script></script></body></html>
+</script></body></html>
