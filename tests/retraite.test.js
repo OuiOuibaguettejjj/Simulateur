@@ -14,7 +14,8 @@ for (const obsolete of ["surcoteParentaleTr", "parentalChildQuarter", "parentalF
 
 assert(!html.includes("const scenarios="), "future scenarios should not be part of the simplified calculator");
 assert(html.includes("p.year<1955||p.year>2100"), "birth year must stay within the stated simulation scope");
-const intro = (html.match(/<div class="content-intro">([\s\S]*?)<\/div>/i) || [,""])[1];\nassert(!/surcote/i.test(intro), "intro must not promise a surcote calculation");
+const intro = (html.match(/<div class="content-intro">([\s\S]*?)<\/div>/i) || [,""])[1];
+assert(!/surcote/i.test(intro), "intro must not promise a surcote calculation");
 assert(html.includes('Date de départ envisagée (1er du mois)'), "departure date must be explicitly month-based");
 assert(html.includes('departure.getDate()!==1'), "departure date must be validated as the first day of a month");
 assert(html.includes('2026-09-01T12:00:00'), "calculator must state the September 2026 rules scope");
