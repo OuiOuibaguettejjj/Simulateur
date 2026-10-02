@@ -77,7 +77,8 @@ function defaultShares(n){
  shares[n-1]=Math.round((100-base*(n-1))*100)/100;
  return shares;
 }
-function parseCents(value){const raw=String(value).trim();if(raw==="")return null;const n=Number(raw);return Number.isFinite(n)&&n>=0?Math.round(n*100):null}
+function parseCents(value){const raw=String(value).trim().replace(",", ".");if(raw==="")return null;const n=Number(raw);return Number.isFinite(n)&&n>=0?Math.round(n*100):null}
+function parseNumber(value){const raw=String(value).trim().replace(",", ".");if(raw==="")return null;const n=Number(raw);return Number.isFinite(n)?n:null}
 function allocateCents(totalCents,shares){
  const exact=shares.map(share=>totalCents*share/100);
  const cents=exact.map(Math.floor);
@@ -86,7 +87,7 @@ function allocateCents(totalCents,shares){
  return cents;
 }
 function renderPeople(){
- const rawCount=String(count.value).trim(),parsedCount=Number(rawCount);
+ const rawCount=String(count.value).trim(),parsedCount=parseNumber(rawCount);
  if(rawCount===""||!Number.isInteger(parsedCount)||parsedCount<2||parsedCount>12){ results.innerHTML="<div class=\"status-note\" role=\"alert\"><strong>Nombre de personnes invalide.</strong><p>Saisissez un nombre entier compris entre 2 et 12.</p></div>"; return; }
  const n=parsedCount; count.value=n;
  const old=[...people.querySelectorAll(".person")].map(row=>({name:row.querySelector(".pname").value,paid:row.querySelector(".paid").value}));
@@ -111,7 +112,7 @@ function calculate(){
  let shares;
  if(mode()==="equal") shares=rows.map(()=>100/rows.length);
  else{
-  shares=rows.map(r=>{const raw=r.querySelector(".share").value.trim();const n=Number(raw);return raw!==""&&Number.isFinite(n)&&n>=0?n:null});
+  shares=rows.map(r=>{const raw=r.querySelector(".share").value.trim();const n=parseNumber(raw);return raw!==""&&n!==null&&n>=0?n:null});
   if(shares.some(v=>v===null)){results.innerHTML="<div class=\"status-note\" role=\"alert\"><strong>Part invalide.</strong><p>Chaque pourcentage doit être un nombre compris entre 0 et 100.</p></div>";return}
   if(shares.some(v=>v>100)){results.innerHTML="<div class=\"status-note\" role=\"alert\"><strong>Part invalide.</strong><p>Chaque pourcentage doit être compris entre 0 et 100.</p></div>";return}
   const sum=shares.reduce((a,b)=>a+b,0);
@@ -146,7 +147,7 @@ count.addEventListener("change",renderPeople);
 modeInputs.forEach(x=>x.addEventListener("change",()=>{updateMode();calculate()}));
 people.addEventListener("input",calculate);
 document.getElementById("total").addEventListener("input",calculate);
-document.getElementById("calculate").addEventListener("click",calculate);
+document.getElementById("calculate").addEventListener("click",()=>{const n=parseNumber(count.value);if(n===null||!Number.isInteger(n)||n<2||n>12){renderPeople();return}calculate();});
 renderPeople();
 })();
 </script>
