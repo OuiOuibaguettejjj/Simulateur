@@ -33,7 +33,7 @@
 </div>
 <h2>Les limites de cette simulation</h2>
 <p>Cette estimation ne reconstitue pas votre relevé de carrière et ne calcule pas la retraite complémentaire Agirc-Arrco. Elle ne traite pas individuellement les carrières longues, le handicap, l'inaptitude, la pénibilité, les règles particulières de certains régimes, ni l'ensemble des majorations et minima sociaux.</p>
-<p>La surcote est calculée à partir des trimestres que vous indiquez comme accomplis après avoir atteint l’âge légal et la durée d’assurance requise. Les scénarios futurs ajoutent au maximum quatre trimestres de surcote par année dans cette hypothèse simplifiée.</p>
+<p>La surcote est calculée à partir des trimestres que vous indiquez comme effectivement éligibles, après l’âge légal et après avoir atteint la durée d’assurance requise. Les scénarios futurs ajoutent au maximum quatre trimestres de surcote par année dans cette hypothèse simplifiée.</p>
 <h2>Particularité des règles 2026 pour certains parents</h2>
 <p>Depuis le 1er septembre 2026, le revenu annuel moyen peut être calculé sur les 24 meilleures années pour certains parents bénéficiant d'une majoration de durée d'assurance pour un enfant, et sur 23 années pour deux enfants ou plus. Le calculateur vous permet de sélectionner le nombre d'années correspondant à votre situation, mais il ne détermine pas votre éligibilité à cette règle.</p>
 <h2>Sources officielles</h2>
@@ -69,11 +69,11 @@ function paramsForBirth(value){
  else return null;
  return {year:y,month:m,legal:age,req};
 }
-function retirementEstimate(s,tr,req,age,legal,children,surcoteTr=0){
- const missing=Math.max(0,Math.min(20,Math.ceil(Math.min(req-tr,Math.max(0,67-age)*4))));
+function retirementEstimate(s,trTotal,trGeneral,req,age,legal,children,surcoteTr=0){
+ const missing=Math.max(0,Math.min(20,Math.ceil(Math.min(req-trTotal,Math.max(0,67-age)*4))));
  const decote=age>=67?0:missing*.625;
  const rate=Math.max(37.5,50-decote);
- const prorata=Math.min(tr/req,1);
+ const prorata=Math.min(trGeneral/req,1);
  const quartersSurcote=age>=legal?surcoteTr:0;
  const surcote=quartersSurcote*1.25;
  const base=s*rate/100*prorata;
@@ -90,24 +90,24 @@ fields:function(){
   F.text("sam","Revenu annuel moyen (€)","30000","100","1000000")
  ])+
  F.row([
-  F.text("tr","Trimestres d'assurance au régime général","170","1","400"),
-  F.text("age","Âge de départ envisagé (années)","64","0.25","75")
+  F.text("trTotal","Trimestres d'assurance tous régimes","172","1","400"),
+  F.text("trGeneral","Trimestres d'assurance au régime général","172","1","400")
  ])+
  F.row([
-  F.text("surcoteTr","Trimestres déjà acquis pour la surcote","0","1","80"),
-  F.select("annees","Années retenues pour le revenu moyen",[["25","25 meilleures années"],["24","24 meilleures années"],["23","23 meilleures années"]])
+  F.text("age","Âge de départ envisagé (années)","64","0.25","75"),
+  F.text("surcoteTr","Trimestres déjà acquis pour la surcote","0","1","80")
  ])+
  F.select("children","Nombre d'enfants pour la majoration de 10 % à partir de 3 enfants",[["0","0 à 2 enfants"],["3","3 enfants ou plus"]]);
 },
 calc:function(){
- const birth=this.$("birth").value,s=Number(this.$("sam").value),tr=Number(this.$("tr").value),age=Number(this.$("age").value),surcoteTr=Number(this.$("surcoteTr").value),children=Number(this.$("children").value),annees=Number(this.$("annees").value);
+ const birth=this.$("birth").value,s=Number(this.$("sam").value),trTotal=Number(this.$("trTotal").value),trGeneral=Number(this.$("trGeneral").value),age=Number(this.$("age").value),surcoteTr=Number(this.$("surcoteTr").value),children=Number(this.$("children").value);
  const p=paramsForBirth(birth);
- if(!p||!Number.isFinite(s)||s<=0||s>1000000||!Number.isInteger(tr)||tr<0||tr>400||!Number.isFinite(age)||age<50||age>75||!Number.isInteger(surcoteTr)||surcoteTr<0||surcoteTr>80||surcoteTr>Math.max(0,tr-p.req)||!Number.isFinite(children)||!Number.isFinite(annees)){
+ if(!p||!Number.isFinite(s)||s<=0||s>1000000||!Number.isInteger(trTotal)||trTotal<0||trTotal>400||!Number.isInteger(trGeneral)||trGeneral<0||trGeneral>400||trGeneral>trTotal||!Number.isFinite(age)||age<50||age>75||!Number.isInteger(surcoteTr)||surcoteTr<0||surcoteTr>80||surcoteTr>Math.max(0,trTotal-p.req)||!Number.isInteger(children)){
    return '<div class="result-error"><strong>Valeurs invalides.</strong><br>Vérifiez votre date de naissance, votre revenu et vos trimestres.</div>';
  }
  if(age<p.legal)return '<div class="result-error"><strong>L’âge de départ est inférieur à l’âge légal estimé.</strong><br>Pour une retraite prenant effet à partir du 1er septembre 2026, votre âge légal est de '+p.legal.toFixed(2).replace(".25"," ans et 3 mois").replace(".5"," ans et 6 mois").replace(".75"," ans et 9 mois")+'.</div>';
- const r=retirementEstimate(s,tr,p.req,age,p.legal,children,surcoteTr);
- const scenarios=[1,2,3].map(y=>{const futureTr=Math.min(400,tr+4*y);const futureSurcote=age+y>=p.legal?surcoteTr+Math.max(0,futureTr-p.req-surcoteTr):0;return {y,x:retirementEstimate(s,futureTr,p.req,age+y,p.legal,children,futureSurcote)};});
+ const r=retirementEstimate(s,trTotal,trGeneral,p.req,age,p.legal,children,surcoteTr);
+ const scenarios=[1,2,3].map(y=>{const futureTotal=Math.min(400,trTotal+4*y);const futureGeneral=Math.min(400,trGeneral+4*y);const futureSurcote=age+y>=p.legal?surcoteTr+Math.max(0,futureTotal-p.req-surcoteTr):0;return {y,x:retirementEstimate(s,futureTotal,futureGeneral,p.req,age+y,p.legal,children,futureSurcote)};});
  const monthly=r.pension/12;
  const status=r.quartersSurcote>0?"Surcote estimée":"Décote / taux plein selon votre durée";
  return '<div class="result-main"><span class="result-label">Pension de base estimée</span><strong>'+this.euro(r.pension)+' brut/an</strong><div class="result-monthly">≈ '+this.euro(monthly)+' brut/mois</div></div>'+
