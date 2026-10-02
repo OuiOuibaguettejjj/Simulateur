@@ -7,7 +7,7 @@
 <link rel="canonical" href="https://simulateur.site/outil/retraite-simplifiee/">
 <link rel="stylesheet" href="/styles.css">
 <script src="/simulateurs.js" defer></script><script src="/enter-calcul.js" defer></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","@id":"https://simulateur.site/outil/retraite-simplifiee/#application","name":"Simulateur retraite 2026","url":"https://simulateur.site/outil/retraite-simplifiee/","applicationCategory":"Calculator","operatingSystem":"Web","inLanguage":"fr-FR","description":"Estimation indicative de la retraite de base d'un salarié du privé, avec prise en compte de la décote, de la surcote et de plusieurs scénarios d'âge de départ."}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","@id":"https://simulateur.site/outil/retraite-simplifiee/#application","name":"Simulateur retraite 2026","url":"https://simulateur.site/outil/retraite-simplifiee/","applicationCategory":"Calculator","operatingSystem":"Web","inLanguage":"fr-FR","description":"Estimation indicative simplifiée de la retraite de base à partir du revenu annuel moyen, des trimestres d’assurance et de la date de départ."}</script>
 </head>
 <body><header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header>
 <main><div class="wrap">
@@ -105,7 +105,7 @@ function retirementEstimate(s,trTotal,trGeneral,req,departure,birth){
   const age=ageAt(birth,departure);
   const age67=addMonths(birth,67*12);
   const missingByDuration=Math.max(0,req-trTotal);
-  const missingByAge=departure>=age67?0:Math.ceil(completedMonthsBetween(departure,age67)/3);
+  const monthsToAge67=completedMonthsBetween(departure,age67);\n  const missingByAge=departure>=age67?0:Math.ceil(monthsToAge67/3);
   const missing=Math.min(20,missingByDuration,missingByAge);
   const decote=missing*0.625;
   const rate=50-decote;
