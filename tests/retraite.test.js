@@ -25,7 +25,7 @@ assert(!html.includes("const scenarios="), "future scenarios should not be part 
 const rate = 50 - (10 * 0.625);
 const pension = 30000 * rate / 100 * (160 / 170);
 assert.strictEqual(rate, 43.75, "decote formula regression");
-assert(Math.abs(pension - 12603.550295857989) < 1e-9, "base pension formula regression");
+assert(Math.abs(pension - 12352.941176470587) < 1e-9, "base pension formula regression");
 
 const fullRate = 50 - (0 * 0.625);
 assert.strictEqual(fullRate, 50, "full-rate regression");
