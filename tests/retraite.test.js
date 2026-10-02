@@ -12,6 +12,8 @@ for (const obsolete of ["surcoteParentaleTr", "parentalChildQuarter", "parentalF
 }
 
 assert(!html.includes("const scenarios="), "future scenarios should not be part of the simplified calculator");
+assert(html.includes("p.year<1955||p.year>2100"), "birth year must stay within the stated simulation scope");
+assert(!html.includes("effets simplifiés d&#39;une décote ou d&#39;une surcote"), "intro must not promise surcote calculation");
 
 function retirementRate(trTotal, req, monthsToAge67) {
   const missingByDuration = Math.max(0, req - trTotal);
