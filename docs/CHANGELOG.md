@@ -1,3 +1,7 @@
+## 2026-10-02 — Uniformisation du calcul au clavier
+- Rattachement du calculateur Partage de dépenses au mécanisme commun `enter-calcul.js` afin que la touche Entrée déclenche le calcul comme sur les calculateurs utilisant le socle commun.
+- Aucun changement du moteur de calcul, du Worker, de Cloudflare ou des dépendances externes.
+
 ## 2026-10-02 — Robustesse des saisies du partage de dépenses
 - Correction du parsing des pourcentages personnalisés afin de traiter correctement les espaces et espaces insécables comme les autres champs numériques.
 - Refus de la notation scientifique dans les champs numériques utilisateur afin de respecter les formats de saisie affichés et la règle de précision des pourcentages.
