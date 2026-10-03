@@ -373,14 +373,6 @@
   },
   {
     "path": "public/outil/partage-depenses/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/partage-depenses/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/partage-depenses/index.html",
     "rule": "result"
   },
   {
@@ -422,14 +414,6 @@
   {
     "path": "public/outil/pourboire/index.html",
     "rule": "jsonld"
-  },
-  {
-    "path": "public/outil/pourboire/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/pourboire/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/pourboire/index.html",
@@ -501,14 +485,6 @@
   },
   {
     "path": "public/outil/promotions/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/promotions/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/promotions/index.html",
     "rule": "result"
   },
   {
@@ -542,14 +518,6 @@
   {
     "path": "public/outil/ratio/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/recette/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/recette/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/recette/index.html",

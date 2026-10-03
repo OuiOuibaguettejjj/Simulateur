@@ -694,22 +694,38 @@
     "partage-depenses": {
       "type": "calculateur",
       "category": "vie",
-      "relatedTools": []
+      "relatedTools": [
+        "pourboire",
+        "promotions",
+        "prix-unitaire"
+      ]
     },
     "pourboire": {
       "type": "calculateur",
       "category": "vie",
-      "relatedTools": []
+      "relatedTools": [
+        "partage-depenses",
+        "promotions",
+        "prix-unitaire"
+      ]
     },
     "promotions": {
       "type": "calculateur",
       "category": "vie",
-      "relatedTools": []
+      "relatedTools": [
+        "prix-unitaire",
+        "remise",
+        "tva"
+      ]
     },
     "recette": {
       "type": "calculateur",
       "category": "vie",
-      "relatedTools": []
+      "relatedTools": [
+        "proportion",
+        "partage-depenses",
+        "prix-unitaire"
+      ]
     },
     "signe-astrologique": {
       "type": "calculateur",
