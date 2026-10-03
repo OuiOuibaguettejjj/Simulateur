@@ -25,8 +25,8 @@ jobs:
       - name: Pre-production security and architecture gate
         run: node scripts/check-security.mjs
 
-      - name: Generate sitemap
-        run: node scripts/generate-sitemap.mjs
+      - name: Verify sitemap is up to date
+        run: node scripts/generate-sitemap.mjs --check
 
       - name: Verify HTML-first calculator contract
         run: |
@@ -144,19 +144,11 @@ jobs:
           if (errors.length) { console.error(errors.join('\n')); process.exit(1); }
           console.log('Verified metadata ↔ HTML contract for ' + files.length + ' /outil/ pages.');
           NODE
-      - name: Normalize shared layout (header, footer)
-        run: |
-          node scripts/normalize-layout.mjs
-          cp -a public /tmp/public-after-first-normalize
-          node scripts/normalize-layout.mjs
-          diff -qr /tmp/public-after-first-normalize public
+      - name: Verify shared layout is normalized
+        run: node scripts/normalize-layout.mjs --check
 
-      - name: Prepare AdSense HTML
-        run: |
-          node scripts/prepare-adsense.mjs
-          cp -a public /tmp/public-after-first-adsense
-          node scripts/prepare-adsense.mjs
-          diff -qr /tmp/public-after-first-adsense public
+      - name: Verify AdSense HTML is prepared
+        run: node scripts/prepare-adsense.mjs --check
 
       - name: Verify AdSense HTML markers
         run: |
@@ -355,7 +347,11 @@ jobs:
           NODE
 
       - name: Run deterministic calculator tests
-        run: node tests/rsa.test.js
+        run: |
+          node tests/ifi.test.js
+          node tests/impot.test.js
+          node tests/rsa.test.js
+          node tests/retraite.test.js
 
       - name: Smoke-test every calculator in Chromium
         run: |

@@ -3,6 +3,7 @@ import path from "node:path";
 import { execFileSync } from "node:child_process";
 
 const ROOT = "public";
+const CHECK_ONLY = process.argv.includes("--check");
 const SITE = "https://simulateur.site";
 const EXCLUDED_PREFIXES = ["public/api/"];
 
@@ -77,5 +78,15 @@ const sitemap = [
   ""
 ].join("\n");
 
-fs.writeFileSync(path.join(ROOT, "sitemap.xml"), sitemap, "utf8");
-console.log(`Generated sitemap.xml with ${pages.length} URLs using Git last-modified dates.`);
+const sitemapPath = path.join(ROOT, "sitemap.xml");
+if (CHECK_ONLY) {
+  const current = fs.existsSync(sitemapPath) ? fs.readFileSync(sitemapPath, "utf8") : "";
+  if (current !== sitemap) {
+    console.error("Sitemap check failed: public/sitemap.xml is not the generated sitemap for this commit.");
+    process.exit(1);
+  }
+  console.log(`Sitemap check passed: ${pages.length} URLs.`);
+} else {
+  fs.writeFileSync(sitemapPath, sitemap, "utf8");
+  console.log(`Generated sitemap.xml with ${pages.length} URLs using Git last-modified dates.`);
+}

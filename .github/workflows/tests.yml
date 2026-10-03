@@ -2,11 +2,9 @@ name: Tests
 on:
   pull_request:
     branches: [main]
-    paths:
-      - "public/outil/**"
-      - "public/*.js"
-      - "tests/**"
-      - ".github/workflows/tests.yml"
+  merge_group:
+    types: [checks_requested]
+    branches: [main]
   push:
     branches: [main]
 
@@ -20,6 +18,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+
+      - name: Pre-production security and architecture gate
+        run: node scripts/check-security.mjs
+
+      - name: Verify committed build is canonical
+        run: |
+          node scripts/generate-sitemap.mjs --check
+          node scripts/normalize-layout.mjs --check
+          node scripts/prepare-adsense.mjs --check
 
       - name: Test calculateur IFI
         run: node tests/ifi.test.js

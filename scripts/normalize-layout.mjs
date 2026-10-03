@@ -6,6 +6,7 @@ import path from "node:path";
 // Pour changer le menu ou les liens du pied de page, modifier HEADER / FOOTER ci-dessous.
 
 const root = path.join(process.cwd(), "public");
+const CHECK_ONLY = process.argv.includes("--check");
 const SKIP_ROOT_DIRS = new Set([".well-known", "api"]);
 
 const HEADER =
@@ -100,8 +101,12 @@ for (const file of files) {
     console.warn("normalize-layout: " + path.relative(process.cwd(), file) + " : " + w);
   }
   if (html !== old) {
-    fs.writeFileSync(file, html);
     changed++;
+    if (!CHECK_ONLY) fs.writeFileSync(file, html);
   }
 }
-console.log("Layout normalize: " + changed + " pages updated; " + files.length + " pages checked; " + warned + " warnings.");
+if (CHECK_ONLY && changed) {
+  console.error("Layout check failed: " + changed + " page(s) differ from the canonical shared layout.");
+  process.exit(1);
+}
+console.log("Layout " + (CHECK_ONLY ? "check" : "normalize") + ": " + changed + " pages updated; " + files.length + " pages checked; " + warned + " warnings.");

@@ -107,7 +107,7 @@ for (const file of allFiles.filter(file => file.startsWith(".github/workflows/")
   const workflow = read(file);
   if (!/^permissions:\s*$/m.test(workflow)) fail(file + ": explicit permissions block required");
   if (/permissions:\s*(?:write-all|read-write)/i.test(workflow) || /^\s+\w+:\s*write\s*$/m.test(workflow)) fail(file + ": write GitHub permissions are forbidden");
-  for (const match of workflow.matchAll(/^\s*uses:\s*([^\s#]+)\s*$/gm)) {
+  for (const match of workflow.matchAll(/^\s*(?:-\s*)?uses:\s*([^\s#]+)/gm)) {
     if (!/@[0-9a-f]{40}$/i.test(match[1])) fail(file + ": action is not pinned to a full commit SHA: " + match[1]);
   }
   if (/pull_request_target/i.test(workflow)) fail(file + ": pull_request_target is forbidden");
