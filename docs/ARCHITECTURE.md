@@ -11,8 +11,7 @@ La taxonomie officielle est centralisée dans `data/tools.json` via `categories`
 La source de vérité contient également les relations `relatedTools` de chaque outil. Cette structure est la référence opérationnelle du maillage associé ; l'ancien objet `groups` n'est plus utilisé.
 
 Les contrôles pré-production vérifient notamment :
-- la présence de chaque outil dans `data/tools.json` et `data/tools.json` ;
-- l'égalité exacte entre le type déclaré dans `data/tools.json` et celui de `data/tools.json` ;
+- la présence de chaque outil dans `data/tools.json` ;
 - la validité des catégories et des relations `relatedTools` ;
 - la correspondance entre la taxonomie centrale et les pages `/outil/<slug>/` ;
 - la cohérence entre les métadonnées centrales et le HTML publié : catégorie, breadcrumb JSON-LD, URL canonique et liens du bloc « Outils associés ».

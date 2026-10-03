@@ -37,10 +37,10 @@
 <main>
 <div class="wrap">
 <div class="breadcrumb"><a href="/">Accueil</a> · <a href="/temps/">Temps</a> · Calculateur de durée</div>
-<section class="tool">>
-<div class="eyebrow" >TEMPS</div>
-<h1 >Calculateur de durée</h1>
-<p class="tool-intro" >Convertissez une durée, calculez un intervalle entre deux dates ou horaires, ou ajoutez une durée à une date.</p>
+<section class="tool">
+<div class="eyebrow">TEMPS</div>
+<h1>Calculateur de durée</h1>
+<p class="tool-intro">Convertissez une durée, calculez un intervalle entre deux dates ou horaires, ou ajoutez une durée à une date.</p>
 
 <div class="duration-modes">
 <label for="durationMode">Que souhaitez-vous calculer ?</label>
@@ -120,7 +120,7 @@
 
 <button class="button-main" onclick="Simulateurs.calc()">Calculer</button>
 <div class="result" id="result">Saisissez vos données puis lancez le calcul.</div>
-<div class="formula"><strong>Méthode et conventions</strong><p >Les conversions utilisent 60 secondes par minute, 60 minutes par heure, 24 heures par jour et 7 jours par semaine. Les mois et années sont traités comme des unités calendaires, dont la durée dépend de la date.</p></div>
+<div class="formula"><strong>Méthode et conventions</strong><p>Les conversions utilisent 60 secondes par minute, 60 minutes par heure, 24 heures par jour et 7 jours par semaine. Les mois et années sont traités comme des unités calendaires, dont la durée dépend de la date.</p></div>
 </section>
 
 <div class="duration-content">
@@ -243,7 +243,7 @@
       datetime:"Calculez la durée entre deux dates et heures.",
       add:"Ajoutez ou retirez une durée à une date et une heure."
     }[mode];
-    document.getElementById("intro").textContent=intro;
+    document.querySelector(".tool-intro").textContent=intro;
     document.getElementById("result").textContent="Saisissez vos données puis lancez le calcul.";
   };
   const calc=()=>{
