@@ -12,16 +12,16 @@ const read=f=>fs.readFileSync(path.join(ROOT,f),"utf8");
 const norm=s=>String(s).replace(/&(#x[0-9a-f]+|#[0-9]+|[a-z][a-z0-9]+);/gi,(x,e)=>e[0]==="#"?String.fromCodePoint(parseInt(e.slice(e[1].toLowerCase()==="x"?2:1),e[1].toLowerCase()==="x"?16:10)):ENT[e]??x).replace(/\s+/g," ").trim();
 function parseAttrs(s){const a={},r=/([^\s=/>]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>]+)))?/g;let m;while(m=r.exec(s))a[m[1].toLowerCase()]=m[2]??m[3]??m[4]??"";return a}
 export function parseHtml(html){
- const root={name:"#root",attrs:{},start:0,end:html.length,children:[],parent:null,texts:[]},stack=[root],errors=[],re=/<!--[\s\S]*?-->|<![^>]*>|<[^>]*>/g;let pos=0,raw=null,m;
+ const root={name:"#root",attrs:{},start:0,end:html.length,children:[],parent:null,texts:[]},stack=[root],errors=[],re=/<!--[\s\S]*?-->|<![^>]*>|<[^>]*>/g;let pos=0,m;
  const add=(s,start)=>{if(s)stack[stack.length-1].texts.push({text:s,start})};
- while(m=re.exec(html)){if(m.index<pos)continue;if(raw){if(!new RegExp("^<\\s*/\\s*"+raw+"\\b","i").test(m[0]))continue;add(html.slice(pos,m.index),pos);raw=null}else add(html.slice(pos,m.index),pos);const t=m[0],start=m.index,end=start+t.length;pos=end;
+ while(m=re.exec(html)){if(m.index<pos)continue;add(html.slice(pos,m.index),pos);const t=m[0],start=m.index,end=start+t.length;pos=end;
   if(t.startsWith("<!--")||/^<!doctype\b/i.test(t))continue;
   const close=/^<\s*\/\s*([A-Za-z][\w:-]*)/.exec(t);
   if(close){const n=close[1].toLowerCase();let i=-1;for(let j=stack.length-1;j;j--)if(stack[j].name===n){i=j;break}if(i<0){if(!OPTIONAL_END.has(n))errors.push(t+" en trop")}else{for(let j=stack.length-1;j>i;j--)if(STRUCT.has(stack[j].name))errors.push("<"+stack[j].name+"> non fermé avant </"+n+">");stack[i].end=end;stack.length=i}continue}
   const open=/^<\s*([A-Za-z][\w:-]*)\b([\s\S]*?)\/?\s*>$/.exec(t);if(!open)continue;const n=open[1].toLowerCase(),node={name:n,attrs:parseAttrs(open[2].replace(/\/\s*$/,"")),start,end,children:[],parent:stack.at(-1),texts:[]};node.parent.children.push(node);
-  if(!(/\/\s*>$/.test(t)||VOID.has(n))){stack.push(node);if(n==="script"||n==="style")raw=n}
+  if(!(/\/\s*>$/.test(t)||VOID.has(n))){stack.push(node);if(n==="script"||n==="style"){const closeIndex=html.toLowerCase().indexOf("</"+n,start+t.length);if(closeIndex<0){add(html.slice(start+t.length),start+t.length);pos=html.length;re.lastIndex=html.length}else{add(html.slice(start+t.length,closeIndex),start+t.length);pos=closeIndex;re.lastIndex=closeIndex}}}
  }
- if(!raw)add(html.slice(pos),pos);for(let i=stack.length-1;i;i--)if(STRUCT.has(stack[i].name))errors.push("<"+stack[i].name+"> non fermé");return{root,errors}
+ if(pos<html.length)add(html.slice(pos),pos);for(let i=stack.length-1;i;i--)if(STRUCT.has(stack[i].name))errors.push("<"+stack[i].name+"> non fermé");return{root,errors}
 }
 const walk=(n,p,o=[])=>{for(const c of n.children){if(p(c))o.push(c);walk(c,p,o)}return o};
 const find=(r,q={})=>walk(r,n=>(!q.tag||n.name===q.tag)&&(!q.className||(n.attrs.class||"").split(/\s+/).includes(q.className))&&(q.id===undefined||n.attrs.id===q.id));
@@ -32,6 +32,7 @@ const attr=(n,k)=>n.attrs[k.toLowerCase()],links=n=>find(n,{tag:"a"});
 const external=h=>{try{const u=new URL(h);return /^https?:$/.test(u.protocol)&&!["simulateur.site","www.simulateur.site"].includes(u.hostname.toLowerCase())}catch{return false}};
 const pageHref=(h,idx)=>{const m=/^\/([^/]+)\/([^/]+)\/$/.exec(h||"");return!!m&&idx.has(m[1]+"/"+m[2])};
 function ld(root){const ss=find(root,{tag:"script"}).filter(n=>(attr(n,"type")||"").toLowerCase()==="application/ld+json"),err=[],items=[];for(const n of ss){try{const v=JSON.parse(n.texts.map(x=>x.text).join("").trim()),add=v=>Array.isArray(v)?v.forEach(add):v&&typeof v==="object"?(Array.isArray(v["@graph"])?v["@graph"].forEach(add):items.push(v)):null;add(v)}catch(e){err.push("JSON-LD invalide : "+e.message)}}return{items,err}}
+export function summarize(fail,rules,total){const max=Number.isFinite(total)?Math.max(0,total):0;return Object.fromEntries(rules.map(rule=>{const rows=fail.filter(x=>x.rule===rule),pages=new Set(rows.map(x=>x.path));return[rule,{pages:Math.min(pages.size,max),messages:rows.length}] }))}
 export function checkPage(html,ctx){
  const {dir,slug,toolsMeta,pageIndex}=ctx,{root,errors:bal}=parseHtml(html),e=[],fail=(rule,message)=>e.push({rule,message}),metas=find(root,{tag:"meta"}),he=find(root,{tag:"html"});
  if(!/<!doctype\s+html\s*>/i.test(html)||he.length!==1||attr(he[0],"lang")!=="fr"||!metas.some(n=>(attr(n,"name")||"").toLowerCase()==="viewport")||!metas.some(n=>(attr(n,"name")||"").toLowerCase()==="calculator-rendering"&&(attr(n,"content")||"").toLowerCase()==="static")||!find(root,{tag:"link"}).some(n=>(attr(n,"rel")||"").toLowerCase().split(/\s+/).includes("stylesheet")&&attr(n,"href")==="/styles.css"))fail("html-base","doctype/lang/viewport/static rendering/stylesheet incomplet");
@@ -45,8 +46,7 @@ export function checkPage(html,ctx){
  const rs=find(root,{className:"result"});if(!rs.some(n=>text(n)))fail("result","au moins un .result doit avoir un texte non vide dans le HTML source");if(!rs.some(n=>attr(n,"aria-live")==="polite"))fail("result",'un .result doit avoir aria-live="polite"');
  if(!find(root,{className:"formula"}).some(n=>links(n).some(a=>external(attr(a,"href")))) )fail("formula",".formula doit contenir un lien externe http(s)");
  const secs=find(root,{className:"content-section"}),h2=secs.flatMap(s=>find(s,{tag:"h2"}).filter(n=>!ancestor(n,"related-tools")));if(!secs.length||h2.length<3)fail("content-h2","au moins 3 h2 éditoriaux requis");
- const rel=find(root,{className:"related-tools"});if(rel.length!==1)fail("related-block","exactement un bloc .related-tools est requis");const rl=rel.length===1?find(rel[0],{className:"related-link"}):[];if(rl.length<2||rl.length>4)fail("related-block","2 à 4 .related-link requis");
- const meta=toolsMeta?.[slug];for(const a of rl){const h=attr(a,"href"),m=/^\/[^/]+\/([^/]+)\/$/.exec(h||""),target=m?.[1];if(!pageHref(h,pageIndex))fail("related-block","lien associé vers une page inexistante : "+(h||"(vide)"));if(target&&!(meta?.relatedTools||[]).some(x=>x?.slug===target))fail("related-block","slug associé absent de TOOLS_META["+slug+"].relatedTools : "+target)}
+ const rel=find(root,{className:"related-tools"});const meta=toolsMeta?.[slug];if(rel.length!==1)fail("related-block","exactement un bloc .related-tools est requis");if(rel.length===1){const rl=find(rel[0],{className:"related-link"});if(rl.length<2||rl.length>4)fail("related-block","2 à 4 .related-link requis");for(const a of rl){const h=attr(a,"href"),m=/^\/[^/]+\/([^/]+)\/$/.exec(h||""),target=m?.[1];if(!pageHref(h,pageIndex))fail("related-block","lien associé vers une page inexistante : "+(h||"(vide)"));if(target&&!(meta?.relatedTools||[]).some(x=>x?.slug===target))fail("related-block","slug associé absent de TOOLS_META["+slug+"].relatedTools : "+target)}}
  if(!meta||!Array.isArray(meta.relatedTools)||meta.relatedTools.length<2)fail("related-meta","TOOLS_META["+slug+"] doit exister avec au moins 2 relatedTools");
  const j=ld(root),wa=j.items.filter(x=>x["@type"]==="WebApplication"),br=j.items.filter(x=>x["@type"]==="BreadcrumbList");j.err.forEach(m=>fail("jsonld",m));if(wa.length!==1||br.length!==1)fail("jsonld","exactement un WebApplication et un BreadcrumbList sont requis");
  if(wa.length===1){if(wa[0].url!==canonical)fail("jsonld","WebApplication.url doit être le canonique");if(norm(wa[0].description||"")!==description)fail("jsonld","WebApplication.description doit égaler la meta description")}
@@ -61,15 +61,15 @@ function main(){
  let pages;try{pages=discover()}catch(e){console.error(e.message);process.exit(1)}if(!pages.length){console.error("Aucune page outil trouvée.");process.exit(1)}
  let meta;try{meta=loadToolsMeta(read("public/simulateurs.js"))}catch(e){console.error(e.message);process.exit(1)}
  const idx=new Set(pages.map(p=>p.dir+"/"+p.slug)),fail=[];for(const p of pages)fail.push(...checkPage(p.html,{dir:p.dir,slug:p.slug,toolsMeta:meta,pageIndex:idx}).map(x=>({...x,path:p.path})));fail.push(...checkAll(pages));
- const rules=["html-base","markup-balance","title","description","canonical","breadcrumb","h1","tool-block","result","formula","content-h2","related-block","related-meta","jsonld","meta-unique"],counts=Object.fromEntries(rules.map(x=>[x,0]));for(const x of fail)if(x.rule in counts)counts[x.rule]++;
+ const rules=["html-base","markup-balance","title","description","canonical","breadcrumb","h1","tool-block","result","formula","content-h2","related-block","related-meta","jsonld","meta-unique"],counts=summarize(fail,rules,pages.length);
  const fam={};for(const p of pages){const f=family(p,meta);fam[f]=(fam[f]||0)+1}
  const ind=pages.map(p=>{const{root}=parseHtml(p.html),s=find(root,{className:"content-section"}),words=s.map(x=>excl(x,"related-tools")).join(" ").split(/\s+/).filter(Boolean).length,h=s.flatMap(x=>find(x,{tag:"h2"}).filter(n=>!ancestor(n,"related-tools"))).length,ext=find(root,{tag:"a"}).filter(a=>external(attr(a,"href"))).length;return{path:p.path,words,h2:h,external:ext}}),under=ind.filter(x=>x.words<120).length,noext=ind.filter(x=>x.external===0).length,total=pages.length;
- const a=["### (a) Règles","","| Règle | Pages en échec | Total |","|---|---:|---:|",...rules.map(r=>"| "+r+" | "+counts[r]+" | "+total+" |")].join("\n");
+ const a=["### (a) Règles","","| Règle | Pages en échec | Écarts | Total |","|---|---:|---:|---:|",...rules.map(r=>"| "+r+" | "+counts[r].pages+" | "+counts[r].messages+" | "+total+" |")].join("\n");
  const b=["### (b) Familles","","| Famille | Pages |","|---|---:|",...Object.entries(fam).sort(([x],[y])=>x.localeCompare(y)).map(([f,n])=>"| "+f+" | "+n+" |")].join("\n");
  const c=["### (c) Indicateurs","","| Indicateur | Valeur |","|---|---:|","| Pages sous 120 mots | "+under+" |","| Pages sans lien externe | "+noext+" |"].join("\n");
  const out=[a,b,c,"### Écarts","",...fail.map(x=>x.path+" ["+x.rule+"] "+x.message)].join("\n");
  if(process.env.GITHUB_STEP_SUMMARY&&!process.argv.includes("--json"))fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,[a,b,c].join("\n\n")+"\n");
- if(process.argv.includes("--json"))console.log(JSON.stringify({pages:pages.map(p=>({path:p.path,dir:p.dir,slug:p.slug,family:family(p,meta)})),rules:counts,families:fam,indicators:ind,pagesUnder120:under,pagesWithoutExternalLink:noext,failures:fail},null,2));else console.log(out);
+ if(process.argv.includes("--json"))console.log(JSON.stringify({pages:pages.map(p=>({path:p.path,dir:p.dir,slug:p.slug,family:family(p,meta)})),counts,families:fam,indicators:ind,pagesUnder120:under,pagesWithoutExternalLink:noext,failures:fail},null,2));else console.log(out);
  if(process.argv.includes("--strict")&&fail.length){for(const x of fail)console.error("::error file="+x.path+"::"+x.rule+" "+x.message);process.exit(1)}
 }
 if(import.meta.url===(process.argv[1]?pathToFileURL(path.resolve(process.argv[1])).href:""))main();
