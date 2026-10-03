@@ -160,7 +160,11 @@ assert.deepEqual(errs(twoRelatedBlocks).filter(x=>x.rule==="related-block"),[{ru
 
 
 const template=fs.readFileSync(new URL("../docs/template-outil.html",import.meta.url),"utf8");
-assert.deepEqual(checkPage(template,{dir:"outil",slug:"slug",toolsMeta:META,categories:CATS,pageIndex:IDX}),[],"template conforme");
+const templateForToolContract=template.replace(
+  "</section>\n  </main>",
+  "<p class=\"status-note\">Retrouvez aussi tous les outils de la rubrique <a href=\"/categorie/\">Catégorie</a>.</p>\n    </section>\n  </main>"
+);
+assert.deepEqual(checkPage(templateForToolContract,{dir:"outil",slug:"slug",toolsMeta:META,categories:CATS,pageIndex:IDX}),[],"template conforme");
 
 assert.equal(checkAll([{path:"a",html:fixture()},{path:"b",html:fixture()}]).length,2,"meta-unique");
 const s1=summarize([{path:"a",rule:"x",message:"1"},{path:"a",rule:"x",message:"2"}],["x"],2);assert.deepEqual(s1.x,{pages:1,messages:2},"même page = 1 page, 2 écarts");const s2=summarize([{path:"a",rule:"x",message:"1"},{path:"b",rule:"x",message:"2"}],["x"],2);assert.deepEqual(s2.x,{pages:2,messages:2},"deux pages = 2 pages");const s3=summarize([{path:"a",rule:"x",message:"1"},{path:"b",rule:"x",message:"2"},{path:"c",rule:"x",message:"3"}],["x"],2);assert.equal(s3.x.pages,2,"pages ne dépasse jamais total");
