@@ -9,10 +9,6 @@
   },
   {
     "path": "public/outil/age/index.html",
-    "rule": "jsonld"
-  },
-  {
-    "path": "public/outil/age/index.html",
     "rule": "result"
   },
   {
@@ -246,10 +242,6 @@
   {
     "path": "public/outil/inflation/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/interets-composes/index.html",
-    "rule": "jsonld"
   },
   {
     "path": "public/outil/interets-composes/index.html",
@@ -477,10 +469,6 @@
   },
   {
     "path": "public/outil/rsa/index.html",
-    "rule": "jsonld"
-  },
-  {
-    "path": "public/outil/rsa/index.html",
     "rule": "result"
   },
   {
@@ -538,10 +526,6 @@
   {
     "path": "public/outil/solde-tout-compte/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/succession/index.html",
-    "rule": "jsonld"
   },
   {
     "path": "public/outil/succession/index.html",
