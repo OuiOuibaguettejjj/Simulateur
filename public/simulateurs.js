@@ -14,7 +14,7 @@
 
   function addBreadcrumbSchema(tool,slug,meta){
     const itemList=[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"}];
-    if(meta) itemList.push({"@type":"ListItem","position":2,"name":CATEGORIES[meta.category].label,"item":"https://simulateur.site"+CATEGORIES[meta.category].path});
+    if(meta && CATEGORIES[meta.category].label !== (tool.title||document.title)) itemList.push({"@type":"ListItem","position":2,"name":CATEGORIES[meta.category].label,"item":"https://simulateur.site"+CATEGORIES[meta.category].path});
     itemList.push({"@type":"ListItem","position":itemList.length+1,"name":tool.title||document.title,"item":location.href.split("#")[0]});
     if([...document.querySelectorAll('script[type="application/ld+json"]')].some(node=>/"@type"\s*:\s*"BreadcrumbList"/.test(node.textContent||""))) return;
     const script=document.createElement("script");
@@ -29,7 +29,8 @@
     if(!host) return;
     const b=document.createElement("div");
     b.className="breadcrumb";
-    b.innerHTML='<a href="/">Accueil</a>'+(meta?' · <a href="'+CATEGORIES[meta.category].path+'">'+CATEGORIES[meta.category].label+"</a>":"")+' · '+(tool.title||document.title);
+    const categoryLink=meta && CATEGORIES[meta.category].label !== (tool.title||document.title) ? ' · <a href="'+CATEGORIES[meta.category].path+'">'+CATEGORIES[meta.category].label+"</a>" : "";
+    b.innerHTML='<a href="/">Accueil</a>'+categoryLink+' · '+(tool.title||document.title);
     host.insertBefore(b,host.firstElementChild);
   }
 
