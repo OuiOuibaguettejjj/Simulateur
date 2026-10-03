@@ -59,7 +59,7 @@
 ## 2026-10-01 — Capacité d’emprunt premium
 - Refonte du calculateur de capacité d’emprunt immobilier : formulaire enrichi, assurance emprunteur, apport, comparaison 15/20/25 ans et résultats détaillés.
 - SEO renforcé avec contenu HTML serveur, données structurées WebApplication/BreadcrumbList, FAQ, sources officielles et maillage interne.
-- Compatibilité conservée avec le moteur legacy de pré-rendu afin de ne pas modifier le pipeline de déploiement ni le runtime commun des autres simulateurs.
+- À cette date, la page restait compatible avec le pipeline de pré-rendu alors utilisé. Cette compatibilité a ensuite été supprimée lors de la migration HTML-first complète du 3 octobre 2026.
 - Aucun changement de route, de Worker, de configuration Cloudflare ou de dépendance externe.
 
 # Changelog
