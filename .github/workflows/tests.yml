@@ -45,6 +45,9 @@ jobs:
       - name: Test calculateur retraite
         run: node tests/retraite.test.js
 
+      - name: Test garde des résultats
+        run: node tests/simulateurs.test.js
+
       - name: Test paramètres réglementaires
         run: node tests/params.test.mjs
 
