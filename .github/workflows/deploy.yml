@@ -63,7 +63,7 @@ jobs:
           if (toolPages.length === 0) errors.push('no /outil/ page found');
           if (toolDirsWithoutIndex.length) errors.push('missing index.html in /outil/ directories: ' + toolDirsWithoutIndex.map(entry => path.join(toolRoot, entry.name)).join(', '));
           if (errors.length) { console.error(errors.join('\n')); process.exit(1); }
-          console.log('Verified ' + files.length + ' HTML-first calculator pages.');
+          console.log('Verified ' + toolPages.length + ' HTML-first calculator pages.');
           NODE
 
       - name: Verify tool metadata matches rendered HTML
@@ -152,7 +152,7 @@ jobs:
           if (toolPages.length === 0) errors.push('no /outil/ page found');
           if (toolDirsWithoutIndex.length) errors.push('missing index.html in /outil/ directories: ' + toolDirsWithoutIndex.map(entry => path.join(toolRoot, entry.name)).join(', '));
           if (errors.length) { console.error(errors.join('\n')); process.exit(1); }
-          console.log('Verified metadata ↔ HTML contract for ' + files.length + ' /outil/ pages.');
+          console.log('Verified metadata ↔ HTML contract for ' + toolPages.length + ' /outil/ pages.');
           NODE
       - name: Verify shared layout is normalized
         run: node scripts/normalize-layout.mjs --check
