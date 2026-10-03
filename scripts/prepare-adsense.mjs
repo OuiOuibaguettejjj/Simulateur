@@ -4,6 +4,7 @@ import path from "node:path";
 // Ajoute les marqueurs AdSense dans le <head> de toutes les pages publiques.
 // Idempotent : une seconde exécution ne modifie plus aucun fichier.
 const root = path.join(process.cwd(), "public");
+const CHECK_ONLY = process.argv.includes("--check");
 const SKIP_ROOT_DIRS = new Set([".well-known", "api"]);
 const META = '<meta name="google-adsense-account" content="ca-pub-2924580037451268">';
 
@@ -57,8 +58,12 @@ for (const file of files) {
   const next = normalize(old, path.relative(process.cwd(), file));
   verify(next, path.relative(process.cwd(), file));
   if (next !== old) {
-    fs.writeFileSync(file, next);
     changed++;
+    if (!CHECK_ONLY) fs.writeFileSync(file, next);
   }
 }
-console.log("AdSense normalize: " + changed + " pages updated; " + files.length + " pages checked.");
+if (CHECK_ONLY && changed) {
+  console.error("AdSense check failed: " + changed + " page(s) differ from the canonical AdSense preparation.");
+  process.exit(1);
+}
+console.log("AdSense " + (CHECK_ONLY ? "check" : "normalize") + ": " + changed + " pages updated; " + files.length + " pages checked.");

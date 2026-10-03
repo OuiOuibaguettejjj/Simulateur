@@ -39,3 +39,7 @@ Le workflow de tests fonctionnels reste séparé du gate de sécurité. Le workf
 ## HTML-first 2026-10-03
 
 Les 77 pages `/outil/<slug>/` sont désormais HTML-first et autonomes pour leur contenu éditorial initial. Le script historique de pré-rendu et son workflow de validation ont été supprimés. Les URLs existantes sont conservées.
+
+## Durcissement CI/CD P0 — 2026-10-03
+
+Le dépôt doit rester la source de vérité de la production. Les scripts de génération du sitemap, d'uniformisation du layout et de préparation AdSense peuvent conserver leur mode de génération pour les opérations manuelles, mais le workflow de production les exécute désormais en mode `--check` et échoue si le contenu commité n'est pas déjà conforme. Les tests fonctionnels critiques sont exécutés dans le workflow de déploiement et le workflow `tests` s'exécute sur toute PR vers `main` ainsi que sur les merge groups. Le contrôle des GitHub Actions accepte les commentaires de fin de ligne tout en exigeant un SHA complet.
