@@ -25,7 +25,7 @@ jobs:
       - name: Verify committed build is canonical
         run: |
           node scripts/generate-sitemap.mjs --check
-          node scripts/normalize-layout.mjs --report
+          node scripts/normalize-layout.mjs --check
           node scripts/prepare-adsense.mjs --check
 
       - name: Test calculateur IFI
