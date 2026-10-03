@@ -83,7 +83,13 @@ const sitemapPath = path.join(ROOT, "sitemap.xml");
 if (CHECK_ONLY) {
   const current = fs.existsSync(sitemapPath) ? fs.readFileSync(sitemapPath, "utf8") : "";
   if (current !== sitemap) {
+    const currentLines = current.split(/\r?\n/);
+    const generatedLines = sitemap.split(/\r?\n/);
+    const firstMismatch = generatedLines.findIndex((line, i) => line !== currentLines[i]);
     console.error("Sitemap check failed: public/sitemap.xml is not the generated sitemap for this commit.");
+    console.error("First mismatch at line " + (firstMismatch + 1) + ":");
+    console.error("Committed: " + (currentLines[firstMismatch] ?? "<missing>"));
+    console.error("Generated: " + (generatedLines[firstMismatch] ?? "<missing>"));
     process.exit(1);
   }
   console.log(`Sitemap check passed: ${pages.length} URLs.`);
