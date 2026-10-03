@@ -181,7 +181,8 @@ const NEG={
  "tool-block":fixture().replace("<section class=\"tool\">","<div class=\"tool\">"),
  "result":fixture().replace("Résultat initial.",""),
  "related-block":fixture().replace(L("slug-2"),""),
- "jsonld":fixture().replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/g,"")
+ "jsonld":fixture().replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/g,""),
+ "citation-marker":fixture().replace("Exemple de calcul","Exemple de calcul citeturn2search3")
 };
 for(const r of STRUCTURAL_RULES){
  assert.equal(only(fixture(),r).length,0,"positif "+r+" : page conforme sans écart");
@@ -190,11 +191,12 @@ for(const r of STRUCTURAL_RULES){
  } else assert(only(NEG[r],r).length>0,"négatif "+r+" : écart attendu");
 }
 assert.deepEqual(errs(fixture()),[],"page conforme : aucun écart du tout");
+assert.equal(only(fixture().replace("Exemple de calcul","Exemple de calcul citeturn2search3"),"citation-marker").length,1,"négatif : marqueur de citation ChatGPT visible");
 
 // classement des règles
 assert.deepEqual(STRUCTURAL_RULES.filter(r=>EDITORIAL_RULES.includes(r)),[],"familles disjointes");
 for(const r of ["description","content-h2","formula","meta-unique"])assert(EDITORIAL_RULES.includes(r)&&!STRUCTURAL_RULES.includes(r),r+" est éditoriale");
-for(const r of ["html-base","markup-balance","title","canonical","breadcrumb","h1","tool-block","result","related-block","jsonld","related-meta"])assert(STRUCTURAL_RULES.includes(r),r+" est structurelle");
+for(const r of ["html-base","markup-balance","title","canonical","breadcrumb","h1","tool-block","result","related-block","jsonld","related-meta","citation-marker"])assert(STRUCTURAL_RULES.includes(r),r+" est structurelle");
 assert.deepEqual(errs(fixture("x")).filter(x=>STRUCTURAL_RULES.includes(x.rule)),[],"une page qui ne viole que l'éditorial n'a aucun écart structurel");
 assert(errs(fixture("x")).some(x=>x.rule==="description"),"description reste signalée (éditorial)");
 
