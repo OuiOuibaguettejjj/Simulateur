@@ -425,10 +425,6 @@
   },
   {
     "path": "public/outil/pourcentage/index.html",
-    "rule": "jsonld"
-  },
-  {
-    "path": "public/outil/pourcentage/index.html",
     "rule": "result"
   },
   {
