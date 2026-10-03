@@ -24,3 +24,8 @@ L'intégration publicitaire est préparée via un fichier `ads.txt`, les marqueu
 ## Taxonomie 2026-10-03
 
 La structure logique des outils est définie avant les prochaines intégrations : type unique, catégorie principale unique et conservation des URL. La taxonomie est centralisée dans `public/simulateurs.js`. Cette première étape ne réécrit pas les blocs de contenu existants.
+
+
+## Migration taxonomie 2026-10-03
+
+Les relations entre outils sont maintenant stockées avec la taxonomie centrale. Le pré-rendu et le contrôle CI ne dépendent plus d'un second référentiel `groups`. Cette migration ne change aucune URL.
