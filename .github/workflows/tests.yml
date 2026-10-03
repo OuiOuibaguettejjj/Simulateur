@@ -41,3 +41,9 @@ jobs:
 
       - name: Test calculateur retraite
         run: node tests/retraite.test.js
+
+      - name: Test check-pages
+        run: node tests/check-pages.test.mjs
+
+      - name: Rapport de conformité des pages (non bloquant)
+        run: node scripts/check-pages.mjs
