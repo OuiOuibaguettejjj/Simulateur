@@ -472,6 +472,7 @@ jobs:
           const versionId = active?.version_id;
           if (!versionId) throw new Error('Unable to identify the active 100% production version.');
           fs.writeFileSync('/tmp/simulateur-previous-version-id', versionId + '\n');
+          fs.appendFileSync(process.env.GITHUB_ENV, 'PREVIOUS_VERSION_ID=' + versionId + '\n');
           console.log('Recorded previous production version for rollback: ' + versionId);
           NODE
 
