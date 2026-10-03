@@ -73,4 +73,8 @@ if (fs.existsSync(outilDir)) {
   }
 }
 
-console.log("Layout check: " + files.length + " pages checked; " + warned + " warnings.");
+console.log("Layout check: " + files.length + " pages checked; " + warned + " issue(s).");
+if (warned) {
+  console.error("Layout consistency check failed: " + warned + " issue(s) detected.");
+  process.exit(1);
+}
