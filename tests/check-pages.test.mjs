@@ -23,24 +23,24 @@ const errs=(h,m=META,i=IDX)=>checkPage(h,{dir:"outil",slug:"slug",toolsMeta:m,pa
 const has=(h,r)=>errs(h).some(x=>x.rule===r);
 
 assert.deepEqual(errs(fixture()),[],"page conforme");
-assert(has(fixture().replace("<title>Mot-clé | Simulateur</title>","<title>Mot-clé</title>"),"title");
+assert(has(fixture().replace("<title>Mot-clé | Simulateur</title>","<title>Mot-clé</title>"),"title"));
 for(const [n,bad] of [[119,true],[120,false],[160,false],[161,true]])assert.equal(has(fixture("x".repeat(n)),"description"),bad,"description "+n);
 for(const a of ["'","&#39;","&apos;","’"])assert.equal(has(fixture("x".repeat(118)+a+"."),"description"),false,"apostrophe "+a);
-assert(has(fixture().replace("<section class=\"tool\">","<div class=\"tool\">"),"tool-block");
-assert(has(fixture().replace("<p class=\"tool-intro\">","<p id=\"intro\" class=\"tool-intro\">"),"tool-block");
-assert(has(fixture().replace("Résultat initial.",""),"result");
-assert(has(fixture().replace(" aria-live=\"polite\"",""),"result");
-assert(has(fixture().replace("<a href=\"https://www.service-public.fr/\">Source officielle</a>","Source officielle"),"formula");
-assert(has(fixture().replace("<h2>À savoir</h2>",""),"content-h2");
-assert(has(fixture().replace("</section></main>","</section><section class=\"related-tools\"><a class=\"related-link\" href=\"/outil/slug-1/\">A</a><a class=\"related-link\" href=\"/outil/slug-2/\">B</a></section></main>"),"related-block");
-assert(has(fixture().replace("<a class=\"related-link\" href=\"/outil/slug-2/\">Outil 2</a>",""),"related-block");
-assert(has(fixture().replace("<a class=\"related-link\" href=\"/outil/slug-2/\">Outil 2</a>","<a class=\"related-link\" href=\"/outil/slug-2/\">2</a><a class=\"related-link\" href=\"/outil/slug-1/\">3</a><a class=\"related-link\" href=\"/outil/slug-1/\">4</a><a class=\"related-link\" href=\"/outil/slug-1/\">5</a>"),"related-block");
-assert(has(fixture().replace("/outil/slug-2/","/outil/absent/"),"related-block");
-assert(has(fixture().replace("\"description\":\""+DESC+"\"","\"description\":\"Autre\""),"jsonld");
-assert(has(fixture().replace(/<script type=\"application\/ld\+json\">[\s\S]*?<\/script>/g,""),"jsonld");
-assert(has(fixture()+"</div>","markup-balance");
-assert(has(fixture().replace("</section></main>","</main>"),"markup-balance");
-assert(has(fixture().replace("https://simulateur.site/outil/slug/","https://simulateur.site/outil/autre/"),"canonical");
+assert(has(fixture().replace("<section class=\"tool\">","<div class=\"tool\">"),"tool-block"));
+assert(has(fixture().replace("<p class=\"tool-intro\">","<p id=\"intro\" class=\"tool-intro\">"),"tool-block"));
+assert(has(fixture().replace("Résultat initial.",""),"result"));
+assert(has(fixture().replace(" aria-live=\"polite\"",""),"result"));
+assert(has(fixture().replace("<a href=\"https://www.service-public.fr/\">Source officielle</a>","Source officielle"),"formula"));
+assert(has(fixture().replace("<h2>À savoir</h2>",""),"content-h2"));
+assert(has(fixture().replace("</section></main>","</section><section class=\"related-tools\"><a class=\"related-link\" href=\"/outil/slug-1/\">A</a><a class=\"related-link\" href=\"/outil/slug-2/\">B</a></section></main>"),"related-block"));
+assert(has(fixture().replace("<a class=\"related-link\" href=\"/outil/slug-2/\">Outil 2</a>",""),"related-block"));
+assert(has(fixture().replace("<a class=\"related-link\" href=\"/outil/slug-2/\">Outil 2</a>","<a class=\"related-link\" href=\"/outil/slug-2/\">2</a><a class=\"related-link\" href=\"/outil/slug-1/\">3</a><a class=\"related-link\" href=\"/outil/slug-1/\">4</a><a class=\"related-link\" href=\"/outil/slug-1/\">5</a>"),"related-block"));
+assert(has(fixture().replace("/outil/slug-2/","/outil/absent/"),"related-block"));
+assert(has(fixture().replace("\"description\":\""+DESC+"\"","\"description\":\"Autre\""),"jsonld"));
+assert(has(fixture().replace(/<script type=\"application\/ld\+json\">[\s\S]*?<\/script>/g,""),"jsonld"));
+assert(has(fixture()+"</div>","markup-balance"));
+assert(has(fixture().replace("</section></main>","</main>"),"markup-balance"));
+assert(has(fixture().replace("https://simulateur.site/outil/slug/","https://simulateur.site/outil/autre/"),"canonical"));
 
 assert.deepEqual(parseHtml("<script>const x='<div><section>';</script><section></section>").errors,[],"script text ignored");
 
