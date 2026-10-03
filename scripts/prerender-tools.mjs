@@ -11,15 +11,15 @@ function jsonLdScript(data) {
 }
 function hasJsonLdType(html, type) {
   return [...html.matchAll(/<script[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)]
-    .some(m => new RegExp('"@type"\\s*:\\s*"' + type + '"').test(m[1]));
+    .some(m => new RegExp('"@type"\s*:\s*"' + type + '"').test(m[1]));
 }
 function metaDescription(html) {
   const m = html.match(/<meta[^>]+name=["']description["'][^>]+content=["']([^"']*)["']/i);
   return m ? m[1] : "";
 }
 function metadataOf(s){
-  const c=s.match(/const CATEGORIES=([\\s\\S]*?);\\s*const TOOL_TYPES=/);
-  const m=s.match(/const TOOLS_META=([\\s\\S]*?);\\s*function toolMeta/);
+  const c=s.match(/const CATEGORIES=([\s\S]*?);\s*const TOOL_TYPES=/);
+  const m=s.match(/const TOOLS_META=([\s\S]*?);\s*function toolMeta/);
   if(!c||!m) throw Error("Taxonomy metadata missing");
   return {categories:Function("return ("+c[1]+")")(),tools:Function("return ("+m[1]+")")()};
 }
