@@ -41,30 +41,24 @@ for (const file of textFiles) {
 
 /* Central architecture source-of-truth gate. */
 const sim = read("public/simulateurs.js");
-const categoriesMatch = sim.match(/const CATEGORIES=(\{[\s\S]*?\});\s*const TOOL_TYPES=/);
-const typesMatch = sim.match(/const TOOL_TYPES=(\{[\s\S]*?\});\s*const TOOLS_META=/);
+const categoriesMatch = sim.match(/const CATEGORIES=(\{[\s\S]*?\});\s*const TOOLS_META=/);
 const metaMatch = sim.match(/const TOOLS_META=(\{[\s\S]*?\});\s*function toolMeta/);
-if (!categoriesMatch || !typesMatch || !metaMatch) {
+if (!categoriesMatch || !metaMatch) {
   fail("central taxonomy blocks are not parseable");
 } else {
-  let categories, toolTypes, toolsMeta;
+  let categories, toolsMeta;
   try {
     categories = Function("return (" + categoriesMatch[1] + ")")();
-    toolTypes = Function("return (" + typesMatch[1] + ")")();
     toolsMeta = Function("return (" + metaMatch[1] + ")")();
   } catch (error) {
     fail("central taxonomy cannot be parsed: " + error.message);
   }
-  if (categories && toolTypes && toolsMeta) {
+  if (categories && toolsMeta) {
     const allowedTypes = new Set(["calculateur", "simulateur", "conversion", "comparateur"]);
     const categorySlugs = new Set(Object.keys(categories));
-    const typeSlugs = Object.keys(toolTypes);
     const metaSlugs = Object.keys(toolsMeta);
     const pageSlugs = allFiles.filter(file => /^public\/outil\/[^/]+\/index\.html$/.test(file)).map(file => file.split("/")[2]);
-    for (const slug of typeSlugs) if (!(slug in toolsMeta)) fail("TOOL_TYPES entry missing from TOOLS_META: " + slug);
-    for (const slug of metaSlugs) if (!(slug in toolTypes)) fail("TOOLS_META entry missing from TOOL_TYPES: " + slug);
     for (const [slug, meta] of Object.entries(toolsMeta)) {
-      if (toolTypes[slug] !== meta.type) fail(slug + ": TOOL_TYPES type (" + toolTypes[slug] + ") does not match TOOLS_META type (" + meta.type + ")");
       if (!meta || typeof meta !== "object") { fail("invalid metadata for " + slug); continue; }
       if (!allowedTypes.has(meta.type)) fail(slug + ": invalid type " + meta.type);
       if (!categorySlugs.has(meta.category)) fail(slug + ": unknown primary category " + meta.category);
