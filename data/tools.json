@@ -39,12 +39,16 @@
     "vie": {
       "label": "Vie quotidienne",
       "path": "/vie-quotidienne/"
+    },
+    "maths": {
+      "label": "Maths",
+      "path": "/maths/"
     }
   },
   "tools": {
     "arrondi": {
       "type": "calculateur",
-      "category": "argent",
+      "category": "maths",
       "relatedTools": [
         "pourcentage",
         "proportion",
@@ -53,7 +57,7 @@
     },
     "calculatrice": {
       "type": "calculateur",
-      "category": "argent",
+      "category": "maths",
       "relatedTools": [
         "pourcentage",
         "moyenne",
@@ -71,7 +75,7 @@
     },
     "fractions": {
       "type": "calculateur",
-      "category": "argent",
+      "category": "maths",
       "relatedTools": [
         "proportion",
         "pourcentage",
@@ -89,7 +93,7 @@
     },
     "median-mode": {
       "type": "calculateur",
-      "category": "argent",
+      "category": "maths",
       "relatedTools": [
         "moyenne",
         "moyenne-ponderee",
@@ -98,7 +102,7 @@
     },
     "moyenne-ponderee": {
       "type": "calculateur",
-      "category": "argent",
+      "category": "maths",
       "relatedTools": [
         "moyenne",
         "median-mode",
@@ -107,7 +111,7 @@
     },
     "moyenne": {
       "type": "calculateur",
-      "category": "argent",
+      "category": "maths",
       "relatedTools": [
         "moyenne-ponderee",
         "median-mode",
@@ -116,7 +120,7 @@
     },
     "pourcentage": {
       "type": "calculateur",
-      "category": "argent",
+      "category": "maths",
       "relatedTools": [
         "tva",
         "remise",
@@ -125,7 +129,7 @@
     },
     "proportion": {
       "type": "calculateur",
-      "category": "argent",
+      "category": "maths",
       "relatedTools": [
         "pourcentage",
         "prix-unitaire",
@@ -134,7 +138,7 @@
     },
     "ratio": {
       "type": "calculateur",
-      "category": "argent",
+      "category": "maths",
       "relatedTools": [
         "pourcentage",
         "proportion",
@@ -194,7 +198,7 @@
       ]
     },
     "epargne": {
-      "type": "calculateur",
+      "type": "simulateur",
       "category": "epargne",
       "relatedTools": [
         "epargne-mensuelle",
@@ -375,7 +379,7 @@
       ]
     },
     "tva": {
-      "type": "simulateur",
+      "type": "calculateur",
       "category": "fiscalite",
       "relatedTools": [
         "pourcentage",
@@ -474,7 +478,7 @@
       ]
     },
     "frais-kilometriques": {
-      "type": "calculateur",
+      "type": "simulateur",
       "category": "travail",
       "relatedTools": [
         "consommation-carburant",
@@ -629,7 +633,7 @@
       ]
     },
     "temps": {
-      "type": "calculateur",
+      "type": "conversion",
       "category": "temps",
       "relatedTools": [
         "difference-dates",

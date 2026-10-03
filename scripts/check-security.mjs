@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import fs from "node:fs";
+import { spawnSync } from "node:child_process";
 import path from "node:path";
 
 const ROOT = process.cwd();
@@ -107,6 +108,9 @@ if (!/group:\s*production/.test(deploy) || !/cancel-in-progress:\s*false/.test(d
 if (!/permissions:\s*\n\s+contents:\s+read/.test(deploy)) fail("deploy workflow: contents: read permission is required");
 if (!/cloudflare\/wrangler-action@[0-9a-f]{40}/.test(deploy)) fail("deploy workflow: Wrangler action must be pinned to a full SHA");
 if (!/secrets\.CLOUDFLARE_API_TOKEN/.test(deploy) || !/secrets\.CLOUDFLARE_ACCOUNT_ID/.test(deploy)) fail("deploy workflow: Cloudflare credentials must remain GitHub secrets");
+
+const hubs = spawnSync(process.execPath, ["scripts/check-hubs.mjs"], { stdio: "inherit" });
+if (hubs.status !== 0) fail("hub taxonomy check failed");
 
 if (errors.length) {
   console.error(errors.join("\n"));

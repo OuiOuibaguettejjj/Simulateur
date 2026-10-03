@@ -107,3 +107,12 @@ Toutes les pages `/outil/` utilisent désormais 2 à 4 relations ordonnées dans
 Le fallback JavaScript historique des outils associés est supprimé une fois le comptage final validé. Les pages `/conversion/` et `/comparateur/` restent HTML-first avec 2 à 4 liens sans `relatedTools`.
 
 La page TVA reçoit volontairement une nouvelle liste visible d'outils associés : pourcentage, remise, prix-unitaire et impot-sur-le-revenu. `capacite-emprunt` est ramenée à un seul bloc standard de quatre liens ; son paragraphe « Sources officielles… » est conservé dans le contenu.
+
+
+## 2026-10-03 — Taxonomie définitive et contrôle des hubs
+
+La taxonomie principale est désormais arrêtée : Maths (/maths/) regroupe pourcentage, proportion, ratio, fractions, moyenne, moyenne pondérée, médiane/mode, arrondi et calculatrice. Argent conserve coefficient, marge, remise et prix unitaire. TVA devient un calculateur ; épargne et frais kilométriques deviennent des simulateurs ; temps devient une conversion tout en conservant son URL /outil/temps/.
+
+Les URLs existantes sont conservées. Les deux intentions prix unitaire (/outil/prix-unitaire/ et /comparateur/prix-unitaire/) restent distinctes pour le moment. Les hubs de catégorie et de type sont alignés sur la déclaration centrale ; les liens transversaux des hubs de catégorie restent visibles avec la classe see-also.
+
+Le contrôle CI check-hubs.mjs vérifiera la couverture exacte des hubs de catégorie, la cohérence des hubs de type, la couverture des pages /conversion/ et /comparateur/ et la présence de toutes les catégories sur l’accueil.
