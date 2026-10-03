@@ -142,14 +142,7 @@
 <a href="/">Accueil</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cgu/">CGU</a>
 </div></div></footer>
 
-<script>
-const F={
- text:(i,l,p="")=>'<div class="field"><label for="'+i+'">'+l+'</label><input id="'+i+'" type="number" min="0" step="1" placeholder="'+p+'"></div>',
- select:(i,l,o)=>'<div class="field"><label for="'+i+'">'+l+'</label><select id="'+i+'">'+o.map(x=>'<option value="'+x[0]+'">'+x[1]+'</option>').join('')+'</select></div>',
- row:a=>'<div class="row">'+a.join('')+'</div>'
-};
-
-function euro(v){return Number(v).toLocaleString("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:0});}
+<script>function euro(v){return Number(v).toLocaleString("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:0});}
 function roundEuro(v){return Math.round(Number(v)||0);}
 function progressive(base){
  const brackets=[
