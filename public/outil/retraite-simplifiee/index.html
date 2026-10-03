@@ -1,26 +1,26 @@
 <!doctype html>
 <html lang="fr">
-<head>
+<head><meta name="calculator-rendering" content="static">
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Simulateur retraite 2026 : pension de base | Simulateur</title>
+<title>Simulateur retraite 2026</title>
 <meta name="description" content="Estimez votre retraite de base en 2026 à partir de votre carrière, de votre revenu annuel moyen et de votre date de départ.">
 <link rel="canonical" href="https://simulateur.site/outil/retraite-simplifiee/">
 <link rel="stylesheet" href="/styles.css">
 <script src="/simulateurs.js" defer></script><script src="/enter-calcul.js" defer></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","@id":"https://simulateur.site/outil/retraite-simplifiee/#application","name":"Simulateur retraite 2026","url":"https://simulateur.site/outil/retraite-simplifiee/","applicationCategory":"Calculator","operatingSystem":"Web","inLanguage":"fr-FR","description":"Estimation indicative simplifiée de la retraite de base à partir du revenu annuel moyen, des trimestres d’assurance et de la date de départ."}</script>
-</head>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Simulateur retraite 2026","url":"https://simulateur.site/outil/retraite-simplifiee/","description":"Estimez votre retraite de base en 2026 à partir de votre carrière, de votre revenu annuel moyen et de votre date de départ.","inLanguage":"fr-FR","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"price":"0","priceCurrency":"EUR"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Retraite","item":"https://simulateur.site/retraite/"},{"@type":"ListItem","position":3,"name":"Simulateur retraite 2026","item":"https://simulateur.site/outil/retraite-simplifiee/"}]}</script></head>
 <body><header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header>
 <main><div class="wrap">
-<div class="breadcrumb"><a href="/calculateurs/">Calculateurs</a> · Retraite</div>
+<div class="breadcrumb"><a href="/">Accueil</a> · <a href="/retraite/">Retraite</a> · Simulateur retraite 2026</div>
 <div class="retirement-shell tool">
-<div class="retirement-hero"><div class="eyebrow" id="ey">RETRAITE · 2026</div><h1 id="title">Simulateur retraite</h1><p id="intro">Estimez votre pension de base à partir de votre carrière et de votre date de départ.</p><div class="retirement-badges"><span>Retraite de base</span><span>Calcul simplifié</span><span>2026</span></div></div>
+<div class="retirement-hero"><div class="eyebrow" id="ey">RETRAITE · 2026</div><h1 id="title">Simulateur retraite 2026</h1><p id="intro">Estimez votre retraite de base à partir de votre carrière et de votre date de départ.</p><div class="retirement-badges"><span>Retraite de base</span><span>Calcul simplifié</span><span>2026</span></div></div>
 <div class="retirement-form">
 <div class="retirement-section-title"><strong>Votre situation</strong><span>Quelques informations de votre carrière suffisent pour obtenir une estimation.</span></div>
-<div id="fields"></div>
+<div id="fields"><div class="row"><div class="field"><label for="birth">Date de naissance</label><input id="birth" type="date" min="1955-01-01" max="2100-12-31"> </div><div class="field"><label for="sam">Revenu annuel moyen (€)</label><input id="sam" type="number" min="0" step="100" max="1000000" placeholder="30000"></div></div><div class="row"><div class="field"><label for="trTotal">Trimestres d'assurance tous régimes</label><input id="trTotal" type="number" min="0" step="1" max="400" placeholder="172"></div><div class="field"><label for="trGeneral">Trimestres d'assurance au régime général</label><input id="trGeneral" type="number" min="0" step="1" max="400" placeholder="172"></div></div><div class="field"><label for="departure">Date de départ envisagée (1er du mois)</label><input id="departure" type="date" min="2026-09-01"> </div></div>
 <button class="button-main" onclick="Simulateurs.calc()">Calculer ma retraite</button>
 <p class="privacy-note">Calcul effectué dans votre navigateur · aucune donnée personnelle n'est envoyée.</p>
 <div class="result retirement-result" id="result">Renseignez vos données puis lancez le calcul.</div>
-<div class="formula"><strong>Méthode et sources</strong><p id="source"></p></div>
+<div class="formula"><strong>Méthode et sources</strong><p id="source">Principe : revenu annuel moyen × taux de liquidation × proratisation au régime général. Le taux est de 50 % à taux plein. Avant 67 ans, la décote retient le plus petit nombre entre les trimestres manquants pour atteindre la durée requise et les trimestres restant avant 67 ans, avec une minoration de 0,625 point par trimestre. Le revenu annuel moyen est saisi directement : le calculateur ne reconstitue pas vos meilleures années.</p></div>
 </div></div></div>
 
 <section class="content-section retirement-content">
@@ -129,22 +129,7 @@ function retirementEstimate(s,trTotal,trGeneral,req,departure,birth){
   return {pension:base,base,rate,missing,decote,prorata,age,age67};
 }
 
-window.TOOL={
-ey:"RETRAITE · 2026",
-title:"Simulateur retraite 2026",
-intro:"Estimez votre retraite de base à partir de votre carrière et de votre date de départ.",
-fields:function(){
-  return F.row([
-    F.date("birth","Date de naissance","1955-01-01","2100-12-31"),
-    F.text("sam","Revenu annuel moyen (€)","30000","100","1000000")
-  ])+
-  F.row([
-    F.text("trTotal","Trimestres d'assurance tous régimes","172","1","400"),
-    F.text("trGeneral","Trimestres d'assurance au régime général","172","1","400")
-  ])+
-  F.date("departure","Date de départ envisagée (1er du mois)","2026-09-01");
-},
-calc:function(){
+window.TOOL={calc:function(){
   const birthValue=this.$("birth").value;
   const departureValue=this.$("departure").value;
   const birth=parseDate(birthValue);
@@ -190,9 +175,7 @@ calc:function(){
   '</div></div>'+
   '<div class="retirement-metrics"><div><span>Taux de liquidation</span><strong>'+r.rate.toFixed(3)+' %</strong></div><div><span>Proratisation</span><strong>'+ (r.prorata*100).toFixed(1)+' %</strong></div><div><span>Décote</span><strong>'+decoteLabel+'</strong></div></div>'+
   '<p class="small">Retraite de base uniquement. Le calcul n’inclut pas la retraite complémentaire, les majorations pour enfants, la surcote, les minima ni les dispositifs de départ anticipé.</p>';
-},
-source:"Principe : revenu annuel moyen × taux de liquidation × proratisation au régime général. Le taux est de 50 % à taux plein. Avant 67 ans, la décote retient le plus petit nombre entre les trimestres manquants pour atteindre la durée requise et les trimestres restant avant 67 ans, avec une minoration de 0,625 point par trimestre. Le revenu annuel moyen est saisi directement : le calculateur ne reconstitue pas vos meilleures années."
-};
+}};
 
 function formatAge(totalMonths){
   const years=Math.floor(totalMonths/12);

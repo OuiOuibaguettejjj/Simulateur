@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="fr">
-<head>
+<head><meta name="calculator-rendering" content="static">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Calculateur de durée | Simulateur</title>
+<title>Calculateur de durée</title>
 <meta name="description" content="Calculez et convertissez une durée : minutes, heures, secondes, dates et horaires. Ajoutez ou retirez une durée d'une date.">
 <link rel="canonical" href="https://simulateur.site/outil/temps/">
 <link rel="stylesheet" href="/styles.css">
@@ -30,7 +30,7 @@
 .duration-example strong{font-size:1.35rem}
 @media(max-width:650px){.duration-grid{grid-template-columns:1fr}.duration-panel{padding:14px 14px 2px}}
 </style>
-</head>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur de durée","url":"https://simulateur.site/outil/temps/","description":"Calculez et convertissez une durée : minutes, heures, secondes, dates et horaires. Ajoutez ou retirez une durée d","inLanguage":"fr-FR","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"price":"0","priceCurrency":"EUR"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Temps","item":"https://simulateur.site/temps/"},{"@type":"ListItem","position":3,"name":"Calculateur de durée","item":"https://simulateur.site/outil/temps/"}]}</script></head>
 <body>
 <header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a href="/conversions/">Conversions</a><a href="/comparateurs/">Comparateurs</a><a href="/a-propos/">À propos</a></nav></div></header>
 <main>
@@ -119,7 +119,7 @@
 
 <button class="button-main" onclick="Simulateurs.calc()">Calculer</button>
 <div class="result" id="result">Saisissez vos données puis lancez le calcul.</div>
-<div class="formula"><strong>Méthode et conventions</strong><p id="source">Les conversions utilisent 60 secondes par minute, 60 minutes par heure, 24 heures par jour et 7 jours par semaine. Les calculs calendaires distinguent les dates des durées fixes.</p></div>
+<div class="formula"><strong>Méthode et conventions</strong><p id="source">Les conversions utilisent 60 secondes par minute, 60 minutes par heure, 24 heures par jour et 7 jours par semaine. Les mois et années sont traités comme des unités calendaires, dont la durée dépend de la date.</p></div>
 </div>
 
 <div class="duration-content">
@@ -143,7 +143,7 @@
 </div>
 </div>
 </div>
-</main>
+<section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Calculs associés</h2><div class="related-links"><a class="related-link" href="/outil/difference-dates/"><strong>Différence entre deux dates</strong><span>Calculer l’écart entre deux dates.</span></a><a class="related-link" href="/outil/temps-travail/"><strong>Temps de travail</strong><span>Calculer une durée de travail.</span></a><a class="related-link" href="/outil/age/"><strong>Calcul d’âge</strong><span>Calculer précisément un âge.</span></a></div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="/temps/">Temps</a>.</p></div></section></main>
 <footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cgu/">CGU</a></div></div></footer>
 
 <script>
@@ -285,14 +285,7 @@
     }
     return "Choisissez un calcul.";
   };
-  window.TOOL={
-    ey:"TEMPS",
-    title:"Calculateur de durée",
-    intro:"Convertissez une durée, calculez un intervalle entre deux dates ou horaires, ou ajoutez une durée à une date.",
-    fields:function(){return '<div class="duration-panel" data-panel="convert"><div class="field"><label for="convertValue">Valeur</label><input id="convertValue" type="number" min="0" step="any" value="150"></div><div class="field"><label for="convertUnit">Unité</label><select id="convertUnit"><option value="seconds">secondes</option><option value="minutes" selected>minutes</option><option value="hours">heures</option><option value="days">jours</option><option value="weeks">semaines</option></select></div></div>';},
-    calc:function(){return calc.call(this)},
-    source:"Les conversions utilisent 60 secondes par minute, 60 minutes par heure, 24 heures par jour et 7 jours par semaine. Les mois et années sont traités comme des unités calendaires, dont la durée dépend de la date."
-  };
+  window.TOOL={calc:function(){return calc.call(this)}};
   window.Duree={parseDate,parseTime,parseDateTime,formatDuration,diffCalendar,addCalendarMonths,conversionSeconds};
   window.addEventListener("DOMContentLoaded",()=>{
     const mode=document.getElementById("durationMode");

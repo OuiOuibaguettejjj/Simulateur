@@ -30,4 +30,4 @@ Les simulateurs riches peuvent conserver des extensions spécifiques (graphiques
 
 La migration est progressive. Les URLs `/outil/<slug>/` et la logique métier existante sont conservées. Les pages migrées utilisent temporairement le marqueur `calculator-rendering=static` afin que le pré-rendu historique ne les réécrive pas. Le rôle de `scripts/prerender-tools.mjs` sera réduit progressivement à mesure que les pages legacy disparaîtront.
 
-Prototype de contrat validé sur six profils représentatifs : TVA, âge, prix unitaire, RSA, succession et intérêts composés. Aucune mise en production n'est incluse dans cette phase de prototype.
+Le contrat a d'abord été validé sur six profils représentatifs : TVA, âge, prix unitaire, RSA, succession et intérêts composés, puis étendu aux 71 pages restantes. Les URLs et la logique métier existantes sont conservées.

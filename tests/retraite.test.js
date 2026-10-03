@@ -3,8 +3,8 @@ const assert = require("assert");
 
 const html = fs.readFileSync("public/outil/retraite-simplifiee/index.html", "utf8");
 
-for (const field of ['F.date("birth"', 'F.text("sam"', 'F.text("trTotal"', 'F.text("trGeneral"', 'F.date("departure"']) {
-  assert(html.includes(field), "missing core field reference: " + field);
+for (const field of ['id="birth"', 'id="sam"', 'id="trTotal"', 'id="trGeneral"', 'id="departure"']) {
+  assert(html.includes(field), "missing core field: " + field);
 }
 
 assert(html.includes("p.year<1955||p.year>2100"), "birth year scope must be enforced");

@@ -1,3 +1,10 @@
+## 2026-10-03 — Migration HTML-first complète des outils
+- Migration des 71 pages `/outil/` restantes vers le contrat HTML-first, pour un total de 77/77 pages.
+- Le HTML initial porte désormais le contenu SEO et l'interface essentielle ; le JavaScript conserve la logique de calcul.
+- Harmonisation des breadcrumbs, données structurées WebApplication/BreadcrumbList et liens d'outils associés à partir de la taxonomie centrale.
+- Suppression de l'ancien pré-rendu `scripts/prerender-tools.mjs` et du workflow de validation dédié, devenus inutiles.
+- Le pipeline de production vérifie désormais directement que les 77 pages respectent le contrat HTML-first.
+
 ## 2026-10-02 — Mécanisme Entrée commun aux calculateurs
 - Généralisation du raccourci Entrée via le socle partagé enter-calcul.js : détection automatique du bouton principal du calculateur courant, sans dépendre d'une classe de conteneur spécifique.
 - Injection automatique de enter-calcul.js par le normaliseur de layout sur toutes les pages /outil/ et /conversion/, y compris les futurs calculateurs ajoutés au dépôt.
