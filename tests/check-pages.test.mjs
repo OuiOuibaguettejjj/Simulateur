@@ -216,6 +216,7 @@ assert(only(fixture().replace("<a href=\"/categorie/\">Catégorie</a>","<a href=
 assert(only(fixture(),"breadcrumb",{...META,slug:{...META.slug,category:"inconnue"}}).length>0,"négatif : catégorie absente de data/tools.json");
 // related-tools : lien « rubrique » aligné sur la catégorie
 assert(only(fixture().replace('<a href="/categorie/">Catégorie</a>.</p></section>', '<a href="/autre/">Catégorie</a>.</p></section>'),"related-block").some(x=>/lien « rubrique »/.test(x.message)),"négatif : href du lien rubrique");
+assert(only(fixture().replace('<a href="/categorie/">Catégorie</a>.</p></section>', '').replace('</section></main>', '</section></main>'),"related-block").some(x=>/lien « rubrique »/.test(x.message)),"négatif : lien rubrique absent");
 assert(only(fixture().replace('<a href="/categorie/">Catégorie</a>.</p></section>', '<a href="/categorie/">Autre</a>.</p></section>'),"related-block").some(x=>/lien « rubrique »/.test(x.message)),"négatif : texte du lien rubrique");
 assert(only(fixture().replace('<a href="/categorie/">Catégorie</a>.</p></section>', '<a href="/categorie/">Catégorie</a><a href="/categorie/">Catégorie</a>.</p></section>'),"related-block").some(x=>/lien « rubrique »/.test(x.message)),"négatif : doublon du lien rubrique");
 assert.equal(only(fixture(),"related-block").length,0,"positif : lien rubrique correct");
