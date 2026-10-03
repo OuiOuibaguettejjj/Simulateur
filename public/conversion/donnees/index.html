@@ -2,10 +2,10 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="calculator-rendering" content="static">
 <meta name="google-adsense-account" content="ca-pub-2924580037451268">
-<title>Convertisseur Ko Mo Go : octets, Mo, Go, To, Gio | Simulateur</title>
-<meta name="description" content="Conversion Ko Mo Go en ligne : convertissez octets, Ko, Mo, Go, To et unités binaires (Kio, Mio, Gio, Tio). Tableau d’équivalences et différence entre Go et Gio.">
+<title>Convertisseur de données | Simulateur</title>
+<meta name="description" content="Convertissez octets, Ko, Mo, Go, To et unités binaires Kio, Mio, Gio et Tio avec ce convertisseur de données gratuit et pratique.">
 <link rel="canonical" href="https://simulateur.site/conversion/donnees/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/styles.css">
@@ -17,7 +17,7 @@
 
 <main>
 <div class="wrap">
-<div class="breadcrumb"><a href="/conversions/">Conversions</a> → Données</div>
+<div class="breadcrumb"><a href="/">Accueil</a> · <a href="/conversions/">Conversions</a> · Données</div>
 
 <section class="tool data-converter">
 <div class="eyebrow">CONVERSION DE DONNÉES</div>
@@ -31,7 +31,7 @@
 </div>
 <div class="field">
 <label for="from">De</label>
-<select id="from" aria-label="Unité de départ"></select>
+<select id="from" aria-label="Unité de départ"><option value="o">octet — Décimal</option><option value="ko">Ko — Décimal</option><option value="mo">Mo — Décimal</option><option value="go">Go — Décimal</option><option value="to">To — Décimal</option><option value="kio">Kio — Binaire</option><option value="mio">Mio — Binaire</option><option value="gio">Gio — Binaire</option><option value="tio">Tio — Binaire</option></select>
 </div>
 <div class="field">
 <label for="to">Vers</label>
@@ -154,7 +154,7 @@ const to=document.getElementById('to');
 const valueInput=document.getElementById('v');
 const result=document.getElementById('r');
 
-function fillSelect(select){
+function fillSelect(select){select.replaceChildren();
 for(const [key,unit] of Object.entries(UNITS)){
 const option=document.createElement('option');
 option.value=key;
