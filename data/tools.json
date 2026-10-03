@@ -170,12 +170,20 @@
     "comparateur-placements": {
       "type": "comparateur",
       "category": "epargne",
-      "relatedTools": []
+      "relatedTools": [
+        "epargne",
+        "interets-composes",
+        "inflation"
+      ]
     },
     "epargne-mensuelle": {
       "type": "simulateur",
       "category": "epargne",
-      "relatedTools": []
+      "relatedTools": [
+        "epargne",
+        "interets-composes",
+        "comparateur-placements"
+      ]
     },
     "epargne-reglementee": {
       "type": "simulateur",
@@ -188,12 +196,20 @@
     "epargne": {
       "type": "calculateur",
       "category": "epargne",
-      "relatedTools": []
+      "relatedTools": [
+        "epargne-mensuelle",
+        "interets-composes",
+        "inflation"
+      ]
     },
     "inflation": {
       "type": "simulateur",
       "category": "epargne",
-      "relatedTools": []
+      "relatedTools": [
+        "epargne",
+        "epargne-mensuelle",
+        "comparateur-placements"
+      ]
     },
     "interets-composes": {
       "type": "simulateur",

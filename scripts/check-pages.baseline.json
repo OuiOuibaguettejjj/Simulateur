@@ -109,14 +109,6 @@
   },
   {
     "path": "public/outil/comparateur-placements/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/comparateur-placements/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/comparateur-placements/index.html",
     "rule": "result"
   },
   {
@@ -233,14 +225,6 @@
   },
   {
     "path": "public/outil/epargne-mensuelle/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/epargne-mensuelle/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/epargne-mensuelle/index.html",
     "rule": "result"
   },
   {
@@ -258,14 +242,6 @@
   {
     "path": "public/outil/epargne-reglementee/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/epargne/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/epargne/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/epargne/index.html",
@@ -402,14 +378,6 @@
   {
     "path": "public/outil/inflation/index.html",
     "rule": "jsonld"
-  },
-  {
-    "path": "public/outil/inflation/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/inflation/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/inflation/index.html",
