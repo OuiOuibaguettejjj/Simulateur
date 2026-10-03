@@ -17,36 +17,24 @@ function metaDescription(html) {
   const m = html.match(/<meta[^>]+name=["']description["'][^>]+content=["']([^"']*)["']/i);
   return m ? m[1] : "";
 }
-function applicationCategory(group) {
-  return group && ["Fiscalité", "Épargne", "Immobilier"].includes(group[0])
-    ? "FinanceApplication"
-    : "UtilitiesApplication";
+function metadataOf(s){
+  const c=s.match(/const CATEGORIES=([\\s\\S]*?);\\s*const TOOL_TYPES=/);
+  const m=s.match(/const TOOLS_META=([\\s\\S]*?);\\s*function toolMeta/);
+  if(!c||!m) throw Error("Taxonomy metadata missing");
+  return {categories:Function("return ("+c[1]+")")(),tools:Function("return ("+m[1]+")")()};
 }
-function groupsOf(s){const m=s.match(/const groups=({[\s\S]*?})\s*;\s*function addBreadcrumbSchema/);return m?vm.runInNewContext("("+m[1]+")"):{}}
-function replaceElementContents(html, tag, id, content) {
-  const open = new RegExp(`<${tag}\\b[^>]*\\bid=["']${id}["'][^>]*>`, 'i').exec(html);
-  if (!open) return html;
-  const openEnd = open.index + open[0].length;
-  const tags = new RegExp('</?' + tag + '\\b[^>]*>', 'gi');
-  tags.lastIndex = openEnd;
-  let depth = 1;
-  let match;
-  while ((match = tags.exec(html))) {
-    if (/^<\//.test(match[0])) depth--;
-    else depth++;
-    if (depth === 0) return html.slice(0, openEnd) + content + html.slice(match.index);
-  }
-  throw new Error('Unclosed #' + id + ' container');
+function applicationCategory(meta){
+  return meta && ["fiscalite","epargne","immobilier"].includes(meta.category) ? "FinanceApplication" : "UtilitiesApplication";
 }
 function relatedToolsMarkup(slug) {
-  const data = groups[slug];
-  if (!data) return "";
-  return '<section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Calculs associés</h2><div class="related-links">' +
-    data[2].map(x => '<a class="related-link" href="/outil/' + x[0] + '/"><strong>' + esc(x[1]) + '</strong><span>' + esc(x[2]) + '</span></a>').join("") +
-    '</div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="' + data[1] + '">' + esc(data[0]) + '</a>.</p></div></section>';
+  const meta=toolsMeta[slug];
+  if(!meta || !meta.relatedTools?.length) return "";
+  const links=meta.relatedTools.map(x=>'<a class="related-link" href="/outil/'+x.slug+'/"><strong>'+esc(x.title)+'</strong><span>'+esc(x.description)+'</span></a>').join("");
+  const category=taxonomy.categories[meta.category];
+  return '<section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Calculs associés</h2><div class="related-links">'+links+'</div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="'+category.path+'">'+esc(category.label)+'</a>.</p></div></section>';
 }
 function hasBC(h){return [...h.matchAll(/<script[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)].some(m=>/"@type"\s*:\s*"BreadcrumbList"/.test(m[1]))}
-const groups=groupsOf(sim);let changed=0,skipped=0,staticSkipped=0;
+const taxonomy=metadataOf(sim);const toolsMeta=taxonomy.tools;let changed=0,skipped=0,staticSkipped=0;
 for(const file of walk(root)){
   const old=fs.readFileSync(file,"utf8");
   // HTML-first calculators own their SEO/interface markup; legacy prerender must not rewrite them.
@@ -63,7 +51,7 @@ if(typeof t.fields==="function" && slug !== "temps"){
   const f=t.fields();
   if(f) h=replaceElementContents(h,"div","fields",f);
 }
-const g=groups[slug]||["Calculateurs","/calculateurs/"];
+const meta=toolsMeta[slug];if(!meta)throw Error(file+": outil absent de la taxonomie");const category=taxonomy.categories[meta.category];if(!category)throw Error(file+": catégorie inconnue: "+meta.category);const g=[category.label,category.path];
 const breadcrumb='<div class="breadcrumb"><a href="/">Accueil</a> · <a href="'+g[1]+'">'+esc(g[0])+'</a> · '+esc(title)+'</div>';
 if(/<div[^>]+class=["']breadcrumb["']/i.test(h)){
   h=h.replace(/<div[^>]+class=["']breadcrumb["'][^>]*>[\s\S]*?<\/div>/i,breadcrumb);
@@ -79,7 +67,7 @@ if(!hasJsonLdType(h,"WebApplication")){
     url:canonical,
     description:metaDescription(h),
     inLanguage:"fr-FR",
-    applicationCategory:applicationCategory(groups[slug]),
+    applicationCategory:applicationCategory(meta),
     operatingSystem:"Any",
     browserRequirements:"Requires JavaScript",
     offers:{price:"0",priceCurrency:"EUR"}
