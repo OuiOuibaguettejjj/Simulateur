@@ -81,16 +81,28 @@ export function validateLastmodData(data, pages, today) {
   return errors;
 }
 
+export function findDuplicateRouteKeys(text) {
+  const seen = new Set();
+  const errors = [];
+  for (const match of text.matchAll(/"(\/[^"\\]*)"\s*:/g)) {
+    if (seen.has(match[1])) errors.push("Route dupliquée dans data/lastmod.json : " + match[1]);
+    seen.add(match[1]);
+  }
+  return errors;
+}
+
 function loadLastmodData(pages) {
   const dataPath = path.resolve(DATA_FILE);
+  let raw;
   let data;
   try {
-    data = JSON.parse(fs.readFileSync(dataPath, "utf8"));
+    raw = fs.readFileSync(dataPath, "utf8");
+    data = JSON.parse(raw);
   } catch (error) {
     throw new Error("Impossible de lire " + DATA_FILE + " : " + error.message);
   }
   const today = new Date().toISOString().slice(0, 10);
-  const errors = validateLastmodData(data, pages, today);
+  const errors = [...findDuplicateRouteKeys(raw), ...validateLastmodData(data, pages, today)];
   if (errors.length) throw new Error(errors.join("\n"));
   return data.routes;
 }

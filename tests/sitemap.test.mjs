@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { validateLastmodData } from "../scripts/generate-sitemap.mjs";
+import { findDuplicateRouteKeys, validateLastmodData } from "../scripts/generate-sitemap.mjs";
 
 const valid = {
   schemaVersion: 1,
@@ -61,6 +61,18 @@ assert.deepEqual(
   ),
   [],
   "demain UTC reste autorisé"
+);
+
+assert.ok(
+  findDuplicateRouteKeys('{"schemaVersion":1,"routes":{"/":"2026-10-03","/":"2026-10-02"}}')
+    .some(error => error.includes("Route dupliquée dans data/lastmod.json")),
+  "clé route dupliquée dans le JSON brut"
+);
+
+assert.deepEqual(
+  findDuplicateRouteKeys('{"schemaVersion":1,"routes":{"/":"2026-10-03","/retraite/":"2026-09-28"}}'),
+  [],
+  "aucune clé route dupliquée"
 );
 
 console.log("Sitemap lastmod tests passed.");
