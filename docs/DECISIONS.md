@@ -84,3 +84,8 @@ Le template canonique est donc déplacé dans `docs/template-outil.html`. Il res
 ## 2026-10-03 — Taxonomie hors `public/`
 
 La taxonomie des outils est déplacée de `public/simulateurs.js` vers `data/tools.json`. Ce fichier est hors de `public/` et n'est donc pas servi comme ressource publique. Les consommateurs CI/CD et de validation lisent désormais ce JSON avec `JSON.parse`. `public/simulateurs.js` est réduit aux utilitaires numériques et au moteur partagé de calcul, sans modification de `window.Simulateurs.calc`.
+
+
+## 2026-10-03 — relatedTools en liste de slugs
+
+`relatedTools` devient une liste ordonnée de slugs dans `data/tools.json`. Les titres et descriptions de l'ancienne structure ne sont plus une donnée de référence : le texte des liens du HTML est libre. Le contrôle exige que les slugs existent, ne contiennent ni auto-référence ni doublon, et (check-pages) que le bloc `.related-tools` du HTML liste exactement ces slugs. Aucune page HTML n'est modifiée par cette décision.

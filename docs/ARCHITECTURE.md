@@ -8,7 +8,7 @@ Le simulateur RSA utilise un moteur dédié `public/rsa.js` séparé de son inte
 
 La taxonomie officielle est centralisée dans `data/tools.json` via `categories` et `tools`. Chaque outil possède un type unique et une catégorie principale. Les URL existantes `/outil/<slug>/` ne sont pas modifiées.
 
-La source de vérité contient également les relations `relatedTools` de chaque outil. Cette structure est la référence opérationnelle du maillage associé ; l'ancien objet `groups` n'est plus utilisé.
+La source de vérité contient également les relations `relatedTools` de chaque outil, sous forme d'une liste ordonnée de slugs (`["slug-a","slug-b"]`). Les titres et descriptions ne sont pas des données de référence : le texte des liens dans le HTML est libre (recommandé : titre de la page cible). L'ancien objet `groups` n'est plus utilisé.
 
 Les contrôles pré-production vérifient notamment :
 - la présence de chaque outil dans `data/tools.json` ;

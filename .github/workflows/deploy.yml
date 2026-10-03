@@ -114,7 +114,7 @@ jobs:
               if (!categoryItem || categoryItem.item !== 'https://simulateur.site' + categoryPath || categoryItem.name !== categoryLabel) errors.push(file + ': BreadcrumbList category mismatch');
               if (!finalItem || finalItem.item !== expectedCanonical) errors.push(file + ': BreadcrumbList final URL mismatch');
             }
-            const relatedExpected = (entry.relatedTools || []).map(x => x.slug);
+            const relatedExpected = entry.relatedTools || [];
             const relatedSection = (html.match(/<section\b[^>]*class=["']related-tools["'][^>]*>([\s\S]*?)<\/section>/i) || [])[1] || '';
             const relatedActual = [...relatedSection.matchAll(/href=["']\/outil\/([^"']+)\/["']/gi)].map(m => m[1]);
             if (JSON.stringify(relatedActual) !== JSON.stringify(relatedExpected)) errors.push(file + ': relatedTools mismatch: HTML=[' + relatedActual.join(',') + '] metadata=[' + relatedExpected.join(',') + ']');

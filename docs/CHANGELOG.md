@@ -1,3 +1,8 @@
+## 2026-10-03 — relatedTools en liste de slugs
+- `data/tools.json` : `relatedTools` passe de `[{slug,title,description}]` à `["slug"]`, ordre conservé (91 relations, 77 outils).
+- Contrôles adaptés (check-security : slugs existants, sans auto-référence ni doublon ; check-pages ; deploy.yml).
+- Aucune page HTML modifiée.
+
 ## 2026-10-03 — Nettoyage du legacy et taxonomie hors public
 - Déplacement de la taxonomie des outils vers `data/tools.json`, hors de `public/`.
 - Suppression du rendu éditorial historique `Simulateurs.render()` et des métadonnées de taxonomie dans `public/simulateurs.js`.

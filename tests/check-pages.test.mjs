@@ -3,7 +3,7 @@ import fs from "node:fs";
 import {checkPage,checkAll,loadToolsMeta,parseHtml,summarize} from "../scripts/check-pages.mjs";
 
 const DESC="Utilisez cet outil en ligne pour effectuer rapidement votre calcul et obtenir un résultat clair, pratique et adapté à votre situation.";
-const META={slug:{type:"calculateur",relatedTools:[{slug:"slug-1"},{slug:"slug-2"}]},"slug-1":{},"slug-2":{}};
+const META={slug:{type:"calculateur",relatedTools:["slug-1","slug-2"]},"slug-1":{},"slug-2":{}};
 const IDX=new Set(["outil/slug","outil/slug-1","outil/slug-2"]);
 
 function fixture(desc=DESC){
@@ -157,11 +157,11 @@ assert.deepEqual(errs(twoRelatedBlocks).filter(x=>x.rule==="related-block"),[{ru
 
 
 const template=fs.readFileSync(new URL("../docs/template-outil.html",import.meta.url),"utf8");
-assert.deepEqual(checkPage(template,{dir:"outil",slug:"slug",toolsMeta:{slug:{relatedTools:[{slug:"slug-1"},{slug:"slug-2"}]},"slug-1":{},"slug-2":{}},pageIndex:IDX}),[],"template conforme");
+assert.deepEqual(checkPage(template,{dir:"outil",slug:"slug",toolsMeta:{slug:{relatedTools:["slug-1","slug-2"]},"slug-1":{},"slug-2":{}},pageIndex:IDX}),[],"template conforme");
 
 assert.equal(checkAll([{path:"a",html:fixture()},{path:"b",html:fixture()}]).length,2,"meta-unique");
 const s1=summarize([{path:"a",rule:"x",message:"1"},{path:"a",rule:"x",message:"2"}],["x"],2);assert.deepEqual(s1.x,{pages:1,messages:2},"même page = 1 page, 2 écarts");const s2=summarize([{path:"a",rule:"x",message:"1"},{path:"b",rule:"x",message:"2"}],["x"],2);assert.deepEqual(s2.x,{pages:2,messages:2},"deux pages = 2 pages");const s3=summarize([{path:"a",rule:"x",message:"1"},{path:"b",rule:"x",message:"2"},{path:"c",rule:"x",message:"3"}],["x"],2);assert.equal(s3.x.pages,2,"pages ne dépasse jamais total");
-const sim='{"categories":{},"tools":{"slug":{"type":"calculateur","relatedTools":[{"slug":"slug-1"},{"slug":"slug-2"}]}}}';
+const sim='{"categories":{},"tools":{"slug":{"type":"calculateur","relatedTools":["slug-1","slug-2"]}}}';
 assert.equal(loadToolsMeta(sim).slug.type,"calculateur");
 
 console.log("check-pages tests passed.");
