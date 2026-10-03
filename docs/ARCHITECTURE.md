@@ -29,7 +29,7 @@ Les contrôles CI vérifient désormais ces invariants entre la taxonomie centra
 
 Les simulateurs riches peuvent conserver des extensions spécifiques (graphiques, tableaux, scénarios, FAQ, contenu réglementaire), à condition de respecter le socle commun. Il n'est pas recherché une uniformité visuelle absolue.
 
-La migration HTML-first est terminée : les 77 pages `/outil/<slug>/` sont statiques et autonomes pour leur contenu éditorial initial. Le script historique `scripts/prerender-tools.mjs` et son workflow de validation ont été supprimés. Il n'existe plus de migration progressive ni de réécriture pré-déploiement de ces pages.
+La migration HTML-first est terminée : les 77 pages `/outil/<slug>/` sont statiques et autonomes pour leur contenu éditorial initial. Le script historique `scripts/prerender-tools.mjs` et son workflow de validation ont été supprimés. Le rendu dynamique historique (`Simulateurs.render()`) ne génère plus aucun contenu : les titres, introductions, champs, sources et breadcrumbs sont fournis par le HTML statique. Le hook `render()` est conservé uniquement comme no-op de compatibilité avec les anciens appels inline et n'est plus une couche de rendu. Il n'existe plus de migration progressive ni de réécriture pré-déploiement de ces pages.
 
 Les URLs et la logique métier existantes sont conservées.
 ## Processus pré-production et MEP
