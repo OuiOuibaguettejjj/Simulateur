@@ -113,7 +113,7 @@ jobs:
           const roots = ['public/outil', 'public/conversion', 'public/comparateur'];
           const files = roots.flatMap(walk);
           const routeFor = (slug, entry) => entry.path || '/outil/' + slug + '/';
-          const pageKey = file => file.replace(/^public\\//, '').replace(/\\/index\\.html$/, '');
+          const pageKey = file => file.replace(/^public\//, '').replace(/\/index\.html$/, '');
 
           for (const file of files) {
             const key = pageKey(file);
@@ -144,7 +144,7 @@ jobs:
             }
             const relatedExpected = (entry.relatedTools || []).map(x => x.slug);
             const relatedSection = (html.match(/<section\\b[^>]*class=["']related-tools["'][^>]*>([\\s\\S]*?)<\\/section>/i) || [])[1] || '';
-            const relatedActual = [...relatedSection.matchAll(/href=["'](\\/outil\\/[^"']+\\/)["']/gi)].map(m => m[1]);
+            const relatedActual = [...relatedSection.matchAll(/href=["'](\/outil\/[^"']+\/)["']/gi)].map(m => m[1]);
             if (family === 'outil' && JSON.stringify(relatedActual) !== JSON.stringify(relatedExpected.map(slug => '/outil/' + slug + '/'))) errors.push(file + ': relatedTools mismatch');
           }
           if (files.length !== 86) errors.push('expected 86 unified tool pages, found ' + files.length);          NODE
