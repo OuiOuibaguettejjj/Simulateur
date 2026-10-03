@@ -131,7 +131,7 @@ jobs:
             const categoryPos = breadcrumb.indexOf('href="' + categoryPath + '"');
             if (categoryPos < 0) errors.push(file + ': visible breadcrumb missing category link ' + categoryPath);
             else { const tail = breadcrumb.slice(categoryPos); const label = (tail.match(/>([\s\S]*?)<\/a>/i) || [])[1]; if (textContent(label || '') !== categoryLabel) errors.push(file + ': visible breadcrumb category label mismatch'); }
-            const jsonLdBlocks = [...html.matchAll(/<script\b[^>]*type=["']application\/ld\\+json["'][^>]*>([\s\S]*?)<\/script>/gi)];
+            const jsonLdBlocks = [...html.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)];
             const jsonLd = [];
             for (const match of jsonLdBlocks) { try { jsonLd.push(JSON.parse(match[1])); } catch {} }
             const crumb = jsonLd.find(x => x && x['@type'] === 'BreadcrumbList');
