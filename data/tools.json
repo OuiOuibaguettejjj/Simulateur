@@ -241,7 +241,11 @@
     "cash-flow-immobilier": {
       "type": "simulateur",
       "category": "immobilier",
-      "relatedTools": []
+      "relatedTools": [
+        "rendement-locatif",
+        "pret-immobilier",
+        "frais-de-notaire"
+      ]
     },
     "frais-de-notaire": {
       "type": "simulateur",
@@ -274,7 +278,11 @@
     "plus-value-immobiliere": {
       "type": "simulateur",
       "category": "immobilier",
-      "relatedTools": []
+      "relatedTools": [
+        "frais-de-notaire",
+        "pret-immobilier",
+        "rendement-locatif"
+      ]
     },
     "pret-immobilier": {
       "type": "simulateur",
@@ -289,17 +297,29 @@
     "ptz": {
       "type": "simulateur",
       "category": "immobilier",
-      "relatedTools": []
+      "relatedTools": [
+        "pret-immobilier",
+        "capacite-emprunt",
+        "frais-de-notaire"
+      ]
     },
     "rendement-locatif": {
       "type": "simulateur",
       "category": "immobilier",
-      "relatedTools": []
+      "relatedTools": [
+        "cash-flow-immobilier",
+        "pret-immobilier",
+        "frais-de-notaire"
+      ]
     },
     "tableau-amortissement": {
       "type": "simulateur",
       "category": "immobilier",
-      "relatedTools": []
+      "relatedTools": [
+        "pret-immobilier",
+        "mensualite-pret",
+        "capacite-emprunt"
+      ]
     },
     "taux-endettement": {
       "type": "simulateur",

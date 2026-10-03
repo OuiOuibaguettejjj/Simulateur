@@ -49,10 +49,6 @@
   },
   {
     "path": "public/outil/capacite-emprunt/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/capacite-emprunt/index.html",
     "rule": "result"
   },
   {
@@ -62,14 +58,6 @@
   {
     "path": "public/outil/cash-flow-immobilier/index.html",
     "rule": "jsonld"
-  },
-  {
-    "path": "public/outil/cash-flow-immobilier/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/cash-flow-immobilier/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/cash-flow-immobilier/index.html",
@@ -526,14 +514,6 @@
   {
     "path": "public/outil/perimetre/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/plus-value-immobiliere/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/plus-value-immobiliere/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/plus-value-immobiliere/index.html",
@@ -669,14 +649,6 @@
   },
   {
     "path": "public/outil/ptz/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/ptz/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/ptz/index.html",
     "rule": "result"
   },
   {
@@ -718,14 +690,6 @@
   {
     "path": "public/outil/rendement-locatif/index.html",
     "rule": "jsonld"
-  },
-  {
-    "path": "public/outil/rendement-locatif/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/rendement-locatif/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/rendement-locatif/index.html",
@@ -874,14 +838,6 @@
   {
     "path": "public/outil/tableau-amortissement/index.html",
     "rule": "jsonld"
-  },
-  {
-    "path": "public/outil/tableau-amortissement/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/tableau-amortissement/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/tableau-amortissement/index.html",
