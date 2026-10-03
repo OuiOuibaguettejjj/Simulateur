@@ -145,7 +145,7 @@ jobs:
           console.log('Verified metadata ↔ HTML contract for ' + files.length + ' /outil/ pages.');
           NODE
       - name: Verify shared layout is normalized
-        run: node scripts/normalize-layout.mjs --report
+        run: node scripts/normalize-layout.mjs --check
 
       - name: Verify AdSense HTML is prepared
         run: node scripts/prepare-adsense.mjs --check
