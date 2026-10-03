@@ -127,11 +127,11 @@ jobs:
             if (canonical !== expectedCanonical) errors.push(file + ': canonical mismatch: ' + canonical + ' != ' + expectedCanonical);
             const categoryPath = categories[entry.category].path;
             const categoryLabel = categories[entry.category].label;
-            const breadcrumb = (html.match(/<div\b[^>]*class=["']breadcrumb["'][^>]*>([\s\\S]*?)<\/div>/i) || [])[1] || '';
+            const breadcrumb = (html.match(/<div\b[^>]*class=["']breadcrumb["'][^>]*>([\s\S]*?)<\/div>/i) || [])[1] || '';
             const categoryPos = breadcrumb.indexOf('href="' + categoryPath + '"');
             if (categoryPos < 0) errors.push(file + ': visible breadcrumb missing category link ' + categoryPath);
-            else { const tail = breadcrumb.slice(categoryPos); const label = (tail.match(/>([\s\\S]*?)<\/a>/i) || [])[1]; if (textContent(label || '') !== categoryLabel) errors.push(file + ': visible breadcrumb category label mismatch'); }
-            const jsonLdBlocks = [...html.matchAll(/<script\b[^>]*type=["']application\/ld\\+json["'][^>]*>([\s\\S]*?)<\/script>/gi)];
+            else { const tail = breadcrumb.slice(categoryPos); const label = (tail.match(/>([\s\S]*?)<\/a>/i) || [])[1]; if (textContent(label || '') !== categoryLabel) errors.push(file + ': visible breadcrumb category label mismatch'); }
+            const jsonLdBlocks = [...html.matchAll(/<script\b[^>]*type=["']application\/ld\\+json["'][^>]*>([\s\S]*?)<\/script>/gi)];
             const jsonLd = [];
             for (const match of jsonLdBlocks) { try { jsonLd.push(JSON.parse(match[1])); } catch {} }
             const crumb = jsonLd.find(x => x && x['@type'] === 'BreadcrumbList');
@@ -143,7 +143,7 @@ jobs:
               if (!finalItem || finalItem.item !== expectedCanonical) errors.push(file + ': BreadcrumbList final URL mismatch');
             }
             const relatedExpected = (entry.relatedTools || []).map(x => x.slug);
-            const relatedSection = (html.match(/<section\b[^>]*class=["']related-tools["'][^>]*>([\s\\S]*?)<\/section>/i) || [])[1] || '';
+            const relatedSection = (html.match(/<section\b[^>]*class=["']related-tools["'][^>]*>([\s\S]*?)<\/section>/i) || [])[1] || '';
             const relatedActual = [...relatedSection.matchAll(/href=["'](\/outil\/[^"']+\/)["']/gi)].map(m => m[1]);
             if (family === 'outil' && JSON.stringify(relatedActual) !== JSON.stringify(relatedExpected.map(slug => '/outil/' + slug + '/'))) errors.push(file + ': relatedTools mismatch');
           }
