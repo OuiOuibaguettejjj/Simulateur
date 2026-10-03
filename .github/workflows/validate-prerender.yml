@@ -114,7 +114,7 @@ jobs:
 
             const slug = path.basename(path.dirname(file));
             if (toolsMeta[slug]?.relatedTools?.length) {
-              const related = html.match(/<section\\b[^>]*class=["']related-tools["'][^>]*>([\s\S]*?)<\\/section>/i);
+              const related = html.match(/<section\b[^>]*class=["']related-tools["'][^>]*>([\s\S]*?)<\/section>/i);
               if (!related) errors.push(file + ': missing static related-tools');
             }
           }
