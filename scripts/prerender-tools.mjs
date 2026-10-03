@@ -26,6 +26,21 @@ function metadataOf(s){
 function applicationCategory(meta){
   return meta && ["fiscalite","epargne","immobilier"].includes(meta.category) ? "FinanceApplication" : "UtilitiesApplication";
 }
+function replaceElementContents(html, tag, id, content) {
+  const open = new RegExp(`<${tag}\\b[^>]*\\bid=["']${id}["'][^>]*>`, 'i').exec(html);
+  if (!open) return html;
+  const openEnd = open.index + open[0].length;
+  const tags = new RegExp('</?' + tag + '\\b[^>]*>', 'gi');
+  tags.lastIndex = openEnd;
+  let depth = 1;
+  let match;
+  while ((match = tags.exec(html))) {
+    if (/^<\//.test(match[0])) depth--;
+    else depth++;
+    if (depth === 0) return html.slice(0, openEnd) + content + html.slice(match.index);
+  }
+  throw new Error('Unclosed #' + id + ' container');
+}
 function relatedToolsMarkup(slug) {
   const meta=toolsMeta[slug];
   if(!meta || !meta.relatedTools?.length) return "";
