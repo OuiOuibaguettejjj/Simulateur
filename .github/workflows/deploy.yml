@@ -182,7 +182,8 @@ jobs:
               if (!title || !title[1].replace(/<[^>]+>/g, "").trim()) errors.push(file + ": empty title");
               const description = html.match(/<meta\b[^>]*name=["']description["'][^>]*content=["']([^"']+)["']/i);
               if (!description || !description[1].trim()) errors.push(file + ": empty meta description");
-              const titleCount = [...html.matchAll(/<title\b[^>]*>[\s\S]*?<\/title>/gi)].length;
+              const titleHead = (html.match(/<head\b[^>]*>[\s\S]*?<\/head>/i) || [''])[0];
+              const titleCount = [...titleHead.matchAll(/<title>[^<]+<\/title>/gi)].length;
               if (titleCount !== 1) errors.push(file + ": expected exactly one title, found " + titleCount);
               const jsonLd = jsonLdBlocks(html);
               const breadcrumbCount = jsonLd.filter(s => s && s['@type'] === 'BreadcrumbList').length;
