@@ -96,28 +96,8 @@ La taxonomie des outils est déplacée de `public/simulateurs.js` vers `data/too
 L'architecture est gelée autour d'un socle HTML commun obligatoire, avec liberté d'enrichir l'intérieur du bloc outil. `check-pages` distingue les règles structurelles (le socle, bloquantes) des règles éditoriales (qualité de contenu, suivies par compteurs sans bloquer). Le contrat HTML ne dit rien sur le style du JavaScript interne : `window.TOOL` reste le défaut recommandé, et un moteur réglementaire peut être extrait en `public/<slug>.js` comme `rsa.js` et `impot.js`. Remplacé en partie par l'entrée suivante : les règles éditoriales sont désormais sous cliquet.
 
 
-## 2026-10-03 — Cliquet sur les règles structurelles
+## 2026-10-03 — Cliquet sur les règles structurelles et éditoriales
 
-`check-pages --ratchet` est bloquant en CI et en déploiement. Les écarts structurels existants sont figés dans `scripts/check-pages.baseline.json` : un nouvel écart fait échouer la CI, et un écart corrigé doit être retiré de la baseline (entrée périmée). `--update-baseline` ne peut que retirer des entrées. Les règles éditoriales restent suivies sans bloquer. Les deux blocs Node inline de `deploy.yml` sont supprimés une fois leurs contrôles portés dans `check-pages` et testés ; le garde de cohérence avant production, la validation statique, les tests, les smoke tests, le déploiement et le rollback sont conservés tels quels.
-
-## 2026-10-03 — Outils associés HTML-first
-
-Toutes les pages `/outil/` utilisent désormais 2 à 4 relations ordonnées dans `data/tools.json` et dans leur HTML. Cette duplication contrôlée est volontaire : le JSON sert au contrôle de cohérence, tandis que le HTML est la source de vérité rendue au visiteur.
-
-Le fallback JavaScript historique des outils associés est supprimé une fois le comptage final validé. Les pages `/conversion/` et `/comparateur/` restent HTML-first avec 2 à 4 liens sans `relatedTools`.
-
-La page TVA reçoit volontairement une nouvelle liste visible d'outils associés : pourcentage, remise, prix-unitaire et impot-sur-le-revenu. `capacite-emprunt` est ramenée à un seul bloc standard de quatre liens ; son paragraphe « Sources officielles… » est conservé dans le contenu.
+`check-pages --ratchet` est bloquant en CI et en déploiement. Les écarts structurels et éditoriaux suivis sont figés dans `scripts/check-pages.baseline.json` : un nouvel écart fait échouer la CI, et un écart corrigé doit être retiré de la baseline (entrée périmée). Les règles éditoriales ne peuvent que diminuer : toute nouvelle page doit être conforme dès sa création. `--update-baseline` ne peut que retirer des entrées. `--seed-baseline` sert uniquement à amorcer une règle éditoriale qui n'a encore aucune entrée et refuse toute règle déjà présente. Les deux blocs Node inline de `deploy.yml` sont supprimés une fois leurs contrôles portés dans `check-pages` et testés ; le garde de cohérence avant production, la validation statique, les tests, les smoke tests, le déploiement et le rollback sont conservés tels quels.
 
 
-## 2026-10-03 — Taxonomie définitive et contrôle des hubs
-
-La taxonomie principale est désormais arrêtée : Maths (/maths/) regroupe pourcentage, proportion, ratio, fractions, moyenne, moyenne pondérée, médiane/mode, arrondi et calculatrice. Argent conserve coefficient, marge, remise et prix unitaire. TVA devient un calculateur ; épargne et frais kilométriques deviennent des simulateurs ; temps devient une conversion tout en conservant son URL /outil/temps/.
-
-Les URLs existantes sont conservées. Les deux intentions prix unitaire (/outil/prix-unitaire/ et /comparateur/prix-unitaire/) restent distinctes pour le moment. Les hubs de catégorie et de type sont alignés sur la déclaration centrale ; les liens transversaux des hubs de catégorie restent visibles avec la classe see-also.
-
-Le contrôle CI check-hubs.mjs vérifiera la couverture exacte des hubs de catégorie, la cohérence des hubs de type, la couverture des pages /conversion/ et /comparateur/ et la présence de toutes les catégories sur l’accueil.
-
-
-## Paramètres réglementaires centralisés — 2026-10-03
-
-Les barèmes ne sont plus codés en dur dans chaque page : ils vivent dans `data/parametres.json` avec validité, source et date de vérification, et sont diffusés par un fichier généré (`public/parametres.js`). Choix : un JSON central plutôt qu'un module par moteur, pour contrôler tous les jeux au même endroit ; une année dans un titre seulement pour un barème daté ; contrôle de péremption bloquant sur la validité dépassée (une page ne doit pas afficher un barème périmé) mais simple avertissement sur l'ancienneté de la vérification (une PR sans rapport ne doit pas casser un jour donné pour une simple date de contrôle). Migration par lots : trois outils pilotes (SMIC, frais kilométriques, RSA) ; les autres restent listés dans `anneeAMigrer` jusqu'à leur tour. Limite connue : la prose HTML n'est liée aux paramètres que pour les montants déclarés dans `htmlMentions`.

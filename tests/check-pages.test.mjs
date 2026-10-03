@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import {checkPage,checkAll,loadToolsMeta,parseHtml,summarize,STRUCTURAL_RULES,EDITORIAL_RULES,toolDirsWithoutIndex,structuralPairs,parseBaseline,compareToBaseline,nextBaseline} from "../scripts/check-pages.mjs";
+import {checkPage,checkAll,loadToolsMeta,parseHtml,summarize,STRUCTURAL_RULES,EDITORIAL_RULES,TRACKED_RULES,toolDirsWithoutIndex,trackedPairs,parseBaseline,compareToBaseline,nextBaseline,seedBaseline} from "../scripts/check-pages.mjs";
 
 const DESC="Utilisez cet outil en ligne pour effectuer rapidement votre calcul et obtenir un résultat clair, pratique et adapté à votre situation.";
 const CATS={categorie:{label:"Catégorie",path:"/categorie/"}};
@@ -272,26 +272,38 @@ try{
 
 // ===== Étape E : cliquet et baseline =====
 const P=(p,r)=>({path:p,rule:r});
-const cur=structuralPairs([{path:"b",rule:"title",message:"1"},{path:"a",rule:"result",message:"1"},{path:"a",rule:"result",message:"2"},{path:"a",rule:"description",message:"éditorial"}]);
-assert.deepEqual(cur,[P("a","result"),P("b","title")],"paires structurelles dédoublonnées, triées, sans l'éditorial");
+const cur=trackedPairs([{path:"b",rule:"title",message:"1"},{path:"a",rule:"result",message:"1"},{path:"a",rule:"result",message:"2"},{path:"a",rule:"description",message:"éditorial"}]);
+assert.deepEqual(cur,[P("a","description"),P("a","result"),P("b","title")],"paires suivies dédoublonnées et triées, structurelles + éditoriales");
 // cliquet : positif
-assert.deepEqual(compareToBaseline(cur,[P("b","title"),P("a","result")]),{added:[],stale:[]},"positif : écarts = baseline");
+assert.deepEqual(compareToBaseline(cur,cur),{added:[],stale:[]},"positif : écarts structurels + éditoriaux = baseline");
 // cliquet : négatif (régression ou nouvelle page non conforme)
 assert.deepEqual(compareToBaseline([...cur,P("c","h1")],cur).added,[P("c","h1")],"négatif : nouvel écart absent de la baseline");
 // cliquet : négatif (entrée périmée)
-assert.deepEqual(compareToBaseline([P("a","result")],cur).stale,[P("b","title")],"négatif : entrée périmée");
+assert.deepEqual(compareToBaseline([P("a","result"),P("a","description")],cur).stale,[P("b","title")],"négatif : entrée périmée");
 // parseBaseline : validation
-assert.deepEqual(parseBaseline('[{"path":"a","rule":"title"}]'),[P("a","title")],"positif : baseline valide");
-for(const [label,txt] of [["JSON invalide","{"],["pas une liste","{}"],["entrée sans règle",'[{"path":"a"}]'],["règle éditoriale",'[{"path":"a","rule":"description"}]'],["règle inconnue",'[{"path":"a","rule":"zzz"}]'],["doublon",'[{"path":"a","rule":"title"},{"path":"a","rule":"title"}]']])assert.throws(()=>parseBaseline(txt),Error,"négatif : "+label);
+assert.deepEqual(parseBaseline('[{"path":"a","rule":"title"}]'),[P("a","title")],"positif : baseline structurelle valide");
+assert.deepEqual(parseBaseline('[{"path":"a","rule":"description"}]'),[P("a","description")],"positif : baseline éditoriale acceptée");
+for(const [label,txt] of [["JSON invalide","{"],["pas une liste","{}"],["entrée sans règle",'[{"path":"a"}]'],["règle inconnue",'[{"path":"a","rule":"zzz"}]'],["doublon",'[{"path":"a","rule":"title"},{"path":"a","rule":"title"}]']])assert.throws(()=>parseBaseline(txt),Error,"négatif : "+label);
 // --update-baseline : génération initiale, retrait seul, refus d'ajout
-const init=nextBaseline(cur,null);assert(init.ok&&init.initial&&init.next.length===2,"génération initiale autorisée");
-const shrink=nextBaseline([P("a","result")],cur);assert(shrink.ok&&!shrink.initial,"retrait accepté");assert.deepEqual(shrink.next,[P("a","result")],"la baseline perd l'entrée corrigée");assert.deepEqual(shrink.removed,[P("b","title")]);
+const init=nextBaseline(cur,null);assert(init.ok&&init.initial&&init.next.length===3,"génération initiale autorisée");
+const shrink=nextBaseline([P("a","result")],cur);assert(shrink.ok&&!shrink.initial,"retrait accepté");assert.deepEqual(shrink.next,[P("a","result")],"la baseline perd les entrées corrigées");assert.deepEqual(shrink.removed,[P("a","description"),P("b","title")]);
 const grow=nextBaseline([...cur,P("c","h1")],cur);assert.equal(grow.ok,false,"ajout refusé");assert.deepEqual(grow.added,[P("c","h1")]);assert.deepEqual(grow.next,cur,"la baseline n'est pas modifiée en cas de refus");
-const mixed=nextBaseline([P("a","result"),P("c","h1")],cur);assert.equal(mixed.ok,false,"un retrait ne compense pas un ajout");
+const mixed=nextBaseline([P("a","result"),P("a","description"),P("c","h1")],cur);assert.equal(mixed.ok,false,"un retrait ne compense pas un ajout");
 assert.deepEqual(nextBaseline(cur,cur).removed,[],"rien à retirer : baseline inchangée");
 
-// le fichier de baseline versionné est valide et ne contient que des règles suivies
+const editorial=[P("a","description")];
+assert.deepEqual(compareToBaseline([...editorial,P("c","content-h2")],editorial).added,[P("c","content-h2")],"nouvel écart éditorial = added");
+assert.deepEqual(compareToBaseline([],editorial).stale,editorial,"écart éditorial corrigé = stale");
+assert.equal(nextBaseline([...editorial,P("c","formula")],editorial).ok,false,"--update-baseline ne peut pas ajouter un écart éditorial");
+const seeded=seedBaseline([...editorial,P("b","content-h2"),P("c","title")],[P("z","title")]);
+assert(seeded.ok,"--seed-baseline accepte les règles éditoriales absentes");
+assert.deepEqual(seeded.added,[P("a","description"),P("b","content-h2")],"--seed-baseline ajoute les écarts des règles éditoriales absentes");
+const refused=seedBaseline(editorial,[P("z","description")]);
+assert.equal(refused.ok,false,"--seed-baseline refuse une règle éditoriale déjà présente");
+assert.deepEqual(refused.refused,["description"],"--seed-baseline indique la règle déjà présente");
+
+// le fichier de baseline versionné est valide et ne contient que des écarts structurels
 const committed=parseBaseline(fs.readFileSync(new URL("../scripts/check-pages.baseline.json",import.meta.url),"utf8"));
-assert(committed.every(x=>STRUCTURAL_RULES.includes(x.rule)),"baseline versionnée : règles structurelles seulement");
+assert(committed.every(x=>TRACKED_RULES.includes(x.rule)),"baseline versionnée : uniquement des règles suivies");
 
 console.log("check-pages tests passed.");
