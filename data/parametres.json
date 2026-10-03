@@ -1,0 +1,192 @@
+{
+  "schemaVersion": 1,
+  "staleAfterDays": 180,
+  "warnExpiryDays": 30,
+  "sets": {
+    "smic": {
+      "label": "SMIC",
+      "year": 2026,
+      "usedBy": [
+        "smic"
+      ],
+      "source": {
+        "label": "Service-Public — SMIC",
+        "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2300"
+      },
+      "effectiveFrom": "2026-06-01",
+      "effectiveTo": "2026-12-31",
+      "verifiedOn": "2026-10-03",
+      "notes": "Montants bruts vérifiés sur Service-Public. Les montants nets sont indicatifs et ne sont pas issus de la source : ils sont déjà présentés comme tels dans l'outil. Revalorisation au 1er janvier, et en cours d'année si l'inflation dépasse 2 %.",
+      "htmlMentions": [
+        {
+          "slug": "smic",
+          "path": "metropole.horaireBrut",
+          "format": "eur2"
+        },
+        {
+          "slug": "smic",
+          "path": "metropole.mensuelBrut35",
+          "format": "eur2"
+        },
+        {
+          "slug": "smic",
+          "path": "metropole.annuelBrut35",
+          "format": "eur2"
+        },
+        {
+          "slug": "smic",
+          "path": "mayotte.horaireBrut",
+          "format": "eur2"
+        },
+        {
+          "slug": "smic",
+          "path": "mayotte.mensuelBrut35",
+          "format": "eur2"
+        },
+        {
+          "slug": "smic",
+          "path": "mayotte.annuelBrut35",
+          "format": "eur2"
+        }
+      ],
+      "values": {
+        "metropole": {
+          "horaireBrut": 12.31,
+          "mensuelBrut35": 1867.02,
+          "annuelBrut35": 22404.2,
+          "netHoraireIndicatif": 9.74,
+          "netMensuel35Indicatif": 1477.93
+        },
+        "mayotte": {
+          "horaireBrut": 9.56,
+          "mensuelBrut35": 1449.93,
+          "annuelBrut35": 17399.2
+        }
+      }
+    },
+    "frais-kilometriques": {
+      "label": "Barème kilométrique (voitures)",
+      "year": 2026,
+      "usedBy": [
+        "frais-kilometriques"
+      ],
+      "source": {
+        "label": "Service-Public — frais kilométriques",
+        "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R3080"
+      },
+      "effectiveFrom": "2026-01-01",
+      "effectiveTo": "2027-03-31",
+      "verifiedOn": "2026-10-03",
+      "notes": "Barème de la déclaration 2026 (revenus 2025), non revalorisé en 2026 selon economie.gouv.fr (page mise à jour le 13 avril 2026). Fin de validité fixée avant la déclaration suivante.",
+      "values": {
+        "majorationElectrique": 1.2,
+        "palier1": 5000,
+        "palier2": 20000,
+        "parCV": {
+          "3": {
+            "jusqua5000": 0.529,
+            "milieu": 0.316,
+            "forfaitMilieu": 1065,
+            "auDela": 0.37
+          },
+          "4": {
+            "jusqua5000": 0.606,
+            "milieu": 0.34,
+            "forfaitMilieu": 1330,
+            "auDela": 0.407
+          },
+          "5": {
+            "jusqua5000": 0.636,
+            "milieu": 0.357,
+            "forfaitMilieu": 1395,
+            "auDela": 0.427
+          },
+          "6": {
+            "jusqua5000": 0.665,
+            "milieu": 0.374,
+            "forfaitMilieu": 1457,
+            "auDela": 0.447
+          },
+          "7": {
+            "jusqua5000": 0.697,
+            "milieu": 0.394,
+            "forfaitMilieu": 1515,
+            "auDela": 0.47
+          }
+        }
+      }
+    },
+    "rsa": {
+      "label": "RSA",
+      "year": 2026,
+      "usedBy": [
+        "rsa"
+      ],
+      "source": {
+        "label": "Service-Public — RSA (demandeur de 25 ans et plus)",
+        "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F19778"
+      },
+      "effectiveFrom": "2026-04-01",
+      "effectiveTo": "2027-03-31",
+      "verifiedOn": "2026-09-28",
+      "notes": "Vérification du 28 septembre 2026 documentée dans docs/rsa/SOURCES.md (barème Caf au 1er avril 2026, Légifrance, Service-Public). Montants officiels Caf conservés tels quels pour éviter les écarts d'arrondi.",
+      "values": {
+        "base": 651.69,
+        "childIncrease": 260.68,
+        "coupleChildIncrease": 195.51,
+        "majorationBase": 836.85,
+        "majorationChildIncrease": 278.95,
+        "housing": {
+          "one": 78.2,
+          "two": 156.41,
+          "threePlus": 193.55
+        },
+        "youngActiveHours": 3214,
+        "singleAmounts": [
+          651.69,
+          977.54,
+          1173.05,
+          1433.73
+        ],
+        "coupleAmounts": [
+          977.54,
+          1173.05,
+          1368.56,
+          1629.24
+        ]
+      }
+    }
+  },
+  "anneeAMigrer": {
+    "motif": "Barèmes encore codés en dur dans la page ou à auditer : l'année reste dans le titre jusqu'à la migration vers data/parametres.json. Retirer un slug de cette liste quand l'outil est migré ou que l'année quitte le titre.",
+    "slugs": [
+      "age-retraite",
+      "capacite-emprunt",
+      "charges-independant",
+      "comparateur-placements",
+      "donation",
+      "electricite",
+      "epargne-reglementee",
+      "frais-de-notaire",
+      "ifi",
+      "impot-sur-le-revenu",
+      "indemnite-licenciement",
+      "indemnite-precarite",
+      "indemnites-maladie",
+      "indemnites-maternite-paternite",
+      "micro-entrepreneur",
+      "per",
+      "plus-value-immobiliere",
+      "plus-value-mobiliere",
+      "preavis-demission",
+      "pret-immobilier",
+      "prime-activite",
+      "ptz",
+      "retraite-simplifiee",
+      "rupture-conventionnelle",
+      "salaire-brut-net",
+      "succession",
+      "tva"
+    ]
+  }
+}

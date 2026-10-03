@@ -116,3 +116,8 @@ La taxonomie principale est désormais arrêtée : Maths (/maths/) regroupe pour
 Les URLs existantes sont conservées. Les deux intentions prix unitaire (/outil/prix-unitaire/ et /comparateur/prix-unitaire/) restent distinctes pour le moment. Les hubs de catégorie et de type sont alignés sur la déclaration centrale ; les liens transversaux des hubs de catégorie restent visibles avec la classe see-also.
 
 Le contrôle CI check-hubs.mjs vérifiera la couverture exacte des hubs de catégorie, la cohérence des hubs de type, la couverture des pages /conversion/ et /comparateur/ et la présence de toutes les catégories sur l’accueil.
+
+
+## Paramètres réglementaires centralisés — 2026-10-03
+
+Les barèmes ne sont plus codés en dur dans chaque page : ils vivent dans `data/parametres.json` avec validité, source et date de vérification, et sont diffusés par un fichier généré (`public/parametres.js`). Choix : un JSON central plutôt qu'un module par moteur, pour contrôler tous les jeux au même endroit ; une année dans un titre seulement pour un barème daté ; contrôle de péremption bloquant sur la validité dépassée (une page ne doit pas afficher un barème périmé) mais simple avertissement sur l'ancienneté de la vérification (une PR sans rapport ne doit pas casser un jour donné pour une simple date de contrôle). Migration par lots : trois outils pilotes (SMIC, frais kilométriques, RSA) ; les autres restent listés dans `anneeAMigrer` jusqu'à leur tour. Limite connue : la prose HTML n'est liée aux paramètres que pour les montants déclarés dans `htmlMentions`.

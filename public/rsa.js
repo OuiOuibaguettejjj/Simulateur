@@ -1,15 +1,8 @@
 (function(){
-  const PARAMS = Object.freeze({
-    effectiveFrom: "2026-04-01",
-    effectiveTo: "2027-03-31",
-    base: 651.69,
-    childIncrease: 260.68,
-    coupleChildIncrease: 195.51,
-    majorationBase: 836.85,
-    majorationChildIncrease: 278.95,
-    housing: { one: 78.20, two: 156.41, threePlus: 193.55 },
-    youngActiveHours: 3214
-  });
+  // Barèmes : data/parametres.json (jeu "rsa"), exposés par /parametres.js (chargé avant ce fichier).
+  const SET = window.Parametres.get("rsa");
+  const PARAMS = Object.freeze(Object.assign({ effectiveFrom: SET.effectiveFrom, effectiveTo: SET.effectiveTo }, SET.values));
+  const hoursLabel = String(PARAMS.youngActiveHours).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 
   function round2(n){ return Math.round((n + Number.EPSILON) * 100) / 100; }
   function money(n){ return Number(n).toLocaleString("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:2}); }
@@ -22,9 +15,7 @@
     }
 
     // Official Caf amounts for 2026, avoiding percentage-rounding discrepancies.
-    const singleAmounts = [651.69, 977.54, 1173.05, 1433.73];
-    const coupleAmounts = [977.54, 1173.05, 1368.56, 1629.24];
-    const amounts = single ? singleAmounts : coupleAmounts;
+    const amounts = single ? PARAMS.singleAmounts : PARAMS.coupleAmounts;
 
     if(d <= 3) return amounts[d];
     return round2(amounts[3] + (d - 3) * PARAMS.childIncrease);
@@ -55,7 +46,7 @@
       if(!resident) return {eligible:false,reason:"Le simulateur suppose une résidence stable et effective en France. La Caf doit vérifier la condition de résidence et, le cas échéant, le droit au séjour."};
       if(age<18) return {eligible:false,reason:"Le RSA est ouvert à partir de 18 ans, sous conditions."};
       if(age<25 && !(single && dependents>0) && !(youngActive && !student)){
-        return {eligible:false,reason:"Entre 18 et 24 ans, le RSA est soumis à des conditions particulières, notamment de parent isolé ou de jeune actif ayant exercé au moins 3 214 heures sur les 3 années précédentes."};
+        return {eligible:false,reason:"Entre 18 et 24 ans, le RSA est soumis à des conditions particulières, notamment de parent isolé ou de jeune actif ayant exercé au moins " + hoursLabel + " heures sur les 3 années précédentes."};
       }
       if(student && !(single && dependents>0)){
         return {eligible:false,reason:"Le RSA n'est en principe pas ouvert aux étudiants, sauf situations particulières, notamment de parent isolé. La Caf doit confirmer le droit."};

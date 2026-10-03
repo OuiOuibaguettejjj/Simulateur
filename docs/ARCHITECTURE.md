@@ -67,3 +67,19 @@ Les règles éditoriales ne bloquent pas ; leurs compteurs sont affichés dans l
 ### Outils associés — Étape F (2026-10-03)
 
 Pour chaque page `/outil/<slug>/`, `relatedTools` est un tableau ordonné de 2 à 4 slugs dans `data/tools.json`, et le même ensemble, dans le même ordre, est écrit directement dans le bloc HTML `.related-tools`. Le HTML commité est la source de vérité éditoriale. Aucun fallback JavaScript ne génère les outils associés. Les pages `/conversion/` et `/comparateur/` portent leurs 2 à 4 liens directement dans leur HTML et n'ont pas d'entrée `relatedTools` dans `data/tools.json`.
+
+
+## Paramètres réglementaires et année dans les titres (2026-10-03)
+
+**Source de vérité** : `data/parametres.json` (non servi). Chaque jeu (`sets.<id>`) porte `label`, `year`, `usedBy` (slugs d'outils), `source` (libellé et URL https), `effectiveFrom` / `effectiveTo`, `verifiedOn` (date de notre dernière vérification contre la source, pas celle de la source), des `notes` et des `values` strictement numériques. Un jeu = une période de validité : une revalorisation remplace le jeu, l'historique reste dans Git.
+
+**Diffusion** : `scripts/generate-params.mjs` produit `public/parametres.js` (objet `window.Parametres`, valeurs figées : `get(id)`, `ids()`, `isEffective(id, date)`). Le fichier est commité et vérifié en `--check`, comme le sitemap. Les pages migrées chargent `/parametres.js` avant leur moteur ; un jeu inconnu lève une erreur explicite, il n'existe aucune valeur de repli.
+
+**Contrôle** : `scripts/check-params.mjs` (étape CI de `tests.yml` et `deploy.yml`, option `--today=AAAA-MM-JJ` pour simuler une date) :
+- *bloquant* : schéma invalide, jeu dont `effectiveTo` est dépassé (`expired`), année de titre/H1 différente de celle du jeu (`year-mismatch`), page migrée sans `/parametres.js`, `public/parametres.js` périmé, année dans le titre d'un outil sans paramètres (`year-not-regulatory`) ;
+- *avertissement* : `verifiedOn` plus ancien que `staleAfterDays` (180), fin de validité à moins de `warnExpiryDays` (30), outils encore listés dans `anneeAMigrer`.
+- `htmlMentions` (optionnel) : relie un montant écrit dans la prose HTML d'une page (indispensable au rendu HTML-first) à une valeur du jeu ; le contrôle échoue si la page n'affiche plus le montant formaté. Utilisé pour le SMIC.
+
+**Politique d'année** : l'année n'apparaît dans le titre, le H1 et le breadcrumb que pour un outil dont le résultat dépend d'un barème daté, et doit alors égaler `year` de son jeu. Les outils de calcul pur (mensualité, inflation, amortissement, etc.) n'ont pas d'année. Les URL `/outil/<slug>/` ne changent jamais. `anneeAMigrer.slugs` liste les outils dont le barème est encore en dur ; chaque migration retire le slug de la liste (une entrée devenue inutile fait échouer le contrôle).
+
+**Migrés** : `smic`, `frais-kilometriques`, `rsa`. **Mise à jour annuelle** : vérifier la source, modifier le jeu (valeurs, dates, `year`, `verifiedOn`), lancer `node scripts/generate-params.mjs`, puis mettre à jour les titres/H1 des outils concernés et la prose signalée par `htmlMentions`.
