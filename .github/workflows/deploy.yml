@@ -22,6 +22,9 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Pre-production security and architecture gate
+        run: node scripts/check-security.mjs
+
       - name: Generate sitemap
         run: node scripts/generate-sitemap.mjs
 

@@ -32,3 +32,12 @@ Les simulateurs riches peuvent conserver des extensions spécifiques (graphiques
 La migration HTML-first est terminée : les 77 pages `/outil/<slug>/` sont statiques et autonomes pour leur contenu éditorial initial. Le script historique `scripts/prerender-tools.mjs` et son workflow de validation ont été supprimés. Il n'existe plus de migration progressive ni de réécriture pré-déploiement de ces pages.
 
 Les URLs et la logique métier existantes sont conservées.
+## Processus pré-production et MEP
+
+Le contrôle transversal `scripts/check-security.mjs` est le gate unique pour les invariants de sécurité, de frontière de production, de taxonomie et de CI/CD. Il est exécuté au début du workflow de déploiement, avant toute génération ou transformation du build.
+
+Le workflow `.github/workflows/deploy.yml` conserve les contrôles qui relèvent du build et de la qualité du produit : génération et intégrité du sitemap, contrat HTML-first, cohérence métadonnées/HTML, normalisation idempotente, intégration AdSense, validation statique, tests fonctionnels, smoke tests locaux et production, contrôle de commit, empreinte de déploiement et vérifications Cloudflare post-MEP. Ces contrôles ne sont pas dupliqués dans le gate de sécurité.
+
+Le workflow `.github/workflows/tests.yml` reste dédié aux tests fonctionnels ciblés des calculateurs. Il ne porte pas le gate de sécurité.
+
+Toute évolution d'architecture ou de sécurité doit d'abord être décidée et auditée manuellement. Les contrôles CI bloquent une configuration non conforme ; ils ne modifient jamais automatiquement les règles de sécurité ou l'architecture.
