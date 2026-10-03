@@ -64,6 +64,11 @@ for (const file of files) {
 }
 if (CHECK_ONLY && changed) {
   console.error("AdSense check failed: " + changed + " page(s) differ from the canonical AdSense preparation.");
+  for (const file of files) {
+    const old = fs.readFileSync(file, "utf8");
+    const next = normalize(old, path.relative(process.cwd(), file));
+    if (next !== old) console.error(" - " + path.relative(process.cwd(), file));
+  }
   process.exit(1);
 }
 console.log("AdSense " + (CHECK_ONLY ? "check" : "normalize") + ": " + changed + " pages updated; " + files.length + " pages checked.");
