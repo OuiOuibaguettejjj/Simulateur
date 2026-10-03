@@ -7,6 +7,7 @@ import path from "node:path";
 
 const root = path.join(process.cwd(), "public");
 const CHECK_ONLY = process.argv.includes("--check");
+const REPORT_ONLY = process.argv.includes("--report");
 const SKIP_ROOT_DIRS = new Set([".well-known", "api"]);
 
 const HEADER =
@@ -104,6 +105,10 @@ for (const file of files) {
     changed++;
     if (!CHECK_ONLY) fs.writeFileSync(file, html);
   }
+}
+if (REPORT_ONLY) {
+  console.log("Layout report: " + changed + " page(s) differ from the canonical shared layout.");
+  process.exit(0);
 }
 if (CHECK_ONLY && changed) {
   console.error("Layout check failed: " + changed + " page(s) differ from the canonical shared layout.");
