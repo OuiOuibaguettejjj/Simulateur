@@ -3,7 +3,7 @@ import fs from "node:fs";
 import {checkPage,checkAll,loadToolsMeta,parseHtml} from "../scripts/check-pages.mjs";
 
 const DESC="Utilisez cet outil en ligne pour effectuer rapidement votre calcul et obtenir un résultat clair, pratique et adapté à votre situation.";
-const META={slug:{type:"calculateur",relatedTools:[{slug:"slug-1"},{slug:"slug-2"}],"slug-1":{},"slug-2":{}};
+const META={slug:{type:"calculateur",relatedTools:[{slug:"slug-1"},{slug:"slug-2"}]},"slug-1":{},"slug-2":{}};
 const IDX=new Set(["outil/slug","outil/slug-1","outil/slug-2"]);
 
 function fixture(desc=DESC){
