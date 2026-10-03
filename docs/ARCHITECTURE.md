@@ -40,3 +40,15 @@ Le workflow `.github/workflows/deploy.yml` conserve les contrôles qui relèvent
 Le workflow `.github/workflows/tests.yml` reste dédié aux tests fonctionnels ciblés des calculateurs. Il ne porte pas le gate de sécurité.
 
 Toute évolution d'architecture ou de sécurité doit d'abord être décidée et auditée manuellement. Les contrôles CI bloquent une configuration non conforme ; ils ne modifient jamais automatiquement les règles de sécurité ou l'architecture.
+
+## Contrôle des pages : règles structurelles et éditoriales
+
+`scripts/check-pages.mjs` classe ses règles en deux familles, séparées dans la sortie console et dans le tableau `GITHUB_STEP_SUMMARY`.
+
+- **Structurelles (bloquantes)** : `html-base`, `markup-balance`, `title`, `canonical`, `breadcrumb`, `h1`, `tool-block`, `result`, `related-block`, `jsonld`, `related-meta`. Elles garantissent le socle HTML commun. `markup-balance` détecte aussi les attributs malformés (nom d'attribut contenant `"` ou `'`, par exemple `type="number step="any"`) et un `>` parasite juste après une balise.
+- **Éditoriales (suivies, non bloquantes)** : `description` (120 à 160 caractères), `content-h2` (au moins 3 H2), `formula` (lien source externe), `meta-unique`, ainsi que les indicateurs « pages sous 120 mots » et « pages sans lien externe ». Elles sont affichées avec leurs compteurs mais ne font jamais échouer le contrôle.
+
+Pour les pages `/outil/`, le contrôle vérifie en plus, contre `data/tools.json` : la catégorie (lien du breadcrumb visible, et élément de position 2 du `BreadcrumbList`, nom et URL) ; l'égalité exacte, ordre compris, entre les slugs du bloc `.related-tools` du HTML et `relatedTools` ; et que `relatedTools` contient de 2 à 4 slugs (règle `related-meta`).
+
+Avec `--strict`, seuls les écarts structurels font échouer la commande.
+

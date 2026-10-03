@@ -1,9 +1,10 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import {checkPage,checkAll,loadToolsMeta,parseHtml,summarize} from "../scripts/check-pages.mjs";
+import {checkPage,checkAll,loadToolsMeta,parseHtml,summarize,STRUCTURAL_RULES,EDITORIAL_RULES} from "../scripts/check-pages.mjs";
 
 const DESC="Utilisez cet outil en ligne pour effectuer rapidement votre calcul et obtenir un résultat clair, pratique et adapté à votre situation.";
-const META={slug:{type:"calculateur",relatedTools:["slug-1","slug-2"]},"slug-1":{},"slug-2":{}};
+const CATS={categorie:{label:"Catégorie",path:"/categorie/"}};
+const META={slug:{type:"calculateur",category:"categorie",relatedTools:["slug-1","slug-2"]},"slug-1":{},"slug-2":{}};
 const IDX=new Set(["outil/slug","outil/slug-1","outil/slug-2"]);
 
 function fixture(desc=DESC){
@@ -19,7 +20,7 @@ return "<!doctype html><html lang=\"fr\"><head>"+
 "<section class=\"content-section\"><h2>Comment calculer ?</h2><p>Principe.</p><h2>Exemple de calcul</h2><p>Exemple.</p><h2>À savoir</h2><p>Limites.</p></section>"+
 "<section class=\"related-tools\"><a class=\"related-link\" href=\"/outil/slug-1/\">Outil 1</a><a class=\"related-link\" href=\"/outil/slug-2/\">Outil 2</a></section></main><footer></footer></body></html>";
 }
-const errs=(h,m=META,i=IDX)=>checkPage(h,{dir:"outil",slug:"slug",toolsMeta:m,pageIndex:i});
+const errs=(h,m=META,i=IDX)=>checkPage(h,{dir:"outil",slug:"slug",toolsMeta:m,categories:CATS,pageIndex:i});
 const has=(h,r)=>errs(h).some(x=>x.rule===r);
 function familyFixture(dir,slug,relatedLinks){
   const related=relatedLinks.map((href,i)=>"<a class=\"related-link\" href=\""+href+"\">Associé "+(i+1)+"</a>").join("");
@@ -37,7 +38,7 @@ function familyIndex(dir,slug,relatedLinks){
 }
 const familyErrs=(dir,slug,relatedLinks,idx=familyIndex(dir,slug,relatedLinks))=>checkPage(
   familyFixture(dir,slug,relatedLinks),
-  {dir,slug,toolsMeta:{},pageIndex:idx}
+  {dir,slug,toolsMeta:{},categories:{},pageIndex:idx}
 );
 
 
@@ -157,11 +158,74 @@ assert.deepEqual(errs(twoRelatedBlocks).filter(x=>x.rule==="related-block"),[{ru
 
 
 const template=fs.readFileSync(new URL("../docs/template-outil.html",import.meta.url),"utf8");
-assert.deepEqual(checkPage(template,{dir:"outil",slug:"slug",toolsMeta:{slug:{relatedTools:["slug-1","slug-2"]},"slug-1":{},"slug-2":{}},pageIndex:IDX}),[],"template conforme");
+assert.deepEqual(checkPage(template,{dir:"outil",slug:"slug",toolsMeta:META,categories:CATS,pageIndex:IDX}),[],"template conforme");
 
 assert.equal(checkAll([{path:"a",html:fixture()},{path:"b",html:fixture()}]).length,2,"meta-unique");
 const s1=summarize([{path:"a",rule:"x",message:"1"},{path:"a",rule:"x",message:"2"}],["x"],2);assert.deepEqual(s1.x,{pages:1,messages:2},"même page = 1 page, 2 écarts");const s2=summarize([{path:"a",rule:"x",message:"1"},{path:"b",rule:"x",message:"2"}],["x"],2);assert.deepEqual(s2.x,{pages:2,messages:2},"deux pages = 2 pages");const s3=summarize([{path:"a",rule:"x",message:"1"},{path:"b",rule:"x",message:"2"},{path:"c",rule:"x",message:"3"}],["x"],2);assert.equal(s3.x.pages,2,"pages ne dépasse jamais total");
 const sim='{"categories":{},"tools":{"slug":{"type":"calculateur","relatedTools":["slug-1","slug-2"]}}}';
 assert.equal(loadToolsMeta(sim).slug.type,"calculateur");
+
+
+// ===== Étape D : un test positif et un test négatif par règle structurelle =====
+const only=(h,r,m=META,i=IDX)=>errs(h,m,i).filter(x=>x.rule===r);
+const L=x=>"<a class=\"related-link\" href=\"/outil/"+x+"/\">"+({"slug-1":"Outil 1","slug-2":"Outil 2"}[x]||x)+"</a>";
+const NEG={
+ "html-base":fixture().replace("<html lang=\"fr\">","<html lang=\"en\">"),
+ "markup-balance":fixture().replace("</section></main>","</main>"),
+ "title":fixture().replace("<title>Mot-clé | Simulateur</title>","<title>Mot-clé</title>"),
+ "canonical":fixture().replace("rel=\"canonical\" href=\"https://simulateur.site/outil/slug/\"","rel=\"canonical\" href=\"https://simulateur.site/outil/autre/\""),
+ "breadcrumb":fixture().replace("<a href=\"/\">Accueil</a> ·","<a href=\"/\">Home</a> ·"),
+ "h1":fixture().replace("<h1>Nom de l'outil</h1>","<h1></h1>"),
+ "tool-block":fixture().replace("<section class=\"tool\">","<div class=\"tool\">"),
+ "result":fixture().replace("Résultat initial.",""),
+ "related-block":fixture().replace(L("slug-2"),""),
+ "jsonld":fixture().replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/g,"")
+};
+for(const r of STRUCTURAL_RULES){
+ assert.equal(only(fixture(),r).length,0,"positif "+r+" : page conforme sans écart");
+ if(r==="related-meta"){
+  assert(only(fixture(),r,{...META,slug:{...META.slug,relatedTools:["slug-1"]}}).length>0,"négatif related-meta : 1 slug");
+ } else assert(only(NEG[r],r).length>0,"négatif "+r+" : écart attendu");
+}
+assert.deepEqual(errs(fixture()),[],"page conforme : aucun écart du tout");
+
+// classement des règles
+assert.deepEqual(STRUCTURAL_RULES.filter(r=>EDITORIAL_RULES.includes(r)),[],"familles disjointes");
+for(const r of ["description","content-h2","formula","meta-unique"])assert(EDITORIAL_RULES.includes(r)&&!STRUCTURAL_RULES.includes(r),r+" est éditoriale");
+for(const r of ["html-base","markup-balance","title","canonical","breadcrumb","h1","tool-block","result","related-block","jsonld","related-meta"])assert(STRUCTURAL_RULES.includes(r),r+" est structurelle");
+assert.deepEqual(errs(fixture("x")).filter(x=>STRUCTURAL_RULES.includes(x.rule)),[],"une page qui ne viole que l'éditorial n'a aucun écart structurel");
+assert(errs(fixture("x")).some(x=>x.rule==="description"),"description reste signalée (éditorial)");
+
+// markup-balance : attributs malformés et « > » parasite
+const badAttr=fixture().replace("<div id=\"fields\"></div>","<input id=\"v\" type=\"number step=\"any\" value=\"12.345\">");
+assert(only(badAttr,"markup-balance").some(x=>/attribut malformé/.test(x.message)),"négatif : type=\"number step=\"any\"");
+assert.equal(only(fixture().replace("<div id=\"fields\"></div>","<input id=\"v\" type=\"number\" step=\"any\" value=\"12.345\">"),"markup-balance").length,0,"positif : attributs corrects");
+assert(only(fixture().replace("<div id=\"fields\"></div>","<input id=\"v\" data-x='a\"b'>"),"markup-balance").length===0,"positif : guillemet dans une valeur entre apostrophes");
+assert(only(fixture().replace("<section class=\"tool\">","<section class=\"tool\">>"),"markup-balance").some(x=>/parasite/.test(x.message)),"négatif : « > » en trop après une balise");
+assert.deepEqual(parseHtml("<script>>1</script><div></div>").errors,[],"un > en début de script n'est pas signalé");
+
+// catégorie : breadcrumb visible
+assert(only(fixture().replace("<a href=\"/categorie/\">Catégorie</a>","<a href=\"/autre/\">Catégorie</a>"),"breadcrumb").length>0,"négatif : href catégorie");
+assert(only(fixture().replace("<a href=\"/categorie/\">Catégorie</a>","<a href=\"/categorie/\">Autre</a>"),"breadcrumb").length>0,"négatif : libellé catégorie");
+assert(only(fixture(),"breadcrumb",{...META,slug:{...META.slug,category:"inconnue"}}).length>0,"négatif : catégorie absente de data/tools.json");
+// catégorie : BreadcrumbList position 2
+assert(only(fixture().replace("\"name\":\"Catégorie\",\"item\":\"https://simulateur.site/categorie/\"","\"name\":\"Catégorie\",\"item\":\"https://simulateur.site/autre/\""),"jsonld").some(x=>/position 2/.test(x.message)),"négatif : item position 2");
+assert(only(fixture().replace("\"name\":\"Catégorie\",\"item\"","\"name\":\"Autre\",\"item\""),"jsonld").some(x=>/position 2/.test(x.message)),"négatif : name position 2");
+
+// related-tools : égalité exacte avec data/tools.json (ordre inclus)
+const swapped=fixture().replace(L("slug-1")+L("slug-2"),L("slug-2")+L("slug-1"));
+assert(only(swapped,"related-block").some(x=>/différents de data\/tools\.json/.test(x.message)),"négatif : même slugs, ordre différent");
+const IDX3=new Set([...IDX,"outil/slug-3"]);
+assert(only(fixture().replace(L("slug-2"),L("slug-2")+L("slug-3")),"related-block",{...META,"slug-3":{}},IDX3).length>0,"négatif : lien en plus dans le HTML");
+assert(only(fixture(),"related-block",{...META,slug:{...META.slug,relatedTools:["slug-1","slug-2","slug-3"]},"slug-3":{}},IDX3).length>0,"négatif : slug en plus dans data/tools.json");
+// related-meta : bornes 2 à 4
+const IDX5=new Set([...IDX,"outil/slug-3","outil/slug-4","outil/slug-5"]);
+const M=n=>({...META,slug:{...META.slug,relatedTools:["slug-1","slug-2","slug-3","slug-4","slug-5"].slice(0,n)},"slug-3":{},"slug-4":{},"slug-5":{}});
+const H=n=>fixture().replace(L("slug-1")+L("slug-2"),["slug-1","slug-2","slug-3","slug-4","slug-5"].slice(0,n).map(L).join(""));
+assert.deepEqual(errs(H(4),M(4),IDX5),[],"positif : 4 relations cohérentes HTML/data");
+assert.deepEqual(errs(H(2),M(2),IDX5),[],"positif : 2 relations cohérentes HTML/data");
+assert.equal(only(H(5),"related-meta",M(5),IDX5).length,1,"négatif : 5 relations");
+assert.equal(only(H(1),"related-meta",M(1),IDX5).length,1,"négatif : 1 relation");
+assert.equal(only(fixture(),"related-meta",{...META,slug:{...META.slug,relatedTools:"slug-1"}}).length,1,"négatif : relatedTools n'est pas une liste");
 
 console.log("check-pages tests passed.");

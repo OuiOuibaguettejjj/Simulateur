@@ -1,3 +1,9 @@
+## 2026-10-03 — check-pages : règles structurelles et éditoriales
+- Règles classées en structurelles (bloquantes) et éditoriales (suivies, non bloquantes) ; rapport séparé en deux familles.
+- `markup-balance` : détection des attributs malformés et du `>` parasite après une balise.
+- Nouvelles vérifications `/outil/` : catégorie (breadcrumb visible et `BreadcrumbList` position 2), égalité exacte des slugs du bloc `.related-tools` avec `data/tools.json`, `relatedTools` de 2 à 4 slugs.
+- `tests/check-pages.test.mjs` : un test positif et un test négatif par règle structurelle.
+
 ## 2026-10-03 — relatedTools en liste de slugs
 - `data/tools.json` : `relatedTools` passe de `[{slug,title,description}]` à `["slug"]`, ordre conservé (91 relations, 77 outils).
 - Contrôles adaptés (check-security : slugs existants, sans auto-référence ni doublon ; check-pages ; deploy.yml).

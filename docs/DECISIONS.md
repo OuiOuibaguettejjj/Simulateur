@@ -89,3 +89,9 @@ La taxonomie des outils est déplacée de `public/simulateurs.js` vers `data/too
 ## 2026-10-03 — relatedTools en liste de slugs
 
 `relatedTools` devient une liste ordonnée de slugs dans `data/tools.json`. Les titres et descriptions de l'ancienne structure ne sont plus une donnée de référence : le texte des liens du HTML est libre. Le contrôle exige que les slugs existent, ne contiennent ni auto-référence ni doublon, et (check-pages) que le bloc `.related-tools` du HTML liste exactement ces slugs. Aucune page HTML n'est modifiée par cette décision.
+
+
+## 2026-10-03 — Gel de l'architecture : règles structurelles et éditoriales
+
+L'architecture est gelée autour d'un socle HTML commun obligatoire, avec liberté d'enrichir l'intérieur du bloc outil. `check-pages` distingue les règles structurelles (le socle, bloquantes) des règles éditoriales (qualité de contenu, suivies par compteurs sans bloquer). Le contrat HTML ne dit rien sur le style du JavaScript interne : `window.TOOL` reste le défaut recommandé, et un moteur réglementaire peut être extrait en `public/<slug>.js` comme `rsa.js` et `impot.js`.
+
