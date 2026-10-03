@@ -66,3 +66,8 @@ La taxonomie des outils repose désormais sur une seule déclaration par outil d
 ## 2026-10-03 — Suppression du rendu dynamique historique des outils
 
 Les pages `/outil/<slug>/` étant désormais HTML-first, `Simulateurs.render()` ne doit plus générer de contenu de page. Les éléments éditoriaux et l'interface initiale restent dans chaque HTML statique ; JavaScript conserve uniquement la logique de calcul et les interactions. Le hook `render()` est conservé temporairement comme no-op de compatibilité avec les anciens appels inline, afin d'éviter toute régression fonctionnelle pendant le nettoyage des hooks historiques.
+
+
+## 2026-10-03 — Unification des familles de pages outil
+
+Les routes `/outil/`, `/conversion/` et `/comparateur/` conservent leurs URLs existantes, mais utilisent désormais le même socle HTML-first : structure commune, données structurées, breadcrumb et layout partagé. La taxonomie centrale couvre les 86 pages et porte explicitement le `path` des routes hors `/outil/`. Cette décision évite une migration d'URLs tout en supprimant la séparation architecturale historique entre ces pages.
