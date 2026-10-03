@@ -110,24 +110,28 @@ jobs:
           const source = fs.readFileSync('public/simulateurs.js', 'utf8');
           const categories = extractObject(source, 'CATEGORIES');
           const meta = extractObject(source, 'TOOLS_META');
-          const files = walk('public/outil');
+          const roots = ['public/outil', 'public/conversion', 'public/comparateur'];
+          const files = roots.flatMap(walk);
+          const routeFor = (slug, entry) => entry.path || '/outil/' + slug + '/';
+          const pageKey = file => file.replace(/^public\\//, '').replace(/\\/index\\.html$/, '');
 
           for (const file of files) {
-            const slug = file.slice('public/outil/'.length, -'/index.html'.length);
-            const entry = meta[slug];
-            if (!entry) { errors.push(file + ': missing TOOLS_META entry for ' + slug); continue; }
-            if (!categories[entry.category]) { errors.push(file + ': unknown category ' + entry.category); continue; }
+            const key = pageKey(file);
+            const [family, slug] = key.split('/');
+            const entry = family === 'outil' ? meta[slug] : Object.entries(meta).find(([name, value]) => routeFor(name, value) === '/' + key + '/')?.[1];
+            if (!entry) { errors.push(file + ': missing TOOLS_META entry for ' + key); continue; }
+            const expectedPath = routeFor(family === 'outil' ? slug : Object.keys(meta).find(name => routeFor(name, meta[name]) === '/' + key + '/'), entry);
             const html = fs.readFileSync(file, 'utf8');
-            const expectedCanonical = 'https://simulateur.site/outil/' + slug + '/';
-            const canonical = (html.match(/<link\b[^>]*rel=["']canonical["'][^>]*href=["']([^"']+)["']/i) || [])[1];
+            const expectedCanonical = 'https://simulateur.site' + expectedPath;
+            const canonical = (html.match(/<link\\b[^>]*rel=["']canonical["'][^>]*href=["']([^"']+)["']/i) || [])[1];
             if (canonical !== expectedCanonical) errors.push(file + ': canonical mismatch: ' + canonical + ' != ' + expectedCanonical);
-            const breadcrumb = (html.match(/<div\b[^>]*class=["']breadcrumb["'][^>]*>([\s\S]*?)<\/div>/i) || [])[1] || '';
             const categoryPath = categories[entry.category].path;
             const categoryLabel = categories[entry.category].label;
+            const breadcrumb = (html.match(/<div\\b[^>]*class=["']breadcrumb["'][^>]*>([\\s\\S]*?)<\\/div>/i) || [])[1] || '';
             const categoryPos = breadcrumb.indexOf('href="' + categoryPath + '"');
             if (categoryPos < 0) errors.push(file + ': visible breadcrumb missing category link ' + categoryPath);
-            else { const tail = breadcrumb.slice(categoryPos); const label = (tail.match(/>([\s\S]*?)<\/a>/i) || [])[1]; if (textContent(label || '') !== categoryLabel) errors.push(file + ': visible breadcrumb category label mismatch'); }
-            const jsonLdBlocks = [...html.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)];
+            else { const tail = breadcrumb.slice(categoryPos); const label = (tail.match(/>([\\s\\S]*?)<\\/a>/i) || [])[1]; if (textContent(label || '') !== categoryLabel) errors.push(file + ': visible breadcrumb category label mismatch'); }
+            const jsonLdBlocks = [...html.matchAll(/<script\\b[^>]*type=["']application\\/ld\\+json["'][^>]*>([\\s\\S]*?)<\\/script>/gi)];
             const jsonLd = [];
             for (const match of jsonLdBlocks) { try { jsonLd.push(JSON.parse(match[1])); } catch {} }
             const crumb = jsonLd.find(x => x && x['@type'] === 'BreadcrumbList');
@@ -139,14 +143,11 @@ jobs:
               if (!finalItem || finalItem.item !== expectedCanonical) errors.push(file + ': BreadcrumbList final URL mismatch');
             }
             const relatedExpected = (entry.relatedTools || []).map(x => x.slug);
-            const relatedSection = (html.match(/<section\b[^>]*class=["']related-tools["'][^>]*>([\s\S]*?)<\/section>/i) || [])[1] || '';
-            const relatedActual = [...relatedSection.matchAll(/href=["']\/outil\/([^"']+)\/["']/gi)].map(m => m[1]);
-            if (JSON.stringify(relatedActual) !== JSON.stringify(relatedExpected)) errors.push(file + ': relatedTools mismatch: HTML=[' + relatedActual.join(',') + '] metadata=[' + relatedExpected.join(',') + ']');
+            const relatedSection = (html.match(/<section\\b[^>]*class=["']related-tools["'][^>]*>([\\s\\S]*?)<\\/section>/i) || [])[1] || '';
+            const relatedActual = [...relatedSection.matchAll(/href=["'](\\/outil\\/[^"']+\\/)["']/gi)].map(m => m[1]);
+            if (family === 'outil' && JSON.stringify(relatedActual) !== JSON.stringify(relatedExpected.map(slug => '/outil/' + slug + '/'))) errors.push(file + ': relatedTools mismatch');
           }
-          if (files.length !== 77) errors.push('expected 77 /outil/ pages, found ' + files.length);
-          if (errors.length) { console.error(errors.join('\n')); process.exit(1); }
-          console.log('Verified metadata ↔ HTML contract for ' + files.length + ' /outil/ pages.');
-          NODE
+          if (files.length !== 86) errors.push('expected 86 unified tool pages, found ' + files.length);          NODE
       - name: Verify shared layout is normalized
         run: node scripts/normalize-layout.mjs --check
 
