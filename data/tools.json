@@ -458,22 +458,38 @@
     "charges-independant": {
       "type": "simulateur",
       "category": "travail",
-      "relatedTools": []
+      "relatedTools": [
+        "micro-entrepreneur",
+        "sasu-vs-ei-micro",
+        "impot-sur-le-revenu"
+      ]
     },
     "conges-payes": {
       "type": "simulateur",
       "category": "travail",
-      "relatedTools": []
+      "relatedTools": [
+        "solde-tout-compte",
+        "salaire-horaire",
+        "rupture-conventionnelle"
+      ]
     },
     "frais-kilometriques": {
       "type": "calculateur",
       "category": "travail",
-      "relatedTools": []
+      "relatedTools": [
+        "consommation-carburant",
+        "salaire-brut-net",
+        "impot-sur-le-revenu"
+      ]
     },
     "indemnite-licenciement": {
       "type": "simulateur",
       "category": "travail",
-      "relatedTools": []
+      "relatedTools": [
+        "rupture-conventionnelle",
+        "solde-tout-compte",
+        "are-chomage"
+      ]
     },
     "indemnite-precarite": {
       "type": "simulateur",
@@ -486,17 +502,29 @@
     "indemnites-maladie": {
       "type": "simulateur",
       "category": "travail",
-      "relatedTools": []
+      "relatedTools": [
+        "indemnites-maternite-paternite",
+        "salaire-brut-net",
+        "are-chomage"
+      ]
     },
     "indemnites-maternite-paternite": {
       "type": "simulateur",
       "category": "travail",
-      "relatedTools": []
+      "relatedTools": [
+        "indemnites-maladie",
+        "salaire-brut-net",
+        "prime-activite"
+      ]
     },
     "micro-entrepreneur": {
       "type": "simulateur",
       "category": "travail",
-      "relatedTools": []
+      "relatedTools": [
+        "charges-independant",
+        "sasu-vs-ei-micro",
+        "salaire-brut-net"
+      ]
     },
     "preavis-demission": {
       "type": "simulateur",
@@ -511,7 +539,11 @@
     "prime-activite": {
       "type": "simulateur",
       "category": "travail",
-      "relatedTools": []
+      "relatedTools": [
+        "salaire-brut-net",
+        "rsa",
+        "impot-sur-le-revenu"
+      ]
     },
     "rsa": {
       "type": "simulateur",
@@ -536,12 +568,20 @@
     "sasu-vs-ei-micro": {
       "type": "comparateur",
       "category": "travail",
-      "relatedTools": []
+      "relatedTools": [
+        "micro-entrepreneur",
+        "charges-independant",
+        "impot-sur-le-revenu"
+      ]
     },
     "solde-tout-compte": {
       "type": "simulateur",
       "category": "travail",
-      "relatedTools": []
+      "relatedTools": [
+        "conges-payes",
+        "preavis-demission",
+        "indemnite-licenciement"
+      ]
     },
     "age": {
       "type": "calculateur",

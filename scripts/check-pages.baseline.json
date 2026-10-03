@@ -73,14 +73,6 @@
   },
   {
     "path": "public/outil/charges-independant/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/charges-independant/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/charges-independant/index.html",
     "rule": "result"
   },
   {
@@ -102,14 +94,6 @@
   {
     "path": "public/outil/comparateur-placements/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/conges-payes/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/conges-payes/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/conges-payes/index.html",
@@ -253,14 +237,6 @@
   },
   {
     "path": "public/outil/frais-kilometriques/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/frais-kilometriques/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/frais-kilometriques/index.html",
     "rule": "result"
   },
   {
@@ -294,14 +270,6 @@
   {
     "path": "public/outil/indemnite-licenciement/index.html",
     "rule": "jsonld"
-  },
-  {
-    "path": "public/outil/indemnite-licenciement/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/indemnite-licenciement/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/indemnite-licenciement/index.html",
@@ -325,27 +293,11 @@
   },
   {
     "path": "public/outil/indemnites-maladie/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/indemnites-maladie/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/indemnites-maladie/index.html",
     "rule": "result"
   },
   {
     "path": "public/outil/indemnites-maladie/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/indemnites-maternite-paternite/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/indemnites-maternite-paternite/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/indemnites-maternite-paternite/index.html",
@@ -430,14 +382,6 @@
   {
     "path": "public/outil/micro-entrepreneur/index.html",
     "rule": "jsonld"
-  },
-  {
-    "path": "public/outil/micro-entrepreneur/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/micro-entrepreneur/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/micro-entrepreneur/index.html",
@@ -590,14 +534,6 @@
   {
     "path": "public/outil/prime-activite/index.html",
     "rule": "jsonld"
-  },
-  {
-    "path": "public/outil/prime-activite/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/prime-activite/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/prime-activite/index.html",
@@ -741,14 +677,6 @@
   },
   {
     "path": "public/outil/sasu-vs-ei-micro/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/sasu-vs-ei-micro/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/sasu-vs-ei-micro/index.html",
     "rule": "result"
   },
   {
@@ -770,14 +698,6 @@
   {
     "path": "public/outil/smic/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/solde-tout-compte/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/solde-tout-compte/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/solde-tout-compte/index.html",
