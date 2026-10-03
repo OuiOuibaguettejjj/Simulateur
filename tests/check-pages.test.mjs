@@ -20,7 +20,7 @@ return "<!doctype html><html lang=\"fr\"><head>"+
 "<section class=\"tool\"><h1>Nom de l'outil</h1><p class=\"tool-intro\">Introduction claire et utile.</p><div id=\"fields\"><input id=\"v\" type=\"number\"></div><div class=\"result\" aria-live=\"polite\">Résultat initial.</div>"+
 "<div class=\"formula\"><a href=\"https://www.service-public.fr/\">Source officielle</a></div></section>"+
 "<section class=\"content-section\"><h2>Comment calculer ?</h2><p>Principe.</p><h2>Exemple de calcul</h2><p>Exemple.</p><h2>À savoir</h2><p>Limites.</p></section>"+
-"<section class=\"related-tools\"><a class=\"related-link\" href=\"/outil/slug-1/\">Outil 1</a><a class=\"related-link\" href=\"/outil/slug-2/\">Outil 2</a></section></main><footer></footer></body></html>";
+"<section class=\"related-tools\"><a class=\"related-link\" href=\"/outil/slug-1/\">Outil 1</a><a class=\"related-link\" href=\"/outil/slug-2/\">Outil 2</a><p class=\"status-note\">Retrouvez aussi tous les outils de la rubrique <a href=\"/categorie/\">Catégorie</a>.</p></section></main><footer></footer></body></html>";
 }
 const errs=(h,m=META,i=IDX)=>checkPage(h,{dir:"outil",slug:"slug",toolsMeta:m,categories:CATS,pageIndex:i});
 const has=(h,r)=>errs(h).some(x=>x.rule===r);
@@ -210,6 +210,13 @@ assert.deepEqual(parseHtml("<script>>1</script><div></div>").errors,[],"un > en 
 assert(only(fixture().replace("<a href=\"/categorie/\">Catégorie</a>","<a href=\"/autre/\">Catégorie</a>"),"breadcrumb").length>0,"négatif : href catégorie");
 assert(only(fixture().replace("<a href=\"/categorie/\">Catégorie</a>","<a href=\"/categorie/\">Autre</a>"),"breadcrumb").length>0,"négatif : libellé catégorie");
 assert(only(fixture(),"breadcrumb",{...META,slug:{...META.slug,category:"inconnue"}}).length>0,"négatif : catégorie absente de data/tools.json");
+// related-tools : lien « rubrique » aligné sur la catégorie
+assert(only(fixture().replace('<a href="/categorie/">Catégorie</a>.</p></section>', '<a href="/autre/">Catégorie</a>.</p></section>'),"related-block").some(x=>/lien « rubrique »/.test(x.message)),"négatif : href du lien rubrique");
+assert(only(fixture().replace('<p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="/categorie/">Catégorie</a>.</p>', ''),"related-block").some(x=>/lien « rubrique »/.test(x.message)),"négatif : lien rubrique absent");
+assert(only(fixture().replace('<a href="/categorie/">Catégorie</a>.</p></section>', '<a href="/categorie/">Autre</a>.</p></section>'),"related-block").some(x=>/lien « rubrique »/.test(x.message)),"négatif : texte du lien rubrique");
+assert(only(fixture().replace('<a href="/categorie/">Catégorie</a>.</p></section>', '<a href="/categorie/">Catégorie</a><a href="/categorie/">Catégorie</a>.</p></section>'),"related-block").some(x=>/lien « rubrique »/.test(x.message)),"négatif : doublon du lien rubrique");
+assert.equal(only(fixture(),"related-block").length,0,"positif : lien rubrique correct");
+
 // catégorie : BreadcrumbList position 2
 assert(only(fixture().replace("\"name\":\"Catégorie\",\"item\":\"https://simulateur.site/categorie/\"","\"name\":\"Catégorie\",\"item\":\"https://simulateur.site/autre/\""),"jsonld").some(x=>/position 2/.test(x.message)),"négatif : item position 2");
 assert(only(fixture().replace("\"name\":\"Catégorie\",\"item\"","\"name\":\"Autre\",\"item\""),"jsonld").some(x=>/position 2/.test(x.message)),"négatif : name position 2");
