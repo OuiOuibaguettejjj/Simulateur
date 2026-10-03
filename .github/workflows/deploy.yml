@@ -432,9 +432,17 @@ jobs:
             }
             await browser.close();
             console.log('Smoke-tested '+files.length+' public HTML pages, including '+files.filter(f=>f.startsWith('public/outil/')).length+' calculators.');
-            if(errors.length){console.error(errors.join('\n'));process.exit(1)}
+            if(errors.length){fs.writeFileSync('/tmp/predeploy-smoke-errors.txt',errors.join('\n')+'\n');console.error(errors.join('\n'));process.exit(1)}
           })();
           NODE
+
+      - name: Upload pre-deploy smoke diagnostics
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: predeploy-smoke-diagnostics
+          path: /tmp/predeploy-smoke-errors.txt
+          if-no-files-found: warn
 
       - name: Refuse stale production deployment
         run: |
