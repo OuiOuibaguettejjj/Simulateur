@@ -3,6 +3,14 @@
   const euro=value=>Number(value).toLocaleString("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:2});
   const num=value=>Number(value).toLocaleString("fr-FR",{maximumFractionDigits:2});
 
+
+  // Taxonomie officielle : une seule catégorie principale et un seul type par outil.
+  // Les URLs /outil/<slug>/ restent inchangées. Les relations historiques ci-dessous seront migrées séparément.
+  const CATEGORIES={"argent":{"label":"Argent","path":"/argent/"},"epargne":{"label":"Épargne","path":"/epargne/"},"immobilier":{"label":"Immobilier","path":"/immobilier/"},"fiscalite":{"label":"Fiscalité","path":"/fiscalite/"},"retraite":{"label":"Retraite","path":"/retraite/"},"salaire":{"label":"Salaire","path":"/salaire/"},"travail":{"label":"Travail","path":"/travail/"},"temps":{"label":"Temps","path":"/temps/"},"mesures":{"label":"Mesures","path":"/mesures/"},"vie":{"label":"Vie quotidienne","path":"/vie-quotidienne/"}};
+  const TOOL_TYPES={"arrondi":"calculateur","calculatrice":"calculateur","coefficient":"calculateur","fractions":"calculateur","marge":"calculateur","median-mode":"calculateur","moyenne-ponderee":"calculateur","moyenne":"calculateur","pourcentage":"calculateur","proportion":"calculateur","ratio":"calculateur","remise":"calculateur","salaire-horaire":"calculateur","mensualite-pret":"calculateur","epargne":"calculateur","signe-astrologique":"calculateur","frais-kilometriques":"calculateur","difference-dates":"calculateur","temps-travail":"calculateur","temps-calcul":"calculateur","age":"calculateur","jours-ouvres":"calculateur","surface":"calculateur","vitesse":"calculateur","electricite":"calculateur","consommation-carburant":"calculateur","cout-km":"calculateur","perimetre":"calculateur","promotions":"calculateur","partage-depenses":"calculateur","recette":"calculateur","pourboire":"calculateur","prix-unitaire":"calculateur","age-retraite":"simulateur","are-chomage":"simulateur","assurance-vie":"simulateur","capacite-emprunt":"simulateur","cash-flow-immobilier":"simulateur","charges-independant":"simulateur","conges-payes":"simulateur","donation":"simulateur","epargne-mensuelle":"simulateur","epargne-reglementee":"simulateur","frais-de-notaire":"simulateur","heures-supplementaires":"simulateur","ifi":"simulateur","impot-sur-le-revenu":"simulateur","indemnite-licenciement":"simulateur","indemnite-precarite":"simulateur","indemnites-maladie":"simulateur","indemnites-maternite-paternite":"simulateur","inflation":"simulateur","interets-composes":"simulateur","micro-entrepreneur":"simulateur","per":"simulateur","plus-value-immobiliere":"simulateur","plus-value-mobiliere":"simulateur","preavis-demission":"simulateur","prelevement-source":"simulateur","pret-immobilier":"simulateur","prime-activite":"simulateur","ptz":"simulateur","rendement-locatif":"simulateur","retraite-simplifiee":"simulateur","rsa":"simulateur","rupture-conventionnelle":"simulateur","salaire-brut-net":"simulateur","smic":"simulateur","solde-tout-compte":"simulateur","succession":"simulateur","tableau-amortissement":"simulateur","taux-endettement":"simulateur","temps-partiel":"simulateur","tva":"simulateur","comparateur-placements":"comparateur","sasu-vs-ei-micro":"comparateur","temps":"conversion"};
+  const TOOLS_META={"arrondi":{"type":"calculateur","category":"argent"},"calculatrice":{"type":"calculateur","category":"argent"},"coefficient":{"type":"calculateur","category":"argent"},"fractions":{"type":"calculateur","category":"argent"},"marge":{"type":"calculateur","category":"argent"},"median-mode":{"type":"calculateur","category":"argent"},"moyenne-ponderee":{"type":"calculateur","category":"argent"},"moyenne":{"type":"calculateur","category":"argent"},"pourcentage":{"type":"calculateur","category":"argent"},"proportion":{"type":"calculateur","category":"argent"},"ratio":{"type":"calculateur","category":"argent"},"remise":{"type":"calculateur","category":"argent"},"prix-unitaire":{"type":"calculateur","category":"argent"},"assurance-vie":{"type":"simulateur","category":"epargne"},"comparateur-placements":{"type":"comparateur","category":"epargne"},"epargne-mensuelle":{"type":"simulateur","category":"epargne"},"epargne-reglementee":{"type":"simulateur","category":"epargne"},"epargne":{"type":"calculateur","category":"epargne"},"inflation":{"type":"simulateur","category":"epargne"},"interets-composes":{"type":"simulateur","category":"epargne"},"per":{"type":"simulateur","category":"epargne"},"capacite-emprunt":{"type":"simulateur","category":"immobilier"},"cash-flow-immobilier":{"type":"simulateur","category":"immobilier"},"frais-de-notaire":{"type":"simulateur","category":"immobilier"},"ifi":{"type":"simulateur","category":"immobilier"},"mensualite-pret":{"type":"calculateur","category":"immobilier"},"plus-value-immobiliere":{"type":"simulateur","category":"immobilier"},"pret-immobilier":{"type":"simulateur","category":"immobilier"},"ptz":{"type":"simulateur","category":"immobilier"},"rendement-locatif":{"type":"simulateur","category":"immobilier"},"tableau-amortissement":{"type":"simulateur","category":"immobilier"},"taux-endettement":{"type":"simulateur","category":"immobilier"},"donation":{"type":"simulateur","category":"fiscalite"},"impot-sur-le-revenu":{"type":"simulateur","category":"fiscalite"},"plus-value-mobiliere":{"type":"simulateur","category":"fiscalite"},"prelevement-source":{"type":"simulateur","category":"fiscalite"},"succession":{"type":"simulateur","category":"fiscalite"},"tva":{"type":"simulateur","category":"fiscalite"},"age-retraite":{"type":"simulateur","category":"retraite"},"retraite-simplifiee":{"type":"simulateur","category":"retraite"},"salaire-brut-net":{"type":"simulateur","category":"salaire"},"salaire-horaire":{"type":"calculateur","category":"salaire"},"heures-supplementaires":{"type":"simulateur","category":"salaire"},"smic":{"type":"simulateur","category":"salaire"},"temps-partiel":{"type":"simulateur","category":"salaire"},"are-chomage":{"type":"simulateur","category":"travail"},"charges-independant":{"type":"simulateur","category":"travail"},"conges-payes":{"type":"simulateur","category":"travail"},"frais-kilometriques":{"type":"calculateur","category":"travail"},"indemnite-licenciement":{"type":"simulateur","category":"travail"},"indemnite-precarite":{"type":"simulateur","category":"travail"},"indemnites-maladie":{"type":"simulateur","category":"travail"},"indemnites-maternite-paternite":{"type":"simulateur","category":"travail"},"micro-entrepreneur":{"type":"simulateur","category":"travail"},"preavis-demission":{"type":"simulateur","category":"travail"},"prime-activite":{"type":"simulateur","category":"travail"},"rsa":{"type":"simulateur","category":"travail"},"rupture-conventionnelle":{"type":"simulateur","category":"travail"},"sasu-vs-ei-micro":{"type":"comparateur","category":"travail"},"solde-tout-compte":{"type":"simulateur","category":"travail"},"age":{"type":"calculateur","category":"temps"},"difference-dates":{"type":"calculateur","category":"temps"},"jours-ouvres":{"type":"calculateur","category":"temps"},"temps-calcul":{"type":"calculateur","category":"temps"},"temps-travail":{"type":"calculateur","category":"temps"},"temps":{"type":"conversion","category":"temps"},"consommation-carburant":{"type":"calculateur","category":"mesures"},"cout-km":{"type":"calculateur","category":"mesures"},"electricite":{"type":"calculateur","category":"mesures"},"perimetre":{"type":"calculateur","category":"mesures"},"surface":{"type":"calculateur","category":"mesures"},"vitesse":{"type":"calculateur","category":"mesures"},"partage-depenses":{"type":"calculateur","category":"vie"},"pourboire":{"type":"calculateur","category":"vie"},"promotions":{"type":"calculateur","category":"vie"},"recette":{"type":"calculateur","category":"vie"},"signe-astrologique":{"type":"calculateur","category":"vie"}};
+  function toolMeta(slug){return TOOLS_META[slug]||null}
+
   const groups={
     "temps":["Temps","/temps/",[
       ["difference-dates","Différence entre deux dates","Calculer l’écart entre deux dates."],
@@ -97,9 +105,9 @@
     ]]
   };
 
-  function addBreadcrumbSchema(tool,slug,group){
+  function addBreadcrumbSchema(tool,slug,meta){
     const itemList=[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"}];
-    if(group) itemList.push({"@type":"ListItem","position":2,"name":group[0],"item":"https://simulateur.site"+group[1]});
+    if(meta) itemList.push({"@type":"ListItem","position":2,"name":CATEGORIES[meta.category].label,"item":"https://simulateur.site"+CATEGORIES[meta.category].path});
     itemList.push({"@type":"ListItem","position":itemList.length+1,"name":tool.title||document.title,"item":location.href.split("#")[0]});
     if([...document.querySelectorAll('script[type="application/ld+json"]')].some(node=>/"@type"\s*:\s*"BreadcrumbList"/.test(node.textContent||""))) return;
     const script=document.createElement("script");
@@ -108,13 +116,13 @@
     document.head.appendChild(script);
   }
 
-  function addVisibleBreadcrumb(tool,group){
+  function addVisibleBreadcrumb(tool,meta){
     if(document.querySelector(".breadcrumb")) return;
     const host=document.querySelector("main .wrap")||document.querySelector("main");
     if(!host) return;
     const b=document.createElement("div");
     b.className="breadcrumb";
-    b.innerHTML='<a href="/">Accueil</a>'+(group?' · <a href="'+group[1]+'">'+group[0]+"</a>":"")+' · '+(tool.title||document.title);
+    b.innerHTML='<a href="/">Accueil</a>'+(meta?' · <a href="'+CATEGORIES[meta.category].path+'">'+CATEGORIES[meta.category].label+"</a>":"")+' · '+(tool.title||document.title);
     host.insertBefore(b,host.firstElementChild);
   }
 
@@ -131,9 +139,9 @@
         if(renderedFields && !$("fields").children.length) $("fields").innerHTML=renderedFields;
         $("source").textContent=tool.source||"";
         const slug=(location.pathname.match(/\/outil\/([^/]+)/)||[])[1];
-        const group=slug&&groups[slug];
-        addBreadcrumbSchema(tool,slug,group);
-        addVisibleBreadcrumb(tool,group);
+        const meta=slug&&toolMeta(slug);
+        addBreadcrumbSchema(tool,slug,meta);
+        addVisibleBreadcrumb(tool,meta);
       }catch(error){
         $("result").textContent="Impossible de charger ce calculateur.";
         console.error("Simulateurs.render:",error);
