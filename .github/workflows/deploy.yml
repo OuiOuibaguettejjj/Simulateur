@@ -50,7 +50,7 @@ jobs:
             if (!/<meta\b[^>]*name=["']calculator-rendering["'][^>]*content=["']static["'][^>]*>/i.test(html)) errors.push(file + ': missing HTML-first rendering marker');
             if (!/<h1\b[^>]*>[\s\S]*?\S[\s\S]*?<\/h1>/i.test(html)) errors.push(file + ': missing non-empty H1');
             if (!/<meta\b[^>]*name=["']description["'][^>]*content=["'][^"']+["']/i.test(html)) errors.push(file + ': missing meta description');
-            const description = (html.match(/<meta\b[^>]*name=["']description["'][^>]*content=["']([^"']*)["']/i) || [,''])[1];
+            const description = (html.match(/<meta\b[^>]*name=["']description["'][^>]*content="([^"]*)"/i) || [,''])[1];
             if (description.length < 120 || description.length > 160) errors.push(file + ': meta description must be 120-160 characters (' + description.length + ')');
             const title = (html.match(/<title>([^<]+)<\/title>/i) || [,''])[1];
             if (!/\|\s*Simulateur\s*$/.test(title)) errors.push(file + ': title must end with "| Simulateur"');
