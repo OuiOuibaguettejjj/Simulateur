@@ -8,7 +8,7 @@ Le simulateur RSA utilise un moteur dédié `public/rsa.js` séparé de son inte
 
 La taxonomie officielle est centralisée dans `data/tools.json` via `categories` et `tools`. Chaque outil possède un type unique et une catégorie principale. Les URL existantes `/outil/<slug>/` ne sont pas modifiées.
 
-La source de vérité contient également les relations `relatedTools` de chaque outil. Cette structure est la référence opérationnelle du maillage associé ; l'ancien objet `groups` n'est plus utilisé.
+La source de vérité contient également les relations `relatedTools` de chaque outil, sous forme d'une liste ordonnée de slugs (`["slug-a","slug-b"]`). Les titres et descriptions ne sont pas des données de référence : le texte des liens dans le HTML est libre (recommandé : titre de la page cible). L'ancien objet `groups` n'est plus utilisé.
 
 Les contrôles pré-production vérifient notamment :
 - la présence de chaque outil dans `data/tools.json` ;
@@ -40,3 +40,26 @@ Le workflow `.github/workflows/deploy.yml` conserve les contrôles qui relèvent
 Le workflow `.github/workflows/tests.yml` reste dédié aux tests fonctionnels ciblés des calculateurs. Il ne porte pas le gate de sécurité.
 
 Toute évolution d'architecture ou de sécurité doit d'abord être décidée et auditée manuellement. Les contrôles CI bloquent une configuration non conforme ; ils ne modifient jamais automatiquement les règles de sécurité ou l'architecture.
+
+## Contrôle des pages : règles structurelles et éditoriales
+
+`scripts/check-pages.mjs` classe ses règles en deux familles, séparées dans la sortie console et dans le tableau `GITHUB_STEP_SUMMARY`.
+
+- **Structurelles (bloquantes)** : `html-base`, `markup-balance`, `title`, `canonical`, `breadcrumb`, `h1`, `tool-block`, `result`, `related-block`, `jsonld`, `related-meta`. Elles garantissent le socle HTML commun. `markup-balance` détecte aussi les attributs malformés (nom d'attribut contenant `"` ou `'`, par exemple `type="number step="any"`) et un `>` parasite juste après une balise.
+- **Éditoriales (suivies, non bloquantes)** : `description` (120 à 160 caractères), `content-h2` (au moins 3 H2), `formula` (lien source externe), `meta-unique`, ainsi que les indicateurs « pages sous 120 mots » et « pages sans lien externe ». Elles sont affichées avec leurs compteurs mais ne font jamais échouer le contrôle.
+
+Pour les pages `/outil/`, le contrôle vérifie en plus, contre `data/tools.json` : la catégorie (lien du breadcrumb visible, et élément de position 2 du `BreadcrumbList`, nom et URL) ; l'égalité exacte, ordre compris, entre les slugs du bloc `.related-tools` du HTML et `relatedTools` ; et que `relatedTools` contient de 2 à 4 slugs (règle `related-meta`).
+
+Avec `--strict`, seuls les écarts structurels font échouer la commande.
+
+### Cliquet (ratchet) et baseline
+
+`node scripts/check-pages.mjs --ratchet` est une étape **bloquante** de `tests.yml` et de `deploy.yml` (placée avant la validation statique). Elle remplace les deux anciens blocs Node inline de `deploy.yml` (contrat HTML-first, métadonnées et HTML), dont les contrôles sont désormais portés dans `check-pages` et couverts par `tests/check-pages.test.mjs` : marqueur `calculator-rendering=static`, H1 non vide, meta description présente, canonique, au moins un `input`, `select`, `textarea` ou `button`, un seul `WebApplication` et un seul `BreadcrumbList` (positions 1, 2, 3), aucun dossier `/outil/<slug>/` sans `index.html`, catégorie et relations égales à `data/tools.json`.
+
+`scripts/check-pages.baseline.json` liste les écarts structurels connus, sous la forme `{ "path": ..., "rule": ... }` (une entrée par page et par règle). Le cliquet ne laisse la situation que s'améliorer :
+
+- **échec** si un écart structurel n'est pas dans la baseline (régression, ou nouvelle page non conforme) : une page absente de la baseline doit passer 100 % des règles structurelles ;
+- **échec** si la baseline contient une entrée qui n'échoue plus (entrée périmée) : elle doit être retirée ;
+- `node scripts/check-pages.mjs --update-baseline` crée la baseline la première fois, puis ne sait que **retirer** des entrées. Il refuse, avec un message explicite, d'en ajouter.
+
+Les règles éditoriales ne bloquent pas ; leurs compteurs sont affichés dans la console et dans `GITHUB_STEP_SUMMARY`. Quand une page est corrigée, la commande de mise à jour de la baseline retire l'entrée correspondante, dans le même commit.

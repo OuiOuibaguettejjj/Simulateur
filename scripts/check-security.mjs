@@ -55,11 +55,13 @@ try {
     if (!allowedTypes.has(meta.type)) fail(slug + ": invalid type " + meta.type);
     if (!categorySlugs.has(meta.category)) fail(slug + ": unknown primary category " + meta.category);
     if (!Array.isArray(meta.relatedTools)) fail(slug + ": relatedTools must be an array");
+    const seenRelated = new Set();
     for (const related of meta.relatedTools || []) {
-      if (!related || typeof related.slug !== "string") { fail(slug + ": malformed related tool"); continue; }
-      if (!(related.slug in toolsMeta)) fail(slug + ": related tool missing from central metadata: " + related.slug);
-      if (related.slug === slug) fail(slug + ": tool cannot relate to itself");
-      if (!related.title || !related.description) fail(slug + ": related tool requires title and description");
+      if (typeof related !== "string" || !related) { fail(slug + ": relatedTools must be a list of slugs (strings)"); continue; }
+      if (!(related in toolsMeta)) fail(slug + ": related tool missing from central metadata: " + related);
+      if (related === slug) fail(slug + ": tool cannot relate to itself");
+      if (seenRelated.has(related)) fail(slug + ": duplicate related tool: " + related);
+      seenRelated.add(related);
     }
   }
   const pageSet = new Set(pageSlugs);
