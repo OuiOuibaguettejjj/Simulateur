@@ -209,6 +209,8 @@ jobs:
           }
           const changed = cp.execFileSync('git', ['diff', '--name-only', 'HEAD^', 'HEAD', '--', 'public'], {encoding:'utf8'}).trim().split(/\r?\n/).filter(Boolean);
           for (const file of changed.filter(f => f.startsWith('public/outil/') && f.endsWith('.html'))) {
+            // Deleted public HTML files are intentional changes; there is no current file to inspect.
+            if (!fs.existsSync(file)) continue;
             let parent = '';
             try { parent = cp.execFileSync('git', ['show', `HEAD^:${file}`], {encoding:'utf8'}); } catch {}
             const current = fs.readFileSync(file, 'utf8');
