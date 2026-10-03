@@ -66,32 +66,7 @@
 <section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Outils associés</h2><div class="related-links"><a class="related-link" href="/outil/prime-activite/"><strong>Prime d’activité</strong><span>Estimer la prime d’activité.</span></a><a class="related-link" href="/outil/salaire-brut-net/"><strong>Salaire brut ↔ net</strong><span>Estimer le salaire net.</span></a><a class="related-link" href="/outil/are-chomage/"><strong>Allocation chômage (ARE)</strong><span>Obtenir une estimation indicative de l’ARE.</span></a></div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="/travail/">Travail</a>.</p></div></section></main>
 <footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cgu/">CGU</a></div></div></footer>
 
-<script>window.TOOL={
- ey:"CAF · BARÈME AU 1ER AVRIL 2026",
- title:"Simulateur RSA 2026",
- intro:"Estimez votre RSA à partir de votre situation familiale, de votre logement et des ressources des trois mois de référence.",
- fields:function(){
-   return F.select("age","Votre âge",[
-     ["25plus","25 ans ou plus"],["18_24","18 à 24 ans"]
-   ])
-   +F.select("status","Situation familiale",[
-     ["single","Vous vivez seul(e)"],["couple","Vous vivez en couple"]
-   ])
-   +F.number("dependents","Nombre de personnes à charge","0")
-   +F.select("student","Êtes-vous étudiant(e) ?",[["no","Non"],["yes","Oui"]])
-   +F.select("youngActive","Entre 18 et 24 ans : avez-vous exercé au moins 3 214 heures au cours des 3 dernières années ?",[["no","Non"],["yes","Oui"]])
-   +F.select("resident","Résidez-vous en France de manière stable et effective ?",[["yes","Oui"],["no","Non"]])
-   +F.select("majoration","Situation susceptible d'ouvrir droit à la majoration pour isolement ?",[["no","Non"],["yes","Oui"]])
-   +F.select("housing","Situation de logement",[
-     ["none","Vous payez votre logement sans aide personnelle au logement"],
-     ["aidBelowForfait","Vous percevez une aide au logement inférieure au forfait applicable"],
-     ["forfait","Vous percevez une aide au logement au moins égale au forfait, êtes logé(e) gratuitement ou êtes propriétaire dans une situation soumise au forfait"]
-   ])
-   +F.number("housingAid","Montant mensuel de l’aide au logement (€) — uniquement si elle est inférieure au forfait","0")
-   +'<h3 style="margin-top:2rem">Ressources des trois mois de référence</h3><p class="small">Pour les salaires et revenus de remplacement concernés, utilisez le montant net social indiqué sur les documents de l’organisme payeur. Ajoutez les autres ressources que vous devez déclarer à la Caf afin d’obtenir une estimation plus complète.</p>'
-   +F.row([F.number("m1","Mois 1 (€)","0"),F.number("m2","Mois 2 (€)","0"),F.number("m3","Mois 3 (€)","0")]);
- },
- calc:function(){
+<script>window.TOOL={calc:function(){
    const age=this.$("age").value==="25plus"?25:18;
    const input={
      age,
