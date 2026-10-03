@@ -77,7 +77,14 @@ for(const [label,links] of [
     "/conversion/volume/"
   ]]
 ]) {
-  const failures=familyErrs("conversion","source",links)
+  const idx=label==="page inexistante"
+    ? new Set([
+        "conversion/source",
+        "conversion/aire",
+        "conversion/volume"
+      ])
+    : familyIndex("conversion","source",links);
+  const failures=familyErrs("conversion","source",links,idx)
     .filter(x=>x.rule==="related-block");
 
   assert.equal(
