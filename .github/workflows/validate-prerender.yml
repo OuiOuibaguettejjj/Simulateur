@@ -128,7 +128,18 @@ jobs:
 
           for (const file of walk('public/outil')) {
             const html = fs.readFileSync(file, 'utf8');
-            if (/window\.TOOL\s*=/.test(html) && !/<meta\s+name=["']calculator-rendering["']\s+content=["']static["']/i.test(html)) continue;
+            const isStatic = /<meta\s+name=["']calculator-rendering["']\s+content=["']static["']/i.test(html);
+            if (/window\.TOOL\s*=/.test(html) && !isStatic) continue;
+
+            if (isStatic) {
+              const h1 = html.match(/<h1\\b[^>]*>([\\s\\S]*?)<\\/h1>/i);
+              if (!h1 || !h1[1].replace(/<[^>]+>/g, '').trim()) errors.push(file + ': static page missing non-empty H1');
+              const canonicalMatches = [...html.matchAll(/<link[^>]+rel=["']canonical["'][^>]+href=["']([^"']+)["']/gi)];
+              if (canonicalMatches.length !== 1) errors.push(file + ': static page must have exactly one canonical');
+              const breadcrumb = html.match(/<div\\b[^>]*class=["']breadcrumb["'][^>]*>([\\s\\S]*?)<\\/div>/i);
+              if (!breadcrumb || !/<a\\b[^>]*href=["']\\/["'][^>]*>\\s*Accueil\\s*<\\/a>/i.test(breadcrumb[1])) errors.push(file + ': static page visible breadcrumb missing Accueil link');
+            }
+
             const jsonLd = [...html.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)].map(m => m[1]);
             for (const raw of jsonLd) {
               let data;
