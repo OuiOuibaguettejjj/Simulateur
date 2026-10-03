@@ -12,16 +12,16 @@ const read=f=>fs.readFileSync(path.join(ROOT,f),"utf8");
 const norm=s=>String(s).replace(/&(#x[0-9a-f]+|#[0-9]+|[a-z][a-z0-9]+);/gi,(x,e)=>e[0]==="#"?String.fromCodePoint(parseInt(e.slice(e[1].toLowerCase()==="x"?2:1),e[1].toLowerCase()==="x"?16:10)):ENT[e]??x).replace(/\s+/g," ").trim();
 function parseAttrs(s){const a={},r=/([^\s=/>]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>]+)))?/g;let m;while(m=r.exec(s))a[m[1].toLowerCase()]=m[2]??m[3]??m[4]??"";return a}
 export function parseHtml(html){
- const root={name:"#root",attrs:{},start:0,end:html.length,children:[],parent:null,texts:[]},stack=[root],errors=[],re=/<!--[\s\S]*?-->|<![^>]*>|<[^>]*>/g;let pos=0,raw=null,m;
+ const root={name:"#root",attrs:{},start:0,end:html.length,children:[],parent:null,texts:[]},stack=[root],errors=[],re=/<!--[\\s\\S]*?-->|<![^>]*>|<[^>]*>/g;let pos=0,m;
  const add=(s,start)=>{if(s)stack[stack.length-1].texts.push({text:s,start})};
- while(m=re.exec(html)){if(m.index<pos)continue;if(raw){if(!new RegExp("^<\\s*/\\s*"+raw+"\\b","i").test(m[0]))continue;add(html.slice(pos,m.index),pos);raw=null}else add(html.slice(pos,m.index),pos);const t=m[0],start=m.index,end=start+t.length;pos=end;
-  if(t.startsWith("<!--")||/^<!doctype\b/i.test(t))continue;
-  const close=/^<\s*\/\s*([A-Za-z][\w:-]*)/.exec(t);
+ while(m=re.exec(html)){if(m.index<pos)continue;add(html.slice(pos,m.index),pos);const t=m[0],start=m.index,end=start+t.length;pos=end;
+  if(t.startsWith("<!--")||/^<!doctype\\b/i.test(t))continue;
+  const close=/^<\\s*\\/\\s*([A-Za-z][\\w:-]*)/.exec(t);
   if(close){const n=close[1].toLowerCase();let i=-1;for(let j=stack.length-1;j;j--)if(stack[j].name===n){i=j;break}if(i<0){if(!OPTIONAL_END.has(n))errors.push(t+" en trop")}else{for(let j=stack.length-1;j>i;j--)if(STRUCT.has(stack[j].name))errors.push("<"+stack[j].name+"> non fermé avant </"+n+">");stack[i].end=end;stack.length=i}continue}
-  const open=/^<\s*([A-Za-z][\w:-]*)\b([\s\S]*?)\/?\s*>$/.exec(t);if(!open)continue;const n=open[1].toLowerCase(),node={name:n,attrs:parseAttrs(open[2].replace(/\/\s*$/,"")),start,end,children:[],parent:stack.at(-1),texts:[]};node.parent.children.push(node);
-  if(!(/\/\s*>$/.test(t)||VOID.has(n))){stack.push(node);if(n==="script"||n==="style")raw=n}
+  const open=/^<\\s*([A-Za-z][\\w:-]*)\\b([\\s\\S]*?)\\/?\\s*>$/.exec(t);if(!open)continue;const n=open[1].toLowerCase(),node={name:n,attrs:parseAttrs(open[2].replace(/\\/\\s*$/,"")),start,end,children:[],parent:stack.at(-1),texts:[]};node.parent.children.push(node);
+  if(!(/\\/\\s*>$/.test(t)||VOID.has(n))){stack.push(node);if(n==="script"||n==="style"){const closeIndex=html.toLowerCase().indexOf("</"+n,start+t.length);if(closeIndex<0){add(html.slice(start+t.length),start+t.length);pos=html.length;re.lastIndex=html.length}else{add(html.slice(start+t.length,closeIndex),start+t.length);pos=closeIndex;re.lastIndex=closeIndex}}}
  }
- if(!raw)add(html.slice(pos),pos);for(let i=stack.length-1;i;i--)if(STRUCT.has(stack[i].name))errors.push("<"+stack[i].name+"> non fermé");return{root,errors}
+ if(pos<html.length)add(html.slice(pos),pos);for(let i=stack.length-1;i;i--)if(STRUCT.has(stack[i].name))errors.push("<"+stack[i].name+"> non fermé");return{root,errors}
 }
 const walk=(n,p,o=[])=>{for(const c of n.children){if(p(c))o.push(c);walk(c,p,o)}return o};
 const find=(r,q={})=>walk(r,n=>(!q.tag||n.name===q.tag)&&(!q.className||(n.attrs.class||"").split(/\s+/).includes(q.className))&&(q.id===undefined||n.attrs.id===q.id));
