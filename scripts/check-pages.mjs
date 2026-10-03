@@ -12,14 +12,14 @@ const read=f=>fs.readFileSync(path.join(ROOT,f),"utf8");
 const norm=s=>String(s).replace(/&(#x[0-9a-f]+|#[0-9]+|[a-z][a-z0-9]+);/gi,(x,e)=>e[0]==="#"?String.fromCodePoint(parseInt(e.slice(e[1].toLowerCase()==="x"?2:1),e[1].toLowerCase()==="x"?16:10)):ENT[e]??x).replace(/\s+/g," ").trim();
 function parseAttrs(s){const a={},r=/([^\s=/>]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>]+)))?/g;let m;while(m=r.exec(s))a[m[1].toLowerCase()]=m[2]??m[3]??m[4]??"";return a}
 export function parseHtml(html){
- const root={name:"#root",attrs:{},start:0,end:html.length,children:[],parent:null,texts:[]},stack=[root],errors=[],re=/<!--[\\s\\S]*?-->|<![^>]*>|<[^>]*>/g;let pos=0,m;
+ const root={name:"#root",attrs:{},start:0,end:html.length,children:[],parent:null,texts:[]},stack=[root],errors=[],re=/<!--[\s\S]*?-->|<![^>]*>|<[^>]*>/g;let pos=0,m;
  const add=(s,start)=>{if(s)stack[stack.length-1].texts.push({text:s,start})};
  while(m=re.exec(html)){if(m.index<pos)continue;add(html.slice(pos,m.index),pos);const t=m[0],start=m.index,end=start+t.length;pos=end;
-  if(t.startsWith("<!--")||/^<!doctype\\b/i.test(t))continue;
-  const close=/^<\\s*\\/\\s*([A-Za-z][\\w:-]*)/.exec(t);
+  if(t.startsWith("<!--")||/^<!doctype\b/i.test(t))continue;
+  const close=/^<\s*\/\s*([A-Za-z][\w:-]*)/.exec(t);
   if(close){const n=close[1].toLowerCase();let i=-1;for(let j=stack.length-1;j;j--)if(stack[j].name===n){i=j;break}if(i<0){if(!OPTIONAL_END.has(n))errors.push(t+" en trop")}else{for(let j=stack.length-1;j>i;j--)if(STRUCT.has(stack[j].name))errors.push("<"+stack[j].name+"> non fermé avant </"+n+">");stack[i].end=end;stack.length=i}continue}
-  const open=/^<\\s*([A-Za-z][\\w:-]*)\\b([\\s\\S]*?)\\/?\\s*>$/.exec(t);if(!open)continue;const n=open[1].toLowerCase(),node={name:n,attrs:parseAttrs(open[2].replace(/\\/\\s*$/,"")),start,end,children:[],parent:stack.at(-1),texts:[]};node.parent.children.push(node);
-  if(!(/\\/\\s*>$/.test(t)||VOID.has(n))){stack.push(node);if(n==="script"||n==="style"){const closeIndex=html.toLowerCase().indexOf("</"+n,start+t.length);if(closeIndex<0){add(html.slice(start+t.length),start+t.length);pos=html.length;re.lastIndex=html.length}else{add(html.slice(start+t.length,closeIndex),start+t.length);pos=closeIndex;re.lastIndex=closeIndex}}}
+  const open=/^<\s*([A-Za-z][\w:-]*)\b([\s\S]*?)\/?\s*>$/.exec(t);if(!open)continue;const n=open[1].toLowerCase(),node={name:n,attrs:parseAttrs(open[2].replace(/\/\s*$/,"")),start,end,children:[],parent:stack.at(-1),texts:[]};node.parent.children.push(node);
+  if(!(/\/\s*>$/.test(t)||VOID.has(n))){stack.push(node);if(n==="script"||n==="style"){const closeIndex=html.toLowerCase().indexOf("</"+n,start+t.length);if(closeIndex<0){add(html.slice(start+t.length),start+t.length);pos=html.length;re.lastIndex=html.length}else{add(html.slice(start+t.length,closeIndex),start+t.length);pos=closeIndex;re.lastIndex=closeIndex}}}
  }
  if(pos<html.length)add(html.slice(pos),pos);for(let i=stack.length-1;i;i--)if(STRUCT.has(stack[i].name))errors.push("<"+stack[i].name+"> non fermé");return{root,errors}
 }
@@ -45,7 +45,7 @@ export function checkPage(html,ctx){
  const rs=find(root,{className:"result"});if(!rs.some(n=>text(n)))fail("result","au moins un .result doit avoir un texte non vide dans le HTML source");if(!rs.some(n=>attr(n,"aria-live")==="polite"))fail("result",'un .result doit avoir aria-live="polite"');
  if(!find(root,{className:"formula"}).some(n=>links(n).some(a=>external(attr(a,"href")))) )fail("formula",".formula doit contenir un lien externe http(s)");
  const secs=find(root,{className:"content-section"}),h2=secs.flatMap(s=>find(s,{tag:"h2"}).filter(n=>!ancestor(n,"related-tools")));if(!secs.length||h2.length<3)fail("content-h2","au moins 3 h2 éditoriaux requis");
- const rel=find(root,{className:"related-tools"});const meta=toolsMeta?.[slug];if(rel.length!==1)fail("related-block","exactement un bloc .related-tools est requis");if(rel.length===1){const rl=find(rel[0],{className:"related-link"});if(rl.length<2||rl.length>4)fail("related-block","2 à 4 .related-link requis");for(const a of rl){const h=attr(a,"href"),m=/^\\/[^/]+\\/([^/]+)\\/$/.exec(h||""),target=m?.[1];if(!pageHref(h,pageIndex))fail("related-block","lien associé vers une page inexistante : "+(h||"(vide)"));if(target&&!(meta?.relatedTools||[]).some(x=>x?.slug===target))fail("related-block","slug associé absent de TOOLS_META["+slug+"].relatedTools : "+target)}}
+ const rel=find(root,{className:"related-tools"});const meta=toolsMeta?.[slug];if(rel.length!==1)fail("related-block","exactement un bloc .related-tools est requis");if(rel.length===1){const rl=find(rel[0],{className:"related-link"});if(rl.length<2||rl.length>4)fail("related-block","2 à 4 .related-link requis");for(const a of rl){const h=attr(a,"href"),m=/^\/[^/]+\/([^/]+)\/$/.exec(h||""),target=m?.[1];if(!pageHref(h,pageIndex))fail("related-block","lien associé vers une page inexistante : "+(h||"(vide)"));if(target&&!(meta?.relatedTools||[]).some(x=>x?.slug===target))fail("related-block","slug associé absent de TOOLS_META["+slug+"].relatedTools : "+target)}}
  if(!meta||!Array.isArray(meta.relatedTools)||meta.relatedTools.length<2)fail("related-meta","TOOLS_META["+slug+"] doit exister avec au moins 2 relatedTools");
  const j=ld(root),wa=j.items.filter(x=>x["@type"]==="WebApplication"),br=j.items.filter(x=>x["@type"]==="BreadcrumbList");j.err.forEach(m=>fail("jsonld",m));if(wa.length!==1||br.length!==1)fail("jsonld","exactement un WebApplication et un BreadcrumbList sont requis");
  if(wa.length===1){if(wa[0].url!==canonical)fail("jsonld","WebApplication.url doit être le canonique");if(norm(wa[0].description||"")!==description)fail("jsonld","WebApplication.description doit égaler la meta description")}
