@@ -48,3 +48,14 @@ Le dépôt doit rester la source de vérité de la production. Les scripts de g�
 ## Canonical HTML migration — 2026-10-03
 
 Le contenu HTML commité a été synchronisé avec les transformations canoniques existantes de layout partagé et de préparation AdSense. Le pipeline CI/CD ne réécrit plus ces fichiers en production : il vérifie désormais leur conformité et échoue en cas de dérive.
+
+
+## Durcissement post-audit P0 — 2026-10-03
+
+Le workflow `tests` récupère désormais l'historique Git complet afin que le calcul déterministe des dates `lastmod` du sitemap soit identique en PR et en production.
+
+Le commit de synchronisation HTML `b1844c90bd4c31a815b31433268a629e2049b97a` est explicitement exclu du calcul des `lastmod` car il ne constitue pas une modification éditoriale des pages. Le sitemap est régénéré par le mécanisme canonique et reste une source de vérité committée.
+
+Le contrôle `normalize-layout.mjs --check` est fail-closed : une divergence ou un avertissement structurel fait échouer le contrôle. Le contrôle de cohérence du layout du workflow de déploiement n'est plus présenté comme un contrôle informatif.
+
+Avant chaque MEP, le workflow enregistre la version Cloudflare actuellement active. Si le déploiement ou une vérification de production échoue après cette étape, le workflow tente automatiquement de rétablir cette version précédente. Ce rollback ne modifie ni le dépôt ni les fichiers locaux.
