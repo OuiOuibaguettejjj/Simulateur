@@ -4,7 +4,7 @@ Ce document définit le **gabarit canonique** des pages outil. Les pages sont HT
 
 ## 1. Gabarit unique
 
-Les pages `/outil/`, `/conversion/` et `/comparateur/` partagent le même socle HTML-first. Le préfixe d'URL est conservé pour respecter les URL existantes ; il ne constitue pas un gabarit de rendu différent.
+Les pages `/outil/`, `/conversion/` et `/comparateur/` partagent le même socle HTML-first. Les trois familles utilisent exactement le même squelette, sans variante. Le préfixe d'URL est conservé pour respecter les URL existantes ; il ne constitue pas un gabarit de rendu différent.
 
 La page de référence actuelle est `public/outil/tva/index.html`. Pour créer une nouvelle page, utiliser `docs/template-outil.html` comme point de copie, puis adapter uniquement les données et l'interface propres à l'outil.
 
@@ -61,24 +61,25 @@ Le squelette ci-dessous décrit les blocs attendus. Les commentaires indiquent l
 
         <button class="button-main">Calculer</button>
 
-        <!-- Le résultat initial ne doit jamais être vide. -->
-        <div class="result" id="result">Saisissez vos données puis lancez le calcul.</div>
+        <div class="result" id="result" aria-live="polite">Saisissez vos données puis lancez le calcul.</div>
 
-        <!-- Méthode, limites et sources peuvent être dans le bloc outil ou le contenu éditorial. -->
+        <!-- Méthode, limites et au moins une source : bloc obligatoire, dans le bloc outil. -->
         <div class="formula">
           <strong>Méthode et sources</strong>
           <p>Principe du calcul, limites et/ou source pertinente.</p>
+          <p>Source : <a href="https://...">Source officielle</a>.</p>
         </div>
       </section>
     </div>
 
-    <!-- Bloc éditorial : explications, exemples, limites, FAQ si utile. -->
+    <!-- Bloc éditorial : au moins trois sections H2 (comment calculer, exemple, à savoir). FAQ facultative. -->
     <section class="content-section">
-      <h2>...</h2>
-      <p>...</p>
+      <h2>Comment calculer ... ?</h2><p>...</p>
+      <h2>Exemple de calcul</h2><p>...</p>
+      <h2>À savoir</h2><p>...</p>
     </section>
 
-    <!-- Bloc facultatif : outils associés, lorsque des relations pertinentes sont définies. -->
+    <!-- Bloc obligatoire : outils associés, 2 à 4 liens issus de TOOLS_META, un seul bloc par page. -->
     <section class="related-tools">
       ...
     </section>
@@ -91,6 +92,8 @@ Le squelette ci-dessous décrit les blocs attendus. Les commentaires indiquent l
 </body>
 </html>
 ```
+
+Le bloc outil est un `<section class="tool">` sur toutes les pages. L'introduction est un `<p class="tool-intro">`. Les anciens identifiants `ey`, `title`, `intro` et `source` ne sont plus utilisés.
 
 ## 2. Blocs obligatoires
 
@@ -105,10 +108,12 @@ Chaque page outil doit fournir dans son HTML initial :
 - un `<header>`, un `<main>` et un `<footer>` uniques ;
 - un breadcrumb visible commençant par **Accueil** ;
 - un H1 unique et non vide ;
-- une introduction claire ;
+- un bloc `<section class="tool">` contenant le H1 et une introduction `<p class="tool-intro">` (les anciens ids ey, title, intro et source ne sont plus utilisés) ;
 - l'interface essentielle directement présente dans le HTML ;
-- un résultat initial **non vide**, même avant toute saisie ;
-- les informations de méthode, limites et sources lorsqu'elles sont pertinentes ;
+- un résultat initial **non vide**, même avant toute saisie, avec `aria-live="polite"` ;
+- un bloc `.formula` (méthode et limites) contenant au moins une source ;
+- au moins trois sections H2 dans le contenu éditorial : comment calculer, exemple, à savoir ;
+- un unique bloc `.related-tools` standard de 2 à 4 liens, issus des relations définies dans `TOOLS_META` ;
 - un `WebApplication` JSON-LD unique ;
 - un `BreadcrumbList` JSON-LD unique, cohérent avec le breadcrumb visible et la canonique ;
 - les liens internes réellement utiles à la page.
@@ -122,9 +127,7 @@ Selon la nature de l'outil, peuvent être ajoutés sans modifier le socle :
 - graphique ou tableau ;
 - scénarios ou comparaisons ;
 - FAQ ;
-- exemple détaillé ;
 - avertissement réglementaire ou méthodologique ;
-- bloc « Outils associés » ;
 - contenu spécifique au domaine.
 
 Une extension spécifique ne doit pas recréer un second gabarit de page.
@@ -198,3 +201,5 @@ Toute modification du template doit rester compatible avec les contrôles CI.
 - Pas de rendu éditorial via `Simulateurs.render()`.
 - Pas de modification d'URL pour résoudre un problème de forme.
 - Les simulateurs complexes peuvent enrichir le socle, mais ne doivent pas le remplacer.
+- Un seul bloc `.related-tools` par page : un bloc riche existant est fusionné dans le bloc standard, jamais ajouté à côté.
+- Les pages existantes sont mises en conformité par lots ; le contrat s'applique dès maintenant à toute nouvelle page et à toute modification de page.
