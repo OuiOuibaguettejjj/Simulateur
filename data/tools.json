@@ -396,7 +396,11 @@
     "retraite-simplifiee": {
       "type": "simulateur",
       "category": "retraite",
-      "relatedTools": []
+      "relatedTools": [
+        "age-retraite",
+        "epargne-mensuelle",
+        "interets-composes"
+      ]
     },
     "salaire-brut-net": {
       "type": "simulateur",

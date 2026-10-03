@@ -693,14 +693,6 @@
   },
   {
     "path": "public/outil/retraite-simplifiee/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/retraite-simplifiee/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/retraite-simplifiee/index.html",
     "rule": "result"
   },
   {
