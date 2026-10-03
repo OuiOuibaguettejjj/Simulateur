@@ -72,3 +72,10 @@ La forme du site est désormais documentée autour d'un gabarit HTML-first uniqu
 Le contrat documentaire impose notamment un `<title>` de la forme « Mot-clé principal | Simulateur », une meta description de 120 à 160 caractères, un résultat initial non vide, un `WebApplication` JSON-LD et un `BreadcrumbList` JSON-LD cohérent avec la canonique.
 
 La documentation a été corrigée pour refléter le flux réel : header et footer commités dans les pages, `normalize-layout.mjs --check` et `check-layout.mjs` bloquants, et absence de `scripts/prerender-tools.mjs`. Cette phase ne modifie aucune URL, logique métier, règle de calcul, CSP, en-tête de sécurité, pinning GitHub Actions ou mécanisme de rollback.
+
+
+## 2026-10-03 — Correction MEP Phase 1 : template hors `public/`
+
+La première MEP de la Phase 1 a été bloquée par le contrôle statique : `public/outil/_template.html` était volontairement exclu des walks `index.html`, mais restait néanmoins parcouru par le contrôle global de toutes les pages HTML publiques. Le fichier contenait en outre des placeholders non résolvables comme `/categorie/`.
+
+Le template canonique est donc déplacé dans `docs/template-outil.html`. Il reste disponible comme point de copie documentaire sans être une ressource publique. Aucune URL publique, logique métier, règle de calcul, CSP, en-tête de sécurité, pinning GitHub Actions ou mécanisme de rollback n'est modifié.
