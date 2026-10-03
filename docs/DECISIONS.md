@@ -29,3 +29,8 @@ La structure logique des outils est définie avant les prochaines intégrations 
 ## Migration taxonomie 2026-10-03
 
 Les relations entre outils sont maintenant stockées avec la taxonomie centrale. Le pré-rendu et le contrôle CI ne dépendent plus d'un second référentiel `groups`. Cette migration ne change aucune URL.
+
+
+## Sécurité pré-production 2026-10-03
+
+Le pipeline PR vérifie désormais les invariants de sécurité liés à l'architecture centralisée : cohérence de `TOOL_TYPES` / `TOOLS_META` avec les pages `/outil/<slug>/`, intégrité des relations `relatedTools`, absence de secrets committés, verrouillage CORS de l'API, périmètre `run_worker_first`, cohérence CSP Worker/Static Assets et durcissement des workflows GitHub. Cette validation s'exécute avant le pré-rendu afin qu'une évolution de la taxonomie ne puisse contourner les contrôles de sécurité.
