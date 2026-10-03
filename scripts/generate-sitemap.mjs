@@ -1,19 +1,12 @@
 import fs from "node:fs";
 import path from "node:path";
-import { execFileSync } from "node:child_process";
+import { pathToFileURL } from "node:url";
 
 const ROOT = "public";
+const DATA_FILE = "data/lastmod.json";
 const CHECK_ONLY = process.argv.includes("--check");
 const SITE = "https://simulateur.site";
 const EXCLUDED_PREFIXES = ["public/api/"];
-
-// These restoration/tree-migration commits rebuilt the public tree without changing page content.
-// They must not become the apparent last modification date of restored pages.
-const IGNORED_COMMITS = new Set([
-  "2dc2ac88a7e12e26240d935011c8ad5ebba944a8",
-  "977851feb8ef88b3c4c41307eeee2a5b915a1874",
-  "b1844c90bd4c31a815b31433268a629e2049b97a"
-]);
 
 function walk(dir) {
   const files = [];
@@ -36,64 +29,114 @@ function routeFromFile(file) {
   return "/" + file.slice("public/".length, -"index.html".length);
 }
 
-function lastModified(file) {
-  const history = execFileSync(
-    "git",
-    ["log", "--format=%H%x09%cs", "--", file],
-    { encoding: "utf8" }
-  ).trim().split(/\r?\n/).filter(Boolean);
+function tomorrowUtc(today) {
+  const date = new Date(today + "T00:00:00Z");
+  date.setUTCDate(date.getUTCDate() + 1);
+  return date.toISOString().slice(0, 10);
+}
 
-  for (const entry of history) {
-    const [sha, date] = entry.split("\t");
-    if (IGNORED_COMMITS.has(sha)) continue;
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
-      throw new Error(`Unable to determine valid Git last-modified date for ${file}: ${date}`);
+function validDate(value) {
+  if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+  const date = new Date(value + "T00:00:00Z");
+  return !Number.isNaN(date.getTime()) && date.toISOString().slice(0, 10) === value;
+}
+
+export function validateLastmodData(data, pages, today) {
+  const errors = [];
+  const routes = data && typeof data === "object" && !Array.isArray(data) ? data.routes : null;
+  if (!data || typeof data !== "object" || Array.isArray(data) || data.schemaVersion !== 1 || !routes || typeof routes !== "object" || Array.isArray(routes)) {
+    errors.push("data/lastmod.json doit respecter le schéma { schemaVersion: 1, routes: { ... } }");
+    return errors;
+  }
+
+  const pageRoutes = pages.map(page => typeof page === "string" ? page : page.route);
+  const seenPages = new Set();
+  for (const route of pageRoutes) {
+    if (seenPages.has(route)) errors.push("Route dupliquée dans les pages indexables : " + route);
+    seenPages.add(route);
+  }
+
+  const routeKeys = Object.keys(routes);
+  const pageSet = new Set(pageRoutes);
+  for (const route of pageSet) {
+    if (!Object.prototype.hasOwnProperty.call(routes, route)) {
+      errors.push("Page indexable sans entrée lastmod : " + route);
     }
-    return date;
+  }
+  for (const route of routeKeys) {
+    if (!pageSet.has(route)) {
+      errors.push("Entrée lastmod orpheline : " + route);
+    }
   }
 
-  throw new Error(`No valid Git last-modified date found for ${file}`);
-}
-
-const pages = walk(ROOT)
-  .filter(isIndexablePage)
-  .map(file => ({ route: routeFromFile(file), lastmod: lastModified(file) }))
-  .sort((a, b) => a.route.localeCompare(b.route));
-
-const seen = new Set();
-for (const page of pages) {
-  if (seen.has(page.route)) throw new Error(`Duplicate sitemap route: ${page.route}`);
-  seen.add(page.route);
-}
-
-const sitemap = [
-  '<?xml version="1.0" encoding="UTF-8"?>',
-  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-  ...pages.flatMap(page => [
-    "  <url>",
-    `    <loc>${SITE}${page.route}</loc>`,
-    `    <lastmod>${page.lastmod}</lastmod>`,
-    "  </url>"
-  ]),
-  "</urlset>",
-  ""
-].join("\n");
-
-const sitemapPath = path.join(ROOT, "sitemap.xml");
-if (CHECK_ONLY) {
-  const current = fs.existsSync(sitemapPath) ? fs.readFileSync(sitemapPath, "utf8") : "";
-  if (current !== sitemap) {
-    const currentLines = current.split(/\r?\n/);
-    const generatedLines = sitemap.split(/\r?\n/);
-    const firstMismatch = generatedLines.findIndex((line, i) => line !== currentLines[i]);
-    console.error("Sitemap check failed: public/sitemap.xml is not the generated sitemap for this commit.");
-    console.error("First mismatch at line " + (firstMismatch + 1) + ":");
-    console.error("Committed: " + (currentLines[firstMismatch] ?? "<missing>"));
-    console.error("Generated: " + (generatedLines[firstMismatch] ?? "<missing>"));
-    process.exit(1);
+  const maxDate = tomorrowUtc(today);
+  for (const route of routeKeys) {
+    const date = routes[route];
+    if (!validDate(date)) {
+      errors.push("Date lastmod invalide pour " + route + " : " + String(date));
+    } else if (date > maxDate) {
+      errors.push("Date lastmod future pour " + route + " : " + date + " (maximum autorisé : " + maxDate + ")");
+    }
   }
-  console.log(`Sitemap check passed: ${pages.length} URLs.`);
-} else {
-  fs.writeFileSync(sitemapPath, sitemap, "utf8");
-  console.log(`Generated sitemap.xml with ${pages.length} URLs using Git last-modified dates.`);
+  return errors;
 }
+
+function loadLastmodData(pages) {
+  const dataPath = path.resolve(DATA_FILE);
+  let data;
+  try {
+    data = JSON.parse(fs.readFileSync(dataPath, "utf8"));
+  } catch (error) {
+    throw new Error("Impossible de lire " + DATA_FILE + " : " + error.message);
+  }
+  const today = new Date().toISOString().slice(0, 10);
+  const errors = validateLastmodData(data, pages, today);
+  if (errors.length) throw new Error(errors.join("\n"));
+  return data.routes;
+}
+
+function buildSitemap(pages, routes) {
+  return [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+    ...pages.flatMap(page => [
+      "  <url>",
+      `    <loc>${SITE}${page.route}</loc>`,
+      `    <lastmod>${routes[page.route]}</lastmod>`,
+      "  </url>"
+    ]),
+    "</urlset>",
+    ""
+  ].join("\n");
+}
+
+function main() {
+  const pages = walk(ROOT)
+    .filter(isIndexablePage)
+    .map(file => ({ route: routeFromFile(file) }))
+    .sort((a, b) => a.route.localeCompare(b.route));
+
+  const routes = loadLastmodData(pages);
+  const sitemap = buildSitemap(pages, routes);
+  const sitemapPath = path.join(ROOT, "sitemap.xml");
+
+  if (CHECK_ONLY) {
+    const current = fs.existsSync(sitemapPath) ? fs.readFileSync(sitemapPath, "utf8") : "";
+    if (current !== sitemap) {
+      const currentLines = current.split(/\r?\n/);
+      const generatedLines = sitemap.split(/\r?\n/);
+      const firstMismatch = generatedLines.findIndex((line, i) => line !== currentLines[i]);
+      console.error("Sitemap check failed: public/sitemap.xml is not the generated sitemap from data/lastmod.json.");
+      console.error("First mismatch at line " + (firstMismatch + 1) + ":");
+      console.error("Committed: " + (currentLines[firstMismatch] ?? "<missing>"));
+      console.error("Generated: " + (generatedLines[firstMismatch] ?? "<missing>"));
+      process.exit(1);
+    }
+    console.log(`Sitemap check passed: ${pages.length} URLs.`);
+  } else {
+    fs.writeFileSync(sitemapPath, sitemap, "utf8");
+    console.log(`Generated sitemap.xml with ${pages.length} URLs using data/lastmod.json.`);
+  }
+}
+
+if (import.meta.url === pathToFileURL(path.resolve(process.argv[1] || "")).href) main();

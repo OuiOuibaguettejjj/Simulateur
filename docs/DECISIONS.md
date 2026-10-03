@@ -60,6 +60,12 @@ Le contrôle `normalize-layout.mjs --check` est fail-closed : une divergence ou 
 
 Avant chaque MEP, le workflow enregistre la version Cloudflare actuellement active. Si le déploiement ou une vérification de production échoue après cette étape, le workflow tente automatiquement de rétablir cette version précédente. Ce rollback ne modifie ni le dépôt ni les fichiers locaux.
 
+## Lastmod du sitemap versionné avec le contenu — 2026-10-03
+
+Les dates `lastmod` du sitemap sont désormais définies dans `data/lastmod.json`, versionné avec le contenu, et ne dépendent plus de l'historique Git. Elles ne dépendent donc ni des commits ignorés, ni de la date du committeur qui peut changer lors d'un rebase. La génération du sitemap valide la couverture exacte des routes, les dates et l'absence de doublons avant de produire la sortie committée.
+
+Cette décision remplace en partie l'entrée « Durcissement post-audit P0 » ci-dessus sur les `lastmod` : l'historique Git complet et les commits ignorés ne sont plus nécessaires pour déterminer les dates.
+
 ## Source de vérité unique de la taxonomie — 2026-10-03
 
 La taxonomie des outils repose désormais sur une seule déclaration par outil dans `data/tools.json`. Le type, la catégorie principale et les relations `relatedTools` sont définis au même endroit. L'ancien objet `TOOL_TYPES`, qui dupliquait le type de chaque outil, a été supprimé ainsi que son contrôle de cohérence. Cette décision vise à réduire les points de divergence et à rendre l'ajout ou l'évolution d'un outil plus simple, sans introduire de moteur générique supplémentaire.
