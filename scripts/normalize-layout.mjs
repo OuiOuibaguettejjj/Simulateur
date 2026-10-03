@@ -105,8 +105,12 @@ for (const file of files) {
     if (!CHECK_ONLY) fs.writeFileSync(file, html);
   }
 }
-if (CHECK_ONLY && changed) {
-  console.error("Layout check failed: " + changed + " page(s) differ from the canonical shared layout.");
+if (CHECK_ONLY && (changed || warned)) {
+  console.error(
+    "Layout check failed: " +
+    changed + " page(s) differ from the canonical shared layout; " +
+    warned + " warning(s) indicate an unrecognized or structurally ambiguous layout."
+  );
   process.exit(1);
 }
 console.log("Layout " + (CHECK_ONLY ? "check" : "normalize") + ": " + changed + " pages updated; " + files.length + " pages checked; " + warned + " warnings.");
