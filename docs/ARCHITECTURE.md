@@ -9,7 +9,7 @@ Le simulateur RSA utilise un moteur dédié `public/rsa.js` séparé de son inte
 
 La taxonomie officielle est centralisée dans `public/simulateurs.js` via `CATEGORIES`, `TOOL_TYPES` et `TOOLS_META`. Chaque outil possède un type unique et une catégorie principale. Les URL existantes `/outil/<slug>/` ne sont pas modifiées.
 
-La source de vérité contient également les relations `relatedTools` de chaque outil. Le pré-rendu et les contrôles CI consomment cette même taxonomie ; l'ancien objet `groups` n'est plus utilisé.
+La source de vérité contient également les relations `relatedTools` de chaque outil. Cette structure est désormais la référence opérationnelle : il n'est pas prévu de migration séparée des relations historiques. Le pré-rendu et les contrôles CI consomment cette même taxonomie ; l'ancien objet `groups` n'est plus utilisé.
 
 Les contrôles pré-production vérifient notamment :
 - la présence de chaque outil dans `TOOL_TYPES` et `TOOLS_META` ;
