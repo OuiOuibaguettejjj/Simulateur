@@ -45,64 +45,110 @@
     "arrondi": {
       "type": "calculateur",
       "category": "argent",
-      "relatedTools": []
+      "relatedTools": [
+        "pourcentage",
+        "proportion",
+        "fractions"
+      ]
     },
     "calculatrice": {
       "type": "calculateur",
       "category": "argent",
-      "relatedTools": []
+      "relatedTools": [
+        "pourcentage",
+        "moyenne",
+        "fractions"
+      ]
     },
     "coefficient": {
       "type": "calculateur",
       "category": "argent",
       "relatedTools": [
-        "pourcentage"
+        "marge",
+        "remise",
+        "prix-unitaire"
       ]
     },
     "fractions": {
       "type": "calculateur",
       "category": "argent",
-      "relatedTools": []
+      "relatedTools": [
+        "proportion",
+        "pourcentage",
+        "arrondi"
+      ]
     },
     "marge": {
       "type": "calculateur",
       "category": "argent",
-      "relatedTools": []
+      "relatedTools": [
+        "coefficient",
+        "prix-unitaire",
+        "tva"
+      ]
     },
     "median-mode": {
       "type": "calculateur",
       "category": "argent",
-      "relatedTools": []
+      "relatedTools": [
+        "moyenne",
+        "moyenne-ponderee",
+        "calculatrice"
+      ]
     },
     "moyenne-ponderee": {
       "type": "calculateur",
       "category": "argent",
-      "relatedTools": []
+      "relatedTools": [
+        "moyenne",
+        "median-mode",
+        "proportion"
+      ]
     },
     "moyenne": {
       "type": "calculateur",
       "category": "argent",
-      "relatedTools": []
+      "relatedTools": [
+        "moyenne-ponderee",
+        "median-mode",
+        "pourcentage"
+      ]
     },
     "pourcentage": {
       "type": "calculateur",
       "category": "argent",
-      "relatedTools": []
+      "relatedTools": [
+        "tva",
+        "remise",
+        "marge"
+      ]
     },
     "proportion": {
       "type": "calculateur",
       "category": "argent",
-      "relatedTools": []
+      "relatedTools": [
+        "pourcentage",
+        "prix-unitaire",
+        "fractions"
+      ]
     },
     "ratio": {
       "type": "calculateur",
       "category": "argent",
-      "relatedTools": []
+      "relatedTools": [
+        "pourcentage",
+        "proportion",
+        "coefficient"
+      ]
     },
     "remise": {
       "type": "calculateur",
       "category": "argent",
-      "relatedTools": []
+      "relatedTools": [
+        "pourcentage",
+        "tva",
+        "promotions"
+      ]
     },
     "prix-unitaire": {
       "type": "calculateur",

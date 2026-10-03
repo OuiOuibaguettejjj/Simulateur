@@ -25,14 +25,6 @@
   },
   {
     "path": "public/outil/arrondi/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/arrondi/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/arrondi/index.html",
     "rule": "result"
   },
   {
@@ -46,14 +38,6 @@
   {
     "path": "public/outil/assurance-vie/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/calculatrice/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/calculatrice/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/calculatrice/index.html",
@@ -117,14 +101,6 @@
   },
   {
     "path": "public/outil/coefficient/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/coefficient/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/coefficient/index.html",
     "rule": "result"
   },
   {
@@ -298,14 +274,6 @@
   {
     "path": "public/outil/epargne/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/fractions/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/fractions/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/fractions/index.html",
@@ -485,27 +453,11 @@
   },
   {
     "path": "public/outil/marge/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/marge/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/marge/index.html",
     "rule": "result"
   },
   {
     "path": "public/outil/marge/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/median-mode/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/median-mode/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/median-mode/index.html",
@@ -549,14 +501,6 @@
   },
   {
     "path": "public/outil/moyenne-ponderee/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/moyenne-ponderee/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/moyenne-ponderee/index.html",
     "rule": "result"
   },
   {
@@ -566,14 +510,6 @@
   {
     "path": "public/outil/moyenne/index.html",
     "rule": "jsonld"
-  },
-  {
-    "path": "public/outil/moyenne/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/moyenne/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/moyenne/index.html",
@@ -670,14 +606,6 @@
   {
     "path": "public/outil/pourcentage/index.html",
     "rule": "jsonld"
-  },
-  {
-    "path": "public/outil/pourcentage/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/pourcentage/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/pourcentage/index.html",
@@ -761,14 +689,6 @@
   },
   {
     "path": "public/outil/proportion/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/proportion/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/proportion/index.html",
     "rule": "result"
   },
   {
@@ -797,14 +717,6 @@
   },
   {
     "path": "public/outil/ratio/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/ratio/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/ratio/index.html",
     "rule": "result"
   },
   {
@@ -826,14 +738,6 @@
   {
     "path": "public/outil/recette/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/remise/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/remise/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/remise/index.html",
