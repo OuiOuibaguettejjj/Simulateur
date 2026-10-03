@@ -63,3 +63,6 @@ Avant chaque MEP, le workflow enregistre la version Cloudflare actuellement acti
 ## Source de vérité unique de la taxonomie — 2026-10-03
 
 La taxonomie des outils repose désormais sur une seule déclaration par outil dans `TOOLS_META`. Le type, la catégorie principale et les relations `relatedTools` sont définis au même endroit. L'ancien objet `TOOL_TYPES`, qui dupliquait le type de chaque outil, a été supprimé ainsi que son contrôle de cohérence. Cette décision vise à réduire les points de divergence et à rendre l'ajout ou l'évolution d'un outil plus simple, sans introduire de moteur générique supplémentaire.
+## 2026-10-03 — Suppression du rendu dynamique historique des outils
+
+Les pages `/outil/<slug>/` étant désormais HTML-first, `Simulateurs.render()` ne doit plus générer de contenu de page. Les éléments éditoriaux et l'interface initiale restent dans chaque HTML statique ; JavaScript conserve uniquement la logique de calcul et les interactions. Le hook `render()` est conservé temporairement comme no-op de compatibilité avec les anciens appels inline, afin d'éviter toute régression fonctionnelle pendant le nettoyage des hooks historiques.
