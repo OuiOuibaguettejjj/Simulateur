@@ -63,3 +63,12 @@ Avant chaque MEP, le workflow enregistre la version Cloudflare actuellement acti
 ## Source de vérité unique de la taxonomie — 2026-10-03
 
 La taxonomie des outils repose désormais sur une seule déclaration par outil dans `TOOLS_META`. Le type, la catégorie principale et les relations `relatedTools` sont définis au même endroit. L'ancien objet `TOOL_TYPES`, qui dupliquait le type de chaque outil, a été supprimé ainsi que son contrôle de cohérence. Cette décision vise à réduire les points de divergence et à rendre l'ajout ou l'évolution d'un outil plus simple, sans introduire de moteur générique supplémentaire.
+
+
+## 2026-10-03 — Phase 1 : gabarit HTML canonique et documentation
+
+La forme du site est désormais documentée autour d'un gabarit HTML-first unique, avec `public/outil/tva/index.html` comme référence concrète et `public/outil/_template.html` comme point de copie non public.
+
+Le contrat documentaire impose notamment un `<title>` de la forme « Mot-clé principal | Simulateur », une meta description de 120 à 160 caractères, un résultat initial non vide, un `WebApplication` JSON-LD et un `BreadcrumbList` JSON-LD cohérent avec la canonique.
+
+La documentation a été corrigée pour refléter le flux réel : header et footer commités dans les pages, `normalize-layout.mjs --check` et `check-layout.mjs` bloquants, et absence de `scripts/prerender-tools.mjs`. Cette phase ne modifie aucune URL, logique métier, règle de calcul, CSP, en-tête de sécurité, pinning GitHub Actions ou mécanisme de rollback.
