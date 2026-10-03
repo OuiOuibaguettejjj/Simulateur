@@ -40,40 +40,33 @@ for (const file of textFiles) {
 }
 
 /* Central architecture source-of-truth gate. */
-const sim = read("public/simulateurs.js");
-const categoriesMatch = sim.match(/const CATEGORIES=(\{[\s\S]*?\});\s*const TOOLS_META=/);
-const metaMatch = sim.match(/const TOOLS_META=(\{[\s\S]*?\});\s*function toolMeta/);
-if (!categoriesMatch || !metaMatch) {
-  fail("central taxonomy blocks are not parseable");
-} else {
-  let categories, toolsMeta;
-  try {
-    categories = Function("return (" + categoriesMatch[1] + ")")();
-    toolsMeta = Function("return (" + metaMatch[1] + ")")();
-  } catch (error) {
-    fail("central taxonomy cannot be parsed: " + error.message);
-  }
-  if (categories && toolsMeta) {
-    const allowedTypes = new Set(["calculateur", "simulateur", "conversion", "comparateur"]);
-    const categorySlugs = new Set(Object.keys(categories));
-    const metaSlugs = Object.keys(toolsMeta);
-    const pageSlugs = allFiles.filter(file => /^public\/outil\/[^/]+\/index\.html$/.test(file)).map(file => file.split("/")[2]);
-    for (const [slug, meta] of Object.entries(toolsMeta)) {
-      if (!meta || typeof meta !== "object") { fail("invalid metadata for " + slug); continue; }
-      if (!allowedTypes.has(meta.type)) fail(slug + ": invalid type " + meta.type);
-      if (!categorySlugs.has(meta.category)) fail(slug + ": unknown primary category " + meta.category);
-      if (!Array.isArray(meta.relatedTools)) fail(slug + ": relatedTools must be an array");
-      for (const related of meta.relatedTools || []) {
-        if (!related || typeof related.slug !== "string") { fail(slug + ": malformed related tool"); continue; }
-        if (!(related.slug in toolsMeta)) fail(slug + ": related tool missing from central metadata: " + related.slug);
-        if (related.slug === slug) fail(slug + ": tool cannot relate to itself");
-        if (!related.title || !related.description) fail(slug + ": related tool requires title and description");
-      }
+const taxonomy = read("data/tools.json");
+try {
+  const parsed = JSON.parse(taxonomy);
+  const categories = parsed?.categories;
+  const toolsMeta = parsed?.tools;
+  if (!categories || typeof categories !== "object" || !toolsMeta || typeof toolsMeta !== "object") throw new Error("categories/tools missing");
+  const allowedTypes = new Set(["calculateur", "simulateur", "conversion", "comparateur"]);
+  const categorySlugs = new Set(Object.keys(categories));
+  const metaSlugs = Object.keys(toolsMeta);
+  const pageSlugs = allFiles.filter(file => /^public\/outil\/[^/]+\/index\.html$/.test(file)).map(file => file.split("/")[2]);
+  for (const [slug, meta] of Object.entries(toolsMeta)) {
+    if (!meta || typeof meta !== "object") { fail("invalid metadata for " + slug); continue; }
+    if (!allowedTypes.has(meta.type)) fail(slug + ": invalid type " + meta.type);
+    if (!categorySlugs.has(meta.category)) fail(slug + ": unknown primary category " + meta.category);
+    if (!Array.isArray(meta.relatedTools)) fail(slug + ": relatedTools must be an array");
+    for (const related of meta.relatedTools || []) {
+      if (!related || typeof related.slug !== "string") { fail(slug + ": malformed related tool"); continue; }
+      if (!(related.slug in toolsMeta)) fail(slug + ": related tool missing from central metadata: " + related.slug);
+      if (related.slug === slug) fail(slug + ": tool cannot relate to itself");
+      if (!related.title || !related.description) fail(slug + ": related tool requires title and description");
     }
-    const pageSet = new Set(pageSlugs);
-    for (const slug of metaSlugs) if (!pageSet.has(slug)) fail("taxonomy entry has no /outil page: " + slug);
-    for (const slug of pageSet) if (!toolsMeta[slug]) fail("tool page missing from central taxonomy: " + slug);
   }
+  const pageSet = new Set(pageSlugs);
+  for (const slug of metaSlugs) if (!pageSet.has(slug)) fail("taxonomy entry has no /outil page: " + slug);
+  for (const slug of pageSet) if (!toolsMeta[slug]) fail("tool page missing from central taxonomy: " + slug);
+} catch (error) {
+  fail("data/tools.json cannot be parsed: " + error.message);
 }
 
 /* Production boundary and Worker invariants. */

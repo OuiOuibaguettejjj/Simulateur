@@ -14,14 +14,14 @@
 <main><div class="wrap">
 <div class="breadcrumb"><a href="/">Accueil</a> · <a href="/retraite/">Retraite</a> · Simulateur retraite 2026</div>
 <div class="retirement-shell tool">
-<div class="retirement-hero"><div class="eyebrow" id="ey">RETRAITE · 2026</div><h1 id="title">Simulateur retraite 2026</h1><p id="intro">Estimez votre retraite de base à partir de votre carrière et de votre date de départ.</p><div class="retirement-badges"><span>Retraite de base</span><span>Calcul simplifié</span><span>2026</span></div></div>
+<div class="retirement-hero"><div class="eyebrow">RETRAITE · 2026</div><h1>Simulateur retraite 2026</h1><p class="tool-intro">Estimez votre retraite de base à partir de votre carrière et de votre date de départ.</p><div class="retirement-badges"><span>Retraite de base</span><span>Calcul simplifié</span><span>2026</span></div></div>
 <div class="retirement-form">
 <div class="retirement-section-title"><strong>Votre situation</strong><span>Quelques informations de votre carrière suffisent pour obtenir une estimation.</span></div>
 <div id="fields"><div class="row"><div class="field"><label for="birth">Date de naissance</label><input id="birth" type="date" min="1955-01-01" max="2100-12-31"> </div><div class="field"><label for="sam">Revenu annuel moyen (€)</label><input id="sam" type="number" min="0" step="100" max="1000000" placeholder="30000"></div></div><div class="row"><div class="field"><label for="trTotal">Trimestres d'assurance tous régimes</label><input id="trTotal" type="number" min="0" step="1" max="400" placeholder="172"></div><div class="field"><label for="trGeneral">Trimestres d'assurance au régime général</label><input id="trGeneral" type="number" min="0" step="1" max="400" placeholder="172"></div></div><div class="field"><label for="departure">Date de départ envisagée (1er du mois)</label><input id="departure" type="date" min="2026-09-01"> </div></div>
 <button class="button-main" onclick="Simulateurs.calc()">Calculer ma retraite</button>
 <p class="privacy-note">Calcul effectué dans votre navigateur · aucune donnée personnelle n'est envoyée.</p>
 <div class="result retirement-result" id="result">Renseignez vos données puis lancez le calcul.</div>
-<div class="formula"><strong>Méthode et sources</strong><p id="source">Principe : revenu annuel moyen × taux de liquidation × proratisation au régime général. Le taux est de 50 % à taux plein. Avant 67 ans, la décote retient le plus petit nombre entre les trimestres manquants pour atteindre la durée requise et les trimestres restant avant 67 ans, avec une minoration de 0,625 point par trimestre. Le revenu annuel moyen est saisi directement : le calculateur ne reconstitue pas vos meilleures années.</p></div>
+<div class="formula"><strong>Méthode et sources</strong><p>Principe : revenu annuel moyen × taux de liquidation × proratisation au régime général. Le taux est de 50 % à taux plein. Avant 67 ans, la décote retient le plus petit nombre entre les trimestres manquants pour atteindre la durée requise et les trimestres restant avant 67 ans, avec une minoration de 0,625 point par trimestre. Le revenu annuel moyen est saisi directement : le calculateur ne reconstitue pas vos meilleures années.</p></div>
 </div></div></div>
 
 <section class="content-section retirement-content">
@@ -56,11 +56,7 @@
 <footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer>
 
 <script>
-const F={
-text:(i,l,p="",step="1",max="")=>'<div class="field"><label for="'+i+'">'+l+'</label><input id="'+i+'" type="number" min="0" step="'+step+'"'+(max?' max="'+max+'"':'')+' placeholder="'+p+'"></div>',
-date:(i,l,min="",max="")=>'<div class="field"><label for="'+i+'">'+l+'</label><input id="'+i+'" type="date"'+(min?' min="'+min+'"':"")+(max?' max="'+max+'"':"")+'> </div>',
-row:a=>'<div class="row">'+a.join('')+'</div>'
-};
+
 
 function parseDate(value){
   if(!/^\d{4}-\d{2}-\d{2}$/.test(value)) return null;
@@ -184,5 +180,5 @@ function formatAge(totalMonths){
   return months?years+" ans et "+months+" mois":years+" ans";
 }
 
-window.addEventListener("DOMContentLoaded",()=>Simulateurs.render());
+
 </script></body></html>

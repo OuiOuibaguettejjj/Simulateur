@@ -114,7 +114,7 @@ Chaque page outil doit fournir dans son HTML initial :
 - un bloc `.formula` (méthode et limites) contenant au moins une source ;
 - au moins trois sections H2 dans le contenu éditorial : comment calculer, exemple, à savoir ;
 - `/outil/` : un unique bloc `.related-tools` standard de 2 à 4 liens, issus des relations définies dans `TOOLS_META` ;
-- `/conversion/` et `/comparateur/` : un unique bloc `.related-tools` standard de 2 à 4 liens écrits directement dans le HTML, sans entrée `TOOLS_META` ; chaque lien doit pointer vers une page publique existante, sans lien vers la page elle-même et sans doublon ;
+- `/conversion/` et `/comparateur/` : un unique bloc `.related-tools` standard de 2 à 4 liens écrits directement dans le HTML, sans entrée `data/tools.json` ; chaque lien doit pointer vers une page publique existante, sans lien vers la page elle-même et sans doublon ;
 - un `WebApplication` JSON-LD unique ;
 - un `BreadcrumbList` JSON-LD unique, cohérent avec le breadcrumb visible et la canonique ;
 - les liens internes réellement utiles à la page.
@@ -199,7 +199,7 @@ Toute modification du template doit rester compatible avec les contrôles CI.
 
 - Pas de moteur de template générique.
 - Pas de second gabarit pour une famille d'URL.
-- Pas de rendu éditorial via `Simulateurs.render()`.
+- Le contenu éditorial initial doit rester directement présent dans le HTML commité ; aucun rendu éditorial par JavaScript n'est requis.
 - Pas de modification d'URL pour résoudre un problème de forme.
 - Les simulateurs complexes peuvent enrichir le socle, mais ne doivent pas le remplacer.
 - Un seul bloc `.related-tools` par page : un bloc riche existant est fusionné dans le bloc standard, jamais ajouté à côté.
