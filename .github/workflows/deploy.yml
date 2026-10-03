@@ -43,7 +43,8 @@ jobs:
             }
             return out;
           }
-          const files = walk('public/outil');
+          const roots = ['public/outil','public/conversion','public/comparateur'];
+          const files = roots.flatMap(walk);
           for (const file of files) {
             const html = fs.readFileSync(file, 'utf8');
             if (!/<meta\b[^>]*name=["']calculator-rendering["'][^>]*content=["']static["'][^>]*>/i.test(html)) errors.push(file + ': missing HTML-first rendering marker');
@@ -56,9 +57,9 @@ jobs:
             if (parsed.filter(x => x['@type'] === 'WebApplication').length !== 1) errors.push(file + ': expected exactly one WebApplication');
             if (parsed.filter(x => x['@type'] === 'BreadcrumbList').length !== 1) errors.push(file + ': expected exactly one BreadcrumbList');
           }
-          if (files.length !== 77) errors.push('expected 77 /outil/ pages, found ' + files.length);
+          if (files.length !== 86) errors.push('expected 86 unified tool pages, found ' + files.length);
           if (errors.length) { console.error(errors.join('\n')); process.exit(1); }
-          console.log('Verified ' + files.length + ' HTML-first calculator pages.');
+          console.log('Verified ' + files.length + ' unified HTML-first tool pages.');
           NODE
 
       - name: Verify tool metadata matches rendered HTML
