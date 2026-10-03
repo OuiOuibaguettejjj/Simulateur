@@ -98,3 +98,10 @@ Cette version est préparée sur la branche `feature/rsa-refonte` et n'est pas m
 - Renforcement du moteur RSA et du traitement de la déduction logement.
 - Distinction entre aide au logement inférieure au forfait et situation où le forfait légal s'applique.
 - Documentation explicite du périmètre simplifié de l'estimation et des limites réglementaires non simulées.
+
+## 2026-10-03 — Outils associés HTML-first
+- Migration des outils associés vers des blocs `.related-tools` écrits directement dans le HTML, avec 2 à 4 slugs correspondants dans `data/tools.json`.
+- Suppression du fallback JavaScript historique ; les conversions et le comparateur restent HTML-first sans `relatedTools`.
+- TVA : mise à jour visible des quatre outils associés validés.
+- Capacité d'emprunt : conservation d'un seul bloc standard et maintien du paragraphe de sources officielles.
+- Aucun changement d'URL, de logique de calcul, de CSP, de sécurité, d'AdSense ou de déploiement Cloudflare.
