@@ -11,8 +11,8 @@ La taxonomie officielle est centralisée dans `public/simulateurs.js` via `CATEG
 La source de vérité contient également les relations `relatedTools` de chaque outil. Cette structure est la référence opérationnelle du maillage associé ; l'ancien objet `groups` n'est plus utilisé.
 
 Les contrôles pré-production vérifient notamment :
-- la présence de chaque outil dans `TOOL_TYPES` et `TOOLS_META` ;
-- l'égalité exacte entre le type déclaré dans `TOOL_TYPES` et celui de `TOOLS_META` ;
+- la présence de chaque outil dans `TOOLS_META` ;
+- la validité du type unique déclaré dans `TOOLS_META` ;
 - la validité des catégories et des relations `relatedTools` ;
 - la correspondance entre la taxonomie centrale et les pages `/outil/<slug>/` ;
 - la cohérence entre les métadonnées centrales et le HTML publié : catégorie, breadcrumb JSON-LD, URL canonique et liens du bloc « Outils associés ».
