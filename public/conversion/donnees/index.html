@@ -4,20 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="google-adsense-account" content="ca-pub-2924580037451268">
+<meta name="calculator-rendering" content="static">
 <title>Convertisseur Ko Mo Go : octets, Mo, Go, To, Gio | Simulateur</title>
-<meta name="description" content="Conversion Ko Mo Go en ligne : convertissez octets, Ko, Mo, Go, To et unités binaires (Kio, Mio, Gio, Tio). Tableau d’équivalences et différence entre Go et Gio.">
+<meta name="description" content="Convertissez octets, Ko, Mo et Go, puis comparez les unités binaires comme Gio pour comprendre la différence entre Go et Gio.">
 <link rel="canonical" href="https://simulateur.site/conversion/donnees/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/styles.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Convertisseur de données","url":"https://simulateur.site/conversion/donnees/","applicationCategory":"UtilitiesApplication","operatingSystem":"All","description":"Convertisseur de données permettant de convertir des octets, Ko, Mo, Go, To et des unités binaires comme Kio, Mio, Gio et Tio.","isAccessibleForFree":true,"inLanguage":"fr"}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Conversions","item":"https://simulateur.site/conversions/"},{"@type":"ListItem","position":2,"name":"Données","item":"https://simulateur.site/conversion/donnees/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Convertisseur de données","url":"https://simulateur.site/conversion/donnees/","description":"Convertissez octets, Ko, Mo et Go, puis comparez les unités binaires comme Gio pour comprendre la différence entre Go et Gio.","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Conversions","item":"https://simulateur.site/conversions/"},{"@type":"ListItem","position":3,"name":"Données","item":"https://simulateur.site/conversion/donnees/"}]}</script>
 <script src="/enter-calcul.js" defer></script></head>
 <body>
 <header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header>
 
 <main>
 <div class="wrap">
-<div class="breadcrumb"><a href="/conversions/">Conversions</a> → Données</div>
+<div class="breadcrumb"><a href="/">Accueil</a> · <a href="/conversions/">Conversions</a> · Données</div>
 
 <section class="tool data-converter">
 <div class="eyebrow">CONVERSION DE DONNÉES</div>
@@ -31,11 +31,11 @@
 </div>
 <div class="field">
 <label for="from">De</label>
-<select id="from" aria-label="Unité de départ"></select>
+<select id="from" aria-label="Unité de départ"><option value="o">octet — Décimal</option><option value="ko">Ko — Décimal</option><option value="mo">Mo — Décimal</option><option value="go">Go — Décimal</option><option value="to">To — Décimal</option><option value="kio">Kio — Binaire</option><option value="mio">Mio — Binaire</option><option value="gio">Gio — Binaire</option><option value="tio">Tio — Binaire</option></select>
 </div>
 <div class="field">
 <label for="to">Vers</label>
-<select id="to" aria-label="Unité d'arrivée"></select>
+<select id="to" aria-label="Unité d'arrivée"><option value="o">octet — Décimal</option><option value="ko">Ko — Décimal</option><option value="mo">Mo — Décimal</option><option value="go">Go — Décimal</option><option value="to">To — Décimal</option><option value="kio">Kio — Binaire</option><option value="mio">Mio — Binaire</option><option value="gio">Gio — Binaire</option><option value="tio">Tio — Binaire</option></select>
 </div>
 </div>
 
@@ -154,7 +154,7 @@ const to=document.getElementById('to');
 const valueInput=document.getElementById('v');
 const result=document.getElementById('r');
 
-function fillSelect(select){
+function fillSelect(select){select.replaceChildren();
 for(const [key,unit] of Object.entries(UNITS)){
 const option=document.createElement('option');
 option.value=key;
