@@ -21,6 +21,109 @@ return "<!doctype html><html lang=\"fr\"><head>"+
 }
 const errs=(h,m=META,i=IDX)=>checkPage(h,{dir:"outil",slug:"slug",toolsMeta:m,pageIndex:i});
 const has=(h,r)=>errs(h).some(x=>x.rule===r);
+function familyFixture(dir,slug,relatedLinks){
+  const related=relatedLinks.map((href,i)=>"<a class=\"related-link\" href=\""+href+"\">Associé "+(i+1)+"</a>").join("");
+  return fixture()
+    .replaceAll("/outil/slug/", "/"+dir+"/"+slug+"/")
+    .replace(/<section class="related-tools">[\s\S]*?<\/section>/, "<section class=\"related-tools\">"+related+"</section>");
+}
+function familyIndex(dir,slug,relatedLinks){
+  return new Set([
+    dir+"/"+slug,
+    ...relatedLinks
+      .filter(h=>/^\/[^/]+\/[^/]+\/$/.test(h))
+      .map(h=>h.slice(1,-1))
+  ]);
+}
+const familyErrs=(dir,slug,relatedLinks,idx=familyIndex(dir,slug,relatedLinks))=>checkPage(
+  familyFixture(dir,slug,relatedLinks),
+  {dir,slug,toolsMeta:{},pageIndex:idx}
+);
+
+
+
+assert.deepEqual(
+  familyErrs("conversion","source",[
+    "/conversion/aire/",
+    "/conversion/angle/",
+    "/conversion/volume/"
+  ]),
+  [],
+  "conversion valide avec 3 liens internes existants"
+);
+
+for(const [label,links] of [
+  ["1 lien",["/conversion/aire/"]],
+  ["5 liens",[
+    "/conversion/aire/",
+    "/conversion/angle/",
+    "/conversion/volume/",
+    "/conversion/poids/",
+    "/conversion/temperature/"
+  ]],
+  ["page inexistante",[
+    "/conversion/aire/",
+    "/conversion/absente/",
+    "/conversion/volume/"
+  ]],
+  ["auto-lien",[
+    "/conversion/aire/",
+    "/conversion/source/",
+    "/conversion/volume/"
+  ]],
+  ["doublon",[
+    "/conversion/aire/",
+    "/conversion/volume/",
+    "/conversion/volume/"
+  ]]
+]) {
+  const idx=label==="page inexistante"
+    ? new Set([
+        "conversion/source",
+        "conversion/aire",
+        "conversion/volume"
+      ])
+    : familyIndex("conversion","source",links);
+  const failures=familyErrs("conversion","source",links,idx)
+    .filter(x=>x.rule==="related-block");
+
+  assert.equal(
+    failures.length,
+    1,
+    "conversion "+label+" = un seul écart related-block"
+  );
+}
+
+assert.deepEqual(
+  familyErrs("comparateur","source",[
+    "/conversion/aire/",
+    "/conversion/angle/",
+    "/conversion/volume/"
+  ]),
+  [],
+  "comparateur valide sans TOOLS_META"
+);
+
+const outilMissingMeta=errs(
+  fixture().replace("/outil/slug-2/","/outil/slug-3/"),
+  {
+    ...META,
+    "slug-3": {}
+  },
+  new Set(["outil/slug","outil/slug-1","outil/slug-2","outil/slug-3"])
+);
+assert.equal(
+  outilMissingMeta.filter(x=>x.rule==="related-block").length,
+  1,
+  "/outil/ conserve related-block sans relation TOOLS_META"
+);
+
+const outilWithoutMeta=errs(fixture(),{},IDX);
+assert.equal(
+  outilWithoutMeta.filter(x=>x.rule==="related-meta").length,
+  1,
+  "/outil/ sans TOOLS_META conserve related-meta"
+);
 
 assert.deepEqual(errs(fixture()),[],"page conforme");
 assert(has(fixture().replace("<title>Mot-clé | Simulateur</title>","<title>Mot-clé</title>"),"title"));
