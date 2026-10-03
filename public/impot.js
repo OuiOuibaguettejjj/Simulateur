@@ -24,8 +24,8 @@
       cappedTax=Math.max(rawTax,referenceTax-familyQuotientCap);
     }
     const grossTax=Math.max(0,cappedTax);
-    const decoteThreshold=isCouple?3249:1964;
-    const decoteBase=isCouple?1470:889;
+    const decoteThreshold=isCouple?3277:1982;
+    const decoteBase=isCouple?1483:897;
     const decote=grossTax<decoteThreshold?Math.max(0,decoteBase-0.4525*grossTax):0;
     const netTax=Math.max(0,grossTax-decote);
     const tmi=quotient<=11600?0:quotient<=29579?11:quotient<=84577?30:quotient<=181917?41:45;

@@ -16,7 +16,7 @@ function calc(income,parts,couple=false){
 assert.equal(calc(50000,1).grossTax,8103.99);
 assert.equal(calc(50000,1).netTax,8103.99);
 assert.equal(calc(15000,1).netTax,0);
-assert.equal(Math.round(calc(50000,2,true).grossTax),2948);assert.equal(Math.round(calc(50000,2,true).decote),136);assert.equal(Math.round(calc(50000,2,true).netTax),2812);
+assert.equal(Math.round(calc(50000,2,true).grossTax),2948);assert.equal(Math.round(calc(50000,2,true).decote),149);assert.equal(Math.round(calc(50000,2,true).netTax),2799);
 
 // Official 2026 quotient-family cap example: married couple, 130,000 €, 5 parts.
 const officialExample=calc(130000,5,true);
