@@ -4,7 +4,7 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 
 const ROOT=process.cwd();
-export const STRUCTURAL_RULES=["html-base","markup-balance","title","canonical","breadcrumb","h1","tool-block","result","related-block","jsonld","related-meta"];
+export const STRUCTURAL_RULES=["html-base","markup-balance","title","canonical","breadcrumb","h1","tool-block","result","related-block","jsonld","related-meta","citation-marker"];
 export const EDITORIAL_RULES=["description","content-h2","formula","meta-unique"];
 const STRUCT=new Set(["div","section","main","header","footer","nav","article","aside","details","ul","ol","table","form"]);
 const OPTIONAL_END=new Set(["p","li","dt","dd","tr","td","th","thead","tbody","tfoot","option"]);
@@ -29,6 +29,7 @@ export function parseHtml(html){
 const walk=(n,p,o=[])=>{for(const c of n.children){if(p(c))o.push(c);walk(c,p,o)}return o};
 const find=(r,q={})=>walk(r,n=>(!q.tag||n.name===q.tag)&&(!q.className||(n.attrs.class||"").split(/\s+/).includes(q.className))&&(q.id===undefined||n.attrs.id===q.id));
 const text=n=>norm([...n.texts.map(x=>({s:x.start,t:x.text})),...n.children.map(c=>({s:c.start,t:text(c)}))].sort((a,b)=>a.s-b.s).map(x=>x.t).join(" "));
+const visibleText=n=>["script","style"].includes(n.name)?"":norm([...n.texts.map(x=>({s:x.start,t:x.text})),...n.children.map(c=>({s:c.start,t:visibleText(c)}))].sort((a,b)=>a.s-b.s).map(x=>x.t).join(" "));
 const excl=(n,k)=>((n.attrs.class||"").split(/\s+/).includes(k))?"":norm([...n.texts.map(x=>({s:x.start,t:x.text})),...n.children.map(c=>({s:c.start,t:excl(c,k)}))].sort((a,b)=>a.s-b.s).map(x=>x.t).join(" "));
 const ancestor=(n,k)=>{for(let p=n.parent;p;p=p.parent)if((p.attrs.class||"").split(/\s+/).includes(k))return true;return false};
 const attr=(n,k)=>n.attrs[k.toLowerCase()],links=n=>find(n,{tag:"a"});
@@ -43,6 +44,7 @@ export function checkPage(html,ctx){
  const ts=find(root,{tag:"title"}),title=norm(ts[0]?text(ts[0]):"");if(ts.length!==1||!/^.+ \| Simulateur$/.test(title)||!title.slice(0,-13).trim())fail("title","title doit être de la forme « Mot-clé | Simulateur »");
  const ds=metas.filter(n=>(attr(n,"name")||"").toLowerCase()==="description"),description=norm(ds[0]?attr(ds[0],"content")||"":"");if(!description)fail("html-base","meta description absente ou vide");if(ds.length!==1||[...description].length<120||[...description].length>160)fail("description","meta description : "+[...description].length+" caractères, attendu 120–160");
  const canonical="https://simulateur.site/"+dir+"/"+slug+"/",cs=find(root,{tag:"link"}).filter(n=>(attr(n,"rel")||"").toLowerCase().split(/\s+/).includes("canonical"));if(cs.length!==1||attr(cs[0],"href")!==canonical)fail("canonical","canonique attendue : "+canonical);
+ if(/(?:turn\d+search\d+|citeturn\d+search\d+)/i.test(visibleText(root)))fail("citation-marker","marqueur de citation ChatGPT détecté dans le texte visible");
  const bs=find(root,{className:"breadcrumb"}),b=bs[0],bl=b?links(b):[];if(!b||!bl.length||text(bl[0])!=="Accueil")fail("breadcrumb","le premier lien du breadcrumb doit être « Accueil »");
  const cat=dir==="outil"&&meta?.category?categories?.[meta.category]:undefined;if(dir==="outil"){if(!meta||!cat)fail("breadcrumb","catégorie introuvable dans data/tools.json pour "+slug);else{const cl=bl[1];if(!cl||attr(cl,"href")!==cat.path||text(cl)!==norm(cat.label))fail("breadcrumb","lien catégorie du breadcrumb attendu : "+cat.label+" ("+cat.path+")")}}
  const h1=find(root,{tag:"h1"});if(h1.length!==1||!text(h1[0]))fail("h1","exactement un h1 non vide est requis");
