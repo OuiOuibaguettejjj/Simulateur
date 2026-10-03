@@ -167,24 +167,31 @@ jobs:
             }
           }
           roots.forEach(walk);
-          const errors=[];
+          const errors = [];
           for (const file of files) {
-            const html=fs.readFileSync(file,'utf8');
-            const route='/' + file.slice('public/'.length).replace(/index\.html$/,'');
-            const canonical=(html.match(/<link\\b[^>]*rel=["']canonical["'][^>]*href=["']([^"']+)["']/i)||[])[1];
-            if(canonical!=='https://simulateur.site'+route) errors.push(file+': canonical mismatch');
-            const bc=(html.match(/<div[^>]*class=["'][^"']*breadcrumb[^"']*["'][^>]*>([\\s\\S]*?)<\/div>/i)||[])[1]||'';
-            if(!/href=["']\\/["']>Accueil<\\/a>/i.test(bc)) errors.push(file+': breadcrumb missing Accueil');
-            const ld=[...html.matchAll(/<script\\b[^>]*type=["']application\\/ld\\+json["'][^>]*>([\\s\\S]*?)<\\/script>/gi)].map(m=>{try{return JSON.parse(m[1])}catch{return null}}).filter(Boolean);
-            if(ld.filter(x=>x['@type']==='WebApplication').length!==1) errors.push(file+': expected exactly one WebApplication');
-            const crumb=ld.filter(x=>x['@type']==='BreadcrumbList');
-            if(crumb.length!==1) errors.push(file+': expected exactly one BreadcrumbList');
-            else if(crumb[0].itemListElement?.find(x=>x.position===3)?.item!=='https://simulateur.site'+route) errors.push(file+': BreadcrumbList final URL mismatch');
+            const html = fs.readFileSync(file,'utf8');
+            const relative = file.slice('public/'.length);
+            const route = '/' + relative.slice(0, relative.length - 'index.html'.length);
+            const canonical = (html.match(/<link[^>]*rel=["']canonical["'][^>]*href=["']([^"']+)["']/i) || [,''])[1];
+            if (canonical !== 'https://simulateur.site' + route) errors.push(file + ': canonical mismatch');
+            const breadcrumbStart = html.indexOf('class="breadcrumb"');
+            const breadcrumbEnd = breadcrumbStart >= 0 ? html.indexOf('</div>', breadcrumbStart) : -1;
+            const breadcrumb = breadcrumbStart >= 0 && breadcrumbEnd >= 0 ? html.slice(breadcrumbStart,breadcrumbEnd) : '';
+            if (!breadcrumb.includes('href="/">Accueil</a>')) errors.push(file + ': breadcrumb missing Accueil');
+            const ld = [...html.matchAll(/<script[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)].map(m => { try { return JSON.parse(m[1]); } catch { return null; } }).filter(Boolean);
+            if (ld.filter(x => x['@type'] === 'WebApplication').length !== 1) errors.push(file + ': expected exactly one WebApplication');
+            const crumb = ld.filter(x => x['@type'] === 'BreadcrumbList');
+            if (crumb.length !== 1) errors.push(file + ': expected exactly one BreadcrumbList');
+            else {
+              const finalItem = (crumb[0].itemListElement || []).find(x => x && x.position === 3);
+              if (!finalItem || finalItem.item !== 'https://simulateur.site' + route) errors.push(file + ': BreadcrumbList final URL mismatch');
+            }
           }
-          if(files.length!==86) errors.push('expected 86 pages, found '+files.length);
-          if(errors.length){console.error(errors.join('\\n'));process.exit(1)}
-          console.log('Verified canonical metadata on '+files.length+' pages.');
+          if (files.length !== 86) errors.push('expected 86 pages, found ' + files.length);
+          if (errors.length) { console.error(errors.join('\n')); process.exit(1); }
+          console.log('Verified canonical metadata on ' + files.length + ' pages.');
           NODE
+
       - name: Verify shared layout is normalized
         run: node scripts/normalize-layout.mjs --check
 
