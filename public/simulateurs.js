@@ -11,49 +11,10 @@
   function toolMeta(slug){return TOOLS_META[slug]||null}
 
 
-  function addBreadcrumbSchema(tool,slug,meta){
-    const itemList=[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"}];
-    if(meta && CATEGORIES[meta.category].label !== (tool.title||document.title)) itemList.push({"@type":"ListItem","position":2,"name":CATEGORIES[meta.category].label,"item":"https://simulateur.site"+CATEGORIES[meta.category].path});
-    itemList.push({"@type":"ListItem","position":itemList.length+1,"name":tool.title||document.title,"item":location.href.split("#")[0]});
-    if([...document.querySelectorAll('script[type="application/ld+json"]')].some(node=>/"@type"\s*:\s*"BreadcrumbList"/.test(node.textContent||""))) return;
-    const script=document.createElement("script");
-    script.type="application/ld+json";
-    script.textContent=JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":itemList});
-    document.head.appendChild(script);
-  }
-
-  function addVisibleBreadcrumb(tool,meta){
-    if(document.querySelector(".breadcrumb")) return;
-    const host=document.querySelector("main .wrap")||document.querySelector("main");
-    if(!host) return;
-    const b=document.createElement("div");
-    b.className="breadcrumb";
-    const categoryLink=meta && CATEGORIES[meta.category].label !== (tool.title||document.title) ? ' · <a href="'+CATEGORIES[meta.category].path+'">'+CATEGORIES[meta.category].label+"</a>" : "";
-    b.innerHTML='<a href="/">Accueil</a>'+categoryLink+' · '+(tool.title||document.title);
-    host.insertBefore(b,host.firstElementChild);
-  }
-
   window.Simulateurs={
-    render(){
-      if(document.querySelector('meta[name="calculator-rendering"][content="static"]')) return;
-      const tool=window.TOOL;
-      if(!tool){ $("result").textContent="Calculateur indisponible."; return; }
-      try{
-        $("ey").textContent=tool.ey||"";
-        $("title").textContent=tool.displayTitle||tool.title||"";
-        $("intro").textContent=tool.displayIntro||tool.intro||"";
-        const renderedFields=typeof tool.fields==="function"?tool.fields():"";
-        if(renderedFields && !$("fields").children.length) $("fields").innerHTML=renderedFields;
-        $("source").textContent=tool.source||"";
-        const slug=(location.pathname.match(/\/outil\/([^/]+)/)||[])[1];
-        const meta=slug&&toolMeta(slug);
-        addBreadcrumbSchema(tool,slug,meta);
-        addVisibleBreadcrumb(tool,meta);
-      }catch(error){
-        $("result").textContent="Impossible de charger ce calculateur.";
-        console.error("Simulateurs.render:",error);
-      }
-    },
+    // HTML-first: the page markup is already present in the static document.
+    // Kept as a no-op compatibility shim for legacy inline page hooks.
+    render() {},
     calc(){
       const tool=window.TOOL;
       if(!tool){ $("result").textContent="Calculateur indisponible."; return; }
