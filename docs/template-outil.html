@@ -51,7 +51,7 @@
     <div class="wrap">
       <div class="breadcrumb"><a href="/">Accueil</a> · <a href="/categorie/">Catégorie</a> · Nom de l'outil</div>
 
-      <div class="tool">
+      <section class="tool">
         <div class="eyebrow">CATÉGORIE</div>
         <h1>Nom de l'outil</h1>
         <p class="tool-intro">Introduction claire qui présente l'utilité principale du calculateur.</p>
@@ -64,18 +64,25 @@
         </div>
 
         <button class="button-main" type="button">Calculer</button>
-        <div class="result" id="result">Saisissez vos données puis lancez le calcul.</div>
+        <div class="result" id="result" aria-live="polite">Saisissez vos données puis lancez le calcul.</div>
 
         <div class="formula">
           <strong>Méthode et sources</strong>
-          <p>Décrire ici la méthode, les limites et les sources pertinentes.</p>
+          <p>Décrire ici la méthode et les limites du calcul.</p>
+          <p>Source : <a href="https://exemple.gouv.fr/page-officielle/">Nom de la source officielle</a>.</p>
         </div>
-      </div>
+      </section>
     </div>
 
     <section class="content-section">
-      <h2>Comment fonctionne cet outil ?</h2>
-      <p>Présenter ici l'explication utile à l'utilisateur.</p>
+      <h2>Comment calculer [sujet de l'outil] ?</h2>
+      <p>Expliquer le principe du calcul.</p>
+
+      <h2>Exemple de calcul</h2>
+      <p>Donner un exemple chiffré concret.</p>
+
+      <h2>À savoir</h2>
+      <p>Limites, cas particuliers, points d'attention.</p>
     </section>
 
     <section class="related-tools">
@@ -83,7 +90,9 @@
         <div class="eyebrow">À VOIR AUSSI</div>
         <h2>Outils associés</h2>
         <div class="related-links">
-          <!-- Ajouter uniquement des liens internes pertinents. -->
+          <!-- 2 à 4 liens, issus des relations définies dans TOOLS_META. -->
+          <a class="related-link" href="/outil/slug-1/"><strong>Outil 1</strong><span>Description courte.</span></a>
+          <a class="related-link" href="/outil/slug-2/"><strong>Outil 2</strong><span>Description courte.</span></a>
         </div>
       </div>
     </section>
