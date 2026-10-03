@@ -83,6 +83,9 @@ if (CHECK_ONLY) {
   const current = fs.existsSync(sitemapPath) ? fs.readFileSync(sitemapPath, "utf8") : "";
   if (current !== sitemap) {
     console.error("Sitemap check failed: public/sitemap.xml is not the generated sitemap for this commit.");
+    console.error("BEGIN_GENERATED_SITEMAP");
+    console.error(sitemap);
+    console.error("END_GENERATED_SITEMAP");
     process.exit(1);
   }
   console.log(`Sitemap check passed: ${pages.length} URLs.`);
