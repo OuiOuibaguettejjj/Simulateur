@@ -64,6 +64,7 @@ if (!categoriesMatch || !typesMatch || !metaMatch) {
     for (const slug of typeSlugs) if (!(slug in toolsMeta)) fail("TOOL_TYPES entry missing from TOOLS_META: " + slug);
     for (const slug of metaSlugs) if (!(slug in toolTypes)) fail("TOOLS_META entry missing from TOOL_TYPES: " + slug);
     for (const [slug, meta] of Object.entries(toolsMeta)) {
+      if (toolTypes[slug] !== meta.type) fail(slug + ": TOOL_TYPES type (" + toolTypes[slug] + ") does not match TOOLS_META type (" + meta.type + ")");
       if (!meta || typeof meta !== "object") { fail("invalid metadata for " + slug); continue; }
       if (!allowedTypes.has(meta.type)) fail(slug + ": invalid type " + meta.type);
       if (!categorySlugs.has(meta.category)) fail(slug + ": unknown primary category " + meta.category);
