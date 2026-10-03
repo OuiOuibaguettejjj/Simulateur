@@ -63,3 +63,7 @@ Avec `--strict`, seuls les écarts structurels font échouer la commande.
 - `node scripts/check-pages.mjs --update-baseline` crée la baseline la première fois, puis ne sait que **retirer** des entrées. Il refuse, avec un message explicite, d'en ajouter.
 
 Les règles éditoriales ne bloquent pas ; leurs compteurs sont affichés dans la console et dans `GITHUB_STEP_SUMMARY`. Quand une page est corrigée, la commande de mise à jour de la baseline retire l'entrée correspondante, dans le même commit.
+
+### Outils associés — Étape F (2026-10-03)
+
+Pour chaque page `/outil/<slug>/`, `relatedTools` est un tableau ordonné de 2 à 4 slugs dans `data/tools.json`, et le même ensemble, dans le même ordre, est écrit directement dans le bloc HTML `.related-tools`. Le HTML commité est la source de vérité éditoriale. Aucun fallback JavaScript ne génère les outils associés. Les pages `/conversion/` et `/comparateur/` portent leurs 2 à 4 liens directement dans leur HTML et n'ont pas d'entrée `relatedTools` dans `data/tools.json`.

@@ -45,64 +45,110 @@
     "arrondi": {
       "type": "calculateur",
       "category": "argent",
-      "relatedTools": []
+      "relatedTools": [
+        "pourcentage",
+        "proportion",
+        "fractions"
+      ]
     },
     "calculatrice": {
       "type": "calculateur",
       "category": "argent",
-      "relatedTools": []
+      "relatedTools": [
+        "pourcentage",
+        "moyenne",
+        "fractions"
+      ]
     },
     "coefficient": {
       "type": "calculateur",
       "category": "argent",
       "relatedTools": [
-        "pourcentage"
+        "marge",
+        "remise",
+        "prix-unitaire"
       ]
     },
     "fractions": {
       "type": "calculateur",
       "category": "argent",
-      "relatedTools": []
+      "relatedTools": [
+        "proportion",
+        "pourcentage",
+        "arrondi"
+      ]
     },
     "marge": {
       "type": "calculateur",
       "category": "argent",
-      "relatedTools": []
+      "relatedTools": [
+        "coefficient",
+        "prix-unitaire",
+        "tva"
+      ]
     },
     "median-mode": {
       "type": "calculateur",
       "category": "argent",
-      "relatedTools": []
+      "relatedTools": [
+        "moyenne",
+        "moyenne-ponderee",
+        "calculatrice"
+      ]
     },
     "moyenne-ponderee": {
       "type": "calculateur",
       "category": "argent",
-      "relatedTools": []
+      "relatedTools": [
+        "moyenne",
+        "median-mode",
+        "proportion"
+      ]
     },
     "moyenne": {
       "type": "calculateur",
       "category": "argent",
-      "relatedTools": []
+      "relatedTools": [
+        "moyenne-ponderee",
+        "median-mode",
+        "pourcentage"
+      ]
     },
     "pourcentage": {
       "type": "calculateur",
       "category": "argent",
-      "relatedTools": []
+      "relatedTools": [
+        "tva",
+        "remise",
+        "marge"
+      ]
     },
     "proportion": {
       "type": "calculateur",
       "category": "argent",
-      "relatedTools": []
+      "relatedTools": [
+        "pourcentage",
+        "prix-unitaire",
+        "fractions"
+      ]
     },
     "ratio": {
       "type": "calculateur",
       "category": "argent",
-      "relatedTools": []
+      "relatedTools": [
+        "pourcentage",
+        "proportion",
+        "coefficient"
+      ]
     },
     "remise": {
       "type": "calculateur",
       "category": "argent",
-      "relatedTools": []
+      "relatedTools": [
+        "pourcentage",
+        "tva",
+        "promotions"
+      ]
     },
     "prix-unitaire": {
       "type": "calculateur",
@@ -124,12 +170,20 @@
     "comparateur-placements": {
       "type": "comparateur",
       "category": "epargne",
-      "relatedTools": []
+      "relatedTools": [
+        "epargne",
+        "interets-composes",
+        "inflation"
+      ]
     },
     "epargne-mensuelle": {
       "type": "simulateur",
       "category": "epargne",
-      "relatedTools": []
+      "relatedTools": [
+        "epargne",
+        "interets-composes",
+        "comparateur-placements"
+      ]
     },
     "epargne-reglementee": {
       "type": "simulateur",
@@ -142,12 +196,20 @@
     "epargne": {
       "type": "calculateur",
       "category": "epargne",
-      "relatedTools": []
+      "relatedTools": [
+        "epargne-mensuelle",
+        "interets-composes",
+        "inflation"
+      ]
     },
     "inflation": {
       "type": "simulateur",
       "category": "epargne",
-      "relatedTools": []
+      "relatedTools": [
+        "epargne",
+        "epargne-mensuelle",
+        "comparateur-placements"
+      ]
     },
     "interets-composes": {
       "type": "simulateur",
@@ -179,7 +241,11 @@
     "cash-flow-immobilier": {
       "type": "simulateur",
       "category": "immobilier",
-      "relatedTools": []
+      "relatedTools": [
+        "rendement-locatif",
+        "pret-immobilier",
+        "frais-de-notaire"
+      ]
     },
     "frais-de-notaire": {
       "type": "simulateur",
@@ -212,7 +278,11 @@
     "plus-value-immobiliere": {
       "type": "simulateur",
       "category": "immobilier",
-      "relatedTools": []
+      "relatedTools": [
+        "frais-de-notaire",
+        "pret-immobilier",
+        "rendement-locatif"
+      ]
     },
     "pret-immobilier": {
       "type": "simulateur",
@@ -227,17 +297,29 @@
     "ptz": {
       "type": "simulateur",
       "category": "immobilier",
-      "relatedTools": []
+      "relatedTools": [
+        "pret-immobilier",
+        "capacite-emprunt",
+        "frais-de-notaire"
+      ]
     },
     "rendement-locatif": {
       "type": "simulateur",
       "category": "immobilier",
-      "relatedTools": []
+      "relatedTools": [
+        "cash-flow-immobilier",
+        "pret-immobilier",
+        "frais-de-notaire"
+      ]
     },
     "tableau-amortissement": {
       "type": "simulateur",
       "category": "immobilier",
-      "relatedTools": []
+      "relatedTools": [
+        "pret-immobilier",
+        "mensualite-pret",
+        "capacite-emprunt"
+      ]
     },
     "taux-endettement": {
       "type": "simulateur",
@@ -250,7 +332,11 @@
     "donation": {
       "type": "simulateur",
       "category": "fiscalite",
-      "relatedTools": []
+      "relatedTools": [
+        "succession",
+        "plus-value-mobiliere",
+        "impot-sur-le-revenu"
+      ]
     },
     "impot-sur-le-revenu": {
       "type": "simulateur",
@@ -292,9 +378,10 @@
       "type": "simulateur",
       "category": "fiscalite",
       "relatedTools": [
-        "impot-sur-le-revenu",
-        "plus-value-mobiliere",
-        "donation"
+        "pourcentage",
+        "remise",
+        "prix-unitaire",
+        "impot-sur-le-revenu"
       ]
     },
     "age-retraite": {
@@ -309,7 +396,11 @@
     "retraite-simplifiee": {
       "type": "simulateur",
       "category": "retraite",
-      "relatedTools": []
+      "relatedTools": [
+        "age-retraite",
+        "epargne-mensuelle",
+        "interets-composes"
+      ]
     },
     "salaire-brut-net": {
       "type": "simulateur",
@@ -367,22 +458,38 @@
     "charges-independant": {
       "type": "simulateur",
       "category": "travail",
-      "relatedTools": []
+      "relatedTools": [
+        "micro-entrepreneur",
+        "sasu-vs-ei-micro",
+        "impot-sur-le-revenu"
+      ]
     },
     "conges-payes": {
       "type": "simulateur",
       "category": "travail",
-      "relatedTools": []
+      "relatedTools": [
+        "solde-tout-compte",
+        "salaire-horaire",
+        "rupture-conventionnelle"
+      ]
     },
     "frais-kilometriques": {
       "type": "calculateur",
       "category": "travail",
-      "relatedTools": []
+      "relatedTools": [
+        "consommation-carburant",
+        "salaire-brut-net",
+        "impot-sur-le-revenu"
+      ]
     },
     "indemnite-licenciement": {
       "type": "simulateur",
       "category": "travail",
-      "relatedTools": []
+      "relatedTools": [
+        "rupture-conventionnelle",
+        "solde-tout-compte",
+        "are-chomage"
+      ]
     },
     "indemnite-precarite": {
       "type": "simulateur",
@@ -395,17 +502,29 @@
     "indemnites-maladie": {
       "type": "simulateur",
       "category": "travail",
-      "relatedTools": []
+      "relatedTools": [
+        "indemnites-maternite-paternite",
+        "salaire-brut-net",
+        "are-chomage"
+      ]
     },
     "indemnites-maternite-paternite": {
       "type": "simulateur",
       "category": "travail",
-      "relatedTools": []
+      "relatedTools": [
+        "indemnites-maladie",
+        "salaire-brut-net",
+        "prime-activite"
+      ]
     },
     "micro-entrepreneur": {
       "type": "simulateur",
       "category": "travail",
-      "relatedTools": []
+      "relatedTools": [
+        "charges-independant",
+        "sasu-vs-ei-micro",
+        "salaire-brut-net"
+      ]
     },
     "preavis-demission": {
       "type": "simulateur",
@@ -420,7 +539,11 @@
     "prime-activite": {
       "type": "simulateur",
       "category": "travail",
-      "relatedTools": []
+      "relatedTools": [
+        "salaire-brut-net",
+        "rsa",
+        "impot-sur-le-revenu"
+      ]
     },
     "rsa": {
       "type": "simulateur",
@@ -445,12 +568,20 @@
     "sasu-vs-ei-micro": {
       "type": "comparateur",
       "category": "travail",
-      "relatedTools": []
+      "relatedTools": [
+        "micro-entrepreneur",
+        "charges-independant",
+        "impot-sur-le-revenu"
+      ]
     },
     "solde-tout-compte": {
       "type": "simulateur",
       "category": "travail",
-      "relatedTools": []
+      "relatedTools": [
+        "conges-payes",
+        "preavis-demission",
+        "indemnite-licenciement"
+      ]
     },
     "age": {
       "type": "calculateur",
@@ -464,22 +595,38 @@
     "difference-dates": {
       "type": "calculateur",
       "category": "temps",
-      "relatedTools": []
+      "relatedTools": [
+        "jours-ouvres",
+        "temps-travail",
+        "age-retraite"
+      ]
     },
     "jours-ouvres": {
       "type": "calculateur",
       "category": "temps",
-      "relatedTools": []
+      "relatedTools": [
+        "difference-dates",
+        "temps-travail",
+        "conges-payes"
+      ]
     },
     "temps-calcul": {
       "type": "calculateur",
       "category": "temps",
-      "relatedTools": []
+      "relatedTools": [
+        "temps",
+        "temps-travail",
+        "difference-dates"
+      ]
     },
     "temps-travail": {
       "type": "calculateur",
       "category": "temps",
-      "relatedTools": []
+      "relatedTools": [
+        "salaire-horaire",
+        "jours-ouvres",
+        "temps-calcul"
+      ]
     },
     "temps": {
       "type": "calculateur",
@@ -493,52 +640,92 @@
     "consommation-carburant": {
       "type": "calculateur",
       "category": "mesures",
-      "relatedTools": []
+      "relatedTools": [
+        "frais-kilometriques",
+        "prix-unitaire",
+        "promotions"
+      ]
     },
     "cout-km": {
       "type": "calculateur",
       "category": "mesures",
-      "relatedTools": []
+      "relatedTools": [
+        "consommation-carburant",
+        "frais-kilometriques",
+        "vitesse"
+      ]
     },
     "electricite": {
       "type": "calculateur",
       "category": "mesures",
-      "relatedTools": []
+      "relatedTools": [
+        "prix-unitaire",
+        "consommation-carburant",
+        "moyenne"
+      ]
     },
     "perimetre": {
       "type": "calculateur",
       "category": "mesures",
-      "relatedTools": []
+      "relatedTools": [
+        "proportion",
+        "arrondi",
+        "fractions"
+      ]
     },
     "surface": {
       "type": "calculateur",
       "category": "mesures",
-      "relatedTools": []
+      "relatedTools": [
+        "perimetre",
+        "calculatrice",
+        "proportion"
+      ]
     },
     "vitesse": {
       "type": "calculateur",
       "category": "mesures",
-      "relatedTools": []
+      "relatedTools": [
+        "consommation-carburant",
+        "cout-km",
+        "temps-calcul"
+      ]
     },
     "partage-depenses": {
       "type": "calculateur",
       "category": "vie",
-      "relatedTools": []
+      "relatedTools": [
+        "pourboire",
+        "promotions",
+        "prix-unitaire"
+      ]
     },
     "pourboire": {
       "type": "calculateur",
       "category": "vie",
-      "relatedTools": []
+      "relatedTools": [
+        "partage-depenses",
+        "promotions",
+        "prix-unitaire"
+      ]
     },
     "promotions": {
       "type": "calculateur",
       "category": "vie",
-      "relatedTools": []
+      "relatedTools": [
+        "prix-unitaire",
+        "remise",
+        "tva"
+      ]
     },
     "recette": {
       "type": "calculateur",
       "category": "vie",
-      "relatedTools": []
+      "relatedTools": [
+        "proportion",
+        "partage-depenses",
+        "prix-unitaire"
+      ]
     },
     "signe-astrologique": {
       "type": "calculateur",

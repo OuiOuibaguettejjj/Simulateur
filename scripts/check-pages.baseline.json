@@ -25,14 +25,6 @@
   },
   {
     "path": "public/outil/arrondi/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/arrondi/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/arrondi/index.html",
     "rule": "result"
   },
   {
@@ -49,23 +41,11 @@
   },
   {
     "path": "public/outil/calculatrice/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/calculatrice/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/calculatrice/index.html",
     "rule": "result"
   },
   {
     "path": "public/outil/calculatrice/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/capacite-emprunt/index.html",
-    "rule": "related-block"
   },
   {
     "path": "public/outil/capacite-emprunt/index.html",
@@ -81,14 +61,6 @@
   },
   {
     "path": "public/outil/cash-flow-immobilier/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/cash-flow-immobilier/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/cash-flow-immobilier/index.html",
     "rule": "result"
   },
   {
@@ -101,14 +73,6 @@
   },
   {
     "path": "public/outil/charges-independant/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/charges-independant/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/charges-independant/index.html",
     "rule": "result"
   },
   {
@@ -117,27 +81,11 @@
   },
   {
     "path": "public/outil/coefficient/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/coefficient/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/coefficient/index.html",
     "rule": "result"
   },
   {
     "path": "public/outil/coefficient/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/comparateur-placements/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/comparateur-placements/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/comparateur-placements/index.html",
@@ -149,27 +97,11 @@
   },
   {
     "path": "public/outil/conges-payes/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/conges-payes/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/conges-payes/index.html",
     "rule": "result"
   },
   {
     "path": "public/outil/conges-payes/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/consommation-carburant/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/consommation-carburant/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/consommation-carburant/index.html",
@@ -185,27 +117,11 @@
   },
   {
     "path": "public/outil/cout-km/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/cout-km/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/cout-km/index.html",
     "rule": "result"
   },
   {
     "path": "public/outil/cout-km/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/difference-dates/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/difference-dates/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/difference-dates/index.html",
@@ -221,14 +137,6 @@
   },
   {
     "path": "public/outil/donation/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/donation/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/donation/index.html",
     "rule": "result"
   },
   {
@@ -241,27 +149,11 @@
   },
   {
     "path": "public/outil/electricite/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/electricite/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/electricite/index.html",
     "rule": "result"
   },
   {
     "path": "public/outil/electricite/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/epargne-mensuelle/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/epargne-mensuelle/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/epargne-mensuelle/index.html",
@@ -285,27 +177,11 @@
   },
   {
     "path": "public/outil/epargne/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/epargne/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/epargne/index.html",
     "rule": "result"
   },
   {
     "path": "public/outil/epargne/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/fractions/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/fractions/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/fractions/index.html",
@@ -326,14 +202,6 @@
   {
     "path": "public/outil/frais-de-notaire/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/frais-kilometriques/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/frais-kilometriques/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/frais-kilometriques/index.html",
@@ -373,14 +241,6 @@
   },
   {
     "path": "public/outil/indemnite-licenciement/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/indemnite-licenciement/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/indemnite-licenciement/index.html",
     "rule": "result"
   },
   {
@@ -401,27 +261,11 @@
   },
   {
     "path": "public/outil/indemnites-maladie/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/indemnites-maladie/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/indemnites-maladie/index.html",
     "rule": "result"
   },
   {
     "path": "public/outil/indemnites-maladie/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/indemnites-maternite-paternite/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/indemnites-maternite-paternite/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/indemnites-maternite-paternite/index.html",
@@ -434,14 +278,6 @@
   {
     "path": "public/outil/inflation/index.html",
     "rule": "jsonld"
-  },
-  {
-    "path": "public/outil/inflation/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/inflation/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/inflation/index.html",
@@ -465,14 +301,6 @@
   },
   {
     "path": "public/outil/jours-ouvres/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/jours-ouvres/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/jours-ouvres/index.html",
     "rule": "result"
   },
   {
@@ -485,27 +313,11 @@
   },
   {
     "path": "public/outil/marge/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/marge/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/marge/index.html",
     "rule": "result"
   },
   {
     "path": "public/outil/marge/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/median-mode/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/median-mode/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/median-mode/index.html",
@@ -533,27 +345,11 @@
   },
   {
     "path": "public/outil/micro-entrepreneur/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/micro-entrepreneur/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/micro-entrepreneur/index.html",
     "rule": "result"
   },
   {
     "path": "public/outil/micro-entrepreneur/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/moyenne-ponderee/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/moyenne-ponderee/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/moyenne-ponderee/index.html",
@@ -569,27 +365,11 @@
   },
   {
     "path": "public/outil/moyenne/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/moyenne/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/moyenne/index.html",
     "rule": "result"
   },
   {
     "path": "public/outil/moyenne/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/partage-depenses/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/partage-depenses/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/partage-depenses/index.html",
@@ -609,27 +389,11 @@
   },
   {
     "path": "public/outil/perimetre/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/perimetre/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/perimetre/index.html",
     "rule": "result"
   },
   {
     "path": "public/outil/perimetre/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/plus-value-immobiliere/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/plus-value-immobiliere/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/plus-value-immobiliere/index.html",
@@ -653,14 +417,6 @@
   },
   {
     "path": "public/outil/pourboire/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/pourboire/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/pourboire/index.html",
     "rule": "result"
   },
   {
@@ -670,14 +426,6 @@
   {
     "path": "public/outil/pourcentage/index.html",
     "rule": "jsonld"
-  },
-  {
-    "path": "public/outil/pourcentage/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/pourcentage/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/pourcentage/index.html",
@@ -722,14 +470,6 @@
   {
     "path": "public/outil/prime-activite/index.html",
     "rule": "jsonld"
-  },
-  {
-    "path": "public/outil/prime-activite/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/prime-activite/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/prime-activite/index.html",
@@ -745,27 +485,11 @@
   },
   {
     "path": "public/outil/promotions/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/promotions/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/promotions/index.html",
     "rule": "result"
   },
   {
     "path": "public/outil/promotions/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/proportion/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/proportion/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/proportion/index.html",
@@ -781,27 +505,11 @@
   },
   {
     "path": "public/outil/ptz/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/ptz/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/ptz/index.html",
     "rule": "result"
   },
   {
     "path": "public/outil/ptz/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/ratio/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/ratio/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/ratio/index.html",
@@ -813,27 +521,11 @@
   },
   {
     "path": "public/outil/recette/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/recette/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/recette/index.html",
     "rule": "result"
   },
   {
     "path": "public/outil/recette/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/remise/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/remise/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/remise/index.html",
@@ -849,27 +541,11 @@
   },
   {
     "path": "public/outil/rendement-locatif/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/rendement-locatif/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/rendement-locatif/index.html",
     "rule": "result"
   },
   {
     "path": "public/outil/rendement-locatif/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/retraite-simplifiee/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/retraite-simplifiee/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/retraite-simplifiee/index.html",
@@ -921,14 +597,6 @@
   },
   {
     "path": "public/outil/sasu-vs-ei-micro/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/sasu-vs-ei-micro/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/sasu-vs-ei-micro/index.html",
     "rule": "result"
   },
   {
@@ -950,14 +618,6 @@
   {
     "path": "public/outil/smic/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/solde-tout-compte/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/solde-tout-compte/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/solde-tout-compte/index.html",
@@ -985,14 +645,6 @@
   },
   {
     "path": "public/outil/surface/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/surface/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/surface/index.html",
     "rule": "result"
   },
   {
@@ -1002,14 +654,6 @@
   {
     "path": "public/outil/tableau-amortissement/index.html",
     "rule": "jsonld"
-  },
-  {
-    "path": "public/outil/tableau-amortissement/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/tableau-amortissement/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/tableau-amortissement/index.html",
@@ -1029,14 +673,6 @@
   },
   {
     "path": "public/outil/temps-calcul/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/temps-calcul/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/temps-calcul/index.html",
     "rule": "result"
   },
   {
@@ -1050,14 +686,6 @@
   {
     "path": "public/outil/temps-partiel/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/temps-travail/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/temps-travail/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/temps-travail/index.html",
@@ -1082,14 +710,6 @@
   {
     "path": "public/outil/vitesse/index.html",
     "rule": "jsonld"
-  },
-  {
-    "path": "public/outil/vitesse/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/vitesse/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/vitesse/index.html",

@@ -99,3 +99,11 @@ L'architecture est gelée autour d'un socle HTML commun obligatoire, avec libert
 ## 2026-10-03 — Cliquet sur les règles structurelles
 
 `check-pages --ratchet` est bloquant en CI et en déploiement. Les écarts structurels existants sont figés dans `scripts/check-pages.baseline.json` : un nouvel écart fait échouer la CI, et un écart corrigé doit être retiré de la baseline (entrée périmée). `--update-baseline` ne peut que retirer des entrées. Les règles éditoriales restent suivies sans bloquer. Les deux blocs Node inline de `deploy.yml` sont supprimés une fois leurs contrôles portés dans `check-pages` et testés ; le garde de cohérence avant production, la validation statique, les tests, les smoke tests, le déploiement et le rollback sont conservés tels quels.
+
+## 2026-10-03 — Outils associés HTML-first
+
+Toutes les pages `/outil/` utilisent désormais 2 à 4 relations ordonnées dans `data/tools.json` et dans leur HTML. Cette duplication contrôlée est volontaire : le JSON sert au contrôle de cohérence, tandis que le HTML est la source de vérité rendue au visiteur.
+
+Le fallback JavaScript historique des outils associés est supprimé une fois le comptage final validé. Les pages `/conversion/` et `/comparateur/` restent HTML-first avec 2 à 4 liens sans `relatedTools`.
+
+La page TVA reçoit volontairement une nouvelle liste visible d'outils associés : pourcentage, remise, prix-unitaire et impot-sur-le-revenu. `capacite-emprunt` est ramenée à un seul bloc standard de quatre liens ; son paragraphe « Sources officielles… » est conservé dans le contenu.

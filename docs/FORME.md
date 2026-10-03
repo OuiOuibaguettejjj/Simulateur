@@ -212,3 +212,7 @@ Toute modification du template doit rester compatible avec les contrôles CI.
 - Les simulateurs complexes peuvent enrichir le socle, mais ne doivent pas le remplacer.
 - Un seul bloc `.related-tools` par page : un bloc riche existant est fusionné dans le bloc standard, jamais ajouté à côté.
 - Les pages existantes sont mises en conformité par lots ; le contrat s'applique dès maintenant à toute nouvelle page et à toute modification de page.
+
+### Outils associés — contrat HTML-first (2026-10-03)
+
+Une page `/outil/` possède exactement un bloc `.related-tools` contenant 2 à 4 `.related-link`. Chaque lien est écrit dans le HTML et pointe vers `/outil/<slug>/`. `data/tools.json` contient le même tableau ordonné de 2 à 4 slugs dans `relatedTools`. Le texte visible du lien suit le format `<strong>Titre</strong><span>Description</span>` et ne dépend plus d'un rendu JavaScript. Les pages `/conversion/` et `/comparateur/` conservent 2 à 4 liens dans leur HTML sans entrée `relatedTools` dans `data/tools.json`. Le fallback JS historique est supprimé.
