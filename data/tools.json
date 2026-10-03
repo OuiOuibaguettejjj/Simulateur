@@ -595,22 +595,38 @@
     "difference-dates": {
       "type": "calculateur",
       "category": "temps",
-      "relatedTools": []
+      "relatedTools": [
+        "jours-ouvres",
+        "temps-travail",
+        "age-retraite"
+      ]
     },
     "jours-ouvres": {
       "type": "calculateur",
       "category": "temps",
-      "relatedTools": []
+      "relatedTools": [
+        "difference-dates",
+        "temps-travail",
+        "conges-payes"
+      ]
     },
     "temps-calcul": {
       "type": "calculateur",
       "category": "temps",
-      "relatedTools": []
+      "relatedTools": [
+        "temps",
+        "temps-travail",
+        "difference-dates"
+      ]
     },
     "temps-travail": {
       "type": "calculateur",
       "category": "temps",
-      "relatedTools": []
+      "relatedTools": [
+        "salaire-horaire",
+        "jours-ouvres",
+        "temps-calcul"
+      ]
     },
     "temps": {
       "type": "calculateur",

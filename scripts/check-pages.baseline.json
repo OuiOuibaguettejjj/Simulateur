@@ -141,14 +141,6 @@
   },
   {
     "path": "public/outil/difference-dates/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/difference-dates/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/difference-dates/index.html",
     "rule": "result"
   },
   {
@@ -330,14 +322,6 @@
   {
     "path": "public/outil/interets-composes/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/jours-ouvres/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/jours-ouvres/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/jours-ouvres/index.html",
@@ -761,14 +745,6 @@
   },
   {
     "path": "public/outil/temps-calcul/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/temps-calcul/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/temps-calcul/index.html",
     "rule": "result"
   },
   {
@@ -782,14 +758,6 @@
   {
     "path": "public/outil/temps-partiel/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/temps-travail/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/temps-travail/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/temps-travail/index.html",
