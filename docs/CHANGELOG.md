@@ -1,3 +1,9 @@
+## 2026-10-03 — Nettoyage du legacy et taxonomie hors public
+- Déplacement de la taxonomie des outils vers `data/tools.json`, hors de `public/`.
+- Suppression du rendu éditorial historique `Simulateurs.render()` et des métadonnées de taxonomie dans `public/simulateurs.js`.
+- Suppression des appels de rendu legacy et des identifiants `ey`, `title`, `intro` et `source` des pages outils concernées.
+- Aucun changement d'URL ni de logique de calcul.
+
 ## 2026-10-03 — Migration HTML-first complète des outils
 - Migration des 71 pages `/outil/` restantes vers le contrat HTML-first, pour un total de 77/77 pages.
 - Le HTML initial porte désormais le contenu SEO et l'interface essentielle ; le JavaScript conserve la logique de calcul.

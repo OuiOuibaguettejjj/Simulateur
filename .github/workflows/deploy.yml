@@ -82,42 +82,16 @@ jobs:
             return out;
           }
 
-          function extractObject(source, name) {
-            const marker = 'const ' + name + '=';
-            const start = source.indexOf(marker);
-            if (start < 0) throw new Error('Missing ' + name + ' in public/simulateurs.js');
-            let i = start + marker.length;
-            while (/\s/.test(source[i] || '')) i++;
-            const objectStart = i;
-            let depth = 0, quote = null, escaped = false;
-            for (; i < source.length; i++) {
-              const ch = source[i];
-              if (quote) {
-                if (escaped) { escaped = false; continue; }
-                if (ch === '\\') { escaped = true; continue; }
-                if (ch === quote) quote = null;
-                continue;
-              }
-              if (ch === '"' || ch === "'" || ch === String.fromCharCode(96)) { quote = ch; continue; }
-              if (ch === '{') depth++;
-              else if (ch === '}') {
-                depth--;
-                if (depth === 0) return Function('return (' + source.slice(objectStart, i + 1) + ')')();
-              }
-            }
-            throw new Error('Could not parse ' + name);
-          }
-
           function textContent(html) { return html.replace(/<[^>]*>/g, '').replace(/&amp;/g, '&').replace(/&nbsp;/g, ' ').trim(); }
-          const source = fs.readFileSync('public/simulateurs.js', 'utf8');
-          const categories = extractObject(source, 'CATEGORIES');
-          const meta = extractObject(source, 'TOOLS_META');
+          const taxonomy = JSON.parse(fs.readFileSync('data/tools.json', 'utf8'));
+          const categories = taxonomy.categories;
+          const meta = taxonomy.tools;
           const files = walk('public/outil');
 
           for (const file of files) {
             const slug = file.slice('public/outil/'.length, -'/index.html'.length);
             const entry = meta[slug];
-            if (!entry) { errors.push(file + ': missing TOOLS_META entry for ' + slug); continue; }
+            if (!entry) { errors.push(file + ': missing data/tools.json entry for ' + slug); continue; }
             if (!categories[entry.category]) { errors.push(file + ': unknown category ' + entry.category); continue; }
             const html = fs.readFileSync(file, 'utf8');
             const expectedCanonical = 'https://simulateur.site/outil/' + slug + '/';

@@ -22,7 +22,7 @@ L'intégration publicitaire est préparée via un fichier `ads.txt`, les marqueu
 
 ## Taxonomie 2026-10-03
 
-La structure logique des outils est définie avant les prochaines intégrations : type unique, catégorie principale unique et conservation des URL. La taxonomie est centralisée dans `public/simulateurs.js`. Cette première étape ne réécrit pas les blocs de contenu existants.
+La structure logique des outils est définie avant les prochaines intégrations : type unique, catégorie principale unique et conservation des URL. La taxonomie est centralisée dans `data/tools.json`, hors de `public/` et donc non servie. Cette première étape ne réécrit pas les blocs de contenu existants.
 
 ## Migration taxonomie 2026-10-03
 
@@ -62,7 +62,7 @@ Avant chaque MEP, le workflow enregistre la version Cloudflare actuellement acti
 
 ## Source de vérité unique de la taxonomie — 2026-10-03
 
-La taxonomie des outils repose désormais sur une seule déclaration par outil dans `TOOLS_META`. Le type, la catégorie principale et les relations `relatedTools` sont définis au même endroit. L'ancien objet `TOOL_TYPES`, qui dupliquait le type de chaque outil, a été supprimé ainsi que son contrôle de cohérence. Cette décision vise à réduire les points de divergence et à rendre l'ajout ou l'évolution d'un outil plus simple, sans introduire de moteur générique supplémentaire.
+La taxonomie des outils repose désormais sur une seule déclaration par outil dans `data/tools.json`. Le type, la catégorie principale et les relations `relatedTools` sont définis au même endroit. L'ancien objet `TOOL_TYPES`, qui dupliquait le type de chaque outil, a été supprimé ainsi que son contrôle de cohérence. Cette décision vise à réduire les points de divergence et à rendre l'ajout ou l'évolution d'un outil plus simple, sans introduire de moteur générique supplémentaire.
 
 
 ## 2026-10-03 — Phase 1 : gabarit HTML canonique et documentation
@@ -79,3 +79,8 @@ La documentation a été corrigée pour refléter le flux réel : header et foot
 La première MEP de la Phase 1 a été bloquée par le contrôle statique : `public/outil/_template.html` était volontairement exclu des walks `index.html`, mais restait néanmoins parcouru par le contrôle global de toutes les pages HTML publiques. Le fichier contenait en outre des placeholders non résolvables comme `/categorie/`.
 
 Le template canonique est donc déplacé dans `docs/template-outil.html`. Il reste disponible comme point de copie documentaire sans être une ressource publique. Aucune URL publique, logique métier, règle de calcul, CSP, en-tête de sécurité, pinning GitHub Actions ou mécanisme de rollback n'est modifié.
+
+
+## 2026-10-03 — Taxonomie hors `public/`
+
+La taxonomie des outils est déplacée de `public/simulateurs.js` vers `data/tools.json`. Ce fichier est hors de `public/` et n'est donc pas servi comme ressource publique. Les consommateurs CI/CD et de validation lisent désormais ce JSON avec `JSON.parse`. `public/simulateurs.js` est réduit aux utilitaires numériques et au moteur partagé de calcul, sans modification de `window.Simulateurs.calc`.
