@@ -410,8 +410,8 @@ jobs:
           }
 
                             await page.route('**/api/devises', route => route.fulfill({status:200, contentType:'application/json', body:JSON.stringify({dates:{EUR:null,USD:'2026-09-25',GBP:'2026-09-25',CHF:'2026-09-25'}, rates:{EUR:1,USD:1.17,GBP:0.87,CHF:0.94}, source:'BCE'})}));
-const consoleErrors=[];
-              const pageErrors=[];
+              await page.route('**/api/devises', route => route.fulfill({status:200, contentType:'application/json', body:JSON.stringify({dates:{EUR:null,USD:'2026-09-25',GBP:'2026-09-25',CHF:'2026-09-25'}, rates:{EUR:1,USD:1.17,GBP:0.87,CHF:0.94}, source:'BCE'})}));
+              const consoleErrors=[];
               page.on('console',m=>{if(m.type()==='error' && !/cloudflareinsights|beacon\.min\.js|googlesyndication\.com|googletagservices\.com|googleadservices\.com|doubleclick\.net|fundingchoices\.google\.com|fundingchoicesmessages\.google\.com|adtrafficquality\.google|ERR_BLOCKED_BY_CLIENT/i.test(m.text())) consoleErrors.push(m.text())});
               page.on('pageerror',e=>pageErrors.push(String(e)));
               try{
@@ -606,6 +606,7 @@ const consoleErrors=[];
           }
 
               const consoleErrors=[];
+              await page.route('**/api/devises', route => route.fulfill({status:200, contentType:'application/json', body:JSON.stringify({dates:{EUR:null,USD:'2026-09-25',GBP:'2026-09-25',CHF:'2026-09-25'}, rates:{EUR:1,USD:1.17,GBP:0.87,CHF:0.94}, source:'BCE'})}));
               const pageErrors=[];
               page.on('console',m=>{if(m.type()==='error' && !/cloudflareinsights|beacon\.min\.js|googlesyndication\.com|googletagservices\.com|googleadservices\.com|doubleclick\.net|fundingchoices\.google\.com|fundingchoicesmessages\.google\.com|adtrafficquality\.google|ERR_BLOCKED_BY_CLIENT/i.test(m.text())) consoleErrors.push(m.text())});
               page.on('pageerror',e=>pageErrors.push(String(e)));
