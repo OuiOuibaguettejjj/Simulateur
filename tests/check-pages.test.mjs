@@ -290,7 +290,7 @@ const grow=nextBaseline([...cur,P("c","h1")],cur);assert.equal(grow.ok,false,"aj
 const mixed=nextBaseline([P("a","result"),P("c","h1")],cur);assert.equal(mixed.ok,false,"un retrait ne compense pas un ajout");
 assert.deepEqual(nextBaseline(cur,cur).removed,[],"rien à retirer : baseline inchangée");
 
-// le fichier de baseline versionné est valide et ne contient que des écarts structurels
+// le fichier de baseline versionné est valide et ne contient que des règles suivies
 const committed=parseBaseline(fs.readFileSync(new URL("../scripts/check-pages.baseline.json",import.meta.url),"utf8"));
 assert(committed.every(x=>STRUCTURAL_RULES.includes(x.rule)),"baseline versionnée : règles structurelles seulement");
 
