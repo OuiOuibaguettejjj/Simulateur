@@ -41,3 +41,8 @@ Le workflow `.github/workflows/deploy.yml` conserve les contrôles qui relèvent
 Le workflow `.github/workflows/tests.yml` reste dédié aux tests fonctionnels ciblés des calculateurs. Il ne porte pas le gate de sécurité.
 
 Toute évolution d'architecture ou de sécurité doit d'abord être décidée et auditée manuellement. Les contrôles CI bloquent une configuration non conforme ; ils ne modifient jamais automatiquement les règles de sécurité ou l'architecture.
+
+
+## URL families
+
+Les 77 pages `/outil/`, les 8 pages `/conversion/` et la page `/comparateur/` partagent désormais le même socle HTML-first. Les préfixes d'URL sont conservés pour ne pas provoquer de migration d'URL. La taxonomie centrale décrit les 86 pages et utilise `path` pour les routes hors `/outil/`.
