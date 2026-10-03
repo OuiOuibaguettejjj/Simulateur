@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
-// Contrôle de cohérence de la forme du site : avertissements uniquement, ne bloque jamais le déploiement.
+// Contrôle de cohérence de la forme du site : bloquant (fail-closed), le moindre écart fait échouer le déploiement.
 // Règles : un seul <main>, un seul <header>, un seul <footer> par page ; pas de CSS de page qui redéfinit
 // la mise en page commune ; chaque outil de public/outil/ est listé sur une page de rubrique.
 
