@@ -18,3 +18,16 @@ Les contrôles pré-production vérifient notamment :
 - la correspondance entre la taxonomie centrale et les pages `/outil/<slug>/`.
 
 Les URLs existantes restent inchangées afin d'éviter une migration SEO inutile.
+
+
+## Contrat des pages outil
+
+Les pages `/outil/<slug>/` évoluent vers un contrat HTML-first commun. Le HTML initial est la source de vérité pour le contenu essentiel : titre, H1, introduction, interface visible, résultat initial, méthode/limites, sources, breadcrumb et liens internes. Le JavaScript de l'outil conserve la logique de calcul et les interactions ; il ne doit pas être requis pour générer le contenu SEO principal.
+
+Chaque page possède une catégorie principale issue de `TOOLS_META[slug].category`. Le breadcrumb visible et le `BreadcrumbList` JSON-LD doivent utiliser cette même catégorie et terminer sur l'URL canonique de l'outil. Les relations `relatedTools` alimentent le bloc standard « Outils associés » ; des liens contextuels éditoriaux restent possibles lorsque leur valeur est réelle.
+
+Les simulateurs riches peuvent conserver des extensions spécifiques (graphiques, tableaux, scénarios, FAQ, contenu réglementaire), à condition de respecter le socle commun. Il n'est pas recherché une uniformité visuelle absolue.
+
+La migration est progressive. Les URLs `/outil/<slug>/` et la logique métier existante sont conservées. Les pages migrées utilisent temporairement le marqueur `calculator-rendering=static` afin que le pré-rendu historique ne les réécrive pas. Le rôle de `scripts/prerender-tools.mjs` sera réduit progressivement à mesure que les pages legacy disparaîtront.
+
+Prototype de contrat validé sur six profils représentatifs : TVA, âge, prix unitaire, RSA, succession et intérêts composés. Aucune mise en production n'est incluse dans cette phase de prototype.
