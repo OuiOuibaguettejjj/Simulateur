@@ -186,7 +186,7 @@ Il n'existe pas de `scripts/prerender-tools.mjs` dans ce flux et aucun header/fo
 
 ### Contrôle de conformité
 
-`scripts/check-pages.mjs` sépare les règles **structurelles** (le socle ci-dessus, bloquantes) des règles **éditoriales** (longueur de description, nombre de H2, lien source externe, unicité des métadonnées, volume de contenu : suivies par compteurs, jamais bloquantes). Un cliquet (`--ratchet` et `scripts/check-pages.baseline.json`) interdit toute nouvelle dérive structurelle et oblige à retirer de la baseline les écarts corrigés. Le détail est dans `docs/ARCHITECTURE.md`.
+`scripts/check-pages.mjs` sépare les règles **structurelles** (le socle ci-dessus, bloquantes) des règles **éditoriales** (longueur de description, nombre de H2, lien source externe, unicité des métadonnées). Les règles suivies par le cliquet (`--ratchet` et `scripts/check-pages.baseline.json`) ne peuvent que diminuer : toute nouvelle page doit être conforme dès sa création et tout écart corrigé doit être retiré de la baseline. Les indicateurs de volume de contenu et de présence de lien externe hors règle `.formula` restent informatifs. `--update-baseline` ne peut que retirer des entrées ; `--seed-baseline` sert à amorcer une règle éditoriale encore absente de la baseline et refuse une règle déjà présente. Le détail est dans `docs/ARCHITECTURE.md`.
 
 ### JavaScript interne
 

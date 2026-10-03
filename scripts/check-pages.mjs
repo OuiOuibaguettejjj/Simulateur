@@ -6,6 +6,7 @@ import { pathToFileURL } from "node:url";
 const ROOT=process.cwd();
 export const STRUCTURAL_RULES=["html-base","markup-balance","title","canonical","breadcrumb","h1","tool-block","result","related-block","jsonld","related-meta","citation-marker"];
 export const EDITORIAL_RULES=["description","content-h2","formula","meta-unique"];
+export const TRACKED_RULES=[...STRUCTURAL_RULES,...EDITORIAL_RULES];
 const STRUCT=new Set(["div","section","main","header","footer","nav","article","aside","details","ul","ol","table","form"]);
 const OPTIONAL_END=new Set(["p","li","dt","dd","tr","td","th","thead","tbody","tfoot","option"]);
 const VOID=new Set(["area","base","br","col","embed","hr","img","input","link","meta","source","track","wbr"]);
@@ -67,10 +68,12 @@ export function loadTaxonomy(s=read("data/tools.json")){try{const v=typeof s==="
 export function loadToolsMeta(s){return loadTaxonomy(s).tools}
 export const BASELINE_FILE="scripts/check-pages.baseline.json";
 const pairKey=x=>x.path+"\u0000"+x.rule;
-export function structuralPairs(failures){const seen=new Map();for(const x of failures)if(STRUCTURAL_RULES.includes(x.rule))seen.set(pairKey(x),{path:x.path,rule:x.rule});return[...seen.values()].sort((a,b)=>a.path.localeCompare(b.path)||a.rule.localeCompare(b.rule))}
-export function parseBaseline(text){let v;try{v=JSON.parse(text)}catch(e){throw Error(BASELINE_FILE+" illisible : "+e.message)}if(!Array.isArray(v))throw Error(BASELINE_FILE+" doit être une liste de { path, rule }");const seen=new Set();for(const x of v){if(!x||typeof x.path!=="string"||typeof x.rule!=="string")throw Error(BASELINE_FILE+" : entrée invalide "+JSON.stringify(x));if(!STRUCTURAL_RULES.includes(x.rule))throw Error(BASELINE_FILE+" : règle non structurelle ou inconnue « "+x.rule+" »");if(seen.has(pairKey(x)))throw Error(BASELINE_FILE+" : doublon "+x.path+" ["+x.rule+"]");seen.add(pairKey(x))}return v.map(x=>({path:x.path,rule:x.rule}))}
+export function trackedPairs(failures){const seen=new Map();for(const x of failures)if(TRACKED_RULES.includes(x.rule))seen.set(pairKey(x),{path:x.path,rule:x.rule});return[...seen.values()].sort((a,b)=>a.path.localeCompare(b.path)||a.rule.localeCompare(b.rule))}
+export function parseBaseline(text){let v;try{v=JSON.parse(text)}catch(e){throw Error(BASELINE_FILE+" illisible : "+e.message)}if(!Array.isArray(v))throw Error(BASELINE_FILE+" doit être une liste de { path, rule }");const seen=new Set();for(const x of v){if(!x||typeof x.path!=="string"||typeof x.rule!=="string")throw Error(BASELINE_FILE+" : entrée invalide "+JSON.stringify(x));if(!TRACKED_RULES.includes(x.rule))throw Error(BASELINE_FILE+" : règle inconnue « "+x.rule+" »");if(seen.has(pairKey(x)))throw Error(BASELINE_FILE+" : doublon "+x.path+" ["+x.rule+"]");seen.add(pairKey(x))}return v.map(x=>({path:x.path,rule:x.rule}))}
 export function compareToBaseline(current,baseline){const cur=new Set(current.map(pairKey)),base=new Set(baseline.map(pairKey));return{added:current.filter(x=>!base.has(pairKey(x))),stale:baseline.filter(x=>!cur.has(pairKey(x)))}}
 export function nextBaseline(current,baseline){if(baseline===null)return{ok:true,initial:true,next:current,removed:[]};const{added,stale}=compareToBaseline(current,baseline);if(added.length)return{ok:false,added,next:baseline,removed:[]};const gone=new Set(stale.map(pairKey));return{ok:true,initial:false,next:baseline.filter(x=>!gone.has(pairKey(x))),removed:stale}}
+export function seedBaseline(current,baseline){const present=new Set(baseline.map(x=>x.rule));const refused=EDITORIAL_RULES.filter(rule=>present.has(rule));if(refused.length)return{ok:false,refused,next:baseline,added:[]};const added=current.filter(x=>EDITORIAL_RULES.includes(x.rule));const next=[...baseline,...added].sort((a,b)=>a.path.localeCompare(b.path)||a.rule.localeCompare(b.rule));return{ok:true,refused:[],next,added};
+}
 const family=(p,m)=>p.dir==="outil"?(m[p.slug]?.type||"outil"):p.dir;
 function main(){
  let pages;try{pages=discover()}catch(e){console.error(e.message);process.exit(1)}if(!pages.length||!pages.some(p=>p.dir==="outil")){console.error("Aucune page /outil/ trouvée.");process.exit(1)}
@@ -82,23 +85,31 @@ function main(){
  const table=rs=>["| Règle | Pages en échec | Écarts | Total |","|---|---:|---:|---:|",...rs.map(r=>"| "+r+" | "+counts[r].pages+" | "+counts[r].messages+" | "+total+" |")].join("\n");
  const sp=new Set(sf.map(x=>x.path)).size;
  const a=["### (a) Règles STRUCTURELLES (bloquantes) — "+sf.length+" écart(s) sur "+sp+" page(s)","",table(STRUCTURAL_RULES)].join("\n");
- const b=["### (b) Règles ÉDITORIALES (suivies, non bloquantes) — "+ef.length+" écart(s)","",table(EDITORIAL_RULES),"","| Indicateur éditorial | Valeur |","|---|---:|","| Pages sous 120 mots | "+under+" |","| Pages sans lien externe | "+noext+" |"].join("\n");
+ const b=["### (b) Règles ÉDITORIALES (bloquantes par cliquet) — "+ef.length+" écart(s)","",table(EDITORIAL_RULES),"","| Indicateur éditorial | Valeur |","|---|---:|","| Pages sous 120 mots | "+under+" |","| Pages sans lien externe | "+noext+" |"].join("\n");
  const c=["### (c) Familles","","| Famille | Pages |","|---|---:|",...Object.entries(fam).sort(([x],[y])=>x.localeCompare(y)).map(([f,n])=>"| "+f+" | "+n+" |")].join("\n");
  const out=[a,b,c,"### Écarts structurels","",...sf.map(x=>x.path+" ["+x.rule+"] "+x.message),"","### Écarts éditoriaux","",...ef.map(x=>x.path+" ["+x.rule+"] "+x.message)].join("\n");
  if(process.env.GITHUB_STEP_SUMMARY&&!process.argv.includes("--json"))fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,[a,b,c].join("\n\n")+"\n");
  if(process.argv.includes("--json"))console.log(JSON.stringify({pages:pages.map(p=>({path:p.path,dir:p.dir,slug:p.slug,family:family(p,meta)})),rules:{structural:STRUCTURAL_RULES,editorial:EDITORIAL_RULES},counts,families:fam,indicators:ind,pagesUnder120:under,pagesWithoutExternalLink:noext,structuralFailures:sf,editorialFailures:ef,failures:all},null,2));else if(!process.argv.includes("--update-baseline"))console.log(out);
- const baselinePath=path.join(ROOT,BASELINE_FILE),pairs=structuralPairs(all);
+ const baselinePath=path.join(ROOT,BASELINE_FILE),pairs=trackedPairs(all);
+ if(process.argv.includes("--seed-baseline")){
+  let base;try{base=parseBaseline(fs.readFileSync(baselinePath,"utf8"))}catch(e){console.error(e.code==="ENOENT"?BASELINE_FILE+" introuvable.":e.message);process.exit(1)}
+  const r=seedBaseline(pairs,base);
+  if(!r.ok){console.error("--seed-baseline refusé : les règles éditoriales suivantes sont déjà présentes dans la baseline : "+r.refused.join(", ")+".");process.exit(1)}
+  fs.writeFileSync(baselinePath,JSON.stringify(r.next,null,2)+"\n");
+  const counts=Object.fromEntries(EDITORIAL_RULES.map(rule=>[rule,r.added.filter(x=>x.rule===rule).length]));
+  console.log("--seed-baseline : "+r.added.length+" entrée(s) ajoutée(s). "+EDITORIAL_RULES.map(rule=>rule+"="+counts[rule]).join(", ")+" .");return
+ }
  if(process.argv.includes("--update-baseline")){
   let base=null;if(fs.existsSync(baselinePath)){try{base=parseBaseline(fs.readFileSync(baselinePath,"utf8"))}catch(e){console.error(e.message);process.exit(1)}}
   const r=nextBaseline(pairs,base);
-  if(!r.ok){console.error("--update-baseline refusé : la baseline ne peut que perdre des entrées, jamais en gagner.\n"+r.added.length+" écart(s) structurel(s) absent(s) de la baseline (régression ou nouvelle page non conforme) :");for(const x of r.added)console.error("  - "+x.path+" ["+x.rule+"]");console.error("Corrigez ces écarts au lieu de les ajouter à la baseline.");process.exit(1)}
+  if(!r.ok){console.error("--update-baseline refusé : la baseline ne peut que perdre des entrées, jamais en gagner.\n"+r.added.length+" écart(s) suivi(s) absent(s) de la baseline (régression ou nouvelle page non conforme) :");for(const x of r.added)console.error("  - "+x.path+" ["+x.rule+"]");console.error("Corrigez ces écarts au lieu de les ajouter à la baseline.");process.exit(1)}
   fs.writeFileSync(baselinePath,JSON.stringify(r.next,null,2)+"\n");console.log(r.initial?"Baseline créée : "+r.next.length+" entrée(s).":"Baseline mise à jour : "+r.removed.length+" entrée(s) retirée(s), "+r.next.length+" restante(s).");return
  }
  if(process.argv.includes("--ratchet")){
   let base;try{base=parseBaseline(fs.readFileSync(baselinePath,"utf8"))}catch(e){console.error(e.code==="ENOENT"?BASELINE_FILE+" introuvable : lancez --update-baseline une première fois.":e.message);process.exit(1)}
-  const{added,stale}=compareToBaseline(pairs,base),line="Cliquet : "+pairs.length+" écart(s) structurel(s) connu(s) ou nouveaux, "+base.length+" en baseline, "+added.length+" nouveau(x), "+stale.length+" périmé(s).";
+  const{added,stale}=compareToBaseline(pairs,base),line="Cliquet : "+pairs.length+" écart(s) suivi(s) connu(s) ou nouveaux, "+base.length+" en baseline, "+added.length+" nouveau(x), "+stale.length+" périmé(s).";
   console.log(line);if(process.env.GITHUB_STEP_SUMMARY)fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,"### Cliquet\n\n"+line+"\n");
-  for(const x of added)console.error("::error file="+x.path+"::cliquet : nouvel écart structurel ["+x.rule+"] absent de la baseline");
+  for(const x of added)console.error("::error file="+x.path+"::cliquet : nouvel écart ["+x.rule+"] absent de la baseline");
   for(const x of stale)console.error("::error file="+x.path+"::cliquet : entrée périmée ["+x.rule+"] : l'écart est corrigé, retirez-la avec --update-baseline");
   if(added.length||stale.length)process.exit(1)
  }
