@@ -28,6 +28,11 @@ jobs:
       - name: Verify sitemap is up to date
         run: node scripts/generate-sitemap.mjs --check
 
+      - name: Verify regulatory parameters (generated file, validity, year policy)
+        run: |
+          node scripts/generate-params.mjs --check
+          node scripts/check-params.mjs
+
       - name: Verify pages contract (structural ratchet)
         run: node scripts/check-pages.mjs --ratchet
 
@@ -241,6 +246,7 @@ jobs:
           node tests/impot.test.js
           node tests/rsa.test.js
           node tests/retraite.test.js
+          node tests/params.test.mjs
 
       - name: Smoke-test every calculator in Chromium
         run: |

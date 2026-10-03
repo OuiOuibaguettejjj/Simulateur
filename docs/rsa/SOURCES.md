@@ -17,3 +17,6 @@ Vérification effectuée le 28 septembre 2026.
 
 ## Limites
 Les textes évoluent. Toute modification réglementaire doit entraîner une revue des paramètres et des tests avant publication.
+
+## Paramètres
+Les montants sont désormais dans `data/parametres.json` (jeu `rsa`), diffusés par `public/parametres.js`. Une revue de barème met à jour ce jeu (valeurs, dates de validité, `verifiedOn`).

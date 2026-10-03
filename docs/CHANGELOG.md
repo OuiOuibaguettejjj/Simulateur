@@ -1,3 +1,9 @@
+## 2026-10-03 — Paramètres réglementaires centralisés
+- Nouveau `data/parametres.json` (valeur, validité, source, date de vérification) et `scripts/generate-params.mjs` qui génère `public/parametres.js` ; `scripts/check-params.mjs` contrôle la péremption (bloquant si validité dépassée, avertissement si vérification ancienne) et la politique d'année des titres ; tests dans `tests/params.test.mjs`.
+- SMIC, frais kilométriques et RSA lisent leurs barèmes depuis les paramètres ; calculs inchangés (parité vérifiée contre les anciennes formules sur une grille).
+- Année retirée du titre, du H1, du breadcrumb et du JSON-LD de 7 outils de calcul pur : assurance-vie, épargne mensuelle, inflation, mensualité de prêt, rendement locatif, salaire horaire, tableau d'amortissement. URL inchangées.
+- 27 outils restent listés dans `anneeAMigrer` en attendant la migration de leurs barèmes.
+
 ## 2026-10-03 — Cliquet check-pages et contrôles portés
 - `check-pages --ratchet` devient bloquant dans `tests.yml` et `deploy.yml` ; `scripts/check-pages.baseline.json` liste les écarts structurels connus (retraits seulement via `--update-baseline`).
 - Contrôles des deux blocs inline de `deploy.yml` portés dans `check-pages` (description présente, contrôles de calcul, positions du `BreadcrumbList`, dossier sans `index.html`, au moins une page `/outil/`) et couverts par les tests ; les deux blocs sont supprimés.

@@ -42,6 +42,14 @@ jobs:
       - name: Test calculateur retraite
         run: node tests/retraite.test.js
 
+      - name: Test paramètres réglementaires
+        run: node tests/params.test.mjs
+
+      - name: Contrôle des paramètres réglementaires (génération, péremption, année)
+        run: |
+          node scripts/generate-params.mjs --check
+          node scripts/check-params.mjs
+
       - name: Test check-pages
         run: node tests/check-pages.test.mjs
 
