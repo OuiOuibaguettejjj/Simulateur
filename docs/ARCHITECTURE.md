@@ -29,9 +29,9 @@ Les contrôles CI vérifient désormais ces invariants entre la taxonomie centra
 
 Les simulateurs riches peuvent conserver des extensions spécifiques (graphiques, tableaux, scénarios, FAQ, contenu réglementaire), à condition de respecter le socle commun. Il n'est pas recherché une uniformité visuelle absolue.
 
-La migration HTML-first est terminée : les 77 pages `/outil/<slug>/` sont statiques et autonomes pour leur contenu éditorial initial. Le script historique `scripts/prerender-tools.mjs` et son workflow de validation ont été supprimés. Il n'existe plus de migration progressive ni de réécriture pré-déploiement de ces pages.
+La refonte HTML-first est appliquée aux 86 pages publiques d’outils : 77 `/outil/<slug>/`, 8 `/conversion/<slug>/` et 1 `/comparateur/prix-unitaire/`. Les trois familles partagent désormais le même socle HTML-first et les mêmes invariants SEO/structurels, sans changement d’URL. Le script historique `scripts/prerender-tools.mjs` et son workflow de validation ont été supprimés. Il n’existe plus de réécriture pré-déploiement du contenu éditorial.
 
-Les URLs et la logique métier existantes sont conservées.
+Les URLs et la logique métier existantes sont conservées. Les 77 pages `/outil/` continuent d’utiliser `TOOLS_META` comme source taxonomique ; les conversions et le comparateur conservent leurs interfaces et contenus spécifiques dans le même socle.
 ## Processus pré-production et MEP
 
 Le contrôle transversal `scripts/check-security.mjs` est le gate unique pour les invariants de sécurité, de frontière de production, de taxonomie et de CI/CD. Il est exécuté au début du workflow de déploiement, avant toute génération ou transformation du build.
