@@ -19,3 +19,8 @@ Aucune mise en production n'est effectuée dans le cadre de cette implémentatio
 
 ## Préparation AdSense
 L'intégration publicitaire est préparée via un fichier `ads.txt`, les marqueurs éditeur dans le `<head>`, une CSP dédiée et des contrôles de pipeline. Aucun bloc publicitaire `adsbygoogle` n'est ajouté à ce stade. Les smoke tests bloquent les requêtes publicitaires afin d'éviter de générer des impressions pendant les validations automatisées.
+
+
+## Taxonomie 2026-10-03
+
+La structure logique des outils est définie avant les prochaines intégrations : type unique, catégorie principale unique et conservation des URL. La taxonomie est centralisée dans `public/simulateurs.js`. Cette première étape ne réécrit pas les blocs de contenu existants.
