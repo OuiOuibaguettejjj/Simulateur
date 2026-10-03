@@ -188,16 +188,7 @@ function taxFor(l,base){
  return {total:base*rate,rows:base>0?[{label:"Taux unique",taxable:base,rate,duty:base*rate}]:[]};
 }
 
-window.TOOL={
- ey:"PATRIMOINE",
- title:"Calculateur droits de succession 2026",
- displayTitle:"Calculez vos droits de succession",
- intro:"Estimez les droits à payer sur la part nette recueillie, avec les principaux abattements et les règles fiscales 2026.",
- displayIntro:"Une estimation claire, détaillée et instantanée de votre fiscalité successorale.",
- seoTitle:"Calculateur droits de succession 2026",
- source:"Le calcul applique les règles françaises de taxation des mutations à titre gratuit vérifiées pour 2026. La part taxable est arrondie à l’euro près avant application du tarif.",
- fields:function(){return "";},
- calc:function(){
+window.TOOL={calc:function(){
    const part=Number(document.getElementById("part").value)||0;
    const lien=document.getElementById("lien").value;
    const representationCount=Math.max(1,Math.floor(Number(document.getElementById("representationCount").value)||1));
