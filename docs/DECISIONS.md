@@ -43,3 +43,8 @@ Les 77 pages `/outil/<slug>/` sont désormais HTML-first et autonomes pour leur 
 ## Durcissement CI/CD P0 — 2026-10-03
 
 Le dépôt doit rester la source de vérité de la production. Les scripts de génération du sitemap, d'uniformisation du layout et de préparation AdSense peuvent conserver leur mode de génération pour les opérations manuelles, mais le workflow de production les exécute désormais en mode `--check` et échoue si le contenu commité n'est pas déjà conforme. Les tests fonctionnels critiques sont exécutés dans le workflow de déploiement et le workflow `tests` s'exécute sur toute PR vers `main` ainsi que sur les merge groups. Le contrôle des GitHub Actions accepte les commentaires de fin de ligne tout en exigeant un SHA complet.
+
+
+## Canonical HTML migration — 2026-10-03
+
+Le contenu HTML commité a été synchronisé avec les transformations canoniques existantes de layout partagé et de préparation AdSense. Le pipeline CI/CD ne réécrit plus ces fichiers en production : il vérifie désormais leur conformité et échoue en cas de dérive.
