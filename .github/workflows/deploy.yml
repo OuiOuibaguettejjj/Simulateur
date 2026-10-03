@@ -170,10 +170,10 @@ jobs:
           const errors=[];
           for (const file of files) {
             const html=fs.readFileSync(file,'utf8');
-            const route='/' + file.slice('public/'.length).replace(/index\\.html$/,'');
+            const route='/' + file.slice('public/'.length).replace(/index\.html$/,'');
             const canonical=(html.match(/<link\\b[^>]*rel=["']canonical["'][^>]*href=["']([^"']+)["']/i)||[])[1];
             if(canonical!=='https://simulateur.site'+route) errors.push(file+': canonical mismatch');
-            const bc=(html.match(/<div\\b[^>]*class=["'][^"']*\\bbreadcrumb\\b[^"']*["'][^>]*>([\\s\\S]*?)<\\/div>/i)||[])[1]||'';
+            const bc=(html.match(/<div[^>]*class=["'][^"']*breadcrumb[^"']*["'][^>]*>([\\s\\S]*?)<\/div>/i)||[])[1]||'';
             if(!/href=["']\\/["']>Accueil<\\/a>/i.test(bc)) errors.push(file+': breadcrumb missing Accueil');
             const ld=[...html.matchAll(/<script\\b[^>]*type=["']application\\/ld\\+json["'][^>]*>([\\s\\S]*?)<\\/script>/gi)].map(m=>{try{return JSON.parse(m[1])}catch{return null}}).filter(Boolean);
             if(ld.filter(x=>x['@type']==='WebApplication').length!==1) errors.push(file+': expected exactly one WebApplication');
