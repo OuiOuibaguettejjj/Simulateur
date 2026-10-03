@@ -42,7 +42,16 @@ assert(has(fixture()+"</div>","markup-balance"));
 assert(has(fixture().replace("</section></main>","</main>"),"markup-balance"));
 assert(has(fixture().replace("https://simulateur.site/outil/slug/","https://simulateur.site/outil/autre/"),"canonical"));
 
-assert.deepEqual(parseHtml("<script>const x='<div><section>';</script><section></section>").errors,[],"script text ignored");
+assert.deepEqual(parseHtml("<script>const x='<div><section>';</script><section></section>").errors,[],"script text ignored");assert.deepEqual(parseHtml("<script>for(let i=0;i<n;i++){}</script><section></section>").errors,[], "script comparison text ignored");
+assert.equal(parseHtml("<script>for(let i=0;i<n;i++){}</script><section></section>").root.children.some(n=>n.name==="section"),true,"section après script");
+assert.deepEqual(parseHtml("<script>if(a<b){}</script><div></div>").errors,[], "script less-than text ignored");
+assert.equal(parseHtml("<script>if(a<b){}</script><div></div>").root.children.some(n=>n.name==="div"),true,"div après script");
+assert.deepEqual(parseHtml("<script>x=1</SCRIPT><section></section>").errors,[], "script closing tag case-insensitive");
+assert.equal(parseHtml("<script>x=1</SCRIPT><section></section>").root.children.some(n=>n.name==="section"),true,"section après fermeture majuscule");
+
+const twoRelatedBlocks=fixture().replace("</section></main>","</section><section class=\"related-tools\"><a class=\"related-link\" href=\"/outil/slug-1/\">Outil 1</a><a class=\"related-link\" href=\"/outil/slug-2/\">Outil 2</a></section></main>");
+assert.deepEqual(errs(twoRelatedBlocks).filter(x=>x.rule==="related-block"),[{rule:"related-block",message:"exactement un bloc .related-tools est requis"}],"deux blocs related-tools = un seul écart related-block");
+
 
 const template=fs.readFileSync(new URL("../docs/template-outil.html",import.meta.url),"utf8");
 assert.deepEqual(checkPage(template,{dir:"outil",slug:"slug",toolsMeta:{slug:{relatedTools:[{slug:"slug-1"},{slug:"slug-2"}]},"slug-1":{},"slug-2":{}},pageIndex:IDX}),[],"template conforme");
