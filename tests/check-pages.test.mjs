@@ -25,13 +25,13 @@ function familyFixture(dir,slug,relatedLinks){
   const related=relatedLinks.map((href,i)=>"<a class=\"related-link\" href=\""+href+"\">Associé "+(i+1)+"</a>").join("");
   return fixture()
     .replaceAll("/outil/slug/", "/"+dir+"/"+slug+"/")
-    .replace(/<section class="related-tools">[\\s\\S]*?<\\/section>/, "<section class=\"related-tools\">"+related+"</section>");
+    .replace(/<section class="related-tools">[\s\S]*?<\/section>/, "<section class=\"related-tools\">"+related+"</section>");
 }
 function familyIndex(dir,slug,relatedLinks){
   return new Set([
     dir+"/"+slug,
     ...relatedLinks
-      .filter(h=>/^\\/[^/]+\\/[^/]+\\/$/.test(h))
+      .filter(h=>/^\/[^/]+\/[^/]+\/$/.test(h))
       .map(h=>h.slice(1,-1))
   ]);
 }
