@@ -11,7 +11,8 @@ const EXCLUDED_PREFIXES = ["public/api/"];
 // They must not become the apparent last modification date of restored pages.
 const IGNORED_COMMITS = new Set([
   "2dc2ac88a7e12e26240d935011c8ad5ebba944a8",
-  "977851feb8ef88b3c4c41307eeee2a5b915a1874"
+  "977851feb8ef88b3c4c41307eeee2a5b915a1874",
+  "b1844c90bd4c31a815b31433268a629e2049b97a"
 ]);
 
 function walk(dir) {
