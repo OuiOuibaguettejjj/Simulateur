@@ -179,8 +179,11 @@ Le flux réel est :
 2. renseigner les métadonnées, le breadcrumb, l'interface, le résultat initial et le contenu propres à l'outil ;
 3. conserver la logique de calcul dans le JavaScript existant sans modifier les règles métier ;
 4. inscrire l'outil dans `data/tools.json` (type, catégorie, 2 à 4 `relatedTools` sous forme de slugs) ;
-5. exécuter les contrôles pré-production ;
-6. committer le HTML canonique.
+5. mettre à jour la date de la page dans `data/lastmod.json` si son contenu éditorial change ;
+6. exécuter les contrôles pré-production ;
+7. committer le HTML canonique.
+
+La date de `data/lastmod.json` est mise à jour pour un changement de contenu visible (titre, description, texte, barème, résultat affiché). Elle n'est pas mise à jour pour une modification mécanique (layout, balisage, aria, ids, refactor JavaScript sans effet visible).
 
 Il n'existe pas de `scripts/prerender-tools.mjs` dans ce flux et aucun header/footer n'est injecté pendant le déploiement.
 

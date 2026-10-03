@@ -27,6 +27,7 @@ jobs:
       - name: Verify committed build is canonical
         run: |
           node scripts/generate-sitemap.mjs --check
+          node tests/sitemap.test.mjs
           node scripts/normalize-layout.mjs --check
           node scripts/prepare-adsense.mjs --check
 

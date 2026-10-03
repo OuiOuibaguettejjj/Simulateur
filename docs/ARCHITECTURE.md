@@ -35,7 +35,7 @@ Les URLs et la logique métier existantes sont conservées.
 
 Le contrôle transversal `scripts/check-security.mjs` est le gate unique pour les invariants de sécurité, de frontière de production, de taxonomie et de CI/CD. Il est exécuté au début du workflow de déploiement, avant toute génération ou transformation du build.
 
-Le workflow `.github/workflows/deploy.yml` conserve les contrôles qui relèvent du build et de la qualité du produit : génération et intégrité du sitemap, contrat HTML-first, cohérence métadonnées/HTML, normalisation idempotente, intégration AdSense, validation statique, tests fonctionnels, smoke tests locaux et production, contrôle de commit, empreinte de déploiement et vérifications Cloudflare post-MEP. Ces contrôles ne sont pas dupliqués dans le gate de sécurité.
+Le workflow `.github/workflows/deploy.yml` conserve les contrôles qui relèvent du build et de la qualité du produit : génération et intégrité du sitemap, contrat HTML-first, cohérence métadonnées/HTML, normalisation idempotente, intégration AdSense, validation statique, tests fonctionnels, smoke tests locaux et production, contrôle de commit, empreinte de déploiement et vérifications Cloudflare post-MEP. Ces contrôles ne sont pas dupliqués dans le gate de sécurité. Les dates `lastmod` du sitemap sont lues dans `data/lastmod.json`, hors `public/`, puis vérifiées avant la génération ; elles sont ainsi versionnées avec le contenu et indépendantes de l'historique Git.
 
 Le workflow `.github/workflows/tests.yml` reste dédié aux tests fonctionnels ciblés des calculateurs. Il ne porte pas le gate de sécurité.
 
