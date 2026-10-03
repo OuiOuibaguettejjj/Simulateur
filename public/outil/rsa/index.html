@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="fr">
-<head>
+<head><meta name="calculator-rendering" content="static">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Simulateur RSA 2026 : estimation du montant | Simulateur</title>
@@ -10,21 +10,32 @@
 <script src="/rsa.js" defer></script>
 <script src="/simulateurs.js" defer></script>
 <script src="/enter-calcul.js" defer></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Simulateur RSA 2026","url":"https://simulateur.site/outil/rsa/","applicationCategory":"FinanceApplication","operatingSystem":"Web","description":"Estimation indicative du RSA selon la composition du foyer, les ressources et la situation de logement.","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}}</script>
-</head>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Simulateur RSA 2026","url":"https://simulateur.site/outil/rsa/","description":"Estimez votre RSA à partir de votre situation familiale, de votre logement et des ressources des trois mois de référence.","inLanguage":"fr-FR","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"price":"0","priceCurrency":"EUR"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Travail","item":"https://simulateur.site/travail/"},{"@type":"ListItem","position":3,"name":"Simulateur RSA 2026","item":"https://simulateur.site/outil/rsa/"}]}</script></head>
 <body>
 <header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a href="/conversions/">Conversions</a><a href="/comparateurs/">Comparateurs</a><a href="/a-propos/">À propos</a></nav></div></header>
 <main>
 <div class="wrap">
-<div class="breadcrumb"><a href="/simulateurs/">Simulateurs</a> · Simulateur RSA 2026</div>
+<div class="breadcrumb"><a href="/">Accueil</a> · <a href="/travail/">Travail</a> · Simulateur RSA 2026</div>
 <div class="tool">
 <div class="eyebrow" id="ey">CAF · BARÈME AU 1ER AVRIL 2026</div>
 <h1 id="title">Simulateur RSA 2026</h1>
 <p class="tool-intro" id="intro">Estimez votre RSA à partir de votre situation familiale, de votre logement et des ressources des trois mois de référence.</p>
-<div id="fields"></div>
+<div id="fields">
+<div class="field"><label for="age">Votre âge</label><select id="age"><option value="25plus">25 ans ou plus</option><option value="18_24">18 à 24 ans</option></select></div>
+<div class="field"><label for="status">Situation familiale</label><select id="status"><option value="single">Vous vivez seul(e)</option><option value="couple">Vous vivez en couple</option></select></div>
+<div class="field"><label for="dependents">Nombre de personnes à charge</label><input id="dependents" type="number" min="0" step="1" inputmode="numeric" placeholder="0"></div>
+<div class="field"><label for="student">Êtes-vous étudiant(e) ?</label><select id="student"><option value="no">Non</option><option value="yes">Oui</option></select></div>
+<div class="field"><label for="youngActive">Entre 18 et 24 ans : avez-vous exercé au moins 3 214 heures au cours des 3 dernières années ?</label><select id="youngActive"><option value="no">Non</option><option value="yes">Oui</option></select></div>
+<div class="field"><label for="resident">Résidez-vous en France de manière stable et effective ?</label><select id="resident"><option value="yes">Oui</option><option value="no">Non</option></select></div>
+<div class="field"><label for="majoration">Situation susceptible d'ouvrir droit à la majoration pour isolement ?</label><select id="majoration"><option value="no">Non</option><option value="yes">Oui</option></select></div>
+<div class="field"><label for="housing">Situation de logement</label><select id="housing"><option value="none">Vous payez votre logement sans aide personnelle au logement</option><option value="aidBelowForfait">Vous percevez une aide au logement inférieure au forfait applicable</option><option value="forfait">Vous percevez une aide au logement au moins égale au forfait, êtes logé(e) gratuitement ou êtes propriétaire dans une situation soumise au forfait</option></select></div>
+<div class="field"><label for="housingAid">Montant mensuel de l’aide au logement (€) — uniquement si elle est inférieure au forfait</label><input id="housingAid" type="number" min="0" step="0.01" inputmode="decimal" value="0"></div>
+<h3 style="margin-top:2rem">Ressources des trois mois de référence</h3><p class="small">Pour les salaires et revenus de remplacement concernés, utilisez le montant net social indiqué sur les documents de l’organisme payeur. Ajoutez les autres ressources que vous devez déclarer à la Caf afin d’obtenir une estimation plus complète.</p>
+<div class="row"><div class="field"><label for="m1">Mois 1 (€)</label><input id="m1" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0"></div><div class="field"><label for="m2">Mois 2 (€)</label><input id="m2" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0"></div><div class="field"><label for="m3">Mois 3 (€)</label><input id="m3" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0"></div></div>
+</div>
 <button class="button-main" onclick="Simulateurs.calc()">Calculer mon estimation</button>
 <div class="result" id="result">Renseignez votre situation puis lancez le calcul.</div>
-<div class="formula"><strong>Méthode</strong><p id="source"></p></div>
+<div class="formula"><strong>Méthode et sources</strong><p>Paramètres vérifiés pour le barème du 1er avril 2026 au 31 mars 2027. Sources : CAF et Code de l’action sociale et des familles sur Légifrance. Pour les ressources concernées, utilisez le montant net social.</p></div>
 </div>
 </div>
 
@@ -52,41 +63,10 @@
 
 <p><strong>Sources principales :</strong> <a href="https://www.caf.fr/professionnels/offres-et-services/accompagnement-des-allocataires/bareme-revenu-de-solidarite-active" target="_blank" rel="noopener noreferrer">CAF — barème RSA</a> · <a href="https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006074069/LEGISCTA000020523342/2026-07-23/" target="_blank" rel="noopener noreferrer">Légifrance — Code de l'action sociale et des familles</a> · <a href="https://www.service-public.fr/particuliers/vosdroits/F1971" target="_blank" rel="noopener noreferrer">Service-Public — RSA et étudiants</a></p>
 </section>
-</main>
+<section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Outils associés</h2><div class="related-links"><a class="related-link" href="/outil/prime-activite/"><strong>Prime d’activité</strong><span>Estimer la prime d’activité.</span></a><a class="related-link" href="/outil/salaire-brut-net/"><strong>Salaire brut ↔ net</strong><span>Estimer le salaire net.</span></a><a class="related-link" href="/outil/are-chomage/"><strong>Allocation chômage (ARE)</strong><span>Obtenir une estimation indicative de l’ARE.</span></a><a class="related-link" href="/outil/succession/"><strong>Droits de succession</strong><span>Estimer les droits selon la situation.</span></a></div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="/travail/">Travail</a>.</p></div></section></main>
 <footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cgu/">CGU</a></div></div></footer>
 
-<script>
-const F={
- select:(i,l,o)=>'<div class="field"><label for="'+i+'">'+l+'</label><select id="'+i+'">'+o.map(x=>'<option value="'+x[0]+'">'+x[1]+'</option>').join('')+'</select></div>',
- number:(i,l,p='')=>'<div class="field"><label for="'+i+'">'+l+'</label><input id="'+i+'" type="number" min="0" step="0.01" inputmode="decimal" placeholder="'+p+'"></div>',
- row:a=>'<div class="row">'+a.join('')+'</div>'
-};
-window.TOOL={
- ey:"CAF · BARÈME AU 1ER AVRIL 2026",
- title:"Simulateur RSA 2026",
- intro:"Estimez votre RSA à partir de votre situation familiale, de votre logement et des ressources des trois mois de référence.",
- fields:function(){
-   return F.select("age","Votre âge",[
-     ["25plus","25 ans ou plus"],["18_24","18 à 24 ans"]
-   ])
-   +F.select("status","Situation familiale",[
-     ["single","Vous vivez seul(e)"],["couple","Vous vivez en couple"]
-   ])
-   +F.number("dependents","Nombre de personnes à charge","0")
-   +F.select("student","Êtes-vous étudiant(e) ?",[["no","Non"],["yes","Oui"]])
-   +F.select("youngActive","Entre 18 et 24 ans : avez-vous exercé au moins 3 214 heures au cours des 3 dernières années ?",[["no","Non"],["yes","Oui"]])
-   +F.select("resident","Résidez-vous en France de manière stable et effective ?",[["yes","Oui"],["no","Non"]])
-   +F.select("majoration","Situation susceptible d'ouvrir droit à la majoration pour isolement ?",[["no","Non"],["yes","Oui"]])
-   +F.select("housing","Situation de logement",[
-     ["none","Vous payez votre logement sans aide personnelle au logement"],
-     ["aidBelowForfait","Vous percevez une aide au logement inférieure au forfait applicable"],
-     ["forfait","Vous percevez une aide au logement au moins égale au forfait, êtes logé(e) gratuitement ou êtes propriétaire dans une situation soumise au forfait"]
-   ])
-   +F.number("housingAid","Montant mensuel de l’aide au logement (€) — uniquement si elle est inférieure au forfait","0")
-   +'<h3 style="margin-top:2rem">Ressources des trois mois de référence</h3><p class="small">Pour les salaires et revenus de remplacement concernés, utilisez le montant net social indiqué sur les documents de l’organisme payeur. Ajoutez les autres ressources que vous devez déclarer à la Caf afin d’obtenir une estimation plus complète.</p>'
-   +F.row([F.number("m1","Mois 1 (€)","0"),F.number("m2","Mois 2 (€)","0"),F.number("m3","Mois 3 (€)","0")]);
- },
- calc:function(){
+<script>window.TOOL={calc:function(){
    const age=this.$("age").value==="25plus"?25:18;
    const input={
      age,
@@ -108,10 +88,9 @@ window.TOOL={
      +"Moyenne des ressources des 3 mois : "+RSAEngine.money(r.averageResources)+"<br>"
      +"Déduction logement : "+RSAEngine.money(r.logement)+"<br>"
      +"<p class='small'>Calcul indicatif : montant forfaitaire − moyenne des ressources − forfait logement. Le droit réel dépend de l’ensemble des règles et ressources applicables à votre foyer.</p>";
- },
- source:"Paramètres vérifiés pour le barème du 1er avril 2026 au 31 mars 2027. Sources : CAF et Code de l'action sociale et des familles sur Légifrance. Le montant net social est la référence à utiliser pour les ressources concernées."
+ }
 };
-window.addEventListener("DOMContentLoaded",()=>Simulateurs.render());
+
 </script>
 </body>
 </html>

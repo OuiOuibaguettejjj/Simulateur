@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="fr">
-<head>
+<head><meta name="calculator-rendering" content="static">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Calculateur droits de succession 2026 | Simulateur</title>
@@ -24,7 +24,7 @@
 .source-links{margin:8px 0 0;padding-left:18px}
 .source-links li{margin:4px 0}
 </style>
-</head>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculez vos droits de succession","url":"https://simulateur.site/outil/succession/","description":"Une estimation claire, détaillée et instantanée de votre fiscalité successorale.","inLanguage":"fr-FR","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"price":"0","priceCurrency":"EUR"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Fiscalité","item":"https://simulateur.site/fiscalite/"},{"@type":"ListItem","position":3,"name":"Calculez vos droits de succession","item":"https://simulateur.site/outil/succession/"}]}</script></head>
 <body>
 <header><div class="wrap nav">
 <a class="logo" href="/">Simulateur<span>.</span></a>
@@ -35,7 +35,7 @@
 
 <main>
 <div class="wrap">
-<div class="breadcrumb"><a href="/calculateurs/">Calculateurs</a> · Calculateur droits de succession 2026</div>
+<div class="breadcrumb"><a href="/">Accueil</a> · <a href="/fiscalite/">Fiscalité</a> · Calculez vos droits de succession</div>
 
 <div class="succession-shell"><div class="succession-hero"><div class="eyebrow" id="ey">FISCALITÉ · 2026</div><h1 id="title">Calculez vos droits de succession</h1><p class="tool-intro" id="intro">Une estimation claire, détaillée et instantanée de votre fiscalité successorale.</p><div class="trust-row"><span>✓ Barème 2026</span><span>✓ Calcul par tranches</span><span>✓ Sources officielles</span></div></div><div class="tool succession-tool"><div id="fields" hidden></div>
 <div class="eyebrow">PATRIMOINE</div>
@@ -136,20 +136,13 @@
 <p><a href="https://www.service-public.fr/particuliers/vosdroits/R47789" target="_blank" rel="noopener"><strong>Voir le simulateur officiel de Service-Public</strong></a></p>
 </section>
 </div>
-</main>
+<section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Outils associés</h2><div class="related-links"><a class="related-link" href="/outil/donation/"><strong>Droits de donation</strong><span>Estimer les droits selon le lien de parenté.</span></a><a class="related-link" href="/outil/impot-sur-le-revenu/"><strong>Impôt sur le revenu</strong><span>Estimer l’impôt sur le revenu.</span></a><a class="related-link" href="/outil/assurance-vie/"><strong>Assurance-vie</strong><span>Comprendre le traitement fiscal de l’assurance-vie.</span></a></div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="/fiscalite/">Fiscalité</a>.</p></div></section></main>
 
 <footer><div class="wrap"><div class="footerlinks">
 <a href="/">Accueil</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cgu/">CGU</a>
 </div></div></footer>
 
-<script>
-const F={
- text:(i,l,p="")=>'<div class="field"><label for="'+i+'">'+l+'</label><input id="'+i+'" type="number" min="0" step="1" placeholder="'+p+'"></div>',
- select:(i,l,o)=>'<div class="field"><label for="'+i+'">'+l+'</label><select id="'+i+'">'+o.map(x=>'<option value="'+x[0]+'">'+x[1]+'</option>').join('')+'</select></div>',
- row:a=>'<div class="row">'+a.join('')+'</div>'
-};
-
-function euro(v){return Number(v).toLocaleString("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:0});}
+<script>function euro(v){return Number(v).toLocaleString("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:0});}
 function roundEuro(v){return Math.round(Number(v)||0);}
 function progressive(base){
  const brackets=[
@@ -188,16 +181,7 @@ function taxFor(l,base){
  return {total:base*rate,rows:base>0?[{label:"Taux unique",taxable:base,rate,duty:base*rate}]:[]};
 }
 
-window.TOOL={
- ey:"PATRIMOINE",
- title:"Calculateur droits de succession 2026",
- displayTitle:"Calculez vos droits de succession",
- intro:"Estimez les droits à payer sur la part nette recueillie, avec les principaux abattements et les règles fiscales 2026.",
- displayIntro:"Une estimation claire, détaillée et instantanée de votre fiscalité successorale.",
- seoTitle:"Calculateur droits de succession 2026",
- source:"Le calcul applique les règles françaises de taxation des mutations à titre gratuit vérifiées pour 2026. La part taxable est arrondie à l’euro près avant application du tarif.",
- fields:function(){return "";},
- calc:function(){
+window.TOOL={calc:function(){
    const part=Number(document.getElementById("part").value)||0;
    const lien=document.getElementById("lien").value;
    const representationCount=Math.max(1,Math.floor(Number(document.getElementById("representationCount").value)||1));
