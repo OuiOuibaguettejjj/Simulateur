@@ -176,7 +176,7 @@ jobs:
           if (errors.length) { console.error(errors.join('\n')); process.exit(1); }
           NODE
 
-      - name: Check layout consistency (warnings only)
+      - name: Check layout consistency
         run: node scripts/check-layout.mjs
 
       - name: Verify commit and consistency before production
@@ -442,10 +442,44 @@ jobs:
           git fetch origin main --quiet
           test "$(git rev-parse origin/main)" = "$GITHUB_SHA"
 
+      - name: Record current production version for rollback
+        id: current-production
+        uses: cloudflare/wrangler-action@953926a2e2182532811c01a25e53647d93bf07c0 # v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deployments list --json
+
+      - name: Save current production version ID
+        env:
+          DEPLOYMENTS_JSON: ${{ steps.current-production.outputs.command-output }}
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const fs = require('fs');
+          const raw = process.env.DEPLOYMENTS_JSON;
+          if (!raw) throw new Error('Cloudflare deployments list returned no output.');
+          let data;
+          try { data = JSON.parse(raw); } catch (error) {
+            throw new Error('Unable to parse Cloudflare deployments JSON: ' + error.message);
+          }
+          const deployments = data.result?.deployments ?? data.deployments;
+          if (!Array.isArray(deployments) || !deployments.length) {
+            throw new Error('Cloudflare returned no production deployments.');
+          }
+          const versions = deployments[0]?.versions;
+          const active = Array.isArray(versions) ? versions.find(v => v.percentage === 100) : null;
+          const versionId = active?.version_id;
+          if (!versionId) throw new Error('Unable to identify the active 100% production version.');
+          fs.writeFileSync('/tmp/simulateur-previous-version-id', versionId + '\n');
+          console.log('Recorded previous production version for rollback: ' + versionId);
+          NODE
+
       - name: Create deployment fingerprint
         run: printf '%s\n' "$GITHUB_SHA" > public/__build-sha.txt
 
       - name: Deploy Worker
+        id: deploy
         uses: cloudflare/wrangler-action@953926a2e2182532811c01a25e53647d93bf07c0 # v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -584,3 +618,14 @@ jobs:
             if(errors.length){console.error(errors.join('\n'));process.exit(1)}
           })();
           NODE
+
+
+      - name: Roll back failed production deployment
+        if: ${{ failure() && steps.current-production.outcome == 'success' }}
+        uses: cloudflare/wrangler-action@953926a2e2182532811c01a25e53647d93bf07c0 # v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: rollback ${{ env.PREVIOUS_VERSION_ID }} --message "Automatic rollback after failed production verification"
+        env:
+          PREVIOUS_VERSION_ID: ${{ steps.current-production.outputs.command-output }}
