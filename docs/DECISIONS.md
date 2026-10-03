@@ -79,8 +79,3 @@ La documentation a été corrigée pour refléter le flux réel : header et foot
 La première MEP de la Phase 1 a été bloquée par le contrôle statique : `public/outil/_template.html` était volontairement exclu des walks `index.html`, mais restait néanmoins parcouru par le contrôle global de toutes les pages HTML publiques. Le fichier contenait en outre des placeholders non résolvables comme `/categorie/`.
 
 Le template canonique est donc déplacé dans `docs/template-outil.html`. Il reste disponible comme point de copie documentaire sans être une ressource publique. Aucune URL publique, logique métier, règle de calcul, CSP, en-tête de sécurité, pinning GitHub Actions ou mécanisme de rollback n'est modifié.
-
-
-## 2026-10-03 — Phase 2 : refonte HTML-first des 86 pages
-
-La Phase 2 applique le gabarit canonique aux 86 pages publiques : 77 outils, 8 conversions et 1 comparateur. Les URL, calculs, taux et règles métier sont conservés. Chaque page possède désormais le marqueur HTML-first, un titre avec marque, une meta description contrôlée, un breadcrumb visible commençant par Accueil, un WebApplication JSON-LD, un BreadcrumbList JSON-LD cohérent avec la canonique et un résultat initial visible non vide. Les contrôles CI ont été étendus à l’ensemble des 86 pages, tandis que les contrôles taxonomiques spécifiques à `TOOLS_META` restent appliqués aux 77 pages `/outil/`. La CSP, les en-têtes de sécurité, le pinning GitHub Actions et le mécanisme de rollback n’ont pas été modifiés.

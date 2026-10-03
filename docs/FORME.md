@@ -4,9 +4,9 @@ Ce document définit le **gabarit canonique** des pages outil. Les pages sont HT
 
 ## 1. Gabarit unique
 
-Les 86 pages existantes — 77 `/outil/`, 8 `/conversion/` et 1 `/comparateur/` — partagent le même socle HTML-first. Le préfixe d'URL est conservé pour respecter les URL existantes ; il ne constitue pas un gabarit de rendu différent.
+Les pages `/outil/`, `/conversion/` et `/comparateur/` partagent le même socle HTML-first. Le préfixe d'URL est conservé pour respecter les URL existantes ; il ne constitue pas un gabarit de rendu différent.
 
-La page de référence actuelle est `public/outil/tva/index.html`. Pour créer ou refondre une page, utiliser `docs/template-outil.html` comme point de copie, puis adapter uniquement les données, l’interface et le contenu propres à l’outil. Les 86 pages existantes ont été alignées sur ce socle lors de la Phase 2.
+La page de référence actuelle est `public/outil/tva/index.html`. Pour créer une nouvelle page, utiliser `docs/template-outil.html` comme point de copie, puis adapter uniquement les données et l'interface propres à l'outil.
 
 ### Squelette HTML canonique
 
