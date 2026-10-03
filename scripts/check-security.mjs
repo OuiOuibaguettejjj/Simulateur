@@ -57,12 +57,20 @@ if (!categoriesMatch || !metaMatch) {
     const allowedTypes = new Set(["calculateur", "simulateur", "conversion", "comparateur"]);
     const categorySlugs = new Set(Object.keys(categories));
     const metaSlugs = Object.keys(toolsMeta);
-    const pageSlugs = allFiles.filter(file => /^public\/outil\/[^/]+\/index\.html$/.test(file)).map(file => file.split("/")[2]);
+    const pageKeys = allFiles
+      .filter(file => /^public\/(?:outil|conversion|comparateur)\/[^/]+\/index\.html$/.test(file))
+      .map(file => file.replace(/^public\//, "").replace(/\/index\.html$/, ""));
+    const expectedPath = (slug, meta) => meta.path || "/outil/" + slug + "/";
+    const seenPaths = new Set();
     for (const [slug, meta] of Object.entries(toolsMeta)) {
       if (!meta || typeof meta !== "object") { fail("invalid metadata for " + slug); continue; }
       if (!allowedTypes.has(meta.type)) fail(slug + ": invalid type " + meta.type);
       if (!categorySlugs.has(meta.category)) fail(slug + ": unknown primary category " + meta.category);
       if (!Array.isArray(meta.relatedTools)) fail(slug + ": relatedTools must be an array");
+      const route = expectedPath(slug, meta);
+      if (!/^\/(?:outil|conversion|comparateur)\/[^/]+\/$/.test(route)) fail(slug + ": invalid route " + route);
+      if (seenPaths.has(route)) fail("duplicate taxonomy route: " + route);
+      seenPaths.add(route);
       for (const related of meta.relatedTools || []) {
         if (!related || typeof related.slug !== "string") { fail(slug + ": malformed related tool"); continue; }
         if (!(related.slug in toolsMeta)) fail(slug + ": related tool missing from central metadata: " + related.slug);
@@ -70,9 +78,16 @@ if (!categoriesMatch || !metaMatch) {
         if (!related.title || !related.description) fail(slug + ": related tool requires title and description");
       }
     }
-    const pageSet = new Set(pageSlugs);
-    for (const slug of metaSlugs) if (!pageSet.has(slug)) fail("taxonomy entry has no /outil page: " + slug);
-    for (const slug of pageSet) if (!toolsMeta[slug]) fail("tool page missing from central taxonomy: " + slug);
+    const pageSet = new Set(pageKeys);
+    for (const slug of metaSlugs) {
+      const route = expectedPath(slug, toolsMeta[slug]).replace(/^\//, "").replace(/\/$/, "");
+      if (!pageSet.has(route)) fail("taxonomy entry has no matching page: " + slug + " -> " + route);
+    }
+    for (const page of pageSet) {
+      if (![...metaSlugs].some(slug => expectedPath(slug, toolsMeta[slug]).replace(/^\//, "").replace(/\/$/, "") === page)) {
+        fail("tool page missing from central taxonomy: " + page);
+      }
+    }
   }
 }
 
