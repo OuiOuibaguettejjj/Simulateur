@@ -463,7 +463,7 @@ jobs:
           try { data = JSON.parse(raw); } catch (error) {
             throw new Error('Unable to parse Cloudflare deployments JSON: ' + error.message);
           }
-          const deployments = data.result?.deployments ?? data.deployments;
+          const deployments = Array.isArray(data) ? data : (data.result?.deployments ?? data.deployments);
           if (!Array.isArray(deployments) || !deployments.length) {
             throw new Error('Cloudflare returned no production deployments.');
           }
