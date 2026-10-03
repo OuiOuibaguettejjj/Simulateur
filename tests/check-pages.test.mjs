@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import {checkPage,checkAll,loadToolsMeta,parseHtml,summarize,STRUCTURAL_RULES,EDITORIAL_RULES} from "../scripts/check-pages.mjs";
+import os from "node:os";
+import path from "node:path";
+import {checkPage,checkAll,loadToolsMeta,parseHtml,summarize,STRUCTURAL_RULES,EDITORIAL_RULES,toolDirsWithoutIndex,structuralPairs,parseBaseline,compareToBaseline,nextBaseline} from "../scripts/check-pages.mjs";
 
 const DESC="Utilisez cet outil en ligne pour effectuer rapidement votre calcul et obtenir un résultat clair, pratique et adapté à votre situation.";
 const CATS={categorie:{label:"Catégorie",path:"/categorie/"}};
@@ -15,7 +17,7 @@ return "<!doctype html><html lang=\"fr\"><head>"+
 "<script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"WebApplication\",\"url\":\"https://simulateur.site/outil/slug/\",\"description\":\""+desc+"\"}</script>"+
 "<script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"BreadcrumbList\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Accueil\",\"item\":\"https://simulateur.site/\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"Catégorie\",\"item\":\"https://simulateur.site/categorie/\"},{\"@type\":\"ListItem\",\"position\":3,\"name\":\"Nom de l'outil\",\"item\":\"https://simulateur.site/outil/slug/\"}]}</script>"+
 "</head><body><header></header><main><div class=\"breadcrumb\"><a href=\"/\">Accueil</a> · <a href=\"/categorie/\">Catégorie</a> · Nom de l'outil</div>"+
-"<section class=\"tool\"><h1>Nom de l'outil</h1><p class=\"tool-intro\">Introduction claire et utile.</p><div id=\"fields\"></div><div class=\"result\" aria-live=\"polite\">Résultat initial.</div>"+
+"<section class=\"tool\"><h1>Nom de l'outil</h1><p class=\"tool-intro\">Introduction claire et utile.</p><div id=\"fields\"><input id=\"v\" type=\"number\"></div><div class=\"result\" aria-live=\"polite\">Résultat initial.</div>"+
 "<div class=\"formula\"><a href=\"https://www.service-public.fr/\">Source officielle</a></div></section>"+
 "<section class=\"content-section\"><h2>Comment calculer ?</h2><p>Principe.</p><h2>Exemple de calcul</h2><p>Exemple.</p><h2>À savoir</h2><p>Limites.</p></section>"+
 "<section class=\"related-tools\"><a class=\"related-link\" href=\"/outil/slug-1/\">Outil 1</a><a class=\"related-link\" href=\"/outil/slug-2/\">Outil 2</a></section></main><footer></footer></body></html>";
@@ -197,10 +199,10 @@ assert.deepEqual(errs(fixture("x")).filter(x=>STRUCTURAL_RULES.includes(x.rule))
 assert(errs(fixture("x")).some(x=>x.rule==="description"),"description reste signalée (éditorial)");
 
 // markup-balance : attributs malformés et « > » parasite
-const badAttr=fixture().replace("<div id=\"fields\"></div>","<input id=\"v\" type=\"number step=\"any\" value=\"12.345\">");
+const badAttr=fixture().replace("<input id=\"v\" type=\"number\">","<input id=\"v\" type=\"number step=\"any\" value=\"12.345\">");
 assert(only(badAttr,"markup-balance").some(x=>/attribut malformé/.test(x.message)),"négatif : type=\"number step=\"any\"");
-assert.equal(only(fixture().replace("<div id=\"fields\"></div>","<input id=\"v\" type=\"number\" step=\"any\" value=\"12.345\">"),"markup-balance").length,0,"positif : attributs corrects");
-assert(only(fixture().replace("<div id=\"fields\"></div>","<input id=\"v\" data-x='a\"b'>"),"markup-balance").length===0,"positif : guillemet dans une valeur entre apostrophes");
+assert.equal(only(fixture().replace("<input id=\"v\" type=\"number\">","<input id=\"v\" type=\"number\" step=\"any\" value=\"12.345\">"),"markup-balance").length,0,"positif : attributs corrects");
+assert(only(fixture().replace("<input id=\"v\" type=\"number\">","<input id=\"v\" data-x='a\"b'>"),"markup-balance").length===0,"positif : guillemet dans une valeur entre apostrophes");
 assert(only(fixture().replace("<section class=\"tool\">","<section class=\"tool\">>"),"markup-balance").some(x=>/parasite/.test(x.message)),"négatif : « > » en trop après une balise");
 assert.deepEqual(parseHtml("<script>>1</script><div></div>").errors,[],"un > en début de script n'est pas signalé");
 
@@ -227,5 +229,60 @@ assert.deepEqual(errs(H(2),M(2),IDX5),[],"positif : 2 relations cohérentes HTML
 assert.equal(only(H(5),"related-meta",M(5),IDX5).length,1,"négatif : 5 relations");
 assert.equal(only(H(1),"related-meta",M(1),IDX5).length,1,"négatif : 1 relation");
 assert.equal(only(fixture(),"related-meta",{...META,slug:{...META.slug,relatedTools:"slug-1"}}).length,1,"négatif : relatedTools n'est pas une liste");
+
+// ===== Étape E : contrôles portés depuis deploy.yml =====
+// marqueur calculator-rendering=static
+assert(only(fixture().replace("<meta name=\"calculator-rendering\" content=\"static\">",""),"html-base").length>0,"négatif : marqueur static absent");
+assert(only(fixture().replace("content=\"static\"","content=\"dynamic\""),"html-base").length>0,"négatif : marqueur différent de static");
+// meta description présente (bloquant, distinct de la longueur éditoriale)
+const noDesc=fixture().replace(/<meta name="description" content="[^"]*">/,"");
+assert(only(noDesc,"html-base").some(x=>/description absente/.test(x.message)),"négatif : meta description absente");
+assert.equal(only(fixture("x"),"html-base").length,0,"positif : description présente mais courte = éditorial seulement");
+// canonique
+assert(only(fixture().replace(/<link rel="canonical"[^>]*>/,""),"canonical").length>0,"négatif : canonique absente");
+// au moins un input/select/textarea/button
+const noCtl=fixture().replace("<input id=\"v\" type=\"number\">","");
+assert(only(noCtl,"tool-block").some(x=>/input, select, textarea ou button/.test(x.message)),"négatif : aucun contrôle de calcul");
+for(const el of ["<select id=\"v\"></select>","<textarea id=\"v\"></textarea>","<button id=\"v\">Calculer</button>"])assert.equal(only(fixture().replace("<input id=\"v\" type=\"number\">",el),"tool-block").length,0,"positif : "+el);
+assert.equal(only(noCtl.replace("</main>","<script>const s='<button>';</script></main>"),"tool-block").length>0,true,"un <button> dans une chaîne JS ne compte pas comme contrôle");
+// un seul WebApplication et un seul BreadcrumbList
+const LD=/<script type="application\/ld\+json">[\s\S]*?<\/script>/g,lds=fixture().match(LD);
+assert(only(fixture().replace("</head>",lds[0]+"</head>"),"jsonld").length>0,"négatif : deux WebApplication");
+assert(only(fixture().replace("</head>",lds[1]+"</head>"),"jsonld").length>0,"négatif : deux BreadcrumbList");
+assert(only(fixture().replace("\"position\":3","\"position\":7"),"jsonld").some(x=>/positions/.test(x.message)),"négatif : position 3 incorrecte");
+assert(only(fixture().replace("\"position\":2,","\"position\":\"2\","),"jsonld").some(x=>/positions/.test(x.message)),"négatif : position non numérique");
+// dossier /outil/<slug>/ sans index.html
+const tmp=fs.mkdtempSync(path.join(os.tmpdir(),"check-pages-"));
+try{
+ fs.mkdirSync(path.join(tmp,"avec"));fs.writeFileSync(path.join(tmp,"avec","index.html"),"<!doctype html>");
+ assert.deepEqual(toolDirsWithoutIndex(tmp),[],"positif : tous les dossiers ont un index.html");
+ fs.mkdirSync(path.join(tmp,"sans"));fs.mkdirSync(path.join(tmp,"fichier"));fs.mkdirSync(path.join(tmp,"fichier","index.html"));
+ assert.deepEqual(toolDirsWithoutIndex(tmp),["fichier","sans"],"négatif : dossier vide et index.html qui est un dossier");
+ assert.deepEqual(toolDirsWithoutIndex(path.join(tmp,"absent")),[],"dossier racine absent : rien à signaler ici");
+}finally{fs.rmSync(tmp,{recursive:true,force:true})}
+
+// ===== Étape E : cliquet et baseline =====
+const P=(p,r)=>({path:p,rule:r});
+const cur=structuralPairs([{path:"b",rule:"title",message:"1"},{path:"a",rule:"result",message:"1"},{path:"a",rule:"result",message:"2"},{path:"a",rule:"description",message:"éditorial"}]);
+assert.deepEqual(cur,[P("a","result"),P("b","title")],"paires structurelles dédoublonnées, triées, sans l'éditorial");
+// cliquet : positif
+assert.deepEqual(compareToBaseline(cur,[P("b","title"),P("a","result")]),{added:[],stale:[]},"positif : écarts = baseline");
+// cliquet : négatif (régression ou nouvelle page non conforme)
+assert.deepEqual(compareToBaseline([...cur,P("c","h1")],cur).added,[P("c","h1")],"négatif : nouvel écart absent de la baseline");
+// cliquet : négatif (entrée périmée)
+assert.deepEqual(compareToBaseline([P("a","result")],cur).stale,[P("b","title")],"négatif : entrée périmée");
+// parseBaseline : validation
+assert.deepEqual(parseBaseline('[{"path":"a","rule":"title"}]'),[P("a","title")],"positif : baseline valide");
+for(const [label,txt] of [["JSON invalide","{"],["pas une liste","{}"],["entrée sans règle",'[{"path":"a"}]'],["règle éditoriale",'[{"path":"a","rule":"description"}]'],["règle inconnue",'[{"path":"a","rule":"zzz"}]'],["doublon",'[{"path":"a","rule":"title"},{"path":"a","rule":"title"}]']])assert.throws(()=>parseBaseline(txt),Error,"négatif : "+label);
+// --update-baseline : génération initiale, retrait seul, refus d'ajout
+const init=nextBaseline(cur,null);assert(init.ok&&init.initial&&init.next.length===2,"génération initiale autorisée");
+const shrink=nextBaseline([P("a","result")],cur);assert(shrink.ok&&!shrink.initial,"retrait accepté");assert.deepEqual(shrink.next,[P("a","result")],"la baseline perd l'entrée corrigée");assert.deepEqual(shrink.removed,[P("b","title")]);
+const grow=nextBaseline([...cur,P("c","h1")],cur);assert.equal(grow.ok,false,"ajout refusé");assert.deepEqual(grow.added,[P("c","h1")]);assert.deepEqual(grow.next,cur,"la baseline n'est pas modifiée en cas de refus");
+const mixed=nextBaseline([P("a","result"),P("c","h1")],cur);assert.equal(mixed.ok,false,"un retrait ne compense pas un ajout");
+assert.deepEqual(nextBaseline(cur,cur).removed,[],"rien à retirer : baseline inchangée");
+
+// le fichier de baseline versionné est valide et ne contient que des écarts structurels
+const committed=parseBaseline(fs.readFileSync(new URL("../scripts/check-pages.baseline.json",import.meta.url),"utf8"));
+assert(committed.every(x=>STRUCTURAL_RULES.includes(x.rule)),"baseline versionnée : règles structurelles seulement");
 
 console.log("check-pages tests passed.");

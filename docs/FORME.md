@@ -178,11 +178,19 @@ Le flux réel est :
 1. créer/copier une page à partir de `docs/template-outil.html` ;
 2. renseigner les métadonnées, le breadcrumb, l'interface, le résultat initial et le contenu propres à l'outil ;
 3. conserver la logique de calcul dans le JavaScript existant sans modifier les règles métier ;
-4. inscrire l'outil dans la taxonomie centrale lorsque nécessaire ;
+4. inscrire l'outil dans `data/tools.json` (type, catégorie, 2 à 4 `relatedTools` sous forme de slugs) ;
 5. exécuter les contrôles pré-production ;
 6. committer le HTML canonique.
 
 Il n'existe pas de `scripts/prerender-tools.mjs` dans ce flux et aucun header/footer n'est injecté pendant le déploiement.
+
+### Contrôle de conformité
+
+`scripts/check-pages.mjs` sépare les règles **structurelles** (le socle ci-dessus, bloquantes) des règles **éditoriales** (longueur de description, nombre de H2, lien source externe, unicité des métadonnées, volume de contenu : suivies par compteurs, jamais bloquantes). Un cliquet (`--ratchet` et `scripts/check-pages.baseline.json`) interdit toute nouvelle dérive structurelle et oblige à retirer de la baseline les écarts corrigés. Le détail est dans `docs/ARCHITECTURE.md`.
+
+### JavaScript interne
+
+Le contrat HTML ne dit rien sur le style du JavaScript interne d'un outil. `window.TOOL` (avec `calc`) est recommandé par défaut ; un moteur réglementaire complexe peut être extrait dans `public/<slug>.js`, comme `rsa.js` et `impot.js`. Dans tous les cas, le JavaScript ne génère pas le socle HTML et ne doit pas rendre de liens d'outils associés : le bloc `.related-tools` est écrit dans le HTML.
 
 ## 7. Template de référence
 

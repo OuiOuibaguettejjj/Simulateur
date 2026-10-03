@@ -1,0 +1,1102 @@
+[
+  {
+    "path": "public/outil/age-retraite/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/age-retraite/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/age/index.html",
+    "rule": "jsonld"
+  },
+  {
+    "path": "public/outil/age/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/are-chomage/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/are-chomage/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/arrondi/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/arrondi/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/arrondi/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/arrondi/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/assurance-vie/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/assurance-vie/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/calculatrice/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/calculatrice/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/calculatrice/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/calculatrice/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/capacite-emprunt/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/capacite-emprunt/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/capacite-emprunt/index.html",
+    "rule": "tool-block"
+  },
+  {
+    "path": "public/outil/cash-flow-immobilier/index.html",
+    "rule": "jsonld"
+  },
+  {
+    "path": "public/outil/cash-flow-immobilier/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/cash-flow-immobilier/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/cash-flow-immobilier/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/cash-flow-immobilier/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/charges-independant/index.html",
+    "rule": "jsonld"
+  },
+  {
+    "path": "public/outil/charges-independant/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/charges-independant/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/charges-independant/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/charges-independant/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/coefficient/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/coefficient/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/coefficient/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/coefficient/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/comparateur-placements/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/comparateur-placements/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/comparateur-placements/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/comparateur-placements/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/conges-payes/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/conges-payes/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/conges-payes/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/conges-payes/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/consommation-carburant/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/consommation-carburant/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/consommation-carburant/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/consommation-carburant/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/cout-km/index.html",
+    "rule": "jsonld"
+  },
+  {
+    "path": "public/outil/cout-km/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/cout-km/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/cout-km/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/cout-km/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/difference-dates/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/difference-dates/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/difference-dates/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/difference-dates/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/donation/index.html",
+    "rule": "jsonld"
+  },
+  {
+    "path": "public/outil/donation/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/donation/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/donation/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/donation/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/electricite/index.html",
+    "rule": "jsonld"
+  },
+  {
+    "path": "public/outil/electricite/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/electricite/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/electricite/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/electricite/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/epargne-mensuelle/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/epargne-mensuelle/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/epargne-mensuelle/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/epargne-mensuelle/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/epargne-reglementee/index.html",
+    "rule": "jsonld"
+  },
+  {
+    "path": "public/outil/epargne-reglementee/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/epargne-reglementee/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/epargne/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/epargne/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/epargne/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/epargne/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/fractions/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/fractions/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/fractions/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/fractions/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/frais-de-notaire/index.html",
+    "rule": "jsonld"
+  },
+  {
+    "path": "public/outil/frais-de-notaire/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/frais-de-notaire/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/frais-kilometriques/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/frais-kilometriques/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/frais-kilometriques/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/frais-kilometriques/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/heures-supplementaires/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/heures-supplementaires/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/ifi/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/ifi/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/impot-sur-le-revenu/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/impot-sur-le-revenu/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/indemnite-licenciement/index.html",
+    "rule": "jsonld"
+  },
+  {
+    "path": "public/outil/indemnite-licenciement/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/indemnite-licenciement/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/indemnite-licenciement/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/indemnite-licenciement/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/indemnite-precarite/index.html",
+    "rule": "jsonld"
+  },
+  {
+    "path": "public/outil/indemnite-precarite/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/indemnite-precarite/index.html",
+    "rule": "tool-block"
+  },
+  {
+    "path": "public/outil/indemnites-maladie/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/indemnites-maladie/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/indemnites-maladie/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/indemnites-maladie/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/indemnites-maternite-paternite/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/indemnites-maternite-paternite/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/indemnites-maternite-paternite/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/indemnites-maternite-paternite/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/inflation/index.html",
+    "rule": "jsonld"
+  },
+  {
+    "path": "public/outil/inflation/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/inflation/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/inflation/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/inflation/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/interets-composes/index.html",
+    "rule": "jsonld"
+  },
+  {
+    "path": "public/outil/interets-composes/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/interets-composes/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/jours-ouvres/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/jours-ouvres/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/jours-ouvres/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/jours-ouvres/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/marge/index.html",
+    "rule": "jsonld"
+  },
+  {
+    "path": "public/outil/marge/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/marge/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/marge/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/marge/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/median-mode/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/median-mode/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/median-mode/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/median-mode/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/mensualite-pret/index.html",
+    "rule": "jsonld"
+  },
+  {
+    "path": "public/outil/mensualite-pret/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/mensualite-pret/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/micro-entrepreneur/index.html",
+    "rule": "jsonld"
+  },
+  {
+    "path": "public/outil/micro-entrepreneur/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/micro-entrepreneur/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/micro-entrepreneur/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/micro-entrepreneur/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/moyenne-ponderee/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/moyenne-ponderee/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/moyenne-ponderee/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/moyenne-ponderee/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/moyenne/index.html",
+    "rule": "jsonld"
+  },
+  {
+    "path": "public/outil/moyenne/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/moyenne/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/moyenne/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/moyenne/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/partage-depenses/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/partage-depenses/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/partage-depenses/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/per/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/per/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/perimetre/index.html",
+    "rule": "jsonld"
+  },
+  {
+    "path": "public/outil/perimetre/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/perimetre/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/perimetre/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/perimetre/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/plus-value-immobiliere/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/plus-value-immobiliere/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/plus-value-immobiliere/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/plus-value-immobiliere/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/plus-value-mobiliere/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/plus-value-mobiliere/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/pourboire/index.html",
+    "rule": "jsonld"
+  },
+  {
+    "path": "public/outil/pourboire/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/pourboire/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/pourboire/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/pourboire/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/pourcentage/index.html",
+    "rule": "jsonld"
+  },
+  {
+    "path": "public/outil/pourcentage/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/pourcentage/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/pourcentage/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/pourcentage/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/preavis-demission/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/preavis-demission/index.html",
+    "rule": "tool-block"
+  },
+  {
+    "path": "public/outil/prelevement-source/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/prelevement-source/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/pret-immobilier/index.html",
+    "rule": "jsonld"
+  },
+  {
+    "path": "public/outil/pret-immobilier/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/pret-immobilier/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/pret-immobilier/index.html",
+    "rule": "tool-block"
+  },
+  {
+    "path": "public/outil/prime-activite/index.html",
+    "rule": "jsonld"
+  },
+  {
+    "path": "public/outil/prime-activite/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/prime-activite/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/prime-activite/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/prime-activite/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/prix-unitaire/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/promotions/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/promotions/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/promotions/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/promotions/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/proportion/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/proportion/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/proportion/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/proportion/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/ptz/index.html",
+    "rule": "jsonld"
+  },
+  {
+    "path": "public/outil/ptz/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/ptz/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/ptz/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/ptz/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/ratio/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/ratio/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/ratio/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/ratio/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/recette/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/recette/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/recette/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/recette/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/remise/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/remise/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/remise/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/remise/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/rendement-locatif/index.html",
+    "rule": "jsonld"
+  },
+  {
+    "path": "public/outil/rendement-locatif/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/rendement-locatif/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/rendement-locatif/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/rendement-locatif/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/retraite-simplifiee/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/retraite-simplifiee/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/retraite-simplifiee/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/retraite-simplifiee/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/retraite-simplifiee/index.html",
+    "rule": "tool-block"
+  },
+  {
+    "path": "public/outil/rsa/index.html",
+    "rule": "jsonld"
+  },
+  {
+    "path": "public/outil/rsa/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/rupture-conventionnelle/index.html",
+    "rule": "jsonld"
+  },
+  {
+    "path": "public/outil/rupture-conventionnelle/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/rupture-conventionnelle/index.html",
+    "rule": "tool-block"
+  },
+  {
+    "path": "public/outil/salaire-brut-net/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/salaire-brut-net/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/salaire-horaire/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/salaire-horaire/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/sasu-vs-ei-micro/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/sasu-vs-ei-micro/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/sasu-vs-ei-micro/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/sasu-vs-ei-micro/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/signe-astrologique/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/signe-astrologique/index.html",
+    "rule": "tool-block"
+  },
+  {
+    "path": "public/outil/smic/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/smic/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/solde-tout-compte/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/solde-tout-compte/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/solde-tout-compte/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/solde-tout-compte/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/succession/index.html",
+    "rule": "jsonld"
+  },
+  {
+    "path": "public/outil/succession/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/succession/index.html",
+    "rule": "tool-block"
+  },
+  {
+    "path": "public/outil/surface/index.html",
+    "rule": "jsonld"
+  },
+  {
+    "path": "public/outil/surface/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/surface/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/surface/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/surface/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/tableau-amortissement/index.html",
+    "rule": "jsonld"
+  },
+  {
+    "path": "public/outil/tableau-amortissement/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/tableau-amortissement/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/tableau-amortissement/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/tableau-amortissement/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/taux-endettement/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/taux-endettement/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/temps-calcul/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/temps-calcul/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/temps-calcul/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/temps-calcul/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/temps-partiel/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/temps-partiel/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/temps-travail/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/temps-travail/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/temps-travail/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/temps-travail/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/temps/index.html",
+    "rule": "jsonld"
+  },
+  {
+    "path": "public/outil/temps/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/temps/index.html",
+    "rule": "title"
+  },
+  {
+    "path": "public/outil/vitesse/index.html",
+    "rule": "jsonld"
+  },
+  {
+    "path": "public/outil/vitesse/index.html",
+    "rule": "related-block"
+  },
+  {
+    "path": "public/outil/vitesse/index.html",
+    "rule": "related-meta"
+  },
+  {
+    "path": "public/outil/vitesse/index.html",
+    "rule": "result"
+  },
+  {
+    "path": "public/outil/vitesse/index.html",
+    "rule": "title"
+  }
+]

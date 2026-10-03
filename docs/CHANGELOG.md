@@ -1,3 +1,8 @@
+## 2026-10-03 — Cliquet check-pages et contrôles portés
+- `check-pages --ratchet` devient bloquant dans `tests.yml` et `deploy.yml` ; `scripts/check-pages.baseline.json` liste les écarts structurels connus (retraits seulement via `--update-baseline`).
+- Contrôles des deux blocs inline de `deploy.yml` portés dans `check-pages` (description présente, contrôles de calcul, positions du `BreadcrumbList`, dossier sans `index.html`, au moins une page `/outil/`) et couverts par les tests ; les deux blocs sont supprimés.
+- Aucune page publique modifiée.
+
 ## 2026-10-03 — check-pages : règles structurelles et éditoriales
 - Règles classées en structurelles (bloquantes) et éditoriales (suivies, non bloquantes) ; rapport séparé en deux familles.
 - `markup-balance` : détection des attributs malformés et du `>` parasite après une balise.

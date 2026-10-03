@@ -95,3 +95,7 @@ La taxonomie des outils est déplacée de `public/simulateurs.js` vers `data/too
 
 L'architecture est gelée autour d'un socle HTML commun obligatoire, avec liberté d'enrichir l'intérieur du bloc outil. `check-pages` distingue les règles structurelles (le socle, bloquantes) des règles éditoriales (qualité de contenu, suivies par compteurs sans bloquer). Le contrat HTML ne dit rien sur le style du JavaScript interne : `window.TOOL` reste le défaut recommandé, et un moteur réglementaire peut être extrait en `public/<slug>.js` comme `rsa.js` et `impot.js`.
 
+
+## 2026-10-03 — Cliquet sur les règles structurelles
+
+`check-pages --ratchet` est bloquant en CI et en déploiement. Les écarts structurels existants sont figés dans `scripts/check-pages.baseline.json` : un nouvel écart fait échouer la CI, et un écart corrigé doit être retiré de la baseline (entrée périmée). `--update-baseline` ne peut que retirer des entrées. Les règles éditoriales restent suivies sans bloquer. Les deux blocs Node inline de `deploy.yml` sont supprimés une fois leurs contrôles portés dans `check-pages` et testés ; le garde de cohérence avant production, la validation statique, les tests, les smoke tests, le déploiement et le rollback sont conservés tels quels.

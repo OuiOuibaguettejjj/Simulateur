@@ -52,3 +52,14 @@ Pour les pages `/outil/`, le contrôle vérifie en plus, contre `data/tools.json
 
 Avec `--strict`, seuls les écarts structurels font échouer la commande.
 
+### Cliquet (ratchet) et baseline
+
+`node scripts/check-pages.mjs --ratchet` est une étape **bloquante** de `tests.yml` et de `deploy.yml` (placée avant la validation statique). Elle remplace les deux anciens blocs Node inline de `deploy.yml` (contrat HTML-first, métadonnées et HTML), dont les contrôles sont désormais portés dans `check-pages` et couverts par `tests/check-pages.test.mjs` : marqueur `calculator-rendering=static`, H1 non vide, meta description présente, canonique, au moins un `input`, `select`, `textarea` ou `button`, un seul `WebApplication` et un seul `BreadcrumbList` (positions 1, 2, 3), aucun dossier `/outil/<slug>/` sans `index.html`, catégorie et relations égales à `data/tools.json`.
+
+`scripts/check-pages.baseline.json` liste les écarts structurels connus, sous la forme `{ "path": ..., "rule": ... }` (une entrée par page et par règle). Le cliquet ne laisse la situation que s'améliorer :
+
+- **échec** si un écart structurel n'est pas dans la baseline (régression, ou nouvelle page non conforme) : une page absente de la baseline doit passer 100 % des règles structurelles ;
+- **échec** si la baseline contient une entrée qui n'échoue plus (entrée périmée) : elle doit être retirée ;
+- `node scripts/check-pages.mjs --update-baseline` crée la baseline la première fois, puis ne sait que **retirer** des entrées. Il refuse, avec un message explicite, d'en ajouter.
+
+Les règles éditoriales ne bloquent pas ; leurs compteurs sont affichés dans la console et dans `GITHUB_STEP_SUMMARY`. Quand une page est corrigée, la commande de mise à jour de la baseline retire l'entrée correspondante, dans le même commit.
