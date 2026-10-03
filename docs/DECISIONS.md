@@ -59,3 +59,7 @@ Le commit de synchronisation HTML `b1844c90bd4c31a815b31433268a629e2049b97a` est
 Le contrôle `normalize-layout.mjs --check` est fail-closed : une divergence ou un avertissement structurel fait échouer le contrôle. Le contrôle de cohérence du layout du workflow de déploiement n'est plus présenté comme un contrôle informatif.
 
 Avant chaque MEP, le workflow enregistre la version Cloudflare actuellement active. Si le déploiement ou une vérification de production échoue après cette étape, le workflow tente automatiquement de rétablir cette version précédente. Ce rollback ne modifie ni le dépôt ni les fichiers locaux.
+
+## Source de vérité unique de la taxonomie — 2026-10-03
+
+La taxonomie des outils repose désormais sur une seule déclaration par outil dans `TOOLS_META`. Le type, la catégorie principale et les relations `relatedTools` sont définis au même endroit. L'ancien objet `TOOL_TYPES`, qui dupliquait le type de chaque outil, a été supprimé ainsi que son contrôle de cohérence. Cette décision vise à réduire les points de divergence et à rendre l'ajout ou l'évolution d'un outil plus simple, sans introduire de moteur générique supplémentaire.
