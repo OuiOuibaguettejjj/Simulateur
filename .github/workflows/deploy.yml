@@ -48,6 +48,8 @@ jobs:
           for (const file of files) {
             const html = fs.readFileSync(file, 'utf8');
             if (!/<meta\b[^>]*name=["']calculator-rendering["'][^>]*content=["']static["'][^>]*>/i.test(html)) errors.push(file + ': missing HTML-first rendering marker');
+            if (/Simulateurs\.render\s*\(\)/.test(html)) errors.push(file + ': legacy Simulateurs.render() hook must not remain');
+            if (/(?:id=["'](?:ey|title|intro|source)["'])/i.test(html)) errors.push(file + ': legacy renderer DOM ids must not remain');
             if (!/<h1\b[^>]*>[\s\S]*?\S[\s\S]*?<\/h1>/i.test(html)) errors.push(file + ': missing non-empty H1');
             if (!/<meta\b[^>]*name=["']description["'][^>]*content=["'][^"']+["']/i.test(html)) errors.push(file + ': missing meta description');
             if (!/<link\b[^>]*rel=["']canonical["'][^>]*href=["'][^"']+["']/i.test(html)) errors.push(file + ': missing canonical');
