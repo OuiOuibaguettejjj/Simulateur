@@ -57,19 +57,11 @@
   },
   {
     "path": "public/outil/cash-flow-immobilier/index.html",
-    "rule": "jsonld"
-  },
-  {
-    "path": "public/outil/cash-flow-immobilier/index.html",
     "rule": "result"
   },
   {
     "path": "public/outil/cash-flow-immobilier/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/charges-independant/index.html",
-    "rule": "jsonld"
   },
   {
     "path": "public/outil/charges-independant/index.html",
@@ -113,10 +105,6 @@
   },
   {
     "path": "public/outil/cout-km/index.html",
-    "rule": "jsonld"
-  },
-  {
-    "path": "public/outil/cout-km/index.html",
     "rule": "result"
   },
   {
@@ -133,19 +121,11 @@
   },
   {
     "path": "public/outil/donation/index.html",
-    "rule": "jsonld"
-  },
-  {
-    "path": "public/outil/donation/index.html",
     "rule": "result"
   },
   {
     "path": "public/outil/donation/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/electricite/index.html",
-    "rule": "jsonld"
   },
   {
     "path": "public/outil/electricite/index.html",
@@ -162,10 +142,6 @@
   {
     "path": "public/outil/epargne-mensuelle/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/epargne-reglementee/index.html",
-    "rule": "jsonld"
   },
   {
     "path": "public/outil/epargne-reglementee/index.html",
@@ -190,10 +166,6 @@
   {
     "path": "public/outil/fractions/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/frais-de-notaire/index.html",
-    "rule": "jsonld"
   },
   {
     "path": "public/outil/frais-de-notaire/index.html",
@@ -237,19 +209,11 @@
   },
   {
     "path": "public/outil/indemnite-licenciement/index.html",
-    "rule": "jsonld"
-  },
-  {
-    "path": "public/outil/indemnite-licenciement/index.html",
     "rule": "result"
   },
   {
     "path": "public/outil/indemnite-licenciement/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/indemnite-precarite/index.html",
-    "rule": "jsonld"
   },
   {
     "path": "public/outil/indemnite-precarite/index.html",
@@ -277,10 +241,6 @@
   },
   {
     "path": "public/outil/inflation/index.html",
-    "rule": "jsonld"
-  },
-  {
-    "path": "public/outil/inflation/index.html",
     "rule": "result"
   },
   {
@@ -309,10 +269,6 @@
   },
   {
     "path": "public/outil/marge/index.html",
-    "rule": "jsonld"
-  },
-  {
-    "path": "public/outil/marge/index.html",
     "rule": "result"
   },
   {
@@ -329,19 +285,11 @@
   },
   {
     "path": "public/outil/mensualite-pret/index.html",
-    "rule": "jsonld"
-  },
-  {
-    "path": "public/outil/mensualite-pret/index.html",
     "rule": "result"
   },
   {
     "path": "public/outil/mensualite-pret/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/micro-entrepreneur/index.html",
-    "rule": "jsonld"
   },
   {
     "path": "public/outil/micro-entrepreneur/index.html",
@@ -358,10 +306,6 @@
   {
     "path": "public/outil/moyenne-ponderee/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/moyenne/index.html",
-    "rule": "jsonld"
   },
   {
     "path": "public/outil/moyenne/index.html",
@@ -385,10 +329,6 @@
   },
   {
     "path": "public/outil/perimetre/index.html",
-    "rule": "jsonld"
-  },
-  {
-    "path": "public/outil/perimetre/index.html",
     "rule": "result"
   },
   {
@@ -410,10 +350,6 @@
   {
     "path": "public/outil/plus-value-mobiliere/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/pourboire/index.html",
-    "rule": "jsonld"
   },
   {
     "path": "public/outil/pourboire/index.html",
@@ -449,10 +385,6 @@
   },
   {
     "path": "public/outil/pret-immobilier/index.html",
-    "rule": "jsonld"
-  },
-  {
-    "path": "public/outil/pret-immobilier/index.html",
     "rule": "result"
   },
   {
@@ -462,10 +394,6 @@
   {
     "path": "public/outil/pret-immobilier/index.html",
     "rule": "tool-block"
-  },
-  {
-    "path": "public/outil/prime-activite/index.html",
-    "rule": "jsonld"
   },
   {
     "path": "public/outil/prime-activite/index.html",
@@ -497,10 +425,6 @@
   },
   {
     "path": "public/outil/ptz/index.html",
-    "rule": "jsonld"
-  },
-  {
-    "path": "public/outil/ptz/index.html",
     "rule": "result"
   },
   {
@@ -530,10 +454,6 @@
   {
     "path": "public/outil/remise/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/rendement-locatif/index.html",
-    "rule": "jsonld"
   },
   {
     "path": "public/outil/rendement-locatif/index.html",
@@ -562,10 +482,6 @@
   {
     "path": "public/outil/rsa/index.html",
     "rule": "result"
-  },
-  {
-    "path": "public/outil/rupture-conventionnelle/index.html",
-    "rule": "jsonld"
   },
   {
     "path": "public/outil/rupture-conventionnelle/index.html",
@@ -637,19 +553,11 @@
   },
   {
     "path": "public/outil/surface/index.html",
-    "rule": "jsonld"
-  },
-  {
-    "path": "public/outil/surface/index.html",
     "rule": "result"
   },
   {
     "path": "public/outil/surface/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/tableau-amortissement/index.html",
-    "rule": "jsonld"
   },
   {
     "path": "public/outil/tableau-amortissement/index.html",
@@ -693,19 +601,11 @@
   },
   {
     "path": "public/outil/temps/index.html",
-    "rule": "jsonld"
-  },
-  {
-    "path": "public/outil/temps/index.html",
     "rule": "result"
   },
   {
     "path": "public/outil/temps/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/vitesse/index.html",
-    "rule": "jsonld"
   },
   {
     "path": "public/outil/vitesse/index.html",
