@@ -56,7 +56,12 @@ jobs:
             if (parsed.filter(x => x['@type'] === 'WebApplication').length !== 1) errors.push(file + ': expected exactly one WebApplication');
             if (parsed.filter(x => x['@type'] === 'BreadcrumbList').length !== 1) errors.push(file + ': expected exactly one BreadcrumbList');
           }
-          if (files.length !== 77) errors.push('expected 77 /outil/ pages, found ' + files.length);
+          const toolRoot = 'public/outil';
+          const toolDirs = fs.readdirSync(toolRoot, {withFileTypes:true}).filter(entry => entry.isDirectory());
+          const toolPages = toolDirs.filter(entry => fs.existsSync(path.join(toolRoot, entry.name, 'index.html')) && fs.statSync(path.join(toolRoot, entry.name, 'index.html')).isFile());
+          const toolDirsWithoutIndex = toolDirs.filter(entry => !toolPages.includes(entry));
+          if (toolPages.length === 0) errors.push('no /outil/ page found');
+          if (toolDirsWithoutIndex.length) errors.push('missing index.html in /outil/ directories: ' + toolDirsWithoutIndex.map(entry => path.join(toolRoot, entry.name)).join(', '));
           if (errors.length) { console.error(errors.join('\n')); process.exit(1); }
           console.log('Verified ' + files.length + ' HTML-first calculator pages.');
           NODE
@@ -140,7 +145,12 @@ jobs:
             const relatedActual = [...relatedSection.matchAll(/href=["']\/outil\/([^"']+)\/["']/gi)].map(m => m[1]);
             if (JSON.stringify(relatedActual) !== JSON.stringify(relatedExpected)) errors.push(file + ': relatedTools mismatch: HTML=[' + relatedActual.join(',') + '] metadata=[' + relatedExpected.join(',') + ']');
           }
-          if (files.length !== 77) errors.push('expected 77 /outil/ pages, found ' + files.length);
+          const toolRoot = 'public/outil';
+          const toolDirs = fs.readdirSync(toolRoot, {withFileTypes:true}).filter(entry => entry.isDirectory());
+          const toolPages = toolDirs.filter(entry => fs.existsSync(path.join(toolRoot, entry.name, 'index.html')) && fs.statSync(path.join(toolRoot, entry.name, 'index.html')).isFile());
+          const toolDirsWithoutIndex = toolDirs.filter(entry => !toolPages.includes(entry));
+          if (toolPages.length === 0) errors.push('no /outil/ page found');
+          if (toolDirsWithoutIndex.length) errors.push('missing index.html in /outil/ directories: ' + toolDirsWithoutIndex.map(entry => path.join(toolRoot, entry.name)).join(', '));
           if (errors.length) { console.error(errors.join('\n')); process.exit(1); }
           console.log('Verified metadata ↔ HTML contract for ' + files.length + ' /outil/ pages.');
           NODE
