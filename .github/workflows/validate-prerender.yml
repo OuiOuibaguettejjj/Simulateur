@@ -69,7 +69,7 @@ jobs:
           const errors = [];
           let checked = 0;
           const sim = fs.readFileSync('public/simulateurs.js', 'utf8');
-          const metaMatch = sim.match(/const TOOLS_META=([\\s\\S]*?);\\s*function toolMeta/);
+          const metaMatch = sim.match(/const TOOLS_META=([\s\S]*?);\s*function toolMeta/);
           if (!metaMatch) throw new Error('TOOLS_META missing');
           const toolsMeta = Function('return (' + metaMatch[1] + ')')();
 
@@ -114,7 +114,7 @@ jobs:
 
             const slug = path.basename(path.dirname(file));
             if (toolsMeta[slug]?.relatedTools?.length) {
-              const related = html.match(/<section\\b[^>]*class=["']related-tools["'][^>]*>([\\s\\S]*?)<\\/section>/i);
+              const related = html.match(/<section\\b[^>]*class=["']related-tools["'][^>]*>([\s\S]*?)<\\/section>/i);
               if (!related) errors.push(file + ': missing static related-tools');
             }
           }
