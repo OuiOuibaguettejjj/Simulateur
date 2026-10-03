@@ -79,7 +79,7 @@ Le squelette ci-dessous décrit les blocs attendus. Les commentaires indiquent l
       <h2>À savoir</h2><p>...</p>
     </section>
 
-    <!-- Bloc obligatoire : outils associés, 2 à 4 liens issus de TOOLS_META, un seul bloc par page. -->
+    <!-- Bloc obligatoire : /outil/ : 2 à 4 liens issus de TOOLS_META ; /conversion/ et /comparateur/ : 2 à 4 liens écrits dans le HTML, sans entrée TOOLS_META. Un seul bloc par page. -->
     <section class="related-tools">
       ...
     </section>
@@ -113,7 +113,8 @@ Chaque page outil doit fournir dans son HTML initial :
 - un résultat initial **non vide**, même avant toute saisie, avec `aria-live="polite"` ;
 - un bloc `.formula` (méthode et limites) contenant au moins une source ;
 - au moins trois sections H2 dans le contenu éditorial : comment calculer, exemple, à savoir ;
-- un unique bloc `.related-tools` standard de 2 à 4 liens, issus des relations définies dans `TOOLS_META` ;
+- `/outil/` : un unique bloc `.related-tools` standard de 2 à 4 liens, issus des relations définies dans `TOOLS_META` ;
+- `/conversion/` et `/comparateur/` : un unique bloc `.related-tools` standard de 2 à 4 liens écrits directement dans le HTML, sans entrée `TOOLS_META` ; chaque lien doit pointer vers une page publique existante, sans lien vers la page elle-même et sans doublon ;
 - un `WebApplication` JSON-LD unique ;
 - un `BreadcrumbList` JSON-LD unique, cohérent avec le breadcrumb visible et la canonique ;
 - les liens internes réellement utiles à la page.
