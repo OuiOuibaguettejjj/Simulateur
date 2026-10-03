@@ -66,13 +66,7 @@
 <section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Outils associés</h2><div class="related-links"><a class="related-link" href="/outil/prime-activite/"><strong>Prime d’activité</strong><span>Estimer la prime d’activité.</span></a><a class="related-link" href="/outil/salaire-brut-net/"><strong>Salaire brut ↔ net</strong><span>Estimer le salaire net.</span></a><a class="related-link" href="/outil/are-chomage/"><strong>Allocation chômage (ARE)</strong><span>Obtenir une estimation indicative de l’ARE.</span></a></div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="/travail/">Travail</a>.</p></div></section></main>
 <footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cgu/">CGU</a></div></div></footer>
 
-<script>
-const F={
- select:(i,l,o)=>'<div class="field"><label for="'+i+'">'+l+'</label><select id="'+i+'">'+o.map(x=>'<option value="'+x[0]+'">'+x[1]+'</option>').join('')+'</select></div>',
- number:(i,l,p='')=>'<div class="field"><label for="'+i+'">'+l+'</label><input id="'+i+'" type="number" min="0" step="0.01" inputmode="decimal" placeholder="'+p+'"></div>',
- row:a=>'<div class="row">'+a.join('')+'</div>'
-};
-window.TOOL={
+<script>window.TOOL={
  ey:"CAF · BARÈME AU 1ER AVRIL 2026",
  title:"Simulateur RSA 2026",
  intro:"Estimez votre RSA à partir de votre situation familiale, de votre logement et des ressources des trois mois de référence.",
