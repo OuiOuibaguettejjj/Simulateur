@@ -280,8 +280,8 @@ jobs:
             if (!/<body\b[^>]*>/i.test(html)) errors.push(file + ': missing body');
             if (!/<\/html>/i.test(html)) errors.push(file + ': missing closing html tag');
 
-            const head = (html.match(/<head\\b[^>]*>[\\s\\S]*?<\\/head>/i) || [''])[0];
-            const titles = [...head.matchAll(/<title>[^<]+<\\/title>/gi)];
+            const head = (html.match(/<head\b[^>]*>[\s\S]*?<\/head>/i) || [''])[0];
+            const titles = [...head.matchAll(/<title>[^<]+<\/title>/gi)];
             if (titles.length !== 1) errors.push(file + ': expected exactly one document title, found ' + titles.length);
 
             const canonicalMatches = [...html.matchAll(/<link[^>]+rel=["']canonical["'][^>]+href=["']([^"']+)["']/gi)];
