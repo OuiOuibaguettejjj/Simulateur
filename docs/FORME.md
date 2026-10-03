@@ -6,7 +6,7 @@ Ce document définit le **gabarit canonique** des pages outil. Les pages sont HT
 
 Les pages `/outil/`, `/conversion/` et `/comparateur/` partagent le même socle HTML-first. Le préfixe d'URL est conservé pour respecter les URL existantes ; il ne constitue pas un gabarit de rendu différent.
 
-La page de référence actuelle est `public/outil/tva/index.html`. Pour créer une nouvelle page, utiliser `public/outil/_template.html` comme point de copie, puis adapter uniquement les données et l'interface propres à l'outil.
+La page de référence actuelle est `public/outil/tva/index.html`. Pour créer une nouvelle page, utiliser `docs/template-outil.html` comme point de copie, puis adapter uniquement les données et l'interface propres à l'outil.
 
 ### Squelette HTML canonique
 
@@ -171,7 +171,7 @@ Le HTML commité est la source de vérité. Les scripts de CI vérifient sa conf
 
 Le flux réel est :
 
-1. créer/copier une page à partir de `public/outil/_template.html` ;
+1. créer/copier une page à partir de `docs/template-outil.html` ;
 2. renseigner les métadonnées, le breadcrumb, l'interface, le résultat initial et le contenu propres à l'outil ;
 3. conserver la logique de calcul dans le JavaScript existant sans modifier les règles métier ;
 4. inscrire l'outil dans la taxonomie centrale lorsque nécessaire ;
@@ -182,11 +182,11 @@ Il n'existe pas de `scripts/prerender-tools.mjs` dans ce flux et aucun header/fo
 
 ## 7. Template de référence
 
-Le fichier `public/outil/_template.html` est un **point de copie uniquement**. Il ne représente pas une page publique :
+Le fichier `docs/template-outil.html` est un **point de copie documentaire uniquement**. Il ne représente pas une page publique :
 
-- son nom ne se termine pas par `index.html` ;
-- il n'entre donc pas dans le walk des pages de `generate-sitemap.mjs`, `normalize-layout.mjs`, `prepare-adsense.mjs` ou `check-layout.mjs` ;
-- il doit rester hors du sitemap ;
+- il est situé hors de `public/` ;
+- il n'est donc pas parcouru par les walks des scripts de génération/contrôle des pages publiques ;
+- il ne peut pas être ajouté au sitemap par accident ;
 - il ne doit jamais être référencé comme URL publique.
 
 Toute modification du template doit rester compatible avec les contrôles CI.
