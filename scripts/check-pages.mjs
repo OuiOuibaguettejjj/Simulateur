@@ -4,7 +4,7 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 
 const ROOT=process.cwd();
-const STRUCT=new Set(["div","section","main","header","footer","nav","article","aside","details","ul","ol","table","form"]);
+const STRUCT=new Set(["div","section","main","header","footer","nav","article","aside","details","ul","ol","table","form"]);\nconst OPTIONAL_END=new Set(["p","li","dt","dd","tr","td","th","thead","tbody","tfoot","option"]);
 const VOID=new Set(["area","base","br","col","embed","hr","img","input","link","meta","source","track","wbr"]);
 const ENT={amp:"&",lt:"<",gt:">",quot:'"',apos:"'",nbsp:"\u00a0",lsquo:"‘",rsquo:"’",ldquo:"“",rdquo:"”",laquo:"«",raquo:"»",hellip:"…",ndash:"–",mdash:"—",euro:"€",middot:"·"};
 const read=f=>fs.readFileSync(path.join(ROOT,f),"utf8");
@@ -16,7 +16,7 @@ export function parseHtml(html){
  while(m=re.exec(html)){if(m.index<pos)continue;if(raw){if(!new RegExp("^<\\s*/\\s*"+raw+"\\b","i").test(m[0]))continue;add(html.slice(pos,m.index),pos);raw=null}else add(html.slice(pos,m.index),pos);const t=m[0],start=m.index,end=start+t.length;pos=end;
   if(t.startsWith("<!--")||/^<!doctype\b/i.test(t))continue;
   const close=/^<\s*\/\s*([A-Za-z][\w:-]*)/.exec(t);
-  if(close){const n=close[1].toLowerCase();let i=-1;for(let j=stack.length-1;j;j--)if(stack[j].name===n){i=j;break}if(i<0)errors.push(t+" en trop");else{for(let j=stack.length-1;j>i;j--)if(STRUCT.has(stack[j].name))errors.push("<"+stack[j].name+"> non fermé avant </"+n+">");stack[i].end=end;stack.length=i}continue}
+  if(close){const n=close[1].toLowerCase();let i=-1;for(let j=stack.length-1;j;j--)if(stack[j].name===n){i=j;break}if(i<0){if(!OPTIONAL_END.has(n))errors.push(t+" en trop")}else{for(let j=stack.length-1;j>i;j--)if(STRUCT.has(stack[j].name))errors.push("<"+stack[j].name+"> non fermé avant </"+n+">");stack[i].end=end;stack.length=i}continue}
   const open=/^<\s*([A-Za-z][\w:-]*)\b([\s\S]*?)\/?\s*>$/.exec(t);if(!open)continue;const n=open[1].toLowerCase(),node={name:n,attrs:parseAttrs(open[2].replace(/\/\s*$/,"")),start,end,children:[],parent:stack.at(-1),texts:[]};node.parent.children.push(node);
   if(!(/\/\s*>$/.test(t)||VOID.has(n))){stack.push(node);if(n==="script"||n==="style")raw=n}
  }
@@ -69,6 +69,6 @@ function main(){
  const out=[a,b,c,"### Écarts","",...fail.map(x=>x.path+" ["+x.rule+"] "+x.message)].join("\n");
  if(process.env.GITHUB_STEP_SUMMARY&&!process.argv.includes("--json"))fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,[a,b,c].join("\n\n")+"\n");
  if(process.argv.includes("--json"))console.log(JSON.stringify({pages:pages.map(p=>({path:p.path,dir:p.dir,slug:p.slug,family:family(p,meta)})),rules:counts,families:fam,indicators:ind,pagesUnder120:under,pagesWithoutExternalLink:noext,failures:fail},null,2));else console.log(out);
- if(process.argv.includes("--strict")&&fail.length)process.exit(1)
+ if(process.argv.includes("--strict")&&fail.length){for(const x of fail)console.error("::error file="+x.path+"::"+x.rule+" "+x.message);process.exit(1)}
 }
 if(import.meta.url===(process.argv[1]?pathToFileURL(path.resolve(process.argv[1])).href:""))main();
