@@ -177,14 +177,6 @@
   },
   {
     "path": "public/outil/donation/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/donation/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/donation/index.html",
     "rule": "result"
   },
   {

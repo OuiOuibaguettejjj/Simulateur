@@ -332,7 +332,11 @@
     "donation": {
       "type": "simulateur",
       "category": "fiscalite",
-      "relatedTools": []
+      "relatedTools": [
+        "succession",
+        "plus-value-mobiliere",
+        "impot-sur-le-revenu"
+      ]
     },
     "impot-sur-le-revenu": {
       "type": "simulateur",
@@ -374,9 +378,10 @@
       "type": "simulateur",
       "category": "fiscalite",
       "relatedTools": [
-        "impot-sur-le-revenu",
-        "plus-value-mobiliere",
-        "donation"
+        "pourcentage",
+        "remise",
+        "prix-unitaire",
+        "impot-sur-le-revenu"
       ]
     },
     "age-retraite": {
