@@ -105,14 +105,6 @@
   },
   {
     "path": "public/outil/consommation-carburant/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/consommation-carburant/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/consommation-carburant/index.html",
     "rule": "result"
   },
   {
@@ -122,14 +114,6 @@
   {
     "path": "public/outil/cout-km/index.html",
     "rule": "jsonld"
-  },
-  {
-    "path": "public/outil/cout-km/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/cout-km/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/cout-km/index.html",
@@ -162,14 +146,6 @@
   {
     "path": "public/outil/electricite/index.html",
     "rule": "jsonld"
-  },
-  {
-    "path": "public/outil/electricite/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/electricite/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/electricite/index.html",
@@ -418,14 +394,6 @@
   {
     "path": "public/outil/perimetre/index.html",
     "rule": "jsonld"
-  },
-  {
-    "path": "public/outil/perimetre/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/perimetre/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/perimetre/index.html",
@@ -709,14 +677,6 @@
   },
   {
     "path": "public/outil/surface/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/surface/index.html",
-    "rule": "related-meta"
-  },
-  {
-    "path": "public/outil/surface/index.html",
     "rule": "result"
   },
   {
@@ -782,14 +742,6 @@
   {
     "path": "public/outil/vitesse/index.html",
     "rule": "jsonld"
-  },
-  {
-    "path": "public/outil/vitesse/index.html",
-    "rule": "related-block"
-  },
-  {
-    "path": "public/outil/vitesse/index.html",
-    "rule": "related-meta"
   },
   {
     "path": "public/outil/vitesse/index.html",

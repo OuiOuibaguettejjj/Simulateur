@@ -640,32 +640,56 @@
     "consommation-carburant": {
       "type": "calculateur",
       "category": "mesures",
-      "relatedTools": []
+      "relatedTools": [
+        "frais-kilometriques",
+        "prix-unitaire",
+        "promotions"
+      ]
     },
     "cout-km": {
       "type": "calculateur",
       "category": "mesures",
-      "relatedTools": []
+      "relatedTools": [
+        "consommation-carburant",
+        "frais-kilometriques",
+        "vitesse"
+      ]
     },
     "electricite": {
       "type": "calculateur",
       "category": "mesures",
-      "relatedTools": []
+      "relatedTools": [
+        "prix-unitaire",
+        "consommation-carburant",
+        "moyenne"
+      ]
     },
     "perimetre": {
       "type": "calculateur",
       "category": "mesures",
-      "relatedTools": []
+      "relatedTools": [
+        "proportion",
+        "arrondi",
+        "fractions"
+      ]
     },
     "surface": {
       "type": "calculateur",
       "category": "mesures",
-      "relatedTools": []
+      "relatedTools": [
+        "perimetre",
+        "calculatrice",
+        "proportion"
+      ]
     },
     "vitesse": {
       "type": "calculateur",
       "category": "mesures",
-      "relatedTools": []
+      "relatedTools": [
+        "consommation-carburant",
+        "cout-km",
+        "temps-calcul"
+      ]
     },
     "partage-depenses": {
       "type": "calculateur",
