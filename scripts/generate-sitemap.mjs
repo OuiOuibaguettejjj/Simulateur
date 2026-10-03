@@ -90,9 +90,6 @@ if (CHECK_ONLY) {
     console.error("First mismatch at line " + (firstMismatch + 1) + ":");
     console.error("Committed: " + (currentLines[firstMismatch] ?? "<missing>"));
     console.error("Generated: " + (generatedLines[firstMismatch] ?? "<missing>"));
-    console.error("BEGIN_GENERATED_SITEMAP");
-    console.error(sitemap);
-    console.error("END_GENERATED_SITEMAP");
     process.exit(1);
   }
   console.log(`Sitemap check passed: ${pages.length} URLs.`);
