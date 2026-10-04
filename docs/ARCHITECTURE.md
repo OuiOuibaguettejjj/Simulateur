@@ -46,7 +46,9 @@ Toute évolution d'architecture ou de sécurité doit d'abord être décidée et
 `scripts/check-pages.mjs` classe ses règles en deux familles, séparées dans la sortie console et dans le tableau `GITHUB_STEP_SUMMARY`.
 
 - **Structurelles (bloquantes)** : `html-base`, `markup-balance`, `title`, `canonical`, `breadcrumb`, `h1`, `tool-block`, `result`, `related-block`, `jsonld`, `related-meta`, `citation-marker`. Elles garantissent le socle HTML commun. `markup-balance` détecte aussi les attributs malformés (nom d'attribut contenant `"` ou `'`, par exemple `type="number step="any"`) et un `>` parasite juste après une balise.
-- **Éditoriales sous cliquet** : `description` (120 à 160 caractères), `content-h2` (au moins 3 H2), `formula` (lien source externe) et `meta-unique` sont sous cliquet : elles ne peuvent que diminuer. Les indicateurs « pages sous 120 mots » et « pages sans lien externe » restent informatifs et ne bloquent pas.
+- **Éditoriales sous cliquet** : `description` (120 à 160 caractères), `content-h2` (au moins 3 H2), `formula` (lien source externe dans `.formula` ou `.source-links`) et `meta-unique` sont sous cliquet : elles ne peuvent que diminuer.
+
+Le normaliseur `scripts/normalize-layout.mjs` ajoute de façon idempotente `aria-live="polite"` à chaque `.result` et le favicon SVG commun dans le `<head>`, sans modifier le texte visible. Son mode `--check` est fail-closed. Les indicateurs « pages sous 120 mots » et « pages sans lien externe » restent informatifs et ne bloquent pas.
 
 Pour les pages `/outil/`, le contrôle vérifie en plus, contre `data/tools.json` : la catégorie (lien du breadcrumb visible, et élément de position 2 du `BreadcrumbList`, nom et URL) ; l'égalité exacte, ordre compris, entre les slugs du bloc `.related-tools` du HTML et `relatedTools` ; et que `relatedTools` contient de 2 à 4 slugs (règle `related-meta`).
 
