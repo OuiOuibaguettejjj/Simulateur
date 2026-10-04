@@ -13,9 +13,11 @@ for(const block of moduleBlocks){
   const check=spawnSync(process.execPath,["--input-type=module","--check"],{input:block,encoding:"utf8"});
   assert.equal(check.status,0,check.stderr||"syntaxe ESM invalide");
 }
-const staticGuard=moduleBlocks.find(block=>block.includes("isInteractivePage"));
-assert(staticGuard,"le garde de cohérence doit importer isInteractivePage");
-assert.match(staticGuard,/import \{ isInteractivePage \} from ['"]\.\/scripts\/interactive-families\.mjs['"]/);
-assert.match(staticGuard,/isInteractivePage\(/);
+const interactiveBlocks=blocks.filter(block=>block.includes("isInteractivePage("));
+assert.equal(interactiveBlocks.length,2,"les deux blocs utilisant isInteractivePage doivent être contrôlés");
+for(const block of interactiveBlocks){
+  assert.match(block,/import \{ isInteractivePage \} from ['"]\.\/scripts\/interactive-families\.mjs['"]/);
+  assert.match(block,/isInteractivePage\(/);
+}
 
 console.log("deploy workflow inline Node syntax tests passed.");
