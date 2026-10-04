@@ -318,13 +318,13 @@ assert(committed.every(x=>TRACKED_RULES.includes(x.rule)),"baseline versionnée 
 
 // anneeAMigrer : les écarts éditoriaux ne peuvent pas être résorbés avant migration.
 const debtPath="public/outil/ancien/index.html";
-const lockedBaseline=[P(debtPath,"description"),P(debtPath,"content-h2"),P(debtPath,"formula"),P(debtPath,"result")];
+const lockedBaseline=[P(debtPath,"description"),P(debtPath,"content-h2"),P(debtPath,"formula"),P(debtPath,"faq"),P(debtPath,"result")];
 const lockedCurrent=[P(debtPath,"result")];
 const locked=nextBaseline(lockedCurrent,lockedBaseline,["ancien"]);
 assert.equal(locked.ok,false,"anneeAMigrer bloque le retrait des écarts éditoriaux");
-assert.deepEqual(locked.blocked,[P(debtPath,"description"),P(debtPath,"content-h2"),P(debtPath,"formula")],"les trois écarts éditoriaux sont verrouillés");
-const lockedMessages=buildRatchetMessages({stale:lockedBaseline.slice(0,3),blocked:locked.blocked});
-assert.equal(lockedMessages.length,3,"entrée verrouillée : un seul message par écart");
+assert.deepEqual(locked.blocked,[P(debtPath,"description"),P(debtPath,"content-h2"),P(debtPath,"formula"),P(debtPath,"faq")],"les quatre écarts éditoriaux sont verrouillés");
+const lockedMessages=buildRatchetMessages({stale:lockedBaseline.slice(0,4),blocked:locked.blocked});
+assert.equal(lockedMessages.length,4,"entrée verrouillée : un seul message par écart");
 assert(lockedMessages.every(m=>m.includes("cliquet anneeAMigrer")),"entrée verrouillée : seul le message anneeAMigrer apparaît");
 assert(!lockedMessages.some(m=>m.includes("entrée périmée")),"entrée verrouillée : aucun message entrée périmée");
 const addedMessages=buildRatchetMessages({added:[P("public/outil/test/index.html","result")]});
