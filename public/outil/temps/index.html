@@ -31,7 +31,7 @@
 .duration-example strong{font-size:1.35rem}
 @media(max-width:650px){.duration-grid{grid-template-columns:1fr}.duration-panel{padding:14px 14px 2px}}
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur de durée","url":"https://simulateur.site/outil/temps/","description":"Calculez et convertissez une durée : minutes, heures, secondes, dates et horaires. Ajoutez ou retirez une durée d\u0027une date.","inLanguage":"fr-FR","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"price":"0","priceCurrency":"EUR"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Temps","item":"https://simulateur.site/temps/"},{"@type":"ListItem","position":3,"name":"Calculateur de durée","item":"https://simulateur.site/outil/temps/"}]}</script></head>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur de durée","url":"https://simulateur.site/outil/temps/","description":"Calculez et convertissez une durée : minutes, heures, secondes, dates et horaires. Ajoutez ou retirez une durée d\u0027une date.","inLanguage":"fr-FR","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"price":"0","priceCurrency":"EUR"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Temps","item":"https://simulateur.site/temps/"},{"@type":"ListItem","position":3,"name":"Calculateur de durée","item":"https://simulateur.site/outil/temps/"}]}</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"></head>
 <body>
 <header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header>
 <main>
@@ -119,7 +119,7 @@
 </div>
 
 <button class="button-main" onclick="Simulateurs.calc()">Calculer</button>
-<div class="result" id="result">Saisissez vos données puis lancez le calcul.</div>
+<div class="result" id="result" aria-live="polite">Saisissez vos données puis lancez le calcul.</div>
 <div class="formula"><strong>Méthode et conventions</strong><p>Les conversions utilisent 60 secondes par minute, 60 minutes par heure, 24 heures par jour et 7 jours par semaine. Les mois et années sont traités comme des unités calendaires, dont la durée dépend de la date.</p></div>
 </section>
 
@@ -253,25 +253,25 @@
       if(!c) return "Valeur invalide.";
       const s=c.seconds;
       const hours=s/3600,minutes=s/60,days=s/86400;
-      return '<div class="result-main"><strong>'+formatDuration(s,true)+'</strong></div><div class="takeaway"><div class="takeaway-title">Équivalences</div><div class="takeaway-grid"><div class="takeaway-item"><small>Heures</small><strong>'+number(hours)+'</strong></div><div class="takeaway-item"><small>Minutes</small><strong>'+number(minutes)+'</strong></div><div class="takeaway-item"><small>Secondes</small><strong>'+number(s)+'</strong></div></div></div><p class="small">Soit '+number(days)+' jour(s).</p>';
+      return '<div class="result-main" aria-live="polite"><strong>'+formatDuration(s,true)+'</strong></div><div class="takeaway"><div class="takeaway-title">Équivalences</div><div class="takeaway-grid"><div class="takeaway-item"><small>Heures</small><strong>'+number(hours)+'</strong></div><div class="takeaway-item"><small>Minutes</small><strong>'+number(minutes)+'</strong></div><div class="takeaway-item"><small>Secondes</small><strong>'+number(s)+'</strong></div></div></div><p class="small">Soit '+number(days)+' jour(s).</p>';
     }
     if(mode==="dates"){
       const a=parseDate(document.getElementById("dateStart").value),b=parseDate(document.getElementById("dateEnd").value);
       if(!a||!b||b.date<a.date) return "Vérifiez les dates : la date de fin doit être postérieure ou égale à la date de début.";
       const days=Math.round((b.date-a.date)/86400000),cal=diffCalendar({y:a.y,m:a.m,d:a.d},{y:b.y,m:b.m,d:b.d});
-      return '<div class="result-main"><strong>'+unitText(days,"jour")+'</strong></div><div class="takeaway"><div class="takeaway-title">Équivalences</div><div class="takeaway-grid"><div class="takeaway-item"><small>Semaines</small><strong>'+number(days/7)+'</strong></div><div class="takeaway-item"><small>Heures</small><strong>'+number(days*24)+'</strong></div><div class="takeaway-item"><small>Minutes</small><strong>'+number(days*1440)+'</strong></div></div></div><p>Soit '+unitText(cal.years,"an")+" "+unitText(cal.months,"mois")+" "+unitText(cal.days,"jour")+'.</p><p class="small">Écart calendaire : le jour de départ n’est pas compté comme une journée écoulée.</p>';
+      return '<div class="result-main" aria-live="polite"><strong>'+unitText(days,"jour")+'</strong></div><div class="takeaway"><div class="takeaway-title">Équivalences</div><div class="takeaway-grid"><div class="takeaway-item"><small>Semaines</small><strong>'+number(days/7)+'</strong></div><div class="takeaway-item"><small>Heures</small><strong>'+number(days*24)+'</strong></div><div class="takeaway-item"><small>Minutes</small><strong>'+number(days*1440)+'</strong></div></div></div><p>Soit '+unitText(cal.years,"an")+" "+unitText(cal.months,"mois")+" "+unitText(cal.days,"jour")+'.</p><p class="small">Écart calendaire : le jour de départ n’est pas compté comme une journée écoulée.</p>';
     }
     if(mode==="times"){
       const a=parseTime(document.getElementById("timeStart").value),b=parseTime(document.getElementById("timeEnd").value);
       if(!a||!b) return "Saisissez deux horaires valides.";
       let seconds=b.total-a.total;if(seconds<0)seconds+=86400;
-      return '<div class="result-main"><strong>'+formatDuration(seconds,true)+'</strong></div><p>Soit '+number(seconds/3600)+' heure(s) ou '+number(seconds/60)+' minute(s).</p>';
+      return '<div class="result-main" aria-live="polite"><strong>'+formatDuration(seconds,true)+'</strong></div><p>Soit '+number(seconds/3600)+' heure(s) ou '+number(seconds/60)+' minute(s).</p>';
     }
     if(mode==="datetime"){
       const a=parseDateTime(document.getElementById("dateTimeStart").value),b=parseDateTime(document.getElementById("dateTimeEnd").value);
       if(!a||!b||b.date<a.date) return "Vérifiez les dates et heures.";
       const seconds=Math.round((b.date-a.date)/1000),cal=diffCalendar(a,b);
-      return '<div class="result-main"><strong>'+formatDuration(seconds,true)+'</strong></div><div class="takeaway"><div class="takeaway-title">Totaux</div><div class="takeaway-grid"><div class="takeaway-item"><small>Heures</small><strong>'+number(seconds/3600)+'</strong></div><div class="takeaway-item"><small>Minutes</small><strong>'+number(seconds/60)+'</strong></div><div class="takeaway-item"><small>Secondes</small><strong>'+number(seconds)+'</strong></div></div></div><p>Décomposition calendaire : '+cal.years+' an(s), '+cal.months+' mois, '+cal.days+' jour(s), plus le temps restant.</p><p class="small">Calcul effectué sans fuseau horaire ni changement d’heure saisonnier : il compare les dates et heures saisies comme des horaires civils.</p>';
+      return '<div class="result-main" aria-live="polite"><strong>'+formatDuration(seconds,true)+'</strong></div><div class="takeaway"><div class="takeaway-title">Totaux</div><div class="takeaway-grid"><div class="takeaway-item"><small>Heures</small><strong>'+number(seconds/3600)+'</strong></div><div class="takeaway-item"><small>Minutes</small><strong>'+number(seconds/60)+'</strong></div><div class="takeaway-item"><small>Secondes</small><strong>'+number(seconds)+'</strong></div></div></div><p>Décomposition calendaire : '+cal.years+' an(s), '+cal.months+' mois, '+cal.days+' jour(s), plus le temps restant.</p><p class="small">Calcul effectué sans fuseau horaire ni changement d’heure saisonnier : il compare les dates et heures saisies comme des horaires civils.</p>';
     }
     if(mode==="add"){
       const start=parseDateTime(document.getElementById("addDateTime").value);
@@ -282,7 +282,7 @@
       const base=toDateTime(p)+((vals[2]*86400+vals[3]*3600+vals[4]*60+vals[5])*1000);
       const result=new Date(base);
       const rp={y:result.getUTCFullYear(),m:result.getUTCMonth()+1,d:result.getUTCDate(),h:result.getUTCHours(),mi:result.getUTCMinutes(),s:result.getUTCSeconds()};
-      return '<div class="result-main"><strong>'+formatDateTime(rp)+'</strong></div><p>Résultat obtenu après application de la durée saisie.</p><p class="small">Les années et mois suivent le calendrier ; les jours, heures, minutes et secondes sont ajoutés comme durées fixes.</p>';
+      return '<div class="result-main" aria-live="polite"><strong>'+formatDateTime(rp)+'</strong></div><p>Résultat obtenu après application de la durée saisie.</p><p class="small">Les années et mois suivent le calendrier ; les jours, heures, minutes et secondes sont ajoutés comme durées fixes.</p>';
     }
     return "Choisissez un calcul.";
   };
