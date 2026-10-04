@@ -129,7 +129,20 @@ assert.equal(
   "/outil/ sans TOOLS_META conserve related-meta"
 );
 
-assert.deepEqual(errs(fixture()),[],"page conforme");
+assert.deepEqual(errs(fixture()),[],"page conforme");const faqInsideContentSection=fixture().replace(
+  '<section class="calculator-faq"><h2>FAQ</h2>',
+  '<section class="content-section"><h2>Explication du calcul</h2><p>Principe.</p><section class="calculator-faq"><h2>FAQ</h2>'
+).replace(
+  '<section class="related-tools">',
+  '</section></section><section class="related-tools">'
+);
+assert(has(faqInsideContentSection,"content-h2"),"le H2 FAQ ne doit pas compter dans les 2 H2 éditoriaux");
+const faqWithTwoEditorialH2=faqInsideContentSection.replace(
+  '<p>Principe.</p><section class="calculator-faq">',
+  '<p>Principe.</p><h2>Deuxième section</h2><section class="calculator-faq">'
+);
+assert.equal(has(faqWithTwoEditorialH2,"content-h2"),false,"deux H2 éditoriaux hors FAQ restent valides");
+
 assert(has(fixture().replace("<title>Mot-clé | Simulateur</title>","<title>Mot-clé</title>"),"title"));
 for(const [n,bad] of [[119,true],[120,false],[160,false],[161,true]])assert.equal(has(fixture("x".repeat(n)),"description"),bad,"description "+n);
 for(const a of ["'","&#39;","&apos;","’"])assert.equal(has(fixture("x".repeat(118)+a+"."),"description"),false,"apostrophe "+a);
