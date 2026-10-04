@@ -136,6 +136,16 @@ Limite connue : si un slug est retiré de `anneeAMigrer` après suppression de l
 
 `check-params.mjs` conserve son comportement par défaut : seule une validité dépassée est bloquante. L'option `--horizon <jours>` permet une anticipation indépendante ; les jeux qui expirent dans moins de l'horizon deviennent bloquants pour ce contrôle. Le workflow PR exécute cette anticipation en non bloquant avec une annotation GitHub warning, et un workflow hebdomadaire l'exécute en bloquant. Les échéances suivies sont documentées dans `docs/ECHEANCES.md`.
 
+## 2026-10-04 — Deux couches de tests des calculateurs
+
+Les calculateurs à script intégré disposent de deux niveaux de filet de sécurité. La couche 1 exécute chaque script intégré dans `node:vm` avec un DOM minimal et plusieurs familles d'entrées limites ; elle vérifie l'absence d'exception, de résultat vide et de valeurs invalides. Les exceptions techniques existantes sont versionnées dans `tests/generic-calcs-exceptions.json` et sont ratchetées par identité et motif.
+
+La couche 2 ajoute des cas de référence pilotés par `tests/references/*.json`. Chaque valeur attendue est indépendante du code testé et accompagnée d'une source publiée fiable. Les cas refusent les outils encore marqués `anneeAMigrer`, lus directement depuis `data/parametres.json`. Les sorties sont vérifiées à partir d'un libellé ou d'une regex déclarée dans le champ `sortie`.
+
+La couche 1 appelle volontairement `TOOL.calc` directement pour observer la sortie brute avant le garde-fou de `simulateurs.js`. Ce contournement est intentionnel et limité au harnais de test.
+
+Le smoke Chromium et le contrôle post-déploiement utilisent le même module `tests/invalid-result.mjs` pour détecter `NaN`, `Infinity`, `undefined`, `null`, `[object Object]`, `∞` et `-∞`.
+
 ## 2026-10-04 — Balises de partage dans le normaliseur de layout
 
 Les balises Open Graph et Twitter sont générées par `normalize-layout.mjs` plutôt que écrites page par page : elles sont dérivées du titre, de la meta description et de la canonique, qui restent la source de vérité, et le mode `--check` bloque toute dérive. Choix : `twitter:card` en `summary` et aucune `og:image`, faute d'image dans le dépôt ; une image de partage pourra être ajoutée plus tard sans toucher aux URL. Les pages sans titre, description ou canonique (`404.html`) ne reçoivent aucune balise. Aucune URL, logique de calcul, CSP ni date `lastmod` n'est modifiée (changement mécanique de balisage).

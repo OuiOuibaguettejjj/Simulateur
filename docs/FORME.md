@@ -206,7 +206,17 @@ Le fichier `docs/template-outil.html` est un **point de copie documentaire uniqu
 
 Toute modification du template doit rester compatible avec les contrôles CI.
 
-## 8. Règles de simplicité
+## 8. Tests de référence d'un calculateur
+
+Lorsqu'un calculateur reçoit un test de référence, le cas est ajouté dans `tests/references/*.json` avec les champs `outil`, `entrees`, `attendu`, `tolerance`, `sortie` et `source`. Le champ `sortie` désigne le libellé ou la regex de la valeur contrôlée ; le test échoue si ce libellé est absent ou si aucune valeur numérique ne lui est associée.
+
+La valeur `attendu` doit provenir d'une source publiée indépendante du code testé. Elle ne doit jamais être obtenue en exécutant le calculateur testé pour fabriquer l'attendu. Si aucune source fiable ne permet de fixer un attendu, le cas n'est pas ajouté.
+
+La couche 1 de `tests/generic-calcs.test.mjs` appelle directement `TOOL.calc` pour observer les sorties brutes, en contournant volontairement le garde-fou de `simulateurs.js`. Ce comportement est réservé au harnais et permet de détecter les valeurs invalides avant leur remplacement par le message de production.
+
+Le matcher partagé des résultats invalides est défini dans `tests/invalid-result.mjs` et utilisé par les tests et les smokes Chromium.
+
+## 9. Règles de simplicité
 
 - Pas de moteur de template générique.
 - Pas de second gabarit pour une famille d'URL.

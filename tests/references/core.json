@@ -1,0 +1,136 @@
+[
+  {
+    "outil": "coefficient",
+    "entrees": {
+      "a": "10",
+      "b": "14.3"
+    },
+    "attendu": 1.43,
+    "tolerance": 0,
+    "sortie": "Coefficient",
+    "source": "https://booper.fr/glossaire/calcul-prix-de-vente"
+  },
+  {
+    "outil": "marge",
+    "entrees": {
+      "achat": "80",
+      "vente": "100"
+    },
+    "attendu": 20,
+    "tolerance": 0.01,
+    "sortie": "Marge",
+    "verifications": [
+      {
+        "sortie": "Taux de marge",
+        "attendu": 25,
+        "tolerance": 0.01
+      },
+      {
+        "sortie": "Taux de marque",
+        "attendu": 20,
+        "tolerance": 0.01
+      }
+    ],
+    "source": "https://calculette.org/calculateurs/marge"
+  },
+  {
+    "outil": "pourcentage",
+    "entrees": {
+      "v": "150",
+      "p": "20"
+    },
+    "attendu": 30,
+    "tolerance": 0.01,
+    "sortie": "^30(?:[,.]0*)?\\s*€",
+    "source": "https://calculette.org/calculateurs/pourcentage"
+  },
+  {
+    "outil": "moyenne",
+    "entrees": {
+      "s": "10,12,20"
+    },
+    "attendu": 14,
+    "tolerance": 0,
+    "sortie": "^14(?:$|\\s*\\|)",
+    "source": "https://www.calculatrice.fr/moyenne.html"
+  },
+  {
+    "outil": "median-mode",
+    "entrees": {
+      "s": "10,12,20"
+    },
+    "attendu": 12,
+    "tolerance": 0,
+    "sortie": "Médiane",
+    "source": "https://calculette.org/calculateurs/statistiques"
+  },
+  {
+    "outil": "moyenne-ponderee",
+    "entrees": {
+      "v1": "80,5",
+      "w1": "3",
+      "v2": "90",
+      "w2": "1"
+    },
+    "attendu": 82.875,
+    "tolerance": 0.0001,
+    "sortie": "^82,875(?:$|\\s*\\|)",
+    "source": "https://helpfulcalculator.com/en/weighted-average-calculator"
+  },
+  {
+    "outil": "vitesse",
+    "entrees": {
+      "d": "100",
+      "t": "2"
+    },
+    "attendu": 50,
+    "tolerance": 0,
+    "sortie": "^50\\s*km/h",
+    "source": "https://calculatorlib.com/speed-from-distance-and-time-calculator"
+  },
+  {
+    "outil": "smic",
+    "entrees": {
+      "heures": "35",
+      "zone": "metropole"
+    },
+    "attendu": 12.31,
+    "tolerance": 0.01,
+    "sortie": "12,31\\s*€\\s*brut / heure",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2300"
+  },
+  {
+    "outil": "frais-kilometriques",
+    "entrees": {
+      "km": "4000",
+      "cv": "6",
+      "veh": "normal"
+    },
+    "attendu": 2660,
+    "tolerance": 0.01,
+    "sortie": "2\\s*660,00\\s*€\\s*de\\s*frais kilométriques estimés",
+    "source": "https://www.impots.gouv.fr/sites/default/files/media/3_Documentation/depliants/nid_4002_gp_120.pdf"
+  },
+  {
+    "outil": "rsa",
+    "entrees": {
+      "age": "25plus",
+      "status": "single",
+      "dependents": "0",
+      "student": "no",
+      "youngActive": "no",
+      "resident": "yes",
+      "majoration": "no",
+      "housing": "none",
+      "housingAid": "",
+      "m1": "0",
+      "m2": "0",
+      "m3": "0"
+    },
+    "attendu": 651.69,
+    "tolerance": 0.01,
+    "sortie": "651,69\\s*€\\s*/\\s*mois",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F19778",
+    "verificationSource": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053733826"
+  }
+]
