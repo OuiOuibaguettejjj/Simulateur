@@ -43,7 +43,7 @@ function numbersOnly(value, where, fail) {
 }
 
 // pages : { slug: html } des pages /outil/<slug>/ ; generated : contenu actuel de public/parametres.js (ou null).
-export function checkParams({ data, pages, today, generated }) {
+export function checkParams({ data, pages, today, generated, horizonDays }) {
   const errors = [];
   const warnings = [];
   const fail = (rule, message) => errors.push({ rule, message });
@@ -74,7 +74,14 @@ export function checkParams({ data, pages, today, generated }) {
       const y0 = Number(set.effectiveFrom.slice(0, 4)), y1 = Number(set.effectiveTo.slice(0, 4));
       if (Number.isInteger(set.year) && (set.year < y0 || set.year > y1)) fail("year-set", at + ".year (" + set.year + ") hors de la période de validité " + set.effectiveFrom + " → " + set.effectiveTo);
       if (today > set.effectiveTo) fail("expired", id + " : validité dépassée depuis le " + set.effectiveTo + " — mettre à jour les paramètres (" + (set.source?.url || "source") + ")");
-      else if (days(today, set.effectiveTo) <= data.warnExpiryDays) warn("expiring", id + " : fin de validité le " + set.effectiveTo + " (dans " + days(today, set.effectiveTo) + " j)");
+      else {
+        const remaining=days(today,set.effectiveTo);
+        if (Number.isInteger(horizonDays) && horizonDays >= 0 && remaining < horizonDays) {
+          fail("horizon", id + " : fin de validité le " + set.effectiveTo + " (dans " + remaining + " j) — renouveler avant l'échéance");
+        } else if (remaining <= data.warnExpiryDays) {
+          warn("expiring", id + " : fin de validité le " + set.effectiveTo + " (dans " + remaining + " j)");
+        }
+      }
     }
     if (isDate(set.verifiedOn)) {
       if (set.verifiedOn > today) fail("schema", at + ".verifiedOn est dans le futur");
@@ -136,16 +143,24 @@ function loadPages(root) {
 }
 
 function main() {
-  const arg = process.argv.find(a => a.startsWith("--today="));
-  const today = arg ? arg.slice("--today=".length) : new Date().toISOString().slice(0, 10);
+  const todayArg = process.argv.find(a => a.startsWith("--today="));
+  const today = todayArg ? todayArg.slice("--today=".length) : new Date().toISOString().slice(0, 10);
   if (!isDate(today)) { console.error("--today doit être au format AAAA-MM-JJ"); process.exit(2); }
+  const horizonIndex=process.argv.indexOf("--horizon");
+  let horizonDays;
+  if(horizonIndex>=0){
+    const raw=process.argv[horizonIndex+1];
+    if(raw===undefined||!/^[0-9]+$/.test(raw)){console.error("--horizon doit être un nombre entier de jours");process.exit(2)}
+    horizonDays=Number(raw);
+  }
   const root = process.cwd();
   const generatedFile = path.join(root, TARGET);
   const result = checkParams({
     data: readParams(root),
     pages: loadPages(root),
     today,
-    generated: fs.existsSync(generatedFile) ? fs.readFileSync(generatedFile, "utf8") : null
+    generated: fs.existsSync(generatedFile) ? fs.readFileSync(generatedFile, "utf8") : null,
+    horizonDays
   });
 
   console.log("Contrôle des paramètres réglementaires au " + today);
