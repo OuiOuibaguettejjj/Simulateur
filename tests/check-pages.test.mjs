@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import {checkPage,checkAll,loadToolsMeta,parseHtml,summarize,STRUCTURAL_RULES,EDITORIAL_RULES,TRACKED_RULES,toolDirsWithoutIndex,trackedPairs,parseBaseline,compareToBaseline,nextBaseline,seedBaseline} from "../scripts/check-pages.mjs";
+import { buildRatchetMessages,checkPage,checkAll,loadToolsMeta,parseHtml,summarize,STRUCTURAL_RULES,EDITORIAL_RULES,TRACKED_RULES,toolDirsWithoutIndex,trackedPairs,parseBaseline,compareToBaseline,nextBaseline,seedBaseline} from "../scripts/check-pages.mjs";
 
 const DESC="Utilisez cet outil en ligne pour effectuer rapidement votre calcul et obtenir un résultat clair, pratique et adapté à votre situation.";
 const CATS={categorie:{label:"Catégorie",path:"/categorie/"}};
@@ -315,8 +315,14 @@ const lockedBaseline=[P(debtPath,"description"),P(debtPath,"content-h2"),P(debtP
 const lockedCurrent=[P(debtPath,"result")];
 const locked=nextBaseline(lockedCurrent,lockedBaseline,["ancien"]);
 assert.equal(locked.ok,false,"anneeAMigrer bloque le retrait des écarts éditoriaux");
-assert.deepEqual(nextBaseline(lockedCurrent,lockedBaseline,["ancien"]).blocked,[P(debtPath,"description"),P(debtPath,"content-h2"),P(debtPath,"formula")],"les entrées verrouillées restent la seule explication du refus");
 assert.deepEqual(locked.blocked,[P(debtPath,"description"),P(debtPath,"content-h2"),P(debtPath,"formula")],"les trois écarts éditoriaux sont verrouillés");
+const lockedMessages=buildRatchetMessages({stale:lockedBaseline.slice(),blocked:locked.blocked});
+assert.equal(lockedMessages.length,3,"entrée verrouillée : un seul message par écart");
+assert(lockedMessages.every(m=>m.includes("cliquet anneeAMigrer")),"entrée verrouillée : seul le message anneeAMigrer apparaît");
+assert(!lockedMessages.some(m=>m.includes("entrée périmée")),"entrée verrouillée : aucun message entrée périmée");
+const unlockedMessages=buildRatchetMessages({stale:[P(debtPath,"description")]});
+assert.equal(unlockedMessages.length,1,"entrée périmée non verrouillée : un message");
+assert(unlockedMessages[0].includes("entrée périmée"),"entrée périmée non verrouillée : message périmé présent");
 const migrated=nextBaseline(lockedCurrent,lockedBaseline,[]);
 assert.equal(migrated.ok,true,"outil migré : retrait des écarts autorisé");
 assert.deepEqual(migrated.removed,[P(debtPath,"description"),P(debtPath,"content-h2"),P(debtPath,"formula")],"outil migré : écarts retirables");
