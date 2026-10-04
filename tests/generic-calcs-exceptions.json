@@ -1,203 +1,239 @@
 {
-  "maxFailures": 33,
+  "maxFailures": 39,
   "exceptions": [
     {
       "slug": "arrondi",
       "case": "large",
-      "reason": "limite du harnais VM : comportement générique non représentable avec le DOM minimal",
-      "match": "DOM"
+      "reason": "limite du harnais VM : API ou validation DOM non exposée par le faux DOM minimal",
+      "match": "toFixed() digits argument"
     },
     {
       "slug": "indemnite-precarite",
       "case": "default",
-      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
-      "match": "DOM"
+      "reason": "limite du harnais VM : ce calculateur n'expose pas de résultat dans le DOM minimal pour ce scénario",
+      "match": "résultat vide"
     },
     {
       "slug": "indemnite-precarite",
       "case": "zero",
-      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
-      "match": "DOM"
+      "reason": "limite du harnais VM : ce calculateur n'expose pas de résultat dans le DOM minimal pour ce scénario",
+      "match": "résultat vide"
     },
     {
       "slug": "indemnite-precarite",
       "case": "empty",
-      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
-      "match": "DOM"
+      "reason": "limite du harnais VM : ce calculateur n'expose pas de résultat dans le DOM minimal pour ce scénario",
+      "match": "résultat vide"
     },
     {
       "slug": "indemnite-precarite",
       "case": "negative",
-      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
-      "match": "DOM"
+      "reason": "limite du harnais VM : ce calculateur n'expose pas de résultat dans le DOM minimal pour ce scénario",
+      "match": "résultat vide"
     },
     {
       "slug": "indemnite-precarite",
       "case": "large",
-      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
-      "match": "DOM"
+      "reason": "limite du harnais VM : ce calculateur n'expose pas de résultat dans le DOM minimal pour ce scénario",
+      "match": "résultat vide"
     },
     {
       "slug": "interets-composes",
       "case": "default",
-      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
-      "match": "DOM"
+      "reason": "limite du harnais VM : API ou validation DOM non exposée par le faux DOM minimal",
+      "match": "document.createElementNS"
     },
     {
       "slug": "interets-composes",
       "case": "zero",
-      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
-      "match": "DOM"
+      "reason": "limite du harnais VM : ce calculateur n'expose pas de résultat dans le DOM minimal pour ce scénario",
+      "match": "résultat vide"
     },
     {
       "slug": "interets-composes",
       "case": "empty",
-      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
-      "match": "DOM"
+      "reason": "limite du harnais VM : ce calculateur n'expose pas de résultat dans le DOM minimal pour ce scénario",
+      "match": "résultat vide"
     },
     {
       "slug": "interets-composes",
       "case": "negative",
-      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
-      "match": "DOM"
+      "reason": "limite du harnais VM : ce calculateur n'expose pas de résultat dans le DOM minimal pour ce scénario",
+      "match": "résultat vide"
     },
     {
       "slug": "interets-composes",
       "case": "large",
-      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
-      "match": "DOM"
+      "reason": "limite du harnais VM : ce calculateur n'expose pas de résultat dans le DOM minimal pour ce scénario",
+      "match": "résultat vide"
     },
     {
       "slug": "interets-composes",
       "case": "comma",
-      "reason": "cas décimal : entrée locale non représentative du type attendu par ce moteur",
-      "match": "résultat"
+      "reason": "limite du harnais VM : API ou validation DOM non exposée par le faux DOM minimal",
+      "match": "document.createElementNS"
     },
     {
       "slug": "partage-depenses",
       "case": "default",
-      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
-      "match": "DOM"
+      "reason": "limite du harnais VM : API ou validation DOM non exposée par le faux DOM minimal",
+      "match": "people.replaceChildren"
     },
     {
       "slug": "preavis-demission",
       "case": "default",
-      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
-      "match": "DOM"
+      "reason": "limite du harnais VM : ce calculateur n'expose pas de résultat dans le DOM minimal pour ce scénario",
+      "match": "résultat vide"
     },
     {
       "slug": "preavis-demission",
       "case": "zero",
-      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
-      "match": "DOM"
+      "reason": "limite du harnais VM : ce calculateur n'expose pas de résultat dans le DOM minimal pour ce scénario",
+      "match": "résultat vide"
     },
     {
       "slug": "preavis-demission",
       "case": "empty",
-      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
-      "match": "DOM"
+      "reason": "limite du harnais VM : ce calculateur n'expose pas de résultat dans le DOM minimal pour ce scénario",
+      "match": "résultat vide"
     },
     {
       "slug": "preavis-demission",
       "case": "negative",
-      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
-      "match": "DOM"
+      "reason": "limite du harnais VM : ce calculateur n'expose pas de résultat dans le DOM minimal pour ce scénario",
+      "match": "résultat vide"
     },
     {
       "slug": "preavis-demission",
       "case": "large",
-      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
-      "match": "DOM"
+      "reason": "limite du harnais VM : ce calculateur n'expose pas de résultat dans le DOM minimal pour ce scénario",
+      "match": "résultat vide"
     },
     {
       "slug": "pret-immobilier",
       "case": "default",
-      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
-      "match": "DOM"
+      "reason": "limite du harnais VM : ce calculateur n'expose pas de résultat dans le DOM minimal pour ce scénario",
+      "match": "résultat vide"
     },
     {
       "slug": "pret-immobilier",
       "case": "zero",
-      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
-      "match": "DOM"
+      "reason": "limite du harnais VM : ce calculateur n'expose pas de résultat dans le DOM minimal pour ce scénario",
+      "match": "résultat vide"
     },
     {
       "slug": "pret-immobilier",
       "case": "empty",
-      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
-      "match": "DOM"
+      "reason": "limite du harnais VM : ce calculateur n'expose pas de résultat dans le DOM minimal pour ce scénario",
+      "match": "résultat vide"
     },
     {
       "slug": "pret-immobilier",
       "case": "negative",
-      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
-      "match": "DOM"
+      "reason": "limite du harnais VM : ce calculateur n'expose pas de résultat dans le DOM minimal pour ce scénario",
+      "match": "résultat vide"
     },
     {
       "slug": "pret-immobilier",
       "case": "large",
-      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
-      "match": "DOM"
+      "reason": "limite du harnais VM : ce calculateur n'expose pas de résultat dans le DOM minimal pour ce scénario",
+      "match": "résultat vide"
     },
     {
       "slug": "rupture-conventionnelle",
       "case": "default",
-      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
-      "match": "DOM"
+      "reason": "limite du harnais VM : ce calculateur n'expose pas de résultat dans le DOM minimal pour ce scénario",
+      "match": "résultat vide"
     },
     {
       "slug": "rupture-conventionnelle",
       "case": "zero",
-      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
-      "match": "DOM"
+      "reason": "limite du harnais VM : ce calculateur n'expose pas de résultat dans le DOM minimal pour ce scénario",
+      "match": "résultat vide"
     },
     {
       "slug": "rupture-conventionnelle",
       "case": "empty",
-      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
-      "match": "DOM"
+      "reason": "limite du harnais VM : ce calculateur n'expose pas de résultat dans le DOM minimal pour ce scénario",
+      "match": "résultat vide"
     },
     {
       "slug": "rupture-conventionnelle",
       "case": "negative",
-      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
-      "match": "DOM"
+      "reason": "limite du harnais VM : ce calculateur n'expose pas de résultat dans le DOM minimal pour ce scénario",
+      "match": "résultat vide"
     },
     {
       "slug": "rupture-conventionnelle",
       "case": "large",
-      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
-      "match": "DOM"
+      "reason": "limite du harnais VM : ce calculateur n'expose pas de résultat dans le DOM minimal pour ce scénario",
+      "match": "résultat vide"
     },
     {
       "slug": "signe-astrologique",
       "case": "default",
-      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
-      "match": "DOM"
+      "reason": "limite du harnais VM : ce calculateur n'expose pas de résultat dans le DOM minimal pour ce scénario",
+      "match": "résultat vide"
     },
     {
       "slug": "signe-astrologique",
       "case": "zero",
-      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
-      "match": "DOM"
+      "reason": "limite du harnais VM : ce calculateur n'expose pas de résultat dans le DOM minimal pour ce scénario",
+      "match": "résultat vide"
     },
     {
       "slug": "signe-astrologique",
       "case": "empty",
-      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
-      "match": "DOM"
+      "reason": "limite du harnais VM : ce calculateur n'expose pas de résultat dans le DOM minimal pour ce scénario",
+      "match": "résultat vide"
     },
     {
       "slug": "signe-astrologique",
       "case": "negative",
-      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
-      "match": "DOM"
+      "reason": "limite du harnais VM : ce calculateur n'expose pas de résultat dans le DOM minimal pour ce scénario",
+      "match": "résultat vide"
     },
     {
       "slug": "signe-astrologique",
       "case": "large",
-      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
-      "match": "DOM"
+      "reason": "limite du harnais VM : ce calculateur n'expose pas de résultat dans le DOM minimal pour ce scénario",
+      "match": "résultat vide"
+    },
+    {
+      "slug": "indemnite-precarite",
+      "case": "comma",
+      "reason": "limite du harnais VM : ce calculateur n'expose pas de résultat dans le DOM minimal pour ce scénario",
+      "match": "résultat vide"
+    },
+    {
+      "slug": "moyenne-ponderee",
+      "case": "comma",
+      "reason": "limite du harnais VM : l'entrée décimale locale produit NaN dans ce moteur",
+      "match": "NaN"
+    },
+    {
+      "slug": "preavis-demission",
+      "case": "comma",
+      "reason": "limite du harnais VM : ce calculateur n'expose pas de résultat dans le DOM minimal pour ce scénario",
+      "match": "résultat vide"
+    },
+    {
+      "slug": "pret-immobilier",
+      "case": "comma",
+      "reason": "limite du harnais VM : ce calculateur n'expose pas de résultat dans le DOM minimal pour ce scénario",
+      "match": "résultat vide"
+    },
+    {
+      "slug": "rupture-conventionnelle",
+      "case": "comma",
+      "reason": "limite du harnais VM : ce calculateur n'expose pas de résultat dans le DOM minimal pour ce scénario",
+      "match": "résultat vide"
+    },
+    {
+      "slug": "signe-astrologique",
+      "case": "comma",
+      "reason": "limite du harnais VM : ce calculateur n'expose pas de résultat dans le DOM minimal pour ce scénario",
+      "match": "résultat vide"
     }
   ]
 }
