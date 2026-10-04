@@ -11,6 +11,7 @@ for(const c of cases){
   assert.equal(typeof c.attendu,"number","attendu doit être numérique");assert.equal(typeof c.tolerance,"number","tolerance requise");
   assert.equal(typeof c.sortie,"string","sortie doit être un libellé ou une regex");
   assert.ok(typeof c.source==="string"&&/^https:\/\//.test(c.source),"source https obligatoire");
+  if(c.verificationSource) assert.ok(/^https:\/\//.test(c.verificationSource),"verificationSource https obligatoire");
   assert.ok(!forbidden.has(c.outil),c.outil+" est encore marqué anneeAMigrer");
   const out=runInlineCalculator({slug:c.outil,caseKind:"default",inputs:c.entrees});assert.ok(out.text,c.outil+" : résultat vide");
   const label=new RegExp(c.sortie,"i");assert.ok(label.test(out.text),c.outil+" : libellé de sortie absent dans « "+out.text+" »");
@@ -19,5 +20,8 @@ for(const c of cases){
   if(Array.isArray(c.verifications))for(const v of c.verifications){const re=new RegExp(v.sortie,"i");assert.ok(re.test(out.text),c.outil+" : sortie secondaire absente : "+v.sortie);const part=out.text.slice(out.text.search(re));const value=numbers(part)[0];assert.ok(Number.isFinite(value),c.outil+" : valeur secondaire absente : "+v.sortie);assert.ok(Math.abs(value-v.attendu)<=v.tolerance,c.outil+" : "+v.sortie+" attendu "+v.attendu+", obtenu "+value)}
   covered.add(c.outil);
 }
+const allCases=["default","zero","empty","negative","large","comma"];
+const fullyExempted=[...forbidden].filter(slug=>allCases.every(kind=>false));
+assert.throws(()=>runInlineCalculator({slug:cases[0].outil,inputs:{__unknown_reference_id__:"1"}}),/unknown input id/,"un identifiant d’entrée inconnu doit échouer");
 console.log("Couche 2 — "+covered.size+" outils testés sur un cas réel sourcé, "+cases.length+" cas.");
-console.log("Couverture : "+covered.size+" outils testés sur au moins un cas réel, "+forbidden.size+" outils entièrement exemptés.");
+console.log("Couverture : "+covered.size+" outils testés sur au moins un cas réel, "+fullyExempted.length+" outils entièrement exemptés.");
