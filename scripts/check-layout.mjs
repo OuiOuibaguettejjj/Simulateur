@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
 
 // Contrôle de cohérence de la forme du site : bloquant (fail-closed), le moindre écart fait échouer le déploiement.
 // Règles : un seul <main>, un seul <header>, un seul <footer> par page ; pas de CSS de page qui redéfinit
@@ -28,7 +29,7 @@ function walk(dir, out = []) {
   return out;
 }
 
-function sharedOverrides(html) {
+export function sharedOverrides(html) {
   const found = new Set();
   for (const m of html.matchAll(/<style\b[^>]*>([\s\S]*?)<\/style>/gi)) {
     const css = m[1].replace(/\/\*[\s\S]*?\*\//g, "").replace(/@media[^\{]*\{/gi, "");
@@ -36,6 +37,21 @@ function sharedOverrides(html) {
       for (const s of rule.split("{")[0].split(",")) {
         const t = s.trim();
         if (SHARED.test(t)) found.add(t);
+      }
+    }
+  }
+  return [...found];
+}
+
+
+export function localHeadingOverrides(html) {
+  const found = new Set();
+  for (const m of html.matchAll(/<style\\b[^>]*>([\\s\\S]*?)<\\/style>/gi)) {
+    const css = m[1].replace(/\\/\\*[\\s\\S]*?\\*\\//g, "").replace(/@media[^\\{]*\\{/gi, "");
+    for (const rule of css.split("}")) {
+      for (const s of rule.split("{")[0].split(",")) {
+        const t = s.trim();
+        if (/(^|[\\s>+~,(])h[1-6](?=$|[\\s.#:[>+~),])/.test(t)) found.add(t);
       }
     }
   }
