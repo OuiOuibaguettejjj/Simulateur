@@ -25,7 +25,7 @@
 .source-links{margin:8px 0 0;padding-left:18px}
 .source-links li{margin:4px 0}
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculez vos droits de succession","url":"https://simulateur.site/outil/succession/","description":"Calculez une estimation détaillée des droits de succession 2026 selon le lien de parenté, les abattements, une éventuelle exonération et les donations antérieures de moins de 15 ans.","inLanguage":"fr-FR","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"price":"0","priceCurrency":"EUR"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Fiscalité","item":"https://simulateur.site/fiscalite/"},{"@type":"ListItem","position":3,"name":"Calculez vos droits de succession","item":"https://simulateur.site/outil/succession/"}]}</script></head>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculez vos droits de succession","url":"https://simulateur.site/outil/succession/","description":"Calculez une estimation détaillée des droits de succession 2026 selon le lien de parenté, les abattements, une éventuelle exonération et les donations antérieures de moins de 15 ans.","inLanguage":"fr-FR","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"price":"0","priceCurrency":"EUR"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Fiscalité","item":"https://simulateur.site/fiscalite/"},{"@type":"ListItem","position":3,"name":"Calculez vos droits de succession","item":"https://simulateur.site/outil/succession/"}]}</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"></head>
 <body>
 <header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header>
 
@@ -101,7 +101,7 @@
 </details>
 
 <button class="button-main" onclick="Simulateurs.calc()">Calculer mes droits <span>→</span></button><p class="privacy-note">Calcul effectué dans votre navigateur · aucune donnée personnelle n’est nécessaire.</p>
-<div class="result" id="result">Saisissez vos données puis lancez le calcul.</div>
+<div class="result" id="result" aria-live="polite">Saisissez vos données puis lancez le calcul.</div>
 
 <div class="formula">
 <strong>Méthode et sources</strong>
@@ -234,7 +234,7 @@ window.TOOL={calc:function(){
      ?'<br><span class="small">Après prise en compte des donations de moins de 15 ans déclarées ci-dessus : '+euro(priorTaxable)+' de part taxable antérieure et '+euro(priorRights)+' de droits déjà acquittés.</span>'
      :"";
 
-   return '<div class="result-main"><strong>Droits de succession estimés : '+euro(currentRights)+'</strong>'+
+   return '<div class="result-main" aria-live="polite"><strong>Droits de succession estimés : '+euro(currentRights)+'</strong>'+
      '<div class="takeaway"><div class="takeaway-title">À retenir</div><div class="takeaway-grid">'+
      '<div class="takeaway-item"><small>Part nette reçue</small><strong>'+euro(part)+'</strong></div>'+
      '<div class="takeaway-item"><small>Abattement disponible</small><strong>'+euro(remainingAllowance)+'</strong></div>'+
