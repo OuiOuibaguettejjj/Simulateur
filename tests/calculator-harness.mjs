@@ -17,7 +17,7 @@ class FakeElement{
   removeChild(child){this.children=this.children.filter(x=>x!==child);return child}replaceChildren(...children){this.children=[...children];for(const child of children)if(this._doc&&!this._doc.elements.includes(child))this._doc.elements.push(child);this.innerHTML=children.map(x=>x?.outerHTML||x?.textContent||"").join("");return undefined}
   insertAdjacentHTML(_where,html){this.innerHTML+=html;this.textContent=strip(this.innerHTML)}
   setAttribute(k,v){this.attributes[k]=String(v);if(k==="value")this.value=String(v);if(k==="class")this.className=String(v)}
-  getAttribute(k){return this.attributes[k]??null}
+  getAttribute(k){return this.attributes[k]??null}removeAttribute(k){delete this.attributes[k]}
   matches(selector){return matches(this,selector)}
   querySelector(selector){return this._doc?.querySelector(selector)||null}
   querySelectorAll(selector){return this._doc?.querySelectorAll(selector)||[]}
