@@ -107,6 +107,5 @@ jobs:
       - name: Test workflow de déploiement
         run: node tests/deploy-workflow.test.mjs
 
-
       - name: Contrôle des pages (cliquet bloquant)
         run: node scripts/check-pages.mjs --ratchet
