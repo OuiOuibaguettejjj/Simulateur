@@ -144,7 +144,7 @@ Pour une page `/outil/`, le socle comprend :
 - calculateur et résultat ;
 - contenu explicatif ;
 - données utilisées, hypothèses ou notes lorsque pertinentes ;
-- FAQ obligatoire en accordéon natif `<details>/<summary>`, avec un bloc `.calculator-faq` unique, un H2 `FAQ` ou `Questions fréquentes`, au moins une question et, pour chaque question, un bloc `.calculator-faq-answer` non vide ;
+- FAQ obligatoire en accordéon natif `<details>/<summary>`, pour chaque page `/outil/`, avec un bloc `.calculator-faq` unique, un H2 `FAQ`, `aria-labelledby="faq-title"` et `id="faq-title"`, au moins une question et, pour chaque question, un bloc `.calculator-faq-answer` non vide ;
 - sources ;
 - calculs associés et maillage interne ;
 - breadcrumb visible et BreadcrumbList ;
