@@ -77,7 +77,7 @@ function loadContext(html){
 function localScripts(html){return[...html.matchAll(/<script[^>]+src=[\"']([^\"']+)[\"'][^>]*><\/script>/gi)].map(m=>m[1]).filter(src=>src.startsWith("/")&&src.endsWith(".js")).map(src=>src.slice(1))}
 export function runInlineCalculator({slug,caseKind="default",inputs={}}){
   const file=path.join(ROOT,"public","outil",slug,"index.html");const html=fs.readFileSync(file,"utf8");const {context,document,window}=loadContext(html);
-  for(const [id,value] of Object.entries(inputs)){const el=document.getElementById(id);if(!el)throw new Error("unknown input id: "+id);el.value=String(value)}
+  for(const [id,value] of Object.entries(inputs)){const el=document.getElementById(id);if(!el)throw new Error("unknown input id: "+id);const raw=String(value);el.value=el.type==="number"?raw.replace(",","." ):raw}
   setCase(document,caseKind);
   for(const src of localScripts(html)){const full=path.join(ROOT,"public",src);if(fs.existsSync(full))vm.runInContext(fs.readFileSync(full,"utf8"),context,{filename:src,timeout:500})}
   const inline=[...html.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/gi)].filter(m=>!/\bsrc=/.test(m[1])&&!/application\/ld\+json/i.test(m[1]));

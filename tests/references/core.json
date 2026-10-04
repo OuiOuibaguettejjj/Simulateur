@@ -67,14 +67,14 @@
   {
     "outil": "moyenne-ponderee",
     "entrees": {
-      "v1": "80",
+      "v1": "80,5",
       "w1": "3",
       "v2": "90",
       "w2": "1"
     },
-    "attendu": 82.5,
+    "attendu": 82.875,
     "tolerance": 0.0001,
-    "sortie": "^82,5(?:$|\\s*\\|)",
+    "sortie": "^82,875(?:$|\\s*\\|)",
     "source": "https://helpfulcalculator.com/en/weighted-average-calculator"
   },
   {
