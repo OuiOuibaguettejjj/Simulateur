@@ -251,12 +251,35 @@ jobs:
           node tests/simulateurs.test.js
           node tests/params.test.mjs
 
-      - name: Smoke-test every calculator in Chromium
+      - name: Préparer Chromium pour les contrôles interactifs
         run: |
           npm init -y >/dev/null 2>&1
           npm install --no-save playwright@1.55.0 >/dev/null 2>&1
           npx playwright install chromium >/dev/null 2>&1
-          node scripts/smoke-site.mjs --base-url http://127.0.0.1:4173 --mode local
+
+      - name: Smoke bloquant des résultats et du mécanisme Entrée
+        run: node tests/smoke-results.test.mjs
+
+      - name: Tests génériques des calculateurs
+        run: node tests/generic-calcs.test.mjs
+
+      - name: Tests de référence sourcés
+        run: node tests/reference-calcs.test.mjs
+
+      - name: Test check-pages
+        run: node tests/check-pages.test.mjs
+
+      - name: Test normalisation du layout
+        run: node tests/normalize-layout.test.mjs
+
+      - name: Test classification des pages interactives
+        run: node tests/interactive-families.test.mjs
+
+      - name: Test workflow de déploiement
+        run: node tests/deploy-workflow.test.mjs
+
+      - name: Smoke-test every calculator in Chromium
+        run: node scripts/smoke-site.mjs --base-url http://127.0.0.1:4173 --mode local
 
       - name: Refuse stale production deployment
         run: |
