@@ -46,10 +46,9 @@ jobs:
         run: |
           node --input-type=module <<'NODE'
           import fs from 'node:fs';
-          const path = require('path');
+          import path from 'node:path';
           const root = 'public';
           const errors = [];
-          const { isInteractivePage } = await import('./scripts/interactive-families.mjs');
           function walk(dir, out = []) {
             for (const entry of fs.readdirSync(dir, {withFileTypes:true})) {
               const file = path.join(dir, entry.name);
@@ -75,9 +74,10 @@ jobs:
       - name: Verify commit and consistency before production
         run: |
           test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
-          node <<'NODE'
-          const fs = require('fs');
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
           import cp from 'node:child_process';
+          import { isInteractivePage } from './scripts/interactive-families.mjs';
           const errors = [];
           const minimumSitemapUrls = 106;
           const critical = [
@@ -115,10 +115,11 @@ jobs:
 
       - name: Validate complete static site
         run: |
-          node <<'NODE'
-          const fs = require('fs');
-          const path = require('path');
-          const vm = require('vm');
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import path from 'node:path';
+          import vm from 'node:vm';
+          import { isInteractivePage } from './scripts/interactive-families.mjs';
 
           const root = 'public';
           const files = [];
