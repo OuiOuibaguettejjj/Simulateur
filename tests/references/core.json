@@ -108,7 +108,7 @@
     },
     "attendu": 2660,
     "tolerance": 0.01,
-    "sortie": "frais kilométriques estimés",
+    "sortie": "2\\s*660,00\\s*€\\s*frais kilométriques estimés",
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/R3080"
   },
   {
