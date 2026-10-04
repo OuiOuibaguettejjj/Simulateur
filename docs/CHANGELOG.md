@@ -1,3 +1,9 @@
+## 2026-10-04 — Contrôle des pages et layout
+- Le contrôle `formula` accepte désormais une source externe dans `.formula` ou `.source-links`.
+- Le normaliseur de layout ajoute `aria-live="polite"` aux `.result` et le favicon SVG commun, de façon idempotente et sans modifier le texte visible.
+- La baseline `check-pages` retire 61 écarts devenus obsolètes (46 `result` et 15 `formula`).
+- Tests et documentation du contrat de contrôle mis à jour.
+
 ## 2026-10-03 — Paramètres réglementaires centralisés
 - Nouveau `data/parametres.json` (valeur, validité, source, date de vérification) et `scripts/generate-params.mjs` qui génère `public/parametres.js` ; `scripts/check-params.mjs` contrôle la péremption (bloquant si validité dépassée, avertissement si vérification ancienne) et la politique d'année des titres ; tests dans `tests/params.test.mjs`.
 - SMIC, frais kilométriques et RSA lisent leurs barèmes depuis les paramètres ; calculs inchangés (parité vérifiée contre les anciennes formules sur une grille).

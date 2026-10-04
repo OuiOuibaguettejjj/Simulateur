@@ -137,6 +137,9 @@ assert(has(fixture().replace("<p class=\"tool-intro\">","<p id=\"intro\" class=\
 assert(has(fixture().replace("Résultat initial.",""),"result"));
 assert(has(fixture().replace(" aria-live=\"polite\"",""),"result"));
 assert(has(fixture().replace("<a href=\"https://www.service-public.fr/\">Source officielle</a>","Source officielle"),"formula"));
+const sourceLinksFixture=fixture().replace("<div class=\"formula\"><a href=\"https://www.service-public.fr/\">Source officielle</a></div>","<div class=\"formula\">Source officielle</div><div class=\"source-links\"><a href=\"https://www.service-public.fr/\">Source officielle</a></div>");
+assert.equal(has(sourceLinksFixture,"formula"),false,"positif : source externe dans .source-links");
+assert(has(sourceLinksFixture.replace("<a href=\"https://www.service-public.fr/\">Source officielle</a>","Source officielle"),"formula"),"négatif : .source-links sans lien externe");
 assert(has(fixture().replace("<h2>À savoir</h2>",""),"content-h2"));
 assert(has(fixture().replace("</section></main>","</section><section class=\"related-tools\"><a class=\"related-link\" href=\"/outil/slug-1/\">A</a><a class=\"related-link\" href=\"/outil/slug-2/\">B</a></section></main>"),"related-block"));
 assert(has(fixture().replace("<a class=\"related-link\" href=\"/outil/slug-2/\">Outil 2</a>",""),"related-block"));
