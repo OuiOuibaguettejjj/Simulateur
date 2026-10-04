@@ -77,7 +77,7 @@ function loadContext(html){
   context.window=context;context.globalThis=context;document._context=context;context.addEventListener=(type,fn)=>{if(type==="load")fn()};return{context,document,window:context};
 }
 function localScripts(html){return[...html.matchAll(/<script[^>]+src=[\"']([^\"']+)[\"'][^>]*><\/script>/gi)].map(m=>m[1]).filter(src=>src.startsWith("/")&&src.endsWith(".js")).map(src=>src.slice(1))}
-export function runInlineCalculator({slug,family="outil",caseKind="default",inputs={}}){
+export async function runInlineCalculator({slug,family="outil",caseKind="default",inputs={}}){
   if(!INTERACTIVE_FAMILIES.includes(family))throw new Error("unknown interactive family: "+family);
   const file=path.join(ROOT,"public",family,slug,"index.html");const html=fs.readFileSync(file,"utf8");const {context,document,window}=loadContext(html);
   for(const [id,value] of Object.entries(inputs)){const el=document.getElementById(id);if(!el)throw new Error("unknown input id: "+id);const raw=String(value);el.value=el.type==="number"?raw.replace(",","." ):raw}
@@ -86,6 +86,8 @@ export function runInlineCalculator({slug,family="outil",caseKind="default",inpu
   const inline=[...html.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/gi)].filter(m=>!/\bsrc=/.test(m[1])&&!/application\/ld\+json/i.test(m[1]));
   if(!inline.length)throw new Error("aucun script intégré");
   for(const m of inline)vm.runInContext(m[2],context,{filename:file,timeout:500});
+  await Promise.resolve();
+  await Promise.resolve();
   let returned="";
   if(family==="outil"&&window.TOOL?.calc){const $=id=>document.getElementById(id);const euro=value=>Number(value).toLocaleString("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:2});const num=value=>Number(value).toLocaleString("fr-FR",{maximumFractionDigits:2});const result=window.TOOL.calc.call({$,euro,num});if(typeof result!=="string")throw new Error("calc ne retourne pas une chaîne");returned=strip(result)}
   for(const button of document.querySelectorAll("button"))button.click();
