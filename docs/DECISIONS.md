@@ -130,7 +130,7 @@ Les barèmes ne sont plus codés en dur dans chaque page : ils vivent dans `data
 
 ## 2026-10-04 — Verrou anneeAMigrer et anticipation des échéances
 
-Un outil encore marqué `anneeAMigrer` dans `data/parametres.json` ne peut pas résorber ses écarts éditoriaux suivis (`description`, `content-h2`, `formula`) dans `scripts/check-pages.baseline.json`. Le cliquet bloque leur retrait jusqu'à la migration du barème vers `parametres.json), puis au retrait du marqueur. Cette règle évite d'enrichir un outil dont le barème reste à migrer.
+Un outil encore marqué `anneeAMigrer` dans `data/parametres.json` ne peut pas résorber ses écarts éditoriaux suivis (`description`, `content-h2`, `formula`) dans `scripts/check-pages.baseline.json`. Le cliquet bloque leur retrait jusqu'à la migration du barème vers `parametres.json`, puis au retrait du marqueur. Cette règle évite d'enrichir un outil dont le barème reste à migrer.
 
 `check-params.mjs` conserve son comportement par défaut : seule une validité dépassée est bloquante. L'option `--horizon <jours>` permet une anticipation indépendante ; les jeux qui expirent dans moins de l'horizon deviennent bloquants pour ce contrôle. Le workflow PR exécute cette anticipation en non bloquant avec une annotation GitHub warning, et un workflow hebdomadaire l'exécute en bloquant. Les échéances suivies sont documentées dans `docs/ECHEANCES.md`.
 
