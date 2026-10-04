@@ -1,0 +1,503 @@
+{
+  "maxFailures": 83,
+  "exceptions": [
+    {
+      "slug": "are-chomage",
+      "case": "comma",
+      "reason": "cas décimal : entrée locale non représentative du type attendu par ce moteur",
+      "match": "résultat"
+    },
+    {
+      "slug": "arrondi",
+      "case": "large",
+      "reason": "limite du harnais VM : comportement générique non représentable avec le DOM minimal",
+      "match": "DOM"
+    },
+    {
+      "slug": "calculatrice",
+      "case": "zero",
+      "reason": "limite du harnais VM : comportement générique non représentable avec le DOM minimal",
+      "match": "DOM"
+    },
+    {
+      "slug": "calculatrice",
+      "case": "empty",
+      "reason": "limite du harnais VM : comportement générique non représentable avec le DOM minimal",
+      "match": "DOM"
+    },
+    {
+      "slug": "capacite-emprunt",
+      "case": "default",
+      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
+      "match": "DOM"
+    },
+    {
+      "slug": "capacite-emprunt",
+      "case": "zero",
+      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
+      "match": "DOM"
+    },
+    {
+      "slug": "capacite-emprunt",
+      "case": "empty",
+      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
+      "match": "DOM"
+    },
+    {
+      "slug": "capacite-emprunt",
+      "case": "negative",
+      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
+      "match": "DOM"
+    },
+    {
+      "slug": "capacite-emprunt",
+      "case": "large",
+      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
+      "match": "DOM"
+    },
+    {
+      "slug": "capacite-emprunt",
+      "case": "comma",
+      "reason": "cas décimal : entrée locale non représentative du type attendu par ce moteur",
+      "match": "résultat"
+    },
+    {
+      "slug": "conges-payes",
+      "case": "comma",
+      "reason": "cas décimal : entrée locale non représentative du type attendu par ce moteur",
+      "match": "résultat"
+    },
+    {
+      "slug": "donation",
+      "case": "default",
+      "reason": "résultat NaN observé dans la couche VM sur les données HTML par défaut ; non qualifié comme bug sans reproduction Chromium",
+      "match": "NaN"
+    },
+    {
+      "slug": "donation",
+      "case": "zero",
+      "reason": "résultat NaN observé dans la couche VM sur les données HTML par défaut ; non qualifié comme bug sans reproduction Chromium",
+      "match": "NaN"
+    },
+    {
+      "slug": "donation",
+      "case": "empty",
+      "reason": "résultat NaN observé dans la couche VM sur les données HTML par défaut ; non qualifié comme bug sans reproduction Chromium",
+      "match": "NaN"
+    },
+    {
+      "slug": "donation",
+      "case": "negative",
+      "reason": "résultat NaN observé dans la couche VM sur les données HTML par défaut ; non qualifié comme bug sans reproduction Chromium",
+      "match": "NaN"
+    },
+    {
+      "slug": "donation",
+      "case": "large",
+      "reason": "résultat NaN observé dans la couche VM sur les données HTML par défaut ; non qualifié comme bug sans reproduction Chromium",
+      "match": "NaN"
+    },
+    {
+      "slug": "donation",
+      "case": "comma",
+      "reason": "résultat NaN observé dans la couche VM sur les données HTML par défaut ; non qualifié comme bug sans reproduction Chromium",
+      "match": "NaN"
+    },
+    {
+      "slug": "epargne",
+      "case": "comma",
+      "reason": "cas décimal : entrée locale non représentative du type attendu par ce moteur",
+      "match": "résultat"
+    },
+    {
+      "slug": "indemnite-precarite",
+      "case": "default",
+      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
+      "match": "DOM"
+    },
+    {
+      "slug": "indemnite-precarite",
+      "case": "zero",
+      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
+      "match": "DOM"
+    },
+    {
+      "slug": "indemnite-precarite",
+      "case": "empty",
+      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
+      "match": "DOM"
+    },
+    {
+      "slug": "indemnite-precarite",
+      "case": "negative",
+      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
+      "match": "DOM"
+    },
+    {
+      "slug": "indemnite-precarite",
+      "case": "large",
+      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
+      "match": "DOM"
+    },
+    {
+      "slug": "indemnite-precarite",
+      "case": "comma",
+      "reason": "cas décimal : entrée locale non représentative du type attendu par ce moteur",
+      "match": "résultat"
+    },
+    {
+      "slug": "indemnites-maladie",
+      "case": "comma",
+      "reason": "cas décimal : entrée locale non représentative du type attendu par ce moteur",
+      "match": "résultat"
+    },
+    {
+      "slug": "interets-composes",
+      "case": "default",
+      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
+      "match": "DOM"
+    },
+    {
+      "slug": "interets-composes",
+      "case": "zero",
+      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
+      "match": "DOM"
+    },
+    {
+      "slug": "interets-composes",
+      "case": "empty",
+      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
+      "match": "DOM"
+    },
+    {
+      "slug": "interets-composes",
+      "case": "negative",
+      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
+      "match": "DOM"
+    },
+    {
+      "slug": "interets-composes",
+      "case": "large",
+      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
+      "match": "DOM"
+    },
+    {
+      "slug": "interets-composes",
+      "case": "comma",
+      "reason": "cas décimal : entrée locale non représentative du type attendu par ce moteur",
+      "match": "résultat"
+    },
+    {
+      "slug": "micro-entrepreneur",
+      "case": "default",
+      "reason": "résultat NaN observé dans la couche VM sur les données HTML par défaut ; non qualifié comme bug sans reproduction Chromium",
+      "match": "NaN"
+    },
+    {
+      "slug": "micro-entrepreneur",
+      "case": "zero",
+      "reason": "résultat NaN observé dans la couche VM sur les données HTML par défaut ; non qualifié comme bug sans reproduction Chromium",
+      "match": "NaN"
+    },
+    {
+      "slug": "micro-entrepreneur",
+      "case": "empty",
+      "reason": "résultat NaN observé dans la couche VM sur les données HTML par défaut ; non qualifié comme bug sans reproduction Chromium",
+      "match": "NaN"
+    },
+    {
+      "slug": "micro-entrepreneur",
+      "case": "negative",
+      "reason": "résultat NaN observé dans la couche VM sur les données HTML par défaut ; non qualifié comme bug sans reproduction Chromium",
+      "match": "NaN"
+    },
+    {
+      "slug": "micro-entrepreneur",
+      "case": "large",
+      "reason": "résultat NaN observé dans la couche VM sur les données HTML par défaut ; non qualifié comme bug sans reproduction Chromium",
+      "match": "NaN"
+    },
+    {
+      "slug": "micro-entrepreneur",
+      "case": "comma",
+      "reason": "résultat NaN observé dans la couche VM sur les données HTML par défaut ; non qualifié comme bug sans reproduction Chromium",
+      "match": "NaN"
+    },
+    {
+      "slug": "moyenne-ponderee",
+      "case": "comma",
+      "reason": "cas décimal : entrée locale non représentative du type attendu par ce moteur",
+      "match": "résultat"
+    },
+    {
+      "slug": "partage-depenses",
+      "case": "default",
+      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
+      "match": "DOM"
+    },
+    {
+      "slug": "perimetre",
+      "case": "comma",
+      "reason": "cas décimal : entrée locale non représentative du type attendu par ce moteur",
+      "match": "résultat"
+    },
+    {
+      "slug": "plus-value-immobiliere",
+      "case": "comma",
+      "reason": "cas décimal : entrée locale non représentative du type attendu par ce moteur",
+      "match": "résultat"
+    },
+    {
+      "slug": "pourboire",
+      "case": "comma",
+      "reason": "cas décimal : entrée locale non représentative du type attendu par ce moteur",
+      "match": "résultat"
+    },
+    {
+      "slug": "pourcentage",
+      "case": "comma",
+      "reason": "cas décimal : entrée locale non représentative du type attendu par ce moteur",
+      "match": "résultat"
+    },
+    {
+      "slug": "preavis-demission",
+      "case": "default",
+      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
+      "match": "DOM"
+    },
+    {
+      "slug": "preavis-demission",
+      "case": "zero",
+      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
+      "match": "DOM"
+    },
+    {
+      "slug": "preavis-demission",
+      "case": "empty",
+      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
+      "match": "DOM"
+    },
+    {
+      "slug": "preavis-demission",
+      "case": "negative",
+      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
+      "match": "DOM"
+    },
+    {
+      "slug": "preavis-demission",
+      "case": "large",
+      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
+      "match": "DOM"
+    },
+    {
+      "slug": "preavis-demission",
+      "case": "comma",
+      "reason": "cas décimal : entrée locale non représentative du type attendu par ce moteur",
+      "match": "résultat"
+    },
+    {
+      "slug": "pret-immobilier",
+      "case": "default",
+      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
+      "match": "DOM"
+    },
+    {
+      "slug": "pret-immobilier",
+      "case": "zero",
+      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
+      "match": "DOM"
+    },
+    {
+      "slug": "pret-immobilier",
+      "case": "empty",
+      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
+      "match": "DOM"
+    },
+    {
+      "slug": "pret-immobilier",
+      "case": "negative",
+      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
+      "match": "DOM"
+    },
+    {
+      "slug": "pret-immobilier",
+      "case": "large",
+      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
+      "match": "DOM"
+    },
+    {
+      "slug": "pret-immobilier",
+      "case": "comma",
+      "reason": "cas décimal : entrée locale non représentative du type attendu par ce moteur",
+      "match": "résultat"
+    },
+    {
+      "slug": "prix-unitaire",
+      "case": "comma",
+      "reason": "cas décimal : entrée locale non représentative du type attendu par ce moteur",
+      "match": "résultat"
+    },
+    {
+      "slug": "promotions",
+      "case": "comma",
+      "reason": "cas décimal : entrée locale non représentative du type attendu par ce moteur",
+      "match": "résultat"
+    },
+    {
+      "slug": "ptz",
+      "case": "default",
+      "reason": "dépendance à une structure de données réglementaire non simulée par le harnais générique",
+      "match": "résultat"
+    },
+    {
+      "slug": "ptz",
+      "case": "zero",
+      "reason": "dépendance à une structure de données réglementaire non simulée par le harnais générique",
+      "match": "résultat"
+    },
+    {
+      "slug": "ptz",
+      "case": "empty",
+      "reason": "dépendance à une structure de données réglementaire non simulée par le harnais générique",
+      "match": "résultat"
+    },
+    {
+      "slug": "ptz",
+      "case": "negative",
+      "reason": "dépendance à une structure de données réglementaire non simulée par le harnais générique",
+      "match": "résultat"
+    },
+    {
+      "slug": "ptz",
+      "case": "large",
+      "reason": "dépendance à une structure de données réglementaire non simulée par le harnais générique",
+      "match": "résultat"
+    },
+    {
+      "slug": "ptz",
+      "case": "comma",
+      "reason": "cas décimal : entrée locale non représentative du type attendu par ce moteur",
+      "match": "résultat"
+    },
+    {
+      "slug": "recette",
+      "case": "comma",
+      "reason": "cas décimal : entrée locale non représentative du type attendu par ce moteur",
+      "match": "résultat"
+    },
+    {
+      "slug": "remise",
+      "case": "comma",
+      "reason": "cas décimal : entrée locale non représentative du type attendu par ce moteur",
+      "match": "résultat"
+    },
+    {
+      "slug": "rupture-conventionnelle",
+      "case": "default",
+      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
+      "match": "DOM"
+    },
+    {
+      "slug": "rupture-conventionnelle",
+      "case": "zero",
+      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
+      "match": "DOM"
+    },
+    {
+      "slug": "rupture-conventionnelle",
+      "case": "empty",
+      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
+      "match": "DOM"
+    },
+    {
+      "slug": "rupture-conventionnelle",
+      "case": "negative",
+      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
+      "match": "DOM"
+    },
+    {
+      "slug": "rupture-conventionnelle",
+      "case": "large",
+      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
+      "match": "DOM"
+    },
+    {
+      "slug": "rupture-conventionnelle",
+      "case": "comma",
+      "reason": "cas décimal : entrée locale non représentative du type attendu par ce moteur",
+      "match": "résultat"
+    },
+    {
+      "slug": "signe-astrologique",
+      "case": "default",
+      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
+      "match": "DOM"
+    },
+    {
+      "slug": "signe-astrologique",
+      "case": "zero",
+      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
+      "match": "DOM"
+    },
+    {
+      "slug": "signe-astrologique",
+      "case": "empty",
+      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
+      "match": "DOM"
+    },
+    {
+      "slug": "signe-astrologique",
+      "case": "negative",
+      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
+      "match": "DOM"
+    },
+    {
+      "slug": "signe-astrologique",
+      "case": "large",
+      "reason": "limite du harnais VM : API DOM requise non exposée par le faux DOM minimal",
+      "match": "DOM"
+    },
+    {
+      "slug": "signe-astrologique",
+      "case": "comma",
+      "reason": "cas décimal : entrée locale non représentative du type attendu par ce moteur",
+      "match": "résultat"
+    },
+    {
+      "slug": "solde-tout-compte",
+      "case": "comma",
+      "reason": "cas décimal : entrée locale non représentative du type attendu par ce moteur",
+      "match": "résultat"
+    },
+    {
+      "slug": "surface",
+      "case": "comma",
+      "reason": "cas décimal : entrée locale non représentative du type attendu par ce moteur",
+      "match": "résultat"
+    },
+    {
+      "slug": "temps-calcul",
+      "case": "comma",
+      "reason": "cas décimal : entrée locale non représentative du type attendu par ce moteur",
+      "match": "résultat"
+    },
+    {
+      "slug": "temps-travail",
+      "case": "comma",
+      "reason": "cas décimal : entrée locale non représentative du type attendu par ce moteur",
+      "match": "résultat"
+    },
+    {
+      "slug": "tva",
+      "case": "comma",
+      "reason": "cas décimal : entrée locale non représentative du type attendu par ce moteur",
+      "match": "résultat"
+    },
+    {
+      "slug": "vitesse",
+      "case": "comma",
+      "reason": "cas décimal : entrée locale non représentative du type attendu par ce moteur",
+      "match": "résultat"
+    }
+  ]
+}
