@@ -11,11 +11,6 @@ const SKIP_ROOT_DIRS = new Set([".well-known", "api"]);
 const HUBS = ["calculateurs", "simulateurs", "conversions", "comparateurs"];
 const SHARED = /^(?:\.wrap|main|header|footer|\.nav|\.navlinks|\.logo|\.content-section|\.calculator-faq|\.related-tools|\.footerlinks)(?![\w-])/;
 
-let warned = 0;
-function warn(rel, msg) {
-  warned++;
-  console.log("::warning file=" + rel + "::" + msg);
-}
 
 function walk(dir, out = []) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
