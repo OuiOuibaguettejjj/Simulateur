@@ -116,7 +116,7 @@ export function checkParams({ data, pages, today, generated, horizonDays }) {
     if (pages[slug] === undefined) { fail("year-debt", "anneeAMigrer : « " + slug + " » n'existe pas dans public/outil/"); continue; }
     if (owner.has(slug)) fail("year-debt", "anneeAMigrer : « " + slug + " » est déjà migré (jeu " + owner.get(slug) + ") — le retirer de la liste");
     const { title, h1 } = titleAndH1(pages[slug]);
-    if (!years(title).length && !years(h1).length) fail("year-debt", "anneeAMigrer : « " + slug + " » n'a plus d'année dans son titre/H1 — le retirer de la liste");
+    if (!years(title).length && !years(h1).length) fail("year-debt", "anneeAMigrer : « " + slug + " » n'a plus d'année dans son titre/H1 : vérifiez que le barème est bien migré vers data/parametres.json avant de retirer ce slug de la liste");
   }
   for (const [slug, html] of Object.entries(pages)) {
     if (owner.has(slug) || debtSet.has(slug)) continue;
