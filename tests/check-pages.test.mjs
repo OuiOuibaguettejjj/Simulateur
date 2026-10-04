@@ -142,12 +142,6 @@ const sourceLinksFixture=fixture().replace("<div class=\"formula\"><a href=\"htt
 assert.equal(has(sourceLinksFixture,"formula"),false,"positif : source externe dans .source-links");
 assert(has(sourceLinksFixture.replace("<a href=\"https://www.service-public.fr/\">Source officielle</a>","Source officielle"),"formula"),"négatif : .source-links sans lien externe");
 assert(has(fixture().replace("<h2>Exemple de calcul</h2>",""),"content-h2"));
-assert.equal(only(fixture(),"faq").length,0,"FAQ accordéon conforme");
-assert(only(fixture().replace('<section class="calculator-faq"><h2>FAQ</h2><details><summary>Comment interpréter le résultat ?</summary><div class="calculator-faq-answer"><p>Une réponse utile.</p></div></details></section>',""),"faq").length>0,"FAQ absente");
-assert(only(fixture().replace("<details><summary>Comment interpréter le résultat ?</summary><div class=\"calculator-faq-answer\"><p>Une réponse utile.</p></div></details>","<p>Question sans accordéon.</p>"),"faq").length>0,"FAQ sans details");
-assert(only(fixture().replace("<summary>Comment interpréter le résultat ?</summary>","<p>Question</p>"),"faq").length>0,"FAQ sans summary");
-assert(only(fixture().replace("<p>Une réponse utile.</p>",""),"faq").length>0,"FAQ sans réponse");
-assert(only(fixture().replace('<section class="calculator-faq">','<section class="calculator-faq"><section class="calculator-faq">'),"faq").length>0,"deux blocs FAQ");
 assert(has(fixture().replace("</section></main>","</section><section class=\"related-tools\"><a class=\"related-link\" href=\"/outil/slug-1/\">A</a><a class=\"related-link\" href=\"/outil/slug-2/\">B</a></section></main>"),"related-block"));
 assert(has(fixture().replace("<a class=\"related-link\" href=\"/outil/slug-2/\">Outil 2</a>",""),"related-block"));
 assert(has(fixture().replace("<a class=\"related-link\" href=\"/outil/slug-2/\">Outil 2</a>","<a class=\"related-link\" href=\"/outil/slug-2/\">2</a><a class=\"related-link\" href=\"/outil/slug-1/\">3</a><a class=\"related-link\" href=\"/outil/slug-1/\">4</a><a class=\"related-link\" href=\"/outil/slug-1/\">5</a>"),"related-block"));
@@ -180,6 +174,13 @@ assert.equal(loadToolsMeta(sim).slug.type,"calculateur");
 
 // ===== Étape D : un test positif et un test négatif par règle structurelle =====
 const only=(h,r,m=META,i=IDX)=>errs(h,m,i).filter(x=>x.rule===r);
+assert.equal(only(fixture(),"faq").length,0,"FAQ accordéon conforme");
+assert(only(fixture().replace('<section class="calculator-faq"><h2>FAQ</h2><details><summary>Comment interpréter le résultat ?</summary><div class="calculator-faq-answer"><p>Une réponse utile.</p></div></details></section>',""),"faq").length>0,"FAQ absente");
+assert(only(fixture().replace("<details><summary>Comment interpréter le résultat ?</summary><div class=\"calculator-faq-answer\"><p>Une réponse utile.</p></div></details>","<p>Question sans accordéon.</p>"),"faq").length>0,"FAQ sans details");
+assert(only(fixture().replace("<summary>Comment interpréter le résultat ?</summary>","<p>Question</p>"),"faq").length>0,"FAQ sans summary");
+assert(only(fixture().replace("<p>Une réponse utile.</p>",""),"faq").length>0,"FAQ sans réponse");
+assert(only(fixture().replace('<section class="calculator-faq">','<section class="calculator-faq"><section class="calculator-faq">'),"faq").length>0,"deux blocs FAQ");
+
 const L=x=>"<a class=\"related-link\" href=\"/outil/"+x+"/\">"+({"slug-1":"Outil 1","slug-2":"Outil 2"}[x]||x)+"</a>";
 const NEG={
  "html-base":fixture().replace("<html lang=\"fr\">","<html lang=\"en\">"),
