@@ -35,11 +35,49 @@ function walk(dir, out = []) {
   return out;
 }
 
+// Échappe une valeur pour un attribut entre guillemets doubles, sans toucher aux entités déjà présentes.
+function escapeAttr(value) {
+  return value
+    .replace(/&(?!#?\w+;)/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+// Balises de partage Open Graph et Twitter, dérivées du titre, de la meta description
+// et de l'URL canonique déjà présents dans la page. Idempotent : une balise déjà
+// présente est respectée, et une page sans titre, description ou canonique n'est pas touchée.
+// Aucune image n'est déclarée : le dépôt n'en contient pas.
+function addSocialMeta(html) {
+  const title = /<title\b[^>]*>([\s\S]*?)<\/title>/i.exec(html);
+  const description = /<meta\b[^>]*\bname=(["'])description\1[^>]*\bcontent=(["'])([\s\S]*?)\2[^>]*>/i.exec(html);
+  const canonical = /<link\b[^>]*\brel=(["'])canonical\1[^>]*\bhref=(["'])([^"']+)\2[^>]*>/i.exec(html);
+  if (!title || !description || !canonical || !title[1].trim()) return html;
+
+  const has = (attr, name) =>
+    new RegExp("<meta\\b[^>]*\\b" + attr + "=([\"'])" + name + "\\1", "i").test(html);
+  const wanted = [
+    ["property", "og:type", "website"],
+    ["property", "og:site_name", "Simulateur"],
+    ["property", "og:locale", "fr_FR"],
+    ["property", "og:title", escapeAttr(title[1].trim())],
+    ["property", "og:description", escapeAttr(description[3].trim())],
+    ["property", "og:url", escapeAttr(canonical[3])],
+    ["name", "twitter:card", "summary"]
+  ];
+  const tags = wanted
+    .filter(([attr, name]) => !has(attr, name))
+    .map(([attr, name, content]) => '<meta ' + attr + '="' + name + '" content="' + content + '">')
+    .join("");
+  if (!tags) return html;
+  return html.replace(/<\/head>/i, () => tags + "</head>");
+}
+
 function normalize(html, isCalculator = false) {
   const warnings = [];
   let out = html;
 
-  // Accessibilité et favicon communs, de façon idempotente.
+  // Accessibilité, favicon et balises de partage communs, de façon idempotente.
   out = out.replace(/<[^>]*\bclass=(["'])([^"']*)\1[^>]*>/gi, (tag, _q, cls) =>
     /(^|\s)result(\s|$)/.test(cls) && !/\baria-live\s*=/.test(tag)
       ? tag.slice(0, -1) + ' aria-live="polite">'
@@ -48,6 +86,8 @@ function normalize(html, isCalculator = false) {
   if (!/<link\b[^>]*href=["']\/favicon\.svg["'][^>]*>/i.test(out)) {
     out = out.replace(/<\/head>/i, '<link rel="icon" href="/favicon.svg" type="image/svg+xml"></head>');
   }
+
+  out = addSocialMeta(out);
 
   let body = /<body\b[^>]*>/i.exec(out);
   if (!body) return { html, warnings: ["pas de balise <body>, page ignorée"] };
