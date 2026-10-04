@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
-import { isInteractivePage } from './scripts/interactive-families.mjs';
+import { isInteractivePage } from './interactive-families.mjs';
 
 const root = 'public';
 const files = [];
