@@ -192,7 +192,7 @@ assert(only(fixture().replace('<section class="calculator-faq" aria-labelledby="
 assert(only(fixture().replace("<details><summary>Comment interpréter le résultat ?</summary><div class=\"calculator-faq-answer\"><p>Une réponse utile.</p></div></details>","<p>Question sans accordéon.</p>"),"faq").length>0,"FAQ sans details");
 assert(only(fixture().replace("<summary>Comment interpréter le résultat ?</summary>","<p>Question</p>"),"faq").length>0,"FAQ sans summary");
 assert(only(fixture().replace("<p>Une réponse utile.</p>",""),"faq").length>0,"FAQ sans réponse");
-assert(only(fixture().replace('<section class="calculator-faq">','<section class="calculator-faq"><section class="calculator-faq">'),"faq").length>0,"deux blocs FAQ");
+assert(only(fixture().replace('<section class="calculator-faq" aria-labelledby="faq-title">','<section class="calculator-faq" aria-labelledby="faq-title"><section class="calculator-faq">'),"faq").length>0,"deux blocs FAQ");
 
 const L=x=>"<a class=\"related-link\" href=\"/outil/"+x+"/\">"+({"slug-1":"Outil 1","slug-2":"Outil 2"}[x]||x)+"</a>";
 const NEG={
