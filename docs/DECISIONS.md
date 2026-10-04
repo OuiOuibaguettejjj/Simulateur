@@ -128,6 +128,12 @@ Le contrôle CI check-hubs.mjs vérifiera la couverture exacte des hubs de caté
 
 Les barèmes ne sont plus codés en dur dans chaque page : ils vivent dans `data/parametres.json` avec validité, source et date de vérification, et sont diffusés par un fichier généré (`public/parametres.js`). Choix : un JSON central plutôt qu'un module par moteur, pour contrôler tous les jeux au même endroit ; une année dans un titre seulement pour un barème daté ; contrôle de péremption bloquant sur la validité dépassée (une page ne doit pas afficher un barème périmé) mais simple avertissement sur l'ancienneté de la vérification (une PR sans rapport ne doit pas casser un jour donné pour une simple date de contrôle). Migration par lots : trois outils pilotes (SMIC, frais kilométriques, RSA) ; les autres restent listés dans `anneeAMigrer` jusqu'à leur tour. Limite connue : la prose HTML n'est liée aux paramètres que pour les montants déclarés dans `htmlMentions`.
 
+## 2026-10-04 — Verrou anneeAMigrer et anticipation des échéances
+
+Un outil encore marqué `anneeAMigrer` dans `data/parametres.json` ne peut pas résorber ses écarts éditoriaux suivis (`description`, `content-h2`, `formula`) dans `scripts/check-pages.baseline.json`. Le cliquet bloque leur retrait jusqu'à la migration du barème vers `parametres.json), puis au retrait du marqueur. Cette règle évite d'enrichir un outil dont le barème reste à migrer.
+
+`check-params.mjs` conserve son comportement par défaut : seule une validité dépassée est bloquante. L'option `--horizon <jours>` permet une anticipation indépendante ; les jeux qui expirent dans moins de l'horizon deviennent bloquants pour ce contrôle. Le workflow PR exécute cette anticipation en non bloquant avec une annotation GitHub warning, et un workflow hebdomadaire l'exécute en bloquant. Les échéances suivies sont documentées dans `docs/ECHEANCES.md`.
+
 ## 2026-10-04 — Balises de partage dans le normaliseur de layout
 
 Les balises Open Graph et Twitter sont générées par `normalize-layout.mjs` plutôt que écrites page par page : elles sont dérivées du titre, de la meta description et de la canonique, qui restent la source de vérité, et le mode `--check` bloque toute dérive. Choix : `twitter:card` en `summary` et aucune `og:image`, faute d'image dans le dépôt ; une image de partage pourra être ajoutée plus tard sans toucher aux URL. Les pages sans titre, description ou canonique (`404.html`) ne reçoivent aucune balise. Aucune URL, logique de calcul, CSP ni date `lastmod` n'est modifiée (changement mécanique de balisage).
