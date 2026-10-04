@@ -101,5 +101,9 @@ jobs:
       - name: Test normalisation du layout
         run: node tests/normalize-layout.test.mjs
 
+      - name: Test classification des pages interactives
+        run: node tests/interactive-families.test.mjs
+
+
       - name: Contrôle des pages (cliquet bloquant)
         run: node scripts/check-pages.mjs --ratchet
