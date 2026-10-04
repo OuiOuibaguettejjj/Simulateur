@@ -7,7 +7,7 @@ import {isInvalidResult} from "./invalid-result.mjs";
 const exceptionsPath="tests/generic-calcs-exceptions.json";
 const data=JSON.parse(fs.readFileSync(exceptionsPath,"utf8"));
 const exceptions=data.exceptions;
-const keyOf=x=>(x.family?x.family+"/":"")+x.slug+"|"+x.case;
+const keyOf=x=>(x.family||"outil")+"/"+x.slug+"|"+x.case;
 const exceptionMap=new Map(exceptions.map(x=>[keyOf(x),x]));
 const cases=["default","zero","empty","negative","large","comma"];
 const pages=listIntegratedPages(),rawFailures=[];
@@ -17,7 +17,7 @@ for(const page of pages)for(const caseKind of cases){
     const out=await runInlineCalculator({family,slug,caseKind});
     if(!out.text)throw new Error("résultat vide");
     if(isInvalidResult(out.text))throw new Error("valeur invalide dans le résultat : "+out.text.slice(0,160));
-  }catch(error){rawFailures.push({slug,case:caseKind,error:String(error.message||error)})}
+  }catch(error){rawFailures.push({family,slug,case:caseKind,error:String(error.message||error)})}
 }
 const rawFailureMap=new Map(rawFailures.map(f=>[keyOf(f),f]));
 const failures=rawFailures.filter(f=>{
