@@ -13,7 +13,7 @@ for(const c of cases){
   assert.ok(typeof c.source==="string"&&/^https:\/\//.test(c.source),"source https obligatoire");
   if(c.verificationSource) assert.ok(/^https:\/\//.test(c.verificationSource),"verificationSource https obligatoire");
   assert.ok(!forbidden.has(c.outil),c.outil+" est encore marqué anneeAMigrer");
-  const out=runInlineCalculator({family:c.famille||"outil",slug:c.outil,caseKind:"default",inputs:c.entrees});assert.ok(out.text,c.outil+" : résultat vide");
+  const out=await runInlineCalculator({family:c.famille||"outil",slug:c.outil,caseKind:"default",inputs:c.entrees});assert.ok(out.text,c.outil+" : résultat vide");
   const label=new RegExp(c.sortie,"i");assert.ok(label.test(out.text),c.outil+" : libellé de sortie absent dans « "+out.text+" »");
   const labelled=out.text.slice(out.text.search(label));const got=numbers(labelled)[0];assert.ok(Number.isFinite(got),c.outil+" : aucune valeur numérique associée à la sortie « "+c.sortie+" »");
   assert.ok(Math.abs(got-c.attendu)<=c.tolerance,c.outil+" : attendu "+c.attendu+", obtenu "+got+" (« "+out.text+" »)");
@@ -21,7 +21,7 @@ for(const c of cases){
   covered.add(c.outil);
 }
 const refusedTools=[...forbidden];
-assert.throws(()=>runInlineCalculator({family:cases[0].famille||"outil",slug:cases[0].outil,inputs:{__unknown_reference_id__:"1"}}),/unknown input id/,"un identifiant d’entrée inconnu doit échouer");
+await assert.rejects(()=>runInlineCalculator({family:cases[0].famille||"outil",slug:cases[0].outil,inputs:{__unknown_reference_id__:"1"}}),/unknown input id/,"un identifiant d’entrée inconnu doit échouer");
 console.log("Couche 2 — "+covered.size+" outils testés sur un cas réel sourcé, "+cases.length+" cas.");
 console.log("Couverture : "+covered.size+" outils testés sur au moins un cas réel.");
 console.log("Outils refusés (anneeAMigrer) : "+refusedTools.length+".");
