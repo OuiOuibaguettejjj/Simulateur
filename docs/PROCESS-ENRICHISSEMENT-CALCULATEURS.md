@@ -52,13 +52,32 @@ Le classement se vérifie dans les fichiers, pas de mémoire :
 
 Lister les entrées de `scripts/check-pages.baseline.json` concernant la page (`path` = `public/outil/<slug>/index.html`, ou le chemin de la famille concernée). Ces entrées sont l'écart éditorial connu : elles constituent une partie de la cible de l'enrichissement.
 
+Pour voir les écarts actuels d'une page, lancer `node scripts/check-pages.mjs` sans option : la sortie liste chaque écart avec son chemin, sa règle et son message (filtrer par slug au besoin).
+
 Règles du cliquet, à respecter strictement :
 
 - la baseline ne **grossit jamais** : aucun nouvel écart n'est toléré, aucune entrée n'est ajoutée à la main ;
 - une entrée corrigée est **retirée** avec l'option `--update-baseline` de `scripts/check-pages.mjs`, jamais à la main ;
 - une entrée corrigée mais non retirée fait échouer la CI (« entrée périmée ») ;
 - les entrées `description`, `content-h2` et `formula` d'un outil verrouillé (classe C) ne peuvent pas être retirées tant que son slug figure dans `anneeAMigrer` : le cliquet les bloque volontairement. Les autres règles ne sont pas concernées par ce verrou, mais la classe C reste interdite d'enrichissement éditorial (§ 0.1) ;
-- seules les entrées **de l'outil traité** sont modifiées dans la baseline, dans la même PR que l'enrichissement.
+- seules les entrées **de l'outil traité** sont modifiées dans la baseline, dans la même PR que l'enrichissement ;
+- l'option `--seed-baseline` du script **ajoute** des entrées éditoriales : elle n'est jamais utilisée dans le cadre de ce processus.
+
+#### Ce que chaque règle exige réellement
+
+Cette table est tirée du code de `scripts/check-pages.mjs`. En cas de doute ou d'évolution du script, le script fait foi. Elle rend la cible de chaque chantier concrète.
+
+| Règle | Exigence vérifiée par `check-pages` |
+|---|---|
+| `title` | un seul `<title>`, de la forme « Mot-clé \| Simulateur », avec un mot-clé non vide |
+| `description` | une seule meta description, de 120 à 160 caractères. Elle doit aussi être identique à `WebApplication.description` du JSON-LD (règle `jsonld`) |
+| `content-h2` | au moins 3 titres h2 éditoriaux, situés dans des `.content-section` et hors `.related-tools` |
+| `formula` | un bloc `.formula` ou `.source-links` contenant un lien externe http(s) (hors simulateur.site) |
+| `result` | deux conditions indépendantes, qui peuvent porter sur deux éléments : un `.result` non vide dans le HTML source (donc non rempli par JavaScript), et un `.result` avec `aria-live="polite"` |
+| `tool-block` | une seule section `.tool` contenant le h1 et un `p.tool-intro` non vide ; pour `/outil/`, au moins un `input`, `select`, `textarea` ou `button` dans la page ; les ids hérités `ey`, `title`, `intro` et `source` sont interdits |
+| `meta-unique` | titre et description uniques sur l'ensemble du site (outil, conversion, comparateur) |
+
+Les douze règles structurelles et les quatre règles éditoriales (`description`, `content-h2`, `formula`, `meta-unique`) sont suivies par le cliquet.
 
 ### 0.3 Vérifier que le filet de sécurité couvre l'outil
 
@@ -410,7 +429,15 @@ Exécuter sur la branche, avant ouverture de la PR, les contrôles de `.github/w
 - `node tests/generic-calcs.test.mjs` (aucune exception ajoutée) ;
 - `node tests/reference-calcs.test.mjs` ;
 - `node tests/params.test.mjs` ;
-- les tests et le contrôle de `scripts/check-pages.mjs`, y compris le cliquet de la baseline.
+- `node tests/check-pages.test.mjs` ;
+- `node scripts/check-pages.mjs --ratchet` (cliquet de la baseline, bloquant en CI).
+
+Commandes du cliquet :
+
+- `node scripts/check-pages.mjs --ratchet` vérifie l'état courant par rapport à la baseline. Il échoue en cas de nouvel écart, d'entrée périmée ou d'entrée bloquée par `anneeAMigrer`. À lancer avant d'ouvrir la PR, et après chaque correction ;
+- `node scripts/check-pages.mjs --update-baseline` retire de la baseline les entrées corrigées. Il refuse de s'exécuter si un nouvel écart existe ou si l'outil est verrouillé par `anneeAMigrer` ; la baseline ne peut que perdre des entrées.
+
+Ordre d'usage pour un chantier : corriger la page, lancer `--ratchet` (il signale les entrées périmées), lancer `--update-baseline`, relancer `--ratchet` (il doit être vert), puis committer la baseline avec la page.
 
 Joindre les sorties à la PR.
 
@@ -572,7 +599,7 @@ Pour toute personne ou tout outil appliquant ce processus :
 1. **Ne jamais inventer** une valeur réglementaire, un taux, un plafond, une date de validité ou une source. En l'absence de source officielle, s'arrêter et signaler le manque.
 2. **Ne jamais fabriquer** une valeur attendue de test en exécutant le calculateur testé.
 3. **Ne jamais modifier** `data/parametres.json` ou `scripts/check-pages.baseline.json` hors du cadre explicite du chantier.
-4. **Ne jamais ajouter** d'entrée à la baseline ni d'exception générique.
+4. **Ne jamais ajouter** d'entrée à la baseline (y compris avec `--seed-baseline`) ni d'exception générique.
 5. **Ne jamais fusionner ni déployer** sans autorisation explicite.
 6. **Un seul calculateur par chantier**, un seul type de changement par PR.
 7. En cas d'écart entre ce document et le dépôt (fichier absent, option inconnue, règle différente), **vérifier dans le dépôt** et signaler l'écart plutôt que de supposer.
