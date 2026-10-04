@@ -1,4 +1,233 @@
 {
-  "maxFailures": 0,
-  "exceptions": []
+  "maxFailures": 38,
+  "exceptions": [
+    {
+      "slug": "indemnite-precarite",
+      "case": "default",
+      "reason": "limite du harnais VM : le DOM minimal ne produit pas de résultat pour ce scénario",
+      "match": "résultat vide"
+    },
+    {
+      "slug": "indemnite-precarite",
+      "case": "zero",
+      "reason": "limite du harnais VM : le DOM minimal ne produit pas de résultat pour ce scénario",
+      "match": "résultat vide"
+    },
+    {
+      "slug": "indemnite-precarite",
+      "case": "empty",
+      "reason": "limite du harnais VM : le DOM minimal ne produit pas de résultat pour ce scénario",
+      "match": "résultat vide"
+    },
+    {
+      "slug": "indemnite-precarite",
+      "case": "negative",
+      "reason": "limite du harnais VM : le DOM minimal ne produit pas de résultat pour ce scénario",
+      "match": "résultat vide"
+    },
+    {
+      "slug": "indemnite-precarite",
+      "case": "large",
+      "reason": "limite du harnais VM : le DOM minimal ne produit pas de résultat pour ce scénario",
+      "match": "résultat vide"
+    },
+    {
+      "slug": "indemnite-precarite",
+      "case": "comma",
+      "reason": "limite du harnais VM : le DOM minimal ne produit pas de résultat pour ce scénario",
+      "match": "résultat vide"
+    },
+    {
+      "slug": "interets-composes",
+      "case": "default",
+      "reason": "limite du harnais VM : API DOM non exposée par le faux DOM minimal",
+      "match": "document.createElementNS"
+    },
+    {
+      "slug": "interets-composes",
+      "case": "zero",
+      "reason": "limite du harnais VM : le DOM minimal ne produit pas de résultat pour ce scénario",
+      "match": "résultat vide"
+    },
+    {
+      "slug": "interets-composes",
+      "case": "empty",
+      "reason": "limite du harnais VM : le DOM minimal ne produit pas de résultat pour ce scénario",
+      "match": "résultat vide"
+    },
+    {
+      "slug": "interets-composes",
+      "case": "negative",
+      "reason": "limite du harnais VM : le DOM minimal ne produit pas de résultat pour ce scénario",
+      "match": "résultat vide"
+    },
+    {
+      "slug": "interets-composes",
+      "case": "large",
+      "reason": "limite du harnais VM : le DOM minimal ne produit pas de résultat pour ce scénario",
+      "match": "résultat vide"
+    },
+    {
+      "slug": "interets-composes",
+      "case": "comma",
+      "reason": "limite du harnais VM : API DOM non exposée par le faux DOM minimal",
+      "match": "document.createElementNS"
+    },
+    {
+      "slug": "moyenne-ponderee",
+      "case": "comma",
+      "reason": "limite du harnais VM : l'entrée décimale avec virgule produit NaN dans ce moteur",
+      "match": "NaN"
+    },
+    {
+      "slug": "partage-depenses",
+      "case": "default",
+      "reason": "limite du harnais VM : API DOM non exposée par le faux DOM minimal",
+      "match": "people.replaceChildren"
+    },
+    {
+      "slug": "preavis-demission",
+      "case": "default",
+      "reason": "limite du harnais VM : le DOM minimal ne produit pas de résultat pour ce scénario",
+      "match": "résultat vide"
+    },
+    {
+      "slug": "preavis-demission",
+      "case": "zero",
+      "reason": "limite du harnais VM : le DOM minimal ne produit pas de résultat pour ce scénario",
+      "match": "résultat vide"
+    },
+    {
+      "slug": "preavis-demission",
+      "case": "empty",
+      "reason": "limite du harnais VM : le DOM minimal ne produit pas de résultat pour ce scénario",
+      "match": "résultat vide"
+    },
+    {
+      "slug": "preavis-demission",
+      "case": "negative",
+      "reason": "limite du harnais VM : le DOM minimal ne produit pas de résultat pour ce scénario",
+      "match": "résultat vide"
+    },
+    {
+      "slug": "preavis-demission",
+      "case": "large",
+      "reason": "limite du harnais VM : le DOM minimal ne produit pas de résultat pour ce scénario",
+      "match": "résultat vide"
+    },
+    {
+      "slug": "preavis-demission",
+      "case": "comma",
+      "reason": "limite du harnais VM : le DOM minimal ne produit pas de résultat pour ce scénario",
+      "match": "résultat vide"
+    },
+    {
+      "slug": "pret-immobilier",
+      "case": "default",
+      "reason": "limite du harnais VM : le DOM minimal ne produit pas de résultat pour ce scénario",
+      "match": "résultat vide"
+    },
+    {
+      "slug": "pret-immobilier",
+      "case": "zero",
+      "reason": "limite du harnais VM : le DOM minimal ne produit pas de résultat pour ce scénario",
+      "match": "résultat vide"
+    },
+    {
+      "slug": "pret-immobilier",
+      "case": "empty",
+      "reason": "limite du harnais VM : le DOM minimal ne produit pas de résultat pour ce scénario",
+      "match": "résultat vide"
+    },
+    {
+      "slug": "pret-immobilier",
+      "case": "negative",
+      "reason": "limite du harnais VM : le DOM minimal ne produit pas de résultat pour ce scénario",
+      "match": "résultat vide"
+    },
+    {
+      "slug": "pret-immobilier",
+      "case": "large",
+      "reason": "limite du harnais VM : le DOM minimal ne produit pas de résultat pour ce scénario",
+      "match": "résultat vide"
+    },
+    {
+      "slug": "pret-immobilier",
+      "case": "comma",
+      "reason": "limite du harnais VM : le DOM minimal ne produit pas de résultat pour ce scénario",
+      "match": "résultat vide"
+    },
+    {
+      "slug": "rupture-conventionnelle",
+      "case": "default",
+      "reason": "limite du harnais VM : le DOM minimal ne produit pas de résultat pour ce scénario",
+      "match": "résultat vide"
+    },
+    {
+      "slug": "rupture-conventionnelle",
+      "case": "zero",
+      "reason": "limite du harnais VM : le DOM minimal ne produit pas de résultat pour ce scénario",
+      "match": "résultat vide"
+    },
+    {
+      "slug": "rupture-conventionnelle",
+      "case": "empty",
+      "reason": "limite du harnais VM : le DOM minimal ne produit pas de résultat pour ce scénario",
+      "match": "résultat vide"
+    },
+    {
+      "slug": "rupture-conventionnelle",
+      "case": "negative",
+      "reason": "limite du harnais VM : le DOM minimal ne produit pas de résultat pour ce scénario",
+      "match": "résultat vide"
+    },
+    {
+      "slug": "rupture-conventionnelle",
+      "case": "large",
+      "reason": "limite du harnais VM : le DOM minimal ne produit pas de résultat pour ce scénario",
+      "match": "résultat vide"
+    },
+    {
+      "slug": "rupture-conventionnelle",
+      "case": "comma",
+      "reason": "limite du harnais VM : le DOM minimal ne produit pas de résultat pour ce scénario",
+      "match": "résultat vide"
+    },
+    {
+      "slug": "signe-astrologique",
+      "case": "default",
+      "reason": "limite du harnais VM : le DOM minimal ne produit pas de résultat pour ce scénario",
+      "match": "résultat vide"
+    },
+    {
+      "slug": "signe-astrologique",
+      "case": "zero",
+      "reason": "limite du harnais VM : le DOM minimal ne produit pas de résultat pour ce scénario",
+      "match": "résultat vide"
+    },
+    {
+      "slug": "signe-astrologique",
+      "case": "empty",
+      "reason": "limite du harnais VM : le DOM minimal ne produit pas de résultat pour ce scénario",
+      "match": "résultat vide"
+    },
+    {
+      "slug": "signe-astrologique",
+      "case": "negative",
+      "reason": "limite du harnais VM : le DOM minimal ne produit pas de résultat pour ce scénario",
+      "match": "résultat vide"
+    },
+    {
+      "slug": "signe-astrologique",
+      "case": "large",
+      "reason": "limite du harnais VM : le DOM minimal ne produit pas de résultat pour ce scénario",
+      "match": "résultat vide"
+    },
+    {
+      "slug": "signe-astrologique",
+      "case": "comma",
+      "reason": "limite du harnais VM : le DOM minimal ne produit pas de résultat pour ce scénario",
+      "match": "résultat vide"
+    }
+  ]
 }
