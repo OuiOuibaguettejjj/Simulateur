@@ -36,6 +36,9 @@ jobs:
       - name: Validation statique complète du site
         run: node scripts/check-static-site.mjs
 
+      - name: Test garde-fou du layout
+        run: node tests/check-layout.test.mjs
+
       - name: Check layout
         run: node scripts/check-layout.mjs
 
