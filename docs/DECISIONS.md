@@ -34,7 +34,7 @@ Le contrôle transversal `scripts/check-security.mjs` est le gate des invariants
 
 Les contrôles CI bloquent une configuration non conforme ; ils ne modifient jamais automatiquement les règles de sécurité ou l'architecture. Toute évolution d'architecture ou de sécurité doit d'abord être décidée et auditée manuellement.
 
-Le workflow de tests fonctionnels reste séparé du gate de sécurité. Le workflow de déploiement conserve les contrôles de build, de qualité, de smoke tests et les vérifications Cloudflare post-MEP.
+Le workflow de tests exécute le même gate de sécurité en début de chaîne que le workflow de déploiement. Les deux workflows partagent désormais les contrôles fonctionnels structurants ; le workflow de déploiement ajoute ensuite ses contrôles spécifiques au build de production, à Cloudflare et au post-MEP.
 
 ## HTML-first 2026-10-03
 
