@@ -65,10 +65,6 @@
   },
   {
     "path": "public/outil/age-retraite/index.html",
-    "rule": "result"
-  },
-  {
-    "path": "public/outil/age-retraite/index.html",
     "rule": "title"
   },
   {
@@ -84,20 +80,12 @@
     "rule": "formula"
   },
   {
-    "path": "public/outil/age/index.html",
-    "rule": "result"
-  },
-  {
     "path": "public/outil/are-chomage/index.html",
     "rule": "description"
   },
   {
     "path": "public/outil/are-chomage/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/are-chomage/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/are-chomage/index.html",
@@ -117,19 +105,11 @@
   },
   {
     "path": "public/outil/arrondi/index.html",
-    "rule": "result"
-  },
-  {
-    "path": "public/outil/arrondi/index.html",
     "rule": "title"
   },
   {
     "path": "public/outil/assurance-vie/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/assurance-vie/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/assurance-vie/index.html",
@@ -146,10 +126,6 @@
   {
     "path": "public/outil/calculatrice/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/calculatrice/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/calculatrice/index.html",
@@ -158,10 +134,6 @@
   {
     "path": "public/outil/capacite-emprunt/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/capacite-emprunt/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/capacite-emprunt/index.html",
@@ -181,10 +153,6 @@
   },
   {
     "path": "public/outil/cash-flow-immobilier/index.html",
-    "rule": "result"
-  },
-  {
-    "path": "public/outil/cash-flow-immobilier/index.html",
     "rule": "title"
   },
   {
@@ -198,10 +166,6 @@
   {
     "path": "public/outil/charges-independant/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/charges-independant/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/charges-independant/index.html",
@@ -213,10 +177,6 @@
   },
   {
     "path": "public/outil/coefficient/index.html",
-    "rule": "result"
-  },
-  {
-    "path": "public/outil/coefficient/index.html",
     "rule": "title"
   },
   {
@@ -230,10 +190,6 @@
   {
     "path": "public/outil/comparateur-placements/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/comparateur-placements/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/comparateur-placements/index.html",
@@ -253,10 +209,6 @@
   },
   {
     "path": "public/outil/conges-payes/index.html",
-    "rule": "result"
-  },
-  {
-    "path": "public/outil/conges-payes/index.html",
     "rule": "title"
   },
   {
@@ -273,10 +225,6 @@
   },
   {
     "path": "public/outil/consommation-carburant/index.html",
-    "rule": "result"
-  },
-  {
-    "path": "public/outil/consommation-carburant/index.html",
     "rule": "title"
   },
   {
@@ -290,10 +238,6 @@
   {
     "path": "public/outil/cout-km/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/cout-km/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/cout-km/index.html",
@@ -310,10 +254,6 @@
   {
     "path": "public/outil/difference-dates/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/difference-dates/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/difference-dates/index.html",
@@ -330,10 +270,6 @@
   {
     "path": "public/outil/donation/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/donation/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/donation/index.html",
@@ -350,10 +286,6 @@
   {
     "path": "public/outil/electricite/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/electricite/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/electricite/index.html",
@@ -370,10 +302,6 @@
   {
     "path": "public/outil/epargne-mensuelle/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/epargne-mensuelle/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/epargne-mensuelle/index.html",
@@ -390,10 +318,6 @@
   {
     "path": "public/outil/epargne-reglementee/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/epargne-reglementee/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/epargne-reglementee/index.html",
@@ -410,10 +334,6 @@
   {
     "path": "public/outil/epargne/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/epargne/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/epargne/index.html",
@@ -430,10 +350,6 @@
   {
     "path": "public/outil/fractions/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/fractions/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/fractions/index.html",
@@ -446,10 +362,6 @@
   {
     "path": "public/outil/frais-de-notaire/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/frais-de-notaire/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/frais-de-notaire/index.html",
@@ -466,10 +378,6 @@
   {
     "path": "public/outil/frais-kilometriques/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/frais-kilometriques/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/frais-kilometriques/index.html",
@@ -486,10 +394,6 @@
   {
     "path": "public/outil/heures-supplementaires/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/heures-supplementaires/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/heures-supplementaires/index.html",
@@ -501,10 +405,6 @@
   },
   {
     "path": "public/outil/ifi/index.html",
-    "rule": "result"
-  },
-  {
-    "path": "public/outil/ifi/index.html",
     "rule": "title"
   },
   {
@@ -514,10 +414,6 @@
   {
     "path": "public/outil/impot-sur-le-revenu/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/impot-sur-le-revenu/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/impot-sur-le-revenu/index.html",
@@ -534,10 +430,6 @@
   {
     "path": "public/outil/indemnite-licenciement/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/indemnite-licenciement/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/indemnite-licenciement/index.html",
@@ -550,10 +442,6 @@
   {
     "path": "public/outil/indemnite-precarite/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/indemnite-precarite/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/indemnite-precarite/index.html",
@@ -573,10 +461,6 @@
   },
   {
     "path": "public/outil/indemnites-maladie/index.html",
-    "rule": "result"
-  },
-  {
-    "path": "public/outil/indemnites-maladie/index.html",
     "rule": "title"
   },
   {
@@ -590,10 +474,6 @@
   {
     "path": "public/outil/indemnites-maternite-paternite/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/indemnites-maternite-paternite/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/indemnites-maternite-paternite/index.html",
@@ -613,10 +493,6 @@
   },
   {
     "path": "public/outil/inflation/index.html",
-    "rule": "result"
-  },
-  {
-    "path": "public/outil/inflation/index.html",
     "rule": "title"
   },
   {
@@ -626,10 +502,6 @@
   {
     "path": "public/outil/interets-composes/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/interets-composes/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/interets-composes/index.html",
@@ -649,10 +521,6 @@
   },
   {
     "path": "public/outil/jours-ouvres/index.html",
-    "rule": "result"
-  },
-  {
-    "path": "public/outil/jours-ouvres/index.html",
     "rule": "title"
   },
   {
@@ -666,10 +534,6 @@
   {
     "path": "public/outil/marge/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/marge/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/marge/index.html",
@@ -686,10 +550,6 @@
   {
     "path": "public/outil/median-mode/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/median-mode/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/median-mode/index.html",
@@ -706,10 +566,6 @@
   {
     "path": "public/outil/mensualite-pret/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/mensualite-pret/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/mensualite-pret/index.html",
@@ -726,10 +582,6 @@
   {
     "path": "public/outil/micro-entrepreneur/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/micro-entrepreneur/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/micro-entrepreneur/index.html",
@@ -746,10 +598,6 @@
   {
     "path": "public/outil/moyenne-ponderee/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/moyenne-ponderee/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/moyenne-ponderee/index.html",
@@ -766,10 +614,6 @@
   {
     "path": "public/outil/moyenne/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/moyenne/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/moyenne/index.html",
@@ -780,10 +624,6 @@
     "rule": "formula"
   },
   {
-    "path": "public/outil/partage-depenses/index.html",
-    "rule": "result"
-  },
-  {
     "path": "public/outil/per/index.html",
     "rule": "content-h2"
   },
@@ -794,10 +634,6 @@
   {
     "path": "public/outil/per/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/per/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/per/index.html",
@@ -817,10 +653,6 @@
   },
   {
     "path": "public/outil/perimetre/index.html",
-    "rule": "result"
-  },
-  {
-    "path": "public/outil/perimetre/index.html",
     "rule": "title"
   },
   {
@@ -834,10 +666,6 @@
   {
     "path": "public/outil/plus-value-immobiliere/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/plus-value-immobiliere/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/plus-value-immobiliere/index.html",
@@ -857,10 +685,6 @@
   },
   {
     "path": "public/outil/plus-value-mobiliere/index.html",
-    "rule": "result"
-  },
-  {
-    "path": "public/outil/plus-value-mobiliere/index.html",
     "rule": "title"
   },
   {
@@ -874,10 +698,6 @@
   {
     "path": "public/outil/pourboire/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/pourboire/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/pourboire/index.html",
@@ -890,10 +710,6 @@
   {
     "path": "public/outil/pourcentage/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/pourcentage/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/pourcentage/index.html",
@@ -906,10 +722,6 @@
   {
     "path": "public/outil/preavis-demission/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/preavis-demission/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/preavis-demission/index.html",
@@ -929,10 +741,6 @@
   },
   {
     "path": "public/outil/prelevement-source/index.html",
-    "rule": "result"
-  },
-  {
-    "path": "public/outil/prelevement-source/index.html",
     "rule": "title"
   },
   {
@@ -942,10 +750,6 @@
   {
     "path": "public/outil/pret-immobilier/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/pret-immobilier/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/pret-immobilier/index.html",
@@ -969,10 +773,6 @@
   },
   {
     "path": "public/outil/prime-activite/index.html",
-    "rule": "result"
-  },
-  {
-    "path": "public/outil/prime-activite/index.html",
     "rule": "title"
   },
   {
@@ -988,10 +788,6 @@
     "rule": "formula"
   },
   {
-    "path": "public/outil/prix-unitaire/index.html",
-    "rule": "result"
-  },
-  {
     "path": "public/outil/promotions/index.html",
     "rule": "content-h2"
   },
@@ -1002,10 +798,6 @@
   {
     "path": "public/outil/promotions/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/promotions/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/promotions/index.html",
@@ -1025,10 +817,6 @@
   },
   {
     "path": "public/outil/proportion/index.html",
-    "rule": "result"
-  },
-  {
-    "path": "public/outil/proportion/index.html",
     "rule": "title"
   },
   {
@@ -1045,10 +833,6 @@
   },
   {
     "path": "public/outil/ptz/index.html",
-    "rule": "result"
-  },
-  {
-    "path": "public/outil/ptz/index.html",
     "rule": "title"
   },
   {
@@ -1062,10 +846,6 @@
   {
     "path": "public/outil/ratio/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/ratio/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/ratio/index.html",
@@ -1082,10 +862,6 @@
   {
     "path": "public/outil/recette/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/recette/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/recette/index.html",
@@ -1098,10 +874,6 @@
   {
     "path": "public/outil/remise/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/remise/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/remise/index.html",
@@ -1118,10 +890,6 @@
   {
     "path": "public/outil/rendement-locatif/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/rendement-locatif/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/rendement-locatif/index.html",
@@ -1130,10 +898,6 @@
   {
     "path": "public/outil/retraite-simplifiee/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/retraite-simplifiee/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/retraite-simplifiee/index.html",
@@ -1148,16 +912,8 @@
     "rule": "formula"
   },
   {
-    "path": "public/outil/rsa/index.html",
-    "rule": "result"
-  },
-  {
     "path": "public/outil/rupture-conventionnelle/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/rupture-conventionnelle/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/rupture-conventionnelle/index.html",
@@ -1169,10 +925,6 @@
   },
   {
     "path": "public/outil/salaire-brut-net/index.html",
-    "rule": "result"
-  },
-  {
-    "path": "public/outil/salaire-brut-net/index.html",
     "rule": "title"
   },
   {
@@ -1186,10 +938,6 @@
   {
     "path": "public/outil/salaire-horaire/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/salaire-horaire/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/salaire-horaire/index.html",
@@ -1209,10 +957,6 @@
   },
   {
     "path": "public/outil/sasu-vs-ei-micro/index.html",
-    "rule": "result"
-  },
-  {
-    "path": "public/outil/sasu-vs-ei-micro/index.html",
     "rule": "title"
   },
   {
@@ -1226,10 +970,6 @@
   {
     "path": "public/outil/signe-astrologique/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/signe-astrologique/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/signe-astrologique/index.html",
@@ -1245,10 +985,6 @@
   },
   {
     "path": "public/outil/smic/index.html",
-    "rule": "result"
-  },
-  {
-    "path": "public/outil/smic/index.html",
     "rule": "title"
   },
   {
@@ -1265,19 +1001,11 @@
   },
   {
     "path": "public/outil/solde-tout-compte/index.html",
-    "rule": "result"
-  },
-  {
-    "path": "public/outil/solde-tout-compte/index.html",
     "rule": "title"
   },
   {
     "path": "public/outil/succession/index.html",
     "rule": "description"
-  },
-  {
-    "path": "public/outil/succession/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/succession/index.html",
@@ -1297,10 +1025,6 @@
   },
   {
     "path": "public/outil/surface/index.html",
-    "rule": "result"
-  },
-  {
-    "path": "public/outil/surface/index.html",
     "rule": "title"
   },
   {
@@ -1317,10 +1041,6 @@
   },
   {
     "path": "public/outil/tableau-amortissement/index.html",
-    "rule": "result"
-  },
-  {
-    "path": "public/outil/tableau-amortissement/index.html",
     "rule": "title"
   },
   {
@@ -1330,10 +1050,6 @@
   {
     "path": "public/outil/taux-endettement/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/taux-endettement/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/taux-endettement/index.html",
@@ -1353,10 +1069,6 @@
   },
   {
     "path": "public/outil/temps-calcul/index.html",
-    "rule": "result"
-  },
-  {
-    "path": "public/outil/temps-calcul/index.html",
     "rule": "title"
   },
   {
@@ -1373,10 +1085,6 @@
   },
   {
     "path": "public/outil/temps-partiel/index.html",
-    "rule": "result"
-  },
-  {
-    "path": "public/outil/temps-partiel/index.html",
     "rule": "title"
   },
   {
@@ -1390,10 +1098,6 @@
   {
     "path": "public/outil/temps-travail/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/temps-travail/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/temps-travail/index.html",
@@ -1413,10 +1117,6 @@
   },
   {
     "path": "public/outil/temps/index.html",
-    "rule": "result"
-  },
-  {
-    "path": "public/outil/temps/index.html",
     "rule": "title"
   },
   {
@@ -1430,10 +1130,6 @@
   {
     "path": "public/outil/vitesse/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/vitesse/index.html",
-    "rule": "result"
   },
   {
     "path": "public/outil/vitesse/index.html",
