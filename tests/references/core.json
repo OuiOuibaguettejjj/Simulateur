@@ -67,6 +67,19 @@
   {
     "outil": "moyenne-ponderee",
     "entrees": {
+      "v1": "80",
+      "w1": "3",
+      "v2": "90",
+      "w2": "1"
+    },
+    "attendu": 82.5,
+    "tolerance": 0.0001,
+    "sortie": "^82,5(?:$|\\s*\\|)",
+    "source": "https://helpfulcalculator.com/en/weighted-average-calculator"
+  },
+  {
+    "outil": "moyenne-ponderee",
+    "entrees": {
       "v1": "80,5",
       "w1": "3",
       "v2": "90",
@@ -75,7 +88,8 @@
     "attendu": 82.875,
     "tolerance": 0.0001,
     "sortie": "^82,875(?:$|\\s*\\|)",
-    "source": "https://helpfulcalculator.com/en/weighted-average-calculator"
+    "source": "https://helpfulcalculator.com/en/weighted-average-calculator",
+    "note": "Calcul manuel : (80,5 × 3 + 90 × 1) / (3 + 1) = 82,875 ; test de non-régression de la virgule décimale, valeur non issue de la source."
   },
   {
     "outil": "vitesse",
