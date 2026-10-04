@@ -76,7 +76,7 @@
     {
       "slug": "moyenne-ponderee",
       "case": "comma",
-      "reason": "limite du harnais VM : l'entrée décimale avec virgule produit NaN dans ce moteur",
+      "reason": "bug réel : champ v1 sans type=number, la virgule décimale produit NaN ; correction dans une PR dédiée",
       "match": "NaN"
     },
     {
