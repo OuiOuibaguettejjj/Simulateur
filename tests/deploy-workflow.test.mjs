@@ -5,16 +5,16 @@ import assert from "node:assert/strict";
 const workflow = fs.readFileSync(".github/workflows/deploy.yml", "utf8");
 const staticCheck = fs.readFileSync("scripts/check-static-site.mjs", "utf8");
 const blocks=[...workflow.matchAll(/^\s+node(?: --input-type=module)? <<'NODE'\n([\s\S]*?)^\s+NODE$/gm)].map(m=>m[1].split("\n").map(line=>line.replace(/^ {10}/,"")).join("\n"));
-assert.equal(blocks.length,6,"nombre inattendu de blocs Node inline dans deploy.yml");
+assert.equal(blocks.length,5,"nombre inattendu de blocs Node inline dans deploy.yml");
 const moduleBlocks=blocks.filter(block=>/^import /m.test(block));
-assert.equal(moduleBlocks.length,3,"les trois blocs modifiés du contrôle transversal doivent être ESM");
+assert.equal(moduleBlocks.length,2,"les deux blocs ESM de deploy.yml doivent rester syntaxiquement valides");
 for(const block of moduleBlocks){
   assert.doesNotMatch(block,/\brequire\s*\(/,"un bloc ESM de deploy.yml ne doit pas utiliser require()");
   const check=spawnSync(process.execPath,["--input-type=module","--check"],{input:block,encoding:"utf8"});
   assert.equal(check.status,0,check.stderr||"syntaxe ESM invalide");
 }
 const interactiveBlocks=blocks.filter(block=>block.includes("isInteractivePage("));
-assert.equal(interactiveBlocks.length,2,"les deux blocs utilisant isInteractivePage doivent être contrôlés");
+assert.equal(interactiveBlocks.length,1,"le bloc utilisant isInteractivePage doit être contrôlé");
 for(const block of interactiveBlocks){
   assert.match(block,/import \{ isInteractivePage \} from ['"]\.\/scripts\/interactive-families\.mjs['"]/);
   assert.match(block,/isInteractivePage\(/);
