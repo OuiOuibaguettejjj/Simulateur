@@ -38,10 +38,10 @@ function fixture() {
   pages.ancien = pages.ancien.replace('<script src="/parametres.js" defer></script>', "");
   return { d, pages, generated: undefined };
 }
-function run(mutate, today = "2026-10-03") {
+function run(mutate, today = "2026-10-03", horizonDays) {
   const f = fixture();
   mutate?.(f);
-  return checkParams({ data: f.d, pages: f.pages, today, generated: f.generated });
+  return checkParams({ data: f.d, pages: f.pages, today, generated: f.generated, horizonDays });
 }
 
 /* ---------- Positif ---------- */
@@ -54,6 +54,8 @@ assert.ok(rules(run(null, "2027-01-01")).includes("expired"), "validité dépass
 assert.equal(rules(run(null, "2026-12-31")).includes("expired"), false, "le dernier jour de validité reste valable");
 assert.ok(warns(run(null, "2026-12-15")).includes("expiring"), "fin de validité proche : avertissement");
 assert.equal(rules(run(null, "2026-12-15")).includes("expired"), false, "fin proche : non bloquant");
+assert.ok(rules(run(null, "2026-11-15", 60)).includes("horizon"), "horizon : expiration à moins de 60 jours bloquante");
+assert.equal(rules(run(null, "2026-11-01", 60)).includes("horizon"), false, "horizon : expiration à exactement 60 jours non bloquante");
 assert.ok(warns(run(f => { f.d.sets.demo.verifiedOn = "2026-03-01"; })).includes("stale"), "vérification ancienne : avertissement");
 assert.equal(rules(run(f => { f.d.sets.demo.verifiedOn = "2026-03-01"; })).includes("stale"), false, "vérification ancienne : non bloquant");
 assert.ok(rules(run(f => { f.d.sets.demo.verifiedOn = "2026-12-01"; })).includes("schema"), "vérification datée du futur refusée");
