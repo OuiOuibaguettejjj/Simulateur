@@ -48,6 +48,24 @@ jobs:
       - name: Test garde des résultats
         run: node tests/simulateurs.test.js
 
+      - name: Test des formes de résultat invalide
+        run: node tests/invalid-result.test.mjs
+
+      - name: Préparer Chromium pour le smoke des résultats
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install --no-save playwright@1.55.0 >/dev/null 2>&1
+          npx playwright install chromium >/dev/null 2>&1
+
+      - name: Smoke bloquant des résultats invalides
+        run: node tests/smoke-results.test.mjs
+
+      - name: Tests génériques des calculateurs
+        run: node tests/generic-calcs.test.mjs
+
+      - name: Tests de référence sourcés
+        run: node tests/reference-calcs.test.mjs
+
       - name: Test paramètres réglementaires
         run: node tests/params.test.mjs
 
