@@ -26,7 +26,7 @@ const failures=rawFailures.filter(f=>{
 const ids=new Set(exceptions.map(keyOf));assert.equal(ids.size,exceptions.length,"exceptions : identités dupliquées");
 assert.equal(data.maxFailures,exceptions.length,"exceptions : maxFailures doit correspondre au nombre d'identités");
 let previous=null;
-try{previous=JSON.parse(execFileSync("git",["show","HEAD^1:"+exceptionsPath],{encoding:"utf8"}));}catch(error){if(error?.status!==128)throw error}
+try{const tracked=execFileSync("git",["ls-tree","-r","--name-only","HEAD^1","--",exceptionsPath],{encoding:"utf8"}).trim();if(tracked===exceptionsPath)previous=JSON.parse(execFileSync("git",["show","HEAD^1:"+exceptionsPath],{encoding:"utf8"}));}catch(error){if(error?.status!==0)throw error}
 if(previous){
   const prevIds=new Set(previous.exceptions.map(keyOf));
   for(const id of ids)assert.ok(prevIds.has(id),"exception nouvelle non autorisée : "+id);
