@@ -75,13 +75,13 @@ export function compareToBaseline(current,baseline){const cur=new Set(current.ma
 export function nextBaseline(current,baseline,migrationSlugs=[]){
  if(baseline===null)return{ok:true,initial:true,next:current,removed:[],blocked:[]};
  const{added,stale}=compareToBaseline(current,baseline);
- if(added.length)return{ok:false,added,next:baseline,removed:[],blocked:[]};
  const debt=new Set(migrationSlugs);
  const blocked=stale.filter(x=>{
    const m=/^public\/outil\/([^/]+)\/index\.html$/.exec(x.path);
    return m&&debt.has(m[1])&&MIGRATION_LOCK_RULES.includes(x.rule);
  });
- if(blocked.length)return{ok:false,added:[],next:baseline,removed:[],blocked};
+ if(blocked.length)return{ok:false,added,next:baseline,removed:[],blocked};
+ if(added.length)return{ok:false,added,next:baseline,removed:[],blocked:[]};
  const gone=new Set(stale.map(pairKey));
  return{ok:true,initial:false,next:baseline.filter(x=>!gone.has(pairKey(x))),removed:stale,blocked:[]}
 }
@@ -134,7 +134,8 @@ function main(){
   const line="Cliquet : "+pairs.length+" écart(s) suivi(s) connu(s) ou nouveaux, "+base.length+" en baseline, "+added.length+" nouveau(x), "+stale.length+" périmé(s).";
   console.log(line);if(process.env.GITHUB_STEP_SUMMARY)fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,"### Cliquet\n\n"+line+"\n");
   for(const x of added)console.error("::error file="+x.path+"::cliquet : nouvel écart ["+x.rule+"] absent de la baseline");
-  for(const x of stale)console.error("::error file="+x.path+"::cliquet : entrée périmée ["+x.rule+"] : l'écart est corrigé, retirez-la avec --update-baseline");
+  const blockedKeys=new Set((r.blocked||[]).map(pairKey));
+  for(const x of stale)if(!blockedKeys.has(pairKey(x)))console.error("::error file="+x.path+"::cliquet : entrée périmée ["+x.rule+"] : l'écart est corrigé, retirez-la avec --update-baseline");
   for(const x of (r.blocked||[]))console.error("::error file="+x.path+"::cliquet anneeAMigrer : migrez le barème vers parametres.json, retirez anneeAMigrer, puis enrichissez l'outil ["+x.rule+"]");
   if(added.length||stale.length||(r.blocked||[]).length)process.exit(1)
  }
