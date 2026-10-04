@@ -109,20 +109,20 @@ function show(){
  result.innerHTML="";
  if(!dateEl.value){result.innerHTML='<div class="result" aria-live="polite">Saisissez votre date de naissance.</div>';return}
  const [y,m,d]=dateEl.value.split("-").map(Number),idx=solarSign(m,d),sun=SIGNS[idx];
- let html='<div class="astro-results"><article class="astro-result sun" aria-live="polite"><div class="eyebrow">SIGNE SOLAIRE</div><div class="sign">'+sun[1]+" "+sun[0]+'</div><div class="degree">'+sun[2]+' · Élément '+sun[3]+'</div><div class="desc">Votre signe solaire est déterminé par la position apparente du Soleil dans le zodiaque tropical à votre naissance.</div></article>';
+ let html='<div class="astro-results"><article class="astro-result sun"><div class="eyebrow">SIGNE SOLAIRE</div><div class="sign">'+sun[1]+" "+sun[0]+'</div><div class="degree">'+sun[2]+' · Élément '+sun[3]+'</div><div class="desc">Votre signe solaire est déterminé par la position apparente du Soleil dans le zodiaque tropical à votre naissance.</div></article>';
  if(!timeEl.value){
-   html+='<article class="astro-result" aria-live="polite"><div class="eyebrow">ASCENDANT</div><div class="sign">Heure nécessaire</div><div class="degree">Date et lieu seuls ne suffisent pas.</div><div class="desc">L’ascendant dépend de l’heure exacte et de la position géographique du lieu de naissance. Ajoutez votre heure pour le calculer.</div></article></div>';
+   html+='<article class="astro-result"><div class="eyebrow">ASCENDANT</div><div class="sign">Heure nécessaire</div><div class="degree">Date et lieu seuls ne suffisent pas.</div><div class="desc">L’ascendant dépend de l’heure exacte et de la position géographique du lieu de naissance. Ajoutez votre heure pour le calculer.</div></article></div>';
    result.innerHTML=html;return;
  }
  const city=cityByName.get(cityEl.value.trim().toLowerCase());
  const lat=city?city[1]:Number(latEl.value),lon=city?city[2]:Number(lonEl.value);
  if(!Number.isFinite(lat)||!Number.isFinite(lon)||Math.abs(lat)>=90||Math.abs(lon)>180){
-   html+='<article class="astro-result" aria-live="polite"><div class="eyebrow">ASCENDANT</div><div class="sign">Lieu à préciser</div><div class="degree">Choisissez une ville reconnue ou renseignez latitude et longitude.</div><div class="desc">Pour éviter une estimation arbitraire, le calcul ne devine jamais votre lieu de naissance.</div></article></div>';result.innerHTML=html;return;
+   html+='<article class="astro-result"><div class="eyebrow">ASCENDANT</div><div class="sign">Lieu à préciser</div><div class="degree">Choisissez une ville reconnue ou renseignez latitude et longitude.</div><div class="desc">Pour éviter une estimation arbitraire, le calcul ne devine jamais votre lieu de naissance.</div></article></div>';result.innerHTML=html;return;
  }
- if(!city&&!offsetEl.value){html+='<article class="astro-result" aria-live="polite"><div class="eyebrow">ASCENDANT</div><div class="sign">Fuseau horaire à préciser</div><div class="degree">Choisissez une ville reconnue ou indiquez le décalage UTC.</div><div class="desc">L’heure locale doit être convertie correctement en UTC avant de calculer le temps sidéral.</div></article></div>';result.innerHTML=html;return;}
+ if(!city&&!offsetEl.value){html+='<article class="astro-result"><div class="eyebrow">ASCENDANT</div><div class="sign">Fuseau horaire à préciser</div><div class="degree">Choisissez une ville reconnue ou indiquez le décalage UTC.</div><div class="desc">L’heure locale doit être convertie correctement en UTC avant de calculer le temps sidéral.</div></article></div>';result.innerHTML=html;return;}
  const date=utcDateFromLocal(dateEl.value,timeEl.value,city?city[3]:null,offsetEl.value);
  const a=ascendant(date,lat,lon), rising=signAt(a);
- html+='<article class="astro-result" aria-live="polite"><div class="eyebrow">ASCENDANT</div><div class="sign">'+rising.symbol+" "+rising.name+'</div><div class="degree">'+fmtDegree(rising.degree)+' · longitude écliptique '+fmtDegree(a)+'</div><div class="desc">Calculé à partir de votre heure locale de naissance, de la latitude et de la longitude du lieu, du temps sidéral local et de l’obliquité de l’écliptique.</div></article></div>';
+ html+='<article class="astro-result"><div class="eyebrow">ASCENDANT</div><div class="sign">'+rising.symbol+" "+rising.name+'</div><div class="degree">'+fmtDegree(rising.degree)+' · longitude écliptique '+fmtDegree(a)+'</div><div class="desc">Calculé à partir de votre heure locale de naissance, de la latitude et de la longitude du lieu, du temps sidéral local et de l’obliquité de l’écliptique.</div></article></div>';
  result.innerHTML=html;
 }
 cityEl.addEventListener("change",()=>{const c=cityByName.get(cityEl.value.trim().toLowerCase());if(c){latEl.value=c[1];lonEl.value=c[2];offsetEl.value="";}});

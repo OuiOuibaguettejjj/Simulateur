@@ -40,12 +40,16 @@ function normalize(html, isCalculator = false) {
   let out = html;
 
   // Accessibilité et favicon communs, de façon idempotente.
-  out = out.replace(/(<[^>]*class=["'][^"']*\bresult\b[^"']*["'][^>]*)(?<!aria-live=["']polite["'])>/gi, (match) => /\baria-live\s*=/.test(match) ? match : match.slice(0, -1) + ' aria-live="polite">');
+  out = out.replace(/<[^>]*\bclass=(["'])([^"']*)\1[^>]*>/gi, (tag, _q, cls) =>
+    /(^|\s)result(\s|$)/.test(cls) && !/\baria-live\s*=/.test(tag)
+      ? tag.slice(0, -1) + ' aria-live="polite">'
+      : tag);
+
   if (!/<link\b[^>]*href=["']\/favicon\.svg["'][^>]*>/i.test(out)) {
     out = out.replace(/<\/head>/i, '<link rel="icon" href="/favicon.svg" type="image/svg+xml"></head>');
   }
 
-  const body = /<body\b[^>]*>/i.exec(out);
+  let body = /<body\b[^>]*>/i.exec(out);
   if (!body) return { html, warnings: ["pas de balise <body>, page ignorée"] };
 
   // Inject the shared keyboard mechanism on every calculator/conversion page.
@@ -58,6 +62,8 @@ function normalize(html, isCalculator = false) {
       warnings.push("balise </head> absente, mécanisme Entrée non injecté");
     }
   }
+
+  body = /<body\b[^>]*>/i.exec(out);
 
   // En-tête
   const headerCount = (out.match(/<header\b/gi) || []).length;

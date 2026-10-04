@@ -141,23 +141,23 @@ window.TOOL={calc:function(){
      !Number.isInteger(trTotal)||trTotal<0||trTotal>400||
      !Number.isInteger(trGeneral)||trGeneral<0||trGeneral>400||
      trGeneral>trTotal){
-    return '<div class="result-error" aria-live="polite"><strong>Valeurs invalides.</strong><br>Vérifiez votre date de naissance, votre date de départ, votre revenu et vos trimestres.</div>';
+    return '<div class="result-error"><strong>Valeurs invalides.</strong><br>Vérifiez votre date de naissance, votre date de départ, votre revenu et vos trimestres.</div>';
   }
 
   if(departure<birth){
-    return '<div class="result-error" aria-live="polite"><strong>Date de départ invalide.</strong><br>La date de départ doit être postérieure à votre date de naissance.</div>';
+    return '<div class="result-error"><strong>Date de départ invalide.</strong><br>La date de départ doit être postérieure à votre date de naissance.</div>';
   }
 
   if(departure.getDate()!==1){
-    return '<div class="result-error" aria-live="polite"><strong>Date de départ invalide.</strong><br>Le point de départ simulé doit être fixé au premier jour d’un mois.</div>';
+    return '<div class="result-error"><strong>Date de départ invalide.</strong><br>Le point de départ simulé doit être fixé au premier jour d’un mois.</div>';
   }
 
   if(departure<new Date("2026-09-01T12:00:00")){
-    return '<div class="result-error" aria-live="polite"><strong>Date de départ hors périmètre.</strong><br>Cette version applique les règles des retraites prenant effet à partir du 1er septembre 2026.</div>';
+    return '<div class="result-error"><strong>Date de départ hors périmètre.</strong><br>Cette version applique les règles des retraites prenant effet à partir du 1er septembre 2026.</div>';
   }
 
   if(departure<p.legalDate){
-    return '<div class="result-error" aria-live="polite"><strong>Le départ est trop précoce.</strong><br>Dans le cadre général simulé ici, votre âge légal est de '+formatAge(p.legalMonths)+'.</div>';
+    return '<div class="result-error"><strong>Le départ est trop précoce.</strong><br>Dans le cadre général simulé ici, votre âge légal est de '+formatAge(p.legalMonths)+'.</div>';
   }
 
   const r=retirementEstimate(s,trTotal,trGeneral,p.req,departure,birth);
@@ -165,7 +165,7 @@ window.TOOL={calc:function(){
   const ageLabel=formatAge(r.age.years*12+r.age.months);
   const decoteLabel=r.decote>0?"−"+r.decote.toFixed(3)+" point":"Aucune";
 
-  return '<div class="result-main" aria-live="polite"><span class="result-label" aria-live="polite">Pension de base estimée</span><strong>'+this.euro(r.pension)+' brut/an</strong><div class="result-monthly" aria-live="polite">≈ '+this.euro(monthly)+' brut/mois</div></div>'+
+  return '<div class="result-main"><span class="result-label">Pension de base estimée</span><strong>'+this.euro(r.pension)+' brut/an</strong><div class="result-monthly">≈ '+this.euro(monthly)+' brut/mois</div></div>'+
   '<div class="takeaway retirement-takeaway"><div class="takeaway-title">'+(r.rate===50?"Taux plein":"Taux réduit")+'</div><div class="takeaway-grid">'+
   '<div class="takeaway-item"><small>Âge au départ</small><strong>'+ageLabel+'</strong></div>'+
   '<div class="takeaway-item"><small>Âge légal</small><strong>'+formatAge(p.legalMonths)+'</strong></div>'+

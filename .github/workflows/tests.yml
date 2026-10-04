@@ -59,5 +59,8 @@ jobs:
       - name: Test check-pages
         run: node tests/check-pages.test.mjs
 
+      - name: Test normalisation du layout
+        run: node tests/normalize-layout.test.mjs
+
       - name: Contrôle des pages (cliquet bloquant)
         run: node scripts/check-pages.mjs --ratchet
