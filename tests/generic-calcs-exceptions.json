@@ -1,11 +1,4 @@
 {
-  "maxFailures": 1,
-  "exceptions": [
-    {
-      "slug": "moyenne-ponderee",
-      "case": "comma",
-      "reason": "limite du harnais VM : l’entrée décimale avec virgule produit NaN dans ce moteur",
-      "match": "NaN"
-    }
-  ]
+  "maxFailures": 0,
+  "exceptions": []
 }
