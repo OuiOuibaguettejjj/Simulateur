@@ -51,7 +51,7 @@
     },
     "attendu": 14,
     "tolerance": 0,
-    "sortie": "^14$",
+    "sortie": "^14(?:$|\\s*\\|)",
     "source": "https://www.calculatrice.fr/moyenne.html"
   },
   {
