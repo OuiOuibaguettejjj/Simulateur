@@ -44,8 +44,8 @@ jobs:
 
       - name: Verify AdSense HTML markers
         run: |
-          node <<'NODE'
-          const fs = require('fs');
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
           const path = require('path');
           const root = 'public';
           const errors = [];
@@ -77,7 +77,7 @@ jobs:
           test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
           node <<'NODE'
           const fs = require('fs');
-          const cp = require('child_process');
+          import cp from 'node:child_process';
           const errors = [];
           const minimumSitemapUrls = 106;
           const critical = [
