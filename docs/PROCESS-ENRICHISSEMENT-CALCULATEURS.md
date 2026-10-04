@@ -57,7 +57,7 @@ Règles du cliquet, à respecter strictement :
 - la baseline ne **grossit jamais** : aucun nouvel écart n'est toléré, aucune entrée n'est ajoutée à la main ;
 - une entrée corrigée est **retirée** avec l'option `--update-baseline` de `scripts/check-pages.mjs`, jamais à la main ;
 - une entrée corrigée mais non retirée fait échouer la CI (« entrée périmée ») ;
-- les entrées d'un outil verrouillé (classe C) ne peuvent pas être retirées tant que son slug figure dans `anneeAMigrer` : le cliquet les bloque volontairement ;
+- les entrées `description`, `content-h2` et `formula` d'un outil verrouillé (classe C) ne peuvent pas être retirées tant que son slug figure dans `anneeAMigrer` : le cliquet les bloque volontairement. Les autres règles ne sont pas concernées par ce verrou, mais la classe C reste interdite d'enrichissement éditorial (§ 0.1) ;
 - seules les entrées **de l'outil traité** sont modifiées dans la baseline, dans la même PR que l'enrichissement.
 
 ### 0.3 Vérifier que le filet de sécurité couvre l'outil
