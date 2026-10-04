@@ -315,6 +315,7 @@ const lockedBaseline=[P(debtPath,"description"),P(debtPath,"content-h2"),P(debtP
 const lockedCurrent=[P(debtPath,"result")];
 const locked=nextBaseline(lockedCurrent,lockedBaseline,["ancien"]);
 assert.equal(locked.ok,false,"anneeAMigrer bloque le retrait des écarts éditoriaux");
+assert.deepEqual(nextBaseline(lockedCurrent,lockedBaseline,["ancien"]).blocked,[P(debtPath,"description"),P(debtPath,"content-h2"),P(debtPath,"formula")],"les entrées verrouillées restent la seule explication du refus");
 assert.deepEqual(locked.blocked,[P(debtPath,"description"),P(debtPath,"content-h2"),P(debtPath,"formula")],"les trois écarts éditoriaux sont verrouillés");
 const migrated=nextBaseline(lockedCurrent,lockedBaseline,[]);
 assert.equal(migrated.ok,true,"outil migré : retrait des écarts autorisé");
