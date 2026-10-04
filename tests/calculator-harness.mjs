@@ -7,10 +7,10 @@ const ROOT=process.cwd();
 function strip(html){return String(html).replace(/<[^>]*>/g,"").replace(/&nbsp;/g," ").replace(/&euro;/g,"€").replace(/\s+/g," ").trim();}
 
 class FakeElement{
-  constructor(tag,attrs={},text=""){this.tagName=tag.toUpperCase();this.nodeName=this.tagName;this.attributes=attrs;this.id=attrs.id||"";this.name=attrs.name||"";this.type=attrs.type||"";this.value=attrs.value??"";this.defaultValue=this.value;this.checked=attrs.checked!==undefined;this.selected=attrs.selected!==undefined;this._textContent=text;this._innerHTML=text;this.style={};this.dataset={};this.listeners={};this.children=[];this.options=[];this.selectedIndex=-1;this.className=attrs.class||"";this.classList={add:()=>{},remove:()=>{},toggle:()=>{},contains:c=>this.className.split(/\s+/).includes(c)};}
+  constructor(tag,attrs={},text=""){this.tagName=tag.toUpperCase();this.nodeName=this.tagName;this.attributes=attrs;this.id=attrs.id||"";this.name=attrs.name||"";this.type=attrs.type||"";this.value=attrs.value??"";this.defaultValue=this.value;this.checked=attrs.checked!==undefined;this.selected=attrs.selected!==undefined;this._textContent=text;this._innerHTML=text;this.style={};this.dataset={};this.listeners={};this.children=[];this.onclick=null;this.options=[];this.selectedIndex=-1;this.className=attrs.class||"";this.classList={add:()=>{},remove:()=>{},toggle:()=>{},contains:c=>this.className.split(/\s+/).includes(c)};}
   addEventListener(type,fn){(this.listeners[type]??=[]).push(fn)}
   dispatchEvent(event){for(const fn of this.listeners[event.type]||[])fn.call(this,event)}
-  click(){const event={type:"click",target:this};this.dispatchEvent(event);if(this.attributes.onclick&&this._doc?._context){const previous=this._doc._context.event;this._doc._context.event=event;try{vm.runInContext(String(this.attributes.onclick),this._doc._context,{filename:"[onclick]"})}finally{this._doc._context.event=previous}}if((this.tagName==="BUTTON"||this.tagName==="INPUT")&&((this.type||"").toLowerCase()==="submit"||this.tagName==="BUTTON"&&!(this.type||"").toLowerCase())&&this.form)this.form.dispatchEvent({type:"submit",target:this.form,preventDefault(){}})}
+  click(){const event={type:"click",target:this};this.dispatchEvent(event);if(typeof this.onclick==="function")this.onclick.call(this,event);if(this.attributes.onclick&&this._doc?._context){const previous=this._doc._context.event;this._doc._context.event=event;try{vm.runInContext(String(this.attributes.onclick),this._doc._context,{filename:"[onclick]"})}finally{this._doc._context.event=previous}}if((this.tagName==="BUTTON"||this.tagName==="INPUT")&&((this.type||"").toLowerCase()==="submit"||this.tagName==="BUTTON"&&!(this.type||"").toLowerCase())&&this.form)this.form.dispatchEvent({type:"submit",target:this.form,preventDefault(){}})}
   get textContent(){return this._textContent}set textContent(v){this._textContent=String(v)}get innerHTML(){return this._innerHTML}set innerHTML(v){this._innerHTML=String(v);this._textContent=strip(this._innerHTML)}focus(){} blur(){} select(){} scrollIntoView(){}
   append(...children){this.children.push(...children);for(const child of children)if(this._doc&&!this._doc.elements.includes(child))this._doc.elements.push(child);return undefined}
   appendChild(child){this.children.push(child);if(this._doc&&!this._doc.elements.includes(child))this._doc.elements.push(child);return child}
@@ -30,6 +30,7 @@ function matches(el,selector){
   const checked=selector.endsWith(":checked"); if(checked)selector=selector.slice(0,-8);
   const a=selector.match(/^([a-zA-Z]*)\[([^=]+)=[\"']?([^\]\"']+)[\"']?\]$/);
   if(a){if(a[1]&&el.tagName.toLowerCase()!==a[1].toLowerCase())return false;return el.attributes[a[2]]===a[3]&&(!checked||el.checked)}
+  const attr=selector.match(/^([a-zA-Z]*)\[([^\]=]+)\]$/);if(attr){if(attr[1]&&el.tagName.toLowerCase()!==attr[1].toLowerCase())return false;return Object.prototype.hasOwnProperty.call(el.attributes,attr[2])&&(!checked||el.checked)}
   return el.tagName.toLowerCase()===selector.toLowerCase();
 }
 function attrs(raw){const out={};for(const a of raw.matchAll(/([:\w-]+)(?:=[\"']([^\"']*)[\"'])?/g))out[a[1].toLowerCase()]=a[2]??"";return out}
@@ -75,11 +76,26 @@ function loadContext(html){
   context.window=context;context.globalThis=context;document._context=context;context.addEventListener=(type,fn)=>{if(type==="load")fn()};return{context,document,window:context};
 }
 function localScripts(html){return[...html.matchAll(/<script[^>]+src=[\"']([^\"']+)[\"'][^>]*><\/script>/gi)].map(m=>m[1]).filter(src=>src.startsWith("/")&&src.endsWith(".js")).map(src=>src.slice(1))}
+export function runInlinePage({pagePath,inputs={},selects={},clickId}){
+  const file=path.join(ROOT,"public",pagePath);const html=fs.readFileSync(file,"utf8");const {context,document,window}=loadContext(html);
+  for(const el of document.elements)if(el.id&&/^[A-Za-z_$][\w$]*$/.test(el.id))context[el.id]=el;
+  for(const [id,value] of Object.entries(inputs)){const el=document.getElementById(id);if(!el)throw new Error("unknown input id: "+id);const raw=String(value);el.value=el.type==="number"?raw.replace(",","." ):raw}
+  for(const [id,value] of Object.entries(selects)){const el=document.getElementById(id);if(!el)throw new Error("unknown select id: "+id);el.value=String(value)}
+  for(const src of localScripts(html)){const full=path.join(ROOT,"public",src);if(fs.existsSync(full))vm.runInContext(fs.readFileSync(full,"utf8"),context,{filename:src,timeout:500})}
+  const inline=[...html.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/gi)].filter(m=>!/\bsrc=/.test(m[1])&&!/application\/ld\+json/i.test(m[1]));
+  if(!inline.length)throw new Error("aucun script intégré");
+  for(const m of inline)vm.runInContext(m[2],context,{filename:file,timeout:500});
+  let returned="";
+  if(window.TOOL?.calc){const $=id=>document.getElementById(id);const euro=value=>Number(value).toLocaleString("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:2});const num=value=>Number(value).toLocaleString("fr-FR",{maximumFractionDigits:2});const result=window.TOOL.calc.call({$,euro,num});if(typeof result!=="string")throw new Error("calc ne retourne pas une chaîne");returned=strip(result)}
+  if(clickId){const button=document.getElementById(clickId);if(!button)throw new Error("unknown button id: "+clickId);button.click()}else{for(const button of document.querySelectorAll("button"))button.click()}
+  return{text:[returned,resultText(document)].filter(Boolean).join(" | "),hasTool:!!window.TOOL};
+}
 export function runInlineCalculator({slug,caseKind="default",inputs={}}){
   const file=path.join(ROOT,"public","outil",slug,"index.html");const html=fs.readFileSync(file,"utf8");const {context,document,window}=loadContext(html);
   for(const [id,value] of Object.entries(inputs)){const el=document.getElementById(id);if(!el)throw new Error("unknown input id: "+id);const raw=String(value);el.value=el.type==="number"?raw.replace(",","." ):raw}
   setCase(document,caseKind);
-  for(const src of localScripts(html)){const full=path.join(ROOT,"public",src);if(fs.existsSync(full))vm.runInContext(fs.readFileSync(full,"utf8"),context,{filename:src,timeout:500})}
+  for(const el of document.elements)if(el.id&&/^[A-Za-z_$][\w$]*$/.test(el.id))context[el.id]=el;
+  for(const src of localScripts(html)){const full=path.join(ROOT,src);if(fs.existsSync(full))vm.runInContext(fs.readFileSync(full,"utf8"),context,{filename:src,timeout:500})}
   const inline=[...html.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/gi)].filter(m=>!/\bsrc=/.test(m[1])&&!/application\/ld\+json/i.test(m[1]));
   if(!inline.length)throw new Error("aucun script intégré");
   for(const m of inline)vm.runInContext(m[2],context,{filename:file,timeout:500});
