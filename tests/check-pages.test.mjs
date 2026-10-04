@@ -185,7 +185,8 @@ assert.equal(loadToolsMeta(sim).slug.type,"calculateur");
 // ===== Étape D : un test positif et un test négatif par règle structurelle =====
 const only=(h,r,m=META,i=IDX)=>errs(h,m,i).filter(x=>x.rule===r);
 assert.equal(only(fixture(),"faq").length,0,"FAQ accordéon conforme");
-assert.equal(only(fixture().replace("<h2>FAQ</h2>","<h2>Questions fréquentes</h2>"),"faq").length,0,"FAQ « Questions fréquentes » conforme");
+assert(only(fixture().replace("<h2>FAQ</h2>","<h2>Questions fréquentes</h2>"),"faq").length>0,"FAQ « Questions fréquentes » refusée");
+assert(only(fixture().replace("aria-labelledby=\"faq-title\"",""),"faq").length>0,"FAQ sans aria-labelledby standard");
 assert(only(fixture().replace("<div class=\"calculator-faq-answer\"><p>Une réponse utile.</p></div>","<p>Une réponse utile.</p>"),"faq").length>0,"FAQ sans conteneur de réponse standard");
 assert(only(fixture().replace('<section class="calculator-faq"><h2>FAQ</h2><details><summary>Comment interpréter le résultat ?</summary><div class="calculator-faq-answer"><p>Une réponse utile.</p></div></details></section>',""),"faq").length>0,"FAQ absente");
 assert(only(fixture().replace("<details><summary>Comment interpréter le résultat ?</summary><div class=\"calculator-faq-answer\"><p>Une réponse utile.</p></div></details>","<p>Question sans accordéon.</p>"),"faq").length>0,"FAQ sans details");
