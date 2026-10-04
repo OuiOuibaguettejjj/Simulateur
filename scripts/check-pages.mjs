@@ -85,6 +85,14 @@ export function nextBaseline(current,baseline,migrationSlugs=[]){
  const gone=new Set(stale.map(pairKey));
  return{ok:true,initial:false,next:baseline.filter(x=>!gone.has(pairKey(x))),removed:stale,blocked:[]}
 }
+export function buildRatchetMessages({added=[],stale=[],blocked=[]}){
+ const blockedKeys=new Set(blocked.map(pairKey));
+ return [
+  ...added.map(x=>"::error file="+x.path+"::cliquet : nouvel écart ["+x.rule+"] absent de la baseline"),
+  ...stale.filter(x=>!blockedKeys.has(pairKey(x))).map(x=>"::error file="+x.path+"::cliquet : entrée périmée ["+x.rule+"] : l'écart est corrigé, retirez-la avec --update-baseline"),
+  ...blocked.map(x=>"::error file="+x.path+"::cliquet anneeAMigrer : migrez le barème vers parametres.json, retirez anneeAMigrer, puis enrichissez l'outil ["+x.rule+"]")
+ ];
+}
 export function seedBaseline(current,baseline){const present=new Set(baseline.map(x=>x.rule));const refused=EDITORIAL_RULES.filter(rule=>present.has(rule));if(refused.length)return{ok:false,refused,next:baseline,added:[]};const added=current.filter(x=>EDITORIAL_RULES.includes(x.rule));const next=[...baseline,...added].sort((a,b)=>a.path.localeCompare(b.path)||a.rule.localeCompare(b.rule));return{ok:true,refused:[],next,added};
 }
 const family=(p,m)=>p.dir==="outil"?(m[p.slug]?.type||"outil"):p.dir;
@@ -134,9 +142,7 @@ function main(){
   const line="Cliquet : "+pairs.length+" écart(s) suivi(s) connu(s) ou nouveaux, "+base.length+" en baseline, "+added.length+" nouveau(x), "+stale.length+" périmé(s).";
   console.log(line);if(process.env.GITHUB_STEP_SUMMARY)fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,"### Cliquet\n\n"+line+"\n");
   for(const x of added)console.error("::error file="+x.path+"::cliquet : nouvel écart ["+x.rule+"] absent de la baseline");
-  const blockedKeys=new Set((r.blocked||[]).map(pairKey));
-  for(const x of stale)if(!blockedKeys.has(pairKey(x)))console.error("::error file="+x.path+"::cliquet : entrée périmée ["+x.rule+"] : l'écart est corrigé, retirez-la avec --update-baseline");
-  for(const x of (r.blocked||[]))console.error("::error file="+x.path+"::cliquet anneeAMigrer : migrez le barème vers parametres.json, retirez anneeAMigrer, puis enrichissez l'outil ["+x.rule+"]");
+  for(const message of buildRatchetMessages({added,stale,blocked:r.blocked||[]}))console.error(message);
   if(added.length||stale.length||(r.blocked||[]).length)process.exit(1)
  }
  if(process.argv.includes("--strict")&&sf.length){for(const x of sf)console.error("::error file="+x.path+"::"+x.rule+" "+x.message);process.exit(1)}
