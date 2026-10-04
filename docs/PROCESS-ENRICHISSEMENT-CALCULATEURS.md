@@ -144,7 +144,7 @@ Pour une page `/outil/`, le socle comprend :
 - calculateur et résultat ;
 - contenu explicatif ;
 - données utilisées, hypothèses ou notes lorsque pertinentes ;
-- FAQ lorsque pertinente ;
+- FAQ obligatoire en accordéon natif `<details>/<summary>`, avec un bloc `.calculator-faq` unique, un H2 `FAQ` ou `Questions fréquentes`, au moins une question et, pour chaque question, un bloc `.calculator-faq-answer` non vide ;
 - sources ;
 - calculs associés et maillage interne ;
 - breadcrumb visible et BreadcrumbList ;
@@ -353,6 +353,8 @@ Toutes les sections ne sont pas obligatoires sur tous les outils : leur présenc
 
 ## 8. FAQ
 
+La FAQ est obligatoire pour chaque calculateur. Elle utilise l’accordéon natif `<details>/<summary>` du nouveau template et reste directement présente dans le HTML.
+
 La FAQ contient des **questions réelles et pertinentes**, pas des formulations créées pour ajouter du texte ou des mots-clés.
 
 Pour chaque question :
@@ -546,7 +548,7 @@ Un calculateur n'est « terminé » que lorsque **tous** les points ci-dessous s
 - [ ] le contenu répond à l'intention principale ;
 - [ ] les explications apportent une valeur ajoutée (test de valeur du § 5 passé sur chaque ajout) ;
 - [ ] les exemples sont recalculés indépendamment et correspondent au résultat de l'outil ;
-- [ ] la FAQ est utile lorsqu'elle est présente ;
+- [ ] la FAQ obligatoire est utile, sans question artificielle ;
 - [ ] les sources sont fiables, officielles pour le réglementaire, et vérifiées à une date notée ;
 - [ ] le maillage interne est pertinent ;
 - [ ] le SEO est travaillé sans contenu artificiel.
