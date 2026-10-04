@@ -1,12 +1,14 @@
 # Règles de forme du site
 
-Ce document définit le **gabarit canonique** des pages outil. Les pages sont HTML-first : le contenu essentiel, l'interface initiale et les données structurées sont présents dans le HTML commité. JavaScript apporte la logique de calcul et les interactions, mais ne génère pas le socle éditorial de la page.
+Ce document définit le **gabarit canonique des pages interactives**. Les pages sont HTML-first : le contenu essentiel, l'interface initiale et les données structurées sont présents dans le HTML commité. JavaScript apporte la logique de calcul et les interactions, mais ne génère pas le socle éditorial de la page.
 
 ## 1. Gabarit unique
 
-Les pages `/outil/`, `/conversion/` et `/comparateur/` partagent le même socle HTML-first. Les trois familles utilisent exactement le même squelette, sans variante. Le préfixe d'URL est conservé pour respecter les URL existantes ; il ne constitue pas un gabarit de rendu différent.
+**Terminologie technique.** Le code de contrôle utilise la notion de **page interactive** pour les règles communes aux trois familles. Les termes `outil`, `conversion` et `comparateur` restent utilisés lorsqu’une règle dépend réellement de la famille concernée (taxonomie, logique de conversion ou logique de comparaison). Les URL `/outil/`, `/conversion/` et `/comparateur/` ne sont pas modifiées.
 
-La page de référence actuelle est `public/outil/tva/index.html`. Pour créer une nouvelle page, utiliser `docs/template-outil.html` comme point de copie, puis adapter uniquement les données et l'interface propres à l'outil.
+Les pages `/outil/`, `/conversion/` et `/comparateur/` sont trois **familles de pages interactives**. Elles partagent le même socle HTML-first et le même contrat de forme ; seule la logique métier et la sémantique propre à la famille peuvent varier. Le préfixe d'URL est conservé pour respecter les URL existantes ; il ne constitue pas un gabarit de rendu différent.
+
+La page de référence actuelle est `public/outil/tva/index.html`. Pour créer une nouvelle page interactive, utiliser `docs/template-outil.html` comme point de copie, puis adapter uniquement les données et l'interface propres à sa famille.
 
 ### Squelette HTML canonique
 
