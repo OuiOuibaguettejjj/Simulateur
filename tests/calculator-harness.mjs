@@ -55,7 +55,7 @@ function setCase(document,kind){
   for(const el of document.elements){
     if(!["INPUT","SELECT","TEXTAREA"].includes(el.tagName))continue;
     if(el.type==="radio"||el.type==="checkbox")continue;
-    if(el.tagName==="SELECT"){if(el.options.length){el.selectedIndex=0;el.value=el.options[0].value}continue}
+    if(el.tagName==="SELECT"){if(caseKind!=="default"&&el.options.length){el.selectedIndex=0;el.value=el.options[0].value}continue}
     if(kind==="default")continue;
     if(el.type==="date"){el.value="2020-01-15";continue}
     if(kind==="empty")el.value="";
