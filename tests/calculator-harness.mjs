@@ -61,7 +61,7 @@ function setCase(document,kind){
     if(kind==="empty")el.value="";
     else if(kind==="zero")el.value="0";
     else if(kind==="negative")el.value="-10";
-    else if(kind==="large")el.value=el.id==="arrondi"?"100":"1000";
+    else if(kind==="large")el.value="100";
     else if(kind==="comma")el.value=el.type==="number"?"12.5":"12,5";
   }
 }
