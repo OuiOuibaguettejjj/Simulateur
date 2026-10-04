@@ -21,7 +21,7 @@ for(const c of cases){
   covered.add(c.outil);
 }
 const allCases=["default","zero","empty","negative","large","comma"];
-const fullyExempted=[...forbidden].filter(slug=>allCases.every(kind=>false));
+const fullyExempted=[...forbidden];
 assert.throws(()=>runInlineCalculator({slug:cases[0].outil,inputs:{__unknown_reference_id__:"1"}}),/unknown input id/,"un identifiant d’entrée inconnu doit échouer");
 console.log("Couche 2 — "+covered.size+" outils testés sur un cas réel sourcé, "+cases.length+" cas.");
 console.log("Couverture : "+covered.size+" outils testés sur au moins un cas réel, "+fullyExempted.length+" outils entièrement exemptés.");
