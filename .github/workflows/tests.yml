@@ -60,6 +60,9 @@ jobs:
       - name: Smoke bloquant des résultats invalides
         run: node tests/smoke-results.test.mjs
 
+      - name: Smoke-test du site de déploiement en local
+        run: node scripts/smoke-site.mjs --base-url http://127.0.0.1:4173 --mode local
+
       - name: Tests génériques des calculateurs
         run: node tests/generic-calcs.test.mjs
 
