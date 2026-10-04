@@ -33,6 +33,12 @@ jobs:
       - name: Test sitemap lastmod validation
         run: node tests/sitemap.test.mjs
 
+      - name: Validation statique complète du site
+        run: node scripts/check-static-site.mjs
+
+      - name: Check layout
+        run: node scripts/check-layout.mjs
+
       - name: Test calculateur IFI
         run: node tests/ifi.test.js
 
