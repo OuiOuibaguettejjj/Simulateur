@@ -32,7 +32,8 @@ for (const test of [
   "tests/deploy-workflow.test.mjs",
   "tests/sitemap.test.mjs",
   "tests/ad-filter.test.mjs",
-  "tests/invalid-result.test.mjs"
+  "tests/invalid-result.test.mjs",
+  "tests/check-layout.test.mjs"
 ]) {
   assert.match(workflow, new RegExp(test.replaceAll(".", "\\.")), `deploy.yml doit exécuter ${test}`);
 }
