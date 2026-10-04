@@ -222,7 +222,7 @@ Toute modification du template doit rester compatible avec les contrôles CI.
 
 ## 8. Tests de référence d'un calculateur
 
-Lorsqu'un calculateur reçoit un test de référence, le cas est ajouté dans `tests/references/*.json` avec les champs `outil`, `entrees`, `attendu`, `tolerance`, `sortie` et `source`. Le champ `sortie` désigne le libellé ou la regex de la valeur contrôlée ; le test échoue si ce libellé est absent ou si aucune valeur numérique ne lui est associée.
+Lorsqu'un calculateur reçoit un test de référence, le cas est ajouté dans `tests/references/*.json` avec les champs `outil`, `entrees`, `attendu`, `tolerance`, `sortie` et `source`. Le champ optionnel `famille` identifie la famille de page interactive (`outil`, `conversion` ou `comparateur`) ; lorsqu'il est omis, le test est rattaché à `outil` pour conserver la compatibilité avec les cas existants. Le champ `sortie` désigne le libellé ou la regex de la valeur contrôlée ; le test échoue si ce libellé est absent ou si aucune valeur numérique ne lui est associée.
 
 La valeur `attendu` doit provenir d'une source publiée indépendante du code testé. Elle ne doit jamais être obtenue en exécutant le calculateur testé pour fabriquer l'attendu. Si aucune source fiable ne permet de fixer un attendu, le cas n'est pas ajouté.
 
