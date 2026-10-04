@@ -1,3 +1,9 @@
+## 2026-10-04 — Balises de partage Open Graph et Twitter
+- Le normaliseur de layout ajoute de façon idempotente `og:type`, `og:site_name`, `og:locale`, `og:title`, `og:description`, `og:url` et `twitter:card` (`summary`) dans le `<head>` des pages, à partir du titre, de la meta description et de la canonique déjà présents.
+- Une balise déjà présente est respectée ; une page sans titre, description ou canonique (`404.html`) n'est pas modifiée. Aucune image n'est déclarée : le dépôt n'en contient pas.
+- 108 pages HTML régénérées ; le diff se limite à ces sept balises. Aucun texte visible, URL, canonique, JSON-LD, calcul, en-tête de sécurité ni date `lastmod` n'est modifié.
+- Tests de `normalize-layout` étendus (ajout unique, échappement, valeur existante respectée, motifs `$`, page sans description).
+
 ## 2026-10-04 — Contrôle des pages et layout
 - Le contrôle `formula` accepte désormais une source externe dans `.formula` ou `.source-links`.
 - Le normaliseur de layout ajoute `aria-live="polite"` aux `.result` et le favicon SVG commun, de façon idempotente et sans modifier le texte visible.
