@@ -261,6 +261,7 @@ jobs:
           node <<'NODE'
           const fs = require('fs');
           const { chromium } = require('playwright');
+          const { isInvalidResult } = await import('./tests/invalid-result.mjs');
 
           function walk(dir, out=[]) {
             for (const e of fs.readdirSync(dir,{withFileTypes:true})) {
@@ -459,6 +460,7 @@ jobs:
           node <<'NODE'
           const fs = require('fs');
           const { chromium } = require('playwright');
+          const { isInvalidResult } = await import('./tests/invalid-result.mjs');
 
           function walk(dir, out=[]) {
             for (const e of fs.readdirSync(dir,{withFileTypes:true})) {
