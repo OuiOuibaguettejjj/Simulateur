@@ -71,13 +71,14 @@ Cette table est tirée du code de `scripts/check-pages.mjs`. En cas de doute ou 
 |---|---|
 | `title` | un seul `<title>`, de la forme « Mot-clé \| Simulateur », avec un mot-clé non vide |
 | `description` | une seule meta description, de 120 à 160 caractères. Elle doit aussi être identique à `WebApplication.description` du JSON-LD (règle `jsonld`) |
-| `content-h2` | au moins 3 titres h2 éditoriaux, situés dans des `.content-section` et hors `.related-tools` |
+| `content-h2` | au moins 2 titres h2 éditoriaux, situés dans des `.content-section` et hors `.related-tools` |
 | `formula` | un bloc `.formula` ou `.source-links` contenant un lien externe http(s) (hors simulateur.site) |
+| `faq` | un bloc `.calculator-faq` unique en accordéon natif `<details>/<summary>`, avec au moins une question et une réponse non vide |
 | `result` | deux conditions indépendantes, qui peuvent porter sur deux éléments : un `.result` non vide dans le HTML source (donc non rempli par JavaScript), et un `.result` avec `aria-live="polite"` |
 | `tool-block` | une seule section `.tool` contenant le h1 et un `p.tool-intro` non vide ; pour `/outil/`, au moins un `input`, `select`, `textarea` ou `button` dans la page ; les ids hérités `ey`, `title`, `intro` et `source` sont interdits |
 | `meta-unique` | titre et description uniques sur l'ensemble du site (outil, conversion, comparateur) |
 
-Les douze règles structurelles et les quatre règles éditoriales (`description`, `content-h2`, `formula`, `meta-unique`) sont suivies par le cliquet.
+Les douze règles structurelles et les cinq règles éditoriales (`description`, `content-h2`, `formula`, `faq`, `meta-unique`) sont suivies par le cliquet.
 
 ### 0.3 Vérifier que le filet de sécurité couvre l'outil
 
@@ -143,7 +144,7 @@ Pour une page `/outil/`, le socle comprend :
 - calculateur et résultat ;
 - contenu explicatif ;
 - données utilisées, hypothèses ou notes lorsque pertinentes ;
-- FAQ lorsque pertinente ;
+- FAQ obligatoire en accordéon natif `<details>/<summary>`, pour chaque page `/outil/`, avec un bloc `.calculator-faq` unique, un H2 `FAQ`, `aria-labelledby="faq-title"` et `id="faq-title"`, au moins une question et, pour chaque question, un bloc `.calculator-faq-answer` non vide ;
 - sources ;
 - calculs associés et maillage interne ;
 - breadcrumb visible et BreadcrumbList ;
@@ -352,6 +353,8 @@ Toutes les sections ne sont pas obligatoires sur tous les outils : leur présenc
 
 ## 8. FAQ
 
+La FAQ est obligatoire pour chaque calculateur. Elle utilise l’accordéon natif `<details>/<summary>` du nouveau template et reste directement présente dans le HTML.
+
 La FAQ contient des **questions réelles et pertinentes**, pas des formulations créées pour ajouter du texte ou des mots-clés.
 
 Pour chaque question :
@@ -545,7 +548,7 @@ Un calculateur n'est « terminé » que lorsque **tous** les points ci-dessous s
 - [ ] le contenu répond à l'intention principale ;
 - [ ] les explications apportent une valeur ajoutée (test de valeur du § 5 passé sur chaque ajout) ;
 - [ ] les exemples sont recalculés indépendamment et correspondent au résultat de l'outil ;
-- [ ] la FAQ est utile lorsqu'elle est présente ;
+- [ ] la FAQ obligatoire est utile, sans question artificielle ;
 - [ ] les sources sont fiables, officielles pour le réglementaire, et vérifiées à une date notée ;
 - [ ] le maillage interne est pertinent ;
 - [ ] le SEO est travaillé sans contenu artificiel.

@@ -10,7 +10,9 @@ for (const field of ['id="birth"', 'id="sam"', 'id="trTotal"', 'id="trGeneral"',
 assert(html.includes("p.year<1955||p.year>2100"), "birth year scope must be enforced");
 assert(html.includes("departure.getDate()!==1"), "departure date must be first of month");
 assert(html.includes('2026-09-01T12:00:00'), "September 2026 rules scope must be enforced");
-assert(html.includes("Questions fréquentes"), "FAQ must be present");
+assert(html.includes('class="calculator-faq"'), "FAQ must be present");
+assert(html.includes("<h2 id=\"faq-title\">FAQ</h2>"), "FAQ must use the standard title");
+assert.strictEqual((html.match(/class="calculator-faq-answer"/g) || []).length, 6, "FAQ answers must use the standard wrapper");
 assert.strictEqual((html.match(/<details>/g) || []).length, 6, "FAQ must stay concise");
 assert(html.includes("À savoir"), "key data note must be present");
 

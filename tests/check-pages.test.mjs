@@ -19,7 +19,8 @@ return "<!doctype html><html lang=\"fr\"><head>"+
 "</head><body><header></header><main><div class=\"breadcrumb\"><a href=\"/\">Accueil</a> · <a href=\"/categorie/\">Catégorie</a> · Nom de l'outil</div>"+
 "<section class=\"tool\"><h1>Nom de l'outil</h1><p class=\"tool-intro\">Introduction claire et utile.</p><div id=\"fields\"><input id=\"v\" type=\"number\"></div><div class=\"result\" aria-live=\"polite\">Résultat initial.</div>"+
 "<div class=\"formula\"><a href=\"https://www.service-public.fr/\">Source officielle</a></div></section>"+
-"<section class=\"content-section\"><h2>Comment calculer ?</h2><p>Principe.</p><h2>Exemple de calcul</h2><p>Exemple.</p><h2>À savoir</h2><p>Limites.</p></section>"+
+"<section class=\"content-section\"><h2>Explication du calcul</h2><p>Principe.</p><h2>Exemple de calcul</h2><p>Exemple.</p></section>"+
+"<section class=\"calculator-faq\" aria-labelledby=\"faq-title\"><h2 id=\"faq-title\">FAQ</h2><details><summary>Comment interpréter le résultat ?</summary><div class=\"calculator-faq-answer\"><p>Une réponse utile.</p></div></details></section>"+
 "<section class=\"related-tools\"><a class=\"related-link\" href=\"/outil/slug-1/\">Outil 1</a><a class=\"related-link\" href=\"/outil/slug-2/\">Outil 2</a><p class=\"status-note\">Retrouvez aussi tous les outils de la rubrique <a href=\"/categorie/\">Catégorie</a>.</p></section></main><footer></footer></body></html>";
 }
 const errs=(h,m=META,i=IDX)=>checkPage(h,{dir:"outil",slug:"slug",toolsMeta:m,categories:CATS,pageIndex:i});
@@ -128,7 +129,17 @@ assert.equal(
   "/outil/ sans TOOLS_META conserve related-meta"
 );
 
-assert.deepEqual(errs(fixture()),[],"page conforme");
+assert.deepEqual(errs(fixture()),[],"page conforme");const oneEditorialH2=fixture().replace(
+  '<h2>Exemple de calcul</h2><p>Exemple.</p>',
+  ''
+);
+assert(has(oneEditorialH2,"content-h2"),"le H2 FAQ ne doit pas compter dans les 2 H2 éditoriaux");
+const faqWithTwoEditorialH2=oneEditorialH2.replace(
+  '<h2>Explication du calcul</h2>',
+  '<h2>Explication du calcul</h2><h2>Deuxième section</h2>'
+);
+assert.equal(has(faqWithTwoEditorialH2,"content-h2"),false,"deux H2 éditoriaux hors FAQ restent valides");
+
 assert(has(fixture().replace("<title>Mot-clé | Simulateur</title>","<title>Mot-clé</title>"),"title"));
 for(const [n,bad] of [[119,true],[120,false],[160,false],[161,true]])assert.equal(has(fixture("x".repeat(n)),"description"),bad,"description "+n);
 for(const a of ["'","&#39;","&apos;","’"])assert.equal(has(fixture("x".repeat(118)+a+"."),"description"),false,"apostrophe "+a);
@@ -140,7 +151,7 @@ assert(has(fixture().replace("<a href=\"https://www.service-public.fr/\">Source 
 const sourceLinksFixture=fixture().replace("<div class=\"formula\"><a href=\"https://www.service-public.fr/\">Source officielle</a></div>","<div class=\"formula\">Source officielle</div><div class=\"source-links\"><a href=\"https://www.service-public.fr/\">Source officielle</a></div>");
 assert.equal(has(sourceLinksFixture,"formula"),false,"positif : source externe dans .source-links");
 assert(has(sourceLinksFixture.replace("<a href=\"https://www.service-public.fr/\">Source officielle</a>","Source officielle"),"formula"),"négatif : .source-links sans lien externe");
-assert(has(fixture().replace("<h2>À savoir</h2>",""),"content-h2"));
+assert(has(fixture().replace("<h2>Exemple de calcul</h2>",""),"content-h2"));
 assert(has(fixture().replace("</section></main>","</section><section class=\"related-tools\"><a class=\"related-link\" href=\"/outil/slug-1/\">A</a><a class=\"related-link\" href=\"/outil/slug-2/\">B</a></section></main>"),"related-block"));
 assert(has(fixture().replace("<a class=\"related-link\" href=\"/outil/slug-2/\">Outil 2</a>",""),"related-block"));
 assert(has(fixture().replace("<a class=\"related-link\" href=\"/outil/slug-2/\">Outil 2</a>","<a class=\"related-link\" href=\"/outil/slug-2/\">2</a><a class=\"related-link\" href=\"/outil/slug-1/\">3</a><a class=\"related-link\" href=\"/outil/slug-1/\">4</a><a class=\"related-link\" href=\"/outil/slug-1/\">5</a>"),"related-block"));
@@ -173,6 +184,16 @@ assert.equal(loadToolsMeta(sim).slug.type,"calculateur");
 
 // ===== Étape D : un test positif et un test négatif par règle structurelle =====
 const only=(h,r,m=META,i=IDX)=>errs(h,m,i).filter(x=>x.rule===r);
+assert.equal(only(fixture(),"faq").length,0,"FAQ accordéon conforme");
+assert(only(fixture().replace("<h2 id=\"faq-title\">FAQ</h2>","<h2 id=\"faq-title\">Questions fréquentes</h2>"),"faq").length>0,"FAQ « Questions fréquentes » refusée");
+assert(only(fixture().replace("aria-labelledby=\"faq-title\"",""),"faq").length>0,"FAQ sans aria-labelledby standard");
+assert(only(fixture().replace("<div class=\"calculator-faq-answer\"><p>Une réponse utile.</p></div>","<p>Une réponse utile.</p>"),"faq").length>0,"FAQ sans conteneur de réponse standard");
+assert(only(fixture().replace('<section class="calculator-faq" aria-labelledby="faq-title"><h2 id="faq-title">FAQ</h2><details><summary>Comment interpréter le résultat ?</summary><div class="calculator-faq-answer"><p>Une réponse utile.</p></div></details></section>',""),"faq").length>0,"FAQ absente");
+assert(only(fixture().replace("<details><summary>Comment interpréter le résultat ?</summary><div class=\"calculator-faq-answer\"><p>Une réponse utile.</p></div></details>","<p>Question sans accordéon.</p>"),"faq").length>0,"FAQ sans details");
+assert(only(fixture().replace("<summary>Comment interpréter le résultat ?</summary>","<p>Question</p>"),"faq").length>0,"FAQ sans summary");
+assert(only(fixture().replace("<p>Une réponse utile.</p>",""),"faq").length>0,"FAQ sans réponse");
+assert(only(fixture().replace('<section class="calculator-faq" aria-labelledby="faq-title">','<section class="calculator-faq" aria-labelledby="faq-title"><section class="calculator-faq">'),"faq").length>0,"deux blocs FAQ");
+
 const L=x=>"<a class=\"related-link\" href=\"/outil/"+x+"/\">"+({"slug-1":"Outil 1","slug-2":"Outil 2"}[x]||x)+"</a>";
 const NEG={
  "html-base":fixture().replace("<html lang=\"fr\">","<html lang=\"en\">"),
@@ -198,7 +219,7 @@ assert.equal(only(fixture().replace("Exemple de calcul","Exemple de calcul ci
 
 // classement des règles
 assert.deepEqual(STRUCTURAL_RULES.filter(r=>EDITORIAL_RULES.includes(r)),[],"familles disjointes");
-for(const r of ["description","content-h2","formula","meta-unique"])assert(EDITORIAL_RULES.includes(r)&&!STRUCTURAL_RULES.includes(r),r+" est éditoriale");
+for(const r of ["description","content-h2","formula","faq","meta-unique"])assert(EDITORIAL_RULES.includes(r)&&!STRUCTURAL_RULES.includes(r),r+" est éditoriale");
 for(const r of ["html-base","markup-balance","title","canonical","breadcrumb","h1","tool-block","result","related-block","jsonld","related-meta","citation-marker"])assert(STRUCTURAL_RULES.includes(r),r+" est structurelle");
 assert.deepEqual(errs(fixture("x")).filter(x=>STRUCTURAL_RULES.includes(x.rule)),[],"une page qui ne viole que l'éditorial n'a aucun écart structurel");
 assert(errs(fixture("x")).some(x=>x.rule==="description"),"description reste signalée (éditorial)");
@@ -311,13 +332,13 @@ assert(committed.every(x=>TRACKED_RULES.includes(x.rule)),"baseline versionnée 
 
 // anneeAMigrer : les écarts éditoriaux ne peuvent pas être résorbés avant migration.
 const debtPath="public/outil/ancien/index.html";
-const lockedBaseline=[P(debtPath,"description"),P(debtPath,"content-h2"),P(debtPath,"formula"),P(debtPath,"result")];
+const lockedBaseline=[P(debtPath,"description"),P(debtPath,"content-h2"),P(debtPath,"formula"),P(debtPath,"faq"),P(debtPath,"result")];
 const lockedCurrent=[P(debtPath,"result")];
 const locked=nextBaseline(lockedCurrent,lockedBaseline,["ancien"]);
 assert.equal(locked.ok,false,"anneeAMigrer bloque le retrait des écarts éditoriaux");
-assert.deepEqual(locked.blocked,[P(debtPath,"description"),P(debtPath,"content-h2"),P(debtPath,"formula")],"les trois écarts éditoriaux sont verrouillés");
-const lockedMessages=buildRatchetMessages({stale:lockedBaseline.slice(0,3),blocked:locked.blocked});
-assert.equal(lockedMessages.length,3,"entrée verrouillée : un seul message par écart");
+assert.deepEqual(locked.blocked,[P(debtPath,"description"),P(debtPath,"content-h2"),P(debtPath,"formula"),P(debtPath,"faq")],"les quatre écarts éditoriaux sont verrouillés");
+const lockedMessages=buildRatchetMessages({stale:lockedBaseline.slice(0,4),blocked:locked.blocked});
+assert.equal(lockedMessages.length,4,"entrée verrouillée : un seul message par écart");
 assert(lockedMessages.every(m=>m.includes("cliquet anneeAMigrer")),"entrée verrouillée : seul le message anneeAMigrer apparaît");
 assert(!lockedMessages.some(m=>m.includes("entrée périmée")),"entrée verrouillée : aucun message entrée périmée");
 const addedMessages=buildRatchetMessages({added:[P("public/outil/test/index.html","result")]});
@@ -328,6 +349,6 @@ assert.equal(unlockedMessages.length,1,"entrée périmée non verrouillée : un 
 assert(unlockedMessages[0].includes("entrée périmée"),"entrée périmée non verrouillée : message périmé présent");
 const migrated=nextBaseline(lockedCurrent,lockedBaseline,[]);
 assert.equal(migrated.ok,true,"outil migré : retrait des écarts autorisé");
-assert.deepEqual(migrated.removed,[P(debtPath,"description"),P(debtPath,"content-h2"),P(debtPath,"formula")],"outil migré : écarts retirables");
+assert.deepEqual(migrated.removed,[P(debtPath,"description"),P(debtPath,"content-h2"),P(debtPath,"formula"),P(debtPath,"faq")],"outil migré : écarts retirables");
 
 console.log("check-pages tests passed.");
