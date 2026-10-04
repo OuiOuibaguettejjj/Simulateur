@@ -320,6 +320,9 @@ const lockedMessages=buildRatchetMessages({stale:lockedBaseline.slice(0,3),block
 assert.equal(lockedMessages.length,3,"entrée verrouillée : un seul message par écart");
 assert(lockedMessages.every(m=>m.includes("cliquet anneeAMigrer")),"entrée verrouillée : seul le message anneeAMigrer apparaît");
 assert(!lockedMessages.some(m=>m.includes("entrée périmée")),"entrée verrouillée : aucun message entrée périmée");
+const addedMessages=buildRatchetMessages({added:[P("public/outil/test/index.html","result")]});
+assert.equal(addedMessages.length,1,"écart ajouté : un seul message");
+assert(addedMessages[0].includes("nouvel écart"),"écart ajouté : message attendu");
 const unlockedMessages=buildRatchetMessages({stale:[P(debtPath,"description")]});
 assert.equal(unlockedMessages.length,1,"entrée périmée non verrouillée : un message");
 assert(unlockedMessages[0].includes("entrée périmée"),"entrée périmée non verrouillée : message périmé présent");
