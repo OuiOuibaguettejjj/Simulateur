@@ -24,9 +24,12 @@ for(const slug of tools)for(const caseKind of cases){
 }
 const ids=new Set(exceptions.map(keyOf));assert.equal(ids.size,exceptions.length,"exceptions : identités dupliquées");
 assert.equal(data.maxFailures,exceptions.length,"exceptions : maxFailures doit correspondre au nombre d'identités");
-const previous=JSON.parse(execFileSync("git",["show","HEAD^1:"+exceptionsPath],{encoding:"utf8"}));
-const prevIds=new Set(previous.exceptions.map(keyOf));
-for(const id of ids)assert.ok(prevIds.has(id),"exception nouvelle non autorisée : "+id);
+let previous=null;
+try{previous=JSON.parse(execFileSync("git",["show","HEAD^1:"+exceptionsPath],{encoding:"utf8"}));}catch(error){if(error?.status!==128)throw error}
+if(previous){
+  const prevIds=new Set(previous.exceptions.map(keyOf));
+  for(const id of ids)assert.ok(prevIds.has(id),"exception nouvelle non autorisée : "+id);
+}
 const currentFailures=new Set(failures.map(keyOf));
 for(const ex of exceptions)assert.ok(currentFailures.has(keyOf(ex)),"exception devenue obsolète : "+keyOf(ex));
 assert.ok(failures.length<=data.maxFailures,"cliquet : les échecs hors exceptions ne peuvent pas augmenter");
