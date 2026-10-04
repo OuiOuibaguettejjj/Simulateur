@@ -201,8 +201,8 @@
       "EUR": 1,
       "USD": 1.17
     },
-    "note": "Cas indépendant fondé sur le taux de référence BCE publié le 4 mai 2026 : 1 EUR = 1,1700 USD. Le taux injecté dans le faux endpoint est une fixture de transport distincte de la valeur attendue du cas de référence.",
-    "source": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html"
+    "note": "Cas indépendant fondé sur le taux de référence BCE publié le 4 mai 2026 : 1 EUR = 1,1700 USD. La fixture de taux simule le transport de l'API ; la valeur attendue reste définie séparément dans le cas de référence.",
+    "source": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/eurofxref-graph-usd.en.html"
   },
   {
     "famille": "conversion",
