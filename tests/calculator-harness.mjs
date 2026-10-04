@@ -120,9 +120,11 @@ export function runInlinePage({pagePath,inputs={},selects={},clickId}){
   if(clickId){
     const button=document.getElementById(clickId);
     if(!button)throw new Error("unknown button id: "+clickId);
-    button.click();
+    if(typeof button.onclick==="function")button.onclick.call(button);else button.click();
   }else{
-    for(const button of document.querySelectorAll("button"))button.click();
+    for(const button of document.querySelectorAll("button")){
+      if(typeof button.onclick==="function")button.onclick.call(button);else button.click();
+    }
   }
   return{text:resultText(document),hasTool:!!window.TOOL};
 }
