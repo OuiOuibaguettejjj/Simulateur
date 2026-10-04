@@ -121,7 +121,7 @@ Chaque page outil doit fournir dans son HTML initial :
 - un résultat initial **non vide**, même avant toute saisie, avec `aria-live="polite"` ;
 - un bloc `.formula` (méthode et limites) contenant au moins une source ;
 - au moins deux sections H2 dans le contenu éditorial ;
-- un bloc `.calculator-faq` unique, avec un H2 `FAQ`, au moins un `<details>` et, pour chaque question, un `<summary>` non vide et une réponse non vide ;
+- un bloc `.calculator-faq` unique, avec un H2 `FAQ` ou `Questions fréquentes`, au moins un `<details>` et, pour chaque question, un `<summary>` non vide et un bloc `.calculator-faq-answer` non vide ;
 - `/outil/` : un unique bloc `.related-tools` standard de 2 à 4 liens, issus des relations définies dans `TOOLS_META` ;
 - `/conversion/` et `/comparateur/` : un unique bloc `.related-tools` standard de 2 à 4 liens écrits directement dans le HTML, sans entrée `data/tools.json` ; chaque lien doit pointer vers une page publique existante, sans lien vers la page elle-même et sans doublon ;
 - un `WebApplication` JSON-LD unique ;
