@@ -1,7 +1,6 @@
 # Processus d'enrichissement des calculateurs
 
 > Document de référence pour enrichir les calculateurs de Simulateur, un à la fois.
-> À placer dans `docs/PROCESS-ENRICHISSEMENT-CALCULATEURS.md`.
 > Dernière révision : 4 octobre 2026.
 
 ## Objectif
@@ -63,7 +62,7 @@ Règles du cliquet, à respecter strictement :
 
 ### 0.3 Vérifier que le filet de sécurité couvre l'outil
 
-Avant de modifier quoi que ce soit, exécuter les contrôles listés en § 6.1 sur la branche de départ, et noter qu'ils sont verts. Un état de départ rouge se traite séparément, avant le chantier.
+Avant de modifier quoi que ce soit, exécuter les contrôles listés en § 11.1 sur la branche de départ, et noter qu'ils sont verts. Un état de départ rouge se traite séparément, avant le chantier.
 
 Vérifier en particulier :
 
@@ -461,9 +460,9 @@ Joindre les sorties à la PR.
 
 ## 12. Revue et Pull Request
 
-- Une branche par calculateur : `enrichissement/<slug>`.
-- Un titre de PR explicite : `feat(<slug>) : enrichir le calculateur <nom>`.
-- Des messages de commit en français, au format `type : description`.
+- Une branche par calculateur : `feat/enrichissement-<slug>`.
+- Un titre de PR explicite : `feat(<slug>): enrichir le calculateur <nom>`.
+- Des messages de commit en français, au format `type: description` ou `type(scope): description`.
 - Une PR par type de changement (§ 0.7).
 - La description reprend la checklist de l'annexe A, cochée, avec les sorties des contrôles.
 - Aucun barème, taux ou plafond modifié en dehors d'une PR de migration ou de revalorisation, annoncée comme telle.
