@@ -107,7 +107,6 @@ for (const file of files) {
     console.warn("normalize-layout: " + path.relative(process.cwd(), file) + " : " + w);
   }
   if (html !== old) {
-    if (CHECK_ONLY) console.error("normalize-layout: would update " + path.relative(process.cwd(), file));
     changed++;
     if (!CHECK_ONLY) fs.writeFileSync(file, html);
   }
