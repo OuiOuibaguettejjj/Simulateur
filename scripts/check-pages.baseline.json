@@ -880,26 +880,6 @@
     "rule": "title"
   },
   {
-    "path": "public/outil/ratio/index.html",
-    "rule": "content-h2"
-  },
-  {
-    "path": "public/outil/ratio/index.html",
-    "rule": "description"
-  },
-  {
-    "path": "public/outil/ratio/index.html",
-    "rule": "formula"
-  },
-  {
-    "path": "public/outil/ratio/index.html",
-    "rule": "result"
-  },
-  {
-    "path": "public/outil/ratio/index.html",
-    "rule": "title"
-  },
-  {
     "path": "public/outil/recette/index.html",
     "rule": "content-h2"
   },
