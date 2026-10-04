@@ -9,6 +9,10 @@
   },
   {
     "path": "public/conversion/aire/index.html",
+    "rule": "content-h2"
+  },
+  {
+    "path": "public/conversion/aire/index.html",
     "rule": "formula"
   },
   {
@@ -17,11 +21,23 @@
   },
   {
     "path": "public/conversion/devises/index.html",
+    "rule": "content-h2"
+  },
+  {
+    "path": "public/conversion/devises/index.html",
     "rule": "formula"
   },
   {
     "path": "public/conversion/longueur/index.html",
+    "rule": "content-h2"
+  },
+  {
+    "path": "public/conversion/longueur/index.html",
     "rule": "formula"
+  },
+  {
+    "path": "public/conversion/poids/index.html",
+    "rule": "content-h2"
   },
   {
     "path": "public/conversion/poids/index.html",
@@ -30,6 +46,10 @@
   {
     "path": "public/conversion/temperature/index.html",
     "rule": "formula"
+  },
+  {
+    "path": "public/conversion/volume/index.html",
+    "rule": "content-h2"
   },
   {
     "path": "public/conversion/volume/index.html",
@@ -734,10 +754,6 @@
   {
     "path": "public/outil/moyenne/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/partage-depenses/index.html",
-    "rule": "faq"
   },
   {
     "path": "public/outil/partage-depenses/index.html",
