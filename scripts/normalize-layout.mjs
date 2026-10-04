@@ -74,7 +74,7 @@ function addSocialMeta(html) {
   return html.replace(/<\/head>/i, () => tags + "</head>");
 }
 
-export function normalize(html, isInteractivePagePage = false) {
+export function normalize(html, isInteractive = false) {
   const warnings = [];
   let out = html;
 
