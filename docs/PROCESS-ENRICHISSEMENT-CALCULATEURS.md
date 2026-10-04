@@ -33,6 +33,8 @@ Cette section est **bloquante** : aucun audit éditorial ne commence avant qu'el
 
 ### 0.1 Classer le calculateur
 
+Avant tout enrichissement, identifier également la **famille de page interactive** (`outil`, `conversion` ou `comparateur`). Cette classification ne change pas l’URL et ne crée pas de gabarit distinct : elle sert à distinguer les règles communes de la page interactive des règles réellement propres à sa famille. L’audit préalable doit donc vérifier le socle commun et, séparément, les contraintes métier de la famille concernée.
+
 Chaque calculateur appartient à une classe, qui détermine ce qui est permis.
 
 | Classe | Définition | Exemples actuels | Enrichissement éditorial |
