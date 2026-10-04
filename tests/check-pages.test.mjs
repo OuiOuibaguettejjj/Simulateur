@@ -336,6 +336,6 @@ assert.equal(unlockedMessages.length,1,"entrée périmée non verrouillée : un 
 assert(unlockedMessages[0].includes("entrée périmée"),"entrée périmée non verrouillée : message périmé présent");
 const migrated=nextBaseline(lockedCurrent,lockedBaseline,[]);
 assert.equal(migrated.ok,true,"outil migré : retrait des écarts autorisé");
-assert.deepEqual(migrated.removed,[P(debtPath,"description"),P(debtPath,"content-h2"),P(debtPath,"formula")],"outil migré : écarts retirables");
+assert.deepEqual(migrated.removed,[P(debtPath,"description"),P(debtPath,"content-h2"),P(debtPath,"formula"),P(debtPath,"faq")],"outil migré : écarts retirables");
 
 console.log("check-pages tests passed.");
