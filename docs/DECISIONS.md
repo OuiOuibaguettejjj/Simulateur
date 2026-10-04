@@ -132,6 +132,8 @@ Les barèmes ne sont plus codés en dur dans chaque page : ils vivent dans `data
 
 Un outil encore marqué `anneeAMigrer` dans `data/parametres.json` ne peut pas résorber ses écarts éditoriaux suivis (`description`, `content-h2`, `formula`) dans `scripts/check-pages.baseline.json`. Le cliquet bloque leur retrait jusqu'à la migration du barème vers `parametres.json`, puis au retrait du marqueur. Cette règle évite d'enrichir un outil dont le barème reste à migrer.
 
+Limite connue : si un slug est retiré de `anneeAMigrer` après suppression de l'année du titre/H1, sans migration effective du barème, les contrôles actuels ne détectent pas cette échappatoire.
+
 `check-params.mjs` conserve son comportement par défaut : seule une validité dépassée est bloquante. L'option `--horizon <jours>` permet une anticipation indépendante ; les jeux qui expirent dans moins de l'horizon deviennent bloquants pour ce contrôle. Le workflow PR exécute cette anticipation en non bloquant avec une annotation GitHub warning, et un workflow hebdomadaire l'exécute en bloquant. Les échéances suivies sont documentées dans `docs/ECHEANCES.md`.
 
 ## 2026-10-04 — Deux couches de tests des calculateurs
