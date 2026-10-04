@@ -69,6 +69,9 @@ jobs:
       - name: Tests génériques des calculateurs
         run: node tests/generic-calcs.test.mjs
 
+      - name: Tests métier des familles interactives
+        run: node tests/interactive-families.test.mjs
+
       - name: Tests de référence sourcés
         run: node tests/reference-calcs.test.mjs
 
