@@ -197,6 +197,7 @@
     "attendu": 117,
     "tolerance": 0.01,
     "sortie": "117\\s*USD",
+    "note": "Cas indépendant fondé sur le taux de référence BCE publié le 4 mai 2026 : 1 EUR = 1,1700 USD.",
     "source": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html"
   },
   {
@@ -267,6 +268,6 @@
     "attendu": 10,
     "tolerance": 0,
     "sortie": "A :",
-    "source": "https://www.economie.gouv.fr/entreprises/prix-unitaire"
+    "source": "https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/linformation-sur-les-prix"
   }
 ]
