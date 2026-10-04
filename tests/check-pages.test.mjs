@@ -20,7 +20,7 @@ return "<!doctype html><html lang=\"fr\"><head>"+
 "<section class=\"tool\"><h1>Nom de l'outil</h1><p class=\"tool-intro\">Introduction claire et utile.</p><div id=\"fields\"><input id=\"v\" type=\"number\"></div><div class=\"result\" aria-live=\"polite\">Résultat initial.</div>"+
 "<div class=\"formula\"><a href=\"https://www.service-public.fr/\">Source officielle</a></div></section>"+
 "<section class=\"content-section\"><h2>Explication du calcul</h2><p>Principe.</p><h2>Exemple de calcul</h2><p>Exemple.</p></section>"+
-"<section class=\"calculator-faq\"><h2>FAQ</h2><details><summary>Comment interpréter le résultat ?</summary><div class=\"calculator-faq-answer\"><p>Une réponse utile.</p></div></details></section>"+
+"<section class=\"calculator-faq\" aria-labelledby=\"faq-title\"><h2 id=\"faq-title\">FAQ</h2><details><summary>Comment interpréter le résultat ?</summary><div class=\"calculator-faq-answer\"><p>Une réponse utile.</p></div></details></section>"+
 "<section class=\"related-tools\"><a class=\"related-link\" href=\"/outil/slug-1/\">Outil 1</a><a class=\"related-link\" href=\"/outil/slug-2/\">Outil 2</a><p class=\"status-note\">Retrouvez aussi tous les outils de la rubrique <a href=\"/categorie/\">Catégorie</a>.</p></section></main><footer></footer></body></html>";
 }
 const errs=(h,m=META,i=IDX)=>checkPage(h,{dir:"outil",slug:"slug",toolsMeta:m,categories:CATS,pageIndex:i});
