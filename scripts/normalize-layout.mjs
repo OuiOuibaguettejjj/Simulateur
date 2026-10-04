@@ -95,7 +95,7 @@ export function normalize(html, isInteractive = false) {
 
   // Inject the shared keyboard mechanism on every interactive page.
   // This also covers future pages automatically through the common layout step.
-  if (isCalculator && !/<script[^>]+src=["']\/enter-calcul\.js["'][^>]*>/i.test(out)) {
+  if (isInteractive && !/<script[^>]+src=["']\/enter-calcul\.js["'][^>]*>/i.test(out)) {
     const headClose = /<\/head>/i.exec(out);
     if (headClose) {
       out = out.slice(0, headClose.index) + '<script src="/enter-calcul.js" defer></script>' + out.slice(headClose.index);
