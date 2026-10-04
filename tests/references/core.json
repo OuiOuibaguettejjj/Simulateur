@@ -146,5 +146,17 @@
     "sortie": "651,69\\s*€\\s*/\\s*mois",
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F19778",
     "verificationSource": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053733826"
+  },
+  {
+    "outil": "ratio",
+    "entrees": {
+      "a": "12",
+      "b": "18"
+    },
+    "attendu": "2 : 3",
+    "tolerance": 0,
+    "sortie": "Ratio",
+    "source": "https://eduscol.education.gouv.fr/sites/default/files/document/guide-resolution-de-problemes-mathematiques-au-college-73914.pdf",
+    "note": "Cas de référence indépendant : 12:18 se réduit à 2:3 en divisant les deux termes par 6."
   }
 ]
