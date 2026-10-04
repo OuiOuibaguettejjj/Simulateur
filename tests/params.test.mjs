@@ -1,6 +1,9 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import vm from "node:vm";
+import os from "node:os";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { spawnSync } from "node:child_process";
 import { buildParamsJs, readParams } from "../scripts/generate-params.mjs";
 import { checkParams } from "../scripts/check-params.mjs";
@@ -57,11 +60,32 @@ assert.ok(warns(run(null, "2026-12-15")).includes("expiring"), "fin de validité
 assert.equal(rules(run(null, "2026-12-15")).includes("expired"), false, "fin proche : non bloquant");
 assert.ok(rules(run(null, "2026-11-15", 60)).includes("horizon"), "horizon : expiration à moins de 60 jours bloquante");
 assert.equal(rules(run(null, "2026-11-01", 60)).includes("horizon"), false, "horizon : expiration à exactement 60 jours non bloquante");
-const cli = args => spawnSync(process.execPath, ["scripts/check-params.mjs", ...args], { encoding: "utf8" });
-assert.equal(cli(["--today=2026-11-15","--horizon","60"]).status, 1, "CLI : --horizon 60 est accepté");
-assert.equal(cli(["--today=2026-11-15","--horizon=60"]).status, 1, "CLI : --horizon=60 est accepté");
-for (const args of [["--horizon"],["--horizon="],["--horizon","abc"],["--horizon=abc"],["--horizon","1.5"],["--horizon=-1"]]) {
-  assert.equal(cli(args).status, 2, "CLI : valeur --horizon invalide refusée (" + args.join(" ") + ")");
+const checkParamsScript = fileURLToPath(new URL("../scripts/check-params.mjs", import.meta.url));
+function cliFixture(expiry, args) {
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "simulateur-check-params-"));
+  try {
+    const f = fixture();
+    f.d.sets.demo.effectiveTo = expiry;
+    f.pages.demo = page("Calculateur démo 2026");
+    fs.mkdirSync(path.join(tmpDir, "data"), { recursive: true });
+    fs.mkdirSync(path.join(tmpDir, "public", "outil", "demo"), { recursive: true });
+    fs.writeFileSync(path.join(tmpDir, "data", "parametres.json"), JSON.stringify(f.d, null, 2) + "\n");
+    fs.writeFileSync(path.join(tmpDir, "public", "outil", "demo", "index.html"), f.pages.demo);
+    fs.writeFileSync(path.join(tmpDir, "public", "parametres.js"), buildParamsJs(f.d));
+    return spawnSync(process.execPath, [checkParamsScript, "--today=2026-11-15", ...args], {
+      cwd: tmpDir,
+      encoding: "utf8"
+    });
+  } finally {
+    fs.rmSync(tmpDir, { recursive: true, force: true });
+  }
+}
+assert.equal(cliFixture("2026-12-01", ["--horizon", "60"]).status, 1, "CLI : --horizon 60 bloque une expiration à moins de 60 jours");
+assert.equal(cliFixture("2026-12-01", ["--horizon=60"]).status, 1, "CLI : --horizon=60 bloque une expiration à moins de 60 jours");
+assert.equal(cliFixture("2027-01-31", ["--horizon", "60"]).status, 0, "CLI : une expiration à plus de 60 jours reste non bloquante");
+assert.equal(cliFixture("2027-01-31", ["--horizon=60"]).status, 0, "CLI : --horizon=60 reste non bloquant à plus de 60 jours");
+for (const args of [["--horizon"], ["--horizon="], ["--horizon", "abc"], ["--horizon=abc"], ["--horizon", "1.5"], ["--horizon=-1"]]) {
+  assert.equal(cliFixture("2026-12-01", args).status, 2, "CLI : valeur --horizon invalide refusée (" + args.join(" ") + ")");
 }
 assert.ok(warns(run(f => { f.d.sets.demo.verifiedOn = "2026-03-01"; })).includes("stale"), "vérification ancienne : avertissement");
 assert.equal(rules(run(f => { f.d.sets.demo.verifiedOn = "2026-03-01"; })).includes("stale"), false, "vérification ancienne : non bloquant");
