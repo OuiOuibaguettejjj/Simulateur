@@ -45,7 +45,8 @@ export function sharedOverrides(html) {
 export function localHeadingOverrides(html) {
   return [...new Set(
     extractStyleRules(html).filter(selector =>
-      /(^|[\s>+~,(])h[1-6](?=$|[\s.#:[>+~),])/.test(selector)
+      SHARED.test(selector) &&
+      /(^|[\\s>+~,(])h[1-6](?=$|[\\s.#:[>+~),])/.test(selector)
     )
   )];
 }
