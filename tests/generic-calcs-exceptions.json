@@ -1,11 +1,4 @@
 {
-  "maxFailures": 1,
-  "exceptions": [
-    {
-      "slug": "moyenne-ponderee",
-      "case": "comma",
-      "reason": "bug réel : champ v1 sans type=number, la virgule décimale produit NaN ; correction dans une PR dédiée",
-      "match": "NaN"
-    }
-  ]
+  "maxFailures": 0,
+  "exceptions": []
 }
