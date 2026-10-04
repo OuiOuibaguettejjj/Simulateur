@@ -8,7 +8,7 @@ import path from "node:path";
 const root = path.join(process.cwd(), "public");
 const SKIP_ROOT_DIRS = new Set([".well-known", "api"]);
 const HUBS = ["calculateurs", "simulateurs", "conversions", "comparateurs"];
-const SHARED = /^(?:\.wrap|main|header|footer|\.nav|\.navlinks|\.logo|\.content-section(?:\s|>|$)|\.calculator-faq(?:\s|>|$)|\.related-tools|\.footerlinks)(?![\w-])/;
+const SHARED = /^(?:\.wrap|main|header|footer|\.nav|\.navlinks|\.logo|\.content-section|\.calculator-faq|\.related-tools|\.footerlinks)(?![\w-])/;
 
 let warned = 0;
 function warn(rel, msg) {
