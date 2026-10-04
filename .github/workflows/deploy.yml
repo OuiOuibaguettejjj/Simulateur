@@ -49,6 +49,7 @@ jobs:
           const path = require('path');
           const root = 'public';
           const errors = [];
+          const { isInteractivePage } = await import('./scripts/interactive-families.mjs');
           function walk(dir, out = []) {
             for (const entry of fs.readdirSync(dir, {withFileTypes:true})) {
               const file = path.join(dir, entry.name);
@@ -100,7 +101,7 @@ jobs:
             for (const marker of markers) if (!html.toLowerCase().includes(marker.toLowerCase())) errors.push(`critical marker missing in ${file}: ${marker}`);
           }
           const changed = cp.execFileSync('git', ['diff', '--name-only', 'HEAD^', 'HEAD', '--', 'public'], {encoding:'utf8'}).trim().split(/\r?\n/).filter(Boolean);
-          for (const file of changed.filter(f => f.startsWith('public/outil/') && f.endsWith('.html'))) {
+          for (const file of changed.filter(f => isInteractivePage(f.slice('public/'.length)) && f.endsWith('.html'))) {
             // Deleted public HTML files are intentional changes; there is no current file to inspect.
             if (!fs.existsSync(file)) continue;
             let parent = '';
@@ -183,10 +184,10 @@ jobs:
             if (html.toLowerCase().includes('repere')) errors.push(file + ': obsolete brand string "repere"');
             if (html.includes('repere.workers.dev')) errors.push(file + ': obsolete workers.dev domain');
 
-            if (file.startsWith('public/outil/')) {
-              if (html.length < 1000) errors.push(file + ': calculator page suspiciously small (' + html.length + ' bytes)');
-              if (!/<script\b/i.test(html)) errors.push(file + ': calculator has no JavaScript');
-              if (!/<button\b/i.test(html)) errors.push(file + ': calculator has no button');
+            if (isInteractivePage(file.slice('public/'.length))) {
+              if (html.length < 1000) errors.push(file + ': interactive page suspiciously small (' + html.length + ' bytes)');
+              if (!/<script\b/i.test(html)) errors.push(file + ': interactive page has no JavaScript');
+              if (!/<button\b/i.test(html)) errors.push(file + ': interactive page has no button');
             }
 
             for (const match of html.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/gi)) {
@@ -231,8 +232,8 @@ jobs:
             catch (e) { errors.push('public/simulateurs.js: JavaScript syntax error: ' + e.message); }
           }
 
-          const toolCount = files.filter(f => f.startsWith('public/outil/')).length;
-          console.log('Validated ' + files.length + ' HTML pages and ' + toolCount + ' calculator pages.');
+          const interactiveCount = files.filter(f => isInteractivePage(f.slice('public/'.length))).length;
+          console.log('Validated ' + files.length + ' HTML pages and ' + interactiveCount + ' interactive pages.');
 
           if (errors.length) {
             console.error(errors.join('\n'));
