@@ -14,7 +14,7 @@ const pages=listIntegratedPages(),rawFailures=[];
 for(const page of pages)for(const caseKind of cases){
   const {family,slug}=page;
   try{
-    const out=runInlineCalculator({family,slug,caseKind});
+    const out=await runInlineCalculator({family,slug,caseKind});
     if(!out.text)throw new Error("résultat vide");
     if(isInvalidResult(out.text))throw new Error("valeur invalide dans le résultat : "+out.text.slice(0,160));
   }catch(error){rawFailures.push({slug,case:caseKind,error:String(error.message||error)})}
