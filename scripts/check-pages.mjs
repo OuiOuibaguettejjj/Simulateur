@@ -6,7 +6,7 @@ import { pathToFileURL } from "node:url";
 const ROOT=process.cwd();
 export const STRUCTURAL_RULES=["html-base","markup-balance","title","canonical","breadcrumb","h1","tool-block","result","related-block","jsonld","related-meta","citation-marker"];
 export const EDITORIAL_RULES=["description","content-h2","formula","faq","meta-unique"];
-export const MIGRATION_LOCK_RULES=["description","content-h2","formula"];
+export const MIGRATION_LOCK_RULES=["description","content-h2","formula","faq"];
 export const TRACKED_RULES=[...STRUCTURAL_RULES,...EDITORIAL_RULES];
 const STRUCT=new Set(["div","section","main","header","footer","nav","article","aside","details","ul","ol","table","form"]);
 const OPTIONAL_END=new Set(["p","li","dt","dd","tr","td","th","thead","tbody","tfoot","option"]);
