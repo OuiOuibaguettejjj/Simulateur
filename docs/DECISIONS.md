@@ -150,9 +150,11 @@ Le smoke Chromium et le contrôle post-déploiement utilisent le même module `t
 
 Les balises Open Graph et Twitter sont générées par `normalize-layout.mjs` plutôt que écrites page par page : elles sont dérivées du titre, de la meta description et de la canonique, qui restent la source de vérité, et le mode `--check` bloque toute dérive. Choix : `twitter:card` en `summary` et aucune `og:image`, faute d'image dans le dépôt ; une image de partage pourra être ajoutée plus tard sans toucher aux URL. Les pages sans titre, description ou canonique (`404.html`) ne reçoivent aucune balise. Aucune URL, logique de calcul, CSP ni date `lastmod` n'est modifiée (changement mécanique de balisage).
 
-## Socle H2 éditorial commun
+## 2026-10-04 — Socle H2 éditorial commun
 
-Les H2 éditoriaux des calculateurs utilisent un traitement visuel commun via `section.content-section > h2`. Le composant repose sur une hiérarchie typographique sobre, un accent latéral, des espacements constants et un comportement mobile dédié. La FAQ conserve son propre composant interactif et les H2 des blocs « Outils associés » restent distincts.
+Les deux H2 éditoriaux obligatoires des calculateurs utilisent un traitement visuel commun via `section.content-section > h2`. Le composant repose sur une hiérarchie typographique sobre, un accent latéral, des espacements constants et un comportement mobile dédié. Le choix porte uniquement sur la forme visuelle : le contenu des sections éditoriales reste libre selon le calculateur.
 
-Le choix est volontairement porté par le CSS commun plutôt que par une multiplication de variantes HTML : les pages existantes conservent leur structure `content-section`, tandis que le template documentaire rappelle ce composant comme référence. Une page ne doit pas créer de style H2 spécifique à un calculateur sans justification d'architecture commune.
+Le H2 de la FAQ reste volontairement distinct, car la FAQ est un composant interactif avec son propre traitement visuel. Les H2 des blocs « Outils associés » restent également distincts. Les pages déjà enrichies pourront être remises progressivement à ce standard visuel lors de leur repasse individuelle, sans exception permanente ni contrainte d'uniformisation du contenu.
+
+Le choix est porté par le CSS commun plutôt que par une multiplication de variantes HTML : les pages conservent leur structure `content-section`, tandis que le template documentaire rappelle ce composant comme référence. Une page ne doit pas créer de style H2 spécifique à un calculateur sans justification d'architecture commune.
 
