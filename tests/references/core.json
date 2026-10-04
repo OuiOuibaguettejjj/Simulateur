@@ -1,0 +1,12 @@
+[
+  {"outil":"coefficient","entrees":{"a":"10","b":"14.3"},"attendu":1.43,"tolerance":0,"sortie":"Coefficient","source":"https://booper.fr/glossaire/calcul-prix-de-vente"},
+  {"outil":"marge","entrees":{"achat":"80","vente":"100"},"attendu":20,"tolerance":0.01,"sortie":"Marge","verifications":[{"sortie":"Taux de marge","attendu":25,"tolerance":0.01},{"sortie":"Taux de marque","attendu":20,"tolerance":0.01}],"source":"https://calculette.org/calculateurs/marge"},
+  {"outil":"pourcentage","entrees":{"v":"150","p":"20"},"attendu":30,"tolerance":0.01,"sortie":"<strong>","source":"https://calculette.org/calculateurs/pourcentage"},
+  {"outil":"moyenne","entrees":{"s":"10,12,20"},"attendu":14,"tolerance":0,"sortie":"<strong>","source":"https://www.calculatrice.fr/moyenne.html"},
+  {"outil":"median-mode","entrees":{"s":"10,12,20"},"attendu":12,"tolerance":0,"sortie":"Médiane","source":"https://calculette.org/calculateurs/statistiques"},
+  {"outil":"moyenne-ponderee","entrees":{"v1":"80","w1":"3","v2":"90","w2":"1"},"attendu":82.5,"tolerance":0.0001,"sortie":"<strong>","source":"https://helpfulcalculator.com/en/weighted-average-calculator"},
+  {"outil":"vitesse","entrees":{"d":"100","t":"2"},"attendu":50,"tolerance":0,"sortie":"<strong>","source":"https://calculatorlib.com/speed-from-distance-and-time-calculator"},
+  {"outil":"smic","entrees":{"heures":"35","zone":"metropole"},"attendu":12.31,"tolerance":0.01,"sortie":"brut / heure","source":"https://www.service-public.gouv.fr/particuliers/vosdroits/F2300"},
+  {"outil":"frais-kilometriques","entrees":{"km":"4000","cv":"6","veh":"normal"},"attendu":2660,"tolerance":0.01,"sortie":"frais kilométriques estimés","source":"https://www.economie.gouv.fr/particuliers/impots-et-fiscalite/gerer-mon-impot-sur-le-revenu/impot-sur-le-revenu-tout-savoir-sur-le-bareme-des-frais-kilometriques"},
+  {"outil":"rsa","entrees":{"age":"25plus","status":"single","dependents":"0","student":"no","youngActive":"no","resident":"yes","majoration":"no","housing":"none","housingAid":"","m1":"0","m2":"0","m3":"0"},"attendu":651.69,"tolerance":0.01,"sortie":"/mois","source":"https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053733826"}
+]
