@@ -80,7 +80,7 @@ Le squelette ci-dessous décrit les blocs attendus. Les commentaires indiquent l
       <h2>Exemple de calcul</h2><p>...</p>
     </section>
 
-    <!-- FAQ obligatoire pour /outil/ : au moins une question utile, nombre de questions libre. Le composant standard utilise aria-labelledby="faq-title" et id="faq-title". -->
+    <!-- FAQ obligatoire pour chaque page interactive : au moins une question utile, nombre de questions libre. Le composant standard utilise aria-labelledby="faq-title" et id="faq-title". -->
     <section class="calculator-faq" aria-labelledby="faq-title">
       <h2 id="faq-title">FAQ</h2>
       <details>
@@ -107,7 +107,7 @@ Le bloc outil est un `<section class="tool">` sur toutes les pages. L'introducti
 
 ## 2. Blocs obligatoires
 
-Chaque page outil doit fournir dans son HTML initial :
+Chaque page interactive doit fournir dans son HTML initial :
 
 - `<!doctype html>` et `lang="fr"` ;
 - un `<head>` complet avec viewport ;
@@ -136,9 +136,9 @@ Le JavaScript ne doit pas être nécessaire pour faire apparaître le H1, l'intr
 
 La présence des composants essentiels est obligatoire ; leur profondeur reste libre. Il n'existe pas de quota de mots, de paragraphes ou de questions.
 
-La FAQ est obligatoire sur chaque page `/outil/`. Elle utilise un unique bloc `.calculator-faq` avec `<details>/<summary>`, `aria-labelledby="faq-title"` et un H2 `id="faq-title"` intitulé `FAQ`, afin de rester native, accessible au clavier et fonctionnelle sans JavaScript. Le nombre de questions est libre, avec au minimum une question et une réponse non vide. Les réponses restent directement présentes dans le HTML.
+La FAQ est obligatoire sur chaque page interactive (`/outil/`, `/conversion/`, `/comparateur/`). Elle utilise un unique bloc `.calculator-faq` avec `<details>/<summary>`, `aria-labelledby="faq-title"` et un H2 `id="faq-title"` intitulé `FAQ`, afin de rester native, accessible au clavier et fonctionnelle sans JavaScript. Le nombre de questions est libre, avec au minimum une question et une réponse non vide. Les réponses restent directement présentes dans le HTML.
 
-Selon la nature de l'outil, peuvent être ajoutés sans modifier le socle :
+Selon la nature de la page interactive, peuvent être ajoutés sans modifier le socle :
 
 - graphique ou tableau ;
 - scénarios ou comparaisons ;
