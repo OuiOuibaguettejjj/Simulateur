@@ -71,6 +71,8 @@ function cliFixture(expiry, args) {
     fs.mkdirSync(path.join(tmpDir, "public", "outil", "demo"), { recursive: true });
     fs.writeFileSync(path.join(tmpDir, "data", "parametres.json"), JSON.stringify(f.d, null, 2) + "\n");
     fs.writeFileSync(path.join(tmpDir, "public", "outil", "demo", "index.html"), f.pages.demo);
+    fs.mkdirSync(path.join(tmpDir, "public", "outil", "ancien"), { recursive: true });
+    fs.writeFileSync(path.join(tmpDir, "public", "outil", "ancien", "index.html"), f.pages.ancien);
     fs.writeFileSync(path.join(tmpDir, "public", "parametres.js"), buildParamsJs(f.d));
     return spawnSync(process.execPath, [checkParamsScript, "--today=2026-11-15", ...args], {
       cwd: tmpDir,
