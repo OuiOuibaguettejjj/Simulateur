@@ -158,7 +158,7 @@
     }
   },
   "anneeAMigrer": {
-    "motif": "Barèmes encore codés en dur dans la page ou à auditer : l'année reste dans le titre jusqu'à la migration vers data/parametres.json. Retirer un slug de cette liste quand l'outil est migré ou que l'année quitte le titre.",
+    "motif": "Barèmes encore codés en dur dans la page ou à auditer : l'année reste dans le titre jusqu'à la migration vers data/parametres.json. Retirer un slug de cette liste uniquement lorsque l'outil est réellement migré vers le jeu de paramètres correspondant.",
     "slugs": [
       "age-retraite",
       "capacite-emprunt",
