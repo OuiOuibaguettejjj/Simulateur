@@ -24,7 +24,7 @@ Les pages `/outil/<slug>/`, `/conversion/<slug>/` et `/comparateur/<slug>/` suiv
 
 Les règles transversales s’appliquent à toutes les pages interactives. Les règles de taxonomie de `data/tools.json` restent propres aux pages `/outil/<slug>/`. Le breadcrumb visible et le `BreadcrumbList` JSON-LD restent spécifiques aux outils lorsqu’ils utilisent la taxonomie centrale ; les conversions et comparateurs suivent leur propre fil d’Ariane jusqu’à leur URL canonique. Les relations `relatedTools` alimentent le bloc standard « Outils associés » lorsqu'elles sont définies ; des liens contextuels éditoriaux restent possibles lorsque leur valeur est réelle.
 
-Les contrôles CI vérifient désormais ces invariants entre la taxonomie centrale et le HTML statique. Ils empêchent notamment qu'une page conserve un ancien breadcrumb, une mauvaise canonique ou un ancien maillage après une modification de `data/tools.json`.
+Les contrôles CI vérifient les invariants transversaux des pages interactives ainsi que, pour les outils, la cohérence entre la taxonomie centrale et le HTML statique. Ils empêchent notamment qu'un outil conserve un ancien breadcrumb, une mauvaise canonique ou un ancien maillage après une modification de `data/tools.json`.
 
 Les simulateurs riches peuvent conserver des extensions spécifiques (graphiques, tableaux, scénarios, contenu réglementaire), à condition de respecter le socle commun. La FAQ n’est pas une extension optionnelle : elle est obligatoire sur chaque page interactive et suit le composant standard. Il n'est pas recherché une uniformité visuelle absolue.
 
