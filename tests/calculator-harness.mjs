@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import vm from "node:vm";
+import {INTERACTIVE_FAMILIES} from "../scripts/interactive-families.mjs";
 
 const ROOT=process.cwd();
 
@@ -71,12 +72,13 @@ function setCase(document,kind){
 function resultText(document){const primary=document.elements.filter(e=>e.id==="result"||e.id==="results"||e.className.split(/\s+/).some(c=>/result/i.test(c))).map(e=>strip(e.textContent||e.innerHTML||"")).filter(Boolean);if(primary.length)return[...new Set(primary)].join(" | ");return document.elements.filter(e=>e.id&&![ "INPUT","SELECT","TEXTAREA","BUTTON","FORM"].includes(e.tagName)).map(e=>strip(e.textContent||e.innerHTML||"")).filter(Boolean).join(" | ")}
 function loadContext(html){
   const document=buildDocument(html);
-  const context=vm.createContext({document,console:{log(){},warn(){},error(){}},setTimeout:()=>0,clearTimeout(){},setInterval:()=>0,clearInterval(){},requestAnimationFrame:fn=>fn(),cancelAnimationFrame(){},alert(){},confirm:()=>true,prompt:()=>null,Event:function(type){this.type=type},CustomEvent:function(type){this.type=type},Date,Intl,Math,Number,String,Boolean,Array,Object,JSON,RegExp,parseFloat,parseInt,isNaN,isFinite});
+  const context=vm.createContext({document,console:{log(){},warn(){},error(){}},setTimeout:()=>0,clearTimeout(){},setInterval:()=>0,clearInterval(){},requestAnimationFrame:fn=>fn(),cancelAnimationFrame(){},alert(){},confirm:()=>true,prompt:()=>null,Event:function(type){this.type=type},CustomEvent:function(type){this.type=type},fetch:async()=>({ok:true,json:async()=>({dates:{EUR:null,USD:"2026-09-25",GBP:"2026-09-25",CHF:"2026-09-25"},rates:{EUR:1,USD:1.17,GBP:0.87,CHF:0.94},source:"BCE"})}),Date,Intl,Math,Number,String,Boolean,Array,Object,JSON,RegExp,parseFloat,parseInt,isNaN,isFinite});
   context.window=context;context.globalThis=context;document._context=context;context.addEventListener=(type,fn)=>{if(type==="load")fn()};return{context,document,window:context};
 }
 function localScripts(html){return[...html.matchAll(/<script[^>]+src=[\"']([^\"']+)[\"'][^>]*><\/script>/gi)].map(m=>m[1]).filter(src=>src.startsWith("/")&&src.endsWith(".js")).map(src=>src.slice(1))}
-export function runInlineCalculator({slug,caseKind="default",inputs={}}){
-  const file=path.join(ROOT,"public","outil",slug,"index.html");const html=fs.readFileSync(file,"utf8");const {context,document,window}=loadContext(html);
+export function runInlineCalculator({slug,family="outil",caseKind="default",inputs={}}){
+  if(!INTERACTIVE_FAMILIES.includes(family))throw new Error("unknown interactive family: "+family);
+  const file=path.join(ROOT,"public",family,slug,"index.html");const html=fs.readFileSync(file,"utf8");const {context,document,window}=loadContext(html);
   for(const [id,value] of Object.entries(inputs)){const el=document.getElementById(id);if(!el)throw new Error("unknown input id: "+id);const raw=String(value);el.value=el.type==="number"?raw.replace(",","." ):raw}
   setCase(document,caseKind);
   for(const src of localScripts(html)){const full=path.join(ROOT,"public",src);if(fs.existsSync(full))vm.runInContext(fs.readFileSync(full,"utf8"),context,{filename:src,timeout:500})}
@@ -84,8 +86,9 @@ export function runInlineCalculator({slug,caseKind="default",inputs={}}){
   if(!inline.length)throw new Error("aucun script intégré");
   for(const m of inline)vm.runInContext(m[2],context,{filename:file,timeout:500});
   let returned="";
-  if(window.TOOL?.calc){const $=id=>document.getElementById(id);const euro=value=>Number(value).toLocaleString("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:2});const num=value=>Number(value).toLocaleString("fr-FR",{maximumFractionDigits:2});const result=window.TOOL.calc.call({$,euro,num});if(typeof result!=="string")throw new Error("calc ne retourne pas une chaîne");returned=strip(result)}
+  if(family==="outil"&&window.TOOL?.calc){const $=id=>document.getElementById(id);const euro=value=>Number(value).toLocaleString("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:2});const num=value=>Number(value).toLocaleString("fr-FR",{maximumFractionDigits:2});const result=window.TOOL.calc.call({$,euro,num});if(typeof result!=="string")throw new Error("calc ne retourne pas une chaîne");returned=strip(result)}
   for(const button of document.querySelectorAll("button"))button.click();
   return{text:[returned,resultText(document)].filter(Boolean).join(" | "),hasTool:!!window.TOOL};
 }
-export function listIntegratedTools(){const dir=path.join(ROOT,"public","outil");return fs.readdirSync(dir,{withFileTypes:true}).filter(e=>e.isDirectory()).map(e=>e.name).filter(slug=>{const html=fs.readFileSync(path.join(dir,slug,"index.html"),"utf8");return[...html.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/gi)].some(m=>!/\bsrc=/.test(m[1])&&!/application\/ld\+json/i.test(m[1]))}).sort()}
+export function listIntegratedPages(){const pages=[];for(const family of INTERACTIVE_FAMILIES){const dir=path.join(ROOT,"public",family);if(!fs.existsSync(dir))continue;for(const entry of fs.readdirSync(dir,{withFileTypes:true})){if(!entry.isDirectory())continue;const slug=entry.name;const html=fs.readFileSync(path.join(dir,slug,"index.html"),"utf8");const hasInline=[...html.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/gi)].some(m=>!/\bsrc=/.test(m[1])&&!/application\/ld\+json/i.test(m[1]));if(hasInline)pages.push({family,slug})}}return pages.sort((a,b)=>(a.family+"/"+a.slug).localeCompare(b.family+"/"+b.slug))}
+export function listIntegratedTools(){return listIntegratedPages().filter(page=>page.family==="outil").map(page=>page.slug)}
