@@ -165,5 +165,108 @@
     ],
     "source": "https://eduscol.education.fr/document/13132/download",
     "note": "Cas de référence indépendant : 12:18 se réduit à 2:3 en divisant les deux termes par 6 ; 12 ÷ 18 ≈ 0,6667."
+  },
+  {
+    "famille": "conversion",
+    "outil": "aire",
+    "entrees": {
+      "v": "1"
+    },
+    "attendu": 0.0001,
+    "tolerance": 0.000001,
+    "sortie": "ha",
+    "source": "https://www.bipm.org/fr/si-brochure-9"
+  },
+  {
+    "famille": "conversion",
+    "outil": "angle",
+    "entrees": {
+      "value": "180"
+    },
+    "attendu": 3.14159265,
+    "tolerance": 1e-7,
+    "sortie": "rad",
+    "source": "https://www.bipm.org/fr/si-brochure-9"
+  },
+  {
+    "famille": "conversion",
+    "outil": "devises",
+    "entrees": {
+      "v": "100"
+    },
+    "attendu": 117,
+    "tolerance": 0.01,
+    "sortie": "USD",
+    "source": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html"
+  },
+  {
+    "famille": "conversion",
+    "outil": "donnees",
+    "entrees": {
+      "v": "1"
+    },
+    "attendu": 1000,
+    "tolerance": 0.0001,
+    "sortie": "Mo",
+    "source": "https://webstore.iec.ch/en/publication/87379"
+  },
+  {
+    "famille": "conversion",
+    "outil": "longueur",
+    "entrees": {
+      "v": "1"
+    },
+    "attendu": 100,
+    "tolerance": 0,
+    "sortie": "cm",
+    "source": "https://www.bipm.org/fr/si-brochure-9"
+  },
+  {
+    "famille": "conversion",
+    "outil": "poids",
+    "entrees": {
+      "v": "1"
+    },
+    "attendu": 1000,
+    "tolerance": 0,
+    "sortie": "g",
+    "source": "https://www.bipm.org/fr/si-brochure-9"
+  },
+  {
+    "famille": "conversion",
+    "outil": "temperature",
+    "entrees": {
+      "value": "0"
+    },
+    "attendu": 32,
+    "tolerance": 0.000001,
+    "sortie": "°F",
+    "source": "https://www.bipm.org/fr/si-brochure-9"
+  },
+  {
+    "famille": "conversion",
+    "outil": "volume",
+    "entrees": {
+      "v": "1"
+    },
+    "attendu": 1000,
+    "tolerance": 0,
+    "sortie": "mL",
+    "source": "https://www.bipm.org/fr/si-brochure-9"
+  },
+  {
+    "famille": "comparateur",
+    "outil": "prix-unitaire",
+    "entrees": {
+      "pa": "10",
+      "qa": "1",
+      "pb": "12",
+      "qb": "2",
+      "unit": "u"
+    },
+    "attendu": 10,
+    "tolerance": 0,
+    "sortie": "A :",
+    "source": "https://www.economie.gouv.fr/entreprises/prix-unitaire"
   }
 ]
