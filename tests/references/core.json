@@ -153,7 +153,7 @@
       "a": "12",
       "b": "18"
     },
-    "attendu": "2 : 3",
+    "attendu": 2,
     "tolerance": 0,
     "sortie": "Ratio",
     "source": "https://eduscol.education.gouv.fr/sites/default/files/document/guide-resolution-de-problemes-mathematiques-au-college-73914.pdf",
