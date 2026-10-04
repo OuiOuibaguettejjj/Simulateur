@@ -73,6 +73,7 @@ function resultText(document){const primary=document.elements.filter(e=>e.id==="
 function loadContext(html){
   const document=buildDocument(html);
   const context=vm.createContext({document,console:{log(){},warn(){},error(){}},setTimeout:()=>0,clearTimeout(){},setInterval:()=>0,clearInterval(){},requestAnimationFrame:fn=>fn(),cancelAnimationFrame(){},alert(){},confirm:()=>true,prompt:()=>null,Event:function(type){this.type=type},CustomEvent:function(type){this.type=type},fetch:async()=>({ok:true,json:async()=>({dates:{EUR:null,USD:"2026-09-25",GBP:"2026-09-25",CHF:"2026-09-25"},rates:{EUR:1,USD:1.17,GBP:0.87,CHF:0.94},source:"BCE"})}),Date,Intl,Math,Number,String,Boolean,Array,Object,JSON,RegExp,parseFloat,parseInt,isNaN,isFinite});
+  for(const element of elements)if(element.id&&!Object.prototype.hasOwnProperty.call(context,element.id))context[element.id]=element;
   context.window=context;context.globalThis=context;document._context=context;context.addEventListener=(type,fn)=>{if(type==="load")fn()};return{context,document,window:context};
 }
 function localScripts(html){return[...html.matchAll(/<script[^>]+src=[\"']([^\"']+)[\"'][^>]*><\/script>/gi)].map(m=>m[1]).filter(src=>src.startsWith("/")&&src.endsWith(".js")).map(src=>src.slice(1))}
