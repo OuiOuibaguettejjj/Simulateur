@@ -11,10 +11,10 @@ const SOCIAL_HEAD =
   '<meta name="description" content="Description de test avec &amp; et l&#39;apostrophe, assez longue pour un exemple réaliste.">' +
   '<link rel="canonical" href="https://simulateur.site/outil/x/">';
 
-function run(body, head = "") {
+function run(body, head = "", family = "outil") {
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "normalize-layout-"));
   try {
-    const dir = path.join(tmp, "public", "outil", "x");
+    const dir = path.join(tmp, "public", family, "x");
     fs.mkdirSync(dir, { recursive: true });
     const file = path.join(dir, "index.html");
     fs.writeFileSync(file, page(body, head));
@@ -58,5 +58,10 @@ assert(dollar.includes('content="Prix $&amp; $1 &amp; B'), "les motifs $ du titr
 
 const bare = run("<div></div>", "<title>Sans description | Simulateur</title>");
 assert.equal((bare.match(/og:|twitter:/g) || []).length, 0, "page sans description ni canonique : aucune balise de partage");
+
+for (const family of ["conversion", "comparateur"]) {
+  const outFamily = run("<button>Calculer</button><div class=\"result\"></div>", SOCIAL_HEAD, family);
+  assert(outFamily.includes('<script src="/enter-calcul.js" defer></script>'), family + " reçoit le mécanisme Entrée commun");
+}
 
 console.log("normalize-layout tests passed.");
