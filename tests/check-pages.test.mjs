@@ -140,7 +140,13 @@ assert(has(fixture().replace("<a href=\"https://www.service-public.fr/\">Source 
 const sourceLinksFixture=fixture().replace("<div class=\"formula\"><a href=\"https://www.service-public.fr/\">Source officielle</a></div>","<div class=\"formula\">Source officielle</div><div class=\"source-links\"><a href=\"https://www.service-public.fr/\">Source officielle</a></div>");
 assert.equal(has(sourceLinksFixture,"formula"),false,"positif : source externe dans .source-links");
 assert(has(sourceLinksFixture.replace("<a href=\"https://www.service-public.fr/\">Source officielle</a>","Source officielle"),"formula"),"négatif : .source-links sans lien externe");
-assert(has(fixture().replace("<h2>À savoir</h2>",""),"content-h2"));
+assert(has(fixture().replace("<h2>Exemple de calcul</h2>",""),"content-h2"));
+assert.equal(only(fixture(),"faq").length,0,"FAQ accordéon conforme");
+assert(only(fixture().replace('<section class="calculator-faq"><h2>FAQ</h2><details><summary>Comment interpréter le résultat ?</summary><div class="calculator-faq-answer"><p>Une réponse utile.</p></div></details></section>',""),"faq").length>0,"FAQ absente");
+assert(only(fixture().replace("<details><summary>Comment interpréter le résultat ?</summary><div class=\"calculator-faq-answer\"><p>Une réponse utile.</p></div></details>","<p>Question sans accordéon.</p>"),"faq").length>0,"FAQ sans details");
+assert(only(fixture().replace("<summary>Comment interpréter le résultat ?</summary>","<p>Question</p>"),"faq").length>0,"FAQ sans summary");
+assert(only(fixture().replace("<p>Une réponse utile.</p>",""),"faq").length>0,"FAQ sans réponse");
+assert(only(fixture().replace('<section class="calculator-faq">','<section class="calculator-faq"><section class="calculator-faq">'),"faq").length>0,"deux blocs FAQ");
 assert(has(fixture().replace("</section></main>","</section><section class=\"related-tools\"><a class=\"related-link\" href=\"/outil/slug-1/\">A</a><a class=\"related-link\" href=\"/outil/slug-2/\">B</a></section></main>"),"related-block"));
 assert(has(fixture().replace("<a class=\"related-link\" href=\"/outil/slug-2/\">Outil 2</a>",""),"related-block"));
 assert(has(fixture().replace("<a class=\"related-link\" href=\"/outil/slug-2/\">Outil 2</a>","<a class=\"related-link\" href=\"/outil/slug-2/\">2</a><a class=\"related-link\" href=\"/outil/slug-1/\">3</a><a class=\"related-link\" href=\"/outil/slug-1/\">4</a><a class=\"related-link\" href=\"/outil/slug-1/\">5</a>"),"related-block"));
@@ -198,7 +204,7 @@ assert.equal(only(fixture().replace("Exemple de calcul","Exemple de calcul ci
 
 // classement des règles
 assert.deepEqual(STRUCTURAL_RULES.filter(r=>EDITORIAL_RULES.includes(r)),[],"familles disjointes");
-for(const r of ["description","content-h2","formula","meta-unique"])assert(EDITORIAL_RULES.includes(r)&&!STRUCTURAL_RULES.includes(r),r+" est éditoriale");
+for(const r of ["description","content-h2","formula","faq","meta-unique"])assert(EDITORIAL_RULES.includes(r)&&!STRUCTURAL_RULES.includes(r),r+" est éditoriale");
 for(const r of ["html-base","markup-balance","title","canonical","breadcrumb","h1","tool-block","result","related-block","jsonld","related-meta","citation-marker"])assert(STRUCTURAL_RULES.includes(r),r+" est structurelle");
 assert.deepEqual(errs(fixture("x")).filter(x=>STRUCTURAL_RULES.includes(x.rule)),[],"une page qui ne viole que l'éditorial n'a aucun écart structurel");
 assert(errs(fixture("x")).some(x=>x.rule==="description"),"description reste signalée (éditorial)");
