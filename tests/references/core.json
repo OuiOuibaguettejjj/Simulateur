@@ -156,7 +156,14 @@
     "attendu": 2,
     "tolerance": 0,
     "sortie": "Ratio",
-    "source": "https://eduscol.education.gouv.fr/sites/default/files/document/guide-resolution-de-problemes-mathematiques-au-college-73914.pdf",
-    "note": "Cas de référence indépendant : 12:18 se réduit à 2:3 en divisant les deux termes par 6."
+    "verifications": [
+      {
+        "sortie": "Quotient",
+        "attendu": 0.6667,
+        "tolerance": 0.0001
+      }
+    ],
+    "source": "https://eduscol.education.fr/document/13132/download",
+    "note": "Cas de référence indépendant : 12:18 se réduit à 2:3 en divisant les deux termes par 6 ; 12 ÷ 18 ≈ 0,6667."
   }
 ]
