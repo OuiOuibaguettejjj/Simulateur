@@ -120,7 +120,7 @@ Chaque page outil doit fournir dans son HTML initial :
 - l'interface essentielle directement présente dans le HTML ;
 - un résultat initial **non vide**, même avant toute saisie, avec `aria-live="polite"` ;
 - un bloc `.formula` (méthode et limites) contenant au moins une source ;
-- au moins deux sections H2 dans le contenu éditorial ;
+- au moins deux sections H2 éditoriales, regroupées dans un ou plusieurs `section.content-section` ; ces H2 utilisent le composant visuel commun du socle (hiérarchie, accent latéral, espacement et responsive). Le H2 de la FAQ est un composant distinct et ne compte pas dans ces deux H2 ; les H2 des blocs « Outils associés » restent également distincts ;
 - un bloc `.calculator-faq` unique, avec un H2 `FAQ` ou `Questions fréquentes`, au moins un `<details>` et, pour chaque question, un `<summary>` non vide et un bloc `.calculator-faq-answer` non vide ;
 - `/outil/` : un unique bloc `.related-tools` standard de 2 à 4 liens, issus des relations définies dans `TOOLS_META` ;
 - `/conversion/` et `/comparateur/` : un unique bloc `.related-tools` standard de 2 à 4 liens écrits directement dans le HTML, sans entrée `data/tools.json` ; chaque lien doit pointer vers une page publique existante, sans lien vers la page elle-même et sans doublon ;

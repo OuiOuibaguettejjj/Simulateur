@@ -217,7 +217,26 @@ footer{border-top:1px solid var(--ink);padding:30px 0;background:#eee9df}
   max-width:var(--calculator-max);
 }
 .content-section>h2{
-  letter-spacing:-.04em;
+  margin:0 0 18px;
+  padding-left:14px;
+  border-left:4px solid var(--accent);
+  color:var(--ink);
+  font-size:clamp(1.45rem,2.2vw,1.7rem);
+  line-height:1.2;
+  font-weight:800;
+  letter-spacing:-.035em;
+}
+.content-section>h2:not(:first-child){
+  margin-top:38px;
+}
+@media(max-width:650px){
+  .content-section>h2{
+    font-size:1.45rem;
+    padding-left:12px;
+  }
+  .content-section>h2:not(:first-child){
+    margin-top:32px;
+  }
 }
 .calculator-data{
   margin:34px 0 0;
