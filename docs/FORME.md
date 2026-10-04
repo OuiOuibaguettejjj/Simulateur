@@ -72,11 +72,19 @@ Le squelette ci-dessous décrit les blocs attendus. Les commentaires indiquent l
       </section>
     </div>
 
-    <!-- Bloc éditorial : au moins trois sections H2 (comment calculer, exemple, à savoir). FAQ facultative. -->
+    <!-- Bloc éditorial : au moins deux sections H2. La FAQ est obligatoire et utilise l’accordéon natif details/summary. -->
     <section class="content-section">
-      <h2>Comment calculer ... ?</h2><p>...</p>
+      <h2>Explication du calcul</h2><p>...</p>
       <h2>Exemple de calcul</h2><p>...</p>
-      <h2>À savoir</h2><p>...</p>
+    </section>
+
+    <!-- FAQ obligatoire : au moins une question utile, nombre de questions libre. -->
+    <section class="calculator-faq" aria-labelledby="faq-title">
+      <h2 id="faq-title">FAQ</h2>
+      <details>
+        <summary>Question fréquente sur cet outil ?</summary>
+        <div class="calculator-faq-answer"><p>Réponse directe et utile.</p></div>
+      </details>
     </section>
 
     <!-- Bloc obligatoire : /outil/ : 2 à 4 liens issus de TOOLS_META ; /conversion/ et /comparateur/ : 2 à 4 liens écrits dans le HTML, sans entrée TOOLS_META. Un seul bloc par page. -->
@@ -112,7 +120,8 @@ Chaque page outil doit fournir dans son HTML initial :
 - l'interface essentielle directement présente dans le HTML ;
 - un résultat initial **non vide**, même avant toute saisie, avec `aria-live="polite"` ;
 - un bloc `.formula` (méthode et limites) contenant au moins une source ;
-- au moins trois sections H2 dans le contenu éditorial : comment calculer, exemple, à savoir ;
+- au moins deux sections H2 dans le contenu éditorial ;
+- un bloc `.calculator-faq` unique, avec un H2 `FAQ`, au moins un `<details>` et, pour chaque question, un `<summary>` non vide et une réponse non vide ;
 - `/outil/` : un unique bloc `.related-tools` standard de 2 à 4 liens, issus des relations définies dans `TOOLS_META` ;
 - `/conversion/` et `/comparateur/` : un unique bloc `.related-tools` standard de 2 à 4 liens écrits directement dans le HTML, sans entrée `data/tools.json` ; chaque lien doit pointer vers une page publique existante, sans lien vers la page elle-même et sans doublon ;
 - un `WebApplication` JSON-LD unique ;
@@ -121,13 +130,16 @@ Chaque page outil doit fournir dans son HTML initial :
 
 Le JavaScript ne doit pas être nécessaire pour faire apparaître le H1, l'introduction, les champs principaux, le résultat initial ou le contenu SEO principal.
 
-## 3. Blocs facultatifs
+## 3. Blocs obligatoires à profondeur flexible
+
+La présence des composants essentiels est obligatoire ; leur profondeur reste libre. Il n'existe pas de quota de mots, de paragraphes ou de questions.
+
+La FAQ est toujours présente. Elle utilise `<details>/<summary>` afin de rester native, accessible au clavier et fonctionnelle sans JavaScript. Les réponses restent directement présentes dans le HTML.
 
 Selon la nature de l'outil, peuvent être ajoutés sans modifier le socle :
 
 - graphique ou tableau ;
 - scénarios ou comparaisons ;
-- FAQ ;
 - avertissement réglementaire ou méthodologique ;
 - contenu spécifique au domaine.
 
