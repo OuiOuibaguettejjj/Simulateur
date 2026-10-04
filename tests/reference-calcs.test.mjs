@@ -6,6 +6,7 @@ assert.ok(Array.isArray(cases)&&cases.length>=9,"au moins 9 cas de référence s
 const forbidden=new Set(JSON.parse(fs.readFileSync("data/parametres.json","utf8")).anneeAMigrer.slugs||[]);
 const covered=new Set();
 function numbers(text){return[...String(text).matchAll(/-?\d+(?:[\s\u00a0\u202f]\d{3})*(?:[.,]\d+)?/g)].map(m=>Number(m[0].replace(/[\s\u00a0\u202f]/g,"").replace(",",".")))}
+function numberNear(text,re){const match=re.exec(String(text));if(!match)return NaN;const before=numbers(String(text).slice(0,match.index));const after=numbers(String(text).slice(match.index+match[0].length));if(!before.length&&!after.length)return NaN;if(!before.length)return after[0];if(!after.length)return before.at(-1);const beforeDistance=match.index-(String(text).slice(0,match.index).search(/-?\d+(?:[\s\u00a0\u202f]\d{3})*(?:[.,]\d+)?(?=\D*$)/));return after[0];}
 for(const c of cases){
   assert.equal(typeof c.outil,"string","outil requis");assert.ok(!c.famille||["outil","conversion","comparateur"].includes(c.famille),"famille interactive invalide");assert.ok(c.entrees&&typeof c.entrees==="object","entrees requises");
   assert.equal(typeof c.attendu,"number","attendu doit être numérique");assert.equal(typeof c.tolerance,"number","tolerance requise");
@@ -15,9 +16,9 @@ for(const c of cases){
   assert.ok(!forbidden.has(c.outil),c.outil+" est encore marqué anneeAMigrer");
   const out=await runInlineCalculator({family:c.famille||"outil",slug:c.outil,caseKind:"default",inputs:c.entrees});assert.ok(out.text,c.outil+" : résultat vide");
   const label=new RegExp(c.sortie,"i");assert.ok(label.test(out.text),c.outil+" : libellé de sortie absent dans « "+out.text+" »");
-  const labelled=out.text.slice(out.text.search(label));const got=numbers(labelled)[0];assert.ok(Number.isFinite(got),c.outil+" : aucune valeur numérique associée à la sortie « "+c.sortie+" »");
+  const got=numberNear(out.text,label);assert.ok(Number.isFinite(got),c.outil+" : aucune valeur numérique associée à la sortie « "+c.sortie+" »");
   assert.ok(Math.abs(got-c.attendu)<=c.tolerance,c.outil+" : attendu "+c.attendu+", obtenu "+got+" (« "+out.text+" »)");
-  if(Array.isArray(c.verifications))for(const v of c.verifications){const re=new RegExp(v.sortie,"i");assert.ok(re.test(out.text),c.outil+" : sortie secondaire absente : "+v.sortie);const part=out.text.slice(out.text.search(re));const value=numbers(part)[0];assert.ok(Number.isFinite(value),c.outil+" : valeur secondaire absente : "+v.sortie);assert.ok(Math.abs(value-v.attendu)<=v.tolerance,c.outil+" : "+v.sortie+" attendu "+v.attendu+", obtenu "+value)}
+  if(Array.isArray(c.verifications))for(const v of c.verifications){const re=new RegExp(v.sortie,"i");assert.ok(re.test(out.text),c.outil+" : sortie secondaire absente : "+v.sortie);const value=numberNear(out.text,re);assert.ok(Number.isFinite(value),c.outil+" : valeur secondaire absente : "+v.sortie);assert.ok(Math.abs(value-v.attendu)<=v.tolerance,c.outil+" : "+v.sortie+" attendu "+v.attendu+", obtenu "+value)}
   covered.add(c.outil);
 }
 const refusedTools=[...forbidden];
