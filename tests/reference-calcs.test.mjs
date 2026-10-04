@@ -6,15 +6,6 @@ assert.ok(Array.isArray(cases)&&cases.length>=9,"au moins 9 cas de référence s
 const forbidden=new Set(JSON.parse(fs.readFileSync("data/parametres.json","utf8")).anneeAMigrer.slugs||[]);
 const covered=new Set();
 function numbers(text){return[...String(text).matchAll(/-?\d+(?:[\s\u00a0\u202f]\d{3})*(?:[.,]\d+)?/g)].map(m=>Number(m[0].replace(/[\s\u00a0\u202f]/g,"").replace(",",".")))}
-import assert from "node:assert/strict";
-import fs from "node:fs";
-import {runInlineCalculator} from "./calculator-harness.mjs";
-const cases=JSON.parse(fs.readFileSync("tests/references/core.json","utf8"));
-assert.ok(Array.isArray(cases)&&cases.length>=9,"au moins 9 cas de référence sont requis");
-const forbidden=new Set(JSON.parse(fs.readFileSync("data/parametres.json","utf8")).anneeAMigrer.slugs||[]);
-const covered=new Set();
-function numbers(text){return[...String(text).matchAll(/-?\d+(?:[\s\u00a0\u202f]\d{3})*(?:[.,]\d+)?/g)].map(m=>Number(m[0].replace(/[\s\u00a0\u202f]/g,"").replace(",",".")))}
-function numberNear(text,re){const value=String(text);const match=re.exec(value);if(!match)return NaN;const before=[...value.slice(0,match.index).matchAll(/-?\d+(?:[\s\u00a0\u202f]\d{3})*(?:[.,]\d+)?/g)];const after=[...value.slice(match.index+match[0].length).matchAll(/-?\d+(?:[\s\u00a0\u202f]\d{3})*(?:[.,]\d+)?/g)];const previous=before.at(-1);const next=after[0];if(!previous&&!next)return NaN;if(!previous)return Number(next[0].replace(/[\s\u00a0\u202f]/g,"").replace(",","."));if(!next)return Number(previous[0].replace(/[\s\u00a0\u202f]/g,"").replace(",","."));const previousDistance=match.index-(previous.index+previous[0].length);const nextDistance=next.index;const selected=previousDistance<=nextDistance?previous:next;return Number(selected[0].replace(/[\s\u00a0\u202f]/g,"").replace(",","."));}
 for(const c of cases){
   assert.equal(typeof c.outil,"string","outil requis");assert.ok(!c.famille||["outil","conversion","comparateur"].includes(c.famille),"famille interactive invalide");assert.ok(c.entrees&&typeof c.entrees==="object","entrees requises");
   assert.equal(typeof c.attendu,"number","attendu doit être numérique");assert.equal(typeof c.tolerance,"number","tolerance requise");
