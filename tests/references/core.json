@@ -174,7 +174,7 @@
     },
     "attendu": 0.0001,
     "tolerance": 0.000001,
-    "sortie": "ha",
+    "sortie": "0,0001\\\\s*ha",
     "source": "https://www.bipm.org/fr/si-brochure-9"
   },
   {
@@ -185,7 +185,7 @@
     },
     "attendu": 3.14159265,
     "tolerance": 1e-7,
-    "sortie": "rad",
+    "sortie": "3,14159265\\\\s*rad",
     "source": "https://www.bipm.org/fr/si-brochure-9"
   },
   {
@@ -196,7 +196,7 @@
     },
     "attendu": 117,
     "tolerance": 0.01,
-    "sortie": "USD",
+    "sortie": "117\\\\s*USD",
     "source": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html"
   },
   {
@@ -207,7 +207,7 @@
     },
     "attendu": 1000,
     "tolerance": 0.0001,
-    "sortie": "Mo",
+    "sortie": "1\\\\s*000\\\\s*Mo",
     "source": "https://webstore.iec.ch/en/publication/87379"
   },
   {
@@ -218,7 +218,7 @@
     },
     "attendu": 100,
     "tolerance": 0,
-    "sortie": "cm",
+    "sortie": "100\\\\s*cm",
     "source": "https://www.bipm.org/fr/si-brochure-9"
   },
   {
@@ -229,7 +229,7 @@
     },
     "attendu": 1000,
     "tolerance": 0,
-    "sortie": "g",
+    "sortie": "1\\\\s*000\\\\s*g",
     "source": "https://www.bipm.org/fr/si-brochure-9"
   },
   {
@@ -240,7 +240,7 @@
     },
     "attendu": 32,
     "tolerance": 0.000001,
-    "sortie": "°F",
+    "sortie": "32\\\\s*°F",
     "source": "https://www.bipm.org/fr/si-brochure-9"
   },
   {
@@ -251,7 +251,7 @@
     },
     "attendu": 1000,
     "tolerance": 0,
-    "sortie": "mL",
+    "sortie": "1\\\\s*000\\\\s*mL",
     "source": "https://www.bipm.org/fr/si-brochure-9"
   },
   {
