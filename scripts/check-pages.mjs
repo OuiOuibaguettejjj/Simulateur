@@ -141,7 +141,6 @@ function main(){
   const {added,stale}=compareToBaseline(pairs,base);
   const line="Cliquet : "+pairs.length+" écart(s) suivi(s) connu(s) ou nouveaux, "+base.length+" en baseline, "+added.length+" nouveau(x), "+stale.length+" périmé(s).";
   console.log(line);if(process.env.GITHUB_STEP_SUMMARY)fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,"### Cliquet\n\n"+line+"\n");
-  for(const x of added)console.error("::error file="+x.path+"::cliquet : nouvel écart ["+x.rule+"] absent de la baseline");
   for(const message of buildRatchetMessages({added,stale,blocked:r.blocked||[]}))console.error(message);
   if(added.length||stale.length||(r.blocked||[]).length)process.exit(1)
  }
