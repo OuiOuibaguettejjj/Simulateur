@@ -53,12 +53,13 @@ function buildDocument(html){
   for(const e of elements)e._doc=doc;const forms=elements.filter(e=>e.tagName==="FORM");for(const e of elements)if((e.tagName==="BUTTON"||e.tagName==="INPUT")&&forms.length)e.form=forms[0];return doc;
 }
 function setCase(document,kind){
+  let dateIndex=0;
   for(const el of document.elements){
     if(!["INPUT","SELECT","TEXTAREA"].includes(el.tagName))continue;
     if(el.type==="radio"||el.type==="checkbox")continue;
     if(el.tagName==="SELECT"){if(kind!=="default"&&el.options.length){el.selectedIndex=0;el.value=el.options[0].value}continue}
     if(kind==="default")continue;
-    if(el.type==="date"){el.value="2020-01-15";continue}
+    if(el.type==="date"){el.value=dateIndex++===0?"2020-01-15":"2021-01-15";continue}
     if(kind==="empty")el.value="";
     else if(kind==="zero")el.value="0";
     else if(kind==="negative")el.value="-10";
@@ -66,7 +67,7 @@ function setCase(document,kind){
     else if(kind==="comma")el.value=el.type==="number"?"12.5":"12,5";
   }
 }
-function resultText(document){return document.elements.filter(e=>e.id==="result"||e.id==="results"||e.className.split(/\s+/).some(c=>/result/i.test(c))).map(e=>strip(e.textContent||e.innerHTML||"")).filter(Boolean).join(" | ")}
+function resultText(document){const primary=document.elements.filter(e=>e.id==="result"||e.id==="results"||e.className.split(/\s+/).some(c=>/result/i.test(c))).map(e=>strip(e.textContent||e.innerHTML||"")).filter(Boolean);if(primary.length)return[...new Set(primary)].join(" | ");return document.elements.filter(e=>e.id&&![ "INPUT","SELECT","TEXTAREA","BUTTON","FORM"].includes(e.tagName)).map(e=>strip(e.textContent||e.innerHTML||"")).filter(Boolean).join(" | ")}
 function loadContext(html){
   const document=buildDocument(html);
   const context=vm.createContext({document,console:{log(){},warn(){},error(){}},setTimeout:()=>0,clearTimeout(){},setInterval:()=>0,clearInterval(){},requestAnimationFrame:fn=>fn(),cancelAnimationFrame(){},alert(){},confirm:()=>true,prompt:()=>null,Event:function(type){this.type=type},CustomEvent:function(type){this.type=type},Date,Intl,Math,Number,String,Boolean,Array,Object,JSON,RegExp,parseFloat,parseInt,isNaN,isFinite});
