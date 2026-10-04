@@ -34,7 +34,7 @@ function matches(el,selector){
 function attrs(raw){const out={};for(const a of raw.matchAll(/([:\w-]+)(?:=[\"']([^\"']*)[\"'])?/g))out[a[1].toLowerCase()]=a[2]??"";return out}
 function parseElements(html){
   const elements=[];
-  for(const m of html.matchAll(/<(form)(\\s[^>]*)?>[\\s\\S]*?<\\/form>/gi))elements.push(new FakeElement("form",attrs(m[2]||"")));
+  for(const m of html.matchAll(/<(form)(\s[^>]*)?>[\s\S]*?<\/form>/gi))elements.push(new FakeElement("form",attrs(m[2]||"")));
   for(const m of html.matchAll(/<(input|select|textarea|button)(\s[^>]*)?>([\s\S]*?)<\/\1>/gi)){elements.push(new FakeElement(m[1],attrs(m[2]||""),strip(m[3])))}
   for(const m of html.matchAll(/<(input)(\s[^>]*)?\/?\s*>/gi)){const a=attrs(m[2]||"");if(!elements.some(e=>e.tagName==="INPUT"&&e.id===a.id&&e.name===a.name))elements.push(new FakeElement("input",a))}
   for(const m of html.matchAll(/<([a-z]+)([^>]*)\sclass=[\"']([^\"']*result[^\"']*)[\"'][^>]*>/gi)){const a=attrs(m[2]||"");a.class=m[3];if(!elements.some(e=>e.id===a.id&&e.className===a.class))elements.push(new FakeElement(m[1],a,""))}
