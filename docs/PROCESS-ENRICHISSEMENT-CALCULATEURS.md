@@ -77,7 +77,7 @@ Cette table est tirée du code de `scripts/check-pages.mjs`. En cas de doute ou 
 | `formula` | un bloc `.formula` ou `.source-links` contenant un lien externe http(s) (hors simulateur.site) |
 | `faq` | un bloc `.calculator-faq` unique en accordéon natif `<details>/<summary>`, avec au moins une question et une réponse non vide |
 | `result` | deux conditions indépendantes, qui peuvent porter sur deux éléments : un `.result` non vide dans le HTML source (donc non rempli par JavaScript), et un `.result` avec `aria-live="polite"` |
-| `tool-block` | une seule section `.tool` contenant le h1 et un `p.tool-intro` non vide ; pour `/outil/`, au moins un `input`, `select`, `textarea` ou `button` dans la page ; les ids hérités `ey`, `title`, `intro` et `source` sont interdits |
+| `tool-block` | une seule section `.tool` contenant le h1 et un `p.tool-intro` non vide ; pour toute page interactive, au moins un `input`, `select`, `textarea` ou `button` dans la page ; les ids hérités `ey`, `title`, `intro` et `source` sont interdits |
 | `meta-unique` | titre et description uniques sur l'ensemble du site (outil, conversion, comparateur) |
 
 Les douze règles structurelles et les cinq règles éditoriales (`description`, `content-h2`, `formula`, `faq`, `meta-unique`) sont suivies par le cliquet.
@@ -139,14 +139,14 @@ Raison : un bug mélangé à un enrichissement rend la revue illisible et masque
 
 Le format structurel et fonctionnel commun du site reste la référence. L'enrichissement ne doit pas contourner ou remplacer ce socle.
 
-Pour une page `/outil/`, le socle comprend :
+Pour toute page interactive (`/outil/`, `/conversion/`, `/comparateur/`), le socle commun comprend :
 
 - title et métadonnées SEO ;
 - H1 et introduction ;
 - calculateur et résultat ;
 - contenu explicatif ;
 - données utilisées, hypothèses ou notes lorsque pertinentes ;
-- FAQ obligatoire en accordéon natif `<details>/<summary>`, pour chaque page `/outil/`, avec un bloc `.calculator-faq` unique, un H2 `FAQ`, `aria-labelledby="faq-title"` et `id="faq-title"`, au moins une question et, pour chaque question, un bloc `.calculator-faq-answer` non vide ;
+- FAQ obligatoire en accordéon natif `<details>/<summary>`, pour chaque page interactive, avec un bloc `.calculator-faq` unique, un H2 `FAQ`, `aria-labelledby="faq-title"` et `id="faq-title"`, au moins une question et, pour chaque question, un bloc `.calculator-faq-answer` non vide ;
 - sources ;
 - calculs associés et maillage interne ;
 - breadcrumb visible et BreadcrumbList ;
