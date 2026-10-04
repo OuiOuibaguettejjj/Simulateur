@@ -31,7 +31,8 @@ if(previous){
   for(const id of ids)assert.ok(prevIds.has(id),"exception nouvelle non autorisée : "+id);
 }
 const currentFailures=new Set(failures.map(keyOf));
-for(const ex of exceptions)assert.ok(currentFailures.has(keyOf(ex)),"exception devenue obsolète : "+keyOf(ex));
+const stale=exceptions.filter(ex=>!currentFailures.has(keyOf(ex))).map(keyOf);
+assert.equal(stale.length,0,"exceptions devenues obsolètes : "+stale.join(", "));
 assert.ok(failures.length<=data.maxFailures,"cliquet : les échecs hors exceptions ne peuvent pas augmenter");
 console.log("Couche 1 — "+tools.length+" outils testés sur au moins un cas réel, "+exceptions.length+" outils/cas entièrement ou partiellement exemptés.");
 if(failures.length){console.error("Échecs couche 1 hors exceptions :");for(const f of failures)console.error(" - "+f.slug+" ["+f.case+"] : "+f.error);process.exit(1)}
