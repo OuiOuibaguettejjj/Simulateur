@@ -116,6 +116,15 @@ jobs:
       - name: Validate complete static site
         run: node scripts/check-static-site.mjs
 
+      - name: Test sitemap lastmod validation
+        run: node tests/sitemap.test.mjs
+
+      - name: Test filtre publicitaire
+        run: node tests/ad-filter.test.mjs
+
+      - name: Test des formes de résultat invalide
+        run: node tests/invalid-result.test.mjs
+
       - name: Run deterministic calculator tests
         run: |
           node tests/ifi.test.js
