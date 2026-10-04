@@ -198,6 +198,8 @@ Aucune modification ne commence avant l'audit. Le résultat s'écrit dans la fic
 ### Calcul et fiabilité
 
 - formule et logique métier ;
+- pour toute refonte ou modification substantielle du comportement, ajouter ou mettre à jour des tests métier propres au calculateur : au minimum un cas nominal, un cas limite pertinent et les règles particulières importantes ;
+- les tests spécifiques restent associés au calculateur et sont exécutés à chaque CI ; les tests génériques par famille ne remplacent pas cette couverture ;
 - unités et conventions ;
 - arrondis ;
 - cas limites ;
@@ -424,12 +426,15 @@ Règles de rédaction techniques :
 
 Exécuter sur la branche, avant ouverture de la PR, les contrôles de `.github/workflows/tests.yml` (liste à jour dans ce fichier). Parmi eux :
 
+Les tests génériques par famille constituent un filet de sécurité permanent. Les scénarios métier propres à un calculateur doivent être ajoutés ou mis à jour dans sa PR lorsqu'une refonte ou une modification substantielle touche son comportement. Une modification purement mécanique sans changement de comportement ne nécessite pas de nouveau cas artificiel.
+
 - `node tests/simulateurs.test.js` (garde des résultats) ;
 - `node tests/invalid-result.test.mjs` ;
 - `node tests/ad-filter.test.mjs` ;
 - `node tests/smoke-results.test.mjs` ;
 - `node scripts/smoke-site.mjs --base-url http://127.0.0.1:4173 --mode local` ;
 - `node tests/generic-calcs.test.mjs` (aucune exception ajoutée) ;
+- `node tests/interactive-families.test.mjs` (scénarios métier génériques des conversions et comparateurs déterministes) ;
 - `node tests/reference-calcs.test.mjs` ;
 - `node tests/params.test.mjs` ;
 - `node tests/check-pages.test.mjs` ;
@@ -528,6 +533,7 @@ Un calculateur n'est « terminé » que lorsque **tous** les points ci-dessous s
 
 **Fiabilité**
 - [ ] le calcul est vérifié sur cas normaux, limites, invalides et virgule décimale ;
+- [ ] les tests métier propres au calculateur sont présents ou mis à jour lorsqu'une refonte ou une modification substantielle touche son comportement ;
 - [ ] au moins un cas de référence sourcé existe dans `tests/references/*.json` (obligatoire en classe B, recommandé en classe A) ;
 - [ ] aucune exception n'existe ni n'a été ajoutée dans `tests/generic-calcs-exceptions.json` pour cet outil ;
 - [ ] le résultat ne produit jamais de valeur invalide.
