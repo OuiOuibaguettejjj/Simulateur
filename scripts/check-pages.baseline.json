@@ -1109,10 +1109,6 @@
   },
   {
     "path": "public/outil/retraite-simplifiee/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/retraite-simplifiee/index.html",
     "rule": "title"
   },
   {
