@@ -56,6 +56,17 @@ assert.deepEqual(
   "conversion valide avec 3 liens internes existants"
 );
 
+for (const dir of ["conversion","comparateur"]) {
+  const family = dir === "conversion" ? "source" : "prix-unitaire";
+  const related = dir === "conversion"
+    ? ["/conversion/aire/","/conversion/angle/","/conversion/volume/"]
+    : ["/outil/slug-1/","/outil/slug-2/"];
+  const missingFaq = familyErrs(dir,family,related).filter(x=>x.rule === "faq");
+  assert.equal(missingFaq.length,0,dir+" conforme : la FAQ est transversale");
+  const withoutFaq = familyFixture(dir,family,related).replace(/<section class="calculator-faq"[\s\S]*?<\/section>/,"");
+  assert.ok(checkPage(withoutFaq,{dir,slug:family,toolsMeta:{},categories:{},pageIndex:familyIndex(dir,family,related)}).some(x=>x.rule==="faq"),dir+" sans FAQ : le contrôle transversal doit échouer");
+}
+
 for(const [label,links] of [
   ["1 lien",["/conversion/aire/"]],
   ["5 liens",[

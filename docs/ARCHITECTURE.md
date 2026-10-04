@@ -18,15 +18,15 @@ Les contrôles pré-production vérifient notamment :
 
 Les URLs existantes restent inchangées afin d'éviter une migration SEO inutile.
 
-## Contrat des pages outil
+## Contrat des pages interactives
 
-Les pages `/outil/<slug>/` suivent un contrat HTML-first commun. Le HTML initial est la source de vérité pour le contenu essentiel : titre, H1, introduction, interface visible, résultat initial, méthode/limites, sources, breadcrumb et liens internes. Le JavaScript de l'outil conserve la logique de calcul et les interactions ; il ne doit pas être requis pour générer le contenu SEO principal.
+Les pages `/outil/<slug>/`, `/conversion/<slug>/` et `/comparateur/<slug>/` suivent un contrat HTML-first commun. Le HTML initial est la source de vérité pour le contenu essentiel : titre, H1, introduction, interface visible, résultat initial, méthode/limites, sources, breadcrumb et liens internes. Le JavaScript de l'outil conserve la logique de calcul et les interactions ; il ne doit pas être requis pour générer le contenu SEO principal.
 
-Chaque page possède une catégorie principale issue de `data/tools.json` (`tools[slug].category`). Le breadcrumb visible et le `BreadcrumbList` JSON-LD utilisent cette même catégorie et terminent sur l'URL canonique de l'outil. Les relations `relatedTools` alimentent le bloc standard « Outils associés » lorsqu'elles sont définies ; des liens contextuels éditoriaux restent possibles lorsque leur valeur est réelle.
+Les règles transversales s’appliquent à toutes les pages interactives. Les règles de taxonomie de `data/tools.json` restent propres aux pages `/outil/<slug>/`. Le breadcrumb visible et le `BreadcrumbList` JSON-LD restent spécifiques aux outils lorsqu’ils utilisent la taxonomie centrale ; les conversions et comparateurs suivent leur propre fil d’Ariane jusqu’à leur URL canonique. Les relations `relatedTools` alimentent le bloc standard « Outils associés » lorsqu'elles sont définies ; des liens contextuels éditoriaux restent possibles lorsque leur valeur est réelle.
 
-Les contrôles CI vérifient désormais ces invariants entre la taxonomie centrale et le HTML statique. Ils empêchent notamment qu'une page conserve un ancien breadcrumb, une mauvaise canonique ou un ancien maillage après une modification de `data/tools.json`.
+Les contrôles CI vérifient les invariants transversaux des pages interactives ainsi que, pour les outils, la cohérence entre la taxonomie centrale et le HTML statique. Ils empêchent notamment qu'un outil conserve un ancien breadcrumb, une mauvaise canonique ou un ancien maillage après une modification de `data/tools.json`.
 
-Les simulateurs riches peuvent conserver des extensions spécifiques (graphiques, tableaux, scénarios, contenu réglementaire), à condition de respecter le socle commun. La FAQ n’est pas une extension optionnelle : elle est obligatoire sur chaque page `/outil/<slug>/` et suit le composant standard. Il n'est pas recherché une uniformité visuelle absolue.
+Les simulateurs riches peuvent conserver des extensions spécifiques (graphiques, tableaux, scénarios, contenu réglementaire), à condition de respecter le socle commun. La FAQ n’est pas une extension optionnelle : elle est obligatoire sur chaque page interactive et suit le composant standard. Il n'est pas recherché une uniformité visuelle absolue.
 
 La migration HTML-first est terminée : les 77 pages `/outil/<slug>/` sont statiques et autonomes pour leur contenu éditorial initial. Le script historique `scripts/prerender-tools.mjs` et son workflow de validation ont été supprimés. Il n'existe plus de migration progressive ni de réécriture pré-déploiement de ces pages.
 
@@ -46,9 +46,9 @@ Toute évolution d'architecture ou de sécurité doit d'abord être décidée et
 `scripts/check-pages.mjs` classe ses règles en deux familles, séparées dans la sortie console et dans le tableau `GITHUB_STEP_SUMMARY`.
 
 - **Structurelles (bloquantes)** : `html-base`, `markup-balance`, `title`, `canonical`, `breadcrumb`, `h1`, `tool-block`, `result`, `related-block`, `jsonld`, `related-meta`, `citation-marker`. Elles garantissent le socle HTML commun. `markup-balance` détecte aussi les attributs malformés (nom d'attribut contenant `"` ou `'`, par exemple `type="number step="any"`) et un `>` parasite juste après une balise.
-- **Éditoriales sous cliquet** : `description` (120 à 160 caractères), `content-h2` (au moins 2 H2), `formula` (lien source externe dans `.formula` ou `.source-links`), `faq` (FAQ accordéon obligatoire sur `/outil/`) et `meta-unique` sont sous cliquet : elles ne peuvent que diminuer.
+- **Éditoriales sous cliquet** : `description` (120 à 160 caractères), `content-h2` (au moins 2 H2), `formula` (lien source externe dans `.formula` ou `.source-links`), `faq` (FAQ accordéon obligatoire sur toute page interactive) et `meta-unique` sont sous cliquet : elles ne peuvent que diminuer.
 
-La règle `faq` s’applique à chaque page `/outil/`. Une page nouvelle ou enrichie sans FAQ crée un nouvel écart et bloque la CI ; les pages historiques déjà en dette restent suivies par le cliquet et sont résorbées lors de leur enrichissement.
+La règle `faq` s’applique à chaque page interactive (`/outil/`, `/conversion/`, `/comparateur/`). Une page nouvelle ou enrichie sans FAQ crée un nouvel écart et bloque la CI ; les pages historiques déjà en dette restent suivies par le cliquet et sont résorbées lors de leur enrichissement.
 
 Le normaliseur `scripts/normalize-layout.mjs` ajoute de façon idempotente `aria-live="polite"` à chaque `.result` le favicon SVG commun et les balises de partage Open Graph / Twitter (`og:title`, `og:description`, `og:url`, `og:type`, `og:site_name`, `og:locale`, `twitter:card`, dérivées du titre, de la meta description et de la canonique de la page) dans le `<head>`, sans modifier le texte visible. Son mode `--check` est fail-closed. Les indicateurs « pages sous 120 mots » et « pages sans lien externe » restent informatifs et ne bloquent pas.
 

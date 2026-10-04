@@ -1,12 +1,14 @@
 # Règles de forme du site
 
-Ce document définit le **gabarit canonique** des pages outil. Les pages sont HTML-first : le contenu essentiel, l'interface initiale et les données structurées sont présents dans le HTML commité. JavaScript apporte la logique de calcul et les interactions, mais ne génère pas le socle éditorial de la page.
+Ce document définit le **gabarit canonique des pages interactives**. Les pages sont HTML-first : le contenu essentiel, l'interface initiale et les données structurées sont présents dans le HTML commité. JavaScript apporte la logique de calcul et les interactions, mais ne génère pas le socle éditorial de la page.
 
 ## 1. Gabarit unique
 
-Les pages `/outil/`, `/conversion/` et `/comparateur/` partagent le même socle HTML-first. Les trois familles utilisent exactement le même squelette, sans variante. Le préfixe d'URL est conservé pour respecter les URL existantes ; il ne constitue pas un gabarit de rendu différent.
+**Terminologie technique.** Le code de contrôle utilise la notion de **page interactive** pour les règles réellement transversales aux trois familles. Les termes `outil`, `conversion` et `comparateur` restent utilisés lorsqu’une règle dépend réellement de la famille concernée (taxonomie, logique de conversion, logique de comparaison ou règles éditoriales encore spécifiques). Les URL `/outil/`, `/conversion/` et `/comparateur/` ne sont pas modifiées.
 
-La page de référence actuelle est `public/outil/tva/index.html`. Pour créer une nouvelle page, utiliser `docs/template-outil.html` comme point de copie, puis adapter uniquement les données et l'interface propres à l'outil.
+Les pages `/outil/`, `/conversion/` et `/comparateur/` sont trois **familles de pages interactives**. Elles partagent le même socle HTML-first et le même contrat de forme ; seule la logique métier et la sémantique propre à la famille peuvent varier. Le préfixe d'URL est conservé pour respecter les URL existantes ; il ne constitue pas un gabarit de rendu différent.
+
+La page de référence actuelle est `public/outil/tva/index.html`. Pour créer une nouvelle page interactive, utiliser `docs/template-outil.html` comme point de copie, puis adapter uniquement les données et l'interface propres à sa famille.
 
 ### Squelette HTML canonique
 
@@ -78,7 +80,7 @@ Le squelette ci-dessous décrit les blocs attendus. Les commentaires indiquent l
       <h2>Exemple de calcul</h2><p>...</p>
     </section>
 
-    <!-- FAQ obligatoire pour /outil/ : au moins une question utile, nombre de questions libre. Le composant standard utilise aria-labelledby="faq-title" et id="faq-title". -->
+    <!-- FAQ obligatoire pour chaque page interactive : au moins une question utile, nombre de questions libre. Le composant standard utilise aria-labelledby="faq-title" et id="faq-title". -->
     <section class="calculator-faq" aria-labelledby="faq-title">
       <h2 id="faq-title">FAQ</h2>
       <details>
@@ -105,7 +107,7 @@ Le bloc outil est un `<section class="tool">` sur toutes les pages. L'introducti
 
 ## 2. Blocs obligatoires
 
-Chaque page outil doit fournir dans son HTML initial :
+Chaque page interactive doit fournir dans son HTML initial :
 
 - `<!doctype html>` et `lang="fr"` ;
 - un `<head>` complet avec viewport ;
@@ -134,9 +136,9 @@ Le JavaScript ne doit pas être nécessaire pour faire apparaître le H1, l'intr
 
 La présence des composants essentiels est obligatoire ; leur profondeur reste libre. Il n'existe pas de quota de mots, de paragraphes ou de questions.
 
-La FAQ est obligatoire sur chaque page `/outil/`. Elle utilise un unique bloc `.calculator-faq` avec `<details>/<summary>`, `aria-labelledby="faq-title"` et un H2 `id="faq-title"` intitulé `FAQ`, afin de rester native, accessible au clavier et fonctionnelle sans JavaScript. Le nombre de questions est libre, avec au minimum une question et une réponse non vide. Les réponses restent directement présentes dans le HTML.
+La FAQ est obligatoire sur chaque page interactive (`/outil/`, `/conversion/`, `/comparateur/`). Elle utilise un unique bloc `.calculator-faq` avec `<details>/<summary>`, `aria-labelledby="faq-title"` et un H2 `id="faq-title"` intitulé `FAQ`, afin de rester native, accessible au clavier et fonctionnelle sans JavaScript. Le nombre de questions est libre, avec au minimum une question et une réponse non vide. Les réponses restent directement présentes dans le HTML.
 
-Selon la nature de l'outil, peuvent être ajoutés sans modifier le socle :
+Selon la nature de la page interactive, peuvent être ajoutés sans modifier le socle :
 
 - graphique ou tableau ;
 - scénarios ou comparaisons ;
