@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import {isInteractivePage} from "./interactive-families.mjs";
 
 // Uniformise l'en-tête et le pied de page de toutes les pages HTML de public/.
 // Idempotent : relancé sur son propre résultat, il ne modifie plus rien.
@@ -73,7 +74,7 @@ function addSocialMeta(html) {
   return html.replace(/<\/head>/i, () => tags + "</head>");
 }
 
-function normalize(html, isCalculator = false) {
+export function normalize(html, isInteractivePagePage = false) {
   const warnings = [];
   let out = html;
 
@@ -92,7 +93,7 @@ function normalize(html, isCalculator = false) {
   let body = /<body\b[^>]*>/i.exec(out);
   if (!body) return { html, warnings: ["pas de balise <body>, page ignorée"] };
 
-  // Inject the shared keyboard mechanism on every calculator/conversion page.
+  // Inject the shared keyboard mechanism on every interactive page.
   // This also covers future pages automatically through the common layout step.
   if (isCalculator && !/<script[^>]+src=["']\/enter-calcul\.js["'][^>]*>/i.test(out)) {
     const headClose = /<\/head>/i.exec(out);
@@ -146,8 +147,8 @@ const files = walk(root);
 for (const file of files) {
   const old = fs.readFileSync(file, "utf8");
   const relative = path.relative(root, file).replaceAll(path.sep, "/");
-  const isCalculator = relative.startsWith("outil/") || relative.startsWith("conversion/");
-  const { html, warnings } = normalize(old, isCalculator);
+  const interactive = isInteractivePage(relative);
+  const { html, warnings } = normalize(old, interactive);
   for (const w of warnings) {
     warned++;
     console.warn("normalize-layout: " + path.relative(process.cwd(), file) + " : " + w);
