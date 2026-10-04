@@ -71,14 +71,14 @@ Cette table est tirée du code de `scripts/check-pages.mjs`. En cas de doute ou 
 |---|---|
 | `title` | un seul `<title>`, de la forme « Mot-clé \| Simulateur », avec un mot-clé non vide |
 | `description` | une seule meta description, de 120 à 160 caractères. Elle doit aussi être identique à `WebApplication.description` du JSON-LD (règle `jsonld`) |
-| `content-h2` | au moins 3 titres h2 éditoriaux, situés dans des `.content-section` et hors `.related-tools` |
+| `content-h2` | au moins 2 titres h2 éditoriaux, situés dans des `.content-section` et hors `.related-tools` |
 | `formula` | un bloc `.formula` ou `.source-links` contenant un lien externe http(s) (hors simulateur.site) |
 | `faq` | un bloc `.calculator-faq` unique en accordéon natif `<details>/<summary>`, avec au moins une question et une réponse non vide |
 | `result` | deux conditions indépendantes, qui peuvent porter sur deux éléments : un `.result` non vide dans le HTML source (donc non rempli par JavaScript), et un `.result` avec `aria-live="polite"` |
 | `tool-block` | une seule section `.tool` contenant le h1 et un `p.tool-intro` non vide ; pour `/outil/`, au moins un `input`, `select`, `textarea` ou `button` dans la page ; les ids hérités `ey`, `title`, `intro` et `source` sont interdits |
 | `meta-unique` | titre et description uniques sur l'ensemble du site (outil, conversion, comparateur) |
 
-Les douze règles structurelles et les quatre règles éditoriales (`description`, `content-h2`, `formula`, `meta-unique`) sont suivies par le cliquet.
+Les douze règles structurelles et les cinq règles éditoriales (`description`, `content-h2`, `formula`, `faq`, `meta-unique`) sont suivies par le cliquet.
 
 ### 0.3 Vérifier que le filet de sécurité couvre l'outil
 
