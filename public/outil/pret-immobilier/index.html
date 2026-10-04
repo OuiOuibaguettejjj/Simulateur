@@ -66,7 +66,7 @@
 .mortgage-content{max-width:850px;margin:50px auto 0}.mortgage-content h2{font-size:clamp(1.7rem,4vw,2.5rem);letter-spacing:-.05em;line-height:1;margin:38px 0 10px}.mortgage-content h2:first-child{margin-top:0}.mortgage-content p{color:#44413b}.mortgage-content ul{padding-left:22px}.mortgage-content li{margin:7px 0}.mortgage-faq{border-top:1px solid var(--ink);margin-top:45px;padding-top:10px}.mortgage-faq details{border-bottom:1px solid var(--line);padding:15px 0}.mortgage-faq summary{cursor:pointer;font-weight:900}.mortgage-source{font-size:.82rem;color:var(--muted);margin-top:28px;padding:16px;border-left:4px solid var(--accent);background:#f0eadf}
 @media(max-width:720px){.mortgage-hero{padding:32px 22px}.mortgage-hero h1{font-size:3rem}.mortgage-form,.mortgage-result{padding:25px 20px}.mortgage-fields,.result-kpi,.cost-grid{grid-template-columns:1fr}.chart-panel,.compare,.schedule{padding:20px 16px}.chart-shell{min-height:190px}}
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Simulez votre prêt immobilier","url":"https://simulateur.site/outil/pret-immobilier/","description":"Simulez votre prêt immobilier en 2026 : mensualité, intérêts, assurance, coût total, taux d\u0027endettement et tableau d\u0027amortissement.","inLanguage":"fr-FR","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"price":"0","priceCurrency":"EUR"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Immobilier","item":"https://simulateur.site/immobilier/"},{"@type":"ListItem","position":3,"name":"Simulez votre prêt immobilier","item":"https://simulateur.site/outil/pret-immobilier/"}]}</script><script src="/enter-calcul.js" defer></script></head>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Simulez votre prêt immobilier","url":"https://simulateur.site/outil/pret-immobilier/","description":"Simulez votre prêt immobilier en 2026 : mensualité, intérêts, assurance, coût total, taux d\u0027endettement et tableau d\u0027amortissement.","inLanguage":"fr-FR","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"price":"0","priceCurrency":"EUR"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Immobilier","item":"https://simulateur.site/immobilier/"},{"@type":"ListItem","position":3,"name":"Simulez votre prêt immobilier","item":"https://simulateur.site/outil/pret-immobilier/"}]}</script><script src="/enter-calcul.js" defer></script><link rel="icon" href="/favicon.svg" type="image/svg+xml"></head>
 <body>
 <header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header>
 
@@ -109,10 +109,10 @@
 </div>
 
 <div class="mortgage-result" id="results" aria-live="polite">
-<div class="result-kpi">
-<div class="result-card primary"><small>Mensualité avec assurance</small><strong id="monthly">—</strong></div>
-<div class="result-card"><small>Mensualité hors assurance</small><strong id="monthlyEx">—</strong></div>
-<div class="result-card"><small>Total remboursé</small><strong id="totalPaid">—</strong></div>
+<div class="result-kpi" aria-live="polite">
+<div class="result-card primary" aria-live="polite"><small>Mensualité avec assurance</small><strong id="monthly">—</strong></div>
+<div class="result-card" aria-live="polite"><small>Mensualité hors assurance</small><strong id="monthlyEx">—</strong></div>
+<div class="result-card" aria-live="polite"><small>Total remboursé</small><strong id="totalPaid">—</strong></div>
 </div>
 <div class="cost-grid">
 <div class="cost-item"><span>Intérêts</span><strong id="interest">—</strong></div>
@@ -120,7 +120,7 @@
 <div class="cost-item"><span>Frais saisis</span><strong id="fees">—</strong></div>
 </div>
 <div class="debt-box" id="debtBox" hidden></div>
-<p class="result-note">Le coût total affiché additionne intérêts, assurance et frais saisis. Il ne constitue pas un TAEG : celui-ci dépend notamment des frais et modalités exactes du crédit.</p>
+<p class="result-note" aria-live="polite">Le coût total affiché additionne intérêts, assurance et frais saisis. Il ne constitue pas un TAEG : celui-ci dépend notamment des frais et modalités exactes du crédit.</p>
 </div>
 </section>
 
