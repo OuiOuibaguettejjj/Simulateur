@@ -130,6 +130,7 @@
     "attendu": 651.69,
     "tolerance": 0.01,
     "sortie": "/mois",
-    "source": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053733826"
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F19778",
+    "verificationSource": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053733826"
   }
 ]
