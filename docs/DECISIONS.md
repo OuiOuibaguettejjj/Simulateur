@@ -164,6 +164,6 @@ Le choix est porté par le CSS commun plutôt que par une multiplication de vari
 
 Le contrôle de couverture des pages interactives s'applique aux familles `outil`, `conversion` et `comparateur`. Les tests génériques, de référence et Chromium vérifient ce contrat commun sans effacer les différences de logique entre familles.
 
-Le garde-fou de layout interdit également les redéfinitions locales des composants partagés lorsqu'elles utilisent un sélecteur descendant, notamment `.content-section h2` et `.calculator-faq h2`. Le contrôle de syntaxe des blocs Node inline conservés dans `deploy.yml` est vérifié automatiquement.
+Le garde-fou de layout interdit les redéfinitions locales des titres `h1` à `h6` et les redéfinitions locales des composants partagés, notamment `.content-section h2` et `.calculator-faq h2`. Un test dédié vérifie ces invariants et est exécuté dans les workflows de tests et de déploiement. Le contrôle de syntaxe des blocs Node inline conservés dans `deploy.yml` est vérifié automatiquement.
 
-Les contrôles PR dédiés au sitemap, au filtre publicitaire et aux formes de résultat invalide sont également rejoués avant un déploiement. Les cas de référence dépendant d'une API simulée utilisent une fixture de transport explicitement séparée de la valeur attendue issue de la source publiée.
+Les contrôles de sitemap, de filtre publicitaire et de formes de résultat invalide sont désormais communs aux workflows de tests et de déploiement. Les cas de référence dépendant d'une API simulée utilisent une fixture de transport explicitement séparée de la valeur attendue issue de la source publiée.
