@@ -4,7 +4,7 @@ import assert from "node:assert/strict";
 
 const workflow=fs.readFileSync(".github/workflows/deploy.yml","utf8");
 const blocks=[...workflow.matchAll(/^\s+node(?: --input-type=module)? <<'NODE'\n([\s\S]*?)^\s+NODE$/gm)].map(m=>m[1].split("\n").map(line=>line.replace(/^ {10}/,"")).join("\n"));
-assert.equal(blocks.length,7,"nombre inattendu de blocs Node inline dans deploy.yml");
+assert.equal(blocks.length,6,"nombre inattendu de blocs Node inline dans deploy.yml");
 
 const moduleBlocks=blocks.filter(block=>/^import /m.test(block));
 assert.equal(moduleBlocks.length,3,"les trois blocs modifiés du contrôle transversal doivent être ESM");
