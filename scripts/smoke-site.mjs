@@ -3,6 +3,7 @@ import {spawn} from "node:child_process";
 import {chromium} from "playwright";
 import {isInvalidResult} from "./../tests/invalid-result.mjs";
 import {AD_HOST_RE,IGNORED_CONSOLE_RE} from "./ad-filter.mjs";
+import {isInteractivePage} from "./interactive-families.mjs";
 
 const args=new Map();
 for(let i=0;i<process.argv.length;i++){const m=process.argv[i].match(/^--([^=]+)=(.*)$/);if(m)args.set(m[1],m[2]);else if(process.argv[i].startsWith("--"))args.set(process.argv[i].slice(2),process.argv[i+1]&&!process.argv[i+1].startsWith("--")?process.argv[++i]:"");}
@@ -29,7 +30,7 @@ try{
    const response=await page.goto(baseUrl+route,{waitUntil:mode==="local"?"load":"domcontentloaded",timeout:mode==="local"?10000:20000});
    if(!response||response.status()!==200)errors.push(file+": "+(mode==="production"?"production ":"")+"HTTP "+(response&&response.status()));
    if(!(await page.title()))errors.push(file+": "+(mode==="production"?"production ":"")+"empty title");
-   if(file.startsWith("public/outil/")){
+   if(isInteractivePage(file.slice("public/".length))){
     await populate(page);const buttons=page.locator("button"),n=await buttons.count();if(n===0)errors.push(file+": "+(mode==="production"?"production ":"")+"no button");
     for(let i=0;i<n;i++)try{await buttons.nth(i).click({timeout:mode==="local"?1500:2000});await page.waitForTimeout(mode==="local"?30:50)}catch(e){errors.push(file+": "+(mode==="production"?"production ":"")+"button "+i+" click failed: "+e.message)}
    }else if(mode==="local")await populate(page);
@@ -42,6 +43,6 @@ try{
   await page.close();
  }
  await browser.close();
- console.log((mode==="production"?"Production ":"Local ")+"smoke-tested "+files.length+" public HTML pages, including "+files.filter(f=>f.startsWith("public/outil/")).length+" calculators.");
+ console.log((mode==="production"?"Production ":"Local ")+"smoke-tested "+files.length+" public HTML pages, including "+files.filter(f=>isInteractivePage(f.slice("public/".length))).length+" interactive pages.");
  if(errors.length){console.error(errors.join("\n"));process.exit(1)}
 }finally{if(server)server.kill("SIGTERM")}
