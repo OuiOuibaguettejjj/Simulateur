@@ -4,8 +4,8 @@
     {
       "slug": "moyenne-ponderee",
       "case": "comma",
-      "reason": "limite du harnais VM : le DOM minimal ne produit pas de résultat pour ce scénario",
-      "match": "résultat vide"
+      "reason": "limite du harnais VM : l’entrée décimale avec virgule produit NaN dans ce moteur",
+      "match": "NaN"
     }
   ]
 }
