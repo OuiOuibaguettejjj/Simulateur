@@ -1,0 +1,15 @@
+import fs from "node:fs";
+import {spawn} from "node:child_process";
+import {chromium} from "playwright";
+import {isInvalidResult} from "./invalid-result.mjs";
+function walk(dir,out=[]){for(const e of fs.readdirSync(dir,{withFileTypes:true})){const p=dir+"/"+e.name;if(e.isDirectory())walk(p,out);else if(e.isFile()&&p.endsWith(".html"))out.push(p)}return out}
+const files=walk("public");const server=spawn("python3",["-m","http.server","4173","--directory","public"],{stdio:"ignore"});
+async function waitReady(){const deadline=Date.now()+10000;while(Date.now()<deadline){try{const r=await fetch("http://127.0.0.1:4173/");if(r.status===200)return}catch{}await new Promise(r=>setTimeout(r,100))}throw new Error("serveur HTTP non prêt après 10 s")}
+try{await waitReady();const browser=await chromium.launch({headless:true});const invalid=[];let resultPages=0;
+for(const file of files){const route="/"+file.slice("public/".length).replace(/\/index\.html$/,"/");const page=await browser.newPage();await page.route("**/api/devises",route=>route.fulfill({status:200,contentType:"application/json",body:JSON.stringify({dates:{EUR:null,USD:"2026-09-25",GBP:"2026-09-25",CHF:"2026-09-25"},rates:{EUR:1,USD:1.17,GBP:0.87,CHF:0.94},source:"BCE"})}));await page.goto("http://127.0.0.1:4173"+route,{waitUntil:"load",timeout:10000});if(await page.locator(".result").count()>0)resultPages++;
+await page.locator("input").evaluateAll(inputs=>{for(const input of inputs){if(input.type==="date")input.value="2020-01-15";else if(input.type==="number")input.value=input.min&&Number(input.min)>10?input.min:"10";else if(input.type!=="hidden")input.value="test";input.dispatchEvent(new Event("input",{bubbles:true}));input.dispatchEvent(new Event("change",{bubbles:true}))}});
+await page.locator("select").evaluateAll(selects=>{for(const select of selects){if(select.options.length){select.selectedIndex=0;select.dispatchEvent(new Event("change",{bubbles:true}))}}});
+const buttons=page.locator("button"),n=file.startsWith("public/outil/")?await buttons.count():0;for(let i=0;i<n;i++){try{await buttons.nth(i).click({timeout:1500});await page.waitForTimeout(30)}catch{}}
+for(const t of await page.locator(".result").allTextContents())if(isInvalidResult(t))invalid.push(file+": "+t.trim().slice(0,120));await page.close()}
+const known=await browser.newPage();await known.goto("http://127.0.0.1:4173/outil/pourcentage/",{waitUntil:"load",timeout:10000});await known.locator("#v").fill("150");await known.locator("#p").fill("20");await known.getByRole("button",{name:"Calculer"}).click();const knownText=await known.locator(".result").innerText();if(isInvalidResult(knownText)||!/30(?:[,.]0*)?\s*€/.test(knownText))throw new Error("pourcentage 150/20 : résultat inattendu : "+knownText);await known.close();await browser.close();
+if(resultPages===0)throw new Error("aucune page outil ne contient .result");console.log("Smoke résultats : "+files.length+" pages HTML contrôlées ; "+resultPages+" pages avec .result ; "+invalid.length+" occurrence(s) invalide(s).");if(invalid.length){console.error(invalid.join("\n"));process.exit(1)}}finally{server.kill("SIGTERM")}
