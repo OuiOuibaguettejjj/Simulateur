@@ -68,6 +68,9 @@ jobs:
           if (errors.length) { console.error(errors.join('\n')); process.exit(1); }
           NODE
 
+      - name: Test garde-fou du layout
+        run: node tests/check-layout.test.mjs
+
       - name: Check layout consistency
         run: node scripts/check-layout.mjs
 
