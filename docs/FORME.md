@@ -4,7 +4,7 @@ Ce document définit le **gabarit canonique des pages interactives**. Les pages 
 
 ## 1. Gabarit unique
 
-**Terminologie technique.** Le code de contrôle utilise la notion de **page interactive** pour les règles communes aux trois familles. Les termes `outil`, `conversion` et `comparateur` restent utilisés lorsqu’une règle dépend réellement de la famille concernée (taxonomie, logique de conversion ou logique de comparaison). Les URL `/outil/`, `/conversion/` et `/comparateur/` ne sont pas modifiées.
+**Terminologie technique.** Le code de contrôle utilise la notion de **page interactive** pour les règles réellement transversales aux trois familles. Les termes `outil`, `conversion` et `comparateur` restent utilisés lorsqu’une règle dépend réellement de la famille concernée (taxonomie, logique de conversion, logique de comparaison ou règles éditoriales encore spécifiques). Les URL `/outil/`, `/conversion/` et `/comparateur/` ne sont pas modifiées.
 
 Les pages `/outil/`, `/conversion/` et `/comparateur/` sont trois **familles de pages interactives**. Elles partagent le même socle HTML-first et le même contrat de forme ; seule la logique métier et la sémantique propre à la famille peuvent varier. Le préfixe d'URL est conservé pour respecter les URL existantes ; il ne constitue pas un gabarit de rendu différent.
 
