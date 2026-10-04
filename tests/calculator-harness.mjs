@@ -90,6 +90,7 @@ export async function runInlineCalculator({slug,family="outil",caseKind="default
   await Promise.resolve();
   await Promise.resolve();
   await Promise.resolve();
+  await new Promise(resolve=>setTimeout(resolve,0));
   let returned="";
   if(family==="outil"&&window.TOOL?.calc){const $=id=>document.getElementById(id);const euro=value=>Number(value).toLocaleString("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:2});const num=value=>Number(value).toLocaleString("fr-FR",{maximumFractionDigits:2});const result=window.TOOL.calc.call({$,euro,num});if(typeof result!=="string")throw new Error("calc ne retourne pas une chaîne");returned=strip(result)}
   for(const button of document.querySelectorAll("button"))button.click();
