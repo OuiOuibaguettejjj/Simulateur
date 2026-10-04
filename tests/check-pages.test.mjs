@@ -188,7 +188,7 @@ assert.equal(only(fixture(),"faq").length,0,"FAQ accordéon conforme");
 assert(only(fixture().replace("<h2 id=\"faq-title\">FAQ</h2>","<h2 id=\"faq-title\">Questions fréquentes</h2>"),"faq").length>0,"FAQ « Questions fréquentes » refusée");
 assert(only(fixture().replace("aria-labelledby=\"faq-title\"",""),"faq").length>0,"FAQ sans aria-labelledby standard");
 assert(only(fixture().replace("<div class=\"calculator-faq-answer\"><p>Une réponse utile.</p></div>","<p>Une réponse utile.</p>"),"faq").length>0,"FAQ sans conteneur de réponse standard");
-assert(only(fixture().replace('<section class="calculator-faq"><h2>FAQ</h2><details><summary>Comment interpréter le résultat ?</summary><div class="calculator-faq-answer"><p>Une réponse utile.</p></div></details></section>',""),"faq").length>0,"FAQ absente");
+assert(only(fixture().replace('<section class="calculator-faq" aria-labelledby="faq-title"><h2 id="faq-title">FAQ</h2><details><summary>Comment interpréter le résultat ?</summary><div class="calculator-faq-answer"><p>Une réponse utile.</p></div></details></section>',""),"faq").length>0,"FAQ absente");
 assert(only(fixture().replace("<details><summary>Comment interpréter le résultat ?</summary><div class=\"calculator-faq-answer\"><p>Une réponse utile.</p></div></details>","<p>Question sans accordéon.</p>"),"faq").length>0,"FAQ sans details");
 assert(only(fixture().replace("<summary>Comment interpréter le résultat ?</summary>","<p>Question</p>"),"faq").length>0,"FAQ sans summary");
 assert(only(fixture().replace("<p>Une réponse utile.</p>",""),"faq").length>0,"FAQ sans réponse");
