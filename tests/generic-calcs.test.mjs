@@ -33,7 +33,7 @@ if(previous){
 const currentFailures=new Set(failures.map(keyOf));
 const stale=exceptions.filter(ex=>!currentFailures.has(keyOf(ex))).map(keyOf);
 assert.equal(stale.length,0,"exceptions devenues obsolètes : "+stale.join(", "));
-assert.ok(failures.length<=data.maxFailures,"cliquet : les échecs hors exceptions ne peuvent pas augmenter");
+assert.ok(failures.length<=data.maxFailures,"échecs hors exceptions : "+failures.map(f=>keyOf(f)+" => "+f.error).join(" | "));
 console.log("Couche 1 — "+tools.length+" outils testés sur au moins un cas réel, "+exceptions.length+" outils/cas entièrement ou partiellement exemptés.");
 if(failures.length){console.error("Échecs couche 1 hors exceptions :");for(const f of failures)console.error(" - "+f.slug+" ["+f.case+"] : "+f.error);process.exit(1)}
 console.log("Couche 1 : tous les cas passent ou correspondent exactement à une exception documentée.");
