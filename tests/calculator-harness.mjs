@@ -70,16 +70,16 @@ function setCase(document,kind){
   }
 }
 function resultText(document){const primary=document.elements.filter(e=>e.id==="result"||e.id==="results"||e.className.split(/\s+/).some(c=>/result/i.test(c))).map(e=>strip(e.textContent||e.innerHTML||"")).filter(Boolean);if(primary.length)return[...new Set(primary)].join(" | ");return document.elements.filter(e=>e.id&&![ "INPUT","SELECT","TEXTAREA","BUTTON","FORM"].includes(e.tagName)).map(e=>strip(e.textContent||e.innerHTML||"")).filter(Boolean).join(" | ")}
-function loadContext(html){
+function loadContext(html,mockRates={}){
   const document=buildDocument(html);
-  const context=vm.createContext({document,console:{log(){},warn(){},error(){}},setTimeout:()=>0,clearTimeout(){},setInterval:()=>0,clearInterval(){},requestAnimationFrame:fn=>fn(),cancelAnimationFrame(){},alert(){},confirm:()=>true,prompt:()=>null,Event:function(type){this.type=type},CustomEvent:function(type){this.type=type},fetch:async()=>({ok:true,json:async()=>({dates:{EUR:null,USD:"2026-09-25",GBP:"2026-09-25",CHF:"2026-09-25"},rates:{EUR:1,USD:1.17,GBP:0.87,CHF:0.94},source:"BCE"})}),Date,Intl,Math,Number,String,Boolean,Array,Object,JSON,RegExp,parseFloat,parseInt,isNaN,isFinite});
+  const context=vm.createContext({document,console:{log(){},warn(){},error(){}},setTimeout:()=>0,clearTimeout(){},setInterval:()=>0,clearInterval(){},requestAnimationFrame:fn=>fn(),cancelAnimationFrame(){},alert(){},confirm:()=>true,prompt:()=>null,Event:function(type){this.type=type},CustomEvent:function(type){this.type=type},fetch:async()=>({ok:true,json:async()=>({dates:{EUR:null,USD:"2026-09-25",GBP:"2026-09-25",CHF:"2026-09-25"},rates:{EUR:1,USD:1.23,GBP:0.87,CHF:0.94,...mockRates},source:"BCE"})}),Date,Intl,Math,Number,String,Boolean,Array,Object,JSON,RegExp,parseFloat,parseInt,isNaN,isFinite});
   for(const element of document.elements)if(element.id&&!Object.prototype.hasOwnProperty.call(context,element.id))context[element.id]=element;
   context.window=context;context.globalThis=context;document._context=context;context.addEventListener=(type,fn)=>{if(type==="load")fn()};return{context,document,window:context};
 }
 function localScripts(html){return[...html.matchAll(/<script[^>]+src=[\"']([^\"']+)[\"'][^>]*><\/script>/gi)].map(m=>m[1]).filter(src=>src.startsWith("/")&&src.endsWith(".js")).map(src=>src.slice(1))}
-export async function runInlineCalculator({slug,family="outil",caseKind="default",inputs={}}){
+export async function runInlineCalculator({slug,family="outil",caseKind="default",inputs={},mockRates={}}){
   if(!INTERACTIVE_FAMILIES.includes(family))throw new Error("unknown interactive family: "+family);
-  const file=path.join(ROOT,"public",family,slug,"index.html");const html=fs.readFileSync(file,"utf8");const {context,document,window}=loadContext(html);
+  const file=path.join(ROOT,"public",family,slug,"index.html");const html=fs.readFileSync(file,"utf8");const {context,document,window}=loadContext(html,mockRates);
   for(const [id,value] of Object.entries(inputs)){const el=document.getElementById(id);if(!el)throw new Error("unknown input id: "+id);const raw=String(value);el.value=el.type==="number"?raw.replace(",","." ):raw}
   setCase(document,caseKind);
   for(const src of localScripts(html)){const full=path.join(ROOT,"public",src);if(fs.existsSync(full))vm.runInContext(fs.readFileSync(full,"utf8"),context,{filename:src,timeout:500})}
