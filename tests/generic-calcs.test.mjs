@@ -35,6 +35,7 @@ const rawFailureIds=new Set(rawFailures.map(keyOf));
 const stale=exceptions.filter(ex=>!rawFailureIds.has(keyOf(ex))).map(keyOf);
 assert.equal(stale.length,0,"exceptions devenues obsolètes : "+stale.join(", "));
 assert.ok(failures.length<=data.maxFailures,"échecs hors exceptions : "+failures.map(f=>keyOf(f)+" => "+f.error).join(" | "));
-console.log("Couche 1 — "+tools.length+" outils testés sur au moins un cas réel, "+new Set(exceptions.map(e=>e.slug)).size+" outils avec exception documentée.");
+const fullyExempted=new Set(tools.filter(slug=>cases.every(kind=>exceptionMap.has(slug+"|"+kind))));
+console.log("Couverture : "+tools.length+" outils testés sur au moins un cas réel, "+fullyExempted.size+" outils entièrement exemptés.");
 if(failures.length){console.error("Échecs couche 1 hors exceptions :");for(const f of failures)console.error(" - "+f.slug+" ["+f.case+"] : "+f.error);process.exit(1)}
 console.log("Couche 1 : tous les cas passent ou correspondent exactement à une exception documentée.");
