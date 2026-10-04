@@ -149,3 +149,10 @@ Le smoke Chromium et le contrôle post-déploiement utilisent le même module `t
 ## 2026-10-04 — Balises de partage dans le normaliseur de layout
 
 Les balises Open Graph et Twitter sont générées par `normalize-layout.mjs` plutôt que écrites page par page : elles sont dérivées du titre, de la meta description et de la canonique, qui restent la source de vérité, et le mode `--check` bloque toute dérive. Choix : `twitter:card` en `summary` et aucune `og:image`, faute d'image dans le dépôt ; une image de partage pourra être ajoutée plus tard sans toucher aux URL. Les pages sans titre, description ou canonique (`404.html`) ne reçoivent aucune balise. Aucune URL, logique de calcul, CSP ni date `lastmod` n'est modifiée (changement mécanique de balisage).
+
+## Socle H2 éditorial commun
+
+Les H2 éditoriaux des calculateurs utilisent un traitement visuel commun via `section.content-section > h2`. Le composant repose sur une hiérarchie typographique sobre, un accent latéral, des espacements constants et un comportement mobile dédié. La FAQ conserve son propre composant interactif et les H2 des blocs « Outils associés » restent distincts.
+
+Le choix est volontairement porté par le CSS commun plutôt que par une multiplication de variantes HTML : les pages existantes conservent leur structure `content-section`, tandis que le template documentaire rappelle ce composant comme référence. Une page ne doit pas créer de style H2 spécifique à un calculateur sans justification d'architecture commune.
+
