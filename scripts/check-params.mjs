@@ -146,12 +146,12 @@ function main() {
   const todayArg = process.argv.find(a => a.startsWith("--today="));
   const today = todayArg ? todayArg.slice("--today=".length) : new Date().toISOString().slice(0, 10);
   if (!isDate(today)) { console.error("--today doit être au format AAAA-MM-JJ"); process.exit(2); }
-  const horizonIndex=process.argv.indexOf("--horizon");
+  const horizonArg = process.argv.find(a => a === "--horizon" || a.startsWith("--horizon="));
   let horizonDays;
-  if(horizonIndex>=0){
-    const raw=process.argv[horizonIndex+1];
-    if(raw===undefined||!/^[0-9]+$/.test(raw)){console.error("--horizon doit être un nombre entier de jours");process.exit(2)}
-    horizonDays=Number(raw);
+  if(horizonArg !== undefined){
+    const raw = horizonArg === "--horizon" ? process.argv[process.argv.indexOf("--horizon") + 1] : horizonArg.slice("--horizon=".length);
+    if(raw === undefined || !/^\d+$/.test(raw)){console.error("--horizon doit être un nombre entier de jours");process.exit(2)}
+    horizonDays = Number(raw);
   }
   const root = process.cwd();
   const generatedFile = path.join(root, TARGET);
