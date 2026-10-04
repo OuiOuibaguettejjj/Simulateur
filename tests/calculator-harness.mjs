@@ -12,6 +12,7 @@ class FakeElement{
   dispatchEvent(event){for(const fn of this.listeners[event.type]||[])fn.call(this,event)}
   click(){const event={type:"click",target:this};this.dispatchEvent(event);if(this.attributes.onclick&&this._doc?._context){const previous=this._doc._context.event;this._doc._context.event=event;try{vm.runInContext(String(this.attributes.onclick),this._doc._context,{filename:"[onclick]"})}finally{this._doc._context.event=previous}}if((this.tagName==="BUTTON"||this.tagName==="INPUT")&&((this.type||"").toLowerCase()==="submit"||this.tagName==="BUTTON"&&!(this.type||"").toLowerCase())&&this.form)this.form.dispatchEvent({type:"submit",target:this.form,preventDefault(){}})}
   get textContent(){return this._textContent}set textContent(v){this._textContent=String(v)}get innerHTML(){return this._innerHTML}set innerHTML(v){this._innerHTML=String(v);this._textContent=strip(this._innerHTML)}focus(){} blur(){} select(){} scrollIntoView(){}
+  append(...children){this.children.push(...children);return undefined}
   appendChild(child){this.children.push(child);return child}
   removeChild(child){this.children=this.children.filter(x=>x!==child);return child}replaceChildren(...children){this.children=[...children];this.innerHTML=children.map(x=>x?.outerHTML||x?.textContent||"").join("");return undefined}
   insertAdjacentHTML(_where,html){this.innerHTML+=html;this.textContent=strip(this.innerHTML)}
