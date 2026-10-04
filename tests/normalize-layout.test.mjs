@@ -59,9 +59,12 @@ assert(dollar.includes('content="Prix $&amp; $1 &amp; B'), "les motifs $ du titr
 const bare = run("<div></div>", "<title>Sans description | Simulateur</title>");
 assert.equal((bare.match(/og:|twitter:/g) || []).length, 0, "page sans description ni canonique : aucune balise de partage");
 
-for (const family of ["conversion", "comparateur"]) {
+for (const family of ["outil", "conversion", "comparateur"]) {
   const outFamily = run("<button>Calculer</button><div class=\"result\"></div>", SOCIAL_HEAD, family);
   assert(outFamily.includes('<script src="/enter-calcul.js" defer></script>'), family + " reçoit le mécanisme Entrée commun");
 }
+
+const nonInteractive = run("<button>Accueil</button><div class=\"result\"></div>", SOCIAL_HEAD, "calculateurs");
+assert(!nonInteractive.includes("/enter-calcul.js"), "une page non interactive ne reçoit pas le mécanisme Entrée");
 
 console.log("normalize-layout tests passed.");
