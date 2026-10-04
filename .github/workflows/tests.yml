@@ -56,6 +56,21 @@ jobs:
           node scripts/generate-params.mjs --check
           node scripts/check-params.mjs
 
+      - name: Anticipation des échéances des paramètres (60 jours, non bloquant)
+        run: |
+          set +e
+          output="$(node scripts/check-params.mjs --horizon 60 2>&1)"
+          status=$?
+          printf '%s\n' "$output"
+          if [ "$status" -ne 0 ]; then
+            while IFS= read -r line; do
+              case "$line" in
+                *"ERREUR [horizon]"*) echo "::warning::$line" ;;
+              esac
+            done <<< "$output"
+          fi
+          exit 0
+
       - name: Test check-pages
         run: node tests/check-pages.test.mjs
 

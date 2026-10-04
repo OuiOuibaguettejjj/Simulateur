@@ -309,4 +309,16 @@ assert.deepEqual(refused.refused,["description"],"--seed-baseline indique la rè
 const committed=parseBaseline(fs.readFileSync(new URL("../scripts/check-pages.baseline.json",import.meta.url),"utf8"));
 assert(committed.every(x=>TRACKED_RULES.includes(x.rule)),"baseline versionnée : uniquement des règles suivies");
 
+// anneeAMigrer : les écarts éditoriaux ne peuvent pas être résorbés avant migration.
+const debtPath="public/outil/ancien/index.html";
+const lockedBaseline=[P(debtPath,"description"),P(debtPath,"content-h2"),P(debtPath,"formula"),P(debtPath,"result")];
+const lockedCurrent=[P(debtPath,"result")];
+const locked=nextBaseline(lockedCurrent,lockedBaseline,["ancien"]);
+assert.equal(locked.ok,false,"anneeAMigrer bloque le retrait des écarts éditoriaux");
+assert.deepEqual(nextBaseline(lockedCurrent,lockedBaseline,["ancien"]).blocked,[P(debtPath,"description"),P(debtPath,"content-h2"),P(debtPath,"formula")],"les entrées verrouillées restent la seule explication du refus");
+assert.deepEqual(locked.blocked,[P(debtPath,"description"),P(debtPath,"content-h2"),P(debtPath,"formula")],"les trois écarts éditoriaux sont verrouillés");
+const migrated=nextBaseline(lockedCurrent,lockedBaseline,[]);
+assert.equal(migrated.ok,true,"outil migré : retrait des écarts autorisé");
+assert.deepEqual(migrated.removed,[P(debtPath,"description"),P(debtPath,"content-h2"),P(debtPath,"formula")],"outil migré : écarts retirables");
+
 console.log("check-pages tests passed.");

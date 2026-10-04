@@ -1,0 +1,22 @@
+name: Surveillance hebdomadaire des paramètres
+
+on:
+  schedule:
+    - cron: "0 8 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  params-horizon:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          fetch-depth: 1
+
+      - name: Vérifier les échéances à 60 jours
+        run: node scripts/check-params.mjs --horizon 60
