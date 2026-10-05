@@ -306,5 +306,53 @@
     "sortie": "10\\s*261,00\\s*€[^|]*Au seuil du top 1 %",
     "source": "https://www.insee.fr/fr/statistiques/8657156",
     "note": "Le 99e centile 2024 est de 10 261 € nets par mois en EQTP dans le secteur privé. Le test vérifie explicitement la frontière exacte."
+  },
+  {
+    "famille": "comparateur",
+    "outil": "prix-unitaire",
+    "entrees": {
+      "pa": "4",
+      "qa": "500",
+      "pb": "8",
+      "qb": "1000",
+      "unit": "kg"
+    },
+    "attendu": 8,
+    "tolerance": 0.01,
+    "sortie": "A\\s*:\\s*8,00\\s*€\\s*/\\s*kg",
+    "source": "https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/linformation-sur-les-prix",
+    "note": "Cas de référence indépendant : 4 € pour 500 g et 8 € pour 1 kg donnent tous deux 8 €/kg."
+  },
+  {
+    "famille": "comparateur",
+    "outil": "prix-unitaire",
+    "entrees": {
+      "pa": "3.50",
+      "qa": "500",
+      "pb": "5.20",
+      "qb": "800",
+      "unit": "kg"
+    },
+    "attendu": 7,
+    "tolerance": 0.01,
+    "sortie": "A\\s*:\\s*7,00\\s*€\\s*/\\s*kg",
+    "source": "https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/linformation-sur-les-prix",
+    "note": "Cas de référence indépendant : 3,50 € pour 500 g = 7,00 €/kg ; 5,20 € pour 800 g = 6,50 €/kg."
+  },
+  {
+    "famille": "comparateur",
+    "outil": "prix-unitaire",
+    "entrees": {
+      "pa": "1",
+      "qa": "1000",
+      "pb": "1",
+      "qb": "999",
+      "unit": "kg"
+    },
+    "attendu": 1.001,
+    "tolerance": 0.000001,
+    "sortie": "B\\s*:\\s*1,001(?:0)?\\s*€\\s*/\\s*kg|0,001(?:0)?\\s*€\\s*/\\s*kg",
+    "source": "https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/linformation-sur-les-prix",
+    "note": "Cas de non-régression : l'écart inférieur à 0,01 € par kg reste visible après formatage."
   }
 ]
