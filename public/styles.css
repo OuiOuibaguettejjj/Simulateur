@@ -371,3 +371,7 @@ footer{border-top:1px solid var(--ink);padding:30px 0;background:#eee9df}
 .rc-card h2{margin-top:0}
 .duration-content h2{font-size:clamp(1.8rem,4vw,2.5rem);letter-spacing:-.05em;margin:34px 0 10px}
 .duration-content h3{font-size:1.15rem;margin:25px 0 7px}
+
+@media(max-width:760px){.cap-hero h1{font-size:3rem}}
+@media(max-width:650px){.ip-hero h1{font-size:3rem}}
+@media(max-width:720px){.mortgage-hero h1{font-size:3rem}}
