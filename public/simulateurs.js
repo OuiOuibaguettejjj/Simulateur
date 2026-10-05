@@ -5,6 +5,11 @@
   const INVALID_RESULT=/NaN|undefined|Infinity|∞/;
 
   window.Simulateurs={
+    convert({value,from,to,units}){
+      const source=units?.[from],target=units?.[to];
+      if(!Number.isFinite(value)||!source||!target){ return NaN; }
+      return value*source.factor/target.factor;
+    },
     calc(){
       const tool=window.TOOL;
       if(!tool){ $("result").textContent="Calculateur indisponible."; return; }
