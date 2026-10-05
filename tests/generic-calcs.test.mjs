@@ -1,22 +1,23 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import {execFileSync} from "node:child_process";
-import {listIntegratedTools,runInlineCalculator} from "./calculator-harness.mjs";
+import {listIntegratedPages,runInlineCalculator} from "./calculator-harness.mjs";
 import {isInvalidResult} from "./invalid-result.mjs";
 
 const exceptionsPath="tests/generic-calcs-exceptions.json";
 const data=JSON.parse(fs.readFileSync(exceptionsPath,"utf8"));
 const exceptions=data.exceptions;
-const keyOf=x=>x.slug+"|"+x.case;
+const keyOf=x=>(x.family||"outil")+"/"+x.slug+"|"+x.case;
 const exceptionMap=new Map(exceptions.map(x=>[keyOf(x),x]));
 const cases=["default","zero","empty","negative","large","comma"];
-const tools=listIntegratedTools(),rawFailures=[];
-for(const slug of tools)for(const caseKind of cases){
+const pages=listIntegratedPages(),rawFailures=[];
+for(const page of pages)for(const caseKind of cases){
+  const {family,slug}=page;
   try{
-    const out=runInlineCalculator({slug,caseKind});
+    const out=await runInlineCalculator({family,slug,caseKind});
     if(!out.text)throw new Error("résultat vide");
     if(isInvalidResult(out.text))throw new Error("valeur invalide dans le résultat : "+out.text.slice(0,160));
-  }catch(error){rawFailures.push({slug,case:caseKind,error:String(error.message||error)})}
+  }catch(error){rawFailures.push({family,slug,case:caseKind,error:String(error.message||error)})}
 }
 const rawFailureMap=new Map(rawFailures.map(f=>[keyOf(f),f]));
 const failures=rawFailures.filter(f=>{
@@ -39,7 +40,7 @@ const rawFailureIds=new Set(rawFailures.map(keyOf));
 const stale=exceptions.filter(ex=>!rawFailureIds.has(keyOf(ex))).map(keyOf);
 assert.equal(stale.length,0,"exceptions devenues obsolètes : "+stale.join(", "));
 assert.ok(failures.length<=data.maxFailures,"échecs hors exceptions : "+failures.map(f=>keyOf(f)+" => "+f.error).join(" | "));
-const fullyExempted=new Set(tools.filter(slug=>cases.every(kind=>exceptionMap.has(slug+"|"+kind))));
-console.log("Couverture : "+tools.length+" outils testés sur au moins un cas réel, "+fullyExempted.size+" outils entièrement exemptés.");
+const fullyExempted=new Set(pages.filter(page=>cases.every(kind=>exceptionMap.has(keyOf({...page,case:kind})))).map(page=>keyOf(page)));
+console.log("Couverture : "+pages.length+" pages interactives testées sur au moins un cas réel, "+fullyExempted.size+" pages entièrement exemptées.");
 if(failures.length){console.error("Échecs couche 1 hors exceptions :");for(const f of failures)console.error(" - "+f.slug+" ["+f.case+"] : "+f.error);process.exit(1)}
 console.log("Couche 1 : tous les cas passent ou correspondent exactement à une exception documentée.");

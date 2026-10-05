@@ -158,3 +158,12 @@ Le H2 de la FAQ reste volontairement distinct, car la FAQ est un composant inter
 
 Le choix est porté par le CSS commun plutôt que par une multiplication de variantes HTML : les pages conservent leur structure `content-section`, tandis que le template documentaire rappelle ce composant comme référence. Une page ne doit pas créer de style H2 spécifique à un calculateur sans justification d'architecture commune.
 
+
+
+## 2026-10-05 — Durcissement du contrat des pages interactives et de la CI
+
+Le contrôle de couverture des pages interactives s'applique aux familles `outil`, `conversion` et `comparateur`. Les tests génériques, de référence et Chromium vérifient ce contrat commun sans effacer les différences de logique entre familles.
+
+Le garde-fou de layout interdit les redéfinitions locales des titres `h1` à `h6` et les redéfinitions locales des composants partagés, notamment `.content-section h2` et `.calculator-faq h2`. Un test dédié vérifie ces invariants et est exécuté dans les workflows de tests et de déploiement. Le contrôle de syntaxe des blocs Node inline conservés dans `deploy.yml` est vérifié automatiquement.
+
+Les contrôles de sitemap, de filtre publicitaire et de formes de résultat invalide sont désormais communs aux workflows de tests et de déploiement. Les cas de référence dépendant d'une API simulée utilisent une fixture de transport explicitement séparée de la valeur attendue issue de la source publiée.

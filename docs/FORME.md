@@ -8,7 +8,7 @@ Ce document définit le **gabarit canonique des pages interactives**. Les pages 
 
 Les pages `/outil/`, `/conversion/` et `/comparateur/` sont trois **familles de pages interactives**. Elles partagent le même socle HTML-first et le même contrat de forme ; seule la logique métier et la sémantique propre à la famille peuvent varier. Le préfixe d'URL est conservé pour respecter les URL existantes ; il ne constitue pas un gabarit de rendu différent.
 
-La page de référence actuelle est `public/outil/tva/index.html`. Pour créer une nouvelle page interactive, utiliser `docs/template-outil.html` comme point de copie, puis adapter uniquement les données et l'interface propres à sa famille.
+Le gabarit de référence est `docs/template-outil.html`. Pour créer une nouvelle page interactive, utiliser ce fichier comme point de copie, puis adapter uniquement les données et l'interface propres à sa famille.
 
 ### Squelette HTML canonique
 
@@ -89,7 +89,7 @@ Le squelette ci-dessous décrit les blocs attendus. Les commentaires indiquent l
       </details>
     </section>
 
-    <!-- Bloc obligatoire : /outil/ : 2 à 4 liens issus de TOOLS_META ; /conversion/ et /comparateur/ : 2 à 4 liens écrits dans le HTML, sans entrée TOOLS_META. Un seul bloc par page. -->
+    <!-- Bloc obligatoire : /outil/ : 2 à 4 liens issus des relations définies dans `data/tools.json` ; /conversion/ et /comparateur/ : 2 à 4 liens écrits dans le HTML, sans entrée dans `data/tools.json`. Un seul bloc par page. -->
     <section class="related-tools">
       ...
     </section>
@@ -122,9 +122,9 @@ Chaque page interactive doit fournir dans son HTML initial :
 - l'interface essentielle directement présente dans le HTML ;
 - un résultat initial **non vide**, même avant toute saisie, avec `aria-live="polite"` ;
 - un bloc `.formula` (méthode et limites) contenant au moins une source ;
-- au moins deux sections H2 éditoriales, regroupées dans un ou plusieurs `section.content-section` ; ces H2 utilisent le composant visuel commun du socle (hiérarchie, accent latéral, espacement et responsive). Le H2 de la FAQ est un composant distinct et ne compte pas dans ces deux H2 ; les H2 des blocs « Outils associés » restent également distincts ;
-- un bloc `.calculator-faq` unique, avec un H2 `FAQ` ou `Questions fréquentes`, au moins un `<details>` et, pour chaque question, un `<summary>` non vide et un bloc `.calculator-faq-answer` non vide ;
-- `/outil/` : un unique bloc `.related-tools` standard de 2 à 4 liens, issus des relations définies dans `TOOLS_META` ;
+- au moins deux sections H2 éditoriales, regroupées dans un ou plusieurs `section.content-section` ; ces H2 utilisent le composant visuel commun du socle (hiérarchie, accent latéral, espacement et responsive). Le H2 `FAQ` est un composant distinct et ne compte pas dans ces deux H2 ; les H2 des blocs « Outils associés » restent également distincts ;
+- un bloc `.calculator-faq` unique, avec un H2 `FAQ`, au moins un `<details>` et, pour chaque question, un `<summary>` non vide et un bloc `.calculator-faq-answer` non vide ;
+- `/outil/` : un unique bloc `.related-tools` standard de 2 à 4 liens, issus des relations définies dans `data/tools.json` ;
 - `/conversion/` et `/comparateur/` : un unique bloc `.related-tools` standard de 2 à 4 liens écrits directement dans le HTML, sans entrée `data/tools.json` ; chaque lien doit pointer vers une page publique existante, sans lien vers la page elle-même et sans doublon ;
 - un `WebApplication` JSON-LD unique ;
 - un `BreadcrumbList` JSON-LD unique, cohérent avec le breadcrumb visible et la canonique ;
@@ -222,7 +222,7 @@ Toute modification du template doit rester compatible avec les contrôles CI.
 
 ## 8. Tests de référence d'un calculateur
 
-Lorsqu'un calculateur reçoit un test de référence, le cas est ajouté dans `tests/references/*.json` avec les champs `outil`, `entrees`, `attendu`, `tolerance`, `sortie` et `source`. Le champ `sortie` désigne le libellé ou la regex de la valeur contrôlée ; le test échoue si ce libellé est absent ou si aucune valeur numérique ne lui est associée.
+Lorsqu'un calculateur reçoit un test de référence, le cas est ajouté dans `tests/references/*.json` avec les champs `outil`, `entrees`, `attendu`, `tolerance`, `sortie` et `source`. Le champ optionnel `famille` identifie la famille de page interactive (`outil`, `conversion` ou `comparateur`) ; lorsqu'il est omis, le test est rattaché à `outil` pour conserver la compatibilité avec les cas existants. Le champ `sortie` désigne le libellé ou la regex de la valeur contrôlée ; le test échoue si ce libellé est absent ou si aucune valeur numérique ne lui est associée.
 
 La valeur `attendu` doit provenir d'une source publiée indépendante du code testé. Elle ne doit jamais être obtenue en exécutant le calculateur testé pour fabriquer l'attendu. Si aucune source fiable ne permet de fixer un attendu, le cas n'est pas ajouté.
 

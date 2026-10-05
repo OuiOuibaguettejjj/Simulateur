@@ -352,3 +352,26 @@ footer{border-top:1px solid var(--ink);padding:30px 0;background:#eee9df}
 .calculator-people .person input:focus{outline:3px solid var(--accent-soft);border-color:var(--accent)}
 .calculator-people .person input:disabled{background:#f0eadf;color:var(--muted)}
 @media(max-width:650px){.calculator-people-head{display:none}.calculator-people{display:grid;grid-template-columns:1fr}.calculator-people .person{display:grid;grid-template-columns:1fr 1fr;gap:9px}.calculator-people .person .pname{grid-column:1/-1}}
+
+/* Styles de titres des pages interactives : centralisés pour éviter les dérives locales. */
+.cap-hero h1{position:relative;z-index:1;max-width:760px;margin:0 0 14px;font-size:clamp(2.7rem,6vw,4.9rem);line-height:.94;letter-spacing:-.075em}
+.cap-panel h2{margin:0 0 5px;font-size:1.2rem;letter-spacing:-.035em}
+.cap-comparison h2{font-size:1.35rem;margin:0 0 12px;letter-spacing:-.04em}
+.cap-content h2{font-size:clamp(1.8rem,4vw,2.7rem);line-height:1;letter-spacing:-.055em;margin:34px 0 10px}
+.cap-related h2{font-size:1.8rem}
+.ip-hero h1{font-size:clamp(2.7rem,6vw,4.8rem);line-height:.94;letter-spacing:-.07em;margin:0 0 14px;max-width:800px}
+.ip-card h2{margin:0 0 14px;font-size:1.8rem;letter-spacing:-.04em}
+.compound-panel h2{margin:0 0 16px;font-size:1.15rem;letter-spacing:-.03em}
+.pv-card h2{margin-top:0}
+.mortgage-hero h1{position:relative;z-index:1;max-width:780px;margin:0 0 14px;font-size:clamp(2.8rem,6vw,5.2rem);line-height:.93;letter-spacing:-.075em}
+.mortgage-form h2,.mortgage-result h2{margin:0 0 6px;font-size:1.35rem;letter-spacing:-.035em}
+.compare h2,.schedule h2{margin:0 0 5px;font-size:1.25rem;letter-spacing:-.035em}
+.mortgage-content h2{font-size:clamp(1.7rem,4vw,2.5rem);letter-spacing:-.05em;line-height:1;margin:38px 0 10px}
+.mortgage-content h2:first-child{margin-top:0}
+.rc-card h2{margin-top:0}
+.duration-content h2{font-size:clamp(1.8rem,4vw,2.5rem);letter-spacing:-.05em;margin:34px 0 10px}
+.duration-content h3{font-size:1.15rem;margin:25px 0 7px}
+
+@media(max-width:760px){.cap-hero h1{font-size:3rem}}
+@media(max-width:650px){.ip-hero h1{font-size:3rem}}
+@media(max-width:720px){.mortgage-hero h1{font-size:3rem}}

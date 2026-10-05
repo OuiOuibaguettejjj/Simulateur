@@ -165,5 +165,113 @@
     ],
     "source": "https://eduscol.education.fr/document/13132/download",
     "note": "Cas de référence indépendant : 12:18 se réduit à 2:3 en divisant les deux termes par 6 ; 12 ÷ 18 ≈ 0,6667."
+  },
+  {
+    "famille": "conversion",
+    "outil": "aire",
+    "entrees": {
+      "v": "1"
+    },
+    "attendu": 0.0001,
+    "tolerance": 0.000001,
+    "sortie": "0,0001\\s*ha",
+    "source": "https://www.bipm.org/fr/si-brochure-9"
+  },
+  {
+    "famille": "conversion",
+    "outil": "angle",
+    "entrees": {
+      "value": "180"
+    },
+    "attendu": 3.14159265,
+    "tolerance": 1e-7,
+    "sortie": "3,14159265\\s*rad",
+    "source": "https://www.bipm.org/fr/si-brochure-9"
+  },
+  {
+    "famille": "conversion",
+    "outil": "devises",
+    "entrees": {
+      "v": "100"
+    },
+    "attendu": 117,
+    "tolerance": 0.01,
+    "sortie": "117\\s*USD",
+    "mockRates": {
+      "EUR": 1,
+      "USD": 1.17
+    },
+    "note": "Cas indépendant fondé sur le taux de référence BCE publié le 4 mai 2026 : 1 EUR = 1,1700 USD. La fixture de taux simule le transport de l'API ; la valeur attendue reste définie séparément dans le cas de référence.",
+    "source": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/eurofxref-graph-usd.en.html"
+  },
+  {
+    "famille": "conversion",
+    "outil": "donnees",
+    "entrees": {
+      "v": "1"
+    },
+    "attendu": 1000,
+    "tolerance": 0.0001,
+    "sortie": "1\\s*000\\s*Mo",
+    "source": "https://webstore.iec.ch/en/publication/87379"
+  },
+  {
+    "famille": "conversion",
+    "outil": "longueur",
+    "entrees": {
+      "v": "1"
+    },
+    "attendu": 100,
+    "tolerance": 0,
+    "sortie": "100\\s*cm",
+    "source": "https://www.bipm.org/fr/si-brochure-9"
+  },
+  {
+    "famille": "conversion",
+    "outil": "poids",
+    "entrees": {
+      "v": "1"
+    },
+    "attendu": 1000,
+    "tolerance": 0,
+    "sortie": "1\\s*000\\s*g",
+    "source": "https://www.bipm.org/fr/si-brochure-9"
+  },
+  {
+    "famille": "conversion",
+    "outil": "temperature",
+    "entrees": {
+      "value": "0"
+    },
+    "attendu": 32,
+    "tolerance": 0.000001,
+    "sortie": "32\\s*°F",
+    "source": "https://www.bipm.org/fr/si-brochure-9"
+  },
+  {
+    "famille": "conversion",
+    "outil": "volume",
+    "entrees": {
+      "v": "1"
+    },
+    "attendu": 1000,
+    "tolerance": 0,
+    "sortie": "1\\s*000\\s*mL",
+    "source": "https://www.bipm.org/fr/si-brochure-9"
+  },
+  {
+    "famille": "comparateur",
+    "outil": "prix-unitaire",
+    "entrees": {
+      "pa": "10",
+      "qa": "1",
+      "pb": "12",
+      "qb": "2",
+      "unit": "u"
+    },
+    "attendu": 10,
+    "tolerance": 0,
+    "sortie": "A :",
+    "source": "https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/linformation-sur-les-prix"
   }
 ]
