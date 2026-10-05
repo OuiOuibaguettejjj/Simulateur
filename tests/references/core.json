@@ -220,12 +220,12 @@
     "outil": "longueur",
     "entrees": {
       "value": "1",
-      "from": "cm",
-      "to": "m"
+      "from": "m",
+      "to": "cm"
     },
-    "attendu": 0.01,
+    "attendu": 100,
     "tolerance": 0,
-    "sortie": "0,01\\s*m",
+    "sortie": "100\\s*cm",
     "source": "https://www.bipm.org/fr/si-brochure-9"
   },
   {
