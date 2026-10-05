@@ -220,8 +220,8 @@
     "outil": "longueur",
     "entrees": {
       "value": "1",
-      "from": "m",
-      "to": "cm"
+      "from": "cm",
+      "to": "m"
     },
     "attendu": 100,
     "tolerance": 0,
