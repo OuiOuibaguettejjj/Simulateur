@@ -53,4 +53,19 @@ window.Simulateurs.calc();
 assert.equal(nodes.result.textContent,"Calculateur indisponible.");
 assert.equal(nodes.result.innerHTML,"");
 
-console.log("Simulateurs guard tests passed.");
+const angleUnits = {
+  deg:{factor:Math.PI/180},
+  rad:{factor:1},
+  grad:{factor:Math.PI/200},
+  turn:{factor:2*Math.PI},
+  arcmin:{factor:Math.PI/(180*60)},
+  arcsec:{factor:Math.PI/(180*3600)},
+  mrad:{factor:0.001}
+};
+assert.ok(Math.abs(window.Simulateurs.convert({value:180,from:"deg",to:"rad",units:angleUnits})-Math.PI)<1e-12);
+assert.ok(Math.abs(window.Simulateurs.convert({value:Math.PI,from:"rad",to:"deg",units:angleUnits})-180)<1e-12);
+assert.ok(Math.abs(window.Simulateurs.convert({value:1,from:"turn",to:"deg",units:angleUnits})-360)<1e-12);
+assert.ok(Math.abs(window.Simulateurs.convert({value:1,from:"deg",to:"arcmin",units:angleUnits})-60)<1e-12);
+assert.ok(Number.isNaN(window.Simulateurs.convert({value:1,from:"unknown",to:"deg",units:angleUnits})));
+
+console.log("Simulateurs guard and conversion tests passed.");
