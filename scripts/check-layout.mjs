@@ -69,7 +69,7 @@ function checkSite() {
       localWarn(rel, "CSS de page qui redéfinit la mise en page commune : " + sel + " (à déplacer dans public/styles.css)");
     }
     for (const sel of localHeadingOverrides(html)) {
-      localWarn(rel, "CSS local qui redéfinit un titre h1–h6 : " + sel + " (les styles de titres doivent rester dans public/styles.css)");
+      localWarn(rel, rel + ": CSS local qui redéfinit un titre h1–h6 : " + sel + " (les styles de titres doivent rester dans public/styles.css)");
     }
   }
 
