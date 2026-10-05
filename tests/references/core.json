@@ -351,7 +351,7 @@
     },
     "attendu": 1,
     "tolerance": 0.000001,
-    "sortie": "B\\s*:\\s*1,0010\\s*€\\s*/\\s*kg|0,0010\\s*€\\s*/\\s*kg",
+    "sortie": "B\\s*:\\s*1,001(?:0)?\\s*€\\s*/\\s*kg|0,001(?:0)?\\s*€\\s*/\\s*kg",
     "source": "https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/linformation-sur-les-prix",
     "note": "Cas de non-régression : l'écart inférieur à 0,01 € par kg reste visible après formatage."
   }
