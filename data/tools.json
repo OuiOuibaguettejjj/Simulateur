@@ -739,6 +739,16 @@
         "difference-dates",
         "temps-calcul"
       ]
+    },
+    "etes-vous-riche": {
+      "type": "simulateur",
+      "category": "salaire",
+      "relatedTools": [
+        "salaire-brut-net",
+        "salaire-horaire",
+        "smic",
+        "prime-activite"
+      ]
     }
   }
 }
