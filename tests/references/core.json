@@ -349,7 +349,7 @@
       "qb": "999",
       "unit": "kg"
     },
-    "attendu": 1,
+    "attendu": 1.001,
     "tolerance": 0.000001,
     "sortie": "B\\s*:\\s*1,001(?:0)?\\s*€\\s*/\\s*kg|0,001(?:0)?\\s*€\\s*/\\s*kg",
     "source": "https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/linformation-sur-les-prix",
