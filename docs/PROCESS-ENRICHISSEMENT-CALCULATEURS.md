@@ -37,7 +37,7 @@ Avant tout enrichissement, identifier également la **famille de page interactiv
 
 Chaque calculateur appartient à une classe, qui détermine ce qui est permis.
 
-| Classe | Définition | Exemples actuels | Enrichissement éditorial |
+| Classe | Définition | Exemples actuels | Enrichissement |
 |---|---|---|---|
 | **A. Pur calcul** | Aucune valeur réglementaire ni valeur datée : conversions, mathématiques, pourcentages, statistiques | `pourcentage`, `moyenne`, `vitesse`, `conversion/*` | Autorisé |
 | **B. Réglementaire migré** | Rattaché à un jeu de `data/parametres.json` (champ `usedBy`) | `smic`, `rsa`, `frais-kilometriques` | Autorisé, avec les exigences du § 0.4 |
@@ -129,17 +129,19 @@ Un chantier peut impliquer plusieurs types de changement. Ils se livrent dans de
 
 1. correction d'un bug de calcul ou de saisie (exemple : ajout d'un `type="number"` manquant) ;
 2. migration du barème vers les paramètres (§ 0.5) ;
-3. enrichissement éditorial.
+3. **enrichissement du calculateur**, qui regroupe son enrichissement fonctionnel et éditorial lorsqu'ils relèvent du même chantier.
 
-Raison : un bug mélangé à un enrichissement rend la revue illisible et masque la cause d'une régression. Chaque PR garde un périmètre vérifiable.
+L'enrichissement fonctionnel n'est donc pas limité à une retouche éditoriale : si l'audit montre que l'interface, les possibilités de calcul, les paramètres, les unités ou la logique propre au calculateur sont insuffisants, ils peuvent être améliorés dans la PR d'enrichissement, sous réserve des garde-fous et tests prévus par ce document.
+
+Raison : un bug ou une migration mélangés à un enrichissement rendent la revue illisible et masquent la cause d'une régression. En revanche, les évolutions fonctionnelles et éditoriales d'un même calculateur peuvent être traitées ensemble lorsqu'elles constituent un même chantier d'enrichissement. Chaque PR garde un périmètre vérifiable.
 
 ---
 
-## 1. Socle obligatoire
+## 1. Socle partagé des pages interactives
 
-Le format structurel et fonctionnel commun du site reste la référence. L'enrichissement ne doit pas contourner ou remplacer ce socle.
+Le format structurel commun du site reste la référence. L'enrichissement ne doit pas contourner ou remplacer ce socle.
 
-Pour toute page interactive (`/outil/`, `/conversion/`, `/comparateur/`), le socle commun comprend :
+Pour toute page interactive (`/outil/`, `/conversion/`, `/comparateur/`), le socle partagé comprend uniquement les conventions communes de page :
 
 - title et métadonnées SEO ;
 - H1 et introduction ;
@@ -152,11 +154,27 @@ Pour toute page interactive (`/outil/`, `/conversion/`, `/comparateur/`), le soc
 - breadcrumb visible et BreadcrumbList ;
 - WebApplication JSON-LD ;
 - structure HTML, comportement commun, responsive et accessibilité ;
-- gestion correcte des entrées invalides et du résultat.
+- gestion générique correcte des entrées invalides et du résultat.
+
+Le socle partagé **ne contient aucune règle de calcul, aucun moteur métier, aucune liste d'unités propre à un calculateur et aucune logique fonctionnelle spécifique**. Il ne définit donc pas un comportement métier commun aux calculateurs.
 
 Le socle impose une **structure commune**, pas une longueur uniforme ni un contenu identique. La profondeur de chaque section dépend du calculateur, de sa complexité et de l'intention utilisateur.
 
-Toute évolution du socle commun (gabarit, normaliseur de layout, règles de `check-pages`) est une **décision d'architecture distincte**, documentée dans `docs/DECISIONS.md`. Elle n'est jamais introduite pour enrichir un outil particulier.
+Toute évolution du socle partagé (gabarit, normaliseur de layout, règles de `check-pages`) est une **décision d'architecture distincte**, documentée dans `docs/DECISIONS.md`. Elle n'est jamais introduite pour enrichir un calculateur particulier.
+
+## 1.1 Fonctionnement propre à chaque calculateur
+
+Chaque calculateur possède sa propre implémentation fonctionnelle, directement adaptée à son usage. Elle couvre notamment, selon le besoin :
+
+- les champs et paramètres ;
+- les unités et sens de conversion ;
+- les validations et cas limites ;
+- les formules et règles métier ;
+- les résultats et leur interprétation fonctionnelle ;
+- les scénarios et possibilités de calcul ;
+- les limites du calculateur.
+
+Il n'existe pas de couche métier commune entre les calculateurs. Un calculateur peut être refactoré ou enrichi directement dans son propre périmètre lorsque cela améliore son usage ou sa maintenabilité. La similarité avec un autre calculateur ne constitue pas un motif suffisant pour mutualiser sa logique métier.
 
 ---
 
@@ -401,14 +419,14 @@ Le benchmark sert à trouver des lacunes et des opportunités, pas à reproduire
 Une fois la cible définie, les modifications sont limitées au périmètre nécessaire :
 
 - page du calculateur ;
-- logique du calculateur, uniquement pour une évolution justifiée et validée (une correction de bug part dans sa propre PR, § 0.7) ;
+- logique propre du calculateur, lorsque l'audit démontre qu'une évolution fonctionnelle est nécessaire et justifiée ; une correction de bug isolée part dans sa propre PR (§ 0.7) ;
 - tests, y compris le cas de référence sourcé (§ 0.4) ;
 - données ou références nécessaires (`data/parametres.json` pour un outil réglementaire) ;
 - `data/tools.json` lorsque nécessaire ;
 - entrées de la baseline **propres à l'outil**, retirées avec `--update-baseline` ;
 - `docs/ECHEANCES.md` et la note de sources pour un outil réglementaire.
 
-Les fichiers communs (gabarit, scripts de contrôle, workflows, baseline des autres outils) ne sont pas modifiés. Une modification commune n'est introduite que si le besoin est démontré pour plusieurs pages, et elle suit la règle du § 1.
+Les fichiers communs (gabarit, scripts de contrôle, workflows, baseline des autres outils) ne sont pas modifiés pour enrichir un calculateur. Une modification du socle partagé n'est introduite que si elle répond à un besoin transversal démontré et suit la règle du § 1 ; elle fait alors l'objet d'un chantier d'architecture distinct. L'enrichissement fonctionnel d'un calculateur reste dans son propre périmètre.
 
 Règles de rédaction techniques :
 
