@@ -273,5 +273,38 @@
     "tolerance": 0,
     "sortie": "A :",
     "source": "https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/linformation-sur-les-prix"
+  },
+  {
+    "outil": "etes-vous-riche",
+    "entrees": {
+      "salaire": "4334"
+    },
+    "attendu": 4334,
+    "tolerance": 0,
+    "sortie": "D9",
+    "source": "https://www.insee.fr/fr/statistiques/8657156",
+    "note": "Le D9 2024 est de 4 334 € nets par mois en EQTP dans le secteur privé."
+  },
+  {
+    "outil": "etes-vous-riche",
+    "entrees": {
+      "salaire": "5593"
+    },
+    "attendu": 5593,
+    "tolerance": 0,
+    "sortie": "95e centile",
+    "source": "https://www.insee.fr/fr/statistiques/8657156",
+    "note": "Le 95e centile 2024 est de 5 593 € nets par mois en EQTP dans le secteur privé."
+  },
+  {
+    "outil": "etes-vous-riche",
+    "entrees": {
+      "salaire": "10261"
+    },
+    "attendu": 10261,
+    "tolerance": 0,
+    "sortie": "99e centile",
+    "source": "https://www.insee.fr/fr/statistiques/8657156",
+    "note": "Le 99e centile 2024 est de 10 261 € nets par mois en EQTP dans le secteur privé."
   }
 ]
