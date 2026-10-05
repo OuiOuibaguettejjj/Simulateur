@@ -286,7 +286,7 @@
     },
     "attendu": 8,
     "tolerance": 0.01,
-    "sortie": "Les deux offres ont le même prix unitaire",
+    "sortie": "A\\\\s*:\\\\s*8,00\\\\s*€\\\\s*/\\\\s*kg",
     "source": "https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/linformation-sur-les-prix",
     "note": "Cas de référence indépendant : 4 € pour 500 g et 8 € pour 1 kg donnent tous deux 8 €/kg."
   },
