@@ -181,11 +181,26 @@
     "famille": "conversion",
     "outil": "angle",
     "entrees": {
-      "value": "180"
+      "value": "180",
+      "from": "deg",
+      "to": "rad"
     },
     "attendu": 3.14159265,
     "tolerance": 1e-7,
     "sortie": "3,14159265\\s*rad",
+    "source": "https://www.bipm.org/fr/si-brochure-9"
+  },
+  {
+    "famille": "conversion",
+    "outil": "angle",
+    "entrees": {
+      "value": "3.141592653589793",
+      "from": "rad",
+      "to": "deg"
+    },
+    "attendu": 180,
+    "tolerance": 0.000001,
+    "sortie": "180\\s*°",
     "source": "https://www.bipm.org/fr/si-brochure-9"
   },
   {
