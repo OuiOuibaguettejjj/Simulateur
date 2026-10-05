@@ -6,7 +6,17 @@ Ce document définit le **gabarit canonique des pages interactives**. Les pages 
 
 **Terminologie technique.** Le code de contrôle utilise la notion de **page interactive** pour les règles réellement transversales aux trois familles. Les termes `outil`, `conversion` et `comparateur` restent utilisés lorsqu’une règle dépend réellement de la famille concernée (taxonomie, logique de conversion, logique de comparaison ou règles éditoriales encore spécifiques). Les URL `/outil/`, `/conversion/` et `/comparateur/` ne sont pas modifiées.
 
-Les pages `/outil/`, `/conversion/` et `/comparateur/` sont trois **familles de pages interactives**. Elles partagent le même socle HTML-first et le même contrat de forme ; seule la logique métier et la sémantique propre à la famille peuvent varier. Le préfixe d'URL est conservé pour respecter les URL existantes ; il ne constitue pas un gabarit de rendu différent.
+Les pages `/outil/`, `/conversion/` et `/comparateur/` sont trois **familles de pages interactives**. Elles partagent le même socle HTML-first et le même contrat de forme. Le préfixe d'URL distingue la famille de page, mais ne crée pas de gabarit de rendu différent.
+
+### Socle partagé et fonctionnement propre au calculateur
+
+Le **socle partagé des pages interactives** couvre uniquement les conventions communes de structure et de présentation : HTML-first, métadonnées et données structurées communes, en-tête, fil d'Ariane, conteneur du calculateur, structure de l'interface, résultat initial et accessible, blocs éditoriaux, FAQ, sources, outils associés, pied de page, responsive, accessibilité et comportements génériques prévus par le site.
+
+Le socle partagé **ne contient aucune règle de calcul, aucun moteur métier, aucune liste d'unités propre à un calculateur et aucune logique fonctionnelle spécifique**.
+
+Chaque calculateur possède sa **propre implémentation fonctionnelle**, directement adaptée à son usage : champs, paramètres, unités, validations, formules, traitements, résultats, scénarios et limites. Il n'existe pas de couche métier commune entre les calculateurs. Deux calculateurs qui se ressemblent visuellement ou fonctionnellement restent donc autonomes ; une ressemblance ne justifie pas la création d'un moteur ou d'une bibliothèque métier partagée.
+
+Les règles propres à une famille (`outil`, `conversion`, `comparateur`) restent limitées à ses contraintes de structure, de taxonomie ou de sémantique lorsqu'elles sont explicitement définies par la documentation. Elles ne constituent pas un moteur métier commun.
 
 Le gabarit de référence est `docs/template-outil.html`. Pour créer une nouvelle page interactive, utiliser ce fichier comme point de copie, puis adapter uniquement les données et l'interface propres à sa famille.
 
@@ -187,16 +197,16 @@ Le header et le footer **sont commités dans chaque page**. Ils ne sont pas ins�
 
 ### Enrichissement d'une page interactive
 
-Un enrichissement ne se limite pas au contenu éditorial. Avant de modifier une page interactive, vérifier que le **fonctionnement et le périmètre du calculateur lui-même** sont suffisamment complets pour son usage attendu.
+Un enrichissement ne se limite pas au contenu éditorial. Avant de modifier une page interactive, vérifier que le **fonctionnement et le périmètre du calculateur lui-même** sont suffisamment complets pour son usage attendu. Le socle partagé reste inchangé : l'enrichissement porte sur le calculateur concerné et sur son contenu propre.
 
 L'audit d'enrichissement porte donc sur deux volets :
 
-- **fonctionnel** : entrées, sorties, paramètres, unités, cas d'usage couverts, sens de conversion, possibilités de calcul et limites du moteur existant ; lorsque des fonctionnalités utiles et cohérentes manquent, elles peuvent être ajoutées ;
+- **fonctionnel** : entrées, sorties, paramètres, unités, cas d'usage couverts, sens de conversion, possibilités de calcul et limites de l'implémentation propre au calculateur ; lorsque des fonctionnalités utiles et cohérentes manquent, elles peuvent être ajoutées directement dans ce calculateur ;
 - **éditorial** : explications, méthode, exemples, repères, FAQ, sources, limites et contenu utile à la compréhension du résultat.
 
 Pour les conversions notamment, vérifier que l'ensemble des unités courantes et pertinentes pour l'usage visé est couvert et que le parcours de conversion est cohérent (par exemple choix de l'unité de départ et de l'unité d'arrivée lorsque ce modèle est pertinent). Il n'est pas nécessaire de couvrir des unités historiques, spécialisées ou marginales uniquement pour viser une exhaustivité littérale.
 
-Une page n'est donc pas considérée comme pleinement enrichie parce que son texte a été amélioré si son interface ou son moteur reste manifestement trop limité par rapport à l'usage attendu. Toute extension fonctionnelle doit respecter le socle commun, éviter les systèmes spécifiques faisant doublon et être accompagnée des contrôles/tests nécessaires.
+Une page n'est donc pas considérée comme pleinement enrichie parce que son texte a été amélioré si son interface ou son implémentation fonctionnelle reste manifestement trop limitée par rapport à l'usage attendu. Toute extension fonctionnelle est réalisée dans l'implémentation propre du calculateur, respecte le socle partagé et est accompagnée des contrôles/tests nécessaires. Elle ne doit pas créer de couche métier commune à d'autres calculateurs.
 
 
 Le HTML commité est la source de vérité. Les scripts de CI vérifient sa conformité ; ils ne doivent pas servir de moteur de génération éditoriale en production.
@@ -205,7 +215,7 @@ Le flux réel est :
 
 1. créer/copier une page à partir de `docs/template-outil.html` ;
 2. renseigner les métadonnées, le breadcrumb, l'interface, le résultat initial et le contenu propres à l'outil ;
-3. conserver la logique de calcul dans le JavaScript existant sans modifier les règles métier ;
+3. conserver et, lorsque l'enrichissement fonctionnel le justifie, faire évoluer la logique de calcul propre à l'outil dans son JavaScript dédié ;
 4. inscrire l'outil dans `data/tools.json` (type, catégorie, 2 à 4 `relatedTools` sous forme de slugs) ;
 5. mettre à jour la date de la page dans `data/lastmod.json` si son contenu éditorial change ;
 6. exécuter les contrôles pré-production ;
