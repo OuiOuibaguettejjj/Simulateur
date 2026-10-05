@@ -131,7 +131,7 @@
 </tr>
 </tbody>
 </table>
-<h2>Go ou Gio : pourquoi deux systèmes de conversion ?</h2>
+<h2>Go ou Gio : quelle différence entre les unités ?</h2>
 <p>Un <strong>Go</strong> et un <strong>Gio</strong> ne représentent pas la même quantité d'octets. Le Go appartient à la famille décimale ; le Gio à la famille binaire. Les préfixes binaires kibi, mébi, gibi et tébi permettent de distinguer explicitement les puissances de 2 des puissances de 10.</p>
 <p>Par exemple, 1 Go = 0,9313225746 Gio et 1 Gio = 1,073741824 Go. Cette différence devient importante pour les capacités de stockage et les valeurs affichées par certains systèmes.</p>
 <h3>Quelques repères pratiques</h3>
@@ -219,7 +219,7 @@
 <h2>Pourquoi un disque de 1 To affiche environ 931 Go dans Windows ?</h2>
 <p>Un disque vendu 1 To contient 1 000 000 000 000 octets. Si ces octets sont exprimés en unités binaires, on obtient 931,32 Gio, car 1 Gio = 1 073 741 824 octets. Windows utilise encore couramment des libellés « Go » ou « GB » pour cet affichage binaire, ce qui entretient la confusion.</p>
 <p>La capacité n'a donc pas diminué. D'autres écarts peuvent ensuite venir du formatage, des partitions ou des réservations du système de fichiers.</p>
-<h2>Comment choisir la bonne unité ?</h2>
+<h2>Comment choisir entre Ko, Mo, Go, To et Kio, Mio, Gio, Tio ?</h2>
 <p>Pour une capacité annoncée par un fabricant de disque, de SSD ou de clé USB, les unités décimales Go et To sont la référence. Pour une valeur explicitement exprimée en Gio, Mio ou Kio, utilisez la famille binaire. Si un logiciel affiche simplement « Go » ou « GB », vérifiez le contexte avant de supposer qu'il s'agit d'une puissance de 10.</p>
 </section>
 <section class="calculator-faq" aria-labelledby="faq-title">
@@ -255,9 +255,9 @@
 </div>
 </details>
 <details>
-<summary>Un octet contient-il 8 bits ?</summary>
+<summary>Combien de Gio représente 1 Go ?</summary>
 <div class="calculator-faq-answer">
-<p>Oui. Un octet correspond à 8 bits. Les capacités de stockage sont généralement exprimées en octets, tandis que les débits réseau sont souvent exprimés en bits par seconde.</p>
+<p>1 Go = 0,9313225746 Gio. Un Go vaut exactement 1 000 000 000 octets, tandis qu'un Gio vaut 1 073 741 824 octets. Pour un résultat arrondi, utilisez le convertisseur ci-dessus.</p>
 </div>
 </details>
 <details>
@@ -295,10 +295,10 @@
 <script>
 const UNITS={o:{label:'octet',value:1,group:'Décimal'},ko:{label:'Ko',value:1e3,group:'Décimal'},mo:{label:'Mo',value:1e6,group:'Décimal'},go:{label:'Go',value:1e9,group:'Décimal'},to:{label:'To',value:1e12,group:'Décimal'},kio:{label:'Kio',value:2**10,group:'Binaire'},mio:{label:'Mio',value:2**20,group:'Binaire'},gio:{label:'Gio',value:2**30,group:'Binaire'},tio:{label:'Tio',value:2**40,group:'Binaire'}};
 const from=document.getElementById('from'),to=document.getElementById('to'),valueInput=document.getElementById('v'),result=document.getElementById('r');
-function fillSelect(select){select.replaceChildren();for(const [key,unit] of Object.entries(UNITS)){const option=document.createElement('option');option.value=key;option.textContent=unit.label+' — '+unit.group;select.append(option)}}
+function fillSelect(select){select.replaceChildren();const groups=[['base','Unité de base',['o']],['decimal','Unités décimales',['ko','mo','go','to']],['binary','Unités binaires',['kio','mio','gio','tio']]];for(const [,label,keys] of groups){const group=document.createElement('optgroup');group.label=label;for(const key of keys){const unit=UNITS[key];const option=document.createElement('option');option.value=key;option.textContent=unit.label;group.append(option)}select.append(group)}}
 fillSelect(from);fillSelect(to);from.value='go';to.value='mo';
 function formatNumber(value){return value.toLocaleString('fr-FR',{maximumFractionDigits:12})}
-function convert(){const raw=valueInput.value.trim().replace(/[\s\u00a0\u202f]/g,'');if(raw===''){result.textContent='Saisissez une valeur à convertir.';valueInput.setAttribute('aria-invalid','true');return}if(!/^(?:\d+(?:[.,]\d*)?|[.,]\d+)$/.test(raw)){result.textContent='Saisissez un nombre valide (par exemple 1,5 ou 1.5).';valueInput.setAttribute('aria-invalid','true');return}const value=Number(raw.replace(',','.'));if(!Number.isFinite(value)||value<0){result.textContent='Saisissez une valeur valide (zéro ou un nombre positif).';valueInput.setAttribute('aria-invalid','true');return}valueInput.removeAttribute('aria-invalid');const converted=value*UNITS[from.value].value/UNITS[to.value].value;const strong=document.createElement('strong');strong.textContent=formatNumber(converted)+' '+UNITS[to.value].label;const detail=document.createElement('span');detail.textContent=formatNumber(value)+' '+UNITS[from.value].label+' = '+formatNumber(converted)+' '+UNITS[to.value].label;result.replaceChildren(strong,document.createElement('br'),detail)}
+function convert(){const raw=valueInput.value.trim().replace(/[\s\u00a0\u202f]/g,'');if(raw===''){result.textContent='Saisissez une valeur à convertir.';valueInput.setAttribute('aria-invalid','true');return}if(!/^(?:\d+(?:[.,]\d*)?|[.,]\d+)$/.test(raw)){result.textContent='Saisissez un nombre valide (par exemple 1,5 ou 1.5).';valueInput.setAttribute('aria-invalid','true');return}const value=Number(raw.replace(',','.'));if(!Number.isFinite(value)||value<0){result.textContent='Saisissez une valeur valide (zéro ou un nombre positif).';valueInput.setAttribute('aria-invalid','true');return}valueInput.removeAttribute('aria-invalid');const converted=value*UNITS[from.value].value/UNITS[to.value].value;if(!Number.isFinite(converted)){result.textContent='Le résultat est trop grand pour être représenté. Réduisez la valeur ou choisissez une unité plus grande.';return}const strong=document.createElement('strong');strong.textContent=formatNumber(converted)+' '+UNITS[to.value].label;const detail=document.createElement('span');detail.textContent=formatNumber(value)+' '+UNITS[from.value].label+' = '+formatNumber(converted)+' '+UNITS[to.value].label;result.replaceChildren(strong,document.createElement('br'),detail)}
 document.getElementById('go').addEventListener('click',convert);document.querySelectorAll('[data-value]').forEach(button=>{button.addEventListener('click',()=>{valueInput.value=button.dataset.value;from.value=button.dataset.from;to.value=button.dataset.to;convert()})});
 
 </script>
