@@ -1,5 +1,11 @@
 # Décisions techniques
 
+## Êtes-vous riche ? — série statistique retenue 2026-10-05
+
+Le calculateur `/outil/etes-vous-riche/` utilise les seuils 2024 publiés dans l’Insee Première n°2079, « Les salaires dans le secteur privé en 2024 » (publication du 23 octobre 2025). Cette publication fournit D1 à D9 ainsi que les 95e et 99e centiles nécessaires au positionnement proposé par le calculateur.
+
+L’édition 2026 de la fiche Insee sur les salaires dans le secteur privé a élargi son champ aux apprentis, stagiaires rémunérés et à Mayotte et indique que ses données ne sont pas comparables à celles de l’édition 2025. Elle ne fournit par ailleurs pas les 95e et 99e centiles utilisés par le calculateur. Le calculateur conserve donc explicitement la série 2025 pour préserver un périmètre statistique cohérent et les niveaux de positionnement proposés. Toute évolution vers une nouvelle série devra être traitée comme une évolution fonctionnelle et statistique distincte, avec nouvelle vérification des seuils et des tests de référence.
+
 ## Partage de dépenses : formats numériques utilisateur
 
 Les champs de montant, nombre de personnes et pourcentage refusent la notation scientifique afin de rester cohérents avec les formats décimaux affichés. Le parsing des pourcentages reprend le traitement des espaces et espaces insécables des autres champs numériques. Les pourcentages personnalisés restent limités à deux décimales.
