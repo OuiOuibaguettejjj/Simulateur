@@ -223,9 +223,9 @@
       "from": "cm",
       "to": "m"
     },
-    "attendu": 100,
+    "attendu": 0.01,
     "tolerance": 0,
-    "sortie": "100\\s*cm",
+    "sortie": "0,01\\s*m",
     "source": "https://www.bipm.org/fr/si-brochure-9"
   },
   {
