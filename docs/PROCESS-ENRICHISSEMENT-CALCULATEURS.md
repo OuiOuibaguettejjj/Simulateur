@@ -39,7 +39,7 @@ Chaque calculateur appartient à une classe, qui détermine ce qui est permis.
 
 | Classe | Définition | Exemples actuels | Enrichissement |
 |---|---|---|---|
-| **A. Pur calcul** | Aucune valeur réglementaire. Les données statistiques datées sont autorisées lorsqu'elles sont explicitement sourcées, datées et vérifiées ; elles ne constituent pas un barème réglementaire. | `pourcentage`, `moyenne`, `vitesse`, `conversion/*` | Autorisé |
+| **A. Pur calcul** | Aucune valeur réglementaire ni valeur datée : conversions, mathématiques, pourcentages, statistiques | `pourcentage`, `moyenne`, `vitesse`, `conversion/*` | Autorisé |
 | **B. Réglementaire migré** | Rattaché à un jeu de `data/parametres.json` (champ `usedBy`) | `smic`, `rsa`, `frais-kilometriques` | Autorisé, avec les exigences du § 0.4 |
 | **C. Réglementaire verrouillé** | Slug présent dans `anneeAMigrer.slugs` de `data/parametres.json` | liste d'`anneeAMigrer` | **Interdit** : migrer d'abord le barème (§ 0.5) |
 | **D. À qualifier** | Manipule peut-être des taux, plafonds, durées légales ou barèmes sans être migré ni listé | à auditer au cas par cas | Interdit tant que le classement n'est pas tranché (§ 0.6) |
