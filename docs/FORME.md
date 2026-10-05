@@ -185,6 +185,20 @@ Le header et le footer **sont commités dans chaque page**. Ils ne sont pas ins�
 
 ## 6. Source de vérité et workflow
 
+### Enrichissement d'une page interactive
+
+Un enrichissement ne se limite pas au contenu éditorial. Avant de modifier une page interactive, vérifier que le **fonctionnement et le périmètre du calculateur lui-même** sont suffisamment complets pour son usage attendu.
+
+L'audit d'enrichissement porte donc sur deux volets :
+
+- **fonctionnel** : entrées, sorties, paramètres, unités, cas d'usage couverts, sens de conversion, possibilités de calcul et limites du moteur existant ; lorsque des fonctionnalités utiles et cohérentes manquent, elles peuvent être ajoutées ;
+- **éditorial** : explications, méthode, exemples, repères, FAQ, sources, limites et contenu utile à la compréhension du résultat.
+
+Pour les conversions notamment, vérifier que l'ensemble des unités courantes et pertinentes pour l'usage visé est couvert et que le parcours de conversion est cohérent (par exemple choix de l'unité de départ et de l'unité d'arrivée lorsque ce modèle est pertinent). Il n'est pas nécessaire de couvrir des unités historiques, spécialisées ou marginales uniquement pour viser une exhaustivité littérale.
+
+Une page n'est donc pas considérée comme pleinement enrichie parce que son texte a été amélioré si son interface ou son moteur reste manifestement trop limité par rapport à l'usage attendu. Toute extension fonctionnelle doit respecter le socle commun, éviter les systèmes spécifiques faisant doublon et être accompagnée des contrôles/tests nécessaires.
+
+
 Le HTML commité est la source de vérité. Les scripts de CI vérifient sa conformité ; ils ne doivent pas servir de moteur de génération éditoriale en production.
 
 Le flux réel est :
