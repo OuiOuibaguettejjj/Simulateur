@@ -219,7 +219,9 @@
     "famille": "conversion",
     "outil": "longueur",
     "entrees": {
-      "v": "1"
+      "value": "1",
+      "from": "m",
+      "to": "cm"
     },
     "attendu": 100,
     "tolerance": 0,
