@@ -281,9 +281,9 @@
     },
     "attendu": 4334,
     "tolerance": 0,
-    "sortie": "Seuil :",
+    "sortie": "Au seuil du top 10 %",
     "source": "https://www.insee.fr/fr/statistiques/8657156",
-    "note": "Le D9 2024 est de 4 334 € nets par mois en EQTP dans le secteur privé."
+    "note": "Le D9 2024 est de 4 334 € nets par mois en EQTP dans le secteur privé. Le test vérifie explicitement la frontière exacte."
   },
   {
     "outil": "etes-vous-riche",
@@ -292,9 +292,9 @@
     },
     "attendu": 5593,
     "tolerance": 0,
-    "sortie": "Seuil :",
+    "sortie": "Au seuil du top 5 %",
     "source": "https://www.insee.fr/fr/statistiques/8657156",
-    "note": "Le 95e centile 2024 est de 5 593 € nets par mois en EQTP dans le secteur privé."
+    "note": "Le 95e centile 2024 est de 5 593 € nets par mois en EQTP dans le secteur privé. Le test vérifie explicitement la frontière exacte."
   },
   {
     "outil": "etes-vous-riche",
@@ -303,8 +303,8 @@
     },
     "attendu": 10261,
     "tolerance": 0,
-    "sortie": "Seuil :",
+    "sortie": "Au seuil du top 1 %",
     "source": "https://www.insee.fr/fr/statistiques/8657156",
-    "note": "Le 99e centile 2024 est de 10 261 € nets par mois en EQTP dans le secteur privé."
+    "note": "Le 99e centile 2024 est de 10 261 € nets par mois en EQTP dans le secteur privé. Le test vérifie explicitement la frontière exacte."
   }
 ]
