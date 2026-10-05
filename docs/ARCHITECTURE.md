@@ -20,7 +20,11 @@ Les URLs existantes restent inchangées afin d'éviter une migration SEO inutile
 
 ## Contrat des pages interactives
 
-Les pages `/outil/<slug>/`, `/conversion/<slug>/` et `/comparateur/<slug>/` suivent un contrat HTML-first commun. Le HTML initial est la source de vérité pour le contenu essentiel : titre, H1, introduction, interface visible, résultat initial, méthode/limites, sources, breadcrumb et liens internes. Le JavaScript de l'outil conserve la logique de calcul et les interactions ; il ne doit pas être requis pour générer le contenu SEO principal.
+Les pages `/outil/<slug>/`, `/conversion/<slug>/` et `/comparateur/<slug>/` suivent un contrat HTML-first commun. Le HTML initial est la source de vérité pour le contenu essentiel : titre, H1, introduction, interface visible, résultat initial, méthode/limites, sources, breadcrumb et liens internes. Le JavaScript du calculateur porte son calcul et ses interactions propres ; il ne doit pas être requis pour générer le contenu SEO principal.
+
+Le contrat commun porte sur la **structure de la page interactive**, pas sur son métier. Le socle partagé comprend les conventions communes de HTML, de structure, d'accessibilité, de responsive, de métadonnées, de résultat initial, de FAQ, de sources, de maillage et de comportements génériques explicitement documentés. Il ne contient aucun moteur de calcul ni aucune logique métier commune.
+
+Chaque calculateur possède sa **propre implémentation fonctionnelle**, adaptée à son besoin. Les champs, paramètres, unités, validations, formules, résultats, scénarios, règles métier et limites sont définis et maintenus dans le périmètre de ce calculateur. Il n'existe pas de couche métier commune entre les calculateurs. Une ressemblance entre deux calculateurs ne justifie pas la création d'un moteur ou d'une bibliothèque métier partagée.
 
 Les règles transversales s’appliquent à toutes les pages interactives. Les règles de taxonomie de `data/tools.json` restent propres aux pages `/outil/<slug>/`. Le breadcrumb visible et le `BreadcrumbList` JSON-LD restent spécifiques aux outils lorsqu’ils utilisent la taxonomie centrale ; les conversions et comparateurs suivent leur propre fil d’Ariane jusqu’à leur URL canonique. Les relations `relatedTools` alimentent le bloc standard « Outils associés » lorsqu'elles sont définies ; des liens contextuels éditoriaux restent possibles lorsque leur valeur est réelle.
 
@@ -30,7 +34,7 @@ Les simulateurs riches peuvent conserver des extensions spécifiques (graphiques
 
 La migration HTML-first est terminée : les 77 pages `/outil/<slug>/` sont statiques et autonomes pour leur contenu éditorial initial. Le script historique `scripts/prerender-tools.mjs` et son workflow de validation ont été supprimés. Il n'existe plus de migration progressive ni de réécriture pré-déploiement de ces pages.
 
-Les URLs et la logique métier existantes sont conservées.
+Les URLs existantes sont conservées. La logique métier d'un calculateur est conservée lorsqu'elle reste correcte ; elle peut évoluer lorsque l'enrichissement fonctionnel de ce calculateur le justifie et que les tests couvrent l'évolution. Une telle évolution reste propre au calculateur concerné et ne crée pas de couche métier commune.
 ## Processus pré-production et MEP
 
 Le contrôle transversal `scripts/check-security.mjs` est le gate unique pour les invariants de sécurité, de frontière de production, de taxonomie et de CI/CD. Il est exécuté au début du workflow de déploiement, avant toute génération ou transformation du build.
