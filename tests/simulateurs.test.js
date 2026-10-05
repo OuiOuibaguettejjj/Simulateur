@@ -53,4 +53,10 @@ window.Simulateurs.calc();
 assert.equal(nodes.result.textContent,"Calculateur indisponible.");
 assert.equal(nodes.result.innerHTML,"");
 
-console.log("Simulateurs guard tests passed.");
+const units={cm:{factor:0.01},m:{factor:1},km:{factor:1000}};
+assert.equal(window.Simulateurs.convert({value:"1",from:"cm",to:"m",units}),0.01);
+assert.equal(window.Simulateurs.convert({value:"1000",from:"m",to:"cm",units}),100000);
+assert.equal(window.Simulateurs.convert({value:"",from:"cm",to:"m",units}),null);
+assert.equal(window.Simulateurs.convert({value:"-1",from:"cm",to:"m",units}),null);
+assert.equal(window.Simulateurs.convert({value:"1",from:"unknown",to:"m",units}),null);
+console.log("Simulateurs guard and conversion tests passed.");
