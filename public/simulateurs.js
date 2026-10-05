@@ -19,6 +19,13 @@
         $("result").textContent="Valeurs invalides ou insuffisantes.";
         console.error("Simulateurs.calc:",error);
       }
+    },
+    convert({value,from,to,units}){
+      const x=Number(value);
+      if(!Number.isFinite(x)||x<0||!units?.[from]||!units?.[to]) return null;
+      const result=x*units[from].factor/units[to].factor;
+      if(!Number.isFinite(result)) return null;
+      return result;
     }
   };
 })();
