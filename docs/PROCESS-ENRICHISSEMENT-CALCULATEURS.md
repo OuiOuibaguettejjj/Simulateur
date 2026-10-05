@@ -37,7 +37,7 @@ Avant tout enrichissement, identifier également la **famille de page interactiv
 
 Chaque calculateur appartient à une classe, qui détermine ce qui est permis.
 
-| Classe | Définition | Exemples actuels | Enrichissement éditorial |
+| Classe | Définition | Exemples actuels | Enrichissement |
 |---|---|---|---|
 | **A. Pur calcul** | Aucune valeur réglementaire ni valeur datée : conversions, mathématiques, pourcentages, statistiques | `pourcentage`, `moyenne`, `vitesse`, `conversion/*` | Autorisé |
 | **B. Réglementaire migré** | Rattaché à un jeu de `data/parametres.json` (champ `usedBy`) | `smic`, `rsa`, `frais-kilometriques` | Autorisé, avec les exigences du § 0.4 |
@@ -129,9 +129,11 @@ Un chantier peut impliquer plusieurs types de changement. Ils se livrent dans de
 
 1. correction d'un bug de calcul ou de saisie (exemple : ajout d'un `type="number"` manquant) ;
 2. migration du barème vers les paramètres (§ 0.5) ;
-3. enrichissement éditorial.
+3. **enrichissement du calculateur**, qui regroupe son enrichissement fonctionnel et éditorial lorsqu'ils relèvent du même chantier.
 
-Raison : un bug mélangé à un enrichissement rend la revue illisible et masque la cause d'une régression. Chaque PR garde un périmètre vérifiable.
+L'enrichissement fonctionnel n'est donc pas limité à une retouche éditoriale : si l'audit montre que l'interface, les possibilités de calcul, les paramètres, les unités ou la logique propre au calculateur sont insuffisants, ils peuvent être améliorés dans la PR d'enrichissement, sous réserve des garde-fous et tests prévus par ce document.
+
+Raison : un bug ou une migration mélangés à un enrichissement rendent la revue illisible et masquent la cause d'une régression. En revanche, les évolutions fonctionnelles et éditoriales d'un même calculateur peuvent être traitées ensemble lorsqu'elles constituent un même chantier d'enrichissement. Chaque PR garde un périmètre vérifiable.
 
 ---
 
