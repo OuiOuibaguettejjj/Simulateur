@@ -77,7 +77,7 @@ function loadContext(html,mockRates={}){
   context.window=context;context.globalThis=context;document._context=context;context.addEventListener=(type,fn)=>{if(type==="load")fn()};return{context,document,window:context};
 }
 function localScripts(html){return[...html.matchAll(/<script[^>]+src=[\"']([^\"']+)[\"'][^>]*><\/script>/gi)].map(m=>m[1]).filter(src=>src.startsWith("/")&&src.endsWith(".js")).map(src=>src.slice(1))}
-export async function runInlineCalculator({slug,family="outil",caseKind="default",inputs={},mockRates={},clickButtons=true}){
+export async function runInlineCalculator({slug,family="outil",caseKind="default",inputs={},mockRates={},clickButtons=true,skipButtonIds=[]}){
   if(!INTERACTIVE_FAMILIES.includes(family))throw new Error("unknown interactive family: "+family);
   const file=path.join(ROOT,"public",family,slug,"index.html");const html=fs.readFileSync(file,"utf8");const {context,document,window}=loadContext(html,mockRates);
   for(const [id,value] of Object.entries(inputs)){const el=document.getElementById(id);if(!el)throw new Error("unknown input id: "+id);const raw=String(value);el.value=el.type==="number"?raw.replace(",","." ):raw}
@@ -93,7 +93,7 @@ export async function runInlineCalculator({slug,family="outil",caseKind="default
   await new Promise(resolve=>setTimeout(resolve,0));
   let returned="";
   if(family==="outil"&&window.TOOL?.calc){const $=id=>document.getElementById(id);const euro=value=>Number(value).toLocaleString("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:2});const num=value=>Number(value).toLocaleString("fr-FR",{maximumFractionDigits:2});const result=window.TOOL.calc.call({$,euro,num});if(typeof result!=="string")throw new Error("calc ne retourne pas une chaîne");returned=strip(result)}
-  if(clickButtons)for(const button of document.querySelectorAll("button"))button.click();
+  if(clickButtons)for(const button of document.querySelectorAll("button"))if(!skipButtonIds.includes(button.id))button.click();
   return{text:[returned,resultText(document)].filter(Boolean).join(" | "),hasTool:!!window.TOOL};
 }
 export function listIntegratedPages(){const pages=[];for(const family of INTERACTIVE_FAMILIES){const dir=path.join(ROOT,"public",family);if(!fs.existsSync(dir))continue;for(const entry of fs.readdirSync(dir,{withFileTypes:true})){if(!entry.isDirectory())continue;const slug=entry.name;const html=fs.readFileSync(path.join(dir,slug,"index.html"),"utf8");const hasInline=[...html.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/gi)].some(m=>!/\bsrc=/.test(m[1])&&!/application\/ld\+json/i.test(m[1]));if(hasInline)pages.push({family,slug})}}return pages.sort((a,b)=>(a.family+"/"+a.slug).localeCompare(b.family+"/"+b.slug))}
