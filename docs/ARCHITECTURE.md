@@ -70,7 +70,7 @@ Avec `--strict`, seuls les écarts structurels font échouer la commande.
 - **échec** si la baseline contient une entrée qui n'échoue plus sur une page non modifiée (entrée périmée) : elle doit être retirée ; une entrée devenue périmée sur une page modifiée n'est pas bloquante pour le contrat final de la PR ;
 - `node scripts/check-pages.mjs --update-baseline` crée la baseline la première fois, puis ne sait que **retirer** des entrées. Il refuse, avec un message explicite, d'en ajouter.
 
-`--seed-baseline` sert uniquement à amorcer les règles éditoriales quand aucune n'est encore présente dans la baseline ; il refuse dès qu'une règle éditoriale y figure. `--update-baseline` ne fait que retirer des entrées.
+`--check-changed-contract` ne modifie jamais la baseline. Il contrôle uniquement les pages interactives modifiées dans la PR. `--seed-baseline` sert uniquement à amorcer les règles éditoriales quand aucune n'est encore présente dans la baseline ; il refuse dès qu'une règle éditoriale y figure. `--update-baseline` ne fait que retirer des entrées.
 
 ### Outils associés — Étape F (2026-10-03)
 
