@@ -39,8 +39,8 @@
       if(!Number.isInteger(age) || age<0) return {eligible:false,reason:"L'âge renseigné est invalide."};
       if(!Number.isInteger(dependents) || dependents<0) return {eligible:false,reason:"Le nombre de personnes à charge doit être un entier positif ou nul."};
       if(!resident) return {eligible:false,reason:"Le simulateur suppose une résidence stable et effective en France. La Caf vérifie aussi les éventuelles conditions liées à la nationalité et au séjour."};
-      if(age<18) return {eligible:false,reason:"Le RSA est ouvert à partir de 18 ans, sous conditions."};
-      if(age<25 && !(single && dependents>0) && !(youngActive && !student)){
+      if(age<18 && dependents===0 && !pregnant) return {eligible:false,reason:"Le RSA peut être ouvert sans condition d’âge lorsque vous assumez la charge d’un enfant né ou à naître. Dans les autres situations, le simulateur ne retient pas le RSA avant 18 ans."};
+      if(age<25 && dependents===0 && !pregnant && !(youngActive && !student)){
         return {eligible:false,reason:"Entre 18 et 24 ans, le RSA est soumis à des conditions particulières : parent isolé ou jeune actif ayant exercé au moins " + hoursLabel + " heures sur les 3 années précédentes."};
       }
       if(student && !(single && dependents>0)){
