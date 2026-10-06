@@ -134,6 +134,7 @@ jobs:
           node tests/impot.test.js
           node tests/rsa.test.js
           node tests/retraite.test.js
+          node tests/age-retraite.test.js
           node tests/simulateurs.test.js
           node tests/ratio.test.mjs
           node tests/params.test.mjs
