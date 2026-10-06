@@ -10,12 +10,13 @@ Vérification effectuée le 28 septembre 2026.
 
 ## Principes vérifiés
 - Les ressources du foyer sont prises en compte selon les règles du CASF.
-- Le montant dû est déterminé à partir des mois de référence prévus par la réglementation.
-- Les aides au logement peuvent être prises en compte via un forfait.
+- Depuis le 1er mars 2025, le montant dû est déterminé à partir des quatrième, troisième et deuxième mois précédant la demande ou le réexamen, selon les règles de l’article R262-7 du CASF.
+- Une aide au logement, un logement gratuit ou un logement occupé en propriété sans aide personnelle peuvent entraîner la prise en compte du forfait logement ; il ne s’agit pas d’un prorata de l’aide effectivement perçue.
 - Le montant net social est la référence déclarative pour les ressources concernées par le RSA.
 - Les 18-24 ans sont soumis à des conditions spécifiques dans plusieurs situations.
 
 ## Limites
+- Le calculateur demande un total mensuel simplifié des ressources du foyer. La Caf traite certaines prestations et catégories de ressources selon des règles spécifiques ; l’estimation ne reproduit donc pas l’intégralité du calcul administratif.
 Les textes évoluent. Toute modification réglementaire doit entraîner une revue des paramètres et des tests avant publication.
 
 ## Paramètres
