@@ -129,7 +129,7 @@
       "effectiveFrom": "2026-04-01",
       "effectiveTo": "2027-03-31",
       "verifiedOn": "2026-10-06",
-      "notes": "Vérification du 28 septembre 2026 documentée dans docs/rsa/SOURCES.md (barème Caf au 1er avril 2026, CASF et Service-Public). Montants officiels Caf conservés tels quels pour éviter les écarts d'arrondi. Le calculateur reste une estimation simplifiée : les règles de ressources et certaines prestations nécessitent un traitement plus fin par la Caf.",
+      "notes": "Vérification du 6 octobre 2026 documentée dans docs/rsa/SOURCES.md (barème Caf au 1er avril 2026, CASF et Service-Public). Montants officiels Caf conservés tels quels pour éviter les écarts d'arrondi. Le calculateur reste une estimation simplifiée : les règles de ressources et certaines prestations nécessitent un traitement plus fin par la Caf.",
       "values": {
         "base": 651.69,
         "childIncrease": 260.68,
