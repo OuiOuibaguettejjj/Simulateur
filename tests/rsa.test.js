@@ -53,7 +53,7 @@ assert.equal(calc({ status: "single", housing: "paid" }).logement, 0);
 assert.equal(calc({ status: "single", months: [300, 300, 300] }).rsa, 351.69);
 
 // Additional regression coverage: >4 dependents, 3+ person housing forfait,
-// housing aid below the forfait, and key eligibility exclusions.
+// housing rules and key eligibility exclusions.
 assert.equal(calc({ status: "single", dependents: 5 }).forfait, 1955.09);
 assert.equal(calc({ status: "couple", dependents: 5 }).forfait, 2150.60);
 assert.equal(calc({ status: "single", dependents: 3, housing: "aidOrFree" }).logement, 193.55);
@@ -71,7 +71,8 @@ assert.equal(calc({ age: 18, youngActive: "yes", student: "no" }).eligible, true
 assert.equal(calc({ age: 17 }).eligible, false);
 assert.equal(calc({ age: 18, status: "single", dependents: 1, youngActive: "no", student: "yes" }).eligible, true);
 assert.equal(calc({ pregnant: "yes", status: "single" }).majoration, true);
-assert.equal(calc({ pregnant: "yes", status: "couple" }).eligible, false);
+assert.equal(calc({ pregnant: "yes", status: "couple" }).eligible, true);
+assert.equal(calc({ pregnant: "yes", status: "couple" }).majoration, false);
 assert.equal(calc({ majoration: "yes", status: "single", dependents: 0 }).eligible, false);
 assert.equal(calc({ asOf: "2026-04-01" }).eligible, true);
 assert.equal(calc({ asOf: "2027-03-31" }).eligible, true);
