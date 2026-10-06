@@ -69,30 +69,29 @@
       "values": {
         "base": 651.69,
         "childIncrease": 260.68,
+        "coupleAmounts": [
+          977.54,
+          1173.05,
+          1368.56,
+          1629.24
+        ],
         "coupleChildIncrease": 195.51,
-        "majorationBase": 836.85,
-        "majorationChildIncrease": 278.95,
         "housing": {
           "one": 78.2,
-          "two": 156.41,
-          "threePlus": 193.55
+          "threePlus": 193.55,
+          "two": 156.41
         },
-        "youngActiveHours": 3214,
+        "majorationBase": 836.85,
+        "majorationChildIncrease": 278.95,
         "singleAmounts": [
           651.69,
           977.54,
           1173.05,
           1433.73
         ],
-        "coupleAmounts": [
-          977.54,
-          1173.05,
-          1368.56,
-          1629.24
-        ]
+        "youngActiveHours": 3214
       }
     },
-
     "smic": {
       "label": "SMIC",
       "year": 2026,
