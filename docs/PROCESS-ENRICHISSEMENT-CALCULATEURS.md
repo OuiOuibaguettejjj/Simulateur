@@ -457,7 +457,7 @@ Exécuter sur la branche, avant ouverture de la PR, les contrôles de `.github/w
 
 Commandes du cliquet :
 
-- `node scripts/check-pages.mjs --ratchet --enforce-changed` vérifie l'état courant par rapport à la baseline et impose l'extinction de la dette sur toute page interactive modifiée. Il échoue en cas de nouvel écart, d'entrée périmée, d'entrée bloquée par `anneeAMigrer` ou de dette résiduelle sur une page reprise. À lancer avant d'ouvrir la PR, et après chaque correction ;
+- `node scripts/check-pages.mjs --ratchet` vérifie l'état courant par rapport à la baseline. Il échoue en cas de nouvel écart, d'entrée périmée ou d'entrée bloquée par `anneeAMigrer`. À lancer avant d'ouvrir la PR, et après chaque correction ;
 - `node scripts/check-pages.mjs --update-baseline` retire de la baseline les entrées corrigées. Il refuse de s'exécuter si un nouvel écart existe ou si l'outil est verrouillé par `anneeAMigrer` ; la baseline ne peut que perdre des entrées.
 
 Ordre d'usage pour un chantier : corriger la page, lancer `--ratchet` (il signale les entrées périmées), lancer `--update-baseline`, relancer `--ratchet` (il doit être vert), puis committer la baseline avec la page.

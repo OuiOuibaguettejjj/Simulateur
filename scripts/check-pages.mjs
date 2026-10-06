@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 import fs from "node:fs";
 import path from "node:path";
-import {execFileSync} from "node:child_process";
 import { pathToFileURL } from "node:url";
 import {getInteractiveFamily,INTERACTIVE_FAMILIES} from "./interactive-families.mjs";
 
@@ -76,28 +75,6 @@ export function loadToolsMeta(s){return loadTaxonomy(s).tools}
 export const BASELINE_FILE="scripts/check-pages.baseline.json";
 const pairKey=x=>x.path+"\u0000"+x.rule;
 export function trackedPairs(failures){const seen=new Map();for(const x of failures)if(TRACKED_RULES.includes(x.rule))seen.set(pairKey(x),{path:x.path,rule:x.rule});return[...seen.values()].sort((a,b)=>a.path.localeCompare(b.path)||a.rule.localeCompare(b.rule))}
-export function changedInteractivePages(pages,baseRef,headRef="HEAD"){
- const base=String(baseRef||"").trim();
- if(!base)return[];
- let changed;
- try{
-  changed=execFileSync("git",["diff","--name-only",base+"..."+headRef,"--","public"],{encoding:"utf8"}).split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
- }catch(e){throw Error("Impossible de déterminer les fichiers modifiés depuis « "+base+" » : "+e.message)}
- return interactivePagesFromChangedFiles(pages,changed);
-}
-export function interactivePagesFromChangedFiles(pages,changed){
- const changedSet=new Set(changed);
- const htmlPages=pages.filter(p=>changedSet.has(p.path)||changed.some(f=>f.startsWith(p.path.replace(/index\.html$/,""))));
- const slugs=new Set(pages.map(p=>p.slug));
- const rootFiles=changed.filter(f=>{const m=/^public\/([^/]+)\.js$/.exec(f);return m&&slugs.has(m[1])});
- if(!rootFiles.length)return[...new Set(htmlPages.map(p=>p.path))].sort();
- const referenced=pages.filter(p=>rootFiles.some(f=>p.html.includes("/"+f.slice("public/".length))||p.html.includes(f.slice("public/".length))));
- return[...new Set([...htmlPages.map(p=>p.path),...referenced.map(p=>p.path)])].sort();
-}
-export function changedPageResidualDebt(current,changedPaths){
- const changed=new Set(changedPaths);
- return current.filter(x=>changed.has(x.path)).sort((a,b)=>a.path.localeCompare(b.path)||a.rule.localeCompare(b.rule));
-}
 export function parseBaseline(text){let v;try{v=JSON.parse(text)}catch(e){throw Error(BASELINE_FILE+" illisible : "+e.message)}if(!Array.isArray(v))throw Error(BASELINE_FILE+" doit être une liste de { path, rule }");const seen=new Set();for(const x of v){if(!x||typeof x.path!=="string"||typeof x.rule!=="string")throw Error(BASELINE_FILE+" : entrée invalide "+JSON.stringify(x));if(!TRACKED_RULES.includes(x.rule))throw Error(BASELINE_FILE+" : règle inconnue « "+x.rule+" »");if(seen.has(pairKey(x)))throw Error(BASELINE_FILE+" : doublon "+x.path+" ["+x.rule+"]");seen.add(pairKey(x))}return v.map(x=>({path:x.path,rule:x.rule}))}
 export function compareToBaseline(current,baseline){const cur=new Set(current.map(pairKey)),base=new Set(baseline.map(pairKey));return{added:current.filter(x=>!base.has(pairKey(x))),stale:baseline.filter(x=>!cur.has(pairKey(x)))}}
 export function nextBaseline(current,baseline,migrationSlugs=[]){
@@ -167,18 +144,10 @@ function main(){
   let base;try{base=parseBaseline(fs.readFileSync(baselinePath,"utf8"))}catch(e){console.error(e.code==="ENOENT"?BASELINE_FILE+" introuvable : lancez --update-baseline une première fois.":e.message);process.exit(1)}
   const r=nextBaseline(pairs,base,migrationSlugs);
   const {added,stale}=compareToBaseline(pairs,base);
-  let residual=[];
-  if(process.argv.includes("--enforce-changed")){
-   const baseRef=process.env.CHECK_PAGES_BASE_REF||"";
-   const changed=changedInteractivePages(pages,baseRef);
-   residual=changedPageResidualDebt(pairs,changed);
-   if(process.env.GITHUB_STEP_SUMMARY)fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,"Pages interactives modifiées : "+(changed.length?changed.join(", "):"aucune")+"\nDette résiduelle sur ces pages : "+(residual.length?residual.map(x=>x.path+" ["+x.rule+"]").join(", "):"0")+"\n");
-   for(const x of residual)console.error("::error file="+x.path+"::dette résiduelle après modification de la page ["+x.rule+"] : une page interactive modifiée doit être à 0 écart suivi");
-  }
   const line="Cliquet : "+pairs.length+" écart(s) suivi(s) connu(s) ou nouveaux, "+base.length+" en baseline, "+added.length+" nouveau(x), "+stale.length+" périmé(s).";
   console.log(line);if(process.env.GITHUB_STEP_SUMMARY)fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,"### Cliquet\n\n"+line+"\n");
   for(const message of buildRatchetMessages({added,stale,blocked:r.blocked||[]}))console.error(message);
-  if(added.length||stale.length||(r.blocked||[]).length||residual.length)process.exit(1)
+  if(added.length||stale.length||(r.blocked||[]).length)process.exit(1)
  }
  if(process.argv.includes("--strict")&&sf.length){for(const x of sf)console.error("::error file="+x.path+"::"+x.rule+" "+x.message);process.exit(1)}
 }

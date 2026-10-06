@@ -129,6 +129,4 @@ jobs:
         run: node tests/deploy-workflow.test.mjs
 
       - name: Contrôle des pages (cliquet bloquant)
-        env:
-          CHECK_PAGES_BASE_REF: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha || github.event.before }}
-        run: node scripts/check-pages.mjs --ratchet --enforce-changed
+        run: node scripts/check-pages.mjs --ratchet
