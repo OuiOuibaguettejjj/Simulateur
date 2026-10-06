@@ -4,8 +4,8 @@ const html = fs.readFileSync("public/outil/age-retraite/index.html", "utf8");
 
 const title = (html.match(/<title>([^<]+)<\/title>/i) || [,""])[1];
 const description = (html.match(/<meta name="description" content="([^"]+)"/i) || [,""])[1];
-assert(title.includes("Âge légal retraite 2026"), "SEO title must target the primary query");
-assert(title.length <= 70, "SEO title should remain concise");
+assert(title==="Âge de départ à la retraite | Simulateur", "SEO title must follow the shared site title contract");
+assert(title.length <= 60, "SEO title should remain concise");
 assert(description.includes("âge légal de départ à la retraite"), "description must target search intent");
 assert(description.includes("1er septembre 2026"), "description must expose the regulatory scope");
 assert(html.includes("<h1>Âge légal de départ à la retraite 2026</h1>"), "H1 must remain descriptive");
