@@ -61,10 +61,10 @@
       "year": 2026,
       "effectiveFrom": "2026-04-01",
       "effectiveTo": "2027-03-31",
-      "verifiedOn": "2026-09-28",
+      "verifiedOn": "2026-10-06",
       "source": {
-        "label": "Service-Public — RSA (demandeur de 25 ans et plus)",
-        "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F19778"
+        "label": "CAF — barème RSA",
+        "url": "https://www.caf.fr/professionnels/offres-et-services/accompagnement-des-allocataires/bareme-revenu-de-solidarite-active"
       },
       "values": {
         "base": 651.69,

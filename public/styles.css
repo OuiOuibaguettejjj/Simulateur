@@ -411,3 +411,18 @@ footer{border-top:1px solid var(--ink);padding:30px 0;background:#eee9df}
  .retirement-age-note{display:block}
  .retirement-age-note strong{display:block;margin-bottom:5px}
 }
+
+
+/* RSA — contenu éditorial */
+.rsa-content{max-width:920px}
+.rsa-section-heading{display:grid;grid-template-columns:42px 1fr;gap:14px;align-items:start;margin:46px 0 15px;padding-top:24px;border-top:1px solid var(--ink)}
+.rsa-section-heading:first-child{margin-top:0;padding-top:0;border-top:0}
+.rsa-section-heading>span{display:grid;place-items:center;width:36px;height:36px;border:1px solid var(--ink);border-radius:10px;background:var(--accent-soft);font-size:.68rem;font-weight:950;letter-spacing:.08em}
+.rsa-section-heading h2{margin:2px 0 0;font-size:clamp(1.65rem,3.2vw,2.35rem);line-height:1.05;letter-spacing:-.055em}
+.rsa-content>p,.rsa-content>h3{max-width:800px}
+.rsa-content>h3{margin-top:24px;font-size:1.05rem}
+@media(max-width:650px){
+ .rsa-section-heading{grid-template-columns:34px 1fr;gap:10px;margin-top:38px;padding-top:20px}
+ .rsa-section-heading>span{width:30px;height:30px;border-radius:8px;font-size:.62rem}
+ .rsa-section-heading h2{font-size:1.65rem}
+}
