@@ -43,10 +43,10 @@
       if(age<25 && dependents===0 && !pregnant && !(youngActive && !student)){
         return {eligible:false,reason:"Entre 18 et 24 ans, le RSA est soumis à des conditions particulières : parent isolé ou jeune actif ayant exercé au moins " + hoursLabel + " heures sur les 3 années précédentes."};
       }
-      if(student && !(single && dependents>0)){
+      if(student && !(single && (dependents>0 || pregnant))){
         return {eligible:false,reason:"Le RSA n'est en principe pas ouvert aux étudiants, sauf situations particulières, notamment de parent isolé. La Caf doit confirmer le droit."};
       }
-      if(input.majoration==="yes" && !(single && dependents>0)){
+      if(input.majoration==="yes" && !(single && (dependents>0 || pregnant))){
         return {eligible:false,reason:"La majoration parent isolé suppose une situation d'isolement avec enfant à charge. La grossesse peut ouvrir un droit à majoration dans certaines conditions."};
       }
 
