@@ -64,10 +64,11 @@ Avec `--strict`, seuls les écarts structurels font échouer la commande.
 
 `node scripts/check-pages.mjs --ratchet` est une étape **bloquante** de `tests.yml` et de `deploy.yml` (placée avant la validation statique). Elle remplace les deux anciens blocs Node inline de `deploy.yml` (contrat HTML-first, métadonnées et HTML), dont les contrôles sont désormais portés dans `check-pages` et couverts par `tests/check-pages.test.mjs` : marqueur `calculator-rendering=static`, H1 non vide, meta description présente, canonique, au moins un `input`, `select`, `textarea` ou `button`, un seul `WebApplication` et un seul `BreadcrumbList` (positions 1, 2, 3), aucun dossier `/outil/<slug>/` sans `index.html`, catégorie et relations égales à `data/tools.json`.
 
-`scripts/check-pages.baseline.json` liste les écarts connus, structurels et éditoriaux, sous la forme `{ "path": ..., "rule": ... }` (une entrée par page et par règle). Le cliquet ne laisse la situation que s'améliorer :
+`scripts/check-pages.baseline.json` liste les écarts connus, structurels et éditoriaux, sous la forme `{ "path": ..., "rule": ... }` (une entrée par page et par règle). Elle représente l'état de dette connu lors de la mise en place du socle et sert à suivre la migration progressive. Le cliquet ne laisse la situation que s'améliorer :
 
-- **échec** si un écart suivi (structurel ou éditorial) n'est pas dans la baseline (régression, ou nouvelle page non conforme) : une nouvelle page doit passer 100 % des règles suivies ;
+- **échec** si un écart suivi (structurel ou éditorial) n'est pas dans la baseline (régression, ou nouvelle page non conforme) ;
 - **échec** si la baseline contient une entrée qui n'échoue plus (entrée périmée) : elle doit être retirée ;
+- **échec** si une page interactive modifiée dans la PR conserve un écart suivi, même si cet écart figure déjà dans la baseline : une page reprise doit être à **zéro dette résiduelle** avant le merge ;
 - `node scripts/check-pages.mjs --update-baseline` crée la baseline la première fois, puis ne sait que **retirer** des entrées. Il refuse, avec un message explicite, d'en ajouter.
 
 `--seed-baseline` sert uniquement à amorcer les règles éditoriales quand aucune n'est encore présente dans la baseline ; il refuse dès qu'une règle éditoriale y figure. `--update-baseline` ne fait que retirer des entrées.
