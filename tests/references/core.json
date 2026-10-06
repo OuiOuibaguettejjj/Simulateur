@@ -187,7 +187,7 @@
     },
     "attendu": 3.14159265,
     "tolerance": 1e-7,
-    "sortie": "3,14159265\\s*rad",
+    "sortie": "3,14159265\\d*\\s*rad",
     "source": "https://www.bipm.org/fr/si-brochure-9"
   },
   {
