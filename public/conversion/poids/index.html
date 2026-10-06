@@ -9,6 +9,7 @@ function format(value){if(!Number.isFinite(value))return "";return FMT.format(va
 function calc(){
  const value=parseValue(v.value);const unit=unitEl();
  if(!Number.isFinite(value)||value<0){r.textContent="Saisissez une valeur positive ou nulle.";return}
+ if(value>Number.MAX_VALUE/UNITS[unit].kg){r.textContent="Cette valeur est trop élevée pour être convertie de manière fiable.";return}
  const base=value*UNITS[unit].kg;
  const rows=ORDER.map(id=>"<div class=\"weight-result\"><span>"+UNITS[id].name+" <small>("+UNITS[id].label+")</small></span><strong>"+format(base/UNITS[id].kg)+"</strong></div>").join("");
  const pounds=base/UNITS.lb.kg;const stones=Math.floor(pounds/14);const remaining=pounds-stones*14;
