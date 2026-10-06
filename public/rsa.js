@@ -46,9 +46,6 @@
       if(student && !(single && dependents>0)){
         return {eligible:false,reason:"Le RSA n'est en principe pas ouvert aux étudiants, sauf situations particulières, notamment de parent isolé. La Caf doit confirmer le droit."};
       }
-      if(pregnant && !single){
-        return {eligible:false,reason:"La majoration pour isolement ne peut pas être appliquée à un foyer en couple."};
-      }
       if(input.majoration==="yes" && !(single && dependents>0)){
         return {eligible:false,reason:"La majoration parent isolé suppose une situation d'isolement avec enfant à charge. La grossesse peut ouvrir un droit à majoration dans certaines conditions."};
       }
