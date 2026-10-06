@@ -128,5 +128,11 @@ jobs:
       - name: Test workflow de déploiement
         run: node tests/deploy-workflow.test.mjs
 
+      - name: Contrôle du contrat final des pages modifiées
+        if: github.event_name == 'pull_request'
+        env:
+          CHECK_PAGES_BASE_REF: ${{ github.event.pull_request.base.sha }}
+        run: node scripts/check-pages.mjs --check-changed-contract
+
       - name: Contrôle des pages (cliquet bloquant)
         run: node scripts/check-pages.mjs --ratchet
