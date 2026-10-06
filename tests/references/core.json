@@ -322,6 +322,32 @@
   },
   {
     "famille": "conversion",
+    "outil": "temperature",
+    "entrees": {
+      "value": "100",
+      "from": "C",
+      "to": "F"
+    },
+    "attendu": 212,
+    "tolerance": 0,
+    "sortie": "212\\s*°F",
+    "source": "https://www.nist.gov/pml/owm/si-units-temperature"
+  },
+  {
+    "famille": "conversion",
+    "outil": "temperature",
+    "entrees": {
+      "value": "-40",
+      "from": "F",
+      "to": "C"
+    },
+    "attendu": -40,
+    "tolerance": 0,
+    "sortie": "-40\\s*°C",
+    "source": "https://www.nist.gov/pml/owm/si-units-temperature"
+  },
+  {
+    "famille": "conversion",
     "outil": "volume",
     "entrees": {
       "v": "1"
