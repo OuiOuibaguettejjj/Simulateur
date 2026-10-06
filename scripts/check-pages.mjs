@@ -83,6 +83,9 @@ export function changedInteractivePages(pages,baseRef,headRef="HEAD"){
  try{
   changed=execFileSync("git",["diff","--name-only",base+"..."+headRef,"--","public"],{encoding:"utf8"}).split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
  }catch(e){throw Error("Impossible de déterminer les fichiers modifiés depuis « "+base+" » : "+e.message)}
+ return interactivePagesFromChangedFiles(pages,changed);
+}
+export function interactivePagesFromChangedFiles(pages,changed){
  const changedSet=new Set(changed);
  const htmlPages=pages.filter(p=>changedSet.has(p.path)||changed.some(f=>f.startsWith(p.path.replace(/index\.html$/,""))));
  const rootFiles=changed.filter(f=>/^public\/[^/]+\.(?:js|css)$/.test(f));
