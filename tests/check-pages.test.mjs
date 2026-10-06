@@ -343,7 +343,7 @@ assert(committed.every(x=>TRACKED_RULES.includes(x.rule)),"baseline versionnée 
 
 // contrat final des pages modifiées : indépendant de la baseline
 const mandatoryBroken=fixture().replace(/<section class="calculator-faq"[\s\S]*?<\/section>/,"");
-const mandatoryFailures=errs(mandatoryBroken);
+const mandatoryFailures=errs(mandatoryBroken).map(x=>({...x,path:"public/outil/slug/index.html"}));
 assert(mandatoryFailures.some(x=>x.rule==="faq"),"contrat final : une FAQ absente est une violation obligatoire");
 assert.deepEqual(changedMandatoryFailures(mandatoryFailures,["public/outil/slug/index.html"]).map(x=>x.rule),["faq"],"contrat final : la dette d'une page modifiée est bloquante sans regarder la baseline");
 assert.deepEqual(changedMandatoryFailures(mandatoryFailures,["public/outil/autre/index.html"]),[],"contrat final : une page non modifiée n'est pas contrôlée");
