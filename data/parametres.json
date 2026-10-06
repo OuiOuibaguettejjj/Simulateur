@@ -123,13 +123,13 @@
         "rsa"
       ],
       "source": {
-        "label": "Service-Public — RSA (demandeur de 25 ans et plus)",
-        "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F19778"
+        "label": "CAF — barème RSA",
+        "url": "https://www.caf.fr/professionnels/offres-et-services/accompagnement-des-allocataires/bareme-revenu-de-solidarite-active"
       },
       "effectiveFrom": "2026-04-01",
       "effectiveTo": "2027-03-31",
       "verifiedOn": "2026-09-28",
-      "notes": "Vérification du 28 septembre 2026 documentée dans docs/rsa/SOURCES.md (barème Caf au 1er avril 2026, Légifrance, Service-Public). Montants officiels Caf conservés tels quels pour éviter les écarts d'arrondi.",
+      "notes": "Vérification du 28 septembre 2026 documentée dans docs/rsa/SOURCES.md (barème Caf au 1er avril 2026, CASF et Service-Public). Montants officiels Caf conservés tels quels pour éviter les écarts d'arrondi. Le calculateur reste une estimation simplifiée : les règles de ressources et certaines prestations nécessitent un traitement plus fin par la Caf.",
       "values": {
         "base": 651.69,
         "childIncrease": 260.68,
