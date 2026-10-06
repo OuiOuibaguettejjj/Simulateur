@@ -1044,14 +1044,6 @@
     "rule": "tool-block"
   },
   {
-    "path": "public/outil/rsa/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/rsa/index.html",
-    "rule": "formula"
-  },
-  {
     "path": "public/outil/rupture-conventionnelle/index.html",
     "rule": "faq"
   },
