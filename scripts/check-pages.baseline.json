@@ -9,6 +9,10 @@
   },
   {
     "path": "public/outil/age-retraite/index.html",
+    "rule": "jsonld"
+  },
+  {
+    "path": "public/outil/age-retraite/index.html",
     "rule": "title"
   },
   {
