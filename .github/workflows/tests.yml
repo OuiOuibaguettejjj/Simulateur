@@ -54,6 +54,15 @@ jobs:
       - name: Test calculateur retraite
         run: node tests/retraite.test.js
 
+      - name: Test calculateur âge de retraite
+        run: node tests/age-retraite.test.js
+
+      - name: Test SEO âge de retraite
+        run: node tests/age-retraite-seo.test.js
+
+      - name: Test final âge de retraite
+        run: node tests/age-retraite-final.test.js
+
       - name: Test garde des résultats
         run: node tests/simulateurs.test.js
 
