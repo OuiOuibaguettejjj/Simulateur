@@ -45,7 +45,7 @@ for (const [[status, dependents], expected] of cases) {
   assert.equal(result.rsa, expected, `RSA result mismatch for ${status}/${dependents}`);
 }
 
-assert.equal(calc({ majoration: "yes", pregnant: "yes" }).forfait, 836.85);
+assert.equal(calc({ pregnant: "yes" }).forfait, 836.85);
 assert.equal(calc({ majoration: "yes", dependents: 1 }).forfait, 1115.80);
 assert.equal(calc({ status: "couple", housing: "aidOrFree" }).logement, 156.41);
 assert.equal(calc({ status: "single", housing: "aidOrFree" }).logement, 78.20);
