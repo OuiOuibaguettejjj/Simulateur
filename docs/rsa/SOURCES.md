@@ -1,11 +1,11 @@
 # Sources réglementaires — RSA
 
-Vérification effectuée le 28 septembre 2026.
+Vérification effectuée le 6 octobre 2026.
 
 ## Sources principales
 1. CAF — Barème Revenu de solidarité active, au 1er avril 2026.
 2. Légifrance — Code de l'action sociale et des familles, articles R262-6 et suivants.
-3. Service-Public.fr — RSA et conditions applicables aux étudiants/jeunes actifs.
+3. Service-Public.fr — RSA jeunes parents et conditions applicables aux étudiants/jeunes actifs.
 4. CAF — déclaration des ressources et montant net social.
 
 ## Principes vérifiés
