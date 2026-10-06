@@ -67,7 +67,7 @@ Avec `--strict`, seuls les écarts structurels font échouer la commande.
 `scripts/check-pages.baseline.json` liste les écarts connus, structurels et éditoriaux, sous la forme `{ "path": ..., "rule": ... }` (une entrée par page et par règle). Le cliquet ne laisse la situation que s'améliorer :
 
 - **échec** si un écart suivi (structurel ou éditorial) n'est pas dans la baseline (régression, ou nouvelle page non conforme) : une nouvelle page doit passer 100 % des règles suivies ;
-- **échec** si la baseline contient une entrée qui n'échoue plus (entrée périmée) : elle doit être retirée ;
+- **échec** si la baseline contient une entrée qui n'échoue plus sur une page non modifiée (entrée périmée) : elle doit être retirée ; une entrée devenue périmée sur une page modifiée n'est pas bloquante pour le contrat final de la PR ;
 - `node scripts/check-pages.mjs --update-baseline` crée la baseline la première fois, puis ne sait que **retirer** des entrées. Il refuse, avec un message explicite, d'en ajouter.
 
 `--seed-baseline` sert uniquement à amorcer les règles éditoriales quand aucune n'est encore présente dans la baseline ; il refuse dès qu'une règle éditoriale y figure. `--update-baseline` ne fait que retirer des entrées.
