@@ -61,37 +61,38 @@
       "year": 2026,
       "effectiveFrom": "2026-04-01",
       "effectiveTo": "2027-03-31",
-      "verifiedOn": "2026-09-28",
+      "verifiedOn": "2026-10-06",
       "source": {
-        "label": "Service-Public — RSA (demandeur de 25 ans et plus)",
-        "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F19778"
+        "label": "CAF — barème RSA",
+        "url": "https://www.caf.fr/professionnels/offres-et-services/accompagnement-des-allocataires/bareme-revenu-de-solidarite-active"
       },
       "values": {
         "base": 651.69,
         "childIncrease": 260.68,
-        "coupleAmounts": [
-          977.54,
-          1173.05,
-          1368.56,
-          1629.24
-        ],
         "coupleChildIncrease": 195.51,
-        "housing": {
-          "one": 78.2,
-          "threePlus": 193.55,
-          "two": 156.41
-        },
         "majorationBase": 836.85,
         "majorationChildIncrease": 278.95,
+        "housing": {
+          "one": 78.2,
+          "two": 156.41,
+          "threePlus": 193.55
+        },
+        "youngActiveHours": 3214,
         "singleAmounts": [
           651.69,
           977.54,
           1173.05,
           1433.73
         ],
-        "youngActiveHours": 3214
+        "coupleAmounts": [
+          977.54,
+          1173.05,
+          1368.56,
+          1629.24
+        ]
       }
     },
+
     "smic": {
       "label": "SMIC",
       "year": 2026,
