@@ -375,3 +375,39 @@ footer{border-top:1px solid var(--ink);padding:30px 0;background:#eee9df}
 @media(max-width:760px){.cap-hero h1{font-size:3rem}}
 @media(max-width:650px){.ip-hero h1{font-size:3rem}}
 @media(max-width:720px){.mortgage-hero h1{font-size:3rem}}
+
+
+/* Âge retraite — contenu éditorial et barème */
+.retirement-age-content{max-width:920px}
+.retirement-age-heading{display:grid;grid-template-columns:42px 1fr;gap:14px;align-items:start;margin:46px 0 15px;padding-top:24px;border-top:1px solid var(--ink)}
+.retirement-age-heading:first-child{margin-top:0;padding-top:0;border-top:0}
+.retirement-age-heading>span{display:grid;place-items:center;width:36px;height:36px;border:1px solid var(--ink);border-radius:10px;background:var(--accent-soft);font-size:.68rem;font-weight:950;letter-spacing:.08em}
+.retirement-age-heading h2{margin:2px 0 0;font-size:clamp(1.65rem,3.2vw,2.35rem);line-height:1.05;letter-spacing:-.055em}
+.retirement-age-copy{max-width:800px;color:#444139}
+.retirement-age-copy p{margin:0 0 13px}
+.retirement-age-table-wrap{margin:25px 0 0;border:1px solid var(--ink);border-radius:16px;background:var(--card);overflow-x:auto;box-shadow:0 5px 0 rgba(23,23,19,.06)}
+.retirement-age-table{width:100%;min-width:650px;border-collapse:separate;border-spacing:0;margin:0}
+.retirement-age-table caption{text-align:left;padding:18px 20px 14px;font-weight:900;letter-spacing:-.02em}
+.retirement-age-table th,.retirement-age-table td{padding:13px 16px;text-align:left;border-top:1px solid var(--line);vertical-align:middle}
+.retirement-age-table thead th{background:#f0eadf;border-top:0;font-size:.78rem;text-transform:uppercase;letter-spacing:.055em;line-height:1.25}
+.retirement-age-table thead th span{display:block;margin-top:3px;text-transform:none;letter-spacing:0;font-size:.72rem;font-weight:600;color:var(--muted)}
+.retirement-age-table tbody tr:nth-child(even){background:#fbfaf6}
+.retirement-age-table tbody th{font-weight:800}
+.retirement-age-table tbody td:nth-child(2){font-weight:900;white-space:nowrap}
+.retirement-age-table tbody td:nth-child(3){color:var(--muted);white-space:nowrap}
+.retirement-age-table tbody tr.retirement-age-table-break th,.retirement-age-table tbody tr.retirement-age-table-break td{border-top:2px solid var(--accent)}
+.retirement-age-note{display:flex;gap:12px;align-items:flex-start;margin:15px 0 0;padding:16px 18px;border:1px solid var(--accent2);border-radius:12px;background:#edf3ef}
+.retirement-age-note strong{flex:0 0 auto;color:var(--accent2);font-size:.82rem;text-transform:uppercase;letter-spacing:.08em}
+.retirement-age-note span{color:#4f554f;font-size:.9rem;line-height:1.5}
+.retirement-age-updated{margin-top:20px;color:var(--muted)}
+.retirement-age-content .calculator-faq{margin-top:44px}
+.retirement-age-content .calculator-faq h2{font-size:1.8rem}
+@media(max-width:650px){
+ .retirement-age-heading{grid-template-columns:34px 1fr;gap:10px;margin-top:38px;padding-top:20px}
+ .retirement-age-heading>span{width:30px;height:30px;border-radius:8px;font-size:.62rem}
+ .retirement-age-heading h2{font-size:1.65rem}
+ .retirement-age-table-wrap{margin-top:20px;border-radius:13px}
+ .retirement-age-table th,.retirement-age-table td{padding:12px 13px}
+ .retirement-age-note{display:block}
+ .retirement-age-note strong{display:block;margin-bottom:5px}
+}
