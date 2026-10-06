@@ -88,7 +88,8 @@ export function changedInteractivePages(pages,baseRef,headRef="HEAD"){
 export function interactivePagesFromChangedFiles(pages,changed){
  const changedSet=new Set(changed);
  const htmlPages=pages.filter(p=>changedSet.has(p.path)||changed.some(f=>f.startsWith(p.path.replace(/index\.html$/,""))));
- const rootFiles=changed.filter(f=>/^public\/[^/]+\.(?:js|css)$/.test(f));
+ const slugs=new Set(pages.map(p=>p.slug));
+ const rootFiles=changed.filter(f=>{const m=/^public\/([^/]+)\.js$/.exec(f);return m&&slugs.has(m[1])});
  if(!rootFiles.length)return[...new Set(htmlPages.map(p=>p.path))].sort();
  const referenced=pages.filter(p=>rootFiles.some(f=>p.html.includes("/"+f.slice("public/".length))||p.html.includes(f.slice("public/".length))));
  return[...new Set([...htmlPages.map(p=>p.path),...referenced.map(p=>p.path)])].sort();
