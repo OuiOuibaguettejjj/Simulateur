@@ -22,16 +22,15 @@
 <h1>Simulateur RSA 2026</h1>
 <p class="tool-intro">Estimez votre RSA à partir de votre situation familiale, de votre logement et des ressources des trois mois de référence.</p>
 <div id="fields">
-<div class="field"><label for="age">Votre âge</label><select id="age"><option value="25plus">25 ans ou plus</option><option value="18_24">18 à 24 ans</option></select></div>
+<div class="field"><label for="age">Votre âge</label><select id="age"><option value="25plus">25 ans ou plus</option><option value="18_24">18 à 24 ans</option><option value="under18">Moins de 18 ans</option></select></div>
 <div class="field"><label for="status">Situation familiale</label><select id="status"><option value="single">Vous vivez seul(e)</option><option value="couple">Vous vivez en couple</option></select></div>
 <div class="field"><label for="dependents">Nombre de personnes à charge</label><input id="dependents" type="number" min="0" step="1" inputmode="numeric" placeholder="0"></div>
 <div class="field"><label for="student">Êtes-vous étudiant(e) ?</label><select id="student"><option value="no">Non</option><option value="yes">Oui</option></select></div>
-<div class="field"><label for="youngActive">Entre 18 et 24 ans : avez-vous exercé au moins 3 214 heures au cours des 3 dernières années ?</label><select id="youngActive"><option value="no">Non</option><option value="yes">Oui</option></select></div>
-<div class="field"><label for="resident">Résidez-vous en France de manière stable et effective ?</label><select id="resident"><option value="yes">Oui</option><option value="no">Non</option></select></div>
-<div class="field"><label for="majoration">Situation susceptible d'ouvrir droit à la majoration pour isolement ?</label><select id="majoration"><option value="no">Non</option><option value="yes">Oui</option></select></div>
-<div class="field"><label for="housing">Situation de logement</label><select id="housing"><option value="none">Vous payez votre logement sans aide personnelle au logement</option><option value="aidBelowForfait">Vous percevez une aide au logement inférieure au forfait applicable</option><option value="forfait">Vous percevez une aide au logement au moins égale au forfait, êtes logé(e) gratuitement ou êtes propriétaire dans une situation soumise au forfait</option></select></div>
-<div class="field"><label for="housingAid">Montant mensuel de l’aide au logement (€) — uniquement si elle est inférieure au forfait</label><input id="housingAid" type="number" min="0" step="0.01" inputmode="decimal" value="0"></div>
-<h3 style="margin-top:2rem">Ressources des trois mois de référence</h3><p class="small">Pour les salaires et revenus de remplacement concernés, utilisez le montant net social indiqué sur les documents de l’organisme payeur. Ajoutez les autres ressources que vous devez déclarer à la Caf afin d’obtenir une estimation plus complète.</p>
+<div class="field"><label for="youngActive">Si vous avez 18 à 24 ans et aucun enfant à charge : avez-vous travaillé au moins 3 214 heures au cours des 3 dernières années ?</label><select id="youngActive"><option value="no">Non</option><option value="yes">Oui</option></select></div>
+<div class="field"><label for="resident">Résidez-vous en France de manière stable et effective (en principe au moins 9 mois par an) ?</label><select id="resident"><option value="yes">Oui</option><option value="no">Non</option></select></div>
+<div class="field"><label for="pregnant">Êtes-vous enceinte ?</label><select id="pregnant"><option value="no">Non</option><option value="yes">Oui</option></select></div><div class="field"><label for="majoration">Si vous vivez seul(e) avec un enfant, êtes-vous dans une situation ouvrant potentiellement droit à la majoration pour isolement ?</label><select id="majoration"><option value="no">Non</option><option value="yes">Oui</option></select></div>
+<div class="field"><label for="housing">Situation de logement</label><select id="housing"><option value="paid">Vous payez effectivement votre logement et ne percevez pas d’aide personnelle au logement</option><option value="aidOrFree">Vous percevez une aide au logement, êtes logé(e) gratuitement ou êtes propriétaire sans aide personnelle au logement</option></select></div>
+<h3 style="margin-top:2rem">Ressources des trois mois de référence</h3><p class="small">Indiquez, pour chaque mois, le total des ressources mensuelles du foyer à prendre en compte pour le RSA : salaires en montant net social, chômage, pensions, rentes, pensions alimentaires et autres ressources concernées. Le traitement de certaines prestations est spécifique : le résultat reste donc une estimation.</p>
 <div class="row"><div class="field"><label for="m1">Mois 1 (€)</label><input id="m1" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0"></div><div class="field"><label for="m2">Mois 2 (€)</label><input id="m2" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0"></div><div class="field"><label for="m3">Mois 3 (€)</label><input id="m3" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0"></div></div>
 </div>
 <button class="button-main" onclick="Simulateurs.calc()">Calculer mon estimation</button>
@@ -43,13 +42,13 @@
 <section class="content-section rsa-content">
 <div class="rsa-section-heading"><span>01</span><h2>Comment est calculé le RSA ?</h2></div>
 <p>Le RSA dépend du montant forfaitaire correspondant à la composition du foyer et des ressources prises en compte. Lorsque le forfait logement s'applique, il est également déduit du montant obtenu.</p>
-<p>Pour une estimation cohérente avec les règles actuelles, ce simulateur utilise les ressources des <strong>trois mois de référence</strong> et en calcule la moyenne mensuelle. Pour les salaires et plusieurs revenus de remplacement, la référence à utiliser est le <strong>montant net social</strong> figurant sur les bulletins ou relevés concernés.</p>
+<p>Pour une estimation cohérente avec les règles actuelles, ce simulateur utilise les ressources des <strong>trois mois de référence</strong> et en calcule une moyenne mensuelle. Depuis le 1er mars 2025, le RSA est déterminé à partir des mois de référence prévus par la réglementation, et certaines ressources ou prestations font l’objet de traitements particuliers. Pour les salaires et plusieurs revenus de remplacement, la référence à utiliser est le <strong>montant net social</strong> figurant sur les bulletins ou relevés concernés.</p>
 
 <div class="rsa-section-heading"><span>02</span><h2>Les montants du RSA en 2026</h2></div>
 <p>Au 1er avril 2026, le montant forfaitaire est de 651,69 € pour une personne seule sans personne à charge et de 977,54 € pour un couple sans personne à charge. Il augmente selon le nombre de personnes à charge. Une majoration existe dans certaines situations de parent isolé.</p>
 
 <div class="rsa-section-heading"><span>03</span><h2>Le logement peut réduire le RSA</h2></div>
-<p>Le logement peut réduire le RSA. Lorsque l'aide au logement est inférieure au forfait applicable, c'est l'aide elle-même qui est déduite ; lorsqu'elle atteint ou dépasse le forfait, ou en cas d'absence de charge de logement dans les situations prévues, le forfait correspondant à la taille du foyer est retenu.</p>
+<p>Le logement peut réduire le RSA. Si vous percevez une aide au logement, êtes logé gratuitement ou êtes propriétaire sans aide personnelle au logement, un <strong>forfait logement</strong> est pris en compte. Si vous payez effectivement votre logement sans aide personnelle au logement, ce forfait ne s’applique pas.</p>
 
 <div class="rsa-section-heading"><span>04</span><h2>Une estimation, pas une décision de la Caf</h2></div>
 <p>Dernière vérification des paramètres du barème : <strong>28 septembre 2026</strong>. Les montants indiqués couvrent la période du 1er avril 2026 au 31 mars 2027.</p><p>Le calcul présenté est indicatif et volontairement simplifié : il demande directement le total des ressources à retenir pour chacun des trois mois. La Caf détermine le droit réel à partir de la situation complète du foyer, des catégories de ressources et des règles particulières applicables au moment de l'examen.</p>
@@ -68,17 +67,17 @@
 <footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer>
 
 <script>window.TOOL={calc:function(){
-   const age=this.$("age").value==="25plus"?25:18;
+   const age=this.$("age").value==="25plus"?25:(this.$("age").value==="18_24"?18:17);
    const input={
      age,
      status:this.$("status").value,
      dependents:Number(this.$("dependents").value||0),
      student:this.$("student").value,
      youngActive:this.$("youngActive").value,
+     pregnant:this.$("pregnant").value,
      resident:this.$("resident").value,
      majoration:this.$("majoration").value,
      housing:this.$("housing").value,
-     housingAid:this.$("housingAid").value,
      months:[this.$("m1").value,this.$("m2").value,this.$("m3").value]
    };
    if(input.dependents<0 || !Number.isInteger(input.dependents)) return "Le nombre de personnes à charge doit être un nombre entier positif.";
@@ -88,7 +87,7 @@
      +"Montant forfaitaire : "+RSAEngine.money(r.forfait)+"<br>"
      +"Moyenne des ressources des 3 mois : "+RSAEngine.money(r.averageResources)+"<br>"
      +"Déduction logement : "+RSAEngine.money(r.logement)+"<br>"
-     +"<p class='small'>Calcul indicatif : montant forfaitaire − moyenne des ressources − forfait logement. Le droit réel dépend de l’ensemble des règles et ressources applicables à votre foyer.</p>";
+     +"<p class='small'>Calcul indicatif : montant forfaitaire − ressources moyennes prises en compte − forfait logement. Le droit réel dépend de l’ensemble des règles et ressources applicables à votre foyer.</p>";
  }
 };
 
