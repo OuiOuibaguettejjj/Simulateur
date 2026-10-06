@@ -112,6 +112,10 @@ L'architecture est gelée autour d'un socle HTML commun obligatoire, avec libert
 
 `check-pages --ratchet` est bloquant en CI et en déploiement. Les écarts structurels et éditoriaux suivis sont figés dans `scripts/check-pages.baseline.json` : un nouvel écart fait échouer la CI, et un écart corrigé doit être retiré de la baseline (entrée périmée). Les règles éditoriales ne peuvent que diminuer : toute nouvelle page doit être conforme dès sa création. `--update-baseline` ne peut que retirer des entrées. `--seed-baseline` sert uniquement à amorcer une règle éditoriale qui n'a encore aucune entrée et refuse toute règle déjà présente. Les deux blocs Node inline de `deploy.yml` sont supprimés une fois leurs contrôles portés dans `check-pages` et testés ; le garde de cohérence avant production, la validation statique, les tests, les smoke tests, le déploiement et le rollback sont conservés tels quels.
 
+## 2026-10-06 — Contrat final des pages interactives modifiées
+
+Le contrôle de conformité d'une PR est séparé du cliquet de dette historique. Lorsqu'une PR modifie une page interactive, `check-pages --check-changed-contract` exige que toutes les règles suivies du contrat soient satisfaites dans l'état final de la page, sans que la baseline puisse servir d'exception. Le cliquet continue à détecter les nouveaux écarts et les dettes périmées des pages non modifiées. Une dette corrigée sur une page modifiée ne bloque donc pas la PR ; sa suppression de la baseline reste une opération explicite et séparée.
+
 ## 2026-10-03 — Outils associés HTML-first
 
 Toutes les pages `/outil/` utilisent désormais 2 à 4 relations ordonnées dans `data/tools.json` et dans leur HTML. Cette duplication contrôlée est volontaire : le JSON sert au contrôle de cohérence, tandis que le HTML est la source de vérité rendue au visiteur.
