@@ -1,5 +1,5 @@
 (function(){
-  // Barèmes : data/parametres.json (jeu "rsa"), exposés par /parametres.js (chargé avant ce fichier).
+  // Paramètres réglementaires centralisés dans data/parametres.json.
   const SET = window.Parametres.get("rsa");
   const PARAMS = Object.freeze(Object.assign({ effectiveFrom: SET.effectiveFrom, effectiveTo: SET.effectiveTo }, SET.values));
   const hoursLabel = String(PARAMS.youngActiveHours).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
@@ -9,14 +9,8 @@
   function housingFlat(people){ return people<=1 ? PARAMS.housing.one : people===2 ? PARAMS.housing.two : PARAMS.housing.threePlus; }
   function householdBase(single, dependents, majoration){
     const d = Math.max(0, dependents);
-
-    if(majoration && single){
-      return round2(PARAMS.majorationBase + d * PARAMS.majorationChildIncrease);
-    }
-
-    // Official Caf amounts for 2026, avoiding percentage-rounding discrepancies.
+    if(majoration && single) return round2(PARAMS.majorationBase + d * PARAMS.majorationChildIncrease);
     const amounts = single ? PARAMS.singleAmounts : PARAMS.coupleAmounts;
-
     if(d <= 3) return amounts[d];
     return round2(amounts[3] + (d - 3) * PARAMS.childIncrease);
   }
@@ -38,21 +32,25 @@
       const single=input.status==="single";
       const student=input.student==="yes";
       const youngActive=input.youngActive==="yes";
-      const isolatedMajoration=input.majoration==="yes";
+      const pregnant=input.pregnant==="yes";
       const resident=input.resident==="yes";
+      const majoration=single && (pregnant || dependents>0 && input.majoration==="yes");
 
       if(!Number.isInteger(age) || age<0) return {eligible:false,reason:"L'âge renseigné est invalide."};
       if(!Number.isInteger(dependents) || dependents<0) return {eligible:false,reason:"Le nombre de personnes à charge doit être un entier positif ou nul."};
-      if(!resident) return {eligible:false,reason:"Le simulateur suppose une résidence stable et effective en France. La Caf doit vérifier la condition de résidence et, le cas échéant, le droit au séjour."};
+      if(!resident) return {eligible:false,reason:"Le simulateur suppose une résidence stable et effective en France. La Caf vérifie aussi les éventuelles conditions liées à la nationalité et au séjour."};
       if(age<18) return {eligible:false,reason:"Le RSA est ouvert à partir de 18 ans, sous conditions."};
       if(age<25 && !(single && dependents>0) && !(youngActive && !student)){
-        return {eligible:false,reason:"Entre 18 et 24 ans, le RSA est soumis à des conditions particulières, notamment de parent isolé ou de jeune actif ayant exercé au moins " + hoursLabel + " heures sur les 3 années précédentes."};
+        return {eligible:false,reason:"Entre 18 et 24 ans, le RSA est soumis à des conditions particulières : parent isolé ou jeune actif ayant exercé au moins " + hoursLabel + " heures sur les 3 années précédentes."};
       }
       if(student && !(single && dependents>0)){
         return {eligible:false,reason:"Le RSA n'est en principe pas ouvert aux étudiants, sauf situations particulières, notamment de parent isolé. La Caf doit confirmer le droit."};
       }
-      if(!single && isolatedMajoration){
-        return {eligible:false,reason:"La majoration pour isolement concerne un foyer isolé."};
+      if(pregnant && !single){
+        return {eligible:false,reason:"La majoration pour isolement ne peut pas être appliquée à un foyer en couple."};
+      }
+      if(input.majoration==="yes" && !(single && dependents>0)){
+        return {eligible:false,reason:"La majoration parent isolé suppose une situation d'isolement avec enfant à charge. La grossesse peut ouvrir un droit à majoration dans certaines conditions."};
       }
 
       const months=input.months||[];
@@ -60,28 +58,18 @@
         return {eligible:false,reason:"Les ressources des trois mois de référence doivent être renseignées avec des montants valides."};
       }
 
-      const avg=round2(months.reduce((a,b)=>a+Number(b),0)/3);
+      const averageResources=round2(months.reduce((a,b)=>a+Number(b),0)/3);
       const people=1+(single?0:1)+dependents;
-      const majoration=isolatedMajoration && single;
       const forfait=round2(householdBase(single,dependents,majoration));
 
-      // Housing deduction: when the actual housing aid is below the forfait,
-      // the aid itself is deducted; otherwise the statutory housing forfait applies.
-      let logement=0;
-      if(input.housing==="forfait") logement=housingFlat(people);
-      if(input.housing==="aidBelowForfait"){
-        const aid=Number(input.housingAid);
-        if(!validNumber(aid) || aid>housingFlat(people)){
-          return {eligible:false,reason:"Le montant de l'aide au logement doit être compris entre 0 € et le forfait logement applicable au foyer."};
-        }
-        logement=round2(aid);
-      }
-
-      const rsa=round2(Math.max(0,forfait-avg-logement));
+      // Une aide au logement ou l'absence de charge de logement entraîne le forfait logement.
+      // Une charge de logement réellement supportée et sans aide n'entraîne pas ce forfait.
+      const logement=input.housing==="aidOrFree" ? housingFlat(people) : 0;
+      const rsa=round2(Math.max(0,forfait-averageResources-logement));
 
       return {
         eligible:true,
-        averageResources:avg,
+        averageResources,
         forfait,
         logement,
         rsa,
