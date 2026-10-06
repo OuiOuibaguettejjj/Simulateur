@@ -181,12 +181,66 @@
     "famille": "conversion",
     "outil": "angle",
     "entrees": {
-      "value": "180"
+      "value": "180",
+      "from": "deg",
+      "to": "rad"
     },
     "attendu": 3.14159265,
     "tolerance": 1e-7,
     "sortie": "3,14159265\\s*rad",
     "source": "https://www.bipm.org/fr/si-brochure-9"
+  },
+  {
+    "famille": "conversion",
+    "outil": "angle",
+    "entrees": {
+      "value": "1",
+      "from": "turn",
+      "to": "deg"
+    },
+    "attendu": 360,
+    "tolerance": 0,
+    "sortie": "360\\s*°",
+    "source": "https://www.bipm.org/fr/publications/si-brochure/"
+  },
+  {
+    "famille": "conversion",
+    "outil": "angle",
+    "entrees": {
+      "value": "1",
+      "from": "deg",
+      "to": "arcmin"
+    },
+    "attendu": 60,
+    "tolerance": 0,
+    "sortie": "60\\s*′",
+    "source": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b9"
+  },
+  {
+    "famille": "conversion",
+    "outil": "angle",
+    "entrees": {
+      "value": "1",
+      "from": "rad",
+      "to": "mrad"
+    },
+    "attendu": 1000,
+    "tolerance": 0.0001,
+    "sortie": "1\\s*000\\s*mrad",
+    "source": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b9"
+  },
+  {
+    "famille": "conversion",
+    "outil": "angle",
+    "entrees": {
+      "value": "1",
+      "from": "grad",
+      "to": "deg"
+    },
+    "attendu": 0.9,
+    "tolerance": 0.000001,
+    "sortie": "0,9\\s*°",
+    "source": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b9"
   },
   {
     "famille": "conversion",
