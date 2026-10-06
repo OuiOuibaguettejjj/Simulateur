@@ -138,7 +138,7 @@ assert.ok(Object.isFrozen(P.get("smic")) && Object.isFrozen(P.get("smic").values
 assert.equal(P.isEffective("smic", "2026-06-01"), true);
 assert.equal(P.isEffective("smic", "2026-05-31"), false);
 assert.equal(P.isEffective("smic", "2027-01-01"), false);
-assert.equal(P.get("rsa").verifiedOn, "2026-09-28");
+assert.equal(P.get("rsa").verifiedOn, "2026-10-06");
 
 /* ---------- Parité avec les anciens calculs codés en dur ---------- */
 function pageTool(slug) {
