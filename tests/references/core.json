@@ -284,8 +284,31 @@
     "famille": "conversion",
     "outil": "poids",
     "entrees": {
-      "v": "1"
+      "v": "1",
+      "unit": "kg"
     },
+    "attendu": 1000,
+    "tolerance": 0.000001,
+    "sortie": "1\\s*000\\s*g",
+    "source": "https://www.nist.gov/document/2026-nist-handbook-44-appendix-c",
+    "verifications": [
+      {
+        "sortie": "2[.,]20462262\\s*lb",
+        "attendu": 2.20462262,
+        "tolerance": 0.000001
+      },
+      {
+        "sortie": "35[.,]27396195\\s*oz",
+        "attendu": 35.27396195,
+        "tolerance": 0.000001
+      },
+      {
+        "sortie": "0[.,]157473044\\s*st",
+        "attendu": 0.157473044,
+        "tolerance": 0.000001
+      }
+    ]
+  },
     "attendu": 1000,
     "tolerance": 0,
     "sortie": "1\\s*000\\s*g",
