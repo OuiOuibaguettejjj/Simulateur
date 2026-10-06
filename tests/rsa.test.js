@@ -86,3 +86,4 @@ assert.equal(calc({ asOf: "2026-03-31" }).eligible, false);
 assert.equal(calc({ asOf: "2027-04-01" }).eligible, false);
 
 console.log("RSA deterministic tests passed.");
+
