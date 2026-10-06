@@ -52,7 +52,7 @@ Toute évolution d'architecture ou de sécurité doit d'abord être décidée et
 - **Structurelles (bloquantes)** : `html-base`, `markup-balance`, `title`, `canonical`, `breadcrumb`, `h1`, `tool-block`, `result`, `related-block`, `jsonld`, `related-meta`, `citation-marker`. Elles garantissent le socle HTML commun. `markup-balance` détecte aussi les attributs malformés (nom d'attribut contenant `"` ou `'`, par exemple `type="number step="any"`) et un `>` parasite juste après une balise.
 - **Éditoriales sous cliquet** : `description` (120 à 160 caractères), `content-h2` (au moins 2 H2), `formula` (lien source externe dans `.formula` ou `.source-links`), `faq` (FAQ accordéon obligatoire sur toute page interactive) et `meta-unique` sont sous cliquet : elles ne peuvent que diminuer.
 
-La règle `faq` s’applique à chaque page interactive (`/outil/`, `/conversion/`, `/comparateur/`). Une page nouvelle ou enrichie sans FAQ crée un nouvel écart et bloque la CI ; les pages historiques déjà en dette restent suivies par le cliquet et sont résorbées lors de leur enrichissement.
+La règle `faq` s’applique à chaque page interactive (`/outil/`, `/conversion/`, `/comparateur/`). Une page nouvelle ou une page interactive modifiée sans FAQ bloque le contrôle du contrat final, même si `faq` figure dans la baseline ; une page historique non modifiée peut conserver sa dette suivie par le cliquet.
 
 Le normaliseur `scripts/normalize-layout.mjs` ajoute de façon idempotente `aria-live="polite"` à chaque `.result` le favicon SVG commun et les balises de partage Open Graph / Twitter (`og:title`, `og:description`, `og:url`, `og:type`, `og:site_name`, `og:locale`, `twitter:card`, dérivées du titre, de la meta description et de la canonique de la page) dans le `<head>`, sans modifier le texte visible. Son mode `--check` est fail-closed. Les indicateurs « pages sous 120 mots » et « pages sans lien externe » restent informatifs et ne bloquent pas.
 
@@ -62,16 +62,15 @@ Avec `--strict`, seuls les écarts structurels font échouer la commande.
 
 ### Cliquet (ratchet) et baseline
 
-`node scripts/check-pages.mjs --ratchet` est une étape **bloquante** de `tests.yml` et de `deploy.yml` (placée avant la validation statique). Elle remplace les deux anciens blocs Node inline de `deploy.yml` (contrat HTML-first, métadonnées et HTML), dont les contrôles sont désormais portés dans `check-pages` et couverts par `tests/check-pages.test.mjs` : marqueur `calculator-rendering=static`, H1 non vide, meta description présente, canonique, au moins un `input`, `select`, `textarea` ou `button`, un seul `WebApplication` et un seul `BreadcrumbList` (positions 1, 2, 3), aucun dossier `/outil/<slug>/` sans `index.html`, catégorie et relations égales à `data/tools.json`.
+`node scripts/check-pages.mjs --ratchet` est une étape **bloquante** de `tests.yml` et de `deploy.yml`. Sur les PR, `node scripts/check-pages.mjs --check-changed-contract` constitue en plus le contrôle du contrat final des pages interactives modifiées. Elle remplace les deux anciens blocs Node inline de `deploy.yml` (contrat HTML-first, métadonnées et HTML), dont les contrôles sont désormais portés dans `check-pages` et couverts par `tests/check-pages.test.mjs` : marqueur `calculator-rendering=static`, H1 non vide, meta description présente, canonique, au moins un `input`, `select`, `textarea` ou `button`, un seul `WebApplication` et un seul `BreadcrumbList` (positions 1, 2, 3), aucun dossier `/outil/<slug>/` sans `index.html`, catégorie et relations égales à `data/tools.json`.
 
-`scripts/check-pages.baseline.json` liste les écarts connus, structurels et éditoriaux, sous la forme `{ "path": ..., "rule": ... }` (une entrée par page et par règle). Elle représente l'état de dette connu lors de la mise en place du socle et sert à suivre la migration progressive. Le cliquet ne laisse la situation que s'améliorer :
+`scripts/check-pages.baseline.json` liste les écarts connus, structurels et éditoriaux, sous la forme `{ "path": ..., "rule": ... }` (une entrée par page et par règle). Le cliquet ne laisse la situation que s'améliorer :
 
-- **échec** si un écart suivi (structurel ou éditorial) n'est pas dans la baseline (régression, ou nouvelle page non conforme) ;
-- **échec** si la baseline contient une entrée qui n'échoue plus (entrée périmée) : elle doit être retirée ;
-- **échec** si une page interactive modifiée dans la PR conserve un écart suivi, même si cet écart figure déjà dans la baseline : une page reprise doit être à **zéro dette résiduelle** avant le merge ;
+- **échec** si un écart suivi (structurel ou éditorial) n'est pas dans la baseline (régression, ou nouvelle page non conforme) : une nouvelle page doit passer 100 % des règles suivies ;
+- **échec** si la baseline contient une entrée qui n'échoue plus sur une page non modifiée (entrée périmée) : elle doit être retirée ; une entrée devenue périmée sur une page modifiée n'est pas bloquante pour le contrat final de la PR ;
 - `node scripts/check-pages.mjs --update-baseline` crée la baseline la première fois, puis ne sait que **retirer** des entrées. Il refuse, avec un message explicite, d'en ajouter.
 
-`--seed-baseline` sert uniquement à amorcer les règles éditoriales quand aucune n'est encore présente dans la baseline ; il refuse dès qu'une règle éditoriale y figure. `--update-baseline` ne fait que retirer des entrées.
+`--check-changed-contract` ne modifie jamais la baseline. Il contrôle uniquement les pages interactives modifiées dans la PR. `--seed-baseline` sert uniquement à amorcer les règles éditoriales quand aucune n'est encore présente dans la baseline ; il refuse dès qu'une règle éditoriale y figure. `--update-baseline` ne fait que retirer des entrées.
 
 ### Outils associés — Étape F (2026-10-03)
 

@@ -34,9 +34,7 @@ jobs:
           node scripts/check-params.mjs
 
       - name: Verify pages contract (structural ratchet)
-        env:
-          CHECK_PAGES_BASE_REF: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha || github.event.before }}
-        run: node scripts/check-pages.mjs --ratchet --enforce-changed
+        run: node scripts/check-pages.mjs --ratchet
 
       - name: Verify shared layout is normalized
         run: node scripts/normalize-layout.mjs --check

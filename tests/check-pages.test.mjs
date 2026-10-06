@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { buildRatchetMessages,checkPage,checkAll,loadToolsMeta,parseHtml,summarize,STRUCTURAL_RULES,EDITORIAL_RULES,TRACKED_RULES,toolDirsWithoutIndex,trackedPairs,parseBaseline,compareToBaseline,nextBaseline,seedBaseline,changedPageResidualDebt,interactivePagesFromChangedFiles} from "../scripts/check-pages.mjs";
+import { buildRatchetMessages,checkPage,checkAll,loadToolsMeta,parseHtml,summarize,STRUCTURAL_RULES,EDITORIAL_RULES,TRACKED_RULES,toolDirsWithoutIndex,trackedPairs,parseBaseline,compareToBaseline,nextBaseline,seedBaseline,interactivePagesFromChangedFiles,changedMandatoryFailures} from "../scripts/check-pages.mjs";
 
 const DESC="Utilisez cet outil en ligne pour effectuer rapidement votre calcul et obtenir un résultat clair, pratique et adapté à votre situation.";
 const CATS={categorie:{label:"Catégorie",path:"/categorie/"}};
@@ -311,22 +311,6 @@ const cur=trackedPairs([{path:"b",rule:"title",message:"1"},{path:"a",rule:"resu
 assert.deepEqual(cur,[P("a","description"),P("a","result"),P("b","title")],"paires suivies dédoublonnées et triées, structurelles + éditoriales");
 // cliquet : positif
 assert.deepEqual(compareToBaseline(cur,cur),{added:[],stale:[]},"positif : écarts structurels + éditoriaux = baseline");
-assert.deepEqual(
- changedPageResidualDebt(cur,["a"]),
- [P("a","description"),P("a","result")],
- "une page interactive modifiée doit résorber toute sa dette résiduelle"
-);
-assert.deepEqual(
- changedPageResidualDebt(cur,["b"]),
- [P("b","title")],
- "une page modifiée avec une dette baseline reste bloquante"
-);
-assert.deepEqual(
- changedPageResidualDebt(cur,["c"]),
- [],
- "une page non touchée n'est pas soumise à l'extinction immédiate de sa dette"
-);
-
 // cliquet : négatif (régression ou nouvelle page non conforme)
 assert.deepEqual(compareToBaseline([...cur,P("c","h1")],cur).added,[P("c","h1")],"négatif : nouvel écart absent de la baseline");
 // cliquet : négatif (entrée périmée)
@@ -356,6 +340,30 @@ assert.deepEqual(refused.refused,["description"],"--seed-baseline indique la rè
 // le fichier de baseline versionné est valide et ne contient que des écarts structurels
 const committed=parseBaseline(fs.readFileSync(new URL("../scripts/check-pages.baseline.json",import.meta.url),"utf8"));
 assert(committed.every(x=>TRACKED_RULES.includes(x.rule)),"baseline versionnée : uniquement des règles suivies");
+
+// contrat final des pages modifiées : indépendant de la baseline
+const mandatoryBroken=fixture().replace(/<section class="calculator-faq"[\s\S]*?<\/section>/,"");
+const mandatoryFailures=errs(mandatoryBroken).map(x=>({...x,path:"public/outil/slug/index.html"}));
+assert(mandatoryFailures.some(x=>x.rule==="faq"),"contrat final : une FAQ absente est une violation obligatoire");
+assert.deepEqual(changedMandatoryFailures(mandatoryFailures,["public/outil/slug/index.html"]).map(x=>x.rule),["faq"],"contrat final : la dette d'une page modifiée est bloquante sans regarder la baseline");
+assert.deepEqual(changedMandatoryFailures(mandatoryFailures,["public/outil/autre/index.html"]),[],"contrat final : une page non modifiée n'est pas contrôlée");
+assert.deepEqual(changedMandatoryFailures(errs(fixture()),["public/outil/slug/index.html"]),[],"contrat final : une page modifiée conforme est verte");
+assert.deepEqual(
+ interactivePagesFromChangedFiles(
+   [{path:"public/outil/slug/index.html",dir:"outil",slug:"slug",html:""}],
+   ["public/outil/slug/index.html"]
+ ),
+ ["public/outil/slug/index.html"],
+ "détection : modification directe du HTML"
+);
+assert.deepEqual(
+ interactivePagesFromChangedFiles(
+   [{path:"public/outil/slug/index.html",dir:"outil",slug:"slug",html:"/slug.js"}],
+   ["public/slug.js"]
+ ),
+ ["public/outil/slug/index.html"],
+ "détection : JavaScript propre au calculateur référencé par la page"
+);
 
 // anneeAMigrer : les écarts éditoriaux ne peuvent pas être résorbés avant migration.
 const debtPath="public/outil/ancien/index.html";
