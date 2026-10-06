@@ -284,12 +284,30 @@
     "famille": "conversion",
     "outil": "poids",
     "entrees": {
-      "v": "1"
+      "v": "1",
+      "unit": "kg"
     },
     "attendu": 1000,
-    "tolerance": 0,
-    "sortie": "1\\s*000\\s*g",
-    "source": "https://www.bipm.org/fr/si-brochure-9"
+    "tolerance": 0.000001,
+    "sortie": "Grammes \\(g\\)",
+    "source": "https://www.nist.gov/document/2026-nist-handbook-44-appendix-c",
+    "verifications": [
+      {
+        "sortie": "Livres \\(lb\\)",
+        "attendu": 2.20462262,
+        "tolerance": 0.000001
+      },
+      {
+        "sortie": "Onces \\(oz\\)",
+        "attendu": 35.27396195,
+        "tolerance": 0.000001
+      },
+      {
+        "sortie": "Stones \\(st\\)",
+        "attendu": 0.157473044,
+        "tolerance": 0.000001
+      }
+    ]
   },
   {
     "famille": "conversion",
