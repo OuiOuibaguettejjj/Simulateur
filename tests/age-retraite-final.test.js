@@ -1,0 +1,24 @@
+const fs = require("fs");
+const assert = require("assert");
+const html = fs.readFileSync("public/outil/age-retraite/index.html", "utf8");
+
+const title = (html.match(/<title>([^<]+)<\/title>/i) || [,""])[1];
+const description = (html.match(/<meta name="description" content="([^"]+)"/i) || [,""])[1];
+assert(title === "Âge légal retraite 2026 : calcul selon votre date de naissance");
+assert(title.length <= 65);
+assert(description.length >= 120 && description.length <= 170);
+assert(html.includes('"@type":"WebApplication"'));
+assert(html.includes('"name":"Âge légal retraite 2026 : calcul selon votre date de naissance"'));
+assert(html.includes('"name":"Âge légal retraite 2026"'));
+assert(html.includes('Dernière mise à jour : 6 octobre 2026.'));
+assert(html.includes("pensions prenant effet à partir du 1er septembre 2026"));
+assert(html.includes("1958 à 1960"));
+assert(html.includes("1961, janvier à août"));
+assert(html.includes("1961, septembre à décembre"));
+assert(html.includes("1965, janvier à mars"));
+assert(html.includes("1965, avril à décembre"));
+assert(html.includes("1969 et après"));
+assert(html.includes("carrière longue"));
+assert(html.includes("âge minimum abaissé d’un an"));
+assert(html.includes("Légifrance — loi n° 2025-1403 du 30 décembre 2025, article 105"));
+console.log("Age-retraite final SEO/content consistency checks passed.");
