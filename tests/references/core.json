@@ -309,11 +309,6 @@
       }
     ]
   },
-    "attendu": 1000,
-    "tolerance": 0,
-    "sortie": "1\\s*000\\s*g",
-    "source": "https://www.bipm.org/fr/si-brochure-9"
-  },
   {
     "famille": "conversion",
     "outil": "temperature",
