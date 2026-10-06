@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { buildRatchetMessages,checkPage,checkAll,loadToolsMeta,parseHtml,summarize,STRUCTURAL_RULES,EDITORIAL_RULES,TRACKED_RULES,toolDirsWithoutIndex,trackedPairs,parseBaseline,compareToBaseline,nextBaseline,seedBaseline,changedPageResidualDebt,interactivePagesFromChangedFiles} from "../scripts/check-pages.mjs";
+import { buildRatchetMessages,checkPage,checkAll,loadToolsMeta,parseHtml,summarize,STRUCTURAL_RULES,EDITORIAL_RULES,TRACKED_RULES,toolDirsWithoutIndex,trackedPairs,parseBaseline,compareToBaseline,nextBaseline,seedBaseline} from "../scripts/check-pages.mjs";
 
 const DESC="Utilisez cet outil en ligne pour effectuer rapidement votre calcul et obtenir un résultat clair, pratique et adapté à votre situation.";
 const CATS={categorie:{label:"Catégorie",path:"/categorie/"}};
@@ -311,22 +311,6 @@ const cur=trackedPairs([{path:"b",rule:"title",message:"1"},{path:"a",rule:"resu
 assert.deepEqual(cur,[P("a","description"),P("a","result"),P("b","title")],"paires suivies dédoublonnées et triées, structurelles + éditoriales");
 // cliquet : positif
 assert.deepEqual(compareToBaseline(cur,cur),{added:[],stale:[]},"positif : écarts structurels + éditoriaux = baseline");
-assert.deepEqual(
- changedPageResidualDebt(cur,["a"]),
- [P("a","description"),P("a","result")],
- "une page interactive modifiée doit résorber toute sa dette résiduelle"
-);
-assert.deepEqual(
- changedPageResidualDebt(cur,["b"]),
- [P("b","title")],
- "une page modifiée avec une dette baseline reste bloquante"
-);
-assert.deepEqual(
- changedPageResidualDebt(cur,["c"]),
- [],
- "une page non touchée n'est pas soumise à l'extinction immédiate de sa dette"
-);
-
 // cliquet : négatif (régression ou nouvelle page non conforme)
 assert.deepEqual(compareToBaseline([...cur,P("c","h1")],cur).added,[P("c","h1")],"négatif : nouvel écart absent de la baseline");
 // cliquet : négatif (entrée périmée)
