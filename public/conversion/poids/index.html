@@ -4,8 +4,8 @@
 const UNITS={ug:{label:"µg",name:"Microgrammes",kg:1e-9},mg:{label:"mg",name:"Milligrammes",kg:1e-6},g:{label:"g",name:"Grammes",kg:1e-3},kg:{label:"kg",name:"Kilogrammes",kg:1},q:{label:"q",name:"Quintaux métriques",kg:100},t:{label:"t",name:"Tonnes métriques",kg:1000},oz:{label:"oz",name:"Onces",kg:0.028349523125},lb:{label:"lb",name:"Livres",kg:0.45359237},st:{label:"st",name:"Stones",kg:6.35029318},short_ton:{label:"US ton",name:"Tonnes courtes américaines",kg:907.18474},long_ton:{label:"long ton",name:"Tonnes longues britanniques",kg:1016.0469088},troy_oz:{label:"oz t",name:"Onces troy",kg:0.0311034768},grain:{label:"gr",name:"Grains",kg:0.00006479891},carat:{label:"ct",name:"Carats métriques",kg:0.0002}};
 const ORDER=["ug","mg","g","kg","q","t","oz","lb","st","short_ton","long_ton","troy_oz","grain","carat"];
 const FMT=new Intl.NumberFormat("fr-FR",{maximumFractionDigits:9});
-function parseValue(raw){return Number(String(raw).trim().replace(",","."))}
-function format(value){if(!Number.isFinite(value))return "";return FMT.format(value)}
+function parseValue(raw){const text=String(raw).trim();if(!text)return null;return Number(text.replace(",","."))}
+function format(value){if(!Number.isFinite(value))return null;return FMT.format(value)}
 function calc(){
  const value=parseValue(v.value);const unit=unitEl();
  if(!Number.isFinite(value)||value<0){r.textContent="Saisissez une valeur positive ou nulle.";return}
