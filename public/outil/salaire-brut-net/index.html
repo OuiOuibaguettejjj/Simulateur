@@ -1,2 +1,244 @@
-<!doctype html><html lang="fr"><head><meta name="calculator-rendering" content="static"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="google-adsense-account" content="ca-pub-2924580037451268"><title>Salaire brut net | Simulateur</title><meta name="description" content="Calculez votre salaire net à partir du brut. Estimation mensuelle et annuelle, cadre ou non-cadre, avec option de prélèvement à la source."><link rel="canonical" href="https://simulateur.site/outil/salaire-brut-net/"><link rel="stylesheet" href="/styles.css"><script src="/simulateurs.js" defer></script><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Simulateur salaire brut net","url":"https://simulateur.site/outil/salaire-brut-net/","description":"Calculez votre salaire net à partir du brut. Estimation mensuelle et annuelle, cadre ou non-cadre, avec option de prélèvement à la source.","inLanguage":"fr-FR","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"price":"0","priceCurrency":"EUR"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Salaire","item":"https://simulateur.site/salaire/"},{"@type":"ListItem","position":3,"name":"Simulateur salaire brut net","item":"https://simulateur.site/outil/salaire-brut-net/"}]}</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta property="og:type" content="website"><meta property="og:site_name" content="Simulateur"><meta property="og:locale" content="fr_FR"><meta property="og:title" content="Simulateur salaire brut net"><meta property="og:description" content="Calculez votre salaire net à partir du brut. Estimation mensuelle et annuelle, cadre ou non-cadre, avec option de prélèvement à la source."><meta property="og:url" content="https://simulateur.site/outil/salaire-brut-net/"><meta name="twitter:card" content="summary"></head><body><header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header><main><div class="wrap"><div class="breadcrumb"><a href="/">Accueil</a> · <a href="/salaire/">Salaire</a> · Simulateur salaire brut net</div><section class="tool"><div class="eyebrow">EMPLOI</div><h1>Simulateur salaire brut net</h1><p class="tool-intro">Convertissez un salaire brut en net avant impôt, puis obtenez une estimation du net après prélèvement à la source.</p><div id="fields"><div class="row"><div class="field"><label for="brut">Salaire brut</label><input id="brut" type="number" min="0" step="50" value="3500" inputmode="decimal"></div><div class="field"><label for="periode">Période</label><select id="periode"><option value="mensuel">Mensuel</option><option value="annuel">Annuel</option></select></div></div><div class="row"><div class="field"><label for="statut">Statut</label><select id="statut"><option value="noncadre">Non-cadre</option><option value="cadre">Cadre</option></select></div><div class="field"><label for="contrat">Contrat</label><select id="contrat"><option value="CDI">CDI</option><option value="CDD">CDD</option></select></div></div><div class="row"><div class="field"><label for="pas">Taux de prélèvement à la source</label><input id="pas" type="number" min="0" max="100" step="0.1" value="0" inputmode="decimal"><small>0 % = net avant impôt uniquement</small></div></div></div><button class="button-main" onclick="Simulateurs.calc()">Calculer</button><div class="result" id="result" aria-live="polite"><strong>2 695 € / mois net estimé avant impôt</strong><br><small>Pour 3 500 € brut mensuel, avec l’hypothèse non-cadre.</small></div><div class="formula"><strong>Comment lire le résultat</strong><p>Estimation standardisée : 23 % non-cadre / 25 % cadre. Ces taux ne constituent pas un barème légal universel. Le simulateur Urssaf permet une simulation plus détaillée selon la situation individuelle.</p></div></section></div><section class="content-section"><h2>Comment calculer le salaire net à partir du brut ?</h2><p>Le salaire brut est la rémunération avant déduction des cotisations salariales. Le salaire net avant impôt correspond au montant restant après ces cotisations. Le prélèvement à la source intervient ensuite pour déterminer le montant effectivement versé.</p><h2>Notre méthode</h2><p>Pour rester transparent, ce simulateur utilise une <strong>estimation standardisée</strong> et non une fausse précision de bulletin de paie. L'hypothèse de base est de 23 % de cotisations salariales pour un non-cadre et de 25 % pour un cadre. Ces taux sont des ordres de grandeur : ils ne constituent pas un barème légal universel.</p><p>Le résultat peut varier avec la rémunération, les cotisations applicables, la complémentaire santé, la prévoyance, les avantages en nature, les exonérations, les heures supplémentaires, le temps de travail, la convention collective ou la situation du contrat. L'Urssaf propose un simulateur beaucoup plus détaillé permettant notamment d'affiner la situation selon le contrat, le statut cadre, le temps partiel et les heures supplémentaires.</p><h2>Brut, net avant impôt et net payé : quelle différence ?</h2><ul><li><strong>Brut :</strong> rémunération inscrite au contrat avant cotisations salariales.</li><li><strong>Net avant impôt :</strong> montant après les cotisations salariales et avant prélèvement à la source.</li><li><strong>Net payé :</strong> montant versé après application du prélèvement à la source.</li></ul><p>Le taux de prélèvement à la source est transmis par l'administration fiscale à l'employeur. Il dépend de la situation fiscale du foyer et ne peut donc pas être déduit du seul salaire brut.</p><h2>Exemple</h2><p>Avec <strong>3 500 € brut par mois</strong> et l'hypothèse non-cadre, le simulateur estime <strong>2 695 € net avant impôt</strong>, soit 32 340 € sur douze mois. Avec un taux de prélèvement à la source de 7,5 %, l'estimation du montant après PAS serait de 2 493 € par mois.</p><h2>Pourquoi mon bulletin de paie peut-il être différent ?</h2><p>Un bulletin réel peut intégrer des éléments absents de cette estimation : mutuelle, prévoyance, avantages en nature, indemnités, exonérations, heures supplémentaires, assiette de certaines contributions ou règles propres au contrat et à la convention collective. Pour une simulation personnalisée et détaillée, reportez-vous aux paramètres du simulateur Urssaf.</p><section class="calculator-faq" aria-labelledby="faq-title"><h2 id="faq-title">FAQ</h2><details><summary>Quel est le net pour 2 000 € brut ?</summary><div class="calculator-faq-answer"><p>Avec l'hypothèse non-cadre de 23 %, l'ordre de grandeur est de 1 540 € net avant impôt. Le montant réel dépend de la situation de paie.</p></div></details><details><summary>Quel est le net pour 3 000 € brut ?</summary><div class="calculator-faq-answer"><p>Avec la même hypothèse, l'estimation est de 2 310 € net avant impôt.</p></div></details><details><summary>Le statut cadre change-t-il le salaire net ?</summary><div class="calculator-faq-answer"><p>Oui, certaines cotisations et contributions diffèrent selon le statut. C'est pourquoi le simulateur distingue cadre et non-cadre, tout en conservant une méthode indicative.</p></div></details><details><summary>Le net après impôt est-il mon salaire réellement versé ?</summary><div class="calculator-faq-answer"><p>C'est une estimation du montant après prélèvement à la source. D'autres éléments peuvent apparaître sur le bulletin de paie.</p></div></details></section><h2>Sources officielles</h2><p class="source-links"><a href="https://mon-entreprise.urssaf.fr/simulateurs/salaire-brut-net">Urssaf — convertisseur salaire brut/net</a> · <a href="https://www.impots.gouv.fr/gerer-mon-prelevement-la-source-1">impots.gouv.fr — gérer le prélèvement à la source</a>.</p><p><small>Calcul indicatif : il ne remplace ni une fiche de paie ni le simulateur personnalisé de l'Urssaf.</small></p></section><section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Calculs associés</h2><div class="related-links"><a class="related-link" href="/outil/salaire-horaire/"><strong>Salaire horaire</strong><span>Convertir un salaire en taux horaire.</span></a><a class="related-link" href="/outil/rupture-conventionnelle/"><strong>Rupture conventionnelle</strong><span>Estimer l’indemnité minimale.</span></a><a class="related-link" href="/outil/indemnite-licenciement/"><strong>Indemnité de licenciement</strong><span>Estimer l’indemnité légale.</span></a><a class="related-link" href="/outil/solde-tout-compte/"><strong>Solde de tout compte</strong><span>Estimer les sommes dues au départ.</span></a></div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="/salaire/">Salaire</a>.</p></div></section></main><footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer><script>window.TOOL={calc:function(){const b=Number(this.$("brut")?.value||0),p=this.$("periode")?.value||"mensuel",s=this.$("statut")?.value||"noncadre",pas=Math.min(100,Math.max(0,Number(this.$("pas")?.value||0)));if(!Number.isFinite(b)||b<=0)return"Veuillez renseigner un salaire brut positif.";const taux=s==="cadre"?.25:.23;const mensuel=p==="annuel"?b/12:b;const annuel=mensuel*12;const net=mensuel*(1-taux);const netAnnuel=net*12;const apres=net*(1-pas/100);const apresAnnuel=apres*12;const euro=n=>this.euro(n);const cdd=this.$("contrat")?.value==="CDD"?" Le CDD peut comporter des éléments spécifiques non intégrés ici.":"";return"<strong>"+euro(net)+" / mois net estimé avant impôt</strong><br><small>"+euro(annuel)+" brut/an · "+euro(netAnnuel)+" net/an · cotisations estimées : "+euro(mensuel*taux)+"/mois"+(pas>0?" · "+euro(apres)+" après PAS ("+pas.toFixed(1)+" %) · "+euro(apresAnnuel)+"/an":"")+"</small>"+cdd}};</script><script src="/enter-calcul.js" defer></script></body></html>
+<!doctype html>
+<html lang="fr">
+<head>
+<meta name="calculator-rendering" content="static">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="google-adsense-account" content="ca-pub-2924580037451268">
+<title>Salaire brut net : calcul brut → net | Simulateur</title>
+<meta name="description" content="Convertissez un salaire brut en net, ou un net en brut, avec estimation mensuelle, annuelle, cadre ou non-cadre et prélèvement à la source.">
+<link rel="canonical" href="https://simulateur.site/outil/salaire-brut-net/">
+<link rel="stylesheet" href="/styles.css">
+<style>
+.salary-page{max-width:1080px;margin:auto}
+.salary-hero{background:linear-gradient(135deg,#17483d 0%,#123a32 62%,#102f2a 100%);color:#fff;border-radius:22px;padding:40px 42px 34px;position:relative;overflow:hidden;box-shadow:0 22px 60px rgba(23,23,19,.14)}
+.salary-hero:after{content:"€";position:absolute;right:28px;top:-58px;font-size:16rem;line-height:1;font-weight:950;color:rgba(255,255,255,.05);transform:rotate(7deg);pointer-events:none}
+.salary-hero .eyebrow{color:#ffb29f;position:relative;z-index:1}
+.salary-hero h1,.salary-hero p{position:relative;z-index:1}
+.salary-hero p{max-width:720px;color:#dbe6df;font-size:1.05rem;margin:0}
+.salary-trust{position:relative;z-index:1;display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+.salary-trust span{padding:7px 10px;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:rgba(255,255,255,.06);font-size:.75rem;font-weight:800}
+.salary-box{margin-top:18px;background:var(--card);border:1px solid var(--ink);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+.salary-form{padding:30px}
+.salary-form h2{margin-top:0}
+.salary-lead{margin:0 0 20px;color:var(--muted);font-size:.9rem}
+.salary-fields{display:grid;grid-template-columns:repeat(2,1fr);gap:0 16px}
+.salary-field{margin:0 0 17px}
+.salary-field label{display:flex;justify-content:space-between;gap:10px;align-items:baseline;font-weight:900;margin-bottom:7px}
+.salary-field label small{font-weight:500;color:var(--muted)}
+.salary-field input,.salary-field select{width:100%;min-height:48px;padding:11px 13px;border:1px solid var(--ink);border-radius:9px;background:#fff;font:inherit}
+.salary-field input:focus,.salary-field select:focus{outline:3px solid var(--accent-soft);border-color:var(--accent)}
+.salary-switch{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:20px}
+.salary-switch button,.salary-presets button{border:1px solid var(--line);border-radius:10px;background:#fff;padding:10px 12px;font:inherit;font-weight:850;cursor:pointer}
+.salary-switch button[aria-pressed="true"]{border-color:var(--accent);background:var(--accent);color:#fff}
+.salary-presets{display:flex;gap:7px;flex-wrap:wrap;margin:-3px 0 18px}
+.salary-presets button{border-radius:999px;font-size:.78rem}
+.salary-presets button:hover{border-color:var(--accent);color:var(--accent)}
+.salary-advanced{margin:2px 0 20px;border:1px solid var(--line);border-radius:11px;background:#fbfaf6}
+.salary-advanced summary{cursor:pointer;padding:13px 15px;font-weight:900}
+.salary-advanced-body{padding:0 15px 4px}
+.salary-button{min-height:52px;font-size:1rem}
+.salary-result{padding:30px;background:#f7f4ec;border-top:1px solid var(--line)}
+.salary-result-grid{display:grid;grid-template-columns:1.35fr 1fr 1fr;gap:10px}
+.salary-result-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px}
+.salary-result-card small{display:block;color:var(--muted);font-size:.76rem;margin-bottom:5px}
+.salary-result-card strong{display:block;font-size:1.2rem;letter-spacing:-.03em}
+.salary-result-card.primary{background:#17483d;color:#fff;border-color:#17483d}
+.salary-result-card.primary small{color:#dbe6df}
+.salary-result-card.primary strong{font-size:1.75rem}
+.salary-result-note{margin:13px 0 0;color:var(--muted);font-size:.8rem}
+.salary-detail{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.salary-detail>div{padding:13px 14px;border-radius:10px;background:#fff;border:1px solid var(--line)}
+.salary-detail span{display:block;color:var(--muted);font-size:.76rem}
+.salary-detail strong{display:block;margin-top:2px;font-size:1rem}
+.salary-data{margin-top:18px;padding:25px 28px;background:#fff;border:1px solid var(--line);border-radius:16px}
+.salary-data-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}
+.salary-data-grid>div{padding:14px;border:1px solid var(--line);border-radius:10px;background:#fbfaf6}
+.salary-data-grid strong,.salary-data-grid span{display:block}
+.salary-data-grid span{margin-top:4px;color:var(--muted);font-size:.82rem}
+.salary-table{margin-top:18px;padding:25px 28px;background:#fff;border:1px solid var(--line);border-radius:16px;overflow:auto}
+.salary-table table{width:100%;border-collapse:collapse;font-size:.84rem}
+.salary-table th,.salary-table td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:right}
+.salary-table th:first-child,.salary-table td:first-child{text-align:left}
+.salary-table th{font-size:.74rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.salary-table tr.current{background:#f0f5f2;font-weight:800}
+.salary-content{max-width:850px;margin:50px auto 0}
+.salary-content p{color:#44413b}
+.salary-content li{margin:7px 0}
+.salary-source{font-size:.82rem;color:var(--muted);margin-top:28px;padding:16px;border-left:4px solid var(--accent);background:#f0eadf}
+.salary-faq{border-top:1px solid var(--ink);margin-top:45px;padding-top:10px}
+.salary-faq details{border-bottom:1px solid var(--line);padding:15px 0}
+.salary-faq summary{cursor:pointer;font-weight:900}
+.salary-error{padding:14px 16px;border:1px solid #d7b6aa;border-radius:10px;background:#fff7f4;color:#7d2f20}
+@media(max-width:720px){.salary-hero{padding:32px 22px}.salary-form,.salary-result{padding:25px 20px}.salary-fields,.salary-result-grid,.salary-detail,.salary-data-grid{grid-template-columns:1fr}.salary-table,.salary-data{padding:20px 16px}}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Salaire brut net : calcul brut → net","url":"https://simulateur.site/outil/salaire-brut-net/","description":"Convertissez un salaire brut en net, ou un net en brut, avec estimation mensuelle, annuelle, cadre ou non-cadre et prélèvement à la source.","inLanguage":"fr-FR","applicationCategory":"FinanceApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"price":"0","priceCurrency":"EUR"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Salaire","item":"https://simulateur.site/salaire/"},{"@type":"ListItem","position":3,"name":"Salaire brut net : calcul brut → net","item":"https://simulateur.site/outil/salaire-brut-net/"}]}</script>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Simulateur"><meta property="og:locale" content="fr_FR"><meta property="og:title" content="Salaire brut net : calcul brut → net | Simulateur"><meta property="og:description" content="Convertissez un salaire brut en net, ou un net en brut, avec estimation mensuelle, annuelle, cadre ou non-cadre et prélèvement à la source."><meta property="og:url" content="https://simulateur.site/outil/salaire-brut-net/"><meta name="twitter:card" content="summary">
+</head>
+<body>
+<header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header>
+<main>
+<div class="salary-page">
+<div class="breadcrumb"><a href="/">Accueil</a> · <a href="/salaire/">Salaire</a> · Salaire brut net : calcul brut → net</div>
+
+<section class="tool salary-hero">
+<div class="eyebrow">SALAIRE</div>
+<h1>Simulateur salaire brut net</h1>
+<p class="tool-intro">Convertissez un salaire brut en net, ou faites le calcul inverse. Comparez mensuel et annuel, cadre et non-cadre, avec une estimation du prélèvement à la source.</p>
+<div class="salary-trust"><span>✓ Brut → net</span><span>✓ Net → brut</span><span>✓ Mensuel ou annuel</span><span>✓ Calcul local</span></div>
+</section>
+
+<section class="salary-box" aria-labelledby="salary-sim-title">
+<div class="salary-form">
+<h2 id="salary-sim-title">Votre conversion</h2>
+<p class="salary-lead">Le résultat est calculé directement dans votre navigateur. Les taux utilisés sont des hypothèses d'estimation affichées ci-dessous, et non un barème légal universel.</p>
+
+<div class="salary-switch" role="group" aria-label="Sens de conversion">
+<button id="mode-brut" type="button" aria-pressed="true">Brut → net</button>
+<button id="mode-net" type="button" aria-pressed="false">Net → brut</button>
+</div>
+
+<div class="salary-fields">
+<div class="salary-field"><label for="montant">Salaire <small>€</small></label><input id="montant" type="number" min="0.01" step="50" value="3500" inputmode="decimal"></div>
+<div class="salary-field"><label for="periode">Période</label><select id="periode"><option value="mensuel">Mensuel</option><option value="annuel">Annuel</option></select></div>
+<div class="salary-field"><label for="statut">Statut</label><select id="statut"><option value="noncadre">Non-cadre</option><option value="cadre">Cadre</option></select></div>
+<div class="salary-field"><label for="pas">Taux de prélèvement à la source <small>%</small></label><input id="pas" type="number" min="0" max="100" step="0.1" value="0" inputmode="decimal"><small>0 % = estimation avant PAS</small></div>
+</div>
+
+<div class="salary-presets" aria-label="Montants rapides">
+<button type="button" data-amount="2000">2 000 €</button><button type="button" data-amount="2500">2 500 €</button><button type="button" data-amount="3000">3 000 €</button><button type="button" data-amount="3500">3 500 €</button><button type="button" data-amount="4000">4 000 €</button><button type="button" data-amount="5000">5 000 €</button>
+</div>
+
+<details class="salary-advanced">
+<summary>Affiner l'hypothèse de cotisations</summary>
+<div class="salary-advanced-body">
+<div class="salary-field"><label for="custom-rate">Taux de cotisations estimé <small>%</small></label><input id="custom-rate" type="number" min="0" max="40" step="0.1" value="23" inputmode="decimal"></div>
+<p class="status-note">Par défaut : 23 % pour un non-cadre et 25 % pour un cadre. Si vous connaissez le taux global observé sur votre paie, vous pouvez le saisir ici pour obtenir une estimation plus proche de votre situation. Ce taux reste une simplification et ne reconstitue pas un bulletin de paie.</p>
+</div>
+</details>
+
+<button class="button-main salary-button" id="calculate" type="button">Calculer</button>
+</div>
+
+<div class="salary-result result" id="result" aria-live="polite">
+<div class="salary-result-grid">
+<div class="salary-result-card primary"><small>Net estimé avant impôt</small><strong>2 695 € / mois</strong></div>
+<div class="salary-result-card"><small>Brut mensuel</small><strong>3 500 €</strong></div>
+<div class="salary-result-card"><small>Net annuel</small><strong>32 340 €</strong></div>
+</div>
+<div class="salary-detail">
+<div><span>Cotisations estimées</span><strong>805 € / mois</strong></div>
+<div><span>Taux retenu</span><strong>23 %</strong></div>
+<div><span>Net après PAS</span><strong>2 695 €</strong></div>
+</div>
+<p class="salary-result-note">Le net après PAS reste une approximation : le prélèvement à la source porte sur le revenu net imposable, qui peut différer du net avant impôt.</p>
+</div>
+</section>
+
+<section class="salary-data">
+<h2>Données utilisées</h2>
+<div class="salary-data-grid">
+<div><strong>Salaire saisi</strong><span>Le montant est interprété comme mensuel ou annuel selon la période choisie.</span></div>
+<div><strong>Statut</strong><span>Deux hypothèses sont proposées : 23 % de cotisations pour un non-cadre et 25 % pour un cadre.</span></div>
+<div><strong>Conversion inverse</strong><span>En mode net → brut, le salaire brut est retrouvé à partir du taux d'estimation retenu.</span></div>
+<div><strong>Prélèvement à la source</strong><span>Le taux saisi sert uniquement à donner un ordre de grandeur du net après PAS.</span></div>
+</div>
+</section>
+
+<section class="salary-table">
+<h2>Repères rapides brut → net</h2>
+<p class="status-note">Exemples calculés avec l'hypothèse standard non-cadre de 23 %, avant prélèvement à la source.</p>
+<table><caption class="sr-only">Repères de conversion brut net selon l'hypothèse non-cadre</caption><thead><tr><th scope="col">Brut / mois</th><th scope="col">Net estimé / mois</th><th scope="col">Net estimé / an</th></tr></thead><tbody>
+<tr><td>2 000 €</td><td>1 540 €</td><td>18 480 €</td></tr>
+<tr><td>2 500 €</td><td>1 925 €</td><td>23 100 €</td></tr>
+<tr><td>3 000 €</td><td>2 310 €</td><td>27 720 €</td></tr>
+<tr class="current"><td>3 500 €</td><td>2 695 €</td><td>32 340 €</td></tr>
+<tr><td>4 000 €</td><td>3 080 €</td><td>36 960 €</td></tr>
+<tr><td>5 000 €</td><td>3 850 €</td><td>46 200 €</td></tr>
+</tbody></table>
+</section>
+
+<section class="content-section salary-content">
+<h2>Comment passer du salaire brut au salaire net ?</h2>
+<p>Le salaire brut correspond à la rémunération avant les cotisations salariales. Le salaire net avant impôt correspond au montant restant après ces retenues. Le prélèvement à la source intervient ensuite, selon le taux transmis par l'administration fiscale à l'employeur. L'Urssaf rappelle que le résultat d'un simulateur reste indicatif et peut dépendre de nombreux paramètres individuels. citeturn4search0</p>
+
+<h2>Brut, net avant impôt et net après PAS</h2>
+<ul>
+<li><strong>Brut :</strong> montant de référence de la rémunération avant cotisations salariales.</li>
+<li><strong>Net avant impôt :</strong> estimation du montant restant après cotisations salariales.</li>
+<li><strong>Net après PAS :</strong> estimation après prélèvement à la source ; ce résultat ne doit pas être assimilé à un bulletin de paie réel.</li>
+</ul>
+<p>Le taux de prélèvement à la source dépend de la situation fiscale et est transmis à l'employeur par l'administration. Le taux personnalisé peut notamment être individualisé pour les couples mariés ou pacsés. citeturn0search3</p>
+
+<h2>Cadre ou non-cadre : pourquoi le résultat peut-il changer ?</h2>
+<p>Le statut influence certaines cotisations et contributions. Le convertisseur Urssaf distingue notamment le statut cadre et prend en compte la retraite complémentaire et les contributions associées dans son calcul détaillé. citeturn3search0turn3search1</p>
+
+<h2>Notre méthode et ses limites</h2>
+<p>Ce calculateur privilégie une estimation lisible plutôt qu'une fausse précision. Les hypothèses par défaut sont de <strong>23 % de cotisations pour un non-cadre</strong> et <strong>25 % pour un cadre</strong>. Elles sont explicitement présentées comme des hypothèses internes et ne constituent pas un barème réglementaire universel.</p>
+<p>Le résultat peut différer d'une fiche de paie à cause notamment de la rémunération exacte, des bases de cotisation, de la mutuelle, de la prévoyance, des avantages en nature, des heures supplémentaires, du temps de travail, d'une convention collective ou d'autres éléments individuels. Pour une simulation réglementaire détaillée, le convertisseur officiel de l'Urssaf permet d'affiner beaucoup plus de paramètres. citeturn6search4</p>
+
+<h2>Exemple : 3 500 € brut par mois</h2>
+<p>Avec l'hypothèse standard non-cadre de 23 %, 3 500 € brut donnent une estimation de <strong>2 695 € net par mois avant impôt</strong>, soit 32 340 € sur douze mois. Le mode inverse permet également de partir d'un objectif de net pour retrouver le brut correspondant à la même hypothèse.</p>
+
+<section class="calculator-faq salary-faq" aria-labelledby="faq-title">
+<h2 id="faq-title">FAQ</h2>
+<details><summary>Quel est le net pour 2 000 € brut ?</summary><div class="calculator-faq-answer"><p>Avec l'hypothèse standard non-cadre de 23 %, l'estimation est de 1 540 € net par mois avant impôt. Le montant réel peut être différent.</p></div></details>
+<details><summary>Quel est le net pour 3 000 € brut ?</summary><div class="calculator-faq-answer"><p>Avec la même hypothèse, 3 000 € brut correspondent à 2 310 € net estimé avant impôt.</p></div></details>
+<details><summary>Peut-on calculer le brut à partir du net ?</summary><div class="calculator-faq-answer"><p>Oui. Activez « Net → brut », saisissez le net souhaité et choisissez votre statut. Le calcul inverse utilise le même taux d'estimation.</p></div></details>
+<details><summary>Le statut cadre change-t-il le salaire net ?</summary><div class="calculator-faq-answer"><p>Oui, certaines cotisations diffèrent selon le statut. Le calculateur applique donc une hypothèse distincte pour cadre et non-cadre, sans prétendre reproduire toutes les lignes d'une fiche de paie.</p></div></details>
+<details><summary>Le net après prélèvement à la source est-il le salaire réellement versé ?</summary><div class="calculator-faq-answer"><p>Pas nécessairement. Le PAS est appliqué au revenu net imposable et le bulletin peut comporter d'autres éléments. Le résultat affiché ici est donc une estimation.</p></div></details>
+</section>
+
+<div class="salary-source"><strong>Sources et vérification</strong><p>Le fonctionnement général du brut/net et les limites d'une simulation sont confrontés au <a href="https://mon-entreprise.urssaf.fr/simulateurs/salaire-brut-net" target="_blank" rel="noopener noreferrer">convertisseur salaire brut/net de l'Urssaf</a>. Pour le prélèvement à la source, voir <a href="https://www.impots.gouv.fr/particulier/questions/comment-gerer-mon-prelevement-a-la-source" target="_blank" rel="noopener noreferrer">impots.gouv.fr</a>.</p></div>
+<p><small>Calcul indicatif : ce résultat ne remplace ni une fiche de paie ni une simulation personnalisée de l'Urssaf.</small></p>
+</section>
+
+<section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Calculs associés</h2><div class="related-links">
+<a class="related-link" href="/outil/salaire-horaire/"><strong>Salaire horaire</strong><span>Convertir un salaire en taux horaire.</span></a>
+<a class="related-link" href="/outil/heures-supplementaires/"><strong>Heures supplémentaires</strong><span>Estimer la rémunération des heures supplémentaires.</span></a>
+<a class="related-link" href="/outil/prelevement-source/"><strong>Prélèvement à la source</strong><span>Calculer un montant de prélèvement sur un revenu imposable.</span></a>
+<a class="related-link" href="/outil/prime-activite/"><strong>Prime d’activité</strong><span>Estimer une éventuelle prime selon les revenus.</span></a>
+</div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="/salaire/">Salaire</a>.</p></div></section>
+</div>
+</main>
+<footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer>
+
+<script>
+window.TOOL={calc:function(){
+  const montantRaw=this.$("montant")?.value.trim()||"",periode=this.$("periode")?.value||"mensuel",statut=this.$("statut")?.value||"noncadre",pasRaw=this.$("pas")?.value.trim()||"0",customRaw=this.$("custom-rate")?.value.trim()||"",mode=document.getElementById("mode-net")?.getAttribute("aria-pressed")==="true";
+  const montant=Number(montantRaw),pas=Number(pasRaw),custom=Number(customRaw),defaultRate=statut==="cadre"?25:23,rate=customRaw!==""?custom:defaultRate;
+  if(!montantRaw||!Number.isFinite(montant)||montant<=0)return'<div class="salary-error" role="alert"><strong>Montant invalide.</strong><p>Saisissez un salaire strictement positif.</p></div>';
+  if(!Number.isFinite(pas)||pas<0||pas>100)return'<div class="salary-error" role="alert"><strong>Taux de PAS invalide.</strong><p>Saisissez un taux compris entre 0 et 100 %.</p></div>';
+  if(!Number.isFinite(rate)||rate<0||rate>=100)return'<div class="salary-error" role="alert"><strong>Taux de cotisations invalide.</strong><p>Saisissez un taux compris entre 0 et 99,9 %.</p></div>';
+  const monthlyInput=periode==="annuel"?montant/12:montant;
+  const factor=1-rate/100;
+  let brut,net;
+  if(mode){net=monthlyInput;brut=net/factor}else{brut=monthlyInput;net=brut*factor}
+  if(!Number.isFinite(brut)||!Number.isFinite(net)||brut<=0||net<=0)return'<div class="salary-error" role="alert"><strong>Résultat impossible.</strong><p>Réduisez le montant ou vérifiez les paramètres.</p></div>';
+  const brutAnnual=brut*12,netAnnual=net*12,cot=brut-net,after=net*(1-pas/100),afterAnnual=after*12,displayRate=rate.toLocaleString("fr-FR",{minimumFractionDigits:1,maximumFractionDigits:1});
+  const euro=n=>this.euro(n);
+  const primaryLabel=mode?"Brut estimé":"Net estimé avant impôt";
+  const primary=mode?brut:net;
+  const secondary=mode?net:brut;
+  const secondaryLabel=mode?"Net mensuel demandé":"Brut mensuel";
+  const headline=primaryLabel+" : "+euro(primary)+" / mois";
+  return'<div class="salary-result-grid"><div class="salary-result-card primary"><small>'+primaryLabel+'</small><strong>'+euro(primary)+' / mois</strong></div><div class="salary-result-card"><small>'+secondaryLabel+'</small><strong>'+euro(secondary)+'</strong></div><div class="salary-result-card"><small>'+(mode?"Brut annuel":"Net annuel")+'</small><strong>'+euro(mode?brutAnnual:netAnnual)+'</strong></div></div><div class="salary-detail"><div><span>Cotisations estimées</span><strong>'+euro(cot)+' / mois</strong></div><div><span>Taux retenu</span><strong>'+displayRate+' %</strong></div><div><span>Net après PAS</span><strong>'+euro(after)+' / mois</strong></div></div><p class="salary-result-note">'+headline+'. Le net après PAS est une approximation basée sur le taux saisi : le PAS réel s’applique au revenu net imposable.</p>';
+}};
+(function(){
+  const amount=document.getElementById("montant"),custom=document.getElementById("custom-rate"),modeBrut=document.getElementById("mode-brut"),modeNet=document.getElementById("mode-net");
+  function setMode(net){modeBrut.setAttribute("aria-pressed",String(!net));modeNet.setAttribute("aria-pressed",String(net));amount.previousElementSibling.textContent=net?"Net souhaité":"Salaire brut";}
+  modeBrut.addEventListener("click",function(){setMode(false);Simulateurs.calc()});
+  modeNet.addEventListener("click",function(){setMode(true);Simulateurs.calc()});
+  document.querySelectorAll(".salary-presets button").forEach(b=>b.addEventListener("click",function(){amount.value=this.dataset.amount;Simulateurs.calc()}));
+  document.getElementById("statut").addEventListener("change",function(){if(custom.value==="23"||custom.value==="25"||custom.value===""){custom.value=this.value==="cadre"?"25":"23"}Simulateurs.calc()});
+  custom.addEventListener("input",function(){Simulateurs.calc()});
+  ["montant","periode","pas"].forEach(id=>document.getElementById(id).addEventListener("input",function(){Simulateurs.calc()}));
+  setMode(false);
+})();
+</script>
+<script src="/simulateurs.js" defer></script>
+<script src="/enter-calcul.js" defer></script>
+</body>
+</html>
