@@ -119,6 +119,21 @@
         "familyQuotientCap": 1807
       }
     },
+    "prime-activite": {
+      "label": "Prime d’activité",
+      "year": 2026,
+      "effectiveFrom": "2026-04-01",
+      "effectiveTo": "2027-03-31",
+      "verifiedOn": "2026-10-07",
+      "source": {
+        "label": "CAF — évolution de la prime d’activité en 2026",
+        "url": "https://www.caf.fr/allocataires/actualites/actualites-nationales/la-prime-d-activite-augmente-en-2026"
+      },
+      "values": {
+        "activityRate": 0.5985,
+        "base": 638.28
+      }
+    },
     "rsa": {
       "label": "RSA",
       "year": 2026,
