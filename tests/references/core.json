@@ -136,7 +136,7 @@
       "resident": "yes",
       "majoration": "no",
       "housing": "none",
-        "m1": "0",
+      "m1": "0",
       "m2": "0",
       "m3": "0"
     },
@@ -451,5 +451,63 @@
     "sortie": "B\\s*:\\s*1,001(?:0)?\\s*€\\s*/\\s*kg|0,001(?:0)?\\s*€\\s*/\\s*kg",
     "source": "https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/linformation-sur-les-prix",
     "note": "Cas de non-régression : l'écart inférieur à 0,01 € par kg reste visible après formatage."
+  },
+  {
+    "outil": "pret-immobilier",
+    "entrees": {
+      "capital": "200000",
+      "taux": "3.5",
+      "duree": "20",
+      "assurance": "0.25",
+      "frais": "0",
+      "revenus": "",
+      "charges": "0"
+    },
+    "attendu": 1159.92,
+    "tolerance": 0.01,
+    "sortie": "Mensualité hors assurance",
+    "verifications": [
+      {
+        "sortie": "Coût du crédit",
+        "attendu": 88380.66,
+        "tolerance": 0.01
+      },
+      {
+        "sortie": "Total remboursé",
+        "attendu": 288380.66,
+        "tolerance": 0.01
+      }
+    ],
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/R2924",
+    "note": "Cas de référence indépendant : 200 000 € sur 20 ans à 3,50 % donne une mensualité hors assurance d’environ 1 159,92 €. L’assurance hypothétique de 0,25 % est appliquée au capital initial."
+  },
+  {
+    "outil": "pret-immobilier",
+    "entrees": {
+      "capital": "120000",
+      "taux": "0",
+      "duree": "10",
+      "assurance": "0",
+      "frais": "500",
+      "revenus": "4000",
+      "charges": "100"
+    },
+    "attendu": 1000,
+    "tolerance": 0.01,
+    "sortie": "Mensualité hors assurance",
+    "verifications": [
+      {
+        "sortie": "Taux d'effort estimé avec le nouveau prêt",
+        "attendu": 27.5,
+        "tolerance": 0.01
+      },
+      {
+        "sortie": "Coût du crédit",
+        "attendu": 500,
+        "tolerance": 0.01
+      }
+    ],
+    "source": "https://www.economie.gouv.fr/particuliers/gerer-mon-argent/emprunter-et-sassurer/credit-immobilier-comment-ca-marche",
+    "note": "Cas de non-régression à taux nul : le capital est réparti uniformément sur 120 mensualités ; le taux d’effort inclut la nouvelle mensualité et les autres crédits."
   }
 ]
