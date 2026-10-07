@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="google-adsense-account" content="ca-pub-2924580037451268">
-<title>Prêt immobilier : mensualité, intérêts et coût total | Simulateur</title>
+<title>Prêt immobilier | Simulateur</title>
 <meta name="description" content="Calculez la mensualité, les intérêts, l’assurance et le coût total d’un prêt immobilier selon le montant, le taux et la durée.">
 <link rel="canonical" href="https://simulateur.site/outil/pret-immobilier/">
 <link rel="stylesheet" href="/styles.css">
@@ -74,10 +74,10 @@
 <div class="mortgage-page">
 <div class="breadcrumb"><a href="/">Accueil</a> · <a href="/immobilier/">Immobilier</a> · Calculateur de prêt immobilier</div>
 
-<section class="mortgage-hero">
+<section class="tool mortgage-hero">
 <div class="eyebrow">CRÉDIT IMMOBILIER</div>
 <h1>Calculateur de prêt immobilier</h1>
-<p>Calculez votre mensualité, le coût des intérêts et de l'assurance, puis visualisez l'évolution de votre crédit. Modifiez la durée ou le taux pour comparer immédiatement plusieurs scénarios.</p>
+<p class="tool-intro">Calculez votre mensualité, le coût des intérêts et de l’assurance, puis comparez plusieurs durées ou taux.</p>
 <div class="mortgage-trust"><span>✓ Calcul instantané</span><span>✓ Tableau d'amortissement</span><span>✓ Comparaison 15 / 20 / 25 ans</span><span>✓ Sans inscription</span></div>
 </section>
 
@@ -108,7 +108,7 @@
 <button class="button-main mortgage-button" id="calculate" type="button">Calculer mon prêt</button>
 </div>
 
-<div class="mortgage-result" id="results" aria-live="polite">
+<div class="mortgage-result result" id="results" aria-live="polite">
 <div class="result-kpi">
 <div class="result-card primary"><small>Mensualité avec assurance</small><strong id="monthly">—</strong></div>
 <div class="result-card"><small>Mensualité hors assurance</small><strong id="monthlyEx">—</strong></div>
@@ -144,10 +144,10 @@
 <div class="schedule-table-wrap"><table class="schedule-table"><caption class="sr-only">Tableau annuel d’amortissement du prêt</caption><thead><tr><th scope="col">Année</th><th scope="col">Capital remboursé</th><th scope="col">Intérêts</th><th scope="col">Assurance</th><th scope="col">Capital restant dû</th></tr></thead><tbody id="scheduleBody"></tbody></table></div>
 </section>
 
-<section class="mortgage-content">
+<section class="content-section mortgage-content">
 <h2>Comment fonctionne le calcul ?</h2>
 <p>Pour un prêt amortissable à taux fixe, la mensualité hors assurance est calculée à partir du capital emprunté, du taux mensuel et du nombre total de mensualités. À chaque échéance, une part correspond aux intérêts et le reste rembourse le capital.</p>
-<div class="formula"><strong>Formule de la mensualité hors assurance</strong><code>M = C × r ÷ [1 − (1 + r)<sup>−n</sup>]</code><span><strong>C</strong> = capital, <strong>r</strong> = taux mensuel, <strong>n</strong> = nombre de mensualités.</span></div>
+<div class="formula"><strong>Formule de la mensualité hors assurance</strong><code>M = C × r ÷ [1 − (1 + r)<sup>−n</sup>]</code><span><strong>C</strong> = capital, <strong>r</strong> = taux mensuel, <strong>n</strong> = nombre de mensualités.</span><p>Référence : <a href="https://www.service-public.gouv.fr/particuliers/vosdroits/R2924" target="_blank" rel="noopener">Service-Public — simulation de l’échéancier d’un crédit immobilier</a>.</p></div>
 <p>Lorsque le taux est nul, le calcul devient simplement <strong>capital ÷ nombre de mensualités</strong>. L’assurance et les frais saisis sont ensuite ajoutés pour estimer le montant total remboursé.</p>
 
 <h2>Que comprend le résultat ?</h2>
@@ -173,13 +173,13 @@
 <h2>Exemple de simulation</h2>
 <p>Avec les valeurs proposées par défaut, soit 200 000 € sur 20 ans à 3,50 % et une assurance hypothétique de 0,25 % par an, la mensualité hors assurance est d’environ 1 160 €. Ce taux n’est pas présenté comme un taux de marché : il sert uniquement à illustrer le fonctionnement de l’outil.</p>
 
-<div class="mortgage-faq">
-<h2>Questions fréquentes</h2>
-<details><summary>Comment calculer la mensualité d'un prêt immobilier ?</summary><p>Pour un prêt à taux fixe, la mensualité hors assurance dépend du capital emprunté, du taux périodique et du nombre total de mensualités. Le calculateur applique la formule d'annuité correspondante.</p></details>
-<details><summary>Est-il préférable d'emprunter sur 20 ou 25 ans ?</summary><p>Une durée plus longue réduit généralement la mensualité mais augmente le nombre de périodes pendant lesquelles des intérêts sont payés. Comparez les deux scénarios dans le tableau ci-dessus selon votre budget et le coût total.</p></details>
-<details><summary>L'assurance est-elle incluse dans la mensualité ?</summary><p>Oui, dans cette simulation, une estimation d'assurance est ajoutée à la mensualité. Son calcul reste simplifié et ne remplace pas le tarif d'un contrat réel.</p></details>
-<details><summary>Le calculateur donne-t-il le TAEG ?</summary><p>Non. Le TAEG dépend de l'ensemble des coûts et modalités du crédit. Cette page affiche une estimation du coût du financement à partir des données que vous saisissez.</p></details>
-<details><summary>Le résultat garantit-il qu'une banque acceptera mon dossier ?</summary><p>Non. Une simulation mathématique ne tient pas compte de tous les critères d'une banque : revenus retenus, stabilité professionnelle, reste à vivre, apport, charges, assurance, politique de risque et caractéristiques du projet.</p></details>
+<div class="mortgage-faq calculator-faq" id="faq" aria-labelledby="faq-title">
+<h2 id="faq-title">FAQ</h2>
+<details><summary>Comment calculer la mensualité d'un prêt immobilier ?</summary><div class="calculator-faq-answer"><p>Pour un prêt à taux fixe, la mensualité hors assurance dépend du capital emprunté, du taux périodique et du nombre total de mensualités. Le calculateur applique la formule d'annuité correspondante.</p></div></details>
+<details><summary>Est-il préférable d'emprunter sur 20 ou 25 ans ?</summary><div class="calculator-faq-answer"><p>Une durée plus longue réduit généralement la mensualité mais augmente le nombre de périodes pendant lesquelles des intérêts sont payés. Comparez les deux scénarios dans le tableau ci-dessus selon votre budget et le coût total.</p></div></details>
+<details><summary>L'assurance est-elle incluse dans la mensualité ?</summary><div class="calculator-faq-answer"><p>Oui, dans cette simulation, une estimation d'assurance est ajoutée à la mensualité. Son calcul reste simplifié et ne remplace pas le tarif d'un contrat réel.</p></div></details>
+<details><summary>Le calculateur donne-t-il le TAEG ?</summary><div class="calculator-faq-answer"><p>Non. Le TAEG dépend de l'ensemble des coûts et modalités du crédit. Cette page affiche une estimation du coût du financement à partir des données que vous saisissez.</p></div></details>
+<details><summary>Le résultat garantit-il qu'une banque acceptera mon dossier ?</summary><div class="calculator-faq-answer"><p>Non. Une simulation mathématique ne tient pas compte de tous les critères d'une banque : revenus retenus, stabilité professionnelle, reste à vivre, apport, charges, assurance, politique de risque et caractéristiques du projet.</p></div></details>
 </div>
 
 <p class="mortgage-source">Sources : <a href="https://www.service-public.gouv.fr/particuliers/vosdroits/R2924" target="_blank" rel="noopener">Service-Public — simulation de l'échéancier et du TAEG</a> · <a href="https://www.economie.gouv.fr/hcsf" target="_blank" rel="noopener">Économie.gouv.fr — HCSF</a>. Les calculs de cette page sont des estimations mathématiques et ne constituent ni une offre de crédit ni une décision bancaire.</p>
