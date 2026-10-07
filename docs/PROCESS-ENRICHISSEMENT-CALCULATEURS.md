@@ -102,9 +102,9 @@ Vérifier en particulier :
 - **Aucune valeur n'est inventée ni déduite d'une autre source** lorsque la source officielle n'est pas disponible. Dans ce cas, l'information est omise ou signalée comme non vérifiée, et la limite est écrite dans la page.
 - **L'année dans le titre ou le H1** n'est admise que si elle est cohérente avec le jeu de paramètres de l'outil ou avec `anneeAMigrer` : `scripts/check-params.mjs` contrôle cette cohérence.
 
-### 0.5 Outil verrouillé (classe C) : migrer d'abord
+### 0.5 Outil verrouillé (classe C) : migration intégrée à l'enrichissement
 
-Un outil de `anneeAMigrer` ne s'enrichit pas. Il se **migre**, dans une PR dédiée, avant tout chantier éditorial :
+Un outil de `anneeAMigrer` ne peut pas être enrichi tant que sa migration n'est pas réalisée. La migration est toutefois **intégrée à la PR complète du calculateur** : elle doit être effectuée et vérifiée avant les changements qui en dépendent, mais elle ne nécessite pas de merge intermédiaire :
 
 1. créer ou compléter le jeu de paramètres correspondant dans `data/parametres.json`, avec source, validité et vérification ;
 2. régénérer et contrôler `public/parametres.js` (`scripts/generate-params.mjs`) ;
@@ -112,9 +112,9 @@ Un outil de `anneeAMigrer` ne s'enrichit pas. Il se **migre**, dans une PR dédi
 4. ajouter le cas de référence sourcé (§ 0.4) ;
 5. retirer le slug de `anneeAMigrer` **uniquement** lorsque la migration est réelle ;
 6. renseigner `docs/ECHEANCES.md` ;
-7. ne modifier aucun barème au passage : une migration est mécanique, une revalorisation est une autre PR.
+7. ne modifier aucun barème au passage : une migration est mécanique ; une revalorisation reste un changement distinct.
 
-L'enrichissement éditorial ne commence qu'une fois cette PR fusionnée.
+L'enrichissement peut se poursuivre dans la même PR une fois la migration vérifiée.
 
 ### 0.6 Outil à qualifier (classe D)
 
@@ -123,17 +123,19 @@ Le classement d'un outil douteux est une décision, pas un détail. Il se traite
 - l'outil ne contient aucune valeur réglementaire : il passe en classe A ;
 - l'outil en contient : il doit être migré vers un jeu de paramètres (classe B), ou inscrit à `anneeAMigrer` si les contrôles actuels le permettent. Le mécanisme exact se décide au cas par cas, car `scripts/check-params.mjs` impose des règles sur la présence d'une année dans le titre ou le H1 des outils listés.
 
-### 0.7 Séparer les types de changement
+### 0.7 Séparer les changements réellement indépendants
 
-Un chantier peut impliquer plusieurs types de changement. Ils se livrent dans des **PR distinctes**, mergées dans cet ordre :
+Un chantier d'enrichissement d'un calculateur est livré dans **une seule PR complète**. Cette PR peut inclure la migration réglementaire, l'enrichissement fonctionnel et l'enrichissement éditorial lorsqu'ils relèvent du même chantier.
 
-1. correction d'un bug de calcul ou de saisie (exemple : ajout d'un `type="number"` manquant) ;
-2. migration du barème vers les paramètres (§ 0.5) ;
-3. **enrichissement du calculateur**, qui regroupe son enrichissement fonctionnel et éditorial lorsqu'ils relèvent du même chantier.
+Une PR distincte reste réservée à un changement réellement indépendant :
+
+1. correction d'un bug isolé qui ne fait pas partie du chantier ;
+2. évolution du socle partagé ou chantier d'architecture ;
+3. revalorisation réglementaire indépendante de l'enrichissement.
 
 L'enrichissement fonctionnel n'est donc pas limité à une retouche éditoriale : si l'audit montre que l'interface, les possibilités de calcul, les paramètres, les unités ou la logique propre au calculateur sont insuffisants, ils peuvent être améliorés dans la PR d'enrichissement, sous réserve des garde-fous et tests prévus par ce document.
 
-Raison : un bug ou une migration mélangés à un enrichissement rendent la revue illisible et masquent la cause d'une régression. En revanche, les évolutions fonctionnelles et éditoriales d'un même calculateur peuvent être traitées ensemble lorsqu'elles constituent un même chantier d'enrichissement. Chaque PR garde un périmètre vérifiable.
+Raison : séparer artificiellement la migration réglementaire de l'enrichissement du même calculateur multiplie les PR, merges et MEP sans bénéfice lorsque les deux font partie du même chantier. La PR complète doit conserver un périmètre vérifiable et une CI entièrement verte.
 
 ---
 
@@ -188,8 +190,7 @@ Un chantier d'enrichissement porte sur **un seul calculateur** à la fois.
 | 1 | Audit (§ 3) | Fiche d'audit |
 | 2 | Cible et périmètre (§ 4) | Fiche de cadrage |
 | 3 | Intentions de recherche et benchmark (§ 5, § 9) | Notes d'intentions et de benchmark |
-| 4 | PR préalables éventuelles : bug, migration (§ 0.7) | PR mergées |
-| 5 | Enrichissement (§ 10) | Modifications sur la branche |
+| 4 | Enrichissement complet (§ 10), incluant la migration si nécessaire | Une PR complète |
 | 6 | Tests et contrôles (§ 11) | Contrôles verts |
 | 7 | Revue finale et PR (§ 12) | PR conforme à la checklist |
 | 8 | Mise en production, **uniquement après autorisation explicite** (§ 13) | Déploiement |
@@ -204,7 +205,7 @@ L'ordre de traitement suit cette priorité :
 
 1. les outils réglementaires **déjà migrés et vérifiés** (classe B), où le terrain est sûr et les paramètres sourcés ;
 2. les outils de **pur calcul** (classe A), sans risque de contenu réglementaire inexact ;
-3. les outils verrouillés (classe C), **après** leur migration ;
+3. les outils verrouillés (classe C), avec migration intégrée à leur enrichissement ;
 4. les outils à qualifier (classe D), **après** leur classement.
 
 À l'intérieur d'une classe, privilégier les outils dont la demande est la plus forte (données de recherche si disponibles, sinon pertinence de l'intention) et ceux qui ont le plus d'entrées de baseline à résorber.
@@ -510,10 +511,10 @@ Joindre les sorties à la PR.
 
 ## 12. Revue et Pull Request
 
-- Une branche par calculateur : `feat/enrichissement-<slug>`.
+- Une branche par calculateur : `feat/enrichissement-<slug>`. Pour un outil verrouillé, la migration est réalisée dans cette même branche et cette même PR.
 - Un titre de PR explicite : `feat(<slug>): enrichir le calculateur <nom>`.
 - Des messages de commit en français, au format `type: description` ou `type(scope): description`.
-- Une PR par type de changement (§ 0.7).
+- Une PR par chantier de calculateur. Les changements réellement indépendants restent séparés (§ 0.7).
 - La description reprend la checklist de l'annexe A, cochée, avec les sorties des contrôles.
 - Aucun barème, taux ou plafond modifié en dehors d'une PR de migration ou de revalorisation, annoncée comme telle.
 - Aucune fusion tant que la CI n'est pas verte sur le dernier commit et que la branche n'est pas à jour avec `main`.
@@ -624,7 +625,7 @@ Pour toute personne ou tout outil appliquant ce processus :
 3. **Ne jamais modifier** `data/parametres.json` ou `scripts/check-pages.baseline.json` hors du cadre explicite du chantier.
 4. **Ne jamais ajouter** d'entrée à la baseline (y compris avec `--seed-baseline`) ni d'exception générique.
 5. **Ne jamais fusionner ni déployer** sans autorisation explicite.
-6. **Un seul calculateur par chantier**, un seul type de changement par PR.
+6. **Un seul calculateur par chantier et une seule PR complète pour ce chantier**. Les changements réellement indépendants peuvent rester dans des PR séparées.
 7. En cas d'écart entre ce document et le dépôt (fichier absent, option inconnue, règle différente), **vérifier dans le dépôt** et signaler l'écart plutôt que de supposer.
 8. Rendre compte : fichiers touchés, commits, sorties des contrôles, hypothèses non vérifiées, points laissés en suspens.
 
@@ -656,7 +657,7 @@ Ce processus privilégie la qualité, l'exactitude, l'originalité et la satisfa
 - [ ] Aucune entrée ajoutée à `scripts/check-pages.baseline.json`
 - [ ] Entrées de baseline de l'outil retirées avec `--update-baseline`
 - [ ] Aucune exception ajoutée à `tests/generic-calcs-exceptions.json`
-- [ ] Slug absent de `anneeAMigrer` (ou migration faite dans une PR préalable)
+- [ ] Slug absent de `anneeAMigrer` (migration réalisée dans la même PR si nécessaire)
 
 ## Fiabilité
 - [ ] Cas normaux, limites, invalides et virgule décimale vérifiés
@@ -727,7 +728,7 @@ Ce processus privilégie la qualité, l'exactitude, l'originalité et la satisfa
 ## Cible
 - Contenu à ajouter, modifier, supprimer : 
 - Hors périmètre : 
-- PR préalables nécessaires (correction, migration) : 
+- Changements indépendants à traiter dans une PR séparée, s'il y en a : 
 - Cas de test à ajouter : 
 ```
 
