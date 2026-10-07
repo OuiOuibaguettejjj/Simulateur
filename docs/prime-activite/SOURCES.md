@@ -10,6 +10,7 @@ Vérification : 7 octobre 2026.
 ## Valeurs migrées
 
 - Montant forfaitaire de base : **638,28 €** à compter du 1er avril 2026.
+- Montants forfaitaires selon la composition : 638,28 € / 957,42 € / 1 148,90 € pour une personne seule avec 0 / 1 / 2 personnes à charge ; 957,42 € / 1 148,90 € / 1 340,39 € en couple ; **255,31 €** par personne à charge supplémentaire.
 - Part des revenus professionnels : **59,85 %**.
 - Période suivie : du 1er avril 2026 au 31 mars 2027.
 
