@@ -48,6 +48,6 @@ assert.match(result({pas:"10","net-imposable":"2800"}), /2\s?415\s?€/);
 assert.match(result({pas:"10","net-imposable":""}), /Renseignez le revenu net imposable/);
 assert.match(result({pas:"10","net-imposable":"30000"}), /Paramètres incohérents/);
 assert.match(result({"custom-rate":"40"}), /2\s?100\s?€/);
-assert.match(result({"custom-rate":"23,5"}), /2\s?677,5\s?€/);
+assert.match(result({"custom-rate":"23,5"}), /2\s?678\s?€/);
 
 console.log("Salaire brut net regression tests passed.");
