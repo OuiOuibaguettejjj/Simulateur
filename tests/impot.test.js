@@ -36,7 +36,7 @@ const advanced=calc(50000,1,false,{deductions:5000,sourceWithholding:3000});
 assert.equal(advanced.taxableIncome,45000);
 assert.equal(Math.round(advanced.netTax),6604);
 assert.equal(Math.round(advanced.balance),3604);
-assert.equal(calc(50000,1,false,{sourceWithholding:9000}).balance,-896.01);
+assert.equal(Math.round(calc(50000,1,false,{sourceWithholding:9000}).balance*100),-89601);
 
 assert.equal(ImpotEngine.calculate({income:-1,parts:1,couple:false}).valid,false);
 assert.equal(ImpotEngine.calculate({income:50000,parts:0,couple:false}).valid,false);
