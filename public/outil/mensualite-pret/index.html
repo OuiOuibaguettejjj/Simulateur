@@ -50,11 +50,11 @@
 </div>
 <div id="comparison" class="content-section">
 <h2>Comparer les durées</h2>
-<div class="table-wrap"><table><thead><tr><th>Durée</th><th>Mensualité</th><th>Intérêts</th><th>Coût avec assurance</th></tr></thead><tbody id="compareBody"></tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>Durée</th><th>Mensualité</th><th>Intérêts</th><th>Intérêts + assurance</th></tr></thead><tbody id="compareBody"></tbody></table></div>
 </div>
 <div id="rate-comparison" class="content-section">
 <h2>Mesurer l'effet du taux</h2>
-<div class="table-wrap"><table><thead><tr><th>Taux</th><th>Mensualité</th><th>Intérêts</th><th>Coût avec assurance</th></tr></thead><tbody id="rateBody"></tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>Taux</th><th>Mensualité</th><th>Intérêts</th><th>Intérêts + assurance</th></tr></thead><tbody id="rateBody"></tbody></table></div>
 </div>
 <div class="formula">
 <strong>Formule</strong>
@@ -96,26 +96,22 @@
 </main>
 <footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer>
 <script>
+function calculateMensualitePretLoan(capital,annualRate,years,insuranceRate){const n=years*12,r=annualRate/1200,monthly=r?capital*r/(1-Math.pow(1+r,-n)):capital/n,insuranceMonthly=capital*(insuranceRate/100)/12;return{n,monthly,insuranceMonthly,interest:monthly*n-capital,total:capital+(monthly*n-capital)+(insuranceMonthly*n)}}
 window.TOOL={calc:function(){
   const parse=id=>{const raw=String(this.$(id).value??"").trim().replace(",",".");return raw===""?NaN:Number(raw)};
   const c=parse("capital"), annual=parse("taux"), years=parse("duree"), insurance=parse("assurance");
   const valid=Number.isFinite(c)&&c>=1000&&c<=100000000&&Number.isFinite(annual)&&annual>=0&&annual<=30&&Number.isInteger(years)&&years>=1&&years<=50&&Number.isFinite(insurance)&&insurance>=0&&insurance<=10;
   if(!valid)return "Renseignez des valeurs valides.";
-  const n=years*12, r=annual/1200;
-  const monthly=r?c*r/(1-Math.pow(1+r,-n)):c/n;
-  const insuranceMonthly=c*(insurance/100)/12;
-  const payment=monthly+insuranceMonthly;
-  const interest=monthly*n-c;
-  const total=c+interest+insuranceMonthly*n;
+  const d=calculateMensualitePretLoan(c,annual,years,insurance), monthly=d.monthly, insuranceMonthly=d.insuranceMonthly, payment=monthly+insuranceMonthly, interest=d.interest, total=d.total;
   const euro=v=>this.euro(v);
   const durationRows=[15,20,25].filter(y=>y<=50).map(y=>{
-    const m=annual?c*(annual/1200)/(1-Math.pow(1+annual/1200,-y*12)):c/(y*12);
-    const i=m*y*12-c, ins=insuranceMonthly*y*12;
+    const x=calculateMensualitePretLoan(c,annual,y,insurance), m=x.monthly;
+    const i=x.interest, ins=x.insuranceMonthly*y*12;
     return "<tr"+(y===years?" class='current'":"")+"><td>"+y+" ans"+(y===years?" · actuel":"")+"</td><td>"+euro(m+insuranceMonthly)+"</td><td>"+euro(i)+"</td><td>"+euro(i+ins)+"</td></tr>";
   }).join("");
   const rateRows=[annual-0.5,annual,annual+0.5].filter((v,i,a)=>v>=0&&v<=30&&a.indexOf(v)===i).map(rate=>{
-    const m=rate?c*(rate/1200)/(1-Math.pow(1+rate/1200,-n)):c/n;
-    const i=m*n-c, ins=insuranceMonthly*n;
+    const x=calculateMensualitePretLoan(c,rate,years,insurance), m=x.monthly;
+    const i=x.interest, ins=x.insuranceMonthly*n;
     return "<tr"+(Math.abs(rate-annual)<1e-9?" class='current'":"")+"><td>"+String(rate).replace(".",",")+" %"+(Math.abs(rate-annual)<1e-9?" · actuel":"")+"</td><td>"+euro(m+insuranceMonthly)+"</td><td>"+euro(i)+"</td><td>"+euro(i+ins)+"</td></tr>";
   }).join("");
   return "<strong>"+euro(payment)+" / mois</strong><p>Mensualité hors assurance : "+euro(monthly)+"<br>Assurance estimée : "+euro(insuranceMonthly)+" / mois<br>Intérêts totaux : "+euro(interest)+"<br>Total remboursé : "+euro(total)+"</p><p class='small'>L'assurance est estimée sur le capital initial. Le résultat est indicatif et hors autres frais du crédit.</p>";
@@ -125,7 +121,7 @@ window.TOOL={calc:function(){
   const parse=id=>{const raw=String($(id).value??"").trim().replace(",",".");return raw===""?NaN:Number(raw)};
   const money=v=>Number(v).toLocaleString("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:2});
   function valid(){const c=parse("capital"),r=parse("taux"),y=parse("duree"),a=parse("assurance");return Number.isFinite(c)&&c>=1000&&c<=100000000&&Number.isFinite(r)&&r>=0&&r<=30&&Number.isInteger(y)&&y>=1&&y<=50&&Number.isFinite(a)&&a>=0&&a<=10}
-  function loan(c,annual,years,a){const n=years*12,r=annual/1200,m=r?c*r/(1-Math.pow(1+r,-n)):c/n,ins=c*(a/100)/12;return{n,m,ins,interest:m*n-c,total:c+(m*n-c)+(ins*n)}}
+  const loan=(c,annual,years,a)=>calculateMensualitePretLoan(c,annual,years,a);
   function calculate(){
     if(!valid()){$("monthly").textContent="Valeurs invalides";$("monthlyEx").textContent="—";$("interest").textContent="—";$("totalPaid").textContent="—";$("compareBody").innerHTML="";$("rateBody").innerHTML="";return}
     const c=parse("capital"),r=parse("taux"),y=parse("duree"),a=parse("assurance"),d=loan(c,r,y,a);
