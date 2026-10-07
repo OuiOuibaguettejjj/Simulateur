@@ -676,7 +676,7 @@
     },
     "attendu": 236.78,
     "tolerance": 0.01,
-    "sortie": "/mois",
+    "sortie": "236,78\\s*€\\s*/\\s*mois",
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2882",
     "note": "Cas indépendant : 638,28 € + 59,85 % de 1 000 € − 1 000 € = 236,78 €, selon la formule officielle publiée par Service-Public."
   }
