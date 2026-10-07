@@ -727,5 +727,33 @@
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2882",
     "verificationSource": "https://www.caf.fr/allocataires/actualites/actualites-nationales/les-reponses-vos-questions-sur-levolution-de-la-prime-dactivite-en-2026",
     "note": "Régression de saisie : la virgule décimale est acceptée ; 638,28 + 59,85 % × 1 000,50 − 1 000,50 = 236,58 € après arrondi à l’euro-cent."
+  },
+  {
+    "outil": "indemnite-licenciement",
+    "entrees": {
+      "s12": "3000",
+      "s3": "3500",
+      "y": "5",
+      "m": "6"
+    },
+    "attendu": 4812.5,
+    "tolerance": 0.01,
+    "sortie": "4\\\\s*812,50\\\\s*€",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F987",
+    "note": "Cas indépendant : salaire de référence 3 500 € et ancienneté de 5 ans et 6 mois ; 3 500 × 1/4 × 5,5 = 4 812,50 €."
+  },
+  {
+    "outil": "indemnite-licenciement",
+    "entrees": {
+      "s12": "4000",
+      "s3": "4000",
+      "y": "12",
+      "m": "6"
+    },
+    "attendu": 13333.33,
+    "tolerance": 0.02,
+    "sortie": "13\\\\s*333,33\\\\s*€",
+    "source": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000035644692/2026-05-10",
+    "note": "Cas de franchissement du palier : 4 000 × 1/4 × 10 + 4 000 × 1/3 × 2,5 = 13 333,33 €."
   }
 ]
