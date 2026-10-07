@@ -665,5 +665,19 @@
     "source": "https://www.impots.gouv.fr/www2/fichiers/documentation/brochure/ir_2026/pdf_som/21-calcul_impot_369a382.pdf",
     "verificationSource": "https://www.impots.gouv.fr/particulier/conditions-generales",
     "note": "Cas de référence indépendant : 60 000 € avant déductions moins 10 000 € de charges déductibles donnent 50 000 € de revenu net imposable ; le barème donne alors 8 103,99 €."
+  },
+  {
+    "outil": "prime-activite",
+    "entrees": {
+      "activite": "1000",
+      "autres": "0",
+      "log": "0",
+      "bonif": "0"
+    },
+    "attendu": 236.78,
+    "tolerance": 0.01,
+    "sortie": "/mois",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2882",
+    "note": "Cas indépendant : 638,28 € + 59,85 % de 1 000 € − 1 000 € = 236,78 €, selon la formule officielle publiée par Service-Public."
   }
 ]
