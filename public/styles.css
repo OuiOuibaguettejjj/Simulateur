@@ -426,3 +426,52 @@ footer{border-top:1px solid var(--ink);padding:30px 0;background:#eee9df}
  .rsa-section-heading>span{width:30px;height:30px;border-radius:8px;font-size:.62rem}
  .rsa-section-heading h2{font-size:1.65rem}
 }
+/* Impôt sur le revenu — interface simple avec options avancées */
+.income-tax-shell{
+  max-width:920px;
+  padding:30px;
+  border:1px solid var(--ink);
+  box-shadow:0 18px 50px rgba(23,23,19,.08);
+}
+.income-tax-intro{
+  display:flex;
+  gap:10px;
+  align-items:baseline;
+  margin:20px 0 22px;
+  padding:12px 14px;
+  border-left:3px solid var(--accent);
+  background:#fbfaf6;
+}
+.income-tax-intro strong{font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.income-tax-intro span{color:var(--muted);font-size:.88rem}
+.income-tax-advanced{
+  margin-top:18px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#fbfaf6;
+}
+.income-tax-advanced summary{
+  padding:15px 17px;
+  cursor:pointer;
+  font-weight:850;
+  list-style:none;
+}
+.income-tax-advanced summary::-webkit-details-marker{display:none}
+.income-tax-advanced summary:after{content:"+";float:right;font-size:1.2rem}
+.income-tax-advanced[open] summary:after{content:"−"}
+.income-tax-advanced .advanced-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  padding:0 17px 17px;
+}
+.income-tax-advanced .field{margin-top:0}
+.field-help{display:block;margin-top:6px;color:var(--muted);font-size:.78rem;line-height:1.45}
+.income-tax-result{margin-top:18px}
+.income-tax-content{max-width:920px}
+@media(max-width:650px){
+  .income-tax-shell{padding:23px 18px}
+  .income-tax-intro{display:block}
+  .income-tax-intro span{display:block;margin-top:4px}
+  .income-tax-advanced .advanced-grid{grid-template-columns:1fr}
+}

@@ -6,16 +6,27 @@ Source officielle principale :
 
 - [impots.gouv.fr — Calcul de l’impôt 2026 sur les revenus 2025](https://www.impots.gouv.fr/www2/fichiers/documentation/brochure/ir_2026/pdf_som/21-calcul_impot_369a382.pdf)
 
+Sources complémentaires :
+
+- [impots.gouv.fr — prélèvement à la source et solde d’impôt](https://www.impots.gouv.fr/les-modalites-de-la-declaration-de-revenus-en-2026)
+- [impots.gouv.fr — pensions et abattement de 10 %](https://www.impots.gouv.fr/particulier/pensions-retraites)
+
 Vérifié :
 
 - barème 2026 : 0 %, 11 %, 30 %, 41 % et 45 % ;
 - seuils par part : 11 600 €, 29 579 €, 84 577 € et 181 917 € ;
 - plafonnement général du quotient familial : 1 807 € par demi-part supplémentaire concernée ;
 - décote : seuil de 1 982 € et base de 897 € pour une personne seule ; seuil de 3 277 € et base de 1 483 € pour un couple soumis à imposition commune ; taux de 45,25 % ;
-- cas de référence à 50 000 € et 1 part : 8 103,99 € avant et après décote.
+- cas de référence à 50 000 € et 1 part : 8 103,99 € avant et après décote ;
+- le prélèvement à la source déjà versé peut être comparé à l’impôt calculé pour estimer le solde ;
+- les paramètres avancés du calculateur ne calculent pas eux-mêmes l’éligibilité à une déduction : ils intègrent uniquement un montant déjà déterminé par l’utilisateur.
 
 ## Périmètre
 
-Le calculateur utilise uniquement ces paramètres réglementaires centralisés. Il reste volontairement simplifié : il ne reproduit pas l'intégralité de la déclaration et ne traite notamment pas les réductions/crédits d'impôt ni les situations fiscales particulières.
+Le calculateur utilise uniquement les paramètres réglementaires centralisés pour le barème, le quotient familial et la décote. Il reste volontairement simplifié : il ne reproduit pas l’intégralité de la déclaration et ne calcule notamment pas automatiquement les réductions/crédits d’impôt, les situations fiscales particulières ou les règles propres à chaque catégorie de revenus.
 
-La source officielle du simulateur général est également disponible sur [impots.gouv.fr](https://www.impots.gouv.fr/simulateur-de-limpot-sur-le-revenu).
+L’option « déductions déjà calculées » sert à partir d’un revenu net imposable avant certaines déductions lorsque l’utilisateur connaît déjà leur montant ; elle ne remplace pas le calcul fiscal de la déduction.
+
+L’option « prélèvement à la source déjà payé » sert uniquement à estimer un solde ou un remboursement.
+
+Le simulateur officiel est également disponible sur [impots.gouv.fr](https://www.impots.gouv.fr/simulateur-de-limpot-sur-le-revenu).

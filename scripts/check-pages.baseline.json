@@ -400,18 +400,6 @@
     "rule": "title"
   },
   {
-    "path": "public/outil/impot-sur-le-revenu/index.html",
-    "rule": "description"
-  },
-  {
-    "path": "public/outil/impot-sur-le-revenu/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/impot-sur-le-revenu/index.html",
-    "rule": "title"
-  },
-  {
     "path": "public/outil/indemnite-licenciement/index.html",
     "rule": "description"
   },
