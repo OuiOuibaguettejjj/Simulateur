@@ -182,7 +182,7 @@ function legacyIndemniteLicenciement({ s12, s3, prime3 = 0, y, m }) {
   if (a <= 0 || b <= 0 || bonus < 0 || !Number.isInteger(years) || !Number.isInteger(months) || n < 2 / 3) return "Renseignez deux salaires valides et au moins 8 mois d’ancienneté.";
   const r = Math.max(a, b + bonus / 12);
   const v = r * (Math.min(n, 10) / 4 + Math.max(0, n - 10) / 3);
-  return "<strong>Minimum légal : " + euro(v) + "</strong>";
+  return "<strong>" + euro(v) + "</strong>";
 }
 
 let compared = 0;
