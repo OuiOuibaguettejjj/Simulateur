@@ -11,13 +11,14 @@
 <link rel="stylesheet" href="/styles.css">
 <style>
 .salary-page{max-width:1080px;margin:auto}
-.salary-hero{background:linear-gradient(135deg,#17483d 0%,#123a32 62%,#102f2a 100%);color:#fff;border-radius:22px;padding:40px 42px 34px;position:relative;overflow:hidden;box-shadow:0 22px 60px rgba(23,23,19,.14)}
-.salary-hero:after{content:"€";position:absolute;right:28px;top:-58px;font-size:16rem;line-height:1;font-weight:950;color:rgba(255,255,255,.05);transform:rotate(7deg);pointer-events:none}
-.salary-hero .eyebrow{color:#ffb29f;position:relative;z-index:1}
-.salary-hero p{position:relative;z-index:1}
+.salary-tool{padding:0;background:transparent;border:0;box-shadow:none}
+.salary-tool .salary-hero{background:linear-gradient(135deg,#17483d 0%,#123a32 62%,#102f2a 100%);color:#fff;border-radius:22px;padding:40px 42px 34px;position:relative;overflow:hidden;box-shadow:0 22px 60px rgba(23,23,19,.14)}
+.salary-tool .salary-hero:after{content:"€";position:absolute;right:28px;top:-58px;font-size:16rem;line-height:1;font-weight:950;color:rgba(255,255,255,.05);transform:rotate(7deg);pointer-events:none}
+.salary-tool .salary-hero .eyebrow{color:#ffb29f;position:relative;z-index:1}
+.salary-tool .salary-hero p{position:relative;z-index:1}
 .salary-hero p{max-width:720px;color:#dbe6df;font-size:1.05rem;margin:0}
-.salary-trust{position:relative;z-index:1;display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
-.salary-trust span{padding:7px 10px;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:rgba(255,255,255,.06);font-size:.75rem;font-weight:800}
+.salary-tool .salary-trust{position:relative;z-index:1;display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+.salary-tool .salary-trust span{padding:7px 10px;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:rgba(255,255,255,.06);font-size:.75rem;font-weight:800}
 .salary-box{margin-top:18px;background:var(--card);border:1px solid var(--ink);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
 .salary-form{padding:30px}
 .salary-lead{margin:0 0 20px;color:var(--muted);font-size:.9rem}
@@ -69,7 +70,7 @@
 .salary-faq details{border-bottom:1px solid var(--line);padding:15px 0}
 .salary-faq summary{cursor:pointer;font-weight:900}
 .salary-error{padding:14px 16px;border:1px solid #d7b6aa;border-radius:10px;background:#fff7f4;color:#7d2f20}
-@media(max-width:720px){.salary-hero{padding:32px 22px}.salary-form,.salary-result{padding:25px 20px}.salary-fields,.salary-result-grid,.salary-detail,.salary-data-grid{grid-template-columns:1fr}.salary-table,.salary-data{padding:20px 16px}}
+@media(max-width:720px){.salary-tool .salary-hero{padding:32px 22px}.salary-form,.salary-result{padding:25px 20px}.salary-fields,.salary-result-grid,.salary-detail,.salary-data-grid{grid-template-columns:1fr}.salary-table,.salary-data{padding:20px 16px}}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Salaire brut net : calcul brut → net","url":"https://simulateur.site/outil/salaire-brut-net/","description":"Convertissez un salaire brut en net, ou un net en brut, avec estimation mensuelle, annuelle, cadre ou non-cadre et prélèvement à la source.","inLanguage":"fr-FR","applicationCategory":"FinanceApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"price":"0","priceCurrency":"EUR"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Salaire","item":"https://simulateur.site/salaire/"},{"@type":"ListItem","position":3,"name":"Salaire brut net : calcul brut → net","item":"https://simulateur.site/outil/salaire-brut-net/"}]}</script>
@@ -82,12 +83,13 @@
 <div class="salary-page">
 <div class="breadcrumb"><a href="/">Accueil</a> · <a href="/salaire/">Salaire</a> · Salaire brut net : calcul brut → net</div>
 
-<section class="tool salary-hero">
+<section class="tool salary-tool">
+<div class="salary-hero">
 <div class="eyebrow">SALAIRE</div>
 <h1>Simulateur salaire brut net</h1>
 <p class="tool-intro">Convertissez un salaire brut en net, ou faites le calcul inverse. Comparez mensuel et annuel, cadre et non-cadre, avec une estimation du prélèvement à la source.</p>
 <div class="salary-trust"><span>✓ Brut → net</span><span>✓ Net → brut</span><span>✓ Mensuel ou annuel</span><span>✓ Calcul local</span></div>
-</section>
+</div>
 
 <section class="salary-box" aria-labelledby="salary-sim-title">
 <div class="salary-form">
@@ -100,10 +102,11 @@
 </div>
 
 <div class="salary-fields">
-<div class="salary-field"><label for="montant">Salaire <small>€</small></label><input id="montant" type="number" min="0.01" step="50" value="3500" inputmode="decimal"></div>
+<div class="salary-field"><label for="montant"><span id="montant-label">Salaire brut</span> <small>€</small></label><input id="montant" type="number" min="0.01" step="50" value="3500" inputmode="decimal"></div>
 <div class="salary-field"><label for="periode">Période</label><select id="periode"><option value="mensuel">Mensuel</option><option value="annuel">Annuel</option></select></div>
 <div class="salary-field"><label for="statut">Statut</label><select id="statut"><option value="noncadre">Non-cadre</option><option value="cadre">Cadre</option></select></div>
-<div class="salary-field"><label for="pas">Taux de prélèvement à la source <small>%</small></label><input id="pas" type="number" min="0" max="100" step="0.1" value="0" inputmode="decimal"><small>0 % = estimation avant PAS</small></div>
+<div class="salary-field"><label for="pas">Taux de prélèvement à la source <small>%</small></label><input id="pas" type="number" min="0" max="100" step="0.1" value="0" inputmode="decimal"><small>Le taux est appliqué au revenu net imposable.</small></div>
+<div class="salary-field"><label for="net-imposable">Revenu net imposable mensuel <small>€</small></label><input id="net-imposable" type="number" min="0" step="50" inputmode="decimal" placeholder="À renseigner si vous l'avez"><small>À trouver sur votre bulletin de salaire. Requis pour calculer un PAS non nul.</small></div>
 </div>
 
 <div class="salary-presets" aria-label="Montants rapides">
@@ -130,10 +133,12 @@
 <div class="salary-detail">
 <div><span>Cotisations estimées</span><strong>805 € / mois</strong></div>
 <div><span>Taux retenu</span><strong>23 %</strong></div>
-<div><span>Net après PAS</span><strong>2 695 €</strong></div>
+<div><span>Net après PAS</span><strong>2 695 € / mois</strong></div>
 </div>
-<p class="salary-result-note">Le net après PAS reste une approximation : le prélèvement à la source porte sur le revenu net imposable, qui peut différer du net avant impôt.</p>
+<p class="salary-result-note">Avec un taux de PAS supérieur à 0 %, renseignez le revenu net imposable mensuel pour obtenir une retenue cohérente avec l'assiette fiscale.</p>
 </div>
+<div class="formula"><strong>Méthode et sources</strong><p>Le brut/net repose sur les hypothèses internes affichées dans le calculateur. Pour le prélèvement à la source, le taux est appliqué au revenu net imposable renseigné par l'utilisateur, conformément au principe fiscal officiel.</p><p>Source : <a href="https://www.impots.gouv.fr/calcul-du-prelevement-la-source-2018" target="_blank" rel="noopener noreferrer">impots.gouv.fr — calcul du prélèvement à la source</a>.</p></div>
+</section>
 </section>
 
 <section class="salary-data">
@@ -142,7 +147,7 @@
 <div><strong>Salaire saisi</strong><span>Le montant est interprété comme mensuel ou annuel selon la période choisie.</span></div>
 <div><strong>Statut</strong><span>Deux hypothèses sont proposées : 23 % de cotisations pour un non-cadre et 25 % pour un cadre.</span></div>
 <div><strong>Conversion inverse</strong><span>En mode net → brut, le salaire brut est retrouvé à partir du taux d'estimation retenu.</span></div>
-<div><strong>Prélèvement à la source</strong><span>Le taux saisi sert uniquement à donner un ordre de grandeur du net après PAS.</span></div>
+<div><strong>Prélèvement à la source</strong><span>Le PAS est calculé sur le revenu net imposable, à renseigner séparément lorsqu'un taux non nul est utilisé.</span></div>
 </div>
 </section>
 
@@ -206,34 +211,39 @@
 
 <script>
 window.TOOL={calc:function(){
-  const montantRaw=this.$("montant")?.value.trim()||"",periode=this.$("periode")?.value||"mensuel",statut=this.$("statut")?.value||"noncadre",pasRaw=this.$("pas")?.value.trim()||"0",customRaw=this.$("custom-rate")?.value.trim()||"",mode=document.getElementById("mode-net")?.getAttribute("aria-pressed")==="true";
-  const montant=Number(montantRaw),pas=Number(pasRaw),custom=Number(customRaw),defaultRate=statut==="cadre"?25:23,rate=customRaw!==""?custom:defaultRate;
+  const montantRaw=this.$("montant")?.value.trim()||"",periode=this.$("periode")?.value||"mensuel",statut=this.$("statut")?.value||"noncadre",pasRaw=this.$("pas")?.value.trim()||"0",taxableRaw=this.$("net-imposable")?.value.trim()||"",customRaw=this.$("custom-rate")?.value.trim()||"",mode=document.getElementById("mode-net")?.getAttribute("aria-pressed")==="true";
+  const montant=Number(montantRaw),pas=Number(pasRaw),taxable=Number(taxableRaw),custom=Number(customRaw),defaultRate=statut==="cadre"?25:23,rate=customRaw!==""?custom:defaultRate;
   if(!montantRaw||!Number.isFinite(montant)||montant<=0)return'<div class="salary-error" role="alert"><strong>Montant invalide.</strong><p>Saisissez un salaire strictement positif.</p></div>';
   if(!Number.isFinite(pas)||pas<0||pas>100)return'<div class="salary-error" role="alert"><strong>Taux de PAS invalide.</strong><p>Saisissez un taux compris entre 0 et 100 %.</p></div>';
-  if(!Number.isFinite(rate)||rate<0||rate>=100)return'<div class="salary-error" role="alert"><strong>Taux de cotisations invalide.</strong><p>Saisissez un taux compris entre 0 et 99,9 %.</p></div>';
+  if(!Number.isFinite(rate)||rate<0||rate>40)return'<div class="salary-error" role="alert"><strong>Taux de cotisations invalide.</strong><p>Saisissez un taux compris entre 0 et 40 %.</p></div>';
+  if(taxableRaw!==""&&(!Number.isFinite(taxable)||taxable<=0))return'<div class="salary-error" role="alert"><strong>Revenu net imposable invalide.</strong><p>Saisissez un montant mensuel strictement positif.</p></div>';
+  if(pas>0&&taxableRaw===""){}
   const monthlyInput=periode==="annuel"?montant/12:montant;
   const factor=1-rate/100;
   let brut,net;
   if(mode){net=monthlyInput;brut=net/factor}else{brut=monthlyInput;net=brut*factor}
   if(!Number.isFinite(brut)||!Number.isFinite(net)||brut<=0||net<=0)return'<div class="salary-error" role="alert"><strong>Résultat impossible.</strong><p>Réduisez le montant ou vérifiez les paramètres.</p></div>';
-  const brutAnnual=brut*12,netAnnual=net*12,cot=brut-net,after=net*(1-pas/100),afterAnnual=after*12,displayRate=rate.toLocaleString("fr-FR",{minimumFractionDigits:1,maximumFractionDigits:1});
+  const brutAnnual=brut*12,netAnnual=net*12,cot=brut-net,taxableMonthly=taxableRaw!==""?taxable:NaN,pasAmount=Number.isFinite(taxableMonthly)?taxableMonthly*pas/100:NaN,after=Number.isFinite(pasAmount)?net-pasAmount:NaN,afterAnnual=Number.isFinite(after)?after*12:NaN,displayRate=rate.toLocaleString("fr-FR",{minimumFractionDigits:1,maximumFractionDigits:1});
+  if(Number.isFinite(after)&&after<0)return'<div class="salary-error" role="alert"><strong>Paramètres incohérents.</strong><p>Le prélèvement estimé dépasse le net avant impôt. Vérifiez le revenu net imposable et le taux de PAS.</p></div>';
   const euro=n=>this.euro(n);
   const primaryLabel=mode?"Brut estimé":"Net estimé avant impôt";
   const primary=mode?brut:net;
   const secondary=mode?net:brut;
   const secondaryLabel=mode?"Net mensuel demandé":"Brut mensuel";
+  const pasDisplay=pas===0?euro(net)+" / mois":Number.isFinite(after)?euro(after)+" / mois":"À renseigner";
+  const pasNote=pas===0?"Aucun PAS estimé.":Number.isFinite(pasAmount)?"PAS estimé : "+euro(pasAmount)+" / mois, calculé sur le revenu net imposable renseigné.":"Renseignez le revenu net imposable mensuel pour calculer le PAS.";
   const headline=primaryLabel+" : "+euro(primary)+" / mois";
-  return'<div class="salary-result-grid"><div class="salary-result-card primary"><small>'+primaryLabel+'</small><strong>'+euro(primary)+' / mois</strong></div><div class="salary-result-card"><small>'+secondaryLabel+'</small><strong>'+euro(secondary)+'</strong></div><div class="salary-result-card"><small>'+(mode?"Brut annuel":"Net annuel")+'</small><strong>'+euro(mode?brutAnnual:netAnnual)+'</strong></div></div><div class="salary-detail"><div><span>Cotisations estimées</span><strong>'+euro(cot)+' / mois</strong></div><div><span>Taux retenu</span><strong>'+displayRate+' %</strong></div><div><span>Net après PAS</span><strong>'+euro(after)+' / mois</strong></div></div><p class="salary-result-note">'+headline+'. Le net après PAS est une approximation basée sur le taux saisi : le PAS réel s’applique au revenu net imposable.</p>';
+  return'<div class="salary-result-grid"><div class="salary-result-card primary"><small>'+primaryLabel+'</small><strong>'+euro(primary)+' / mois</strong></div><div class="salary-result-card"><small>'+secondaryLabel+'</small><strong>'+euro(secondary)+'</strong></div><div class="salary-result-card"><small>'+(mode?"Brut annuel":"Net annuel")+'</small><strong>'+euro(mode?brutAnnual:netAnnual)+'</strong></div></div><div class="salary-detail"><div><span>Cotisations estimées</span><strong>'+euro(cot)+' / mois</strong></div><div><span>Taux retenu</span><strong>'+displayRate+' %</strong></div><div><span>Net après PAS</span><strong>'+pasDisplay+'</strong></div></div><p class="salary-result-note">'+headline+'. '+pasNote+'</p>';
 }};
 (function(){
-  const amount=document.getElementById("montant"),custom=document.getElementById("custom-rate"),modeBrut=document.getElementById("mode-brut"),modeNet=document.getElementById("mode-net");
-  function setMode(net){modeBrut.setAttribute("aria-pressed",String(!net));modeNet.setAttribute("aria-pressed",String(net));}
+  const amount=document.getElementById("montant"),custom=document.getElementById("custom-rate"),modeBrut=document.getElementById("mode-brut"),modeNet=document.getElementById("mode-net"),montantLabel=document.getElementById("montant-label");
+  function setMode(net){modeBrut.setAttribute("aria-pressed",String(!net));modeNet.setAttribute("aria-pressed",String(net));montantLabel.textContent=net?"Salaire net souhaité":"Salaire brut";}
   modeBrut.addEventListener("click",function(){setMode(false);Simulateurs.calc()});
   modeNet.addEventListener("click",function(){setMode(true);Simulateurs.calc()});
   document.querySelectorAll(".salary-presets button").forEach(b=>b.addEventListener("click",function(){amount.value=this.dataset.amount;Simulateurs.calc()}));
   document.getElementById("statut").addEventListener("change",function(){if(custom.value==="23"||custom.value==="25"||custom.value===""){custom.value=this.value==="cadre"?"25":"23"}Simulateurs.calc()});
   custom.addEventListener("input",function(){Simulateurs.calc()});
-  ["montant","periode","pas"].forEach(id=>document.getElementById(id).addEventListener("input",function(){Simulateurs.calc()}));
+  ["montant","periode","pas","net-imposable"].forEach(id=>document.getElementById(id).addEventListener("input",function(){Simulateurs.calc()}));
   setMode(false);
 })();
 </script>
