@@ -8,6 +8,7 @@
 <meta name="description" content="Calculez votre capacité d’emprunt immobilier en 2026 : mensualité maximale, capital empruntable, taux d’effort, apport et comparaison 15, 20 ou 25 ans.">
 <link rel="canonical" href="https://simulateur.site/outil/capacite-emprunt/">
 <link rel="stylesheet" href="/styles.css">
+<script src="/parametres.js"></script>
 
 
 <style>
@@ -75,14 +76,14 @@
 <div class="wrap">
 <div class="cap-shell">
 <div class="breadcrumb"><a href="/">Accueil</a> · <a href="/immobilier/">Immobilier</a> · Quelle capacité d’emprunt immobilier avez-vous ?</div>
-<section class="cap-hero">
+<section class="tool cap-hero">
 <div class="eyebrow">IMMOBILIER · ESTIMATION</div>
 <h1>Quelle capacité d’emprunt immobilier avez-vous ?</h1>
-<p class="lead">Estimez le montant que vous pourriez emprunter à partir de vos revenus, de vos charges, du taux, de la durée et de l’assurance du prêt.</p>
+<p class="lead tool-intro">Estimez le montant que vous pourriez emprunter à partir de vos revenus, de vos charges, du taux, de la durée et de l’assurance du prêt.</p>
 <div class="cap-trust"><span>Hypothèse de taux d’effort : 35 %</span><span>Calcul immédiat</span><span>Sans données personnelles</span></div>
 </section>
 
-<section class="tool cap-tool">
+<section class="cap-tool">
 <div class="cap-grid">
 <div class="cap-panel">
 <h2>Votre situation</h2>
@@ -135,12 +136,13 @@
 <p>Le résultat ne constitue ni une offre de crédit ni une promesse de financement. Une banque peut examiner notamment la stabilité des revenus, leur nature, le reste à vivre, les autres engagements, la composition du foyer, l’apport, l’assurance et ses propres règles d’octroi. Le calculateur fournit donc un ordre de grandeur, pas une décision de solvabilité.</p>
 
 <h2>Questions fréquentes</h2>
-<div class="cap-faq">
-<details><summary>Quel salaire faut-il pour emprunter 200 000 € ?</summary><p>Il n’existe pas un salaire unique : la réponse dépend du taux, de la durée, de l’assurance et des charges déjà supportées. Utilisez les champs ci-dessus pour obtenir une estimation personnalisée.</p></details>
-<details><summary>L’apport est-il inclus dans la capacité d’emprunt ?</summary><p>Non. Le capital empruntable correspond au financement par crédit. L’apport est affiché séparément afin d’estimer un budget global théorique, sans préjuger des frais d’acquisition ni de la décision de la banque.</p></details>
-<details><summary>Le taux d’effort de 35 % garantit-il l’obtention d’un prêt ?</summary><p>Non. Le seuil de 35 % est un cadre de référence contraignant pour les établissements, avec une marge de flexibilité réglementaire, mais une banque reste libre de ne pas accorder le financement.</p></details>
-<details><summary>Faut-il inclure l’assurance emprunteur ?</summary><p>Oui pour une estimation cohérente du coût du financement. Ici, l’assurance est modélisée séparément comme un pourcentage annuel du capital emprunté ; les contrats réels peuvent être calculés selon d’autres modalités.</p></details>
-</div>
+<section class="calculator-faq cap-faq" aria-labelledby="faq-title">
+<h2 id="faq-title">FAQ</h2>
+<details><summary>Quel salaire faut-il pour emprunter 200 000 € ?</summary><div class="calculator-faq-answer"><p>Il n’existe pas un salaire unique : la réponse dépend du taux, de la durée, de l’assurance et des charges déjà supportées. Utilisez les champs ci-dessus pour obtenir une estimation personnalisée.</p></div></details>
+<details><summary>L’apport est-il inclus dans la capacité d’emprunt ?</summary><div class="calculator-faq-answer"><p>Non. Le capital empruntable correspond au financement par crédit. L’apport est affiché séparément afin d’estimer un budget global théorique, sans préjuger des frais d’acquisition ni de la décision de la banque.</p></div></details>
+<details><summary>Le taux d’effort de 35 % garantit-il l’obtention d’un prêt ?</summary><div class="calculator-faq-answer"><p>Non. Le seuil de 35 % est un cadre de référence contraignant pour les établissements, avec une marge de flexibilité réglementaire, mais une banque reste libre de ne pas accorder le financement.</p></div></details>
+<details><summary>Faut-il inclure l’assurance emprunteur ?</summary><div class="calculator-faq-answer"><p>Oui pour une estimation cohérente du coût du financement. Ici, l’assurance est modélisée séparément comme un pourcentage annuel du capital emprunté ; les contrats réels peuvent être calculés selon d’autres modalités.</p></div></details>
+</section>
 
 
 </section>
@@ -153,6 +155,7 @@
   const $=id=>document.getElementById(id);
   const euro=v=>Number(v).toLocaleString("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:2});
   const num=v=>Number(v).toLocaleString("fr-FR",{maximumFractionDigits:2});
+  const PARAMS=window.Parametres.get("capacite-emprunt").values;
 
   function read(){
     return {
@@ -183,7 +186,7 @@
     const monthlyRate=d.rate/1200;
     const insuranceRate=d.insurance/1200;
     const f=factor(monthlyRate,n);
-    const available=Math.max(0,d.revenus*.35-d.charges);
+    const available=Math.max(0,d.revenus*PARAMS.tauxEffortMax/100-d.charges);
     const capital=available/(f+insuranceRate);
     const principal=capital*f;
     const insurance=capital*insuranceRate;
@@ -200,7 +203,7 @@
       return;
     }
 
-    const available=d.revenus*.35-d.charges;
+    const available=d.revenus*PARAMS.tauxEffortMax/100-d.charges;
     if(available<=0){
       $("result").innerHTML='<div class="result-kicker">Votre estimation</div><div class="result-main"><strong>0 €</strong></div><p class="cap-status">Aucune mensualité n’est disponible avec les charges indiquées dans cette hypothèse de 35 %.</p>';
       $("comparison").innerHTML='<tr><td colspan="4">Aucun capital disponible avec les données saisies.</td></tr>';
@@ -210,7 +213,7 @@
     const s=scenario(d,d.years);
     const budget=s.capital+d.apport;
     const ratio=((d.charges+s.principal+s.insurance)/d.revenus)*100;
-    const meter=Math.min(100,Math.max(0,ratio/35*100));
+    const meter=Math.min(100,Math.max(0,ratio/PARAMS.tauxEffortMax*100));
 
     $("result").innerHTML=
       '<div class="result-kicker">Capital empruntable estimé</div>'+
@@ -221,8 +224,8 @@
         '<div class="cap-stat"><small>Taux d’effort simulé</small><strong>'+num(ratio)+' %</strong></div>'+
         '<div class="cap-stat"><small>Intérêts estimés</small><strong>'+euro(s.interest)+'</strong></div>'+
       '</div>'+
-      '<div class="cap-meter" aria-label="Taux d’effort simulé de '+num(ratio)+' % sur 35 %"><span style="width:'+meter+'%"></span></div>'+
-      '<div class="cap-status">Hypothèse de 35 % respectée. Assurance estimée : '+euro(s.insurance)+' / mois.</div>';
+      '<div class="cap-meter" aria-label="Taux d’effort simulé de '+num(ratio)+' % sur '+PARAMS.tauxEffortMax+' %"><span style="width:'+meter+'%"></span></div>'+
+      '<div class="cap-status">Hypothèse de ' + PARAMS.tauxEffortMax + ' % respectée. Assurance estimée : '+euro(s.insurance)+' / mois.</div>';
 
     $("comparison").innerHTML=[15,20,25].map(years=>{
       const x=scenario(d,years);

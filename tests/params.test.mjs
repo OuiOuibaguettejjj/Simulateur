@@ -117,11 +117,11 @@ for (const slug of fs.readdirSync("public/outil")) {
 }
 const generatedReal = fs.readFileSync("public/parametres.js", "utf8");
 const real = today => checkParams({ data, pages: realPages, today, generated: generatedReal });
-assert.deepEqual(real("2026-10-06").errors, [], "dépôt conforme à la date de référence");
+assert.deepEqual(real("2026-10-07").errors, [], "dépôt conforme à la date de référence");
 assert.equal(generatedReal, buildParamsJs(data), "public/parametres.js correspond à data/parametres.json");
 assert.ok(rules(real("2027-01-01")).includes("expired"), "le SMIC expire fin 2026");
 assert.ok(real("2027-01-01").errors.some(e => e.message.startsWith("smic")), "l'expiration concerne bien le SMIC");
-assert.ok(real("2027-04-01").errors.filter(e => e.rule === "expired").length === 3, "tous les jeux expirent au 1er avril 2027");
+assert.ok(real("2027-04-01").errors.filter(e => e.rule === "expired").length === 4, "tous les jeux expirent au 1er avril 2027");
 
 /* ---------- Runtime ---------- */
 function load() {
@@ -139,6 +139,9 @@ assert.equal(P.isEffective("smic", "2026-06-01"), true);
 assert.equal(P.isEffective("smic", "2026-05-31"), false);
 assert.equal(P.isEffective("smic", "2027-01-01"), false);
 assert.equal(P.get("rsa").verifiedOn, "2026-10-06");
+assert.equal(P.get("capacite-emprunt").values.tauxEffortMax, 35);
+assert.equal(P.get("capacite-emprunt").values.maturiteMax, 25);
+assert.equal(P.isEffective("capacite-emprunt", "2026-10-07"), true);
 
 /* ---------- Parité avec les anciens calculs codés en dur ---------- */
 function pageTool(slug) {
