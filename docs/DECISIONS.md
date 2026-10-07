@@ -177,3 +177,6 @@ Le contrôle de couverture des pages interactives s'applique aux familles `outil
 Le garde-fou de layout interdit les redéfinitions locales des titres `h1` à `h6` et les redéfinitions locales des composants partagés, notamment `.content-section h2` et `.calculator-faq h2`. Un test dédié vérifie ces invariants et est exécuté dans les workflows de tests et de déploiement. Le contrôle de syntaxe des blocs Node inline conservés dans `deploy.yml` est vérifié automatiquement.
 
 Les contrôles de sitemap, de filtre publicitaire et de formes de résultat invalide sont désormais communs aux workflows de tests et de déploiement. Les cas de référence dépendant d'une API simulée utilisent une fixture de transport explicitement séparée de la valeur attendue issue de la source publiée.
+## 2026-10-07 — Prêt immobilier : calcul mathématique sans barème réglementaire
+
+Le calculateur `pret-immobilier` ne dépend pas d’un barème réglementaire daté : le taux, la durée, le capital et l’hypothèse d’assurance sont saisis par l’utilisateur. Il ne doit donc pas rester dans `data/parametres.json > anneeAMigrer.slugs`. La suppression de son année dans le titre est une correction de périmètre, pas une migration réglementaire.
