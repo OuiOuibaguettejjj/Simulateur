@@ -180,3 +180,10 @@ Les contrôles de sitemap, de filtre publicitaire et de formes de résultat inva
 ## 2026-10-07 — Prêt immobilier : calcul mathématique sans barème réglementaire
 
 Le calculateur `pret-immobilier` ne dépend pas d’un barème réglementaire daté : le taux, la durée, le capital et l’hypothèse d’assurance sont saisis par l’utilisateur. Il ne doit donc pas rester dans `data/parametres.json > anneeAMigrer.slugs`. La suppression de son année dans le titre est une correction de périmètre, pas une migration réglementaire.
+
+
+## 2026-10-07 — Prêt immobilier : scénarios de taux et prix du bien
+
+Le calculateur conserve son périmètre de simulation mathématique et ajoute deux scénarios directement utiles à l’intention de recherche : comparaison de taux autour du taux saisi et calcul optionnel du capital emprunté à partir du prix du bien et de l’apport. Ces fonctions enrichissent la comparaison sans introduire de barème de taux de marché, de TAEG approximatif ou de logique PTZ dans cette page.
+
+Lorsque le prix du bien et l’apport sont renseignés, ils déterminent le capital simulé ; le champ « montant emprunté » devient alors facultatif. Le capital saisi reste utilisé lorsque le prix du bien n’est pas renseigné.

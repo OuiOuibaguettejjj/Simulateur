@@ -136,7 +136,7 @@
       "resident": "yes",
       "majoration": "no",
       "housing": "none",
-        "m1": "0",
+      "m1": "0",
       "m2": "0",
       "m3": "0"
     },
@@ -509,5 +509,57 @@
     ],
     "source": "https://www.economie.gouv.fr/particuliers/gerer-mon-argent/emprunter-et-sassurer/credit-immobilier-comment-ca-marche",
     "note": "Cas de non-régression à taux nul : le capital est réparti uniformément sur 120 mensualités ; le taux d’effort inclut la nouvelle mensualité et les autres crédits."
+  },
+  {
+    "outil": "pret-immobilier",
+    "entrees": {
+      "capital": "200000",
+      "taux": "4",
+      "duree": "20",
+      "assurance": "0.25",
+      "frais": "0",
+      "revenus": "",
+      "charges": "0",
+      "prix": "250000",
+      "apport": "50000"
+    },
+    "attendu": 1254,
+    "tolerance": 0.01,
+    "sortie": "1\\s*254\\s*€",
+    "verifications": [
+      {
+        "sortie": "100\\s*871\\s*€",
+        "attendu": 100871,
+        "tolerance": 0.01
+      }
+    ],
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/R2924",
+    "note": "Cas de non-régression du mode prix du bien + apport : 250 000 € de prix avec 50 000 € d'apport produit 200 000 € de capital emprunté ; à 4 % sur 20 ans, la mensualité hors assurance est d’environ 1 211,96 €."
+  },
+  {
+    "outil": "pret-immobilier",
+    "entrees": {
+      "capital": "",
+      "taux": "4",
+      "duree": "20",
+      "assurance": "0.25",
+      "frais": "0",
+      "revenus": "",
+      "charges": "0",
+      "prix": "250000",
+      "apport": "50000"
+    },
+    "attendu": 1254,
+    "tolerance": 0.01,
+    "sortie": "1\\s*254\\s*€",
+    "verifications": [
+      {
+        "sortie": "100\\s*871\\s*€",
+        "attendu": 100871,
+        "tolerance": 0.01
+      }
+    ],
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/R2924",
+    "note": "Cas de non-régression du mode prix du bien + apport sans montant emprunté saisi : 250 000 € de prix avec 50 000 € d'apport produit 200 000 € de capital emprunté ; à 4 % sur 20 ans, la mensualité avec assurance est d’environ 1 253,63 €."
   }
 ]

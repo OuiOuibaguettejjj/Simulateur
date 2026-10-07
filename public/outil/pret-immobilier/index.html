@@ -59,7 +59,7 @@
 .mortgage-chart{width:100%;height:100%;display:block;overflow:visible}
 .mortgage-chart .gridline{stroke:#e7e1d6;stroke-width:1}.mortgage-chart .capital{fill:none;stroke:#17483d;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}.mortgage-chart .interest{fill:none;stroke:#ff5a36;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}.mortgage-chart text{font-family:Arial,Helvetica,sans-serif;fill:#66635b;font-size:12px}
 .chart-legend{display:flex;gap:18px;flex-wrap:wrap;color:var(--muted);font-size:.77rem;margin-top:8px}.chart-legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;background:#17483d}.chart-legend .orange i{background:#ff5a36}
-.compare{margin-top:18px;padding:25px 28px;background:#fff;border:1px solid var(--ink);border-radius:16px}
+.compare{margin-top:18px;padding:25px 28px;background:#fff;border:1px solid var(--ink);border-radius:16px}.rate-sensitivity{margin-top:18px}
 .compare p,.schedule>p{margin:0;color:var(--muted);font-size:.85rem}
 .compare-table,.schedule-table{width:100%;border-collapse:collapse;margin-top:16px;font-size:.84rem}.compare-table th,.compare-table td,.schedule-table th,.schedule-table td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:right}.compare-table th:first-child,.compare-table td:first-child,.schedule-table th:first-child,.schedule-table td:first-child{text-align:left}.compare-table th{font-size:.74rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}.compare-table tr.current{background:#f0f5f2;font-weight:800}
 .schedule{margin-top:18px;padding:25px 28px;background:#fff;border:1px solid var(--ink);border-radius:16px}.schedule-table-wrap{overflow:auto;max-height:470px}.schedule-table{min-width:650px}.schedule-table thead th{position:sticky;top:0;background:#fff;z-index:1;font-size:.74rem;color:var(--muted)}
@@ -98,11 +98,13 @@
 <summary>Paramètres facultatifs</summary>
 <div class="mortgage-advanced-body">
 <div class="mortgage-fields">
+<div class="mortgage-field"><label for="prix">Prix du bien <small>€ · facultatif</small></label><input id="prix" type="number" min="0" step="1000" placeholder="250 000"></div>
+<div class="mortgage-field"><label for="apport">Apport personnel <small>€ · facultatif</small></label><input id="apport" type="number" min="0" step="1000" value="0"></div>
 <div class="mortgage-field"><label for="frais">Frais de dossier / garantie <small>€</small></label><input id="frais" type="number" min="0" step="50" value="0"></div>
 <div class="mortgage-field"><label for="revenus">Revenus mensuels du foyer <small>€ · facultatif</small></label><input id="revenus" type="number" min="0" step="50" placeholder="3 500"></div>
 <div class="mortgage-field"><label for="charges">Autres mensualités de crédit <small>€ · facultatif</small></label><input id="charges" type="number" min="0" step="10" value="0"></div>
 </div>
-<p class="status-note">Le taux d'assurance saisi est une hypothèse annuelle appliquée au capital initial. Les contrats réels peuvent utiliser une autre assiette, des quotités et des garanties différentes.</p>
+<p class="status-note">Si vous renseignez le prix du bien et l'apport, le montant emprunté est calculé comme <strong>prix du bien − apport</strong>. Sinon, le montant saisi dans « Montant emprunté » est utilisé. Le taux d'assurance saisi est une hypothèse annuelle appliquée au capital initial. Les contrats réels peuvent utiliser une autre assiette, des quotités et des garanties différentes.</p>
 </div>
 </details>
 <button class="button-main mortgage-button" id="calculate" type="button">Calculer mon prêt</button>
@@ -124,7 +126,7 @@
 </div>
 </section>
 
-<section class="mortgage-data"><h2>Données utilisées</h2><div class="data-grid"><div><strong>Capital emprunté</strong><span>Montant du prêt simulé, hors apport personnel et frais non saisis.</span></div><div><strong>Taux nominal</strong><span>Taux annuel fixe converti en taux mensuel.</span></div><div><strong>Durée</strong><span>Nombre d’années de remboursement, converti en mensualités.</span></div><div><strong>Assurance</strong><span>Hypothèse annuelle appliquée au capital initial.</span></div></div><p class="status-note">Les frais de dossier ou de garantie ne sont ajoutés que si vous les renseignez. Les frais de notaire, le courtage et les autres coûts du projet ne sont pas inclus par défaut.</p></section>
+<section class="mortgage-data"><h2>Données utilisées</h2><div class="data-grid"><div><strong>Capital emprunté</strong><span>Montant saisi ou, si le prix du bien et l'apport sont renseignés, prix du bien moins apport.</span></div><div><strong>Taux nominal</strong><span>Taux annuel fixe converti en taux mensuel.</span></div><div><strong>Durée</strong><span>Nombre d’années de remboursement, converti en mensualités.</span></div><div><strong>Assurance</strong><span>Hypothèse annuelle appliquée au capital initial.</span></div></div><p class="status-note">Les frais de dossier ou de garantie ne sont ajoutés que si vous les renseignez. Les frais de notaire, le courtage et les autres coûts du projet ne sont pas inclus par défaut.</p></section>
 
 <section class="chart-panel">
 <div class="chart-head"><strong>Comment le crédit se rembourse</strong><span>Capital restant dû et intérêts cumulés</span></div>
@@ -136,6 +138,12 @@
 <h2>Quel impact de la durée ?</h2>
 <p>À capital et taux identiques, une durée plus longue réduit la mensualité mais augmente généralement le coût des intérêts.</p>
 <table class="compare-table"><caption class="sr-only">Comparaison du coût du prêt selon plusieurs durées</caption><thead><tr><th scope="col">Durée</th><th scope="col">Mensualité hors assurance</th><th scope="col">Intérêts</th><th scope="col">Coût assurance</th><th scope="col">Intérêts + assurance</th></tr></thead><tbody id="compareBody"></tbody></table>
+</section>
+
+<section class="compare rate-sensitivity">
+<h2>Quel impact du taux ?</h2>
+<p>À capital et durée identiques, quelques dixièmes de point de taux peuvent modifier sensiblement la mensualité et le montant des intérêts. Les scénarios ci-dessous reprennent votre capital, votre durée et votre hypothèse d'assurance.</p>
+<table class="compare-table"><caption class="sr-only">Comparaison de la mensualité et du coût selon plusieurs taux</caption><thead><tr><th scope="col">Taux nominal</th><th scope="col">Mensualité hors assurance</th><th scope="col">Intérêts</th><th scope="col">Intérêts + assurance</th></tr></thead><tbody id="rateBody"></tbody></table>
 </section>
 
 <section class="schedule">
@@ -175,6 +183,8 @@
 
 <div class="mortgage-faq calculator-faq" id="faq" aria-labelledby="faq-title">
 <h2 id="faq-title">FAQ</h2>
+<details><summary>Quelle mensualité pour un prêt immobilier de 200 000 € ?</summary><div class="calculator-faq-answer"><p>À titre d'exemple, avec 200 000 € empruntés sur 20 ans à 3,50 %, la mensualité hors assurance est d'environ 1 160 €. Le résultat varie selon le taux, la durée et l'assurance.</p></div></details>
+<details><summary>Combien coûte un prêt immobilier de 200 000 € ?</summary><div class="calculator-faq-answer"><p>Le coût dépend principalement du taux, de la durée, de l'assurance et des frais. Pour l'exemple par défaut de cette page, les intérêts sont d'environ 78 381 € avant assurance et frais.</p></div></details>
 <details><summary>Comment calculer la mensualité d'un prêt immobilier ?</summary><div class="calculator-faq-answer"><p>Pour un prêt à taux fixe, la mensualité hors assurance dépend du capital emprunté, du taux périodique et du nombre total de mensualités. Le calculateur applique la formule d'annuité correspondante.</p></div></details>
 <details><summary>Est-il préférable d'emprunter sur 20 ou 25 ans ?</summary><div class="calculator-faq-answer"><p>Une durée plus longue réduit généralement la mensualité mais augmente le nombre de périodes pendant lesquelles des intérêts sont payés. Comparez les deux scénarios dans le tableau ci-dessus selon votre budget et le coût total.</p></div></details>
 <details><summary>L'assurance est-elle incluse dans la mensualité ?</summary><div class="calculator-faq-answer"><p>Oui, dans cette simulation, une estimation d'assurance est ajoutée à la mensualité. Son calcul reste simplifié et ne remplace pas le tarif d'un contrat réel.</p></div></details>
@@ -223,12 +233,17 @@
 
   function valid(){
     const c=Number($("capital").value),r=Number($("taux").value),y=Number($("duree").value),a=Number($("assurance").value),f=Number($("frais").value);
+    const price=Number($("prix").value),downPayment=Number($("apport").value);
     const income=Number($("revenus").value),charges=Number($("charges").value);
-    return Number.isFinite(c)&&c>=1000&&c<=1e12&&
+    const capitalValid=price>0||(Number.isFinite(c)&&c>=1000&&c<=1e12);
+    return capitalValid&&
       Number.isFinite(r)&&r>=0&&r<=30&&
       Number.isFinite(y)&&Number.isInteger(y)&&y>=1&&y<=30&&
       Number.isFinite(a)&&a>=0&&a<=10&&
       Number.isFinite(f)&&f>=0&&
+      Number.isFinite(price)&&price>=0&&
+      Number.isFinite(downPayment)&&downPayment>=0&&
+      (price===0||downPayment<=price)&&
       Number.isFinite(income)&&income>=0&&
       Number.isFinite(charges)&&charges>=0;
   }
@@ -260,6 +275,14 @@
     }).join("");
   }
 
+  function renderRateSensitivity(capital,rate,insurance,years){
+    const rates=[rate-0.5,rate,rate+0.5].filter((v,i,a)=>v>=0&&v<=30&&a.indexOf(v)===i);
+    $("rateBody").innerHTML=rates.map(r=>{
+      const d=loan(capital,r,years,insurance);
+      return '<tr'+(Math.abs(r-rate)<0.000001?' class="current"':'')+'><td>'+number(r)+' %'+(Math.abs(r-rate)<0.000001?' · actuel':'')+'</td><td>'+money(d.monthlyEx)+'</td><td>'+money(d.totalInterest)+'</td><td>'+money(d.totalInterest+d.totalInsurance)+'</td></tr>';
+    }).join("");
+  }
+
   function calculate(){
     if(!valid()){
       $("monthly").textContent="Valeurs invalides";
@@ -272,16 +295,33 @@
       $("debtBox").hidden=true;
       $("debtBox").textContent="";
       $("compareBody").innerHTML="";
+      $("rateBody").innerHTML="";
       $("scheduleBody").innerHTML="";
       const svg=$("chart");
       svg.querySelectorAll(".generated").forEach(n=>n.remove());
       return;
     }
-    const {capital,taux,duree,assurance,frais,revenus,charges}=vals(["capital","taux","duree","assurance","frais","revenus","charges"]);
-    const d=loan(capital,taux,duree,assurance);
+    const {capital,taux,duree,assurance,frais,revenus,charges,prix,apport}=vals(["capital","taux","duree","assurance","frais","revenus","charges","prix","apport"]);
+    const effectiveCapital=prix>0?prix-apport:capital;
+    if(!Number.isFinite(effectiveCapital)||effectiveCapital<1000){
+      $("monthly").textContent="Montant invalide";
+      $("monthlyEx").textContent="—";
+      $("totalPaid").textContent="—";
+      $("interest").textContent="—";
+      $("insuranceCost").textContent="—";
+      $("fees").textContent="—";
+      $("creditCost").textContent="—";
+      $("debtBox").hidden=true;
+      $("rateBody").innerHTML="";
+      $("compareBody").innerHTML="";
+      $("scheduleBody").innerHTML="";
+      $("chart").querySelectorAll(".generated").forEach(n=>n.remove());
+      return;
+    }
+    const d=loan(effectiveCapital,taux,duree,assurance);
     $("monthly").textContent=money(d.payment);
     $("monthlyEx").textContent=money(d.monthlyEx);
-    $("totalPaid").textContent=money(capital+d.totalInterest+d.totalInsurance+frais);
+    $("totalPaid").textContent=money(effectiveCapital+d.totalInterest+d.totalInsurance+frais);
     $("interest").textContent=money(d.totalInterest);
     $("insuranceCost").textContent=money(d.totalInsurance);
     $("fees").textContent=money(frais);
@@ -299,11 +339,12 @@
 
     drawChart(d);
     renderSchedule(d);
-    renderCompare(capital,taux,assurance,duree);
+    renderCompare(effectiveCapital,taux,assurance,duree);
+    renderRateSensitivity(effectiveCapital,taux,assurance,duree);
   }
 
   document.querySelectorAll("[data-years]").forEach(btn=>btn.addEventListener("click",()=>{$("duree").value=btn.dataset.years;calculate();}));
-  ["capital","taux","duree","assurance","frais","revenus","charges"].forEach(id=>$(id).addEventListener("input",calculate));
+  ["capital","taux","duree","assurance","frais","revenus","charges","prix","apport"].forEach(id=>$(id).addEventListener("input",calculate));
   $("calculate").addEventListener("click",calculate);
   calculate();
 })();
