@@ -8,8 +8,8 @@ vm.runInThisContext(fs.readFileSync("public/impot.js","utf8"),{filename:"public/
 const {ImpotEngine}=global.window;
 assert.ok(ImpotEngine,"ImpotEngine must be available");
 
-function calc(income,parts,couple=false){
-  const result=ImpotEngine.calculate({income,parts,couple});
+function calc(income,parts,couple=false,options={}){
+  const result=ImpotEngine.calculate({income,parts,couple,...options});
   assert.equal(result.valid,true);
   return result;
 }
@@ -30,8 +30,18 @@ const uncapped=calc(130000,2,true);
 assert.equal(uncapped.familyQuotientCap,0);
 assert.equal(uncapped.grossTax,uncapped.rawTax);
 
+// Optional advanced inputs: already-determined deductions reduce the taxable base,
+// while source withholding is only used to estimate the remaining balance/refund.
+const advanced=calc(50000,1,false,{deductions:5000,sourceWithholding:3000});
+assert.equal(advanced.taxableIncome,45000);
+assert.equal(Math.round(advanced.netTax),6454);
+assert.equal(Math.round(advanced.balance),3454);
+assert.equal(calc(50000,1,false,{sourceWithholding:9000}).balance,-896.01);
+
 assert.equal(ImpotEngine.calculate({income:-1,parts:1,couple:false}).valid,false);
 assert.equal(ImpotEngine.calculate({income:50000,parts:0,couple:false}).valid,false);
 assert.equal(ImpotEngine.calculate({income:NaN,parts:1,couple:false}).valid,false);
+assert.equal(ImpotEngine.calculate({income:50000,parts:1,couple:false,deductions:-1}).valid,false);
+assert.equal(ImpotEngine.calculate({income:50000,parts:1,couple:false,sourceWithholding:-1}).valid,false);
 
 console.log("Impôt deterministic tests passed.");
