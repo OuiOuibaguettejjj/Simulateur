@@ -30,6 +30,15 @@ const calc = context.window.TOOL.calc.bind({
 });
 
 function result(overrides = {}) {
+  const defaults = {
+    montant: "3500",
+    periode: "mensuel",
+    statut: "noncadre",
+    pas: "0",
+    "net-imposable": "",
+    "custom-rate": "23"
+  };
+  for (const [key, value] of Object.entries(defaults)) inputs[key].value = value;
   for (const [key, value] of Object.entries(overrides)) inputs[key].value = value;
   return calc();
 }
@@ -39,5 +48,6 @@ assert.match(result({pas:"10","net-imposable":"2800"}), /2\s?415\s?€/);
 assert.match(result({pas:"10","net-imposable":""}), /Renseignez le revenu net imposable/);
 assert.match(result({pas:"10","net-imposable":"10000"}), /Paramètres incohérents/);
 assert.match(result({"custom-rate":"40"}), /2\s?100\s?€/);
+assert.match(result({"custom-rate":"23,5"}), /2\s?677,5\s?€/);
 
 console.log("Salaire brut net regression tests passed.");
