@@ -273,7 +273,7 @@
   document.querySelectorAll("[data-hcsf-effort]").forEach(function(el){ el.textContent=PARAMS.tauxEffortMax+" %"; });
   document.querySelectorAll("[data-hcsf-maturity]").forEach(function(el){ el.textContent=PARAMS.maturiteMax+" ans"; });
   $("duree").max=PARAMS.maturiteMax;
-  $("duree").value=PARAMS.maturiteMax;
+  if(!$("duree").value) $("duree").value=PARAMS.maturiteMax;
 
   function read(){
     return {
