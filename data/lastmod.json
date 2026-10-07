@@ -61,7 +61,7 @@
     "/outil/jours-ouvres/": "2026-10-03",
     "/outil/marge/": "2026-10-03",
     "/outil/median-mode/": "2026-10-03",
-    "/outil/mensualite-pret/": "2026-10-03",
+    "/outil/mensualite-pret/": "2026-10-07",
     "/outil/micro-entrepreneur/": "2026-10-03",
     "/outil/moyenne-ponderee/": "2026-10-03",
     "/outil/moyenne/": "2026-10-03",
@@ -110,6 +110,5 @@
     "/travail/": "2026-10-03",
     "/vie-quotidienne/": "2026-10-03",
     "/outil/etes-vous-riche/": "2026-10-05"
-  },
-  "/outil/mensualite-pret/": "2026-10-07"
+  }
 }
