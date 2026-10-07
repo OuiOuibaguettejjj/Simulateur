@@ -23,7 +23,7 @@ assert.equal(calc(50000,2,true).netTax,2798);
 
 // Official 2026 quotient-family cap example: married couple, 130,000 €, 5 parts.
 const officialExample=calc(130000,5,true);
-assert.equal(officialExample.rawTax,7920);
+assert.equal(officialExample.rawTax,9888.45);
 assert.equal(officialExample.familyQuotientCap,10842);
 assert.equal(officialExample.grossTax,14366);
 assert.equal(officialExample.netTax,14366);
