@@ -104,16 +104,6 @@ window.TOOL={calc:function(){
   if(!valid)return "Renseignez des valeurs valides.";
   const d=calculateMensualitePretLoan(c,annual,years,insurance), monthly=d.monthly, insuranceMonthly=d.insuranceMonthly, payment=monthly+insuranceMonthly, interest=d.interest, total=d.total;
   const euro=v=>this.euro(v);
-  const durationRows=[15,20,25].filter(y=>y<=50).map(y=>{
-    const x=calculateMensualitePretLoan(c,annual,y,insurance), m=x.monthly;
-    const i=x.interest, ins=x.insuranceMonthly*y*12;
-    return "<tr"+(y===years?" class='current'":"")+"><td>"+y+" ans"+(y===years?" · actuel":"")+"</td><td>"+euro(m+insuranceMonthly)+"</td><td>"+euro(i)+"</td><td>"+euro(i+ins)+"</td></tr>";
-  }).join("");
-  const rateRows=[annual-0.5,annual,annual+0.5].filter((v,i,a)=>v>=0&&v<=30&&a.indexOf(v)===i).map(rate=>{
-    const x=calculateMensualitePretLoan(c,rate,years,insurance), m=x.monthly;
-    const i=x.interest, ins=x.insuranceMonthly*x.n;
-    return "<tr"+(Math.abs(rate-annual)<1e-9?" class='current'":"")+"><td>"+String(rate).replace(".",",")+" %"+(Math.abs(rate-annual)<1e-9?" · actuel":"")+"</td><td>"+euro(m+insuranceMonthly)+"</td><td>"+euro(i)+"</td><td>"+euro(i+ins)+"</td></tr>";
-  }).join("");
   return "<strong>"+euro(payment)+" / mois</strong><p>Mensualité hors assurance : "+euro(monthly)+"<br>Assurance estimée : "+euro(insuranceMonthly)+" / mois<br>Intérêts totaux : "+euro(interest)+"<br>Total remboursé : "+euro(total)+"</p><p class='small'>L'assurance est estimée sur le capital initial. Le résultat est indicatif et hors autres frais du crédit.</p>";
 }};
 (function(){
