@@ -88,14 +88,6 @@
     "rule": "title"
   },
   {
-    "path": "public/outil/capacite-emprunt/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/capacite-emprunt/index.html",
-    "rule": "tool-block"
-  },
-  {
     "path": "public/outil/cash-flow-immobilier/index.html",
     "rule": "description"
   },
