@@ -202,7 +202,7 @@
       return;
     }
 
-    const available=d.revenus*.35-d.charges;
+    const available=d.revenus*PARAMS.tauxEffortMax/100-d.charges;
     if(available<=0){
       $("result").innerHTML='<div class="result-kicker">Votre estimation</div><div class="result-main"><strong>0 €</strong></div><p class="cap-status">Aucune mensualité n’est disponible avec les charges indiquées dans cette hypothèse de 35 %.</p>';
       $("comparison").innerHTML='<tr><td colspan="4">Aucun capital disponible avec les données saisies.</td></tr>';
