@@ -174,7 +174,7 @@ function legacyFraisKm({ km, cv, veh }) {
   let a = [.529, .606, .636, .665, .697][c - 3], b = [.370, .407, .427, .447, .470][c - 3], m = [1065, 1330, 1395, 1457, 1515][c - 3];
   let f = d <= 5000 ? d * a : d <= 20000 ? d * [.316, .340, .357, .374, .394][c - 3] + m : d * b;
   if (e) f *= 1.2;
-  return "<strong>" + euro(f) + "</strong> de frais kilométriques estimés<br><small>Barème 2026 · majoration électrique de 20 % incluse.</small>";
+  return "<strong>" + euro(f) + "</strong> de frais kilométriques estimés<br><small>Barème 2026" + (e ? " · majoration électrique de 20 % incluse" : "") + ".</small>";
 }
 
 const smic = pageTool("smic");

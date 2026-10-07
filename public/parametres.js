@@ -24,17 +24,71 @@
       }
     },
     "frais-kilometriques": {
-      "label": "Barème kilométrique (voitures)",
+      "label": "Barème kilométrique",
       "year": 2026,
       "effectiveFrom": "2026-01-01",
       "effectiveTo": "2027-03-31",
-      "verifiedOn": "2026-10-03",
+      "verifiedOn": "2026-10-07",
       "source": {
         "label": "Service-Public — frais kilométriques",
         "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R3080"
       },
       "values": {
+        "cyclomoteur": {
+          "auDela": 0.198,
+          "forfaitMilieu": 711,
+          "jusqua3000": 0.315,
+          "milieu": 0.079
+        },
+        "cyclomoteurElectrique": {
+          "auDela": 0.238,
+          "forfaitMilieu": 853,
+          "jusqua3000": 0.378,
+          "milieu": 0.095
+        },
         "majorationElectrique": 1.2,
+        "motoPalier1": 3000,
+        "motoPalier2": 6000,
+        "motoParCV": {
+          "6": {
+            "auDela": 0.343,
+            "forfaitMilieu": 1583,
+            "jusqua3000": 0.606,
+            "milieu": 0.079
+          },
+          "1-2": {
+            "auDela": 0.248,
+            "forfaitMilieu": 891,
+            "jusqua3000": 0.395,
+            "milieu": 0.099
+          },
+          "3-5": {
+            "auDela": 0.275,
+            "forfaitMilieu": 1158,
+            "jusqua3000": 0.468,
+            "milieu": 0.082
+          }
+        },
+        "motoParCVElectrique": {
+          "6": {
+            "auDela": 0.412,
+            "forfaitMilieu": 1900,
+            "jusqua3000": 0.727,
+            "milieu": 0.095
+          },
+          "1-2": {
+            "auDela": 0.298,
+            "forfaitMilieu": 1069,
+            "jusqua3000": 0.474,
+            "milieu": 0.119
+          },
+          "3-5": {
+            "auDela": 0.33,
+            "forfaitMilieu": 1390,
+            "jusqua3000": 0.562,
+            "milieu": 0.098
+          }
+        },
         "palier1": 5000,
         "palier2": 20000,
         "parCV": {
