@@ -34,30 +34,95 @@
         "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R3080"
       },
       "values": {
+        "cyclomoteur": {
+          "auDela": 0.198,
+          "forfaitMilieu": 711,
+          "jusqua3000": 0.315,
+          "milieu": 0.079
+        },
+        "cyclomoteurElectrique": {
+          "auDela": 0.238,
+          "forfaitMilieu": 853,
+          "jusqua3000": 0.378,
+          "milieu": 0.095
+        },
         "majorationElectrique": 1.2,
-        "palier1": 5000,
-        "palier2": 20000,
         "motoPalier1": 3000,
         "motoPalier2": 6000,
-        "parCV": {
-          "3": {"auDela": 0.37, "forfaitMilieu": 1065, "jusqua5000": 0.529, "milieu": 0.316},
-          "4": {"auDela": 0.407, "forfaitMilieu": 1330, "jusqua5000": 0.606, "milieu": 0.34},
-          "5": {"auDela": 0.427, "forfaitMilieu": 1395, "jusqua5000": 0.636, "milieu": 0.357},
-          "6": {"auDela": 0.447, "forfaitMilieu": 1457, "jusqua5000": 0.665, "milieu": 0.374},
-          "7": {"auDela": 0.47, "forfaitMilieu": 1515, "jusqua5000": 0.697, "milieu": 0.394}
-        },
         "motoParCV": {
-          "1-2": {"auDela": 0.248, "forfaitMilieu": 891, "jusqua3000": 0.395, "milieu": 0.099},
-          "3-5": {"auDela": 0.275, "forfaitMilieu": 1158, "jusqua3000": 0.468, "milieu": 0.082},
-          "6": {"auDela": 0.343, "forfaitMilieu": 1583, "jusqua3000": 0.606, "milieu": 0.079}
+          "6": {
+            "auDela": 0.343,
+            "forfaitMilieu": 1583,
+            "jusqua3000": 0.606,
+            "milieu": 0.079
+          },
+          "1-2": {
+            "auDela": 0.248,
+            "forfaitMilieu": 891,
+            "jusqua3000": 0.395,
+            "milieu": 0.099
+          },
+          "3-5": {
+            "auDela": 0.275,
+            "forfaitMilieu": 1158,
+            "jusqua3000": 0.468,
+            "milieu": 0.082
+          }
         },
         "motoParCVElectrique": {
-          "1-2": {"auDela": 0.298, "forfaitMilieu": 1069, "jusqua3000": 0.474, "milieu": 0.119},
-          "3-5": {"auDela": 0.33, "forfaitMilieu": 1390, "jusqua3000": 0.562, "milieu": 0.098},
-          "6": {"auDela": 0.412, "forfaitMilieu": 1900, "jusqua3000": 0.727, "milieu": 0.095}
+          "6": {
+            "auDela": 0.412,
+            "forfaitMilieu": 1900,
+            "jusqua3000": 0.727,
+            "milieu": 0.095
+          },
+          "1-2": {
+            "auDela": 0.298,
+            "forfaitMilieu": 1069,
+            "jusqua3000": 0.474,
+            "milieu": 0.119
+          },
+          "3-5": {
+            "auDela": 0.33,
+            "forfaitMilieu": 1390,
+            "jusqua3000": 0.562,
+            "milieu": 0.098
+          }
         },
-        "cyclomoteur": {"auDela": 0.198, "forfaitMilieu": 711, "jusqua3000": 0.315, "milieu": 0.079},
-        "cyclomoteurElectrique": {"auDela": 0.238, "forfaitMilieu": 853, "jusqua3000": 0.378, "milieu": 0.095}
+        "palier1": 5000,
+        "palier2": 20000,
+        "parCV": {
+          "3": {
+            "auDela": 0.37,
+            "forfaitMilieu": 1065,
+            "jusqua5000": 0.529,
+            "milieu": 0.316
+          },
+          "4": {
+            "auDela": 0.407,
+            "forfaitMilieu": 1330,
+            "jusqua5000": 0.606,
+            "milieu": 0.34
+          },
+          "5": {
+            "auDela": 0.427,
+            "forfaitMilieu": 1395,
+            "jusqua5000": 0.636,
+            "milieu": 0.357
+          },
+          "6": {
+            "auDela": 0.447,
+            "forfaitMilieu": 1457,
+            "jusqua5000": 0.665,
+            "milieu": 0.374
+          },
+          "7": {
+            "auDela": 0.47,
+            "forfaitMilieu": 1515,
+            "jusqua5000": 0.697,
+            "milieu": 0.394
+          }
+        }
       }
     },
     "impot-sur-le-revenu": {
