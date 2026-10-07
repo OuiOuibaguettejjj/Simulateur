@@ -76,7 +76,7 @@ function updateFields(){
   document.getElementById('energy-field').style.display='';
   energy.setAttribute('aria-label',v==='cyclomoteur'?'Énergie du cyclomoteur':v==='moto'?'Énergie de la moto ou du scooter':'Énergie de la voiture');
 }
-document.getElementById('veh').addEventListenerr('change',updateFields);
+document.getElementById('veh').addEventListener('change',updateFields);
 updateFields();
 })();
 </script>
