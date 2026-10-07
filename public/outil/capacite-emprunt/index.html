@@ -182,7 +182,7 @@
 <div class="field cap-field"><label for="revenus">Revenus mensuels nets avant impôt (€)</label><input id="revenus" type="number" min="1" step="50" value="3500" inputmode="decimal"><small>Salaires, pensions et autres revenus retenus selon votre situation.</small></div>
 <div class="field cap-field"><label for="charges">Crédits et charges mensuels (€)</label><input id="charges" type="number" min="0" step="25" value="0" inputmode="decimal"><small>Charges déjà supportées que vous souhaitez intégrer au calcul.</small></div>
 <div class="field cap-field"><label for="taux">Taux annuel du crédit (%)</label><input id="taux" type="number" min="0" max="20" step=".01" value="3.30" inputmode="decimal"><small>Repère modifiable : 3,30 % correspond au taux moyen des nouveaux crédits à l’habitat hors renégociations en juillet 2026, selon la Banque de France.</small></div>
-<div class="field cap-field"><label for="duree">Durée du prêt (années)</label><input id="duree" type="number" min="1"  step="1" value="25" inputmode="numeric"><small>Jusqu’à <span data-hcsf-maturity></span> dans le cadre standard HCSF ; les cas de différé ne sont pas modélisés ici.</small></div>
+<div class="field cap-field"><label for="duree">Durée du prêt (années)</label><input id="duree" type="number" min="1"  step="1" inputmode="numeric"><small>Jusqu’à <span data-hcsf-maturity></span> dans le cadre standard HCSF ; les cas de différé ne sont pas modélisés ici.</small></div>
 <div class="field cap-field"><label for="assurance">Assurance emprunteur (% / an)</label><input id="assurance" type="number" min="0" max="5" step=".01" value=".20" inputmode="decimal"><small>Hypothèse simplifiée appliquée au capital emprunté.</small></div>
 <div class="field cap-field"><label for="apport">Apport disponible (€)</label><input id="apport" type="number" min="0" step="500" value="30000" inputmode="decimal"><small>L’apport augmente votre budget global, mais ne remplace pas l’analyse bancaire.</small></div>
 </div>
@@ -276,6 +276,7 @@
   document.querySelectorAll("[data-hcsf-effort]").forEach(function(el){ el.textContent=PARAMS.tauxEffortMax+" %"; });
   document.querySelectorAll("[data-hcsf-maturity]").forEach(function(el){ el.textContent=PARAMS.maturiteMax+" ans"; });
   $("duree").max=PARAMS.maturiteMax;
+  $("duree").value=PARAMS.maturiteMax;
 
   function read(){
     return {
@@ -318,7 +319,7 @@
   function render(){
     const d=read();
     if(!valid(d)){
-      $("result").innerHTML='<div class="result-kicker">Votre estimation</div><div class="result-main"><strong>Vérifiez vos données</strong></div><p class="cap-status">Saisissez des valeurs positives et une durée comprise entre 1 et 25 ans.</p>';
+      $("result").innerHTML='<div class="result-kicker">Votre estimation</div><div class="result-main"><strong>Vérifiez vos données</strong></div><p class="cap-status">Saisissez des valeurs positives et une durée comprise entre 1 et la durée maximale standard.</p>';
       $("comparison").innerHTML='<tr><td colspan="4">Corrigez les données pour afficher la comparaison.</td></tr>';
       return;
     }
