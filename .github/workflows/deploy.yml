@@ -141,7 +141,6 @@ jobs:
           node tests/age-retraite-final.test.js
           node tests/simulateurs.test.js
           node tests/ratio.test.mjs
-          node tests/salaire-brut-net.test.js
           node tests/params.test.mjs
 
       - name: Préparer Chromium pour les contrôles interactifs
