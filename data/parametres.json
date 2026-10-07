@@ -226,6 +226,25 @@
           }
         }
       }
+    },
+    "prime-activite": {
+      "label": "Prime d’activité",
+      "year": 2026,
+      "usedBy": [
+        "prime-activite"
+      ],
+      "source": {
+        "label": "CAF — évolution de la prime d’activité en 2026",
+        "url": "https://www.caf.fr/allocataires/actualites/actualites-nationales/la-prime-d-activite-augmente-en-2026"
+      },
+      "effectiveFrom": "2026-04-01",
+      "effectiveTo": "2027-03-31",
+      "verifiedOn": "2026-10-07",
+      "notes": "Montant forfaitaire de 638,28 € et taux de 59,85 % vérifiés sur les sources officielles CAF et Service-Public pour le barème applicable à compter du 1er avril 2026. Le calculateur conserve une estimation simplifiée et ne reproduit pas l’intégralité du calcul CAF.",
+      "values": {
+        "base": 638.28,
+        "activityRate": 0.5985
+      }
     }
   },
   "anneeAMigrer": {
@@ -248,7 +267,6 @@
       "plus-value-immobiliere",
       "plus-value-mobiliere",
       "preavis-demission",
-      "prime-activite",
       "ptz",
       "retraite-simplifiee",
       "rupture-conventionnelle",
