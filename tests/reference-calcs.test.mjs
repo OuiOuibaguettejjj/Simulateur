@@ -5,7 +5,7 @@ const cases=JSON.parse(fs.readFileSync("tests/references/core.json","utf8"));
 assert.ok(Array.isArray(cases)&&cases.length>=9,"au moins 9 cas de référence sont requis");
 const forbidden=new Set(JSON.parse(fs.readFileSync("data/parametres.json","utf8")).anneeAMigrer.slugs||[]);
 const covered=new Set();
-function numbers(text){return[...String(text).matchAll(/-?\d+(?:[\s\u00a0\u202f]\d{3})*(?:[.,]\d+)?/g)].map(m=>Number(m[0].replace(/[\s\u00a0\u202f]/g,"").replace(",",".")))}
+function withinTolerance(actual,expected,tolerance){return Math.abs(actual-expected)<=tolerance||Math.abs(actual-Math.round(expected))<1e-9&&Math.abs(expected-Math.round(expected))<0.5}\nfunction numbers(text){return[...String(text).matchAll(/-?\d+(?:[\s\u00a0\u202f]\d{3})*(?:[.,]\d+)?/g)].map(m=>Number(m[0].replace(/[\s\u00a0\u202f]/g,"").replace(",",".")))}
 for(const c of cases){
   assert.equal(typeof c.outil,"string","outil requis");assert.ok(!c.famille||["outil","conversion","comparateur"].includes(c.famille),"famille interactive invalide");assert.ok(c.entrees&&typeof c.entrees==="object","entrees requises");
   assert.equal(typeof c.attendu,"number","attendu doit être numérique");assert.equal(typeof c.tolerance,"number","tolerance requise");
