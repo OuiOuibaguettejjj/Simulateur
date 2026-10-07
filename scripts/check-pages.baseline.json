@@ -853,10 +853,6 @@
   },
   {
     "path": "public/outil/pret-immobilier/index.html",
-    "rule": "content-h2"
-  },
-  {
-    "path": "public/outil/pret-immobilier/index.html",
     "rule": "faq"
   },
   {
