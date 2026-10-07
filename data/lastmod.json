@@ -75,7 +75,6 @@
     "/outil/preavis-demission/": "2026-10-03",
     "/outil/prelevement-source/": "2026-10-03",
     "/outil/pret-immobilier/": "2026-10-07",
-    "/outil/prime-activite/": "2026-10-03",
     "/outil/prix-unitaire/": "2026-10-03",
     "/outil/promotions/": "2026-10-03",
     "/outil/proportion/": "2026-10-03",
@@ -109,6 +108,7 @@
     "/temps/": "2026-10-03",
     "/travail/": "2026-10-03",
     "/vie-quotidienne/": "2026-10-03",
-    "/outil/etes-vous-riche/": "2026-10-05"
+    "/outil/etes-vous-riche/": "2026-10-05",
+    "/outil/prime-activite/": "2026-10-07"
   }
 }
