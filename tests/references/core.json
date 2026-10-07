@@ -587,5 +587,21 @@
     ],
     "source": "https://www.thecalculator.co/finance/Mortgage-Payment-Calculator-24.html",
     "note": "Cas de référence indépendant : 200 000 € sur 20 ans à 3,50 % donne une mensualité de 1 159,92 € hors assurance, 78 380,66 € d'intérêts et 278 380,66 € remboursés."
+  },
+  {
+    "outil": "capacite-emprunt",
+    "entrees": {
+      "revenus": "4000",
+      "charges": "400",
+      "taux": "0",
+      "duree": "20",
+      "assurance": "0",
+      "apport": "0"
+    },
+    "attendu": 240000,
+    "tolerance": 0.01,
+    "sortie": "240\\s*000(?:,00)?\\s*€",
+    "source": "https://www.economie.gouv.fr/hcsf/mesures/mesure-relative-loctroi-de-credits-immobiliers",
+    "note": "Cas de référence indépendant : avec 4 000 € de revenus mensuels nets avant impôt et 400 € de charges, le plafond de 35 % laisse 1 000 € de mensualité disponible. À taux nul et sur 20 ans, cela correspond à 240 000 € de capital. La valeur attendue est calculée indépendamment du code testé."
   }
 ]
