@@ -8,6 +8,21 @@
     return o;
   }
   var SETS = freeze({
+    "capacite-emprunt": {
+      "label": "Cadre HCSF — capacité d'emprunt immobilier",
+      "year": 2026,
+      "effectiveFrom": "2022-01-01",
+      "effectiveTo": "2026-12-31",
+      "verifiedOn": "2026-10-07",
+      "source": {
+        "label": "HCSF — conditions d’octroi de crédits immobiliers",
+        "url": "https://www.economie.gouv.fr/hcsf/mesures/mesure-relative-loctroi-de-credits-immobiliers"
+      },
+      "values": {
+        "maturiteMax": 25,
+        "tauxEffortMax": 35
+      }
+    },
     "frais-kilometriques": {
       "label": "Barème kilométrique (voitures)",
       "year": 2026,
