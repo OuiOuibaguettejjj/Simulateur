@@ -65,7 +65,7 @@
       }
     },
     "frais-kilometriques": {
-      "label": "Barème kilométrique (voitures)",
+      "label": "Barème kilométrique",
       "year": 2026,
       "usedBy": [
         "frais-kilometriques"
@@ -76,44 +76,33 @@
       },
       "effectiveFrom": "2026-01-01",
       "effectiveTo": "2027-03-31",
-      "verifiedOn": "2026-10-03",
-      "notes": "Barème de la déclaration 2026 (revenus 2025), non revalorisé en 2026 selon economie.gouv.fr (page mise à jour le 13 avril 2026). Fin de validité fixée avant la déclaration suivante.",
+      "verifiedOn": "2026-10-07",
+      "notes": "Barèmes kilométriques 2026 applicables à la déclaration des revenus 2025. Les montants n'ont pas été revalorisés en 2026. Les véhicules 100 % électriques bénéficient d'une majoration de 20 %. Sources vérifiées sur Service-Public et impots.gouv.fr le 7 octobre 2026.",
       "values": {
         "majorationElectrique": 1.2,
         "palier1": 5000,
         "palier2": 20000,
+        "motoPalier1": 3000,
+        "motoPalier2": 6000,
         "parCV": {
-          "3": {
-            "jusqua5000": 0.529,
-            "milieu": 0.316,
-            "forfaitMilieu": 1065,
-            "auDela": 0.37
-          },
-          "4": {
-            "jusqua5000": 0.606,
-            "milieu": 0.34,
-            "forfaitMilieu": 1330,
-            "auDela": 0.407
-          },
-          "5": {
-            "jusqua5000": 0.636,
-            "milieu": 0.357,
-            "forfaitMilieu": 1395,
-            "auDela": 0.427
-          },
-          "6": {
-            "jusqua5000": 0.665,
-            "milieu": 0.374,
-            "forfaitMilieu": 1457,
-            "auDela": 0.447
-          },
-          "7": {
-            "jusqua5000": 0.697,
-            "milieu": 0.394,
-            "forfaitMilieu": 1515,
-            "auDela": 0.47
-          }
-        }
+          "3": {"jusqua5000": 0.529, "milieu": 0.316, "forfaitMilieu": 1065, "auDela": 0.37},
+          "4": {"jusqua5000": 0.606, "milieu": 0.34, "forfaitMilieu": 1330, "auDela": 0.407},
+          "5": {"jusqua5000": 0.636, "milieu": 0.357, "forfaitMilieu": 1395, "auDela": 0.427},
+          "6": {"jusqua5000": 0.665, "milieu": 0.374, "forfaitMilieu": 1457, "auDela": 0.447},
+          "7": {"jusqua5000": 0.697, "milieu": 0.394, "forfaitMilieu": 1515, "auDela": 0.47}
+        },
+        "motoParCV": {
+          "1-2": {"jusqua3000": 0.395, "milieu": 0.099, "forfaitMilieu": 891, "auDela": 0.248},
+          "3-5": {"jusqua3000": 0.468, "milieu": 0.082, "forfaitMilieu": 1158, "auDela": 0.275},
+          "6": {"jusqua3000": 0.606, "milieu": 0.079, "forfaitMilieu": 1583, "auDela": 0.343}
+        },
+        "motoParCVElectrique": {
+          "1-2": {"jusqua3000": 0.474, "milieu": 0.119, "forfaitMilieu": 1069, "auDela": 0.298},
+          "3-5": {"jusqua3000": 0.562, "milieu": 0.098, "forfaitMilieu": 1390, "auDela": 0.33},
+          "6": {"jusqua3000": 0.727, "milieu": 0.095, "forfaitMilieu": 1900, "auDela": 0.412}
+        },
+        "cyclomoteur": {"jusqua3000": 0.315, "milieu": 0.079, "forfaitMilieu": 711, "auDela": 0.198},
+        "cyclomoteurElectrique": {"jusqua3000": 0.378, "milieu": 0.095, "forfaitMilieu": 853, "auDela": 0.238}
       }
     },
     "rsa": {
