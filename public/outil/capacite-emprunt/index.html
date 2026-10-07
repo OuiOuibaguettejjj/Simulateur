@@ -12,62 +12,15 @@
 
 
 <style>
-.cap-shell{max-width:980px;margin:auto}
-.cap-hero{background:linear-gradient(135deg,#17483d 0%,#123a32 60%,#102f2a 100%);color:#fff;border:1px solid var(--ink);border-radius:22px 22px 0 0;padding:42px 44px 34px;position:relative;overflow:hidden}
-.cap-hero:after{content:"€";position:absolute;right:28px;top:-58px;font-size:15rem;font-weight:950;line-height:1;color:rgba(255,255,255,.05);transform:rotate(8deg)}
-.cap-hero .eyebrow{color:#ffb29f}
-
-.cap-hero .lead{position:relative;z-index:1;color:#dbe6df;max-width:700px;margin:0}
-.cap-trust{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
-.cap-trust span{font-size:.76rem;font-weight:800;padding:7px 10px;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:rgba(255,255,255,.07)}
-.cap-tool{max-width:none;border-radius:0 0 22px 22px;border-top:0;padding:36px 44px 42px}
-.cap-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:28px}
-.cap-panel{padding:24px;border:1px solid var(--line);border-radius:16px;background:#fbfaf6}
-
-.cap-panel>p{margin:0 0 20px;color:var(--muted);font-size:.9rem}
-.cap-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
-.cap-field{margin:10px 0 12px}
-.cap-field label{font-size:.88rem}
-.cap-field small{display:block;color:var(--muted);font-size:.75rem;margin-top:4px}
-.cap-field input{min-height:48px}
-.cap-action{margin-top:12px}
-.cap-action .button-main{min-height:54px;font-size:1rem;box-shadow:0 5px 0 #bd321c;transition:transform .12s,box-shadow .12s}
-.cap-action .button-main:hover{transform:translateY(2px);box-shadow:0 3px 0 #bd321c}
-.cap-note{text-align:center;color:var(--muted);font-size:.74rem;margin:10px 0 0}
-.cap-result{min-height:100%;margin:0!important;background:linear-gradient(145deg,#f4f7f4,#edf3ef)!important;border-color:#b9c9bf!important;padding:24px!important}
-.cap-result .result-kicker{font-size:.72rem;font-weight:950;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2)}
-.cap-result .result-main{margin-top:7px}
-.cap-result .result-main strong{font-size:clamp(2rem,4.5vw,3rem);letter-spacing:-.055em}
-.cap-stats{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:20px}
-.cap-stat{padding:12px;border:1px solid #c9d4cd;border-radius:10px;background:#fff}
-.cap-stat small{display:block;color:var(--muted);font-size:.75rem}
-.cap-stat strong{display:block;margin-top:2px;font-size:1.05rem}
-.cap-meter{height:9px;background:#dfe8e2;border-radius:99px;overflow:hidden;margin:12px 0 5px}
-.cap-meter span{display:block;height:100%;width:0;background:var(--accent2);border-radius:inherit}
-.cap-status{font-size:.82rem;color:var(--muted)}
-.cap-comparison{margin-top:24px}
-
-.cap-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
-.cap-table th,.cap-table td{padding:11px 12px;border-bottom:1px solid var(--line);text-align:right;font-size:.86rem}
-.cap-table th:first-child,.cap-table td:first-child{text-align:left}
-.cap-table tr:last-child td{border-bottom:0}
-.cap-table th{background:#f0eadf;font-size:.76rem;text-transform:uppercase;letter-spacing:.06em}
-.cap-table .highlight{font-weight:950;background:#edf3ef}
-.cap-content{max-width:980px;margin:50px auto 0}
-.cap-content .content-intro{border-top:1px solid var(--ink);padding-top:24px}
-
-.cap-content p{max-width:850px}
-.cap-faq{margin-top:24px;border-top:1px solid var(--line)}
-.cap-faq details{padding:17px 0;border-bottom:1px solid var(--line)}
-.cap-faq summary{cursor:pointer;font-weight:900}
-.cap-related{margin-top:42px}
-
-.cap-related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-/* Capacité d’emprunt — direction artistique */
-.cap-shell{max-width:920px}
+/* Capacité d’emprunt — variante visuelle locale alignée sur le design system commun. */
+.cap-shell{max-width:var(--calculator-max);margin:auto}
 .cap-hero{
-  border-radius:24px 24px 0 0;
-  padding:48px 48px 36px;
+  position:relative;
+  overflow:hidden;
+  padding:44px 46px 34px;
+  color:#fff;
+  border:1px solid var(--ink);
+  border-radius:22px 22px 0 0;
   background:
     radial-gradient(circle at 88% 12%,rgba(255,178,159,.12),transparent 28%),
     linear-gradient(135deg,#17483d 0%,#123a32 58%,#102f2a 100%);
@@ -77,85 +30,174 @@
   content:"";
   position:absolute;
   inset:0;
-  background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+  background-image:
+    linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
   background-size:28px 28px;
   mask-image:linear-gradient(to right,transparent 0%,black 45%,transparent 100%);
 }
-.cap-hero .eyebrow{position:relative;z-index:1;font-weight:950;letter-spacing:.12em}
-.cap-trust span{backdrop-filter:blur(6px)}
-.cap-tool{
-  padding:32px 48px 44px;
-  background:var(--card);
-  box-shadow:0 24px 60px rgba(23,23,19,.10);
+.cap-hero:after{
+  content:"€";
+  position:absolute;
+  right:28px;
+  top:-58px;
+  font-size:15rem;
+  font-weight:900;
+  line-height:1;
+  color:rgba(255,255,255,.05);
+  transform:rotate(8deg);
 }
-.cap-grid{gap:20px}
+.cap-hero .eyebrow{position:relative;z-index:1;color:#ffb29f}
+.cap-hero .lead{position:relative;z-index:1;max-width:700px;margin:0;color:#dbe6df}
+.cap-trust{
+  position:relative;
+  z-index:1;
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:22px;
+}
+.cap-trust span{
+  font-size:.76rem;
+  font-weight:800;
+  padding:7px 10px;
+  border:1px solid rgba(255,255,255,.2);
+  border-radius:999px;
+  background:rgba(255,255,255,.07);
+  backdrop-filter:blur(6px);
+}
+.cap-tool{
+  max-width:none;
+  padding:36px 46px 42px;
+  border-radius:0 0 22px 22px;
+  border-top:0;
+  background:var(--card);
+  box-shadow:0 24px 60px rgba(23,23,19,.1);
+}
+.cap-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:20px}
 .cap-panel{
   padding:26px;
+  border:1px solid var(--line);
+  border-radius:16px;
   background:#fbfaf6;
   box-shadow:0 2px 0 rgba(23,23,19,.05);
 }
+.cap-panel>p{margin:0 0 20px;color:var(--muted);font-size:.9rem}
+.cap-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+.cap-field{margin:10px 0 12px}
+.cap-field label{font-size:.9rem}
+.cap-field small{display:block;margin-top:5px;color:var(--muted);font-size:.78rem;line-height:1.45}
 .cap-field input{
-  border-color:#c9c2b6;
+  min-height:var(--control-height);
+  border-color:var(--line);
   background:#fff;
-  transition:border-color .16s,box-shadow .16s,transform .16s;
+  transition:border-color .16s,box-shadow .16s;
 }
-.cap-field input:focus{
-  transform:translateY(-1px);
-  box-shadow:0 0 0 3px var(--accent-soft);
-}
+.cap-field input:focus{transform:none;box-shadow:0 0 0 3px var(--accent-soft)}
+.cap-action{margin-top:12px}
 .cap-action .button-main{
   width:100%;
+  min-height:52px;
   border-radius:12px;
+  font-size:1rem;
+  box-shadow:0 5px 0 #bd321c;
+  transition:transform .12s,box-shadow .12s;
 }
+.cap-action .button-main:hover{transform:translateY(2px);box-shadow:0 3px 0 #bd321c}
+.cap-note{text-align:center;color:var(--muted);font-size:.74rem;margin:10px 0 0}
 .cap-result{
   position:relative;
+  min-height:100%;
+  margin:0!important;
+  padding:24px!important;
   overflow:hidden;
+  background:linear-gradient(145deg,#f4f7f4,#edf3ef)!important;
+  border-color:var(--line)!important;
   box-shadow:inset 4px 0 0 var(--accent2),0 10px 28px rgba(23,23,19,.07);
 }
 .cap-result:before{
   content:"";
   position:absolute;
-  width:180px;height:180px;
-  right:-85px;top:-85px;
+  width:180px;
+  height:180px;
+  right:-85px;
+  top:-85px;
   border-radius:50%;
   background:rgba(23,72,61,.08);
 }
-.cap-result .result-main strong{font-size:clamp(2.2rem,4.5vw,3.2rem)}
-.cap-stats{grid-template-columns:1fr 1fr}
-.cap-stat{transition:transform .15s,box-shadow .15s}
-.cap-stat:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(23,23,19,.06)}
-.cap-comparison{
-  margin-top:26px;
-  padding-top:24px;
-  border-top:1px solid var(--line);
+.cap-result .result-kicker{
+  font-size:.72rem;
+  font-weight:900;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--accent2);
 }
+.cap-result .result-main{margin-top:7px}
+.cap-result .result-main strong{
+  font-size:clamp(2.2rem,4.5vw,3.2rem);
+  letter-spacing:-.05em;
+}
+.cap-stats{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:20px}
+.cap-stat{padding:12px;border:1px solid var(--line);border-radius:10px;background:#fff}
+.cap-stat small{display:block;color:var(--muted);font-size:.75rem;line-height:1.35}
+.cap-stat strong{display:block;margin-top:2px;font-size:1.05rem}
+.cap-meter{height:9px;margin:12px 0 5px;overflow:hidden;background:#dfe8e2;border-radius:99px}
+.cap-meter span{display:block;width:0;height:100%;background:var(--accent2);border-radius:inherit}
+.cap-status{font-size:.82rem;color:var(--muted);line-height:1.5}
+.cap-comparison{margin-top:26px;padding-top:24px;border-top:1px solid var(--line)}
 .cap-table{
+  width:100%;
+  border-collapse:collapse;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:12px;
+  overflow:hidden;
   box-shadow:0 3px 0 rgba(23,23,19,.06);
+}
+.cap-table th,.cap-table td{
+  padding:11px 12px;
+  border-bottom:1px solid var(--line);
+  text-align:right;
+  font-size:.86rem;
+}
+.cap-table th:first-child,.cap-table td:first-child{text-align:left}
+.cap-table tr:last-child td{border-bottom:0}
+.cap-table th{
+  background:#f0eadf;
+  font-size:.78rem;
+  text-transform:uppercase;
+  letter-spacing:.055em;
+  line-height:1.3;
 }
 .cap-table tbody tr{transition:background .12s}
 .cap-table tbody tr:hover{background:#f7f4ec}
-.cap-table .highlight{box-shadow:inset 3px 0 0 var(--accent2)}
-.cap-benchmarks{margin-top:20px}
-.cap-table-note{
-  margin:10px 0 0;
-  color:var(--muted);
-  font-size:.78rem;
-  line-height:1.5;
+.cap-table .highlight{
+  font-weight:900;
+  background:#edf3ef;
+  box-shadow:inset 3px 0 0 var(--accent2);
 }
-.cap-content{max-width:920px;margin-top:56px}
+.cap-benchmarks{margin-top:20px}
+.cap-table-note{margin:10px 0 0;color:var(--muted);font-size:.78rem;line-height:1.5}
+.cap-content{max-width:var(--calculator-max);margin:56px auto 0}
 .cap-content .content-intro{padding-top:26px}
 .cap-content .formula{margin-top:22px}
 .cap-content .calculator-data{margin-top:12px}
+.cap-faq{margin-top:46px}
 .cap-related{margin-top:48px}
-@media(min-width:761px){
-  .cap-result{min-height:330px}
-}
+@media(min-width:761px){.cap-result{min-height:330px}}
 @media(max-width:760px){
- .cap-hero{padding:32px 22px 28px}.cap-hero:after{font-size:9rem;right:-8px}
- .cap-tool{padding:26px 20px 32px}.cap-grid{grid-template-columns:1fr}.cap-form-grid{grid-template-columns:1fr}
- .cap-panel{padding:19px}.cap-related-grid{grid-template-columns:1fr 1fr}
+  .cap-hero{padding:32px 22px 28px}
+  .cap-hero:after{font-size:9rem;right:-8px}
+  .cap-tool{padding:26px 20px 32px}
+  .cap-grid,.cap-form-grid{grid-template-columns:1fr}
+  .cap-panel{padding:19px}
+  .cap-stats{grid-template-columns:1fr}
 }
-@media(max-width:520px){.cap-related-grid{grid-template-columns:1fr}.cap-table{font-size:.8rem}.cap-table th,.cap-table td{padding:9px 7px}}
+@media(max-width:520px){
+  .cap-related-grid{grid-template-columns:1fr}
+  .cap-table{font-size:.82rem}
+  .cap-table th,.cap-table td{padding:9px 7px}
+}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Capacité d’emprunt immobilier : combien pouvez-vous emprunter ?","url":"https://simulateur.site/outil/capacite-emprunt/","description":"Calculez votre capacité d’emprunt immobilier en 2026 selon vos revenus, charges, taux, durée et assurance. Comparez plusieurs durées.","inLanguage":"fr-FR","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"price":"0","priceCurrency":"EUR"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Immobilier","item":"https://simulateur.site/immobilier/"},{"@type":"ListItem","position":3,"name":"Capacité d’emprunt immobilier : combien pouvez-vous emprunter ?","item":"https://simulateur.site/outil/capacite-emprunt/"}]}</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta property="og:type" content="website"><meta property="og:site_name" content="Simulateur"><meta property="og:locale" content="fr_FR"><meta property="og:title" content="Capacité d’emprunt immobilier : simulateur 2026 | Simulateur"><meta property="og:description" content="Calculez votre capacité d’emprunt immobilier en 2026 selon vos revenus, charges, taux, durée et assurance. Comparez plusieurs durées."><meta property="og:url" content="https://simulateur.site/outil/capacite-emprunt/"><meta name="twitter:card" content="summary"></head>
 <body><header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header>
@@ -238,7 +280,7 @@
 <p class="cap-table-note">Repères indicatifs calculés avec les mêmes hypothèses que la valeur par défaut. Ils ne tiennent pas compte d’autres charges, du profil de revenus ni des frais d’acquisition.</p>
 <p>Pour <strong>200 000 € empruntés</strong>, avec ces mêmes hypothèses et aucune charge existante, le revenu mensuel nécessaire est d’environ :</p>
 <table class="cap-table" aria-label="Revenu mensuel nécessaire pour emprunter 200 000 euros">
-<thead><tr><th>Durée</th><th>Mensualité estimée</th><th>Revenu mensuel à 35 %</th></tr></thead>
+<thead><tr><th>Durée</th><th>Mensualité estimée</th><th>Revenu mensuel à <span data-hcsf-effort></span></th></tr></thead>
 <tbody>
 <tr><th scope="row">15 ans</th><td>1 445 €</td><td>4 130 €</td></tr>
 <tr class="highlight"><th scope="row">20 ans</th><td>1 175 €</td><td>3 357 €</td></tr>
