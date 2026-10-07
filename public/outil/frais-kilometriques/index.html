@@ -1,3 +1,104 @@
-<!doctype html><html lang="fr"><head><meta name="calculator-rendering" content="static"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="google-adsense-account" content="ca-pub-2924580037451268"><title>Calculateur de frais kilométriques 2026</title><meta name="description" content="Calculez vos frais kilométriques déductibles selon le barème fiscal 2026."><link rel="canonical" href="https://simulateur.site/outil/frais-kilometriques/"><link rel="stylesheet" href="/styles.css"><script src="/parametres.js" defer></script><script src="/simulateurs.js" defer></script><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur de frais kilométriques 2026","url":"https://simulateur.site/outil/frais-kilometriques/","description":"Calculez vos frais kilométriques déductibles selon le barème fiscal 2026.","inLanguage":"fr-FR","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"price":"0","priceCurrency":"EUR"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Travail","item":"https://simulateur.site/travail/"},{"@type":"ListItem","position":3,"name":"Calculateur de frais kilométriques 2026","item":"https://simulateur.site/outil/frais-kilometriques/"}]}</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta property="og:type" content="website"><meta property="og:site_name" content="Simulateur"><meta property="og:locale" content="fr_FR"><meta property="og:title" content="Calculateur de frais kilométriques 2026"><meta property="og:description" content="Calculez vos frais kilométriques déductibles selon le barème fiscal 2026."><meta property="og:url" content="https://simulateur.site/outil/frais-kilometriques/"><meta name="twitter:card" content="summary"></head><body><header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header><main><div class="wrap"><div class="breadcrumb"><a href="/">Accueil</a> · <a href="/travail/">Travail</a> · Calculateur de frais kilométriques 2026</div><section class="tool"><div class="eyebrow">IMPÔTS 2026</div><h1>Calculateur de frais kilométriques 2026</h1><p class="tool-intro">Calculez le montant selon le barème fiscal 2026.</p><div id="fields"><div class="field"><label for="km">Kilomètres professionnels</label><input id="km" type="number" min="0" step="1" placeholder="8000"></div><div class="field"><label for="cv">Puissance fiscale</label><select id="cv"><option value="3">3 CV ou moins</option><option value="4">4 CV</option><option value="5">5 CV</option><option value="6">6 CV</option><option value="7">7 CV ou plus</option></select></div><div class="field"><label for="veh">Véhicule</label><select id="veh"><option value="normal">Thermique / hybride / hydrogène</option><option value="electrique">Électrique</option></select></div></div><button class="button-main" onclick="Simulateurs.calc()">Calculer</button><div class="result" id="result" aria-live="polite">Saisissez vos valeurs puis lancez le calcul.</div><div class="formula"><strong>Source et périmètre</strong><p>Service-Public : barème kilométrique 2026 des voitures. Les véhicules électriques bénéficient d’une majoration de 20 %. Péages et stationnement peuvent s’ajouter sous conditions. Les frais réels se comparent à la déduction forfaitaire de 10 %.</p></div></section></div><section class="content-section"><h2>Comment fonctionne le barème kilométrique ?</h2><p>Le calcul dépend du kilométrage annuel, de la puissance fiscale et du type de véhicule. Le barème fiscal sert à évaluer les frais de déplacement professionnel lorsque vous optez pour les frais réels.</p><p>Pour une voiture, le barème est progressif selon trois tranches de kilomètres. Un véhicule électrique bénéficie d'une majoration de 20 %. Les péages et le stationnement peuvent, sous conditions, être ajoutés séparément.</p><h2>À retenir</h2><p>Ce résultat est une estimation de frais déductibles : il ne correspond pas automatiquement à une économie d'impôt. Il faut notamment comparer les frais réels avec la déduction forfaitaire de 10 %.</p><p><a href="https://www.service-public.fr/particuliers/vosdroits/R3080" target="_blank" rel="noopener">Source officielle : Service-Public — calcul des frais kilométriques</a></p></section><section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Outils associés</h2><div class="related-links"><a class="related-link" href="/outil/consommation-carburant/"><strong>Consommation carburant</strong><span>Estimer les litres consommés et le coût d'un trajet.</span></a><a class="related-link" href="/outil/salaire-brut-net/"><strong>Salaire brut net</strong><span>Estimer le net à partir du brut mensuel.</span></a><a class="related-link" href="/outil/impot-sur-le-revenu/"><strong>Impôt sur le revenu 2026</strong><span>Estimer l'impôt selon les règles du simulateur.</span></a></div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="/travail/">Travail</a>.</p></div></section>
-</main><footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer><script>window.TOOL={calc:function(){let d=+this.$("km").value,c=+this.$("cv").value,e=this.$("veh").value==="electrique";if(d<=0)return"Veuillez saisir un kilométrage positif.";const P=window.Parametres.get("frais-kilometriques"),V=P.values,t=V.parCV[c];if(!t)return"Puissance fiscale invalide.";let f=d<=V.palier1?d*t.jusqua5000:d<=V.palier2?d*t.milieu+t.forfaitMilieu:d*t.auDela;if(e)f*=V.majorationElectrique;return"<strong>"+this.euro(f)+"</strong> de frais kilométriques estimés<br><small>Barème "+P.year+" · majoration électrique de "+Math.round((V.majorationElectrique-1)*100)+" % incluse.</small>"}};</script><script src="/enter-calcul.js" defer></script></body></html>
+<!doctype html>
+<html lang="fr">
+<head>
+<meta name="calculator-rendering" content="static">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="google-adsense-account" content="ca-pub-2924580037451268">
+<title>Frais kilométriques : calcul, barème 2026 | Simulateur</title>
+<meta name="description" content="Calculez vos frais kilométriques 2026 selon le barème fiscal : voiture, moto ou cyclomoteur, électrique ou non.">
+<link rel="canonical" href="https://simulateur.site/outil/frais-kilometriques/">
+<link rel="stylesheet" href="/styles.css">
+<script src="/parametres.js" defer></script>
+<script src="/simulateurs.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur de frais kilométriques 2026","url":"https://simulateur.site/outil/frais-kilometriques/","description":"Calculez vos frais kilométriques 2026 selon le barème fiscal : voiture, moto ou cyclomoteur, électrique ou non.","inLanguage":"fr-FR","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"price":"0","priceCurrency":"EUR"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Travail","item":"https://simulateur.site/travail/"},{"@type":"ListItem","position":3,"name":"Frais kilométriques 2026","item":"https://simulateur.site/outil/frais-kilometriques/"}]}</script>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Simulateur">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Frais kilométriques : calcul, barème 2026 | Simulateur">
+<meta property="og:description" content="Calculez vos frais kilométriques 2026 selon le barème fiscal : voiture, moto ou cyclomoteur, électrique ou non.">
+<meta property="og:url" content="https://simulateur.site/outil/frais-kilometriques/">
+<meta name="twitter:card" content="summary">
+</head>
+<body>
+<header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header>
+<main>
+<div class="wrap">
+<div class="breadcrumb"><a href="/">Accueil</a> · <a href="/travail/">Travail</a> · Frais kilométriques 2026</div>
+<section class="tool">
+<div class="eyebrow">IMPÔTS 2026</div>
+<h1>Calculateur de frais kilométriques 2026</h1>
+<p class="tool-intro">Estimez vos frais réels déductibles selon le barème kilométrique 2026.</p>
+<div id="fields">
+<div class="field"><label for="km">Kilomètres professionnels sur l'année</label><input id="km" type="number" min="0" step="1" inputmode="numeric" placeholder="8000"></div>
+<div class="field"><label for="veh">Type de véhicule</label><select id="veh"><option value="voiture">Voiture</option><option value="moto">Moto ou scooter de plus de 50 cm³</option><option value="cyclomoteur">Cyclomoteur de moins de 50 cm³</option></select></div>
+<div class="field" id="energy-field"><label for="energy">Énergie</label><select id="energy"><option value="normal">Thermique / hybride / hydrogène</option><option value="electrique">100 % électrique</option></select></div>
+<div class="field" id="cv-field"><label for="cv">Puissance fiscale</label><select id="cv"><option value="3">3 CV ou moins</option><option value="4">4 CV</option><option value="5">5 CV</option><option value="6">6 CV</option><option value="7">7 CV ou plus</option></select></div>
+</div>
+<button class="button-main" onclick="Simulateurs.calc()">Calculer mes frais kilométriques</button>
+<div class="result" id="result" aria-live="polite">Saisissez votre kilométrage puis lancez le calcul.</div>
+<div class="formula"><strong>Barème utilisé</strong><p>Le calcul applique le barème kilométrique 2026 aux déplacements professionnels. Pour un véhicule 100 % électrique, la majoration de 20 % prévue par l'administration est intégrée.</p><p><a href="https://www.economie.gouv.fr/particuliers/impots-et-fiscalite/gerer-mon-impot-sur-le-revenu/impot-sur-le-revenu-tout-savoir-sur-le-bareme-des-frais-kilometriques" target="_blank" rel="noopener">Source officielle : economie.gouv.fr — barème des frais kilométriques 2026</a></p></div>
+</section>
+</div>
+<section class="content-section">
+<h2>Comment sont calculés les frais kilométriques ?</h2>
+<p>Le barème dépend du type de véhicule, de sa puissance fiscale et du nombre de kilomètres parcourus à titre professionnel. Pour une voiture, trois tranches s'appliquent : jusqu'à 5 000 km, de 5 001 à 20 000 km, puis au-delà de 20 000 km. Les motos et scooters de plus de 50 cm³ utilisent des seuils de 3 000 et 6 000 km.</p>
+<p>Le barème couvre notamment la dépréciation du véhicule, l'entretien, les pneumatiques, le carburant et l'assurance. Les véhicules 100 % électriques bénéficient d'une majoration de 20 %.</p>
+<h2>Que peut-on ajouter aux frais kilométriques ?</h2>
+<p>Les péages et les frais de stationnement liés aux déplacements professionnels peuvent être ajoutés sous conditions, avec leurs justificatifs. Les intérêts d'un crédit automobile peuvent également être pris en compte au prorata de l'utilisation professionnelle.</p>
+<h2>Frais réels ou déduction de 10 % ?</h2>
+<p>Le montant obtenu ici correspond à des frais professionnels estimés, pas à une économie d'impôt. Pour choisir les frais réels, comparez le total de vos frais déductibles avec la déduction forfaitaire de 10 % appliquée par défaut aux traitements et salaires.</p>
+<h2>À retenir</h2>
+<p>Le barème s'applique aux déplacements professionnels et le kilométrage doit pouvoir être justifié. Pour un trajet domicile-travail de plus de 40 km entre le domicile et le lieu de travail, la déduction est en principe limitée à 40 km par trajet, sauf circonstances particulières reconnues par l'administration.</p>
+<p>Si vous utilisez plusieurs véhicules, le barème se calcule séparément pour chacun d'eux : les kilomètres ne doivent pas être additionnés avant l'application du barème.</p>
+</section>
+<section class="calculator-faq" aria-labelledby="faq-title">
+<h2 id="faq-title">FAQ</h2>
+<details><summary>Le barème kilométrique 2026 a-t-il changé ?</summary><div class="calculator-faq-answer"><p>Non. Le barème kilométrique applicable à la déclaration des revenus 2025 n'a pas été revalorisé en 2026. La dernière revalorisation mentionnée par Service-Public date de 2023.</p></div></details>
+<details><summary>Les voitures électriques bénéficient-elles d'une majoration ?</summary><div class="calculator-faq-answer"><p>Oui. Le montant calculé avec le barème est majoré de 20 % pour les véhicules 100 % électriques. Cette majoration est déjà intégrée dans le calculateur.</p></div></details>
+<details><summary>Les péages et le stationnement sont-ils compris dans le barème ?</summary><div class="calculator-faq-answer"><p>Non. Les péages et certains frais de stationnement peuvent être ajoutés séparément lorsque les conditions de déduction sont remplies et que les dépenses sont justifiées.</p></div></details>
+<details><summary>Le calculateur donne-t-il le montant de l'économie d'impôt ?</summary><div class="calculator-faq-answer"><p>Non. Il estime le montant des frais kilométriques selon le barème. L'économie d'impôt dépend ensuite de votre situation fiscale et du total de vos autres frais réels.</p></div></details>
+</section>
+<section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Outils associés</h2><div class="related-links"><a class="related-link" href="/outil/consommation-carburant/"><strong>Consommation carburant</strong><span>Estimer les litres consommés et le coût d'un trajet.</span></a><a class="related-link" href="/outil/salaire-brut-net/"><strong>Salaire brut net</strong><span>Estimer le salaire net à partir du brut.</span></a><a class="related-link" href="/outil/impot-sur-le-revenu/"><strong>Impôt sur le revenu</strong><span>Estimer votre impôt selon le barème 2026.</span></a></div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="/travail/">Travail</a>.</p></div></section>
+</main>
+<footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer>
+<script>
+(function(){
+const motoOptions='<option value="1-2">1 ou 2 CV</option><option value="3-5">3, 4 ou 5 CV</option><option value="6">Plus de 5 CV</option>';
+const carOptions='<option value="3">3 CV ou moins</option><option value="4">4 CV</option><option value="5">5 CV</option><option value="6">6 CV</option><option value="7">7 CV ou plus</option>';
+const motoLabel='Puissance fiscale';
+function updateFields(){
+  const v=document.getElementById('veh').value, cv=document.getElementById('cv'), energy=document.getElementById('energy');
+  document.getElementById('cv-field').style.display=v==='cyclomoteur'?'none':'';
+  cv.innerHTML=v==='moto'?motoOptions:carOptions;
+  document.getElementById('energy-field').style.display='';
+  energy.setAttribute('aria-label',v==='cyclomoteur'?'Énergie du cyclomoteur':v==='moto'?'Énergie de la moto ou du scooter':'Énergie de la voiture');
+}
+window.TOOL={
+  calc:function(){
+    const d=Number(String(this.$('km').value).replace(',','.')), v=this.$('veh').value, e=this.$('energy').value==='electrique', cv=this.$('cv').value;
+    if(!Number.isFinite(d)||d<=0)return'Veuillez saisir un kilométrage professionnel positif.';
+    const P=window.Parametres.get('frais-kilometriques'), V=P.values;
+    let t, f;
+    if(v==='voiture'){
+      t=V.parCV[cv]; if(!t)return'Puissance fiscale invalide.';
+      f=d<=V.palier1?d*t.jusqua5000:d<=V.palier2?d*t.milieu+t.forfaitMilieu:d*t.auDela;
+    }else if(v==='moto'){
+      t=(e?V.motoParCVElectrique:V.motoParCV)[cv]; if(!t)return'Puissance fiscale invalide.';
+      f=d<=V.motoPalier1?d*t.jusqua3000:d<=V.motoPalier2?d*t.milieu+t.forfaitMilieu:d*t.auDela;
+    }else{
+      t=e?V.cyclomoteurElectrique:V.cyclomoteur;
+      f=d<=V.motoPalier1?d*t.jusqua3000:d<=V.motoPalier2?d*t.milieu+t.forfaitMilieu:d*t.auDela;
+    }
+    return'<strong>'+this.euro(f)+'</strong> de frais kilométriques estimés<br><small>Barème '+P.year+' · '+(e?'véhicule 100 % électrique':'véhicule non électrique')+'.</small>';
+  }
+};
+document.getElementById('veh').addEventListener('change',updateFields);
+updateFields();
+})();
+</script>
+<script src="/enter-calcul.js" defer></script>
+</body>
+</html>
