@@ -465,15 +465,15 @@
     },
     "attendu": 1159.92,
     "tolerance": 0.01,
-    "sortie": "1\\\\s*160\\\\s*€",
+    "sortie": "1\\s*160\\s*€",
     "verifications": [
       {
-        "sortie": "88\\\\s*381\\\\s*€",
+        "sortie": "88\\s*381\\s*€",
         "attendu": 88380.66,
         "tolerance": 0.6
       },
       {
-        "sortie": "288\\\\s*381\\\\s*€",
+        "sortie": "288\\s*381\\s*€",
         "attendu": 288380.66,
         "tolerance": 0.6
       }
@@ -494,15 +494,15 @@
     },
     "attendu": 1000,
     "tolerance": 0.01,
-    "sortie": "1\\\\s*000\\\\s*€",
+    "sortie": "1\\s*000\\s*€",
     "verifications": [
       {
-        "sortie": "27,5\\\\s*%",
+        "sortie": "27,5\\s*%",
         "attendu": 27.5,
         "tolerance": 0.01
       },
       {
-        "sortie": "500\\\\s*€",
+        "sortie": "500\\s*€",
         "attendu": 500,
         "tolerance": 0
       }
