@@ -126,6 +126,40 @@
     "source": "https://www.impots.gouv.fr/sites/default/files/media/3_Documentation/depliants/nid_4002_gp_120.pdf"
   },
   {
+    "outil": "assurance-vie",
+    "entrees": {
+      "capital": "10000",
+      "versement": "300",
+      "rendement": "4",
+      "frais-versement": "1",
+      "frais-gestion": "0.6",
+      "annees": "10"
+    },
+    "attendu": 56279.55,
+    "tolerance": 0.01,
+    "sortie": "Capital final estimé",
+    "verifications": [
+      {
+        "sortie": "Total des versements",
+        "attendu": 46000,
+        "tolerance": 0
+      },
+      {
+        "sortie": "Gain après frais",
+        "attendu": 10279.55,
+        "tolerance": 0.01
+      },
+      {
+        "sortie": "Écart estimé en fin de période",
+        "attendu": 2803.72,
+        "tolerance": 0.01
+      }
+    ],
+    "source": "https://www.amf-france.org/fr/espace-epargnants/lexique-simulateurs-et-outils-pratiques/nos-simulateurs/quel-est-limpact-des-frais-sur-le-rendement-annuel-espere-de-mon-placement",
+    "verificationSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F15274",
+    "note": "Valeur attendue calculée indépendamment : capitalisation mensuelle, versements en fin de mois, frais sur versement appliqués aux versements, frais de gestion modélisés comme une réduction du rendement annuel. La source AMF valide le principe de mesurer l'impact des frais sur le capital final ; la source Service-Public documente les catégories de frais d'assurance-vie."
+  },
+  {
     "outil": "rsa",
     "entrees": {
       "age": "25plus",

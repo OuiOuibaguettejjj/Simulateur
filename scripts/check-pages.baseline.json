@@ -56,14 +56,6 @@
     "rule": "title"
   },
   {
-    "path": "public/outil/assurance-vie/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/assurance-vie/index.html",
-    "rule": "title"
-  },
-  {
     "path": "public/outil/calculatrice/index.html",
     "rule": "content-h2"
   },

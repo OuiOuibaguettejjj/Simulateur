@@ -1,33 +1,149 @@
-<!doctype html><html lang="fr"><head><meta name="calculator-rendering" content="static"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="google-adsense-account" content="ca-pub-2924580037451268"><title>Simulation assurance-vie : simulateur de placement et de rendement</title><meta name="description" content="Simulateur d’assurance-vie : projetez votre épargne selon le capital, les versements, le rendement et les frais, puis comprenez la fiscalité après 8 ans."><link rel="canonical" href="https://simulateur.site/outil/assurance-vie/"><link rel="stylesheet" href="/styles.css"><script src="/simulateurs.js" defer></script><script src="/enter-calcul.js" defer></script><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Simulation assurance-vie","url":"https://simulateur.site/outil/assurance-vie/","description":"Simulateur d’assurance-vie : projetez votre épargne selon le capital, les versements, le rendement et les frais, puis comprenez la fiscalité après 8 ans.","inLanguage":"fr-FR","applicationCategory":"FinanceApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"price":"0","priceCurrency":"EUR"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Épargne","item":"https://simulateur.site/epargne/"},{"@type":"ListItem","position":3,"name":"Simulation assurance-vie","item":"https://simulateur.site/outil/assurance-vie/"}]}</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta property="og:type" content="website"><meta property="og:site_name" content="Simulateur"><meta property="og:locale" content="fr_FR"><meta property="og:title" content="Simulation assurance-vie : simulateur de placement et de rendement"><meta property="og:description" content="Simulateur d’assurance-vie : projetez votre épargne selon le capital, les versements, le rendement et les frais, puis comprenez la fiscalité après 8 ans."><meta property="og:url" content="https://simulateur.site/outil/assurance-vie/"><meta name="twitter:card" content="summary"></head><body><header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header><main><div class="wrap"><div class="breadcrumb"><a href="/">Accueil</a> · <a href="/epargne/">Épargne</a> · Simulation assurance-vie</div><section class="tool"><div class="eyebrow"></div><h1>Simulation assurance-vie</h1><p class="tool-intro">Simulez la valeur d'une assurance-vie ou d'un placement avec capital, versements, rendement et frais.</p><div id="fields"><div class="field"><label for="capital">Capital initial (€)</label><input id="capital" type="number" min="0" step="0.01" placeholder="10000"></div><div class="field"><label for="versement">Versement mensuel (€)</label><input id="versement" type="number" min="0" step="0.01" placeholder="300"></div><div class="field"><label for="rendement">Rendement annuel (%)</label><input id="rendement" type="number" min="0" step="0.01" placeholder="3"></div><div class="field"><label for="frais">Frais annuels (%)</label><input id="frais" type="number" min="0" step="0.01" placeholder="1"></div><div class="field"><label for="annees">Durée (années)</label><input id="annees" type="number" min="0" step="0.01" placeholder="10"></div></div><button class="button-main" onclick="Simulateurs.calc()">Calculer</button><div class="result" id="result" aria-live="polite">Saisissez vos données puis lancez le calcul.</div><div class="formula"><strong>Méthode et sources</strong><p>Source officielle : Service-Public, fiscalité des revenus d'épargne et de placement. La fiscalité réelle d'un rachat dépend de la situation du contrat.</p></div></section></div><section class="content-section">
-<h2>Comment fonctionne cette simulation d'assurance-vie ?</h2>
-<p>La simulation capitalise chaque mois le rendement annuel net de frais (rendement moins frais annuels, divisé par 12) sur votre capital initial et vos versements mensuels. Elle donne la valeur théorique du contrat au terme de la durée choisie, le capital versé et le gain théorique.</p>
-<p>Le rendement saisi est une hypothèse constante : il ne garantit rien. Les fonds en euros offrent en principe une garantie en capital de l’assureur, alors que les unités de compte n’en offrent pas et peuvent perdre de la valeur. La simulation ne tient pas compte de l’inflation ni de la fiscalité d’un rachat.</p>
-<h2>Fiscalité de l'assurance-vie après 8 ans</h2>
-<p>En cas de rachat, seuls les gains sont imposés, pas le capital versé : chaque rachat contient une part de capital et une part de gains, proportionnelle à la composition du contrat.</p>
-<ul><li><strong>Abattement annuel</strong> : après 8 ans, 4 600 € de gains par an pour une personne seule, 9 200 € pour un couple marié ou pacsé soumis à imposition commune. Il s'applique à l'ensemble des contrats d'un même contribuable, et uniquement à l'impôt sur le revenu.</li>
-<li><strong>Taux d'impôt sur le revenu</strong> : pour les primes versées depuis le 27 septembre 2017, 7,5 % dans la limite de 150 000 € de primes nettes (tous contrats confondus), 12,8 % au-delà. L'option pour le barème progressif reste possible.</li>
-<li><strong>Prélèvements sociaux</strong> : 17,2 % sur la totalité des gains, sans abattement.</li></ul>
-<table><thead><tr><th>Rachat</th><th>Impôt sur le revenu (primes depuis le 27/09/2017)</th><th>Prélèvements sociaux</th></tr></thead><tbody><tr><td>Avant 8 ans</td><td>12,8 % (sans abattement)</td><td>17,2 %</td></tr><tr><td>Après 8 ans, primes jusqu'à 150 000 €</td><td>7,5 % après abattement</td><td>17,2 %</td></tr><tr><td>Après 8 ans, primes au-delà de 150 000 €</td><td>12,8 % après abattement</td><td>17,2 %</td></tr></tbody></table>
-<p>Les primes versées avant le 27 septembre 2017 relèvent de règles différentes. Les contrats de plus de 8 ans ne sont donc pas tous taxés de la même façon : la date des versements compte.</p>
-<h2>Exemple chiffré d'un rachat après 8 ans</h2>
-<p>Un célibataire détient un contrat de plus de 8 ans, en unités de compte, valant 40 000 € dont 10 000 € de gains (primes versées après 2017, moins de 150 000 €). Il rachète 20 000 €.</p>
-<ul><li>Part de gains dans le rachat : 20 000 × 10 000 / 40 000 = 5 000 €.</li>
-<li>Abattement de 4 600 € : il reste 400 € imposables, soit 400 × 7,5 % = 30 € d'impôt sur le revenu.</li>
-<li>Prélèvements sociaux : 5 000 × 17,2 % = 860 €.</li>
-<li>Total prélevé : 890 €. Somme nette perçue : 19 110 €.</li></ul>
-<p>Étaler les rachats sur plusieurs années permet de réutiliser l'abattement chaque année, car il n'est pas reportable.</p>
-<h2>Questions fréquentes</h2>
-<h3>Faut-il attendre 8 ans pour retirer de l'argent ?</h3>
-<p>Non, le rachat est possible à tout moment. Attendre 8 ans permet en revanche de bénéficier de l'abattement annuel et du taux réduit de 7,5 %.</p>
-<h3>L'abattement de 4 600 € concerne-t-il aussi les prélèvements sociaux ?</h3>
-<p>Non. Il réduit uniquement la base de l'impôt sur le revenu. Les prélèvements sociaux restent dus sur l'intégralité des gains.</p>
-<h3>Quels frais faut-il renseigner dans le simulateur ?</h3>
-<p>Indiquez les frais annuels de gestion du contrat et des supports. Les frais sur versements ne sont pas modélisés séparément : vous pouvez les intégrer en diminuant vos versements ou votre rendement.</p>
-<h3>Quel rendement retenir pour une simulation de placement ?</h3>
-<p>Testez plusieurs hypothèses prudentes plutôt qu'un seul chiffre. Le rendement passé d'un fonds ne préjuge pas de son rendement futur.</p>
-<p>Pour aller plus loin : <a href="/outil/interets-composes/">calculateur d'intérêts composés</a>, <a href="/outil/epargne-mensuelle/">épargne mensuelle</a> et la rubrique <a href="/epargne/">Épargne</a>.</p>
-<h2>Sources officielles</h2>
-<p class="source-links"><a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F22414">Service-Public.fr — Comment sont imposés les revenus d'un contrat d'assurance-vie ?</a></p>
-<p><small>Dernière mise à jour : septembre 2026. Information générale et projection indicative : la fiscalité réelle d'un rachat dépend de la situation du contrat et du foyer fiscal.</small></p>
-</section><section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Calculs associés</h2><div class="related-links"><a class="related-link" href="/outil/interets-composes/"><strong>Intérêts composés</strong><span>Projeter un capital.</span></a><a class="related-link" href="/outil/epargne-mensuelle/"><strong>Épargne mensuelle</strong><span>Calculer un effort d'épargne.</span></a></div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="/epargne/">Épargne</a>.</p></div></section></main><footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer><script>window.TOOL={calc:function(){const c=+this.$('capital').value||0,m=+this.$('versement').value||0,r=+this.$('rendement').value||0,f=+this.$('frais').value||0,n=+this.$('annees').value||0;if(c<0||m<0||n<0)return'Renseignez des valeurs valides.';const rm=(r-f)/100/12,N=n*12,v=rm?c*Math.pow(1+rm,N)+m*(Math.pow(1+rm,N)-1)/rm:c+m*N;return'<strong>'+this.euro(v)+'</strong> au terme<br><small>Capital versé : '+this.euro(c+m*N)+' · Gain théorique : '+this.euro(v-c-m*N)+'</small>'}};</script></body></html>
+<!doctype html>
+<html lang="fr">
+<head>
+<meta name="calculator-rendering" content="static">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="google-adsense-account" content="ca-pub-2924580037451268">
+<title>Simulateur assurance-vie : rendement, frais et capital final | Simulateur</title>
+<meta name="description" content="Simulateur assurance-vie : projetez votre capital avec versements, rendement, frais sur versement et frais de gestion, hors fiscalité.">
+<link rel="canonical" href="https://simulateur.site/outil/assurance-vie/">
+<link rel="stylesheet" href="/styles.css">
+<script src="/simulateurs.js" defer></script>
+<script src="/assurance-vie.js" defer></script>
+<script src="/enter-calcul.js" defer></script>
+<style>
+.assurance-vie-shell{max-width:920px;margin:auto;border:1px solid var(--ink);border-radius:24px;overflow:hidden;background:var(--card);box-shadow:0 24px 70px rgba(23,23,19,.12)}
+.assurance-vie-hero{padding:42px 46px 34px;background:linear-gradient(135deg,#17483d,#102f2a);color:#fff;position:relative;overflow:hidden}
+.assurance-vie-hero:after{content:"€";position:absolute;right:35px;top:-60px;font-size:15rem;font-weight:950;line-height:1;color:rgba(255,255,255,.05);transform:rotate(8deg)}
+.assurance-vie-hero .eyebrow{color:#ffb29f}
+.assurance-vie-title{position:relative;z-index:1;max-width:760px;margin:0 0 14px;font-size:clamp(2.8rem,6vw,5rem);line-height:.93;letter-spacing:-.075em}
+.assurance-vie-hero .tool-intro{position:relative;z-index:1;color:#dbe6df;max-width:680px;font-size:1.06rem;margin:0}
+.assurance-vie-badges{position:relative;z-index:1;display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+.assurance-vie-badges span{font-size:.75rem;font-weight:800;padding:7px 10px;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:rgba(255,255,255,.07)}
+.assurance-vie-form{padding:36px 46px 42px}
+.assurance-vie-form-title{margin:0 0 6px;font-size:1.35rem;letter-spacing:-.035em}
+.assurance-vie-form .form-intro{margin:0 0 22px;color:var(--muted);font-size:.9rem}
+.assurance-vie-form .row{margin-bottom:0}
+.assurance-vie-form .field-help{margin:7px 0 0;color:var(--muted);font-size:.78rem;line-height:1.45}
+.assurance-vie-form .button-main{min-height:52px;margin-top:20px;box-shadow:0 5px 0 #bd321c;transition:transform .12s,box-shadow .12s}
+.assurance-vie-form .button-main:hover{transform:translateY(2px);box-shadow:0 3px 0 #bd321c}
+.assurance-vie-result{margin-top:20px;background:linear-gradient(145deg,#f4f7f4,#edf3ef);border-color:#b9c9bf;padding:24px}
+.assurance-vie-result .result-main>strong{font-size:clamp(1.8rem,4vw,2.35rem);letter-spacing:-.045em}
+.assurance-vie-result .takeaway{border-color:#17483d;background:#edf3ef}
+.assurance-vie-result .takeaway-item{box-shadow:0 1px 2px rgba(23,23,19,.05)}
+.assurance-vie-note{margin-top:12px;color:var(--muted);font-size:.78rem;text-align:center}
+.assurance-vie-content{max-width:920px;margin:52px auto 0}
+.assurance-vie-content .content-lead{font-size:1.02rem;color:#45423b;max-width:800px}
+.assurance-vie-content table{margin-top:20px}
+.assurance-vie-content .limit-note{margin-top:20px;padding:18px 20px;border:1px solid var(--accent2);border-radius:12px;background:#edf3ef}
+.assurance-vie-content .limit-note strong{display:block;color:var(--accent2);margin-bottom:4px}
+.assurance-vie-content .limit-note p{margin:0;color:#4f554f}
+@media(max-width:650px){
+  .assurance-vie-hero{padding:32px 22px 28px}
+  .assurance-vie-title{font-size:3rem}
+  .assurance-vie-hero:after{right:-5px;font-size:9rem}
+  .assurance-vie-form{padding:27px 20px 32px}
+  .assurance-vie-content{margin-top:38px}
+}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Simulateur assurance-vie","url":"https://simulateur.site/outil/assurance-vie/","description":"Simulateur assurance-vie : projetez votre capital avec versements, rendement, frais sur versement et frais de gestion, hors fiscalité.","inLanguage":"fr-FR","applicationCategory":"FinanceApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"price":"0","priceCurrency":"EUR"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Épargne","item":"https://simulateur.site/epargne/"},{"@type":"ListItem","position":3,"name":"Simulateur assurance-vie","item":"https://simulateur.site/outil/assurance-vie/"}]}</script>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Simulateur">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Simulateur assurance-vie : rendement, frais et capital final | Simulateur">
+<meta property="og:description" content="Simulateur assurance-vie : projetez votre capital avec versements, rendement, frais sur versement et frais de gestion, hors fiscalité.">
+<meta property="og:url" content="https://simulateur.site/outil/assurance-vie/">
+<meta name="twitter:card" content="summary">
+</head>
+<body>
+<header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header>
+<main>
+<div class="wrap">
+<div class="breadcrumb"><a href="/">Accueil</a> · <a href="/epargne/">Épargne</a> · Simulateur assurance-vie</div>
+<section class="tool assurance-vie-shell">
+  <div class="assurance-vie-hero">
+    <div class="eyebrow">SIMULATEUR D’ÉPARGNE</div>
+    <h1 class="assurance-vie-title">Simulateur assurance-vie</h1>
+    <p class="tool-intro">Projetez le capital que vous pourriez constituer selon vos versements, une hypothèse de rendement et les frais du contrat.</p>
+    <div class="assurance-vie-badges" aria-label="Caractéristiques de la simulation">
+      <span>Capitalisation mensuelle</span><span>Frais sur versement</span><span>Frais de gestion</span><span>Hors fiscalité</span>
+    </div>
+  </div>
+  <div class="assurance-vie-form">
+    <h2 class="assurance-vie-form-title">Vos hypothèses</h2>
+    <p class="form-intro">Modifiez les valeurs d’exemple pour obtenir une projection adaptée à votre situation.</p>
+    <div class="row">
+      <div class="field"><label for="capital">Capital initial (€)</label><input id="capital" type="number" min="0" step="0.01" value="10000" inputmode="decimal" autocomplete="off" aria-describedby="capital-help"><p id="capital-help" class="field-help">Montant placé au départ.</p></div>
+      <div class="field"><label for="versement">Versement mensuel (€)</label><input id="versement" type="number" min="0" step="0.01" value="300" inputmode="decimal" autocomplete="off" aria-describedby="versement-help"><p id="versement-help" class="field-help">Versement supposé en fin de mois.</p></div>
+    </div>
+    <div class="row">
+      <div class="field"><label for="rendement">Rendement annuel avant frais (%)</label><input id="rendement" type="number" min="-100" max="100" step="0.01" value="4" inputmode="decimal" autocomplete="off" aria-describedby="rendement-help"><p id="rendement-help" class="field-help">Hypothèse constante ; un rendement négatif peut être testé.</p></div>
+      <div class="field"><label for="frais-versement">Frais sur versement (%)</label><input id="frais-versement" type="number" min="0" max="100" step="0.01" value="0.5" inputmode="decimal" autocomplete="off" aria-describedby="frais-versement-help"><p id="frais-versement-help" class="field-help">Appliqués ici à chaque versement, initial compris.</p></div>
+    </div>
+    <div class="row">
+      <div class="field"><label for="frais-gestion">Frais de gestion annuels (%)</label><input id="frais-gestion" type="number" min="0" max="100" step="0.01" value="0.6" inputmode="decimal" autocomplete="off" aria-describedby="frais-gestion-help"><p id="frais-gestion-help" class="field-help">Modélisés comme une réduction du rendement annuel.</p></div>
+      <div class="field"><label for="annees">Durée (années)</label><input id="annees" type="number" min="0" max="80" step="1" value="10" inputmode="numeric" autocomplete="off" aria-describedby="annees-help"><p id="annees-help" class="field-help">Projection sur 0 à 80 ans.</p></div>
+    </div>
+    <button class="button-main" type="button" onclick="Simulateurs.calc()">Calculer la projection</button>
+    <div class="result assurance-vie-result" id="result" aria-live="polite">
+      <div class="result-main"><span class="result-label">Capital final estimé</span><strong>56 563,79 €</strong></div>
+      <div class="takeaway"><div class="takeaway-title">À retenir</div><div class="takeaway-grid"><div class="takeaway-item"><small>Total des versements</small><strong>46 000,00 €</strong></div><div class="takeaway-item"><small>Gain après frais</small><strong>10 563,79 €</strong></div><div class="takeaway-item"><small>Rendement annuel après frais</small><strong>3,4 %</strong></div></div></div>
+      <div class="scenario"><div class="scenario-title">Impact des frais</div><div class="scenario-grid"><div class="scenario-item"><small>Projection sans frais</small><strong>59 083,27 €</strong></div><div class="scenario-item"><small>Écart estimé en fin de période</small><strong>2 519,48 €</strong></div></div></div>
+    </div>
+    <p class="assurance-vie-note">Projection théorique : le rendement futur n’est pas garanti et les modalités de frais varient selon le contrat.</p>
+    <div class="formula"><strong>Méthode et sources</strong><p>La simulation capitalise chaque mois le capital et les versements de fin de mois. Le rendement mensuel est modélisé à partir du rendement annuel saisi, diminué des frais de gestion annuels. Les frais sur versement réduisent chaque versement avant son investissement. La projection sans frais sert à mesurer l’ordre de grandeur de l’impact cumulé des frais.</p><p>Ce modèle simplifie le prélèvement réel des frais : il ne modélise pas les frais de dossier, d’arbitrage, de rachat ni le calendrier exact de prélèvement propre à chaque contrat.</p><p>Sources : <a href="https://www.amf-france.org/fr/espace-epargnants/lexique-simulateurs-et-outils-pratiques/nos-simulateurs/quel-est-limpact-des-frais-sur-le-rendement-annuel-espere-de-mon-placement">AMF — impact des frais sur le rendement</a> · <a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F15274">Service-Public — fonctionnement et frais de l’assurance-vie</a>.</p></div>
+  </div>
+</section>
+
+<section class="content-section assurance-vie-content">
+  <h2>Comment fonctionne le simulateur assurance-vie ?</h2>
+  <p class="content-lead">Le calculateur estime une valeur future à partir d’un capital initial, de versements réguliers, d’un rendement annuel hypothétique, de frais sur versement et de frais de gestion. Il s’agit d’une projection mathématique, pas d’une prévision de performance.</p>
+  <p>Les versements sont supposés intervenir en fin de mois. Chaque mois, le capital est augmenté du versement net de frais puis valorisé au taux mensuel retenu. Le modèle permet ainsi de visualiser l’effet de la capitalisation et de comparer une projection avec frais à une projection théorique sans frais.</p>
+
+  <h2>Pourquoi les frais changent-ils autant le résultat ?</h2>
+  <p>Un frais prélevé au début ou sur chaque versement réduit immédiatement la somme réellement investie. Les frais de gestion, eux, réduisent la performance au fil du temps. Leur effet se cumule donc avec la durée : une différence apparemment faible sur un an peut représenter un écart important sur plusieurs années.</p>
+  <div class="limit-note"><strong>Point important</strong><p>Les frais réellement appliqués dépendent du contrat et des supports. L’AMF distingue notamment les frais à l’entrée, sur versement, annuels et à la sortie ; ce simulateur n’en modélise qu’une partie.</p></div>
+
+  <h2>Quel rendement utiliser pour une simulation ?</h2>
+  <p>Le rendement est une hypothèse à tester, pas une promesse. Pour une projection utile, comparez plusieurs scénarios plutôt que de retenir un seul taux. Un rendement historique ne garantit pas le rendement futur, et le niveau de risque dépend des supports choisis.</p>
+  <p>Le fonds en euros et les unités de compte ne présentent pas le même profil : le fonds en euros bénéficie d’une garantie en capital selon les conditions du contrat, tandis que les unités de compte peuvent fluctuer et entraîner une perte en capital.</p>
+
+  <h2>Fiscalité : pourquoi elle n’est pas incluse dans le résultat ?</h2>
+  <p>La fiscalité d’un rachat dépend notamment de l’ancienneté du contrat, de la date des versements et de la situation du contrat. Un rachat comprend une part de capital et une part de gains. Une projection de capital final ne permet donc pas, à elle seule, de déduire un montant net après fiscalité.</p>
+  <p>Pour éviter de mélanger une projection financière avec un barème fiscal susceptible d’évoluer, ce calculateur affiche volontairement un résultat <strong>hors fiscalité</strong>. Les règles applicables doivent être vérifiées sur les sources officielles au moment du rachat.</p>
+
+  <h2>Ce que cette simulation ne prend pas en compte</h2>
+  <ul>
+    <li>les frais de dossier, d’arbitrage et de rachat ;</li>
+    <li>le calendrier exact de prélèvement des frais de gestion ;</li>
+    <li>les différences de frais ou de rendement entre supports ;</li>
+    <li>les prélèvements sociaux et l’impôt lors d’un rachat ;</li>
+    <li>les retraits, avances, arbitrages et versements exceptionnels ;</li>
+    <li>l’inflation et l’évolution réelle du pouvoir d’achat.</li>
+  </ul>
+
+  <h2>Exemple de lecture du résultat</h2>
+  <p>Avec 10 000 € au départ, 300 € versés chaque mois pendant 10 ans, un rendement hypothétique de 4 %, 0,5 % de frais sur versement et 0,6 % de frais de gestion annuels, la projection aboutit à environ <strong>56 563,79 €</strong>. Les versements bruts représentent 46 000 € et le gain après prise en compte des frais modélisés est d’environ 10 563,79 €.</p>
+  <p>À hypothèses identiques mais sans frais dans le modèle, la projection serait d’environ 59 083,27 €. L’écart de 2 519,48 € illustre l’impact cumulé des frais sur le capital final ; il ne correspond pas nécessairement à la somme des frais effectivement prélevés par un contrat.</p>
+</section>
+
+<section class="calculator-faq" aria-labelledby="faq-title">
+  <h2 id="faq-title">FAQ</h2>
+  <details><summary>Le rendement saisi est-il garanti ?</summary><div class="calculator-faq-answer"><p>Non. Le rendement est une hypothèse constante utilisée uniquement pour la projection. Les performances futures dépendent notamment des supports et des conditions de marché.</p></div></details>
+  <details><summary>Quels frais puis-je renseigner ?</summary><div class="calculator-faq-answer"><p>Vous pouvez renseigner les frais sur versement et les frais de gestion annuels. Les autres frais sont signalés mais ne sont pas calculés séparément dans ce modèle.</p></div></details>
+  <details><summary>Les frais sur versement s’appliquent-ils au capital initial ?</summary><div class="calculator-faq-answer"><p>Dans ce modèle, oui : le pourcentage saisi est appliqué au versement initial et aux versements mensuels. Vérifiez la grille tarifaire de votre contrat pour connaître les frais réellement appliqués.</p></div></details>
+  <details><summary>Pourquoi comparer avec une projection sans frais ?</summary><div class="calculator-faq-answer"><p>Cette comparaison permet d’isoler l’ordre de grandeur de l’effet cumulé des frais sur le capital final, à rendement brut et versements identiques.</p></div></details>
+  <details><summary>La fiscalité de l’assurance-vie est-elle calculée ?</summary><div class="calculator-faq-answer"><p>Non. Le résultat est volontairement hors fiscalité. Lors d’un rachat, les règles dépendent notamment de l’ancienneté du contrat et de la date des versements ; consultez les sources officielles pour votre situation.</p></div></details>
+  <details><summary>Quelle est la différence entre fonds en euros et unités de compte ?</summary><div class="calculator-faq-answer"><p>Le fonds en euros bénéficie d’une garantie en capital selon les conditions du contrat. Les unités de compte sont exposées aux variations des supports financiers et leur valeur peut baisser.</p></div></details>
+</section>
+</div>
+
+<section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Calculs associés</h2><div class="related-links"><a class="related-link" href="/outil/interets-composes/"><strong>Intérêts composés</strong><span>Projeter un capital avec capitalisation.</span></a><a class="related-link" href="/outil/epargne-mensuelle/"><strong>Épargne mensuelle</strong><span>Mesurer l’effet des versements réguliers.</span></a></div><p class="status-note">Retrouvez aussi les autres simulateurs de la rubrique <a href="/epargne/">Épargne</a>.</p></div></section>
+</main>
+<footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer>
+<script>window.TOOL={calc:function(){return window.assuranceVie.calculate();}};</script>
+</body>
+</html>
