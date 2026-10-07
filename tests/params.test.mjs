@@ -176,27 +176,48 @@ function legacyFraisKm({ km, cv, veh }) {
   if (e) f *= 1.2;
   return "<strong>" + euro(f) + "</strong> de frais kilométriques estimés<br><small>Barème 2026" + (e ? " · majoration électrique de 20 % incluse" : "") + ".</small>";
 }
-function legacyIndemniteLicenciement({ s12, s3, y, m }) {
-  const a = +s12 || 0, b = +s3 || 0, years = Math.max(0, +y || 0), months = Math.min(11, Math.max(0, +m || 0));
-  const n = years + months / 12;
-  if (a <= 0 || b <= 0 || n < 2 / 3) return "Renseignez deux salaires valides et au moins 8 mois d’ancienneté.";
-  const r = Math.max(a, b);
-  const v = r * (Math.min(n, 10) / 4 + Math.max(0, n - 10) / 3);
-  return "<strong>Minimum légal : " + euro(v) + "</strong><br><br>Salaire de référence : " + euro(r) + "/mois<br>Ancienneté : " + years + " an(s)" + (months ? " et " + months + " mois" : "") + "<br>Formule : 1/4 jusqu’à 10 ans, puis 1/3 au-delà.<p class=\"small\">Une convention collective ou le contrat peut être plus favorable.</p>";
+function legacyIndemniteLicenciement({ s12, s3, prime3 = 0, yn, mn, y, m, motif = "standard" }) {
+  const a = +s12 || 0, b = +s3 || 0, bonus = +prime3 || 0;
+  const noticeYears = Math.max(0, +yn || 0), noticeMonths = Math.min(11, Math.max(0, +mn || 0));
+  const years = Math.max(0, +y || 0), months = Math.min(11, Math.max(0, +m || 0));
+  const noticeSeniority = noticeYears + noticeMonths / 12;
+  const seniority = years + months / 12;
+  const inaptPro = motif === "inaptitude-pro";
+  if (motif === "grave-lourde") return "Pas d’indemnité légale en cas de faute grave ou lourde.";
+  if (a <= 0 || b <= 0 || bonus < 0 || !Number.isInteger(noticeYears) || !Number.isInteger(noticeMonths) || !Number.isInteger(years) || !Number.isInteger(months) || (!inaptPro && noticeSeniority < 2 / 3) || seniority < noticeSeniority) return !inaptPro && noticeSeniority < 2 / 3 ? "Vous n’avez pas les 8 mois d’ancienneté requis à la date d’envoi de la lettre de licenciement." : "Renseignez des montants valides et des anciennetés en années et mois complets.";
+  const r = Math.max(a, b + bonus / 12);
+  const v = r * (Math.min(seniority, 10) / 4 + Math.max(0, seniority - 10) / 3) * (inaptPro ? 2 : 1);
+  return "<strong>" + euro(v) + "</strong>";
 }
 
 let compared = 0;
 const indemnLic = pageTool("indemnite-licenciement");
 for (const s12 of [2500, 3000, 3500, 5000]) {
   for (const s3 of [2500, 3500, 4500]) {
-    for (const y of [0, 0.5, 5, 10, 12]) {
-      for (const m of [0, 6, 11]) {
-        assert.equal(indemnLic({ s12, s3, y, m }), legacyIndemniteLicenciement({ s12, s3, y, m }), "Indemnité licenciement " + s12 + "/" + s3 + " " + y + " ans " + m + " mois");
-        compared++;
+    for (const prime3 of [0, 1200]) {
+      for (const y of [0, 5, 10, 12]) {
+        for (const m of [0, 6, 11]) {
+          const yn = y, mn = m;
+          const actual = indemnLic({ s12, s3, prime3, yn, mn, y, m, motif: "standard" });
+          const expected = legacyIndemniteLicenciement({ s12, s3, prime3, yn, mn, y, m, motif: "standard" });
+          assert.equal(actual.includes("Vous n’avez pas les 8 mois d’ancienneté requis à la date d’envoi de la lettre de licenciement."), expected.includes("Vous n’avez pas les 8 mois d’ancienneté requis à la date d’envoi de la lettre de licenciement."), "Indemnité licenciement validation " + s12 + "/" + s3 + " +" + prime3 + " " + y + " ans " + m + " mois");
+          if (!expected.includes("ancienneté requis")) {
+            assert.equal(actual.match(/<strong>([^<]+)<\/strong>/)?.[1], expected.match(/<strong>([^<]+)<\/strong>/)?.[1], "Indemnité licenciement montant " + s12 + "/" + s3 + " +" + prime3 + " " + y + " ans " + m + " mois");
+          }
+          compared++;
+        }
       }
     }
   }
 }
+assert.equal(indemnLic({ s12: 3000, s3: 3500, prime3: 0, yn: 0, mn: 7, y: 0, m: 8, motif: "standard" }), "Vous n’avez pas les 8 mois d’ancienneté requis à la date d’envoi de la lettre de licenciement.", "seuil de 8 mois à la date de notification");
+assert.equal(indemnLic({ s12: 3000, s3: 3500, prime3: 0, yn: 0, mn: 8, y: 0, m: 7, motif: "standard" }), "L’ancienneté à la rupture effective ne peut pas être inférieure à celle à la date d’envoi de la lettre.", "cohérence des deux anciennetés");
+assert.equal(indemnLic({ s12: 3000, s3: 3500, prime3: 0, yn: 0, mn: 8, y: 0, m: 8, motif: "grave-lourde" }), "Pas d’indemnité légale en cas de faute grave ou lourde.", "faute grave ou lourde");
+assert.equal(indemnLic({ s12: 3000, s3: 3500, prime3: 0, yn: 0, mn: 7, y: 0, m: 7, motif: "inaptitude-non-pro" }), "Vous n’avez pas les 8 mois d’ancienneté requis à la date d’envoi de la lettre de licenciement.", "inaptitude non professionnelle : seuil conservé");
+const inaptProResult = indemnLic({ s12: 3000, s3: 3500, prime3: 0, yn: 0, mn: 6, y: 0, m: 6, motif: "inaptitude-pro" });
+assert.equal(inaptProResult.match(/<strong>([^<]+)<\/strong>/)?.[1], euro(875), "inaptitude professionnelle : double indemnité légale sans seuil de 8 mois");
+assert.match(realPages["indemnite-licenciement"], /id="calculate" onclick="Simulateurs\.calc\(\)"/, "bouton calculer relié à Simulateurs.calc");
+
 
 const smic = pageTool("smic");
 for (const zone of ["metropole", "mayotte"]) {

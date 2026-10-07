@@ -733,6 +733,8 @@
     "entrees": {
       "s12": "3000",
       "s3": "3500",
+      "yn": "5",
+      "mn": "6",
       "y": "5",
       "m": "6"
     },
@@ -745,8 +747,27 @@
   {
     "outil": "indemnite-licenciement",
     "entrees": {
+      "s12": "3000",
+      "s3": "3500",
+      "prime3": "1200",
+      "yn": "5",
+      "mn": "6",
+      "y": "5",
+      "m": "6"
+    },
+    "attendu": 4950,
+    "tolerance": 0.01,
+    "sortie": "Minimum légal\\s*:",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F987",
+    "note": "Cas indépendant : moyenne 3 mois 3 500 €, prime annuelle 1 200 € ; 1/12 de la prime ajoute 100 € à la méthode des 3 mois, soit 3 600 €, puis 3 600 × 1/4 × 5,5 = 4 950 €."
+  },
+  {
+    "outil": "indemnite-licenciement",
+    "entrees": {
       "s12": "4000",
       "s3": "4000",
+      "yn": "12",
+      "mn": "6",
       "y": "12",
       "m": "6"
     },

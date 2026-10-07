@@ -185,6 +185,9 @@
       },
       "values": {
         "ancienneteMinMois": 8,
+        "inaptitudeProfessionnelle": {
+          "multiplicateur": 2
+        },
         "moisParAnnee": 12,
         "palierAnnees": 10,
         "tauxApresPalier": {
