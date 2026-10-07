@@ -201,7 +201,7 @@
 <h2>Comparer les durées</h2>
 <table class="cap-table" aria-label="Comparaison de capacité d’emprunt selon la durée">
 <thead><tr><th>Durée</th><th>Capital estimé</th><th>Mensualité</th><th>Intérêts + assurance</th></tr></thead>
-<tbody id="comparison"><tr><td colspan="4">Lancez une simulation pour comparer 15, 20 et 25 ans.</td></tr></tbody>
+<tbody id="comparison"><tr><td colspan="4">Lancez une simulation pour comparer 15, 20 ans et la durée maximale standard.</td></tr></tbody>
 </table>
 </div>
 </section>
@@ -213,15 +213,15 @@
 <p>La capacité d’emprunt correspond au capital qu’un ménage peut théoriquement financer avec une mensualité compatible avec ses revenus et ses charges. Ce calculateur part du taux d’effort maximal du cadre HCSF, puis transforme la mensualité disponible en capital selon le taux, la durée et l’assurance du prêt.</p>
 <div class="formula">
 <strong>Logique de calcul</strong>
-<p>Mensualité disponible = revenus × 35 % − charges déjà prises en compte. Le capital est ensuite obtenu en inversant la formule d’une annuité à taux fixe, en intégrant l’assurance selon l’hypothèse saisie.</p>
+<p>Mensualité disponible = revenus × <span data-hcsf-effort></span> − charges déjà prises en compte. Le capital est ensuite obtenu en inversant la formule d’une annuité à taux fixe, en intégrant l’assurance selon l’hypothèse saisie.</p>
 </div>
 <div class="calculator-data">
 <strong>Données et hypothèses</strong>
-<p>Le seuil de <span data-hcsf-effort></span> et la durée standard maximale de 25 ans sont issus du cadre HCSF. Le taux de 3,30 % proposé par défaut est un repère de marché Banque de France pour juillet 2026 ; il reste modifiable. L’assurance est une hypothèse simplifiée exprimée en pourcentage annuel du capital.</p>
+<p>Le seuil affiché et la durée standard maximale de <span data-hcsf-maturity></span> sont issus du cadre HCSF. Le taux de 3,30 % proposé par défaut est un repère de marché Banque de France pour juillet 2026 ; il reste modifiable. L’assurance est une hypothèse simplifiée exprimée en pourcentage annuel du capital.</p>
 </div>
 </div>
 
-<h2>La règle des 35 % pour calculer sa capacité d’emprunt</h2>
+<h2>La règle du taux d’effort pour calculer sa capacité d’emprunt</h2>
 <p>Le HCSF fixe un taux d’effort maximal de principe de <span data-hcsf-effort></span> pour les crédits immobiliers. Le taux d’effort correspond au rapport entre les charges d’emprunt et les revenus, avec l’assurance emprunteur prise en compte. Une marge de flexibilité existe pour une partie de la production de crédits, et une banque reste libre d’accepter ou de refuser un dossier.</p>
 
 <h2>Quel salaire pour emprunter 200 000 € ?</h2>
@@ -325,7 +325,7 @@
 
     const available=d.revenus*PARAMS.tauxEffortMax/100-d.charges;
     if(available<=0){
-      $("result").innerHTML='<div class="result-kicker">Votre estimation</div><div class="result-main"><strong>0 €</strong></div><p class="cap-status">Aucune mensualité n’est disponible avec les charges indiquées dans cette hypothèse de <span data-hcsf-effort></span>.</p>';
+      $("result").innerHTML='<div class="result-kicker">Votre estimation</div><div class="result-main"><strong>0 €</strong></div><p class="cap-status">Aucune mensualité n’est disponible avec les charges indiquées dans cette hypothèse de ' + PARAMS.tauxEffortMax + ' %.</p>';
       $("comparison").innerHTML='<tr><td colspan="4">Aucun capital disponible avec les données saisies.</td></tr>';
       return;
     }
