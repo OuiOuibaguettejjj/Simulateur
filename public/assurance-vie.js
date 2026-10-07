@@ -1,8 +1,8 @@
 (function(){
   function parseNumber(raw){
-    const normalized=String(raw).trim().replace(/[\\s\\u00a0\\u202f]/g,"").replace(",",".");
+    const normalized=String(raw).trim().replace(/[\s\u00a0\u202f]/g,"").replace(",",".");
     if(normalized==="") return null;
-    if(!/^[+-]?(?:\\d+(?:\\.\\d*)?|\\.\\d+)$/.test(normalized)) return null;
+    if(!/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)$/.test(normalized)) return null;
     const value=Number(normalized);
     return Number.isFinite(value)?value:null;
   }
