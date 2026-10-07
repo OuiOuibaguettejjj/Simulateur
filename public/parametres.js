@@ -131,7 +131,18 @@
       },
       "values": {
         "activityRate": 0.5985,
-        "base": 638.28
+        "additionalDependent": 255.31,
+        "base": 638.28,
+        "coupleAmounts": [
+          957.42,
+          1148.9,
+          1340.39
+        ],
+        "singleAmounts": [
+          638.28,
+          957.42,
+          1148.9
+        ]
       }
     },
     "rsa": {
