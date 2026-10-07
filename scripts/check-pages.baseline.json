@@ -604,26 +604,6 @@
     "rule": "title"
   },
   {
-    "path": "public/outil/mensualite-pret/index.html",
-    "rule": "content-h2"
-  },
-  {
-    "path": "public/outil/mensualite-pret/index.html",
-    "rule": "description"
-  },
-  {
-    "path": "public/outil/mensualite-pret/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/mensualite-pret/index.html",
-    "rule": "formula"
-  },
-  {
-    "path": "public/outil/mensualite-pret/index.html",
-    "rule": "title"
-  },
-  {
     "path": "public/outil/micro-entrepreneur/index.html",
     "rule": "description"
   },
