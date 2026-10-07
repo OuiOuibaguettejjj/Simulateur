@@ -75,7 +75,7 @@
       "label": "Impôt sur le revenu — barème 2026",
       "year": 2026,
       "effectiveFrom": "2026-01-01",
-      "effectiveTo": "2026-12-31",
+      "effectiveTo": "2027-03-31",
       "verifiedOn": "2026-10-07",
       "source": {
         "label": "impots.gouv.fr — calcul de l'impôt 2026 sur les revenus 2025",
