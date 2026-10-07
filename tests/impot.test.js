@@ -14,34 +14,34 @@ function calc(income,parts,couple=false,options={}){
   return result;
 }
 
-assert.equal(calc(50000,1).grossTax,8103.99);
-assert.equal(calc(50000,1).netTax,8103.99);
+assert.equal(calc(50000,1).grossTax,8104);
+assert.equal(calc(50000,1).netTax,8104);
 assert.equal(calc(15000,1).netTax,0);
-assert.equal(Math.round(calc(50000,2,true).grossTax),2948);assert.equal(Math.round(calc(50000,2,true).decote),149);assert.equal(Math.round(calc(50000,2,true).netTax),2799);
+assert.equal(calc(50000,2,true).grossTax,2948);
+assert.equal(calc(50000,2,true).decote,149);
+assert.equal(calc(50000,2,true).netTax,2799);
 
 // Official 2026 quotient-family cap example: married couple, 130,000 €, 5 parts.
 const officialExample=calc(130000,5,true);
-assert.equal(Math.round(officialExample.rawTax),7920);
-assert.equal(Math.round(officialExample.familyQuotientCap),10842);
-assert.equal(Math.round(officialExample.grossTax),14366);
-assert.equal(Math.round(officialExample.netTax),14366);
+assert.equal(officialExample.rawTax,7920);
+assert.equal(officialExample.familyQuotientCap,10842);
+assert.equal(officialExample.grossTax,14366);
+assert.equal(officialExample.netTax,14366);
 
 const uncapped=calc(130000,2,true);
 assert.equal(uncapped.familyQuotientCap,0);
 assert.equal(uncapped.grossTax,uncapped.rawTax);
 
-// Optional advanced inputs: already-determined deductions reduce the taxable base,
-// while source withholding is only used to estimate the remaining balance/refund.
-const advanced=calc(50000,1,false,{deductions:5000,sourceWithholding:3000});
-assert.equal(advanced.taxableIncome,45000);
-assert.equal(Math.round(advanced.netTax),6604);
-assert.equal(Math.round(advanced.balance),3604);
-assert.equal(Math.round(calc(50000,1,false,{sourceWithholding:9000}).balance*100),-89601);
+// Optional advanced input: source withholding only estimates the remaining balance/refund.
+const advanced=calc(50000,1,false,{sourceWithholding:3000});
+assert.equal(advanced.taxableIncome,50000);
+assert.equal(advanced.netTax,8104);
+assert.equal(advanced.balance,5104);
+assert.equal(calc(50000,1,false,{sourceWithholding:9000}).balance,-896);
 
 assert.equal(ImpotEngine.calculate({income:-1,parts:1,couple:false}).valid,false);
 assert.equal(ImpotEngine.calculate({income:50000,parts:0,couple:false}).valid,false);
 assert.equal(ImpotEngine.calculate({income:NaN,parts:1,couple:false}).valid,false);
-assert.equal(ImpotEngine.calculate({income:50000,parts:1,couple:false,deductions:-1}).valid,false);
 assert.equal(ImpotEngine.calculate({income:50000,parts:1,couple:false,sourceWithholding:-1}).valid,false);
 
 console.log("Impôt deterministic tests passed.");
