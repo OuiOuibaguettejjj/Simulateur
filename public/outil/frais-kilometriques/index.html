@@ -92,7 +92,7 @@ window.TOOL={
       t=e?V.cyclomoteurElectrique:V.cyclomoteur;
       f=d<=V.motoPalier1?d*t.jusqua3000:d<=V.motoPalier2?d*t.milieu+t.forfaitMilieu:d*t.auDela;
     }
-    return'<strong>'+this.euro(f)+'</strong> de frais kilométriques estimés<br><small>Barème '+P.year+' · '+(e?'véhicule 100 % électrique':'véhicule non électrique')+'.</small>';
+    return'<strong>'+this.euro(Math.round(f))+'</strong> de frais kilométriques estimés<br><small>Barème '+P.year+' · '+(e?'véhicule 100 % électrique':'véhicule non électrique')+'.</small>';
   }
 };
 document.getElementById('veh').addEventListener('change',updateFields);
