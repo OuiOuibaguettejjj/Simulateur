@@ -155,13 +155,31 @@
           1629.24
         ]
       }
+    },
+    "capacite-emprunt": {
+      "label": "Cadre HCSF — capacité d'emprunt immobilier",
+      "year": 2026,
+      "usedBy": [
+        "capacite-emprunt"
+      ],
+      "source": {
+        "label": "HCSF — conditions d’octroi de crédits immobiliers",
+        "url": "https://www.economie.gouv.fr/hcsf/mesures/mesure-relative-loctroi-de-credits-immobiliers"
+      },
+      "effectiveFrom": "2022-01-01",
+      "effectiveTo": "2026-12-31",
+      "verifiedOn": "2026-10-07",
+      "notes": "Le jeu centralise le cadre HCSF actuellement en vigueur : taux d’effort maximal de 35 % et maturité maximale de 25 ans, avec les exceptions et la marge de flexibilité prévues par les décisions HCSF. La date de fin 2026 constitue une échéance de vérification éditoriale du jeu ; elle ne signifie pas que la norme HCSF expire à cette date. Le taux de marché affiché par défaut dans l’outil est une donnée distincte et n’est pas incluse dans ce jeu.",
+      "values": {
+        "tauxEffortMax": 35,
+        "maturiteMax": 25
+      }
     }
   },
   "anneeAMigrer": {
     "motif": "Barèmes encore codés en dur dans la page ou à auditer : l'année reste dans le titre jusqu'à la migration vers data/parametres.json. Retirer un slug de cette liste uniquement lorsque l'outil est réellement migré vers le jeu de paramètres correspondant.",
     "slugs": [
       "age-retraite",
-      "capacite-emprunt",
       "charges-independant",
       "comparateur-placements",
       "donation",
