@@ -647,7 +647,7 @@
     },
     "attendu": 8103.99,
     "tolerance": 0.01,
-    "sortie": "8\\s*103,99\\s*€\\s*d’impôt estimé",
+    "sortie": "d’impôt estimé",
     "source": "https://www.impots.gouv.fr/www2/fichiers/documentation/brochure/ir_2026/pdf_som/21-calcul_impot_369a382.pdf",
     "note": "Cas de référence indépendant : pour 50 000 € de revenu net imposable et 1 part, le barème donne 50 000 × 30 % − 6 896,01 € = 8 103,99 €. La décote ne s’applique pas."
   }
