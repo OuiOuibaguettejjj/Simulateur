@@ -669,6 +669,8 @@
   {
     "outil": "prime-activite",
     "entrees": {
+      "status": "single",
+      "dependents": "0",
       "activite": "1000",
       "autres": "0",
       "log": "0",
@@ -678,6 +680,24 @@
     "tolerance": 0.01,
     "sortie": "236,78\\s*€\\s*/\\s*mois",
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2882",
-    "note": "Cas indépendant : 638,28 € + 59,85 % de 1 000 € − 1 000 € = 236,78 €, selon la formule officielle publiée par Service-Public."
+    "verificationSource": "https://www.caf.fr/allocataires/actualites/actualites-nationales/les-reponses-vos-questions-sur-levolution-de-la-prime-dactivite-en-2026",
+    "note": "Cas indépendant : 638,28 + 59,85 % × 1 000 − 1 000 = 236,78 € ; bonification, autres ressources et forfait logement nuls."
+  },
+  {
+    "outil": "prime-activite",
+    "entrees": {
+      "status": "single",
+      "dependents": "0",
+      "activite": "1000,50",
+      "autres": "0",
+      "log": "0",
+      "bonif": "0"
+    },
+    "attendu": 236.78,
+    "tolerance": 0.01,
+    "sortie": "236,78\\s*€\\s*/\\s*mois",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2882",
+    "verificationSource": "https://www.caf.fr/allocataires/actualites/actualites-nationales/les-reponses-vos-questions-sur-levolution-de-la-prime-dactivite-en-2026",
+    "note": "Régression de saisie : la virgule décimale est acceptée ; l’affichage arrondi à l’euro-cent donne 236,78 €."
   }
 ]
