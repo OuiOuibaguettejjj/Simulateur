@@ -852,26 +852,6 @@
     "rule": "title"
   },
   {
-    "path": "public/outil/pret-immobilier/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/pret-immobilier/index.html",
-    "rule": "formula"
-  },
-  {
-    "path": "public/outil/pret-immobilier/index.html",
-    "rule": "result"
-  },
-  {
-    "path": "public/outil/pret-immobilier/index.html",
-    "rule": "title"
-  },
-  {
-    "path": "public/outil/pret-immobilier/index.html",
-    "rule": "tool-block"
-  },
-  {
     "path": "public/outil/prime-activite/index.html",
     "rule": "description"
   },
