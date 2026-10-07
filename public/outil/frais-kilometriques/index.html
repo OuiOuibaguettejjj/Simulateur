@@ -78,7 +78,7 @@ function updateFields(){
 }
 window.TOOL={
   calc:function(){
-    const d=Number(String(this.$('km').value).replace(',','.')), v=this.$('veh').value, e=this.$('energy').value==='electrique', cv=this.$('cv').value;
+    const d=Number(String(this.$('km').value).replace(',','.')), rawV=this.$('veh').value, v=(rawV==='normal'||rawV==='electrique')?'voiture':rawV, e=(this.$('energy').value==='electrique'||rawV==='electrique'), cv=this.$('cv').value;
     if(!Number.isFinite(d)||d<=0)return'Veuillez saisir un kilométrage professionnel positif.';
     const P=window.Parametres.get('frais-kilometriques'), V=P.values;
     let t, f;
