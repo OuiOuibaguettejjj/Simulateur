@@ -324,7 +324,7 @@
       "effectiveFrom": "2026-01-01",
       "effectiveTo": "2026-12-31",
       "verifiedOn": "2026-10-07",
-      "notes": "Règles légales vérifiées le 7 octobre 2026 sur Service-Public et Légifrance : ancienneté minimale de 8 mois, proratisation par mois complets, 1/4 de mois par année jusqu’à 10 ans puis 1/3 au-delà. Les dispositions conventionnelles ou contractuelles plus favorables ne sont pas modélisées par ce jeu.",
+      "notes": "Règles légales vérifiées le 7 octobre 2026 sur Service-Public et Légifrance : ancienneté minimale de 8 mois pour le cas général, proratisation par mois complets, 1/4 de mois par année jusqu’à 10 ans puis 1/3 au-delà. En cas d’inaptitude professionnelle, l’indemnité spéciale est au moins égale au double de l’indemnité légale et est due sans condition d’ancienneté. Les dispositions conventionnelles ou contractuelles plus favorables ne sont pas modélisées par ce jeu.",
       "values": {
         "ancienneteMinMois": 8,
         "palierAnnees": 10,
@@ -336,7 +336,10 @@
           "numerateur": 1,
           "denominateur": 3
         },
-        "moisParAnnee": 12
+        "moisParAnnee": 12,
+        "inaptitudeProfessionnelle": {
+          "multiplicateur": 2
+        }
       }
     }
   },
