@@ -71,6 +71,54 @@
         }
       }
     },
+    "impot-sur-le-revenu": {
+      "label": "Impôt sur le revenu — barème 2026",
+      "year": 2026,
+      "effectiveFrom": "2026-01-01",
+      "effectiveTo": "2026-12-31",
+      "verifiedOn": "2026-10-07",
+      "source": {
+        "label": "impots.gouv.fr — calcul de l'impôt 2026 sur les revenus 2025",
+        "url": "https://www.impots.gouv.fr/www2/fichiers/documentation/brochure/ir_2026/pdf_som/21-calcul_impot_369a382.pdf"
+      },
+      "values": {
+        "brackets": [
+          [
+            11600,
+            0
+          ],
+          [
+            29579,
+            0.11
+          ],
+          [
+            84577,
+            0.3
+          ],
+          [
+            181917,
+            0.41
+          ],
+          [
+            null,
+            0.45
+          ]
+        ],
+        "decote": {
+          "couple": {
+            "base": 1483,
+            "rate": 0.4525,
+            "threshold": 3277
+          },
+          "single": {
+            "base": 897,
+            "rate": 0.4525,
+            "threshold": 1982
+          }
+        },
+        "familyQuotientCap": 1807
+      }
+    },
     "rsa": {
       "label": "RSA",
       "year": 2026,
