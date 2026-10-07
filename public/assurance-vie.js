@@ -51,8 +51,7 @@
     }
 
     const totalVerse=capital+versement*months;
-    const totalNetVerse=totalVerse*contributionFactor;
-    const gain=finalCapital-totalNetVerse;
+    const gain=finalCapital-totalVerse;
 
     const grossMonthlyRate=rendement/100/12;
     let noFeeCapital;
