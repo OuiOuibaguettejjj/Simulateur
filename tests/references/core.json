@@ -561,5 +561,31 @@
     ],
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/R2924",
     "note": "Cas de non-régression du mode prix du bien + apport sans montant emprunté saisi : 250 000 € de prix avec 50 000 € d'apport produit 200 000 € de capital emprunté ; à 4 % sur 20 ans, la mensualité avec assurance est d’environ 1 253,63 €."
+  },
+  {
+    "outil": "mensualite-pret",
+    "entrees": {
+      "capital": "200000",
+      "taux": "3.5",
+      "duree": "20",
+      "assurance": "0"
+    },
+    "attendu": 1159.92,
+    "tolerance": 0.01,
+    "sortie": "1\\s*159,92\\s*€",
+    "verifications": [
+      {
+        "sortie": "78\\s*380,66\\s*€",
+        "attendu": 78380.66,
+        "tolerance": 0.01
+      },
+      {
+        "sortie": "278\\s*380,66\\s*€",
+        "attendu": 278380.66,
+        "tolerance": 0.01
+      }
+    ],
+    "source": "https://www.thecalculator.co/finance/Mortgage-Payment-Calculator-24.html",
+    "note": "Cas de référence indépendant : 200 000 € sur 20 ans à 3,50 % donne une mensualité de 1 159,92 € hors assurance, 78 380,66 € d'intérêts et 278 380,66 € remboursés."
   }
 ]
