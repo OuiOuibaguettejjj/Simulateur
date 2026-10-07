@@ -70,7 +70,7 @@
       '<div class="takeaway"><div class="takeaway-title">À retenir</div><div class="takeaway-grid">'+
       '<div class="takeaway-item"><small>Total des versements</small><strong>'+formatEuro(totalVerse)+'</strong></div>'+
       '<div class="takeaway-item"><small>Gain après frais</small><strong>'+formatEuro(gain)+'</strong></div>'+
-      '<div class="takeaway-item"><small>Rendement annuel après frais</small><strong>'+formatNumber(netAnnualRate)+' %</strong></div>'+
+      '<div class="takeaway-item"><small>Rendement annuel après frais de gestion</small><strong>'+formatNumber(netAnnualRate)+' %</strong></div>'+
       '</div></div>'+
       '<div class="scenario"><div class="scenario-title">Impact des frais</div><div class="scenario-grid">'+
       '<div class="scenario-item"><small>Projection sans frais</small><strong>'+formatEuro(noFeeCapital)+'</strong></div>'+
