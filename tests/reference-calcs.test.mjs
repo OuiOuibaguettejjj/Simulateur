@@ -17,7 +17,7 @@ for(const c of cases){
   const label=new RegExp(c.sortie,"i");assert.ok(label.test(out.text),c.outil+" : libellé de sortie absent dans « "+out.text+" »");
   const labelled=out.text.slice(out.text.search(label));const got=numbers(labelled)[0];assert.ok(Number.isFinite(got),c.outil+" : aucune valeur numérique associée à la sortie « "+c.sortie+" »");
   assert.ok(Math.abs(got-c.attendu)<=c.tolerance,c.outil+" : attendu "+c.attendu+", obtenu "+got+" (« "+out.text+" »)");
-  if(Array.isArray(c.verifications))for(const v of c.verifications){const re=new RegExp(v.sortie,"i");assert.ok(re.test(out.text),c.outil+" : sortie secondaire absente : "+v.sortie);const part=out.text.slice(out.text.search(re));const value=numbers(part)[0];assert.ok(Number.isFinite(value),c.outil+" : valeur secondaire absente : "+v.sortie);assert.ok(Math.abs(value-v.attendu)<=v.tolerance,c.outil+" : "+v.sortie+" attendu "+v.attendu+", obtenu "+value)}
+  if(Array.isArray(c.verifications))for(const v of c.verifications){const re=new RegExp(v.sortie,"i");assert.ok(re.test(out.text),c.outil+" : sortie secondaire absente : "+v.sortie);const part=out.text.slice(out.text.search(re));const value=numbers(part)[0];assert.ok(Number.isFinite(value),c.outil+" : valeur secondaire absente : "+v.sortie);assert.ok(withinTolerance(value,v.attendu,v.tolerance),c.outil+" : "+v.sortie+" attendu "+v.attendu+", obtenu "+value)}
   covered.add(c.outil);
 }
 const refusedTools=[...forbidden];
