@@ -212,7 +212,7 @@
 <script>
 window.TOOL={calc:function(){
   const montantRaw=this.$("montant")?.value.trim()||"",periode=this.$("periode")?.value||"mensuel",statut=this.$("statut")?.value||"noncadre",pasRaw=this.$("pas")?.value.trim()||"0",taxableRaw=this.$("net-imposable")?.value.trim()||"",customRaw=this.$("custom-rate")?.value.trim()||"",mode=document.getElementById("mode-net")?.getAttribute("aria-pressed")==="true";
-  const montant=Number(montantRaw),pas=Number(pasRaw),taxable=Number(taxableRaw),custom=Number(customRaw),defaultRate=statut==="cadre"?25:23,rate=customRaw!==""?custom:defaultRate;
+  const toNumber=value=>Number(String(value).replace(/\\s/g,"").replace(",",".")),montant=toNumber(montantRaw),pas=toNumber(pasRaw),taxable=toNumber(taxableRaw),custom=toNumber(customRaw),defaultRate=statut==="cadre"?25:23,rate=customRaw!==""?custom:defaultRate;
   if(!montantRaw||!Number.isFinite(montant)||montant<=0)return'<div class="salary-error" role="alert"><strong>Montant invalide.</strong><p>Saisissez un salaire strictement positif.</p></div>';
   if(!Number.isFinite(pas)||pas<0||pas>100)return'<div class="salary-error" role="alert"><strong>Taux de PAS invalide.</strong><p>Saisissez un taux compris entre 0 et 100 %.</p></div>';
   if(!Number.isFinite(rate)||rate<0||rate>40)return'<div class="salary-error" role="alert"><strong>Taux de cotisations invalide.</strong><p>Saisissez un taux compris entre 0 et 40 %.</p></div>';
