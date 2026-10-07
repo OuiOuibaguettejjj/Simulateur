@@ -173,6 +173,30 @@
         "familyQuotientCap": 1807
       }
     },
+    "indemnite-licenciement": {
+      "label": "Indemnité légale de licenciement",
+      "year": 2026,
+      "effectiveFrom": "2026-01-01",
+      "effectiveTo": "2026-12-31",
+      "verifiedOn": "2026-10-07",
+      "source": {
+        "label": "Service-Public — indemnité de licenciement du salarié en CDI",
+        "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F987"
+      },
+      "values": {
+        "ancienneteMinMois": 8,
+        "moisParAnnee": 12,
+        "palierAnnees": 10,
+        "tauxApresPalier": {
+          "denominateur": 3,
+          "numerateur": 1
+        },
+        "tauxAvantPalier": {
+          "denominateur": 4,
+          "numerateur": 1
+        }
+      }
+    },
     "prime-activite": {
       "label": "Prime d’activité",
       "year": 2026,
