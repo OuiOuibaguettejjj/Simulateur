@@ -34,18 +34,18 @@
 <div class="field"><label for="status">Situation du foyer</label><select id="status"><option value="single">Vous vivez seul(e)</option><option value="couple">Vous vivez en couple</option></select></div>
 <div class="field"><label for="dependents">Nombre d’enfants ou personnes à charge</label><input id="dependents" type="number" min="0" step="1" inputmode="numeric" placeholder="0"></div>
 </div>
-<div class="field"><label for="activite">Revenu net social mensuel du foyer (€)</label><input id="activite" type="number" min="0" step="any" inputmode="decimal" placeholder="1600"><small class="field-help">Utilisez le montant net social indiqué sur vos bulletins de salaire ou relevés de prestations.</small></div>
+<div class="field"><label for="activite">Revenus professionnels mensuels du foyer — montant net social (€)</label><input id="activite" type="text" inputmode="decimal" autocomplete="off" placeholder="1600" aria-describedby="activite-help"><small class="field-help" id="activite-help">Pour les revenus salariés, utilisez le montant net social du foyer indiqué sur les bulletins de salaire. Pour un couple, additionnez les revenus professionnels des membres du foyer. La virgule décimale est acceptée.</small></div>
 <details class="prime-advanced"><summary>Paramètres facultatifs pour affiner l’estimation</summary>
 <div class="advanced-grid">
-<div class="field"><label for="autres">Autres ressources mensuelles prises en compte (€)</label><input id="autres" type="number" min="0" step="any" inputmode="decimal" placeholder="0"><small class="field-help">Laissez 0 si vous n’avez pas d’autre ressource à intégrer dans cette pré-estimation.</small></div>
-<div class="field"><label for="log">Forfait logement à déduire (€)</label><input id="log" type="number" min="0" step="any" inputmode="decimal" placeholder="0"><small class="field-help">Si un forfait logement s’applique à votre situation, renseignez ici le montant retenu. Laissez 0 si vous ne souhaitez pas le modéliser.</small></div>
-<div class="field"><label for="bonif">Bonification mensuelle estimée (€)</label><input id="bonif" type="number" min="0" step="any" inputmode="decimal" placeholder="0"><small class="field-help">Optionnel : la bonification dépend des revenus d’activité des membres du foyer. Laissez 0 si vous ne connaissez pas son montant.</small></div>
+<div class="field"><label for="autres">Autres ressources mensuelles prises en compte (€)</label><input id="autres" type="text" inputmode="decimal" autocomplete="off" placeholder="0" aria-describedby="autres-help"><small class="field-help" id="autres-help">Laissez 0 si vous n’avez pas d’autre ressource à intégrer dans cette pré-estimation. La virgule décimale est acceptée.</small></div>
+<div class="field"><label for="log">Forfait logement à déduire (€)</label><input id="log" type="text" inputmode="decimal" autocomplete="off" placeholder="0" aria-describedby="log-help"><small class="field-help" id="log-help">Saisissez le forfait logement que vous souhaitez modéliser. Laissez 0 si vous ne souhaitez pas l’intégrer. La virgule décimale est acceptée.</small></div>
+<div class="field"><label for="bonif">Bonification mensuelle estimée (€)</label><input id="bonif" type="text" inputmode="decimal" autocomplete="off" placeholder="0" aria-describedby="bonif-help"><small class="field-help" id="bonif-help">Optionnel : saisissez une bonification déjà estimée si vous la connaissez. Laissez 0 sinon. La virgule décimale est acceptée.</small></div>
 </div>
 </details>
 </div>
 <button class="button-main" onclick="Simulateurs.calc()">Calculer mon estimation <span aria-hidden="true">→</span></button>
 <p class="privacy-note">Calcul effectué dans votre navigateur. Aucune donnée personnelle n’est envoyée.</p>
-<div class="result" id="result" aria-live="polite">Renseignez votre foyer et votre revenu net social, puis lancez le calcul.</div>
+<div class="result" id="result" aria-live="polite">Renseignez votre foyer et vos revenus professionnels, puis lancez le calcul.</div>
 <div class="formula"><strong>Méthode et sources</strong><p>Le calcul reprend la formule simplifiée publiée par Service-Public : montant forfaitaire + 59,85 % des revenus professionnels + bonifications − ressources prises en compte. Les montants forfaitaires 2026 sont centralisés dans les paramètres réglementaires. <a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F2882" target="_blank" rel="noopener noreferrer">Service-Public — Prime d’activité</a> · <a href="https://www.caf.fr/allocataires/actualites/actualites-nationales/la-prime-d-activite-augmente-en-2026" target="_blank" rel="noopener noreferrer">CAF — évolution 2026</a>.</p></div>
 </section>
 </div>
@@ -56,7 +56,7 @@
 <p>Le montant réel dépend de la situation complète du foyer. Le simulateur privilégie donc une première estimation simple et laisse les paramètres plus fins dans un menu facultatif.</p>
 
 <h2>Quel revenu faut-il renseigner ?</h2>
-<p>Pour une estimation cohérente avec les règles actuelles, utilisez le <strong>montant net social</strong> figurant sur les bulletins de salaire ou les relevés de prestations. La Caf examine les ressources de l’ensemble du foyer et applique les règles correspondant à la période de référence.</p>
+<p>Pour les revenus salariés, utilisez le <strong>montant net social</strong> figurant sur les bulletins de salaire. Ce montant sert de référence pour les ressources à déclarer ; dans la formule simplifiée ci-dessous, il représente les <strong>revenus professionnels du foyer</strong>. Les autres ressources prises en compte sont saisies séparément.</p>
 <p>Les autres ressources, le forfait logement et la bonification peuvent modifier le résultat. Ils sont volontairement séparés des trois informations principales pour garder le parcours accessible.</p>
 
 <h2>À retenir sur cette estimation</h2>
@@ -66,7 +66,7 @@
 
 <section class="calculator-faq" aria-labelledby="faq-title">
 <h2 id="faq-title">FAQ</h2>
-<details><summary>Quel montant de salaire dois-je saisir ?</summary><div class="calculator-faq-answer"><p>Utilisez le montant net social indiqué sur votre bulletin de salaire. Pour plusieurs membres du foyer, le champ principal correspond au revenu net social mensuel total que vous souhaitez prendre en compte dans cette pré-estimation.</p></div></details>
+<details><summary>Quel montant de salaire dois-je saisir ?</summary><div class="calculator-faq-answer"><p>Pour un salarié, utilisez le montant net social indiqué sur son bulletin de salaire. Pour plusieurs membres du foyer, additionnez leurs revenus professionnels mensuels nets sociaux.</p></div></details>
 <details><summary>Pourquoi le calcul n’est-il pas identique à celui de la Caf ?</summary><div class="calculator-faq-answer"><p>La Caf examine la situation complète du foyer et applique de nombreuses règles sur les ressources, les bonifications, le logement et les périodes de référence. Ce simulateur fournit volontairement une estimation simplifiée.</p></div></details>
 <details><summary>À quoi servent les paramètres facultatifs ?</summary><div class="calculator-faq-answer"><p>Ils permettent d’ajouter des ressources, un forfait logement ou une bonification lorsque vous connaissez déjà ces montants. Vous pouvez les laisser à 0 pour obtenir une première estimation.</p></div></details>
 <details><summary>La prime d’activité est-elle versée pendant trois mois avec le même montant ?</summary><div class="calculator-faq-answer"><p>Le montant attribué est fixé pour un trimestre de droit. Les changements de ressources et de situation sont ensuite pris en compte selon les règles applicables lors de la déclaration suivante.</p></div></details>
@@ -82,7 +82,8 @@
 <script>
 window.TOOL={
 calc:function(){
-const r=Number(this.$("activite").value||0),o=Number(this.$("autres").value||0),l=Number(this.$("log").value||0),b=Number(this.$("bonif").value||0);
+const parseAmount=id=>{const raw=String(this.$(id)?.value??"").trim();if(raw==="")return 0;return Number(raw.replace(/[\s\u00a0\u202f]/g,"").replace(",", "."));};
+const r=parseAmount("activite"),o=parseAmount("autres"),l=parseAmount("log"),b=parseAmount("bonif");
 const dependents=Number(this.$("dependents").value||0),status=this.$("status").value;
 if(!Number.isInteger(dependents)||dependents<0)return "Le nombre de personnes à charge doit être un nombre entier positif ou nul.";
 if([r,o,l,b].some(v=>!Number.isFinite(v)||v<0))return "Vérifiez les montants saisis.";
@@ -91,7 +92,7 @@ const amounts=status==="couple"?params.coupleAmounts:params.singleAmounts;
 const index=Math.min(dependents,2);
 const forfait=(amounts[index]??amounts[2])+Math.max(0,dependents-2)*params.additionalDependent;
 const base=Math.max(0,forfait+b+params.activityRate*r-r-o-l);
-return "<strong>"+this.euro(base)+" / mois</strong> en pré-estimation<br><br>Montant forfaitaire : "+this.euro(forfait)+"<br>Part de revenus d’activité retenue : "+this.euro(params.activityRate*r)+"<br>Ressources déduites : "+this.euro(r+o+l)+"<p class='small'>La bonification éventuelle est ajoutée au montant forfaitaire. Le résultat reste indicatif et ne reproduit pas l’intégralité du calcul Caf.</p>";
+return "<strong>"+this.euro(base)+" / mois</strong> en pré-estimation<br><br>Montant forfaitaire : "+this.euro(forfait)+"<br>Part de revenus d’activité retenue : "+this.euro(params.activityRate*r)+"<br>Ressources déduites : "+this.euro(r+o+l)+"<p class='small'>La bonification éventuelle est ajoutée au montant forfaitaire. Les revenus professionnels sont aussi déduits à 100 % au titre des ressources prises en compte. Le résultat reste indicatif et ne reproduit pas l’intégralité du calcul Caf.</p>";
 },
 source:"Service-Public et CAF — barème et formule de la prime d’activité 2026."
 };
