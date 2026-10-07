@@ -240,10 +240,21 @@
       "effectiveFrom": "2026-04-01",
       "effectiveTo": "2027-03-31",
       "verifiedOn": "2026-10-07",
-      "notes": "Montant forfaitaire de 638,28 € et taux de 59,85 % vérifiés sur les sources officielles CAF et Service-Public pour le barème applicable à compter du 1er avril 2026. Le calculateur conserve une estimation simplifiée et ne reproduit pas l’intégralité du calcul CAF.",
+      "notes": "Montants forfaitaires 2026 (638,28 €, 957,42 €, 1 148,90 €, 1 340,39 € et majoration de 255,31 € par personne à charge supplémentaire) et taux de 59,85 % vérifiés sur Service-Public ; la réforme 2026 est également documentée par la CAF. Le calculateur reste une estimation simplifiée et ne reproduit pas l’intégralité du calcul CAF.",
       "values": {
         "base": 638.28,
-        "activityRate": 0.5985
+        "activityRate": 0.5985,
+        "singleAmounts": [
+          638.28,
+          957.42,
+          1148.9
+        ],
+        "coupleAmounts": [
+          957.42,
+          1148.9,
+          1340.39
+        ],
+        "additionalDependent": 255.31
       }
     }
   },
