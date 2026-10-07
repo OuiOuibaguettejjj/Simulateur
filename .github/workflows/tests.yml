@@ -116,6 +116,11 @@ jobs:
           fi
           exit 0
 
+      - name: Vérification effective update-baseline
+        run: |
+          node scripts/check-pages.mjs --update-baseline
+          git diff -- scripts/check-pages.baseline.json
+
       - name: Test check-pages
         run: node tests/check-pages.test.mjs
 
