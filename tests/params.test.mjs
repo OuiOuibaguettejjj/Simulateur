@@ -139,6 +139,9 @@ assert.equal(P.isEffective("smic", "2026-06-01"), true);
 assert.equal(P.isEffective("smic", "2026-05-31"), false);
 assert.equal(P.isEffective("smic", "2027-01-01"), false);
 assert.equal(P.get("rsa").verifiedOn, "2026-10-06");
+assert.equal(P.get("capacite-emprunt").values.tauxEffortMax, 35);
+assert.equal(P.get("capacite-emprunt").values.maturiteMax, 25);
+assert.equal(P.isEffective("capacite-emprunt", "2026-10-07"), true);
 
 /* ---------- Parité avec les anciens calculs codés en dur ---------- */
 function pageTool(slug) {
