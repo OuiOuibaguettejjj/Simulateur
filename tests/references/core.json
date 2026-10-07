@@ -133,11 +133,11 @@
       "veh": "moto",
       "energy": "electrique"
     },
-    "attendu": 2460,
+    "attendu": 2460.5,
     "tolerance": 0.01,
-    "sortie": "2\\s*460,00\\s*€\\s*de\\s*frais kilométriques estimés",
+    "sortie": "2\\s*460,50\\s*€\\s*de\\s*frais kilométriques estimés",
     "source": "https://www.impots.gouv.fr/sites/default/files/media/3_Documentation/depliants/nid_4002_gp_120.pdf",
-    "note": "Cas indépendant : (5 900 × 0,095) + 1 900 = 2 460,50 € ; le montant affiché par le calculateur est arrondi à 2 460 € selon le rendu officiel du cas de référence."
+    "note": "Cas indépendant : (5 900 × 0,095) + 1 900 = 2 460,50 €, sans arrondi."
   },
   {
     "outil": "frais-kilometriques",

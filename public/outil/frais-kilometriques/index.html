@@ -96,10 +96,8 @@ updateFields();
       t=e?V.cyclomoteurElectrique:V.cyclomoteur;
       f=d<=V.motoPalier1?d*t.jusqua3000:d<=V.motoPalier2?d*t.milieu+t.forfaitMilieu:d*t.auDela;
     }
-    const legacyMode=rawV==='normal'||rawV==='electrique';
-    const displayed=legacyMode?f:Math.floor(f);
-    const label=legacyMode?'majoration électrique de 20 % incluse.':'majoration électrique de 20 % incluse'+'.';
-    return'<strong>'+this.euro(displayed)+'</strong> de frais kilométriques estimés<br><small>Barème '+P.year+' · '+label+'</small>';
+    const mention=e?' · majoration électrique de 20 % incluse.':'.';
+    return'<strong>'+this.euro(f)+'</strong> de frais kilométriques estimés<br><small>Barème '+P.year+mention+'</small>';
   }
 };</script>
 <script src="/enter-calcul.js" defer></script>
