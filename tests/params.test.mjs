@@ -182,7 +182,7 @@ function legacyIndemniteLicenciement({ s12, s3, y, m }) {
   if (a <= 0 || b <= 0 || n < 2 / 3) return "Renseignez deux salaires valides et au moins 8 mois d’ancienneté.";
   const r = Math.max(a, b);
   const v = r * (Math.min(n, 10) / 4 + Math.max(0, n - 10) / 3);
-  return "<strong>Minimum légal : " + euro(v) + "</strong><br><br>Salaire de référence : " + euro(r) + "/mois<br>Ancienneté : " + years + " an(s)" + (months ? " et " + months + " mois" : "") + "<br>Formule : 1/4 jusqu’à 10 ans, puis 1/3 au-delà. Une convention collective ou le contrat peut être plus favorable.";
+  return "<strong>Minimum légal : " + euro(v) + "</strong><br><br>Salaire de référence : " + euro(r) + "/mois<br>Ancienneté : " + years + " an(s)" + (months ? " et " + months + " mois" : "") + "<br>Formule : 1/4 jusqu’à 10 ans, puis 1/3 au-delà.<p class=\"small\">Une convention collective ou le contrat peut être plus favorable.</p>";
 }
 
 let compared = 0;
