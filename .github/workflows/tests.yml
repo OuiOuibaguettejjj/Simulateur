@@ -66,6 +66,9 @@ jobs:
       - name: Test garde des résultats
         run: node tests/simulateurs.test.js
 
+      - name: Test calculateur salaire brut net
+        run: node tests/salaire-brut-net.test.js
+
       - name: Test filtre publicitaire
         run: node tests/ad-filter.test.mjs
 

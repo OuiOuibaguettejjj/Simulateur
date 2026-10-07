@@ -411,9 +411,9 @@
       "category": "salaire",
       "relatedTools": [
         "salaire-horaire",
-        "rupture-conventionnelle",
-        "indemnite-licenciement",
-        "solde-tout-compte"
+        "heures-supplementaires",
+        "prelevement-source",
+        "prime-activite"
       ]
     },
     "salaire-horaire": {
