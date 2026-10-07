@@ -1,2 +1,127 @@
-<!doctype html><html lang="fr"><head><meta name="calculator-rendering" content="static"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="google-adsense-account" content="ca-pub-2924580037451268"><title>Calculateur mensualité de prêt</title><meta name="description" content="Calculez la mensualité, les intérêts et le coût total d'un prêt à taux fixe."><link rel="canonical" href="https://simulateur.site/outil/mensualite-pret/"><link rel="stylesheet" href="/styles.css"><script src="/simulateurs.js" defer></script><script src="/enter-calcul.js" defer></script><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur mensualité de prêt","url":"https://simulateur.site/outil/mensualite-pret/","description":"Calculez la mensualité, les intérêts et le coût total d\u0027un prêt à taux fixe.","inLanguage":"fr-FR","applicationCategory":"FinanceApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"price":"0","priceCurrency":"EUR"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Immobilier","item":"https://simulateur.site/immobilier/"},{"@type":"ListItem","position":3,"name":"Calculateur mensualité de prêt","item":"https://simulateur.site/outil/mensualite-pret/"}]}</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta property="og:type" content="website"><meta property="og:site_name" content="Simulateur"><meta property="og:locale" content="fr_FR"><meta property="og:title" content="Calculateur mensualité de prêt"><meta property="og:description" content="Calculez la mensualité, les intérêts et le coût total d'un prêt à taux fixe."><meta property="og:url" content="https://simulateur.site/outil/mensualite-pret/"><meta name="twitter:card" content="summary"></head><body><header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header><main><div class="wrap"><div class="breadcrumb"><a href="/">Accueil</a> · <a href="/immobilier/">Immobilier</a> · Calculateur mensualité de prêt</div><section class="tool"><div class="eyebrow">CRÉDIT</div><h1>Calculateur mensualité de prêt</h1><p class="tool-intro">Calculez la mensualité, les intérêts et le coût total d'un prêt à taux fixe.</p><div id="fields"><div class="row"><div class="field"><label for="capital">Montant emprunté (€)</label><input id="capital" type="number" min="0" step="any" placeholder="20000"></div><div class="field"><label for="taux">Taux annuel (%)</label><input id="taux" type="number" min="0" step="any" placeholder="5"></div></div><div class="row"><div class="field"><label for="duree">Durée (années)</label><input id="duree" type="number" min="0" step="1" placeholder="5"></div></div></div><button class="button-main" onclick="Simulateurs.calc()">Calculer</button><div class="result" id="result" aria-live="polite">Saisissez vos données puis lancez le calcul.</div><div class="formula"><strong>Méthode et sources</strong><p>Service-Public indique que les offres de crédit doivent notamment communiquer le TAEG, qui permet de prendre en compte le coût global du crédit. La mensualité ci-dessus utilise une formule d'annuité à taux fixe.</p></div></section></div><section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Calculs associés</h2><div class="related-links"><a class="related-link" href="/outil/pret-immobilier/"><strong>Prêt immobilier</strong><span>Calculer le coût total du crédit.</span></a><a class="related-link" href="/outil/capacite-emprunt/"><strong>Capacité d’emprunt</strong><span>Estimer le capital empruntable.</span></a><a class="related-link" href="/outil/tableau-amortissement/"><strong>Tableau d’amortissement</strong><span>Détailler les échéances.</span></a><a class="related-link" href="/outil/rendement-locatif/"><strong>Rendement locatif</strong><span>Évaluer un investissement locatif.</span></a></div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="/immobilier/">Immobilier</a>.</p></div></section></main><footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer><script>window.TOOL={calc:function(){const c=+this.$("capital").value||0,r=(+this.$("taux").value||0)/1200,n=Math.round((+this.$("duree").value||0)*12);if(c<=0||n<=0||r<0)return "Renseignez des valeurs valides.";const m=r?c*r/(1-Math.pow(1+r,-n)):c/n,total=m*n;return "<strong>"+this.euro(m)+" / mois</strong><br><br>Intérêts totaux : "+this.euro(total-c)+"<br>Total remboursé : "+this.euro(total)+"<p class='small'>Calcul hors assurance et frais. Pour comparer des offres, le TAEG est plus pertinent que le seul taux nominal.</p>"}};</script></body></html>
+<!doctype html>
+<html lang="fr">
+<head>
+<meta name="calculator-rendering" content="static">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="google-adsense-account" content="ca-pub-2924580037451268">
+<title>Mensualité de prêt | Simulateur</title>
+<meta name="description" content="Calculez la mensualité d'un prêt à taux fixe, ses intérêts et son coût total, puis comparez l'effet de la durée et du taux.">
+<link rel="canonical" href="https://simulateur.site/outil/mensualite-pret/">
+<link rel="stylesheet" href="/styles.css">
+<script src="/simulateurs.js" defer></script>
+<script src="/enter-calcul.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Mensualité de prêt","url":"https://simulateur.site/outil/mensualite-pret/","description":"Calculez la mensualité d'un prêt à taux fixe, ses intérêts et son coût total, puis comparez l'effet de la durée et du taux.","inLanguage":"fr-FR","applicationCategory":"FinanceApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"price":"0","priceCurrency":"EUR"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Immobilier","item":"https://simulateur.site/immobilier/"},{"@type":"ListItem","position":3,"name":"Mensualité de prêt","item":"https://simulateur.site/outil/mensualite-pret/"}]}</script>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Simulateur">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Mensualité de prêt | Simulateur">
+<meta property="og:description" content="Calculez la mensualité d'un prêt à taux fixe, ses intérêts et son coût total, puis comparez l'effet de la durée et du taux.">
+<meta property="og:url" content="https://simulateur.site/outil/mensualite-pret/">
+<meta name="twitter:card" content="summary">
+</head>
+<body>
+<header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header>
+<main>
+<div class="wrap">
+<div class="breadcrumb"><a href="/">Accueil</a> · <a href="/immobilier/">Immobilier</a> · Mensualité de prêt</div>
+<section class="tool">
+<div class="eyebrow">CRÉDIT</div>
+<h1>Mensualité de prêt</h1>
+<p class="tool-intro">Estimez votre mensualité de prêt à taux fixe, les intérêts et le coût total, puis comparez plusieurs durées.</p>
+<div id="fields">
+<div class="row">
+<div class="field"><label for="capital">Montant emprunté (€)</label><input id="capital" type="number" min="0" max="100000000" step="any" value="200000" inputmode="decimal"></div>
+<div class="field"><label for="taux">Taux annuel nominal (%)</label><input id="taux" type="number" min="0" max="30" step="any" value="3.5" inputmode="decimal"></div>
+</div>
+<div class="row">
+<div class="field"><label for="duree">Durée (années)</label><input id="duree" type="number" min="1" max="50" step="1" value="20" inputmode="numeric"></div>
+<div class="field"><label for="assurance">Assurance annuelle (%) <span class="small">(optionnel)</span></label><input id="assurance" type="number" min="0" max="10" step="any" value="0" inputmode="decimal"></div>
+</div>
+</div>
+<div class="status-note">L'assurance est estimée sur le capital initial. Laissez 0 % pour comparer uniquement la mensualité du prêt.</div>
+<button class="button-main" id="calculate" type="button">Calculer</button>
+<div class="result" id="result" aria-live="polite">
+<strong id="monthly">1 159,92 € / mois</strong>
+<p>Mensualité hors assurance : <span id="monthlyEx">1 159,92 €</span></p>
+<p>Intérêts totaux : <span id="interest">78 380,66 €</span><br>Total remboursé : <span id="totalPaid">278 380,66 €</span></p>
+</div>
+<div id="comparison" class="content-section">
+<h2>Comparer les durées</h2>
+<div class="table-wrap"><table><thead><tr><th>Durée</th><th>Mensualité</th><th>Intérêts</th><th>Intérêts + assurance</th></tr></thead><tbody id="compareBody"></tbody></table></div>
+</div>
+<div id="rate-comparison" class="content-section">
+<h2>Mesurer l'effet du taux</h2>
+<div class="table-wrap"><table><thead><tr><th>Taux</th><th>Mensualité</th><th>Intérêts</th><th>Intérêts + assurance</th></tr></thead><tbody id="rateBody"></tbody></table></div>
+</div>
+<div class="formula">
+<strong>Formule</strong>
+<p>Pour un prêt amortissable à taux fixe, la mensualité hors assurance est calculée avec la formule d'annuité constante : <strong>M = C × r ÷ [1 − (1 + r)<sup>−n</sup>]</strong>, où C est le capital, r le taux mensuel et n le nombre de mensualités. Le taux annuel est divisé par 1 200 pour obtenir le taux mensuel.</p>
+<p>Lorsque le taux est nul, la mensualité est simplement égale au capital divisé par le nombre de mensualités.</p>
+<p>Sources : <a href="https://www.service-public.gouv.fr/particuliers/vosdroits/R2924" target="_blank" rel="noopener">Service-Public — simulation de l'échéancier d'un crédit immobilier</a> et <a href="https://www.thecalculator.co/finance/Mortgage-Payment-Calculator-24.html" target="_blank" rel="noopener">TheCalculator — formule et exemple de mensualité</a>.</p>
+</div>
+</section>
+<section class="content-section">
+<h2>Que comprend la mensualité ?</h2>
+<p>La mensualité hors assurance correspond au remboursement du capital et aux intérêts du prêt. Dans cette simulation, l'assurance est une option distincte : lorsqu'un taux annuel d'assurance est saisi, son estimation mensuelle est ajoutée à la mensualité.</p>
+<p>Le résultat ne constitue pas une offre de crédit. Un contrat réel peut prévoir des frais, une assurance calculée selon d'autres modalités ou des conditions de remboursement différentes.</p>
+</section>
+<section class="content-section">
+<h2>Pourquoi une durée plus longue réduit-elle la mensualité ?</h2>
+<p>À capital et taux identiques, allonger la durée répartit le remboursement sur davantage de mensualités. La mensualité baisse généralement, mais les intérêts cumulés augmentent puisque le capital reste dû plus longtemps. Il faut donc comparer à la fois la mensualité et le coût total.</p>
+</section>
+<section class="content-section">
+<h2>Mensualité et TAEG : ne pas confondre</h2>
+<p>La mensualité calculée ici repose sur le capital, le taux nominal et la durée. Le TAEG est un indicateur plus large du coût d'un crédit : il intègre notamment les intérêts, certains frais et les coûts d'assurance ou de garantie obligatoires selon les conditions du crédit. Il est utilisé pour comparer des offres.</p>
+<p>Pour une offre réelle, le TAEG et l'échéancier remis par le prêteur restent les références à examiner.</p>
+</section>
+<section class="calculator-faq" id="faq" aria-labelledby="faq-title">
+<h2 id="faq-title">FAQ</h2>
+<details><summary>Quelle mensualité pour 200 000 € sur 20 ans ?</summary><div class="calculator-faq-answer"><p>À 3,50 % de taux nominal fixe, la mensualité hors assurance est d'environ 1 159,92 € pour 200 000 € sur 20 ans. Le résultat varie dès que le capital, le taux ou la durée change.</p></div></details>
+<details><summary>Quelle mensualité pour 100 000 € sur 20 ans ?</summary><div class="calculator-faq-answer"><p>À 3,50 % de taux nominal fixe, la mensualité hors assurance est d'environ 579,96 € pour 100 000 € sur 20 ans. L'assurance et les frais éventuels ne sont pas inclus dans ce montant.</p></div></details>
+<details><summary>Est-il moins cher d'emprunter sur 15, 20 ou 25 ans ?</summary><div class="calculator-faq-answer"><p>À taux et capital identiques, une durée plus courte entraîne généralement une mensualité plus élevée mais moins d'intérêts cumulés. Le tableau de comparaison permet de visualiser ce compromis.</p></div></details>
+<details><summary>L'assurance est-elle comprise dans la mensualité ?</summary><div class="calculator-faq-answer"><p>Elle est facultative dans cette simulation. Si vous saisissez un taux annuel d'assurance, une estimation mensuelle calculée sur le capital initial est ajoutée à la mensualité du prêt.</p></div></details>
+<details><summary>La mensualité calculée correspond-elle au TAEG ?</summary><div class="calculator-faq-answer"><p>Non. Le TAEG est un indicateur du coût global du crédit qui peut intégrer notamment les intérêts, l'assurance et certains frais. Cette page calcule une mensualité à partir des paramètres saisis.</p></div></details>
+<details><summary>Que se passe-t-il si le taux est de 0 % ?</summary><div class="calculator-faq-answer"><p>Sans intérêts, le capital est simplement réparti entre les mensualités : mensualité = capital ÷ nombre de mensualités.</p></div></details>
+</section>
+<section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Calculs associés</h2><div class="related-links">
+<a class="related-link" href="/outil/pret-immobilier/"><strong>Prêt immobilier</strong><span>Simuler le coût global d'un crédit immobilier.</span></a>
+<a class="related-link" href="/outil/capacite-emprunt/"><strong>Capacité d’emprunt</strong><span>Estimer le capital correspondant à votre budget.</span></a>
+<a class="related-link" href="/outil/tableau-amortissement/"><strong>Tableau d’amortissement</strong><span>Détailler le remboursement mois par mois.</span></a>
+<a class="related-link" href="/outil/rendement-locatif/"><strong>Rendement locatif</strong><span>Évaluer un investissement locatif.</span></a>
+</div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="/immobilier/">Immobilier</a>.</p></div></section>
+</div>
+</main>
+<footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer>
+<script>
+function calculateMensualitePretLoan(capital,annualRate,years,insuranceRate){const n=years*12,r=annualRate/1200,monthly=r?capital*r/(1-Math.pow(1+r,-n)):capital/n,insuranceMonthly=capital*(insuranceRate/100)/12;return{n,monthly,insuranceMonthly,interest:monthly*n-capital,total:capital+(monthly*n-capital)+(insuranceMonthly*n)}}
+window.TOOL={calc:function(){
+  const parse=id=>{const raw=String(this.$(id).value??"").trim().replace(",",".");return raw===""?NaN:Number(raw)};
+  const c=parse("capital"), annual=parse("taux"), years=parse("duree"), insurance=parse("assurance");
+  const valid=Number.isFinite(c)&&c>=1000&&c<=100000000&&Number.isFinite(annual)&&annual>=0&&annual<=30&&Number.isInteger(years)&&years>=1&&years<=50&&Number.isFinite(insurance)&&insurance>=0&&insurance<=10;
+  if(!valid)return "Renseignez des valeurs valides.";
+  const d=calculateMensualitePretLoan(c,annual,years,insurance), monthly=d.monthly, insuranceMonthly=d.insuranceMonthly, payment=monthly+insuranceMonthly, interest=d.interest, total=d.total;
+  const euro=v=>this.euro(v);
+  return "<strong>"+euro(payment)+" / mois</strong><p>Mensualité hors assurance : "+euro(monthly)+"<br>Assurance estimée : "+euro(insuranceMonthly)+" / mois<br>Intérêts totaux : "+euro(interest)+"<br>Total remboursé : "+euro(total)+"</p><p class='small'>L'assurance est estimée sur le capital initial. Le résultat est indicatif et hors autres frais du crédit.</p>";
+}};
+(function(){
+  const $=id=>document.getElementById(id);
+  const parse=id=>{const raw=String($(id).value??"").trim().replace(",",".");return raw===""?NaN:Number(raw)};
+  const money=v=>Number(v).toLocaleString("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:2});
+  function valid(){const c=parse("capital"),r=parse("taux"),y=parse("duree"),a=parse("assurance");return Number.isFinite(c)&&c>=1000&&c<=100000000&&Number.isFinite(r)&&r>=0&&r<=30&&Number.isInteger(y)&&y>=1&&y<=50&&Number.isFinite(a)&&a>=0&&a<=10}
+  const loan=(c,annual,years,a)=>calculateMensualitePretLoan(c,annual,years,a);
+  function calculate(){
+    if(!valid()){$("monthly").textContent="Valeurs invalides";$("monthlyEx").textContent="—";$("interest").textContent="—";$("totalPaid").textContent="—";$("compareBody").innerHTML="";$("rateBody").innerHTML="";return}
+    const c=parse("capital"),r=parse("taux"),y=parse("duree"),a=parse("assurance"),d=loan(c,r,y,a);
+    $("monthly").textContent=money(d.monthly+d.insuranceMonthly)+" / mois";$("monthlyEx").textContent=money(d.monthly);$("interest").textContent=money(d.interest);$("totalPaid").textContent=money(d.total);
+    $("compareBody").innerHTML=[15,20,25].filter(v=>v<=50).map(v=>{const x=loan(c,r,v,a);return "<tr"+(v===y?" class='current'":"")+"><td>"+v+" ans"+(v===y?" · actuel":"")+"</td><td>"+money(x.monthly+x.insuranceMonthly)+"</td><td>"+money(x.interest)+"</td><td>"+money(x.interest+x.insuranceMonthly*x.n)+"</td></tr>"}).join("");
+    $("rateBody").innerHTML=[r-0.5,r,r+0.5].filter((v,i,arr)=>v>=0&&v<=30&&arr.indexOf(v)===i).map(v=>{const x=loan(c,v,y,a);return "<tr"+(Math.abs(v-r)<1e-9?" class='current'":"")+"><td>"+String(v).replace(".",",")+" %"+(Math.abs(v-r)<1e-9?" · actuel":"")+"</td><td>"+money(x.monthly+x.insuranceMonthly)+"</td><td>"+money(x.interest)+"</td><td>"+money(x.interest+x.insuranceMonthly*x.n)+"</td></tr>"}).join("");
+  }
+  ["capital","taux","duree","assurance"].forEach(id=>$(id).addEventListener("input",calculate));
+  $("calculate").addEventListener("click",calculate);calculate();
+})();
+</script>
+</body>
+</html>
