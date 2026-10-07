@@ -1,6 +1,7 @@
 (function(){
-  const BRACKETS = Object.freeze([[11600,0],[29579,0.11],[84577,0.30],[181917,0.41],[Infinity,0.45]]);
-  const FAMILY_QUOTIENT_CAP = 1807;
+  const params=window.Parametres.get("impot-sur-le-revenu").values;
+  const BRACKETS=params.brackets.map(([limit,rate])=>[limit===null?Infinity:limit,rate]);
+  const FAMILY_QUOTIENT_CAP=params.familyQuotientCap;
   function taxForQuotient(q){
     let tax=0, previous=0;
     for(const [limit,rate] of BRACKETS){
@@ -24,11 +25,10 @@
       cappedTax=Math.max(rawTax,referenceTax-familyQuotientCap);
     }
     const grossTax=Math.max(0,cappedTax);
-    const decoteThreshold=isCouple?3277:1982;
-    const decoteBase=isCouple?1483:897;
-    const decote=grossTax<decoteThreshold?Math.max(0,decoteBase-0.4525*grossTax):0;
+    const decoteRules=isCouple?params.decote.couple:params.decote.single;
+    const decote=grossTax<decoteRules.threshold?Math.max(0,decoteRules.base-decoteRules.rate*grossTax):0;
     const netTax=Math.max(0,grossTax-decote);
-    const tmi=quotient<=11600?0:quotient<=29579?11:quotient<=84577?30:quotient<=181917?41:45;
+    const tmi=quotient<=BRACKETS[0][0]?0:quotient<=BRACKETS[1][0]?11:quotient<=BRACKETS[2][0]?30:quotient<=BRACKETS[3][0]?41:45;
     return {valid:true,rawTax,grossTax,familyQuotientCap,decote,netTax,tmi};
   }
   window.ImpotEngine=Object.freeze({calculate,brackets:BRACKETS,familyQuotientCap:FAMILY_QUOTIENT_CAP});
