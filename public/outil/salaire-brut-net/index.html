@@ -227,7 +227,7 @@ window.TOOL={calc:function(){
 }};
 (function(){
   const amount=document.getElementById("montant"),custom=document.getElementById("custom-rate"),modeBrut=document.getElementById("mode-brut"),modeNet=document.getElementById("mode-net");
-  function setMode(net){modeBrut.setAttribute("aria-pressed",String(!net));modeNet.setAttribute("aria-pressed",String(net));amount.previousElementSibling.textContent=net?"Net souhaité":"Salaire brut";}
+  function setMode(net){modeBrut.setAttribute("aria-pressed",String(!net));modeNet.setAttribute("aria-pressed",String(net));}
   modeBrut.addEventListener("click",function(){setMode(false);Simulateurs.calc()});
   modeNet.addEventListener("click",function(){setMode(true);Simulateurs.calc()});
   document.querySelectorAll(".salary-presets button").forEach(b=>b.addEventListener("click",function(){amount.value=this.dataset.amount;Simulateurs.calc()}));
