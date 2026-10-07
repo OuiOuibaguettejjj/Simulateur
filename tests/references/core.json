@@ -463,19 +463,19 @@
       "revenus": "",
       "charges": "0"
     },
-    "attendu": 1159.92,
+    "attendu": 1160,
     "tolerance": 0.01,
     "sortie": "1\\s*160\\s*€",
     "verifications": [
       {
         "sortie": "88\\s*381\\s*€",
-        "attendu": 88380.66,
-        "tolerance": 0.6
+        "attendu": 88381,
+        "tolerance": 0.01
       },
       {
         "sortie": "288\\s*381\\s*€",
-        "attendu": 288380.66,
-        "tolerance": 0.6
+        "attendu": 288381,
+        "tolerance": 0.01
       }
     ],
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/R2924",
