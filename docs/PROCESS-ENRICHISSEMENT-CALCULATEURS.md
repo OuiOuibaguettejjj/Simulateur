@@ -104,7 +104,7 @@ Vérifier en particulier :
 
 ### 0.5 Outil verrouillé (classe C) : migrer d'abord
 
-Un outil de `anneeAMigrer` ne s'enrichit pas. Il se **migre**, dans une PR dédiée, avant tout chantier éditorial :
+Un outil de `anneeAMigrer` ne s'enrichit pas avant sa migration. Il doit d'abord être **migré** vers son jeu de paramètres. Par défaut, cette migration est livrée dans une PR dédiée avant tout chantier éditorial. Une exception peut toutefois être décidée explicitement pour un chantier unique lorsque migration et enrichissement doivent être livrés ensemble : dans ce cas, la migration doit rester clairement identifiable dans le même diff et être validée par tous les garde-fous de migration avant que l'enrichissement ne soit considéré comme terminé.
 
 1. créer ou compléter le jeu de paramètres correspondant dans `data/parametres.json`, avec source, validité et vérification ;
 2. régénérer et contrôler `public/parametres.js` (`scripts/generate-params.mjs`) ;
@@ -114,7 +114,7 @@ Un outil de `anneeAMigrer` ne s'enrichit pas. Il se **migre**, dans une PR dédi
 6. renseigner `docs/ECHEANCES.md` ;
 7. ne modifier aucun barème au passage : une migration est mécanique, une revalorisation est une autre PR.
 
-L'enrichissement éditorial ne commence qu'une fois cette PR fusionnée.
+L'enrichissement éditorial ne commence normalement qu'une fois la PR de migration fusionnée. Dans l'exception documentée ci-dessus, il peut être livré dans la même PR, mais la partie migration reste traitée comme un prérequis logique et doit être vérifiable séparément.
 
 ### 0.6 Outil à qualifier (classe D)
 
