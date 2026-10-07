@@ -2,6 +2,8 @@
 
 Vérification : 7 octobre 2026.
 
+Les valeurs centralisées dans `data/parametres.json` sont la source de vérité du calculateur.
+
 ## Sources officielles
 
 - [CAF — La prime d’activité augmente en 2026](https://www.caf.fr/allocataires/actualites/actualites-nationales/la-prime-d-activite-augmente-en-2026) : revalorisation au 1er avril 2026 et évolution de la bonification.
