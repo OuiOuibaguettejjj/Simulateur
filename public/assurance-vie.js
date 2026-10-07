@@ -22,7 +22,7 @@
       return "Saisissez toutes les valeurs avec un format numérique valide.";
     }
 
-    const {capital,versement,rendement,frais-versement:feeOnContribution,frais-gestion:feeManagement,annees}=values;
+    const capital=values.capital, versement=values.versement, rendement=values.rendement, feeOnContribution=values["frais-versement"], feeManagement=values["frais-gestion"], annees=values.annees;
     if([capital,versement,feeOnContribution,feeManagement,annees].some(value=>value<0)){
       return "Le capital, les versements, les frais et la durée ne peuvent pas être négatifs.";
     }
