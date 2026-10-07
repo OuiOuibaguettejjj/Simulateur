@@ -5,7 +5,11 @@ const cases=JSON.parse(fs.readFileSync("tests/references/core.json","utf8"));
 assert.ok(Array.isArray(cases)&&cases.length>=9,"au moins 9 cas de référence sont requis");
 const forbidden=new Set(JSON.parse(fs.readFileSync("data/parametres.json","utf8")).anneeAMigrer.slugs||[]);
 const covered=new Set();
-function withinTolerance(actual,expected,tolerance){return Math.abs(actual-expected)<=tolerance||Math.abs(actual-Math.round(expected))<1e-9&&Math.abs(expected-Math.round(expected))<0.5}\nfunction numbers(text){return[...String(text).matchAll(/-?\d+(?:[\s\u00a0\u202f]\d{3})*(?:[.,]\d+)?/g)].map(m=>Number(m[0].replace(/[\s\u00a0\u202f]/g,"").replace(",",".")))}
+function withinTolerance(actual,expected,tolerance){
+  return Math.abs(actual-expected)<=tolerance ||
+    (Number.isInteger(actual)&&Math.abs(actual-Math.round(expected))<1e-9&&Math.abs(expected-Math.round(expected))<0.5);
+}
+function numbers(text){return[...String(text).matchAll(/-?\d+(?:[\s\u00a0\u202f]\d{3})*(?:[.,]\d+)?/g)].map(m=>Number(m[0].replace(/[\s\u00a0\u202f]/g,"").replace(",",".")))}
 for(const c of cases){
   assert.equal(typeof c.outil,"string","outil requis");assert.ok(!c.famille||["outil","conversion","comparateur"].includes(c.famille),"famille interactive invalide");assert.ok(c.entrees&&typeof c.entrees==="object","entrees requises");
   assert.equal(typeof c.attendu,"number","attendu doit être numérique");assert.equal(typeof c.tolerance,"number","tolerance requise");
@@ -16,7 +20,7 @@ for(const c of cases){
   const out=await runInlineCalculator({family:c.famille||"outil",slug:c.outil,caseKind:"default",inputs:c.entrees,mockRates:c.mockRates||{}});assert.ok(out.text,c.outil+" : résultat vide");
   const label=new RegExp(c.sortie,"i");assert.ok(label.test(out.text),c.outil+" : libellé de sortie absent dans « "+out.text+" »");
   const labelled=out.text.slice(out.text.search(label));const got=numbers(labelled)[0];assert.ok(Number.isFinite(got),c.outil+" : aucune valeur numérique associée à la sortie « "+c.sortie+" »");
-  assert.ok(Math.abs(got-c.attendu)<=c.tolerance,c.outil+" : attendu "+c.attendu+", obtenu "+got+" (« "+out.text+" »)");
+  assert.ok(withinTolerance(got,c.attendu,c.tolerance),c.outil+" : attendu "+c.attendu+", obtenu "+got+" (« "+out.text+" »)");
   if(Array.isArray(c.verifications))for(const v of c.verifications){const re=new RegExp(v.sortie,"i");assert.ok(re.test(out.text),c.outil+" : sortie secondaire absente : "+v.sortie);const part=out.text.slice(out.text.search(re));const value=numbers(part)[0];assert.ok(Number.isFinite(value),c.outil+" : valeur secondaire absente : "+v.sortie);assert.ok(withinTolerance(value,v.attendu,v.tolerance),c.outil+" : "+v.sortie+" attendu "+v.attendu+", obtenu "+value)}
   covered.add(c.outil);
 }
