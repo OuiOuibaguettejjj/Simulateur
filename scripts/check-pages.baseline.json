@@ -384,22 +384,6 @@
     "rule": "title"
   },
   {
-    "path": "public/outil/indemnite-licenciement/index.html",
-    "rule": "description"
-  },
-  {
-    "path": "public/outil/indemnite-licenciement/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/indemnite-licenciement/index.html",
-    "rule": "formula"
-  },
-  {
-    "path": "public/outil/indemnite-licenciement/index.html",
-    "rule": "title"
-  },
-  {
     "path": "public/outil/indemnite-precarite/index.html",
     "rule": "description"
   },
