@@ -693,11 +693,11 @@
       "log": "0",
       "bonif": "0"
     },
-    "attendu": 236.28,
+    "attendu": 236.58,
     "tolerance": 0.01,
-    "sortie": "236,28\\s*€\\s*/\\s*mois",
+    "sortie": "236,58\\s*€\\s*/\\s*mois",
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2882",
     "verificationSource": "https://www.caf.fr/allocataires/actualites/actualites-nationales/les-reponses-vos-questions-sur-levolution-de-la-prime-dactivite-en-2026",
-    "note": "Régression de saisie : la virgule décimale est acceptée ; 638,28 + 59,85 % × 1 000,50 − 1 000,50 = 236,28 €."
+    "note": "Régression de saisie : la virgule décimale est acceptée ; 638,28 + 59,85 % × 1 000,50 − 1 000,50 = 236,58 € après arrondi à l’euro-cent."
   }
 ]
