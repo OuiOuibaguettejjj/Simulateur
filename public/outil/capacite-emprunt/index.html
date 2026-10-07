@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="google-adsense-account" content="ca-pub-2924580037451268">
-<title>Calculateur capacité d’emprunt immobilier 2026 | Simulateur</title>
-<meta name="description" content="Calculez votre capacité d’emprunt immobilier en 2026 : mensualité maximale, capital empruntable, taux d’effort, apport et comparaison 15, 20 ou 25 ans.">
+<title>Capacité d’emprunt immobilier : simulateur 2026 | Simulateur</title>
+<meta name="description" content="Calculez votre capacité d’emprunt immobilier en 2026 selon vos revenus, charges, taux, durée et assurance. Comparez plusieurs durées.">
 <link rel="canonical" href="https://simulateur.site/outil/capacite-emprunt/">
 <link rel="stylesheet" href="/styles.css">
 <script src="/parametres.js"></script>
@@ -63,6 +63,93 @@
 .cap-related{margin-top:42px}
 
 .cap-related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+/* Capacité d’emprunt — direction artistique */
+.cap-shell{max-width:920px}
+.cap-hero{
+  border-radius:24px 24px 0 0;
+  padding:48px 48px 36px;
+  background:
+    radial-gradient(circle at 88% 12%,rgba(255,178,159,.12),transparent 28%),
+    linear-gradient(135deg,#17483d 0%,#123a32 58%,#102f2a 100%);
+  box-shadow:0 18px 45px rgba(23,23,19,.12);
+}
+.cap-hero:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+  background-size:28px 28px;
+  mask-image:linear-gradient(to right,transparent 0%,black 45%,transparent 100%);
+}
+.cap-hero .eyebrow{position:relative;z-index:1;font-weight:950;letter-spacing:.12em}
+.cap-trust span{backdrop-filter:blur(6px)}
+.cap-tool{
+  padding:32px 48px 44px;
+  background:var(--card);
+  box-shadow:0 24px 60px rgba(23,23,19,.10);
+}
+.cap-grid{gap:20px}
+.cap-panel{
+  padding:26px;
+  background:#fbfaf6;
+  box-shadow:0 2px 0 rgba(23,23,19,.05);
+}
+.cap-field input{
+  border-color:#c9c2b6;
+  background:#fff;
+  transition:border-color .16s,box-shadow .16s,transform .16s;
+}
+.cap-field input:focus{
+  transform:translateY(-1px);
+  box-shadow:0 0 0 3px var(--accent-soft);
+}
+.cap-action .button-main{
+  width:100%;
+  border-radius:12px;
+}
+.cap-result{
+  position:relative;
+  overflow:hidden;
+  box-shadow:inset 4px 0 0 var(--accent2),0 10px 28px rgba(23,23,19,.07);
+}
+.cap-result:before{
+  content:"";
+  position:absolute;
+  width:180px;height:180px;
+  right:-85px;top:-85px;
+  border-radius:50%;
+  background:rgba(23,72,61,.08);
+}
+.cap-result .result-main strong{font-size:clamp(2.2rem,4.5vw,3.2rem)}
+.cap-stats{grid-template-columns:1fr 1fr}
+.cap-stat{transition:transform .15s,box-shadow .15s}
+.cap-stat:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(23,23,19,.06)}
+.cap-comparison{
+  margin-top:26px;
+  padding-top:24px;
+  border-top:1px solid var(--line);
+}
+.cap-table{
+  box-shadow:0 3px 0 rgba(23,23,19,.06);
+}
+.cap-table tbody tr{transition:background .12s}
+.cap-table tbody tr:hover{background:#f7f4ec}
+.cap-table .highlight{box-shadow:inset 3px 0 0 var(--accent2)}
+.cap-benchmarks{margin-top:20px}
+.cap-table-note{
+  margin:10px 0 0;
+  color:var(--muted);
+  font-size:.78rem;
+  line-height:1.5;
+}
+.cap-content{max-width:920px;margin-top:56px}
+.cap-content .content-intro{padding-top:26px}
+.cap-content .formula{margin-top:22px}
+.cap-content .calculator-data{margin-top:12px}
+.cap-related{margin-top:48px}
+@media(min-width:761px){
+  .cap-result{min-height:330px}
+}
 @media(max-width:760px){
  .cap-hero{padding:32px 22px 28px}.cap-hero:after{font-size:9rem;right:-8px}
  .cap-tool{padding:26px 20px 32px}.cap-grid{grid-template-columns:1fr}.cap-form-grid{grid-template-columns:1fr}
@@ -70,17 +157,17 @@
 }
 @media(max-width:520px){.cap-related-grid{grid-template-columns:1fr}.cap-table{font-size:.8rem}.cap-table th,.cap-table td{padding:9px 7px}}
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Quelle capacité d’emprunt immobilier avez-vous ?","url":"https://simulateur.site/outil/capacite-emprunt/","description":"Calculez votre capacité d’emprunt immobilier en 2026 : mensualité maximale, capital empruntable, taux d’effort, apport et comparaison 15, 20 ou 25 ans.","inLanguage":"fr-FR","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"price":"0","priceCurrency":"EUR"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Immobilier","item":"https://simulateur.site/immobilier/"},{"@type":"ListItem","position":3,"name":"Quelle capacité d’emprunt immobilier avez-vous ?","item":"https://simulateur.site/outil/capacite-emprunt/"}]}</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta property="og:type" content="website"><meta property="og:site_name" content="Simulateur"><meta property="og:locale" content="fr_FR"><meta property="og:title" content="Calculateur capacité d’emprunt immobilier 2026 | Simulateur"><meta property="og:description" content="Calculez votre capacité d’emprunt immobilier en 2026 : mensualité maximale, capital empruntable, taux d’effort, apport et comparaison 15, 20 ou 25 ans."><meta property="og:url" content="https://simulateur.site/outil/capacite-emprunt/"><meta name="twitter:card" content="summary"></head>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Capacité d’emprunt immobilier : combien pouvez-vous emprunter ?","url":"https://simulateur.site/outil/capacite-emprunt/","description":"Calculez votre capacité d’emprunt immobilier en 2026 selon vos revenus, charges, taux, durée et assurance. Comparez plusieurs durées.","inLanguage":"fr-FR","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"price":"0","priceCurrency":"EUR"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Immobilier","item":"https://simulateur.site/immobilier/"},{"@type":"ListItem","position":3,"name":"Capacité d’emprunt immobilier : combien pouvez-vous emprunter ?","item":"https://simulateur.site/outil/capacite-emprunt/"}]}</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta property="og:type" content="website"><meta property="og:site_name" content="Simulateur"><meta property="og:locale" content="fr_FR"><meta property="og:title" content="Capacité d’emprunt immobilier : simulateur 2026 | Simulateur"><meta property="og:description" content="Calculez votre capacité d’emprunt immobilier en 2026 selon vos revenus, charges, taux, durée et assurance. Comparez plusieurs durées."><meta property="og:url" content="https://simulateur.site/outil/capacite-emprunt/"><meta name="twitter:card" content="summary"></head>
 <body><header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header>
 <main>
 <div class="wrap">
 <div class="cap-shell">
-<div class="breadcrumb"><a href="/">Accueil</a> · <a href="/immobilier/">Immobilier</a> · Quelle capacité d’emprunt immobilier avez-vous ?</div>
+<div class="breadcrumb"><a href="/">Accueil</a> · <a href="/immobilier/">Immobilier</a> · Capacité d’emprunt immobilier : combien pouvez-vous emprunter ?</div>
 <section class="tool cap-hero">
 <div class="eyebrow">IMMOBILIER · ESTIMATION</div>
-<h1>Quelle capacité d’emprunt immobilier avez-vous ?</h1>
+<h1>Capacité d’emprunt immobilier : combien pouvez-vous emprunter ?</h1>
 <p class="lead tool-intro">Estimez le montant que vous pourriez emprunter à partir de vos revenus, de vos charges, du taux, de la durée et de l’assurance du prêt.</p>
-<div class="cap-trust"><span>Hypothèse de taux d’effort : 35 %</span><span>Calcul immédiat</span><span>Sans données personnelles</span></div>
+<div class="cap-trust"><span>Taux d’effort maximal du cadre HCSF : <span data-hcsf-effort></span></span><span>Calcul immédiat</span><span>Sans données personnelles</span></div>
 </section>
 
 <section class="cap-tool">
@@ -91,8 +178,8 @@
 <div class="cap-form-grid">
 <div class="field cap-field"><label for="revenus">Revenus mensuels nets avant impôt (€)</label><input id="revenus" type="number" min="1" step="50" value="3500" inputmode="decimal"><small>Salaires, pensions et autres revenus retenus selon votre situation.</small></div>
 <div class="field cap-field"><label for="charges">Crédits et charges mensuels (€)</label><input id="charges" type="number" min="0" step="25" value="0" inputmode="decimal"><small>Charges déjà supportées que vous souhaitez intégrer au calcul.</small></div>
-<div class="field cap-field"><label for="taux">Taux annuel du crédit (%)</label><input id="taux" type="number" min="0" max="20" step=".01" value="3.30" inputmode="decimal"><small>Repère modifiable : 3,30 % correspond au taux moyen des nouveaux crédits à l’habitat hors renégociations en juillet 2026.</small></div>
-<div class="field cap-field"><label for="duree">Durée du prêt (années)</label><input id="duree" type="number" min="1" max="30" step="1" value="25" inputmode="numeric"></div>
+<div class="field cap-field"><label for="taux">Taux annuel du crédit (%)</label><input id="taux" type="number" min="0" max="20" step=".01" value="3.32" inputmode="decimal"><small>Repère modifiable : 3,32 % correspond au taux moyen des nouveaux crédits à l’habitat hors renégociations en août 2026, selon la Banque de France.</small></div>
+<div class="field cap-field"><label for="duree">Durée du prêt (années)</label><input id="duree" type="number" min="1"  step="1" inputmode="numeric"><small>Jusqu’à <span data-hcsf-maturity></span> dans le cadre standard HCSF ; les cas de différé ne sont pas modélisés ici.</small></div>
 <div class="field cap-field"><label for="assurance">Assurance emprunteur (% / an)</label><input id="assurance" type="number" min="0" max="5" step=".01" value=".20" inputmode="decimal"><small>Hypothèse simplifiée appliquée au capital emprunté.</small></div>
 <div class="field cap-field"><label for="apport">Apport disponible (€)</label><input id="apport" type="number" min="0" step="500" value="30000" inputmode="decimal"><small>L’apport augmente votre budget global, mais ne remplace pas l’analyse bancaire.</small></div>
 </div>
@@ -111,7 +198,7 @@
 <h2>Comparer les durées</h2>
 <table class="cap-table" aria-label="Comparaison de capacité d’emprunt selon la durée">
 <thead><tr><th>Durée</th><th>Capital estimé</th><th>Mensualité</th><th>Intérêts + assurance</th></tr></thead>
-<tbody id="comparison"><tr><td colspan="4">Lancez une simulation pour comparer 15, 20 et 25 ans.</td></tr></tbody>
+<tbody id="comparison"><tr><td colspan="4">Lancez une simulation pour comparer 15, 20 ans et la durée maximale standard.</td></tr></tbody>
 </table>
 </div>
 </section>
@@ -120,34 +207,69 @@
 <section class="cap-content content-section">
 <div class="content-intro">
 <h2>Comment calculer sa capacité d’emprunt immobilier ?</h2>
-<p>La capacité d’emprunt correspond au capital qu’un ménage peut théoriquement financer avec une mensualité compatible avec ses revenus et ses charges. Ce calculateur part d’une hypothèse de taux d’effort de 35 %, puis transforme la mensualité disponible en capital selon le taux et la durée du prêt.</p>
+<p>La capacité d’emprunt correspond au capital qu’un ménage peut théoriquement financer avec une mensualité compatible avec ses revenus et ses charges. Ce calculateur part du taux d’effort maximal du cadre HCSF, puis transforme la mensualité disponible en capital selon le taux, la durée et l’assurance du prêt.</p>
+<div class="formula">
+<strong>Logique de calcul</strong>
+<p>Mensualité disponible = revenus × <span data-hcsf-effort></span> − charges déjà prises en compte. Le capital est ensuite obtenu en inversant la formule d’une annuité à taux fixe, en intégrant l’assurance selon l’hypothèse saisie.</p><small>Source du cadre : HCSF — conditions d’octroi de crédits immobiliers.</small>
+</div>
+<div class="calculator-data">
+<strong>Données et hypothèses</strong>
+<p>Le seuil affiché et la durée standard maximale de <span data-hcsf-maturity></span> sont issus du cadre HCSF. Le taux de 3,32 % proposé par défaut est un repère de marché Banque de France pour août 2026 ; il reste modifiable. L’assurance est une hypothèse simplifiée exprimée en pourcentage annuel du capital.</p>
+</div>
 </div>
 
-<h2>La règle des 35 %</h2>
-<p>Le HCSF fixe un taux d’effort maximal de principe de 35 % pour les crédits immobiliers. Le taux d’effort prend en compte les charges d’emprunt, assurance comprise. Les établissements disposent toutefois d’une marge de flexibilité et restent libres d’accepter ou de refuser un dossier selon leurs propres critères.</p>
+<h2>La règle du taux d’effort pour calculer sa capacité d’emprunt</h2>
+<p>Le HCSF fixe un taux d’effort maximal de principe de <span data-hcsf-effort></span> pour les crédits immobiliers. Le taux d’effort correspond au rapport entre les charges d’emprunt et les revenus, avec l’assurance emprunteur prise en compte. Une marge de flexibilité existe pour une partie de la production de crédits, et une banque reste libre d’accepter ou de refuser un dossier.</p>
+
+<h2>Quel salaire pour emprunter 200 000 € ?</h2>
+<p>Il n’existe pas de salaire minimum universel : le montant dépend aussi des charges déjà supportées, du taux, de la durée et de l’assurance. À titre de repère, avec <strong>aucune charge existante</strong>, un taux de <strong>3,32 %</strong> et une assurance de <strong>0,20 % par an</strong>, voici une estimation du capital empruntable selon le revenu mensuel net avant impôt.</p>
+<div class="cap-benchmarks">
+<table class="cap-table" aria-label="Capacité d’emprunt selon le revenu mensuel">
+<thead><tr><th>Revenus / mois</th><th>15 ans</th><th>20 ans</th><th><span data-hcsf-maturity></span></th></tr></thead>
+<tbody>
+<tr><th scope="row">2 000 €</th><td>96 853 €</td><td>119 165 €</td><td>137 880 €</td></tr>
+<tr><th scope="row">2 500 €</th><td>121 067 €</td><td>148 957 €</td><td>172 350 €</td></tr>
+<tr><th scope="row">3 000 €</th><td>145 280 €</td><td>178 748 €</td><td>206 820 €</td></tr>
+<tr class="highlight"><th scope="row">3 500 €</th><td>169 493 €</td><td>208 539 €</td><td>241 290 €</td></tr>
+<tr><th scope="row">4 000 €</th><td>193 707 €</td><td>238 330 €</td><td>275 760 €</td></tr>
+<tr><th scope="row">5 000 €</th><td>242 133 €</td><td>297 913 €</td><td>344 699 €</td></tr>
+</tbody>
+</table>
+<p class="cap-table-note">Repères indicatifs calculés avec les mêmes hypothèses que la valeur par défaut. Ils ne tiennent pas compte d’autres charges, du profil de revenus ni des frais d’acquisition.</p>
+<p>Pour <strong>200 000 € empruntés</strong>, avec ces mêmes hypothèses et aucune charge existante, le revenu mensuel nécessaire est d’environ :</p>
+<table class="cap-table" aria-label="Revenu mensuel nécessaire pour emprunter 200 000 euros">
+<thead><tr><th>Durée</th><th>Mensualité estimée</th><th>Revenu mensuel à 35 %</th></tr></thead>
+<tbody>
+<tr><th scope="row">15 ans</th><td>1 445 €</td><td>4 130 €</td></tr>
+<tr class="highlight"><th scope="row">20 ans</th><td>1 175 €</td><td>3 357 €</td></tr>
+<tr><th scope="row"><span data-hcsf-maturity></span></th><td>1 015 €</td><td>2 901 €</td></tr>
+</tbody>
+</table>
+</div>
 
 <h2>Pourquoi la durée change-t-elle votre capacité ?</h2>
-<p>À taux identique, allonger la durée réduit la mensualité nécessaire pour un même capital et peut donc augmenter le capital théorique accessible. En contrepartie, le coût total du crédit augmente généralement, car les intérêts sont payés sur une période plus longue. Le tableau ci-dessus permet de visualiser ce compromis.</p>
+<p>À taux identique, allonger la durée réduit la mensualité nécessaire pour un même capital et peut donc augmenter le capital théorique accessible. En contrepartie, le coût total du crédit augmente généralement, car les intérêts sont payés plus longtemps. Le tableau de simulation permet de comparer directement ce compromis.</p>
 
-<h2>Quel taux utiliser en 2026 ?</h2>
-<p>Pour donner un point de départ, le taux moyen des nouveaux crédits à l’habitat hors renégociations aux particuliers était de 3,30 % en juillet 2026 selon la Banque de France. Il s’agit d’une moyenne de marché hors frais et assurance : votre taux réel peut être différent selon la durée, le profil et les caractéristiques du financement.</p>
+<h2>Quel taux utiliser pour une estimation en 2026 ?</h2>
+<p>Pour donner un point de départ, le taux moyen des nouveaux crédits à l’habitat hors renégociations était de <strong>3,32 % en août 2026</strong> selon la Banque de France. Il s’agit d’un taux moyen de marché hors frais et assurance : votre taux réel peut être différent selon la durée, le profil et les caractéristiques du financement.</p>
+
+<h2>Quel rôle joue l’apport personnel ?</h2>
+<p>L’apport n’augmente pas le capital empruntable calculé à partir de vos revenus et charges. Il s’ajoute ici au capital estimé pour donner un <strong>budget de financement indicatif</strong>. Ce montant ne doit pas être confondu avec le prix maximal du bien : les frais d’acquisition, les travaux et les autres dépenses du projet peuvent réduire le budget réellement disponible.</p>
 
 <h2>Ce que ce calculateur ne peut pas décider à la place d’une banque</h2>
-<p>Le résultat ne constitue ni une offre de crédit ni une promesse de financement. Une banque peut examiner notamment la stabilité des revenus, leur nature, le reste à vivre, les autres engagements, la composition du foyer, l’apport, l’assurance et ses propres règles d’octroi. Le calculateur fournit donc un ordre de grandeur, pas une décision de solvabilité.</p>
-
-<h2>Questions fréquentes</h2>
+<p>Le résultat ne constitue ni une offre de crédit ni une promesse de financement. Une banque peut examiner notamment la stabilité et la nature des revenus, les autres engagements, le reste à vivre, la composition du foyer, l’apport, l’assurance et ses propres critères d’octroi. Le calculateur fournit donc un ordre de grandeur, pas une décision de solvabilité.</p>
 <section class="calculator-faq cap-faq" aria-labelledby="faq-title">
 <h2 id="faq-title">FAQ</h2>
 <details><summary>Quel salaire faut-il pour emprunter 200 000 € ?</summary><div class="calculator-faq-answer"><p>Il n’existe pas un salaire unique : la réponse dépend du taux, de la durée, de l’assurance et des charges déjà supportées. Utilisez les champs ci-dessus pour obtenir une estimation personnalisée.</p></div></details>
 <details><summary>L’apport est-il inclus dans la capacité d’emprunt ?</summary><div class="calculator-faq-answer"><p>Non. Le capital empruntable correspond au financement par crédit. L’apport est affiché séparément afin d’estimer un budget global théorique, sans préjuger des frais d’acquisition ni de la décision de la banque.</p></div></details>
-<details><summary>Le taux d’effort de 35 % garantit-il l’obtention d’un prêt ?</summary><div class="calculator-faq-answer"><p>Non. Le seuil de 35 % est un cadre de référence contraignant pour les établissements, avec une marge de flexibilité réglementaire, mais une banque reste libre de ne pas accorder le financement.</p></div></details>
+<details><summary>Le taux d’effort de <span data-hcsf-effort></span> garantit-il l’obtention d’un prêt ?</summary><div class="calculator-faq-answer"><p>Non. Le seuil de <span data-hcsf-effort></span> est un cadre de référence contraignant pour les établissements, avec une marge de flexibilité réglementaire, mais une banque reste libre de ne pas accorder le financement.</p></div></details>
 <details><summary>Faut-il inclure l’assurance emprunteur ?</summary><div class="calculator-faq-answer"><p>Oui pour une estimation cohérente du coût du financement. Ici, l’assurance est modélisée séparément comme un pourcentage annuel du capital emprunté ; les contrats réels peuvent être calculés selon d’autres modalités.</p></div></details>
 </section>
 
 
 </section>
 </div>
-<section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Outils associés</h2><div class="related-links"><a class="related-link" href="/outil/pret-immobilier/"><strong>Prêt immobilier</strong><span>Calculer mensualité, intérêts et coût total d'un crédit.</span></a><a class="related-link" href="/outil/mensualite-pret/"><strong>Mensualité de prêt</strong><span>Estimer une mensualité de crédit à taux fixe.</span></a><a class="related-link" href="/outil/tableau-amortissement/"><strong>Tableau d'amortissement</strong><span>Voir la répartition du capital et des intérêts.</span></a><a class="related-link" href="/outil/frais-de-notaire/"><strong>Frais de notaire</strong><span>Estimer les frais liés à l'achat d'un bien immobilier.</span></a></div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="/immobilier/">Immobilier</a>.</p></div></section><p class="source-links">Sources officielles : <a href="https://www.economie.gouv.fr/particuliers/gerer-mon-argent/emprunter-et-sassurer/credit-immobilier-comment-ca-marche">Économie.gouv.fr — crédit immobilier</a>, <a href="https://www.economie.gouv.fr/hcsf/mesures/mesure-relative-loctroi-de-credits-immobiliers">HCSF — conditions d’octroi</a> et <a href="https://www.banque-france.fr/fr/statistiques/credit/credits-aux-particuliers-2026-07">Banque de France — crédits aux particuliers, juillet 2026</a>.</p>
+<section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Outils associés</h2><div class="related-links"><a class="related-link" href="/outil/pret-immobilier/"><strong>Prêt immobilier</strong><span>Calculer mensualité, intérêts et coût total d'un crédit.</span></a><a class="related-link" href="/outil/mensualite-pret/"><strong>Mensualité de prêt</strong><span>Estimer une mensualité de crédit à taux fixe.</span></a><a class="related-link" href="/outil/tableau-amortissement/"><strong>Tableau d'amortissement</strong><span>Voir la répartition du capital et des intérêts.</span></a><a class="related-link" href="/outil/frais-de-notaire/"><strong>Frais de notaire</strong><span>Estimer les frais liés à l'achat d'un bien immobilier.</span></a></div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="/immobilier/">Immobilier</a>.</p></div></section><p class="source-links">Sources officielles : <a href="https://www.economie.gouv.fr/particuliers/gerer-mon-argent/emprunter-et-sassurer/credit-immobilier-comment-ca-marche">Économie.gouv.fr — crédit immobilier</a>, <a href="https://www.economie.gouv.fr/hcsf/mesures/mesure-relative-loctroi-de-credits-immobiliers">HCSF — conditions d’octroi</a> et <a href="https://www.banque-france.fr/fr/statistiques/credit/credits-aux-particuliers-2026-08">Banque de France — crédits aux particuliers, août 2026</a>.</p>
 </main><footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer>
 
 <script>
@@ -156,6 +278,11 @@
   const euro=v=>Number(v).toLocaleString("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:2});
   const num=v=>Number(v).toLocaleString("fr-FR",{maximumFractionDigits:2});
   const PARAMS=window.Parametres.get("capacite-emprunt").values;
+
+  document.querySelectorAll("[data-hcsf-effort]").forEach(function(el){ el.textContent=PARAMS.tauxEffortMax+" %"; });
+  document.querySelectorAll("[data-hcsf-maturity]").forEach(function(el){ el.textContent=PARAMS.maturiteMax+" ans"; });
+  $("duree").max=PARAMS.maturiteMax;
+  if(!$("duree").value) $("duree").value=PARAMS.maturiteMax;
 
   function read(){
     return {
@@ -173,7 +300,7 @@
       Number.isFinite(d.rate) && Number.isFinite(d.years) &&
       Number.isFinite(d.insurance) && Number.isFinite(d.apport) &&
       d.revenus>0 && d.charges>=0 && d.rate>=0 && d.rate<=20 &&
-      d.years>=1 && d.years<=30 && d.insurance>=0 && d.insurance<=5 &&
+      d.years>=1 && d.years<=PARAMS.maturiteMax && d.insurance>=0 && d.insurance<=5 &&
       d.apport>=0;
   }
 
@@ -192,25 +319,32 @@
     const insurance=capital*insuranceRate;
     const total=(principal+insurance)*n;
     const interest=Math.max(0,principal*n-capital);
-    return {capital,principal,insurance,total,interest,cost:interest+insurance*n};
+    const cost=interest+insurance*n;
+    if(!Number.isFinite(capital)||!Number.isFinite(principal)||!Number.isFinite(insurance)||!Number.isFinite(total)||!Number.isFinite(interest)||!Number.isFinite(cost)) return null;
+    return {capital,principal,insurance,total,interest,cost};
   }
 
   function render(){
     const d=read();
     if(!valid(d)){
-      $("result").innerHTML='<div class="result-kicker">Votre estimation</div><div class="result-main"><strong>Vérifiez vos données</strong></div><p class="cap-status">Saisissez des valeurs positives et une durée comprise entre 1 et 30 ans.</p>';
+      $("result").innerHTML='<div class="result-kicker">Votre estimation</div><div class="result-main"><strong>Vérifiez vos données</strong></div><p class="cap-status">Saisissez des valeurs positives et une durée comprise entre 1 et la durée maximale standard.</p>';
       $("comparison").innerHTML='<tr><td colspan="4">Corrigez les données pour afficher la comparaison.</td></tr>';
       return;
     }
 
     const available=d.revenus*PARAMS.tauxEffortMax/100-d.charges;
     if(available<=0){
-      $("result").innerHTML='<div class="result-kicker">Votre estimation</div><div class="result-main"><strong>0 €</strong></div><p class="cap-status">Aucune mensualité n’est disponible avec les charges indiquées dans cette hypothèse de 35 %.</p>';
+      $("result").innerHTML='<div class="result-kicker">Votre estimation</div><div class="result-main"><strong>0 €</strong></div><p class="cap-status">Aucune mensualité n’est disponible avec les charges indiquées dans cette hypothèse de ' + PARAMS.tauxEffortMax + ' %.</p>';
       $("comparison").innerHTML='<tr><td colspan="4">Aucun capital disponible avec les données saisies.</td></tr>';
       return;
     }
 
     const s=scenario(d,d.years);
+    if(!s || !Number.isFinite(s.capital) || !Number.isFinite(s.principal) || !Number.isFinite(s.insurance) || !Number.isFinite(s.interest)){
+      $("result").innerHTML='<div class="result-kicker">Votre estimation</div><div class="result-main"><strong>Résultat impossible</strong></div><p class="cap-status">Les montants saisis sont trop élevés pour produire une estimation fiable. Réduisez les valeurs puis relancez le calcul.</p>';
+      $("comparison").innerHTML='<tr><td colspan="4">Réduisez les montants saisis pour afficher la comparaison.</td></tr>';
+      return;
+    }
     const budget=s.capital+d.apport;
     const ratio=((d.charges+s.principal+s.insurance)/d.revenus)*100;
     const meter=Math.min(100,Math.max(0,ratio/PARAMS.tauxEffortMax*100));
@@ -219,15 +353,16 @@
       '<div class="result-kicker">Capital empruntable estimé</div>'+
       '<div class="result-main"><strong>'+euro(s.capital)+'</strong></div>'+
       '<div class="cap-stats">'+
-        '<div class="cap-stat"><small>Mensualité totale</small><strong>'+euro(s.principal+s.insurance)+'</strong></div>'+
-        '<div class="cap-stat"><small>Budget avec apport</small><strong>'+euro(budget)+'</strong></div>'+
+        '<div class="cap-stat"><small>Mensualité maximale</small><strong>'+euro(available)+'</strong></div>'+
+        '<div class="cap-stat"><small>Mensualité du prêt</small><strong>'+euro(s.principal+s.insurance)+'</strong></div>'+
+        '<div class="cap-stat"><small>Budget de financement</small><strong>'+euro(budget)+'</strong></div>'+
         '<div class="cap-stat"><small>Taux d’effort simulé</small><strong>'+num(ratio)+' %</strong></div>'+
         '<div class="cap-stat"><small>Intérêts estimés</small><strong>'+euro(s.interest)+'</strong></div>'+
       '</div>'+
       '<div class="cap-meter" aria-label="Taux d’effort simulé de '+num(ratio)+' % sur '+PARAMS.tauxEffortMax+' %"><span style="width:'+meter+'%"></span></div>'+
       '<div class="cap-status">Hypothèse de ' + PARAMS.tauxEffortMax + ' % respectée. Assurance estimée : '+euro(s.insurance)+' / mois.</div>';
 
-    $("comparison").innerHTML=[15,20,25].map(years=>{
+    $("comparison").innerHTML=[15,20,PARAMS.maturiteMax].map(years=>{
       const x=scenario(d,years);
       const cls=years===d.years?' class="highlight"':'';
       return '<tr'+cls+'><td>'+years+' ans'+(years===d.years?' · actuel':'')+'</td><td>'+euro(x.capital)+'</td><td>'+euro(x.principal+x.insurance)+'</td><td>'+euro(x.cost)+'</td></tr>';

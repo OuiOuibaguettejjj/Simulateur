@@ -14,12 +14,12 @@ Dernière vérification : 7 octobre 2026.
 
 ## Taux de marché affiché par défaut
 
-Le taux de 3,30 % actuellement affiché dans la page est une donnée de marché distincte du cadre réglementaire et n’est pas migrée dans le jeu de paramètres par cette PR.
+Le taux de 3,32 % actuellement affiché par défaut dans la page est une donnée de marché distincte du cadre réglementaire et n’est pas stockée dans le jeu de paramètres réglementaires.
 
 La dernière publication Banque de France disponible au 7 octobre 2026 est **Crédits aux particuliers — août 2026**, publiée le 6 octobre 2026 : https://www.banque-france.fr/fr/statistiques/credit/credits-aux-particuliers-2026-08
 
-Cette publication indique 3,32 % pour les nouveaux crédits à l’habitat hors renégociations en août 2026. La valeur 3,30 % actuellement présente dans la page est donc à traiter comme une donnée de marché à actualiser dans un chantier distinct ; elle n’est pas modifiée dans cette PR conformément au principe de séparation des migrations et des revalorisations.
+Cette publication indique 3,32 % pour les nouveaux crédits à l’habitat hors renégociations en août 2026. Cette valeur est utilisée comme repère modifiable dans le calculateur ; elle ne constitue ni un barème réglementaire ni une garantie du taux proposé à un emprunteur.
 
 ## Périmètre
 
-Cette migration centralise uniquement les paramètres HCSF utilisés par le calculateur. Elle ne change pas la formule de capacité, les valeurs par défaut, les limites de saisie ou la présentation éditoriale.
+Le cadre HCSF reste centralisé dans le jeu de paramètres réglementaires. Le taux de marché affiché par défaut est une donnée éditoriale distincte, mise à jour à partir de la dernière publication Banque de France disponible.
