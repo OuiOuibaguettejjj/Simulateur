@@ -3,6 +3,7 @@ const fs = require("node:fs");
 const vm = require("node:vm");
 
 global.window = {};
+vm.runInThisContext(fs.readFileSync("public/parametres.js","utf8"),{filename:"public/parametres.js"});
 vm.runInThisContext(fs.readFileSync("public/impot.js","utf8"),{filename:"public/impot.js"});
 const {ImpotEngine}=global.window;
 assert.ok(ImpotEngine,"ImpotEngine must be available");
