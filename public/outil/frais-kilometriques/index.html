@@ -88,7 +88,7 @@ updateFields();
     let t, f;
     if(v==='voiture'){
       t=V.parCV[cv]; if(!t)return'Puissance fiscale invalide.';
-      f=d<=V.palier1?d*t.jusqua5000:d<=V.palier2?d*t.milieu+t.forfaitMilieu:d*t.auDela;
+      f=d<=V.palier1?d*t.jusqua5000:d<=V.palier2?d*t.milieu+t.forfaitMilieu:d*t.auDela; if(e)f*=V.majorationElectrique;
       if(e)f*=1.2;
     }else if(v==='moto'){
       t=(e?V.motoParCVElectrique:V.motoParCV)[cv]; if(!t)return'Puissance fiscale invalide.';
