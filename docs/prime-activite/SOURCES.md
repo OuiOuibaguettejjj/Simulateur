@@ -19,3 +19,5 @@ Les valeurs centralisées dans `data/parametres.json` sont la source de vérité
 ## Périmètre de la migration
 
 Cette PR centralise uniquement les valeurs réglementaires déjà utilisées par le calculateur. Elle ne cherche pas à reproduire l’intégralité du calcul CAF et ne modifie pas le périmètre fonctionnel de l’estimation. L’enrichissement du calculateur (interface, paramètres facultatifs, calcul trimestriel, contenu et design) sera traité dans une PR distincte après fusion de la migration.
+
+- Formule vérifiée : montant forfaitaire + 59,85 % des revenus professionnels + bonifications individuelles − ressources prises en compte du foyer.
