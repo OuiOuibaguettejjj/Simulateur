@@ -16,7 +16,8 @@ Vérification effectuée le 7 octobre 2026.
 
 ## Limites du jeu de paramètres
 - Le jeu ne modélise pas les dispositions conventionnelles ou contractuelles plus favorables.
-- Le calculateur actuel ne traite pas les situations nécessitant une reconstitution détaillée du salaire de référence, notamment certaines périodes de temps partiel ou les règles particulières applicables aux primes.
+- Le calculateur traite la comparaison des moyennes 12 mois / 3 mois et permet d'isoler une prime annuelle ou exceptionnelle pour appliquer la prise en compte proportionnelle prévue par la règle des 3 mois.
+- Il ne reconstitue pas les situations nécessitant un calcul détaillé des périodes de temps partiel, des absences ou d'autres rémunérations particulières.
 - Le calculateur reste une estimation du minimum légal et ne remplace pas la vérification de la convention collective applicable.
 
 ## Paramètres
