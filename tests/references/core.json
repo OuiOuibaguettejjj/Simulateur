@@ -136,7 +136,7 @@
       "resident": "yes",
       "majoration": "no",
       "housing": "none",
-      "m1": "0",
+        "m1": "0",
       "m2": "0",
       "m3": "0"
     },
