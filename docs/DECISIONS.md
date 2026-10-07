@@ -187,3 +187,10 @@ Le calculateur `pret-immobilier` ne dépend pas d’un barème réglementaire da
 Le calculateur conserve son périmètre de simulation mathématique et ajoute deux scénarios directement utiles à l’intention de recherche : comparaison de taux autour du taux saisi et calcul optionnel du capital emprunté à partir du prix du bien et de l’apport. Ces fonctions enrichissent la comparaison sans introduire de barème de taux de marché, de TAEG approximatif ou de logique PTZ dans cette page.
 
 Lorsque le prix du bien et l’apport sont renseignés, ils déterminent le capital simulé ; le champ « montant emprunté » devient alors facultatif. Le capital saisi reste utilisé lorsque le prix du bien n’est pas renseigné.
+
+
+## 2026-10-07 — Migration des paramètres du calculateur de capacité d’emprunt
+
+Le calculateur `capacite-emprunt` était encore verrouillé dans `data/parametres.json > anneeAMigrer.slugs`. Cette PR constitue uniquement la migration préalable imposée par le processus d’enrichissement : le cadre HCSF utilisé par le calcul est désormais centralisé dans `data/parametres.json` et diffusé par `public/parametres.js`.
+
+Le jeu centralise le taux d’effort maximal de 35 % et la maturité maximale de 25 ans. La formule, les valeurs par défaut, les limites de saisie et la présentation de la page ne sont pas enrichies dans cette PR. Le taux de marché affiché par défaut est volontairement laissé hors du jeu réglementaire et documenté séparément, car son actualisation constitue un chantier distinct.
