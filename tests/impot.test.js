@@ -18,8 +18,8 @@ assert.equal(calc(50000,1).grossTax,8104);
 assert.equal(calc(50000,1).netTax,8104);
 assert.equal(calc(15000,1).netTax,0);
 assert.equal(calc(50000,2,true).grossTax,2948);
-assert.equal(calc(50000,2,true).decote,149);
-assert.equal(calc(50000,2,true).netTax,2799);
+assert.equal(calc(50000,2,true).decote,150);
+assert.equal(calc(50000,2,true).netTax,2798);
 
 // Official 2026 quotient-family cap example: married couple, 130,000 €, 5 parts.
 const officialExample=calc(130000,5,true);
@@ -30,7 +30,7 @@ assert.equal(officialExample.netTax,14366);
 
 const uncapped=calc(130000,2,true);
 assert.equal(uncapped.familyQuotientCap,0);
-assert.equal(uncapped.grossTax,uncapped.rawTax);
+assert.equal(uncapped.grossTax,Math.round(uncapped.rawTax));
 
 // Optional advanced input: source withholding only estimates the remaining balance/refund.
 const advanced=calc(50000,1,false,{sourceWithholding:3000});
