@@ -174,7 +174,7 @@
 <li><strong>Net avant impôt :</strong> estimation du montant restant après cotisations salariales.</li>
 <li><strong>Net après PAS :</strong> estimation après prélèvement à la source ; ce résultat ne doit pas être assimilé à un bulletin de paie réel.</li>
 </ul>
-<p>Le taux de prélèvement à la source dépend de la situation fiscale et est transmis à l'employeur par l'administration. Le taux personnalisé peut notamment être individualisé pour les couples mariés ou pacsés.</p>
+<p>Le taux de prélèvement à la source dépend de la situation fiscale et est transmis à l'employeur par l'administration. Pour les couples mariés ou pacsés, le taux individualisé est appliqué par défaut depuis le 1er septembre 2025, sauf option contraire.</p>
 
 <h2>Cadre ou non-cadre : pourquoi le résultat peut-il changer ?</h2>
 <p>Le statut influence certaines cotisations et contributions. Le convertisseur Urssaf distingue notamment le statut cadre et prend en compte la retraite complémentaire et les contributions associées dans son calcul détaillé.</p>
@@ -217,7 +217,6 @@ window.TOOL={calc:function(){
   if(!Number.isFinite(pas)||pas<0||pas>100)return'<div class="salary-error" role="alert"><strong>Taux de PAS invalide.</strong><p>Saisissez un taux compris entre 0 et 100 %.</p></div>';
   if(!Number.isFinite(rate)||rate<0||rate>40)return'<div class="salary-error" role="alert"><strong>Taux de cotisations invalide.</strong><p>Saisissez un taux compris entre 0 et 40 %.</p></div>';
   if(taxableRaw!==""&&(!Number.isFinite(taxable)||taxable<=0))return'<div class="salary-error" role="alert"><strong>Revenu net imposable invalide.</strong><p>Saisissez un montant mensuel strictement positif.</p></div>';
-  if(pas>0&&taxableRaw===""){}
   const monthlyInput=periode==="annuel"?montant/12:montant;
   const factor=1-rate/100;
   let brut,net;
