@@ -98,7 +98,7 @@ updateFields();
     }
     const legacyMode=rawV==='normal'||rawV==='electrique';
     const displayed=legacyMode?f:Math.floor(f);
-    const label=legacyMode?'majoration électrique de 20 % incluse.':(e?'véhicule 100 % électrique':'véhicule non électrique')+'.';
+    const label=legacyMode?'majoration électrique de 20 % incluse.':'majoration électrique de 20 % incluse'+'.';
     return'<strong>'+this.euro(displayed)+'</strong> de frais kilométriques estimés<br><small>Barème '+P.year+' · '+label+'</small>';
   }
 };</script>
