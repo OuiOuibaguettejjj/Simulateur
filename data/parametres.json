@@ -186,7 +186,7 @@
         "url": "https://www.impots.gouv.fr/www2/fichiers/documentation/brochure/ir_2026/pdf_som/21-calcul_impot_369a382.pdf"
       },
       "effectiveFrom": "2026-01-01",
-      "effectiveTo": "2026-12-31",
+      "effectiveTo": "2027-03-31",
       "verifiedOn": "2026-10-07",
       "notes": "Barème de l'impôt 2026 sur les revenus 2025, plafonnement général du quotient familial et décote vérifiés sur la documentation officielle impots.gouv.fr. Le calculateur reste volontairement simplifié et ne traite pas les réductions/crédits d'impôt ni les situations particulières.",
       "values": {
