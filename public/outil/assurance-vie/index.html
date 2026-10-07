@@ -17,12 +17,12 @@
 .assurance-vie-hero{padding:42px 46px 34px;background:linear-gradient(135deg,#17483d,#102f2a);color:#fff;position:relative;overflow:hidden}
 .assurance-vie-hero:after{content:"€";position:absolute;right:35px;top:-60px;font-size:15rem;font-weight:950;line-height:1;color:rgba(255,255,255,.05);transform:rotate(8deg)}
 .assurance-vie-hero .eyebrow{color:#ffb29f}
-.assurance-vie-hero h1{position:relative;z-index:1;max-width:760px;margin:0 0 14px;font-size:clamp(2.8rem,6vw,5rem);line-height:.93;letter-spacing:-.075em}
+.assurance-vie-title{position:relative;z-index:1;max-width:760px;margin:0 0 14px;font-size:clamp(2.8rem,6vw,5rem);line-height:.93;letter-spacing:-.075em}
 .assurance-vie-hero .tool-intro{position:relative;z-index:1;color:#dbe6df;max-width:680px;font-size:1.06rem;margin:0}
 .assurance-vie-badges{position:relative;z-index:1;display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
 .assurance-vie-badges span{font-size:.75rem;font-weight:800;padding:7px 10px;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:rgba(255,255,255,.07)}
 .assurance-vie-form{padding:36px 46px 42px}
-.assurance-vie-form h2{margin:0 0 6px;font-size:1.35rem;letter-spacing:-.035em}
+.assurance-vie-form-title{margin:0 0 6px;font-size:1.35rem;letter-spacing:-.035em}
 .assurance-vie-form .form-intro{margin:0 0 22px;color:var(--muted);font-size:.9rem}
 .assurance-vie-form .row{margin-bottom:0}
 .assurance-vie-form .field-help{margin:7px 0 0;color:var(--muted);font-size:.78rem;line-height:1.45}
@@ -41,7 +41,7 @@
 .assurance-vie-content .limit-note p{margin:0;color:#4f554f}
 @media(max-width:650px){
   .assurance-vie-hero{padding:32px 22px 28px}
-  .assurance-vie-hero h1{font-size:3rem}
+  .assurance-vie-title{font-size:3rem}
   .assurance-vie-hero:after{right:-5px;font-size:9rem}
   .assurance-vie-form{padding:27px 20px 32px}
   .assurance-vie-content{margin-top:38px}
@@ -66,14 +66,14 @@
 <section class="tool assurance-vie-shell">
   <div class="assurance-vie-hero">
     <div class="eyebrow">SIMULATEUR D’ÉPARGNE</div>
-    <h1>Simulateur assurance-vie</h1>
+    <h1 class="assurance-vie-title">Simulateur assurance-vie</h1>
     <p class="tool-intro">Projetez le capital que vous pourriez constituer selon vos versements, une hypothèse de rendement et les frais du contrat.</p>
     <div class="assurance-vie-badges" aria-label="Caractéristiques de la simulation">
       <span>Capitalisation mensuelle</span><span>Frais sur versement</span><span>Frais de gestion</span><span>Hors fiscalité</span>
     </div>
   </div>
   <div class="assurance-vie-form">
-    <h2>Vos hypothèses</h2>
+    <h2 class="assurance-vie-form-title">Vos hypothèses</h2>
     <p class="form-intro">Modifiez les valeurs d’exemple pour obtenir une projection adaptée à votre situation.</p>
     <div class="row">
       <div class="field"><label for="capital">Capital initial (€)</label><input id="capital" type="number" min="0" step="0.01" value="10000" inputmode="decimal" autocomplete="off" aria-describedby="capital-help"><p id="capital-help" class="field-help">Montant placé au départ.</p></div>
