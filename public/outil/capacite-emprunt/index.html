@@ -8,6 +8,7 @@
 <meta name="description" content="Calculez votre capacité d’emprunt immobilier en 2026 : mensualité maximale, capital empruntable, taux d’effort, apport et comparaison 15, 20 ou 25 ans.">
 <link rel="canonical" href="https://simulateur.site/outil/capacite-emprunt/">
 <link rel="stylesheet" href="/styles.css">
+<script src="/parametres.js"></script>
 
 
 <style>
@@ -79,7 +80,7 @@
 <div class="eyebrow">IMMOBILIER · ESTIMATION</div>
 <h1>Quelle capacité d’emprunt immobilier avez-vous ?</h1>
 <p class="lead">Estimez le montant que vous pourriez emprunter à partir de vos revenus, de vos charges, du taux, de la durée et de l’assurance du prêt.</p>
-<div class="cap-trust"><span>Hypothèse de taux d’effort : 35 %</span><span>Calcul immédiat</span><span>Sans données personnelles</span></div>
+<div class="cap-trust"><span>Hypothèse de taux d’effort : ' + params.tauxEffortMax + ' %</span><span>Calcul immédiat</span><span>Sans données personnelles</span></div>
 </section>
 
 <section class="tool cap-tool">
@@ -183,7 +184,7 @@
     const monthlyRate=d.rate/1200;
     const insuranceRate=d.insurance/1200;
     const f=factor(monthlyRate,n);
-    const available=Math.max(0,d.revenus*.35-d.charges);
+    const available=Math.max(0,d.revenus*params.tauxEffortMax/100-d.charges);
     const capital=available/(f+insuranceRate);
     const principal=capital*f;
     const insurance=capital*insuranceRate;
@@ -194,6 +195,7 @@
 
   function render(){
     const d=read();
+    const params=window.Parametres.get("capacite-emprunt").values;
     if(!valid(d)){
       $("result").innerHTML='<div class="result-kicker">Votre estimation</div><div class="result-main"><strong>Vérifiez vos données</strong></div><p class="cap-status">Saisissez des valeurs positives et une durée comprise entre 1 et 30 ans.</p>';
       $("comparison").innerHTML='<tr><td colspan="4">Corrigez les données pour afficher la comparaison.</td></tr>';
@@ -210,7 +212,7 @@
     const s=scenario(d,d.years);
     const budget=s.capital+d.apport;
     const ratio=((d.charges+s.principal+s.insurance)/d.revenus)*100;
-    const meter=Math.min(100,Math.max(0,ratio/35*100));
+    const meter=Math.min(100,Math.max(0,ratio/params.tauxEffortMax*100));
 
     $("result").innerHTML=
       '<div class="result-kicker">Capital empruntable estimé</div>'+
@@ -222,7 +224,7 @@
         '<div class="cap-stat"><small>Intérêts estimés</small><strong>'+euro(s.interest)+'</strong></div>'+
       '</div>'+
       '<div class="cap-meter" aria-label="Taux d’effort simulé de '+num(ratio)+' % sur 35 %"><span style="width:'+meter+'%"></span></div>'+
-      '<div class="cap-status">Hypothèse de 35 % respectée. Assurance estimée : '+euro(s.insurance)+' / mois.</div>';
+      '<div class="cap-status">Hypothèse de ' + params.tauxEffortMax + ' % respectée. Assurance estimée : '+euro(s.insurance)+' / mois.</div>';
 
     $("comparison").innerHTML=[15,20,25].map(years=>{
       const x=scenario(d,years);
