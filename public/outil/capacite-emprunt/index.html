@@ -63,6 +63,96 @@
 .cap-related{margin-top:42px}
 
 .cap-related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+/* Capacité d’emprunt — direction artistique */
+.cap-shell{max-width:920px}
+.cap-hero{
+  border-radius:24px 24px 0 0;
+  padding:48px 48px 36px;
+  background:
+    radial-gradient(circle at 88% 12%,rgba(255,178,159,.12),transparent 28%),
+    linear-gradient(135deg,#17483d 0%,#123a32 58%,#102f2a 100%);
+  box-shadow:0 18px 45px rgba(23,23,19,.12);
+}
+.cap-hero:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+  background-size:28px 28px;
+  mask-image:linear-gradient(to right,transparent 0%,black 45%,transparent 100%);
+}
+.cap-hero .eyebrow{position:relative;z-index:1;font-weight:950;letter-spacing:.12em}
+.cap-hero h1{font-size:clamp(2.8rem,6vw,5rem);letter-spacing:-.075em}
+.cap-trust span{backdrop-filter:blur(6px)}
+.cap-tool{
+  padding:32px 48px 44px;
+  background:var(--card);
+  box-shadow:0 24px 60px rgba(23,23,19,.10);
+}
+.cap-grid{gap:20px}
+.cap-panel{
+  padding:26px;
+  background:#fbfaf6;
+  box-shadow:0 2px 0 rgba(23,23,19,.05);
+}
+.cap-panel h2{font-size:1.35rem}
+.cap-field input{
+  border-color:#c9c2b6;
+  background:#fff;
+  transition:border-color .16s,box-shadow .16s,transform .16s;
+}
+.cap-field input:focus{
+  transform:translateY(-1px);
+  box-shadow:0 0 0 3px var(--accent-soft);
+}
+.cap-action .button-main{
+  width:100%;
+  border-radius:12px;
+}
+.cap-result{
+  position:relative;
+  overflow:hidden;
+  box-shadow:inset 4px 0 0 var(--accent2),0 10px 28px rgba(23,23,19,.07);
+}
+.cap-result:before{
+  content:"";
+  position:absolute;
+  width:180px;height:180px;
+  right:-85px;top:-85px;
+  border-radius:50%;
+  background:rgba(23,72,61,.08);
+}
+.cap-result .result-main strong{font-size:clamp(2.2rem,4.5vw,3.2rem)}
+.cap-stats{grid-template-columns:1fr 1fr}
+.cap-stat{transition:transform .15s,box-shadow .15s}
+.cap-stat:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(23,23,19,.06)}
+.cap-comparison{
+  margin-top:26px;
+  padding-top:24px;
+  border-top:1px solid var(--line);
+}
+.cap-comparison h2{font-size:1.2rem}
+.cap-table{
+  box-shadow:0 3px 0 rgba(23,23,19,.06);
+}
+.cap-table tbody tr{transition:background .12s}
+.cap-table tbody tr:hover{background:#f7f4ec}
+.cap-table .highlight{box-shadow:inset 3px 0 0 var(--accent2)}
+.cap-reperes{margin-top:20px}
+.cap-table-note{
+  margin:10px 0 0;
+  color:var(--muted);
+  font-size:.78rem;
+  line-height:1.5;
+}
+.cap-content{max-width:920px;margin-top:56px}
+.cap-content .content-intro{padding-top:26px}
+.cap-content .formula{margin-top:22px}
+.cap-content .calculator-data{margin-top:12px}
+.cap-related{margin-top:48px}
+@media(min-width:761px){
+  .cap-result{min-height:330px}
+}
 @media(max-width:760px){
  .cap-hero{padding:32px 22px 28px}.cap-hero:after{font-size:9rem;right:-8px}
  .cap-tool{padding:26px 20px 32px}.cap-grid{grid-template-columns:1fr}.cap-form-grid{grid-template-columns:1fr}
