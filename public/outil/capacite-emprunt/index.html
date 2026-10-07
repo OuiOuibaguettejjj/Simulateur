@@ -236,6 +236,15 @@
 </tbody>
 </table>
 <p class="cap-table-note">Repères indicatifs calculés avec les mêmes hypothèses que la valeur par défaut. Ils ne tiennent pas compte d’autres charges, du profil de revenus ni des frais d’acquisition.</p>
+<p>Pour <strong>200 000 € empruntés</strong>, avec ces mêmes hypothèses et aucune charge existante, le revenu mensuel nécessaire est d’environ :</p>
+<table class="cap-table" aria-label="Revenu mensuel nécessaire pour emprunter 200 000 euros">
+<thead><tr><th>Durée</th><th>Mensualité estimée</th><th>Revenu mensuel à 35 %</th></tr></thead>
+<tbody>
+<tr><th scope="row">15 ans</th><td>1 445 €</td><td>4 130 €</td></tr>
+<tr class="highlight"><th scope="row">20 ans</th><td>1 175 €</td><td>3 357 €</td></tr>
+<tr><th scope="row"><span data-hcsf-maturity></span></th><td>1 015 €</td><td>2 901 €</td></tr>
+</tbody>
+</table>
 </div>
 
 <h2>Pourquoi la durée change-t-elle votre capacité ?</h2>
@@ -310,7 +319,9 @@
     const insurance=capital*insuranceRate;
     const total=(principal+insurance)*n;
     const interest=Math.max(0,principal*n-capital);
-    return {capital,principal,insurance,total,interest,cost:interest+insurance*n};
+    const cost=interest+insurance*n;
+    if(!Number.isFinite(capital)||!Number.isFinite(principal)||!Number.isFinite(insurance)||!Number.isFinite(total)||!Number.isFinite(interest)||!Number.isFinite(cost)) return null;
+    return {capital,principal,insurance,total,interest,cost};
   }
 
   function render(){
@@ -329,6 +340,11 @@
     }
 
     const s=scenario(d,d.years);
+    if(!s || !Number.isFinite(s.capital) || !Number.isFinite(s.principal) || !Number.isFinite(s.insurance) || !Number.isFinite(s.interest)){
+      $("result").innerHTML='<div class="result-kicker">Votre estimation</div><div class="result-main"><strong>Résultat impossible</strong></div><p class="cap-status">Les montants saisis sont trop élevés pour produire une estimation fiable. Réduisez les valeurs puis relancez le calcul.</p>';
+      $("comparison").innerHTML='<tr><td colspan="4">Réduisez les montants saisis pour afficher la comparaison.</td></tr>';
+      return;
+    }
     const budget=s.capital+d.apport;
     const ratio=((d.charges+s.principal+s.insurance)/d.revenus)*100;
     const meter=Math.min(100,Math.max(0,ratio/PARAMS.tauxEffortMax*100));
