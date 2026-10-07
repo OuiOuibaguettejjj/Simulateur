@@ -121,7 +121,7 @@ assert.deepEqual(real("2026-10-07").errors, [], "dépôt conforme à la date de 
 assert.equal(generatedReal, buildParamsJs(data), "public/parametres.js correspond à data/parametres.json");
 assert.ok(rules(real("2027-01-01")).includes("expired"), "le SMIC expire fin 2026");
 assert.ok(real("2027-01-01").errors.some(e => e.message.startsWith("smic")), "l'expiration concerne bien le SMIC");
-assert.ok(real("2027-04-01").errors.filter(e => e.rule === "expired").length === 3, "tous les jeux expirent au 1er avril 2027");
+assert.ok(real("2027-04-01").errors.filter(e => e.rule === "expired").length === 4, "tous les jeux expirent au 1er avril 2027");
 
 /* ---------- Runtime ---------- */
 function load() {
