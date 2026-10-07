@@ -29,7 +29,7 @@
     if(annees>80){
       return "Choisissez une durée inférieure ou égale à 80 ans.";
     }
-    if(feeOnContribution>100 || feeManagement>100){
+    if(rendement<-100 || rendement>100){\n      return "Le rendement doit être compris entre -100 % et 100 %.";\n    }\n    if(feeOnContribution>100 || feeManagement>100){
       return "Les frais doivent être compris entre 0 % et 100 %.";
     }
 
