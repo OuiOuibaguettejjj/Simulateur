@@ -31,7 +31,8 @@
     }
     if(rendement<-100 || rendement>100){
       return "Le rendement doit être compris entre -100 % et 100 %.";
-    }\n    if(feeOnContribution>100 || feeManagement>100){
+    }
+    if(feeOnContribution>100 || feeManagement>100){
       return "Les frais doivent être compris entre 0 % et 100 %.";
     }
 
