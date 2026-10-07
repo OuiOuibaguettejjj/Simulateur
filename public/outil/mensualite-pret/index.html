@@ -125,9 +125,9 @@ window.TOOL={calc:function(){
   function calculate(){
     if(!valid()){$("monthly").textContent="Valeurs invalides";$("monthlyEx").textContent="—";$("interest").textContent="—";$("totalPaid").textContent="—";$("compareBody").innerHTML="";$("rateBody").innerHTML="";return}
     const c=parse("capital"),r=parse("taux"),y=parse("duree"),a=parse("assurance"),d=loan(c,r,y,a);
-    $("monthly").textContent=money(d.m+d.ins)+" / mois";$("monthlyEx").textContent=money(d.m);$("interest").textContent=money(d.interest);$("totalPaid").textContent=money(d.total);
-    $("compareBody").innerHTML=[15,20,25].filter(v=>v<=50).map(v=>{const x=loan(c,r,v,a);return "<tr"+(v===y?" class='current'":"")+"><td>"+v+" ans"+(v===y?" · actuel":"")+"</td><td>"+money(x.m+x.ins)+"</td><td>"+money(x.interest)+"</td><td>"+money(x.interest+x.ins*x.n)+"</td></tr>"}).join("");
-    $("rateBody").innerHTML=[r-0.5,r,r+0.5].filter((v,i,arr)=>v>=0&&v<=30&&arr.indexOf(v)===i).map(v=>{const x=loan(c,v,y,a);return "<tr"+(Math.abs(v-r)<1e-9?" class='current'":"")+"><td>"+String(v).replace(".",",")+" %"+(Math.abs(v-r)<1e-9?" · actuel":"")+"</td><td>"+money(x.m+x.ins)+"</td><td>"+money(x.interest)+"</td><td>"+money(x.interest+x.ins*x.n)+"</td></tr>"}).join("");
+    $("monthly").textContent=money(d.monthly+d.insuranceMonthly)+" / mois";$("monthlyEx").textContent=money(d.monthly);$("interest").textContent=money(d.interest);$("totalPaid").textContent=money(d.total);
+    $("compareBody").innerHTML=[15,20,25].filter(v=>v<=50).map(v=>{const x=loan(c,r,v,a);return "<tr"+(v===y?" class='current'":"")+"><td>"+v+" ans"+(v===y?" · actuel":"")+"</td><td>"+money(x.monthly+x.insuranceMonthly)+"</td><td>"+money(x.interest)+"</td><td>"+money(x.interest+x.insuranceMonthly*x.n)+"</td></tr>"}).join("");
+    $("rateBody").innerHTML=[r-0.5,r,r+0.5].filter((v,i,arr)=>v>=0&&v<=30&&arr.indexOf(v)===i).map(v=>{const x=loan(c,v,y,a);return "<tr"+(Math.abs(v-r)<1e-9?" class='current'":"")+"><td>"+String(v).replace(".",",")+" %"+(Math.abs(v-r)<1e-9?" · actuel":"")+"</td><td>"+money(x.monthly+x.insuranceMonthly)+"</td><td>"+money(x.interest)+"</td><td>"+money(x.interest+x.insuranceMonthly*x.n)+"</td></tr>"}).join("");
   }
   ["capital","taux","duree","assurance"].forEach(id=>$(id).addEventListener("input",calculate));
   $("calculate").addEventListener("click",calculate);calculate();
