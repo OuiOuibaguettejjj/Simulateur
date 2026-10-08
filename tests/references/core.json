@@ -1146,5 +1146,21 @@
     "sortie": "X",
     "source": "https://eduscol.education.fr/sites/default/files/document/ra16c3mathproportexemplesnd576959pdf-92964.pdf",
     "note": "Cas de référence indépendant : 2 unités correspondent à 3 unités ; pour 10 unités, 10 × (3 ÷ 2) = 15. La valeur attendue est calculée indépendamment du calculateur testé."
+  },
+  {
+    "outil": "temps-travail",
+    "entrees": {
+      "mode": "type",
+      "start": "09:00",
+      "end": "17:00",
+      "pause": "60",
+      "days": "5",
+      "reference": "35"
+    },
+    "attendu": 35,
+    "tolerance": 0,
+    "sortie": "35\\s*h\\s*00\\s*min",
+    "source": "https://www.service-public.fr/particuliers/vosdroits/F1911",
+    "note": "Cas de référence indépendant : 8 heures de présence − 1 heure de pause = 7 heures par jour ; 7 × 5 = 35 heures par semaine."
   }
 ]
