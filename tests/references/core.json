@@ -959,7 +959,7 @@
     },
     "attendu": 6.46,
     "tolerance": 0.01,
-    "sortie": "6,46\\\\s*L/100\\\\s*km",
+    "sortie": "6,46\\s*L/100\\s*km",
     "source": "https://carlabelling.ademe.fr/recherche/",
     "note": "Cas indépendant : 42 × 100 ÷ 650 = 6,4615 L/100 km, affiché à deux décimales. La valeur attendue est calculée séparément, sans exécuter le calculateur testé."
   },
@@ -976,7 +976,7 @@
     },
     "attendu": 36.08,
     "tolerance": 0.01,
-    "sortie": "36,08\\\\s*€",
+    "sortie": "36,08\\s*€",
     "source": "https://carlabelling.ademe.fr/recherche/",
     "note": "Cas indépendant : 300 × 6,5 ÷ 100 = 19,5 L ; 19,5 × 1,85 = 36,075 €, arrondi à 36,08 €. La valeur attendue est calculée séparément, sans exécuter le calculateur testé."
   }
