@@ -69,6 +69,9 @@ jobs:
       - name: Test calculateur salaire brut net
         run: node tests/salaire-brut-net.test.js
 
+      - name: Test calculateur PTZ
+        run: node tests/ptz.test.mjs
+
       - name: Test filtre publicitaire
         run: node tests/ad-filter.test.mjs
 
