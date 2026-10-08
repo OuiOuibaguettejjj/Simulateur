@@ -1,25 +1,5 @@
 [
   {
-    "path": "public/outil/age/index.html",
-    "rule": "content-h2"
-  },
-  {
-    "path": "public/outil/age/index.html",
-    "rule": "description"
-  },
-  {
-    "path": "public/outil/age/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/age/index.html",
-    "rule": "formula"
-  },
-  {
-    "path": "public/outil/age/index.html",
-    "rule": "result"
-  },
-  {
     "path": "public/outil/are-chomage/index.html",
     "rule": "description"
   },
