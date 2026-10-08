@@ -22,7 +22,7 @@ La page couvre les principaux taux de France métropolitaine. Les taux particuli
 - Le passage HT → TTC utilise `TTC = HT × (1 + taux / 100)`.
 - Le passage TTC → HT utilise `HT = TTC / (1 + taux / 100)`.
 - La TVA est obtenue par `TVA = TTC − HT` ou `TVA = HT × taux / 100`.
-- Les montants affichés sont arrondis à l’euro-cent uniquement pour la présentation.
+- Les montants sont normalisés et calculés à l’euro-cent ; les résultats sont ensuite affichés à deux décimales.
 
 ## Non vérifié / hors périmètre
 
