@@ -806,6 +806,32 @@
   {
     "outil": "tva",
     "entrees": {
+      "montant": "1000",
+      "mode": "ht",
+      "taux": "10"
+    },
+    "attendu": 1100,
+    "tolerance": 0.01,
+    "sortie": "TTC",
+    "source": "https://www.economie.gouv.fr/particuliers/impots-et-fiscalite/gerer-mes-autres-impots-et-taxes/tva-quels-sont-les-taux-de-votre-quotidien",
+    "note": "Cas indépendant : 1 000 € HT à 10 % donnent 100 € de TVA et 1 100 € TTC."
+  },
+  {
+    "outil": "tva",
+    "entrees": {
+      "montant": "210",
+      "mode": "ttc",
+      "taux": "2.1"
+    },
+    "attendu": 205.68,
+    "tolerance": 0.01,
+    "sortie": "HT",
+    "source": "https://www.economie.gouv.fr/particuliers/impots-et-fiscalite/gerer-mes-autres-impots-et-taxes/tva-quels-sont-les-taux-de-votre-quotidien",
+    "note": "Cas indépendant : 210 € TTC à 2,1 % correspondent à environ 205,68 € HT et 4,32 € de TVA."
+  },
+  {
+    "outil": "tva",
+    "entrees": {
       "montant": "100",
       "mode": "ht",
       "taux": "5.5"
