@@ -341,6 +341,29 @@
           "multiplicateur": 2
         }
       }
+    },
+    "tva": {
+      "label": "TVA — principaux taux en France métropolitaine",
+      "year": 2026,
+      "usedBy": [
+        "tva"
+      ],
+      "source": {
+        "label": "Ministère de l’Économie — taux de TVA",
+        "url": "https://www.economie.gouv.fr/particuliers/impots-et-fiscalite/gerer-mes-autres-impots-et-taxes/tva-quels-sont-les-taux-de-votre-quotidien"
+      },
+      "effectiveFrom": "2026-01-01",
+      "effectiveTo": "2026-12-31",
+      "verifiedOn": "2026-10-08",
+      "notes": "Principaux taux de TVA en France métropolitaine vérifiés le 8 octobre 2026 sur le Ministère de l’Économie et les articles 278, 278-0 bis, 279 et 281 octies du Code général des impôts. Le jeu ne couvre pas les taux territoriaux particuliers, les exonérations ni les conditions détaillées d’éligibilité.",
+      "values": {
+        "rates": {
+          "normal": 20,
+          "intermediaire": 10,
+          "reduit": 5.5,
+          "particulier": 2.1
+        }
+      }
     }
   },
   "anneeAMigrer": {
@@ -365,8 +388,7 @@
       "ptz",
       "retraite-simplifiee",
       "rupture-conventionnelle",
-      "succession",
-      "tva"
+      "succession"
     ]
   }
 }
