@@ -932,30 +932,6 @@
     "rule": "title"
   },
   {
-    "path": "public/outil/temps-travail/index.html",
-    "rule": "content-h2"
-  },
-  {
-    "path": "public/outil/temps-travail/index.html",
-    "rule": "description"
-  },
-  {
-    "path": "public/outil/temps-travail/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/temps-travail/index.html",
-    "rule": "formula"
-  },
-  {
-    "path": "public/outil/temps-travail/index.html",
-    "rule": "result"
-  },
-  {
-    "path": "public/outil/temps-travail/index.html",
-    "rule": "title"
-  },
-  {
     "path": "public/outil/temps/index.html",
     "rule": "content-h2"
   },

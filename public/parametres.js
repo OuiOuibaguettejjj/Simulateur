@@ -558,6 +558,25 @@
         }
       }
     },
+    "temps-travail": {
+      "label": "Durée du travail — références légales",
+      "year": 2026,
+      "effectiveFrom": "2016-08-10",
+      "effectiveTo": "2026-12-31",
+      "verifiedOn": "2026-10-08",
+      "source": {
+        "label": "Service-Public — durée du travail d'un salarié du secteur privé à temps plein",
+        "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1911"
+      },
+      "values": {
+        "dailyMaxHours": 10,
+        "referenceAnnualHours": 1607,
+        "referenceMonthlyHours": 151.67,
+        "referenceWeeklyHours": 35,
+        "weeklyAverageMaxHours": 44,
+        "weeklyMaxHours": 48
+      }
+    },
     "tva": {
       "label": "TVA — principaux taux en France métropolitaine",
       "year": 2026,
