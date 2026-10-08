@@ -929,7 +929,7 @@
       "dob": "2000-01-31",
       "now": "2000-03-01"
     },
-    "attendu": 1,
+    "attendu": 0,
     "tolerance": 0,
     "sortie": "0 an[^|]*1 mois et 1 jour",
     "source": "https://allinhub.app/fr/outils/calculateur-d-age/",
