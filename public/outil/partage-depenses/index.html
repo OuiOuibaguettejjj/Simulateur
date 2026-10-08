@@ -265,7 +265,7 @@ function calculate(){
  const n=activeCount();if(n===null){results.innerHTML='<div class="share-note" role="alert"><strong>Nombre de personnes invalide.</strong><p>Choisissez un nombre entier entre 2 et 12.</p></div>';return}
  const weights=shareValues(n);if(!weights)return;
  const participantNames=names(n),paid=Array(n).fill(0),due=Array(n).fill(0),expenseData=[];
- for(const row of rows){
+ for(let e=0;e<rows.length;e++){const row=rows[e];
   const amountInput=document.getElementById("expense-amount-"+e),amountRaw=amountInput.value.trim();
   if(amountRaw==="")continue;
   const amount=cents(amountRaw);
