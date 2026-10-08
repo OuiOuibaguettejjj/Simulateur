@@ -127,7 +127,7 @@ let dateParts;
 if(/^\d{2}\/\d{2}\/\d{4}$/.test(value)){const q=value.split("/");dateParts=[Number(q[2]),Number(q[1]),Number(q[0])];}
 else if(/^\d{4}-\d{2}-\d{2}$/.test(value)){const q=value.split("-");dateParts=[Number(q[0]),Number(q[1]),Number(q[2])];}
 else return"Date invalide : utilisez le format JJ/MM/AAAA.";
-const [y,m,d]=dateParts,check=new Date(y,m-1,d);
+const [y,m,d]=dateParts,check=new Date(y,m-1,d),isoDate=y+"-"+String(m).padStart(2,"0")+"-"+String(d).padStart(2,"0");
 if(!Number.isFinite(check.getTime())||check.getFullYear()!==y||check.getMonth()+1!==m||check.getDate()!==d)return"Date invalide : saisissez votre date de naissance.";
 const n=m*100+d;let sun;
 if(n>=1222||n<=119)sun=["Capricorne","♑","22 décembre – 19 janvier","Terre"];
@@ -161,7 +161,7 @@ function utcDate(str,time,tz,offset){
 const a=str.split("-").map(Number),b=time.split(":").map(Number),base=[a[0],a[1]-1,a[2],b[0],b[1]];
 if(tz){const approx=new Date(Date.UTC(...base)),parts=new Intl.DateTimeFormat("en-US",{timeZone:tz,timeZoneName:"shortOffset",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).formatToParts(approx),zone=parts.find(x=>x.type==="timeZoneName")?.value||"GMT",m=zone.match(/GMT([+-])(\d{1,2})(?::(\d{2}))?/),off=m?(m[1]==="-"?-1:1)*(Number(m[2])+Number(m[3]||0)/60):0;return new Date(approx.getTime()-off*3600000)}
 return new Date(Date.UTC(...base)-Number(offset||0)*3600000)}
-const utc=utcDate(value,time,city?city[2]:null,$("utc-offset").value),J=jd(utc),T=(J-2451545)/36525,eps=(23.43929111-0.013004167*T-1.64e-7*T*T+5.04e-7*T*T*T)*Math.PI/180,lst=(norm(gmst(J)+lon))*Math.PI/180,phi=lat*Math.PI/180;
+const utc=utcDate(isoDate,time,city?city[2]:null,$("utc-offset").value),J=jd(utc),T=(J-2451545)/36525,eps=(23.43929111-0.013004167*T-1.64e-7*T*T+5.04e-7*T*T*T)*Math.PI/180,lst=(norm(gmst(J)+lon))*Math.PI/180,phi=lat*Math.PI/180;
 const asc=norm(Math.atan2(Math.cos(lst),-(Math.sin(lst)*Math.cos(eps)+Math.tan(phi)*Math.sin(eps)))*180/Math.PI),idx=Math.floor(asc/30),names=[["Bélier","♈"],["Taureau","♉"],["Gémeaux","♊"],["Cancer","♋"],["Lion","♌"],["Vierge","♍"],["Balance","♎"],["Scorpion","♏"],["Sagittaire","♐"],["Capricorne","♑"],["Verseau","♒"],["Poissons","♓"]],rise=names[idx],degree=(asc%30).toFixed(2).replace(".",",");
 html+='<article class="astro-result-card"><div class="eyebrow">ASCENDANT</div><div class="astro-sign">'+rise[1]+' '+rise[0]+'</div><div class="astro-degree">'+degree+'° dans le signe</div><p class="astro-desc">Calculé à partir de la date, de l’heure, du lieu et du temps sidéral local.</p></article></div>';
 return html+(boundary?'<div class="astro-note"><strong>Date charnière :</strong> le signe astro suit la convention standard ; l’entrée exacte du Soleil dépend de l’année et de l’heure.</div>':'');
