@@ -243,6 +243,16 @@
           1.8,
           2.1,
           2.4
+        ],        "plafondAutresPretsMultiplicateurs": [
+          1.25,
+          1,
+          1,
+          1
+        ],
+        "travauxMinimumRatio": 0.25,
+        "zonesAncienEligibles": [
+          "B2",
+          "C"
         ],
         "durees": {
           "1": {
