@@ -5,13 +5,58 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="google-adsense-account" content="ca-pub-2924580037451268">
 <title>Calculateur partage de dépenses : qui doit combien ? | Simulateur</title>
-<meta name="description" content="Partagez une dépense entre plusieurs personnes. Répartition égale ou personnalisée, montants déjà payés et calcul de qui doit combien.">
+<meta name="description" content="Partagez une addition ou plusieurs dépenses entre amis, en voyage ou en coloc. Calculez qui doit combien à qui, avec remboursements simplifiés.">
 <link rel="canonical" href="https://simulateur.site/outil/partage-depenses/">
 <link rel="stylesheet" href="/styles.css"><script src="/enter-calcul.js" defer></script>
-
-
-
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur de partage de dépenses","url":"https://simulateur.site/outil/partage-depenses/","description":"Partagez une dépense entre plusieurs personnes. Répartition égale ou personnalisée, montants déjà payés et calcul de qui doit combien.","inLanguage":"fr-FR","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"price":"0","priceCurrency":"EUR"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Vie quotidienne","item":"https://simulateur.site/vie-quotidienne/"},{"@type":"ListItem","position":3,"name":"Calculateur de partage de dépenses","item":"https://simulateur.site/outil/partage-depenses/"}]}</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta property="og:type" content="website"><meta property="og:site_name" content="Simulateur"><meta property="og:locale" content="fr_FR"><meta property="og:title" content="Calculateur partage de dépenses : qui doit combien ? | Simulateur"><meta property="og:description" content="Partagez une dépense entre plusieurs personnes. Répartition égale ou personnalisée, montants déjà payés et calcul de qui doit combien."><meta property="og:url" content="https://simulateur.site/outil/partage-depenses/"><meta name="twitter:card" content="summary"></head>
+<style>
+.share-tool{display:grid;gap:22px}
+.share-section{padding:20px;border:1px solid var(--line);border-radius:14px;background:rgba(255,254,250,.72)}
+.share-section h2,.share-section h3{margin-top:0}
+.share-section-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:14px}
+.share-section-head p{margin:.25rem 0 0;color:var(--muted)}
+.share-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.share-grid-2{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(180px,.6fr);gap:14px}
+.share-field label{display:block;margin-bottom:6px;font-weight:800}
+.share-field input,.share-field select{width:100%;min-height:44px;padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:var(--card);font:inherit}
+.share-people{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.share-person{display:grid;grid-template-columns:1fr 88px;gap:8px;align-items:end}
+.share-person small{grid-column:1/-1;color:var(--muted);font-size:.78rem}
+.share-expenses{display:grid;gap:12px}
+.share-expense{padding:16px;border:1px solid var(--line);border-radius:12px;background:var(--card)}
+.share-expense-top{display:grid;grid-template-columns:minmax(150px,1.5fr) 140px 180px;gap:10px;align-items:end}
+.share-expense legend{font-weight:900}
+.share-checks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin-top:12px}
+.share-check{display:flex;align-items:center;gap:6px;padding:7px 8px;border:1px solid var(--line);border-radius:8px;font-size:.88rem}
+.share-check input{margin:0}
+.share-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.share-secondary{border:1px solid var(--ink);background:transparent;color:var(--ink);padding:9px 13px;border-radius:9px;font-weight:800;cursor:pointer}
+.share-result{display:grid;gap:16px}
+.share-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.share-kpi{padding:15px;border-radius:11px;background:var(--ink);color:#fff}
+.share-kpi small{display:block;opacity:.72;font-weight:700}
+.share-kpi strong{display:block;font-size:1.35rem;margin-top:3px}
+.share-table-wrap{overflow-x:auto}
+.share-table{width:100%;border-collapse:collapse;min-width:620px}
+.share-table th,.share-table td{padding:10px 9px;border-bottom:1px solid var(--line);text-align:right}
+.share-table th:first-child,.share-table td:first-child{text-align:left}
+.share-table th{font-size:.78rem;text-transform:uppercase;letter-spacing:.03em;color:var(--muted)}
+.share-positive{font-weight:900}
+.share-negative{font-weight:900}
+.share-transfers{display:grid;gap:8px}
+.share-transfer{display:flex;justify-content:space-between;gap:12px;padding:11px 13px;border-radius:9px;background:var(--paper);border:1px solid var(--line)}
+.share-transfer strong{white-space:nowrap}
+.share-note{padding:11px 13px;border-left:3px solid var(--accent);background:var(--accent-soft);border-radius:0 9px 9px 0}
+.share-note p:last-child{margin-bottom:0}
+@media(max-width:760px){
+ .share-grid,.share-grid-2,.share-people,.share-summary{grid-template-columns:1fr}
+ .share-expense-top{grid-template-columns:1fr}
+ .share-checks{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .share-section{padding:15px}
+}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur de partage de dépenses","url":"https://simulateur.site/outil/partage-depenses/","description":"Partagez une addition ou plusieurs dépenses entre amis, en voyage ou en coloc. Calculez qui doit combien à qui, avec remboursements simplifiés.","inLanguage":"fr-FR","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"price":"0","priceCurrency":"EUR"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Vie quotidienne","item":"https://simulateur.site/vie-quotidienne/"},{"@type":"ListItem","position":3,"name":"Calculateur de partage de dépenses","item":"https://simulateur.site/outil/partage-depenses/"}]}</script>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta property="og:type" content="website"><meta property="og:site_name" content="Simulateur"><meta property="og:locale" content="fr_FR"><meta property="og:title" content="Calculateur partage de dépenses : qui doit combien ? | Simulateur"><meta property="og:description" content="Partagez une addition ou plusieurs dépenses entre amis, en voyage ou en coloc. Calculez qui doit combien à qui, avec remboursements simplifiés."><meta property="og:url" content="https://simulateur.site/outil/partage-depenses/"><meta name="twitter:card" content="summary"></head>
 <body>
 <header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header>
 <main>
@@ -19,169 +64,242 @@
 <section class="tool" aria-labelledby="title">
 <div class="eyebrow">VIE QUOTIDIENNE</div>
 <h1>Calculateur de partage de dépenses</h1>
-<p class="tool-intro">Répartissez une dépense entre 2 à 12 personnes et calculez automatiquement qui doit payer ou être remboursé.</p>
-<div class="row">
-<div class="field"><label for="total">Montant total (€)</label><input id="total" type="text" value="120" inputmode="decimal" autocomplete="off"></div>
-<div class="field"><label for="count">Nombre de personnes</label><input id="count" type="number" min="2" max="12" step="1" value="3" inputmode="numeric" aria-describedby="count-help"><small id="count-help" class="status-note">De 2 à 12 personnes.</small></div>
+<p class="tool-intro">Ajoutez les dépenses d'un repas, d'un voyage, d'une soirée ou d'une colocation : le calculateur indique la part de chacun et qui doit rembourser qui.</p>
+
+<div class="share-tool">
+<section class="share-section" aria-labelledby="participants-title">
+<div class="share-section-head"><div><h2 id="participants-title">1. Les participants</h2><p>De 2 à 12 personnes. Les noms servent uniquement à rendre le résultat lisible.</p></div></div>
+<div class="share-grid-2">
+<div class="share-field"><label for="count">Nombre de personnes</label><input id="count" type="number" min="2" max="12" step="1" value="3" inputmode="numeric" aria-describedby="count-help"><small id="count-help" class="status-note">Les personnes non utilisées sont ignorées dans le calcul.</small></div>
+<div class="share-field"><label for="split-mode">Répartition par défaut</label><select id="split-mode"><option value="equal" selected>Parts égales</option><option value="custom">Parts personnalisées</option></select></div>
 </div>
-<fieldset class="field" style="border:0;padding:0">
-<legend><strong>Mode de répartition</strong></legend>
-<div class="row">
-<label><input type="radio" name="mode" value="equal" checked> Parts égales</label>
-<label><input type="radio" name="mode" value="custom"> Parts personnalisées</label>
+<div class="share-people" id="people">
+<div class="share-person person-row"><div class="share-field"><label for="person-0">Participant 1</label><input id="person-0" class="person-name" type="text" value="Alice" autocomplete="off"></div><div class="share-field custom-share-field"><label for="share-0">Part (%)</label><input id="share-0" class="person-share" type="text" value="" inputmode="decimal" autocomplete="off" aria-label="Part de 1 en pourcentage"></div><small>Nom affiché dans le résultat</small></div><div class="share-person person-row"><div class="share-field"><label for="person-1">Participant 2</label><input id="person-1" class="person-name" type="text" value="Bob" autocomplete="off"></div><div class="share-field custom-share-field"><label for="share-1">Part (%)</label><input id="share-1" class="person-share" type="text" value="" inputmode="decimal" autocomplete="off" aria-label="Part de 2 en pourcentage"></div><small>Nom affiché dans le résultat</small></div><div class="share-person person-row"><div class="share-field"><label for="person-2">Participant 3</label><input id="person-2" class="person-name" type="text" value="Charlie" autocomplete="off"></div><div class="share-field custom-share-field"><label for="share-2">Part (%)</label><input id="share-2" class="person-share" type="text" value="" inputmode="decimal" autocomplete="off" aria-label="Part de 3 en pourcentage"></div><small>Nom affiché dans le résultat</small></div><div class="share-person person-row"><div class="share-field"><label for="person-3">Participant 4</label><input id="person-3" class="person-name" type="text" value="Personne 4" autocomplete="off"></div><div class="share-field custom-share-field"><label for="share-3">Part (%)</label><input id="share-3" class="person-share" type="text" value="" inputmode="decimal" autocomplete="off" aria-label="Part de 4 en pourcentage"></div><small>Nom affiché dans le résultat</small></div><div class="share-person person-row"><div class="share-field"><label for="person-4">Participant 5</label><input id="person-4" class="person-name" type="text" value="Personne 5" autocomplete="off"></div><div class="share-field custom-share-field"><label for="share-4">Part (%)</label><input id="share-4" class="person-share" type="text" value="" inputmode="decimal" autocomplete="off" aria-label="Part de 5 en pourcentage"></div><small>Nom affiché dans le résultat</small></div><div class="share-person person-row"><div class="share-field"><label for="person-5">Participant 6</label><input id="person-5" class="person-name" type="text" value="Personne 6" autocomplete="off"></div><div class="share-field custom-share-field"><label for="share-5">Part (%)</label><input id="share-5" class="person-share" type="text" value="" inputmode="decimal" autocomplete="off" aria-label="Part de 6 en pourcentage"></div><small>Nom affiché dans le résultat</small></div><div class="share-person person-row"><div class="share-field"><label for="person-6">Participant 7</label><input id="person-6" class="person-name" type="text" value="Personne 7" autocomplete="off"></div><div class="share-field custom-share-field"><label for="share-6">Part (%)</label><input id="share-6" class="person-share" type="text" value="" inputmode="decimal" autocomplete="off" aria-label="Part de 7 en pourcentage"></div><small>Nom affiché dans le résultat</small></div><div class="share-person person-row"><div class="share-field"><label for="person-7">Participant 8</label><input id="person-7" class="person-name" type="text" value="Personne 8" autocomplete="off"></div><div class="share-field custom-share-field"><label for="share-7">Part (%)</label><input id="share-7" class="person-share" type="text" value="" inputmode="decimal" autocomplete="off" aria-label="Part de 8 en pourcentage"></div><small>Nom affiché dans le résultat</small></div><div class="share-person person-row"><div class="share-field"><label for="person-8">Participant 9</label><input id="person-8" class="person-name" type="text" value="Personne 9" autocomplete="off"></div><div class="share-field custom-share-field"><label for="share-8">Part (%)</label><input id="share-8" class="person-share" type="text" value="" inputmode="decimal" autocomplete="off" aria-label="Part de 9 en pourcentage"></div><small>Nom affiché dans le résultat</small></div><div class="share-person person-row"><div class="share-field"><label for="person-9">Participant 10</label><input id="person-9" class="person-name" type="text" value="Personne 10" autocomplete="off"></div><div class="share-field custom-share-field"><label for="share-9">Part (%)</label><input id="share-9" class="person-share" type="text" value="" inputmode="decimal" autocomplete="off" aria-label="Part de 10 en pourcentage"></div><small>Nom affiché dans le résultat</small></div><div class="share-person person-row"><div class="share-field"><label for="person-10">Participant 11</label><input id="person-10" class="person-name" type="text" value="Personne 11" autocomplete="off"></div><div class="share-field custom-share-field"><label for="share-10">Part (%)</label><input id="share-10" class="person-share" type="text" value="" inputmode="decimal" autocomplete="off" aria-label="Part de 11 en pourcentage"></div><small>Nom affiché dans le résultat</small></div><div class="share-person person-row"><div class="share-field"><label for="person-11">Participant 12</label><input id="person-11" class="person-name" type="text" value="Personne 12" autocomplete="off"></div><div class="share-field custom-share-field"><label for="share-11">Part (%)</label><input id="share-11" class="person-share" type="text" value="" inputmode="decimal" autocomplete="off" aria-label="Part de 12 en pourcentage"></div><small>Nom affiché dans le résultat</small></div>
+</div>
+<div class="share-note"><strong>Parts personnalisées :</strong> utilisez-les si tout le monde ne doit pas supporter la même proportion des dépenses. Le total des parts actives doit être de 100 %.</div>
+</section>
+
+<section class="share-section" aria-labelledby="expenses-title">
+<div class="share-section-head"><div><h2 id="expenses-title">2. Les dépenses</h2><p>Une ligne par dépense. Indiquez qui a avancé l'argent et qui doit participer à cette dépense.</p></div></div>
+<div class="share-expenses">
+<fieldset class="share-expense expense-row" data-expense="0">
+<legend>Dépense 1</legend>
+<div class="share-expense-top">
+<div class="share-field"><label for="expense-name-0">Libellé</label><input id="expense-name-0" class="expense-name" type="text" value="Restaurant" autocomplete="off"></div>
+<div class="share-field"><label for="expense-amount-0">Montant (€)</label><input id="expense-amount-0" class="expense-amount" type="text" value="120" inputmode="decimal" autocomplete="off"></div>
+<div class="share-field"><label for="expense-payer-0">Payé par</label><select id="expense-payer-0" class="expense-payer">
+<option value="0" selected>Participant 1</option><option value="1">Participant 2</option><option value="2">Participant 3</option><option value="3">Participant 4</option><option value="4">Participant 5</option><option value="5">Participant 6</option><option value="6">Participant 7</option><option value="7">Participant 8</option><option value="8">Participant 9</option><option value="9">Participant 10</option><option value="10">Participant 11</option><option value="11">Participant 12</option>
+</select></div>
+</div>
+<div class="share-field"><span class="status-note">Qui partage cette dépense ?</span></div>
+<div class="share-checks">
+<label class="share-check"><input class="expense-member" type="checkbox" value="0" checked> Participant 1</label><label class="share-check"><input class="expense-member" type="checkbox" value="1" checked> Participant 2</label><label class="share-check"><input class="expense-member" type="checkbox" value="2" checked> Participant 3</label><label class="share-check"><input class="expense-member" type="checkbox" value="3"> Participant 4</label><label class="share-check"><input class="expense-member" type="checkbox" value="4"> Participant 5</label><label class="share-check"><input class="expense-member" type="checkbox" value="5"> Participant 6</label><label class="share-check"><input class="expense-member" type="checkbox" value="6"> Participant 7</label><label class="share-check"><input class="expense-member" type="checkbox" value="7"> Participant 8</label><label class="share-check"><input class="expense-member" type="checkbox" value="8"> Participant 9</label><label class="share-check"><input class="expense-member" type="checkbox" value="9"> Participant 10</label><label class="share-check"><input class="expense-member" type="checkbox" value="10"> Participant 11</label><label class="share-check"><input class="expense-member" type="checkbox" value="11"> Participant 12</label>
+</div>
+</fieldset><fieldset class="share-expense expense-row" data-expense="1">
+<legend>Dépense 2</legend>
+<div class="share-expense-top">
+<div class="share-field"><label for="expense-name-1">Libellé</label><input id="expense-name-1" class="expense-name" type="text" value="Courses" autocomplete="off"></div>
+<div class="share-field"><label for="expense-amount-1">Montant (€)</label><input id="expense-amount-1" class="expense-amount" type="text" value="60" inputmode="decimal" autocomplete="off"></div>
+<div class="share-field"><label for="expense-payer-1">Payé par</label><select id="expense-payer-1" class="expense-payer">
+<option value="0">Participant 1</option><option value="1" selected>Participant 2</option><option value="2">Participant 3</option><option value="3">Participant 4</option><option value="4">Participant 5</option><option value="5">Participant 6</option><option value="6">Participant 7</option><option value="7">Participant 8</option><option value="8">Participant 9</option><option value="9">Participant 10</option><option value="10">Participant 11</option><option value="11">Participant 12</option>
+</select></div>
+</div>
+<div class="share-field"><span class="status-note">Qui partage cette dépense ?</span></div>
+<div class="share-checks">
+<label class="share-check"><input class="expense-member" type="checkbox" value="0" checked> Participant 1</label><label class="share-check"><input class="expense-member" type="checkbox" value="1" checked> Participant 2</label><label class="share-check"><input class="expense-member" type="checkbox" value="2" checked> Participant 3</label><label class="share-check"><input class="expense-member" type="checkbox" value="3"> Participant 4</label><label class="share-check"><input class="expense-member" type="checkbox" value="4"> Participant 5</label><label class="share-check"><input class="expense-member" type="checkbox" value="5"> Participant 6</label><label class="share-check"><input class="expense-member" type="checkbox" value="6"> Participant 7</label><label class="share-check"><input class="expense-member" type="checkbox" value="7"> Participant 8</label><label class="share-check"><input class="expense-member" type="checkbox" value="8"> Participant 9</label><label class="share-check"><input class="expense-member" type="checkbox" value="9"> Participant 10</label><label class="share-check"><input class="expense-member" type="checkbox" value="10"> Participant 11</label><label class="share-check"><input class="expense-member" type="checkbox" value="11"> Participant 12</label>
+</div>
+</fieldset><fieldset class="share-expense expense-row" data-expense="2">
+<legend>Dépense 3</legend>
+<div class="share-expense-top">
+<div class="share-field"><label for="expense-name-2">Libellé</label><input id="expense-name-2" class="expense-name" type="text" value="Taxi" autocomplete="off"></div>
+<div class="share-field"><label for="expense-amount-2">Montant (€)</label><input id="expense-amount-2" class="expense-amount" type="text" value="30" inputmode="decimal" autocomplete="off"></div>
+<div class="share-field"><label for="expense-payer-2">Payé par</label><select id="expense-payer-2" class="expense-payer">
+<option value="0">Participant 1</option><option value="1">Participant 2</option><option value="2" selected>Participant 3</option><option value="3">Participant 4</option><option value="4">Participant 5</option><option value="5">Participant 6</option><option value="6">Participant 7</option><option value="7">Participant 8</option><option value="8">Participant 9</option><option value="9">Participant 10</option><option value="10">Participant 11</option><option value="11">Participant 12</option>
+</select></div>
+</div>
+<div class="share-field"><span class="status-note">Qui partage cette dépense ?</span></div>
+<div class="share-checks">
+<label class="share-check"><input class="expense-member" type="checkbox" value="0" checked> Participant 1</label><label class="share-check"><input class="expense-member" type="checkbox" value="1" checked> Participant 2</label><label class="share-check"><input class="expense-member" type="checkbox" value="2" checked> Participant 3</label><label class="share-check"><input class="expense-member" type="checkbox" value="3"> Participant 4</label><label class="share-check"><input class="expense-member" type="checkbox" value="4"> Participant 5</label><label class="share-check"><input class="expense-member" type="checkbox" value="5"> Participant 6</label><label class="share-check"><input class="expense-member" type="checkbox" value="6"> Participant 7</label><label class="share-check"><input class="expense-member" type="checkbox" value="7"> Participant 8</label><label class="share-check"><input class="expense-member" type="checkbox" value="8"> Participant 9</label><label class="share-check"><input class="expense-member" type="checkbox" value="9"> Participant 10</label><label class="share-check"><input class="expense-member" type="checkbox" value="10"> Participant 11</label><label class="share-check"><input class="expense-member" type="checkbox" value="11"> Participant 12</label>
+</div>
+</fieldset><fieldset class="share-expense expense-row" data-expense="3">
+<legend>Dépense 4</legend>
+<div class="share-expense-top">
+<div class="share-field"><label for="expense-name-3">Libellé</label><input id="expense-name-3" class="expense-name" type="text" value="Dépense 4" autocomplete="off"></div>
+<div class="share-field"><label for="expense-amount-3">Montant (€)</label><input id="expense-amount-3" class="expense-amount" type="text" value="" inputmode="decimal" autocomplete="off"></div>
+<div class="share-field"><label for="expense-payer-3">Payé par</label><select id="expense-payer-3" class="expense-payer">
+<option value="0" selected>Participant 1</option><option value="1">Participant 2</option><option value="2">Participant 3</option><option value="3">Participant 4</option><option value="4">Participant 5</option><option value="5">Participant 6</option><option value="6">Participant 7</option><option value="7">Participant 8</option><option value="8">Participant 9</option><option value="9">Participant 10</option><option value="10">Participant 11</option><option value="11">Participant 12</option>
+</select></div>
+</div>
+<div class="share-field"><span class="status-note">Qui partage cette dépense ?</span></div>
+<div class="share-checks">
+<label class="share-check"><input class="expense-member" type="checkbox" value="0" checked> Participant 1</label><label class="share-check"><input class="expense-member" type="checkbox" value="1" checked> Participant 2</label><label class="share-check"><input class="expense-member" type="checkbox" value="2" checked> Participant 3</label><label class="share-check"><input class="expense-member" type="checkbox" value="3"> Participant 4</label><label class="share-check"><input class="expense-member" type="checkbox" value="4"> Participant 5</label><label class="share-check"><input class="expense-member" type="checkbox" value="5"> Participant 6</label><label class="share-check"><input class="expense-member" type="checkbox" value="6"> Participant 7</label><label class="share-check"><input class="expense-member" type="checkbox" value="7"> Participant 8</label><label class="share-check"><input class="expense-member" type="checkbox" value="8"> Participant 9</label><label class="share-check"><input class="expense-member" type="checkbox" value="9"> Participant 10</label><label class="share-check"><input class="expense-member" type="checkbox" value="10"> Participant 11</label><label class="share-check"><input class="expense-member" type="checkbox" value="11"> Participant 12</label>
+</div>
+</fieldset><fieldset class="share-expense expense-row" data-expense="4">
+<legend>Dépense 5</legend>
+<div class="share-expense-top">
+<div class="share-field"><label for="expense-name-4">Libellé</label><input id="expense-name-4" class="expense-name" type="text" value="Dépense 5" autocomplete="off"></div>
+<div class="share-field"><label for="expense-amount-4">Montant (€)</label><input id="expense-amount-4" class="expense-amount" type="text" value="" inputmode="decimal" autocomplete="off"></div>
+<div class="share-field"><label for="expense-payer-4">Payé par</label><select id="expense-payer-4" class="expense-payer">
+<option value="0" selected>Participant 1</option><option value="1">Participant 2</option><option value="2">Participant 3</option><option value="3">Participant 4</option><option value="4">Participant 5</option><option value="5">Participant 6</option><option value="6">Participant 7</option><option value="7">Participant 8</option><option value="8">Participant 9</option><option value="9">Participant 10</option><option value="10">Participant 11</option><option value="11">Participant 12</option>
+</select></div>
+</div>
+<div class="share-field"><span class="status-note">Qui partage cette dépense ?</span></div>
+<div class="share-checks">
+<label class="share-check"><input class="expense-member" type="checkbox" value="0" checked> Participant 1</label><label class="share-check"><input class="expense-member" type="checkbox" value="1" checked> Participant 2</label><label class="share-check"><input class="expense-member" type="checkbox" value="2" checked> Participant 3</label><label class="share-check"><input class="expense-member" type="checkbox" value="3"> Participant 4</label><label class="share-check"><input class="expense-member" type="checkbox" value="4"> Participant 5</label><label class="share-check"><input class="expense-member" type="checkbox" value="5"> Participant 6</label><label class="share-check"><input class="expense-member" type="checkbox" value="6"> Participant 7</label><label class="share-check"><input class="expense-member" type="checkbox" value="7"> Participant 8</label><label class="share-check"><input class="expense-member" type="checkbox" value="8"> Participant 9</label><label class="share-check"><input class="expense-member" type="checkbox" value="9"> Participant 10</label><label class="share-check"><input class="expense-member" type="checkbox" value="10"> Participant 11</label><label class="share-check"><input class="expense-member" type="checkbox" value="11"> Participant 12</label>
+</div>
+</fieldset><fieldset class="share-expense expense-row" data-expense="5">
+<legend>Dépense 6</legend>
+<div class="share-expense-top">
+<div class="share-field"><label for="expense-name-5">Libellé</label><input id="expense-name-5" class="expense-name" type="text" value="Dépense 6" autocomplete="off"></div>
+<div class="share-field"><label for="expense-amount-5">Montant (€)</label><input id="expense-amount-5" class="expense-amount" type="text" value="" inputmode="decimal" autocomplete="off"></div>
+<div class="share-field"><label for="expense-payer-5">Payé par</label><select id="expense-payer-5" class="expense-payer">
+<option value="0" selected>Participant 1</option><option value="1">Participant 2</option><option value="2">Participant 3</option><option value="3">Participant 4</option><option value="4">Participant 5</option><option value="5">Participant 6</option><option value="6">Participant 7</option><option value="7">Participant 8</option><option value="8">Participant 9</option><option value="9">Participant 10</option><option value="10">Participant 11</option><option value="11">Participant 12</option>
+</select></div>
+</div>
+<div class="share-field"><span class="status-note">Qui partage cette dépense ?</span></div>
+<div class="share-checks">
+<label class="share-check"><input class="expense-member" type="checkbox" value="0" checked> Participant 1</label><label class="share-check"><input class="expense-member" type="checkbox" value="1" checked> Participant 2</label><label class="share-check"><input class="expense-member" type="checkbox" value="2" checked> Participant 3</label><label class="share-check"><input class="expense-member" type="checkbox" value="3"> Participant 4</label><label class="share-check"><input class="expense-member" type="checkbox" value="4"> Participant 5</label><label class="share-check"><input class="expense-member" type="checkbox" value="5"> Participant 6</label><label class="share-check"><input class="expense-member" type="checkbox" value="6"> Participant 7</label><label class="share-check"><input class="expense-member" type="checkbox" value="7"> Participant 8</label><label class="share-check"><input class="expense-member" type="checkbox" value="8"> Participant 9</label><label class="share-check"><input class="expense-member" type="checkbox" value="9"> Participant 10</label><label class="share-check"><input class="expense-member" type="checkbox" value="10"> Participant 11</label><label class="share-check"><input class="expense-member" type="checkbox" value="11"> Participant 12</label>
+</div>
+</fieldset><fieldset class="share-expense expense-row" data-expense="6">
+<legend>Dépense 7</legend>
+<div class="share-expense-top">
+<div class="share-field"><label for="expense-name-6">Libellé</label><input id="expense-name-6" class="expense-name" type="text" value="Dépense 7" autocomplete="off"></div>
+<div class="share-field"><label for="expense-amount-6">Montant (€)</label><input id="expense-amount-6" class="expense-amount" type="text" value="" inputmode="decimal" autocomplete="off"></div>
+<div class="share-field"><label for="expense-payer-6">Payé par</label><select id="expense-payer-6" class="expense-payer">
+<option value="0" selected>Participant 1</option><option value="1">Participant 2</option><option value="2">Participant 3</option><option value="3">Participant 4</option><option value="4">Participant 5</option><option value="5">Participant 6</option><option value="6">Participant 7</option><option value="7">Participant 8</option><option value="8">Participant 9</option><option value="9">Participant 10</option><option value="10">Participant 11</option><option value="11">Participant 12</option>
+</select></div>
+</div>
+<div class="share-field"><span class="status-note">Qui partage cette dépense ?</span></div>
+<div class="share-checks">
+<label class="share-check"><input class="expense-member" type="checkbox" value="0" checked> Participant 1</label><label class="share-check"><input class="expense-member" type="checkbox" value="1" checked> Participant 2</label><label class="share-check"><input class="expense-member" type="checkbox" value="2" checked> Participant 3</label><label class="share-check"><input class="expense-member" type="checkbox" value="3"> Participant 4</label><label class="share-check"><input class="expense-member" type="checkbox" value="4"> Participant 5</label><label class="share-check"><input class="expense-member" type="checkbox" value="5"> Participant 6</label><label class="share-check"><input class="expense-member" type="checkbox" value="6"> Participant 7</label><label class="share-check"><input class="expense-member" type="checkbox" value="7"> Participant 8</label><label class="share-check"><input class="expense-member" type="checkbox" value="8"> Participant 9</label><label class="share-check"><input class="expense-member" type="checkbox" value="9"> Participant 10</label><label class="share-check"><input class="expense-member" type="checkbox" value="10"> Participant 11</label><label class="share-check"><input class="expense-member" type="checkbox" value="11"> Participant 12</label>
+</div>
+</fieldset><fieldset class="share-expense expense-row" data-expense="7">
+<legend>Dépense 8</legend>
+<div class="share-expense-top">
+<div class="share-field"><label for="expense-name-7">Libellé</label><input id="expense-name-7" class="expense-name" type="text" value="Dépense 8" autocomplete="off"></div>
+<div class="share-field"><label for="expense-amount-7">Montant (€)</label><input id="expense-amount-7" class="expense-amount" type="text" value="" inputmode="decimal" autocomplete="off"></div>
+<div class="share-field"><label for="expense-payer-7">Payé par</label><select id="expense-payer-7" class="expense-payer">
+<option value="0" selected>Participant 1</option><option value="1">Participant 2</option><option value="2">Participant 3</option><option value="3">Participant 4</option><option value="4">Participant 5</option><option value="5">Participant 6</option><option value="6">Participant 7</option><option value="7">Participant 8</option><option value="8">Participant 9</option><option value="9">Participant 10</option><option value="10">Participant 11</option><option value="11">Participant 12</option>
+</select></div>
+</div>
+<div class="share-field"><span class="status-note">Qui partage cette dépense ?</span></div>
+<div class="share-checks">
+<label class="share-check"><input class="expense-member" type="checkbox" value="0" checked> Participant 1</label><label class="share-check"><input class="expense-member" type="checkbox" value="1" checked> Participant 2</label><label class="share-check"><input class="expense-member" type="checkbox" value="2" checked> Participant 3</label><label class="share-check"><input class="expense-member" type="checkbox" value="3"> Participant 4</label><label class="share-check"><input class="expense-member" type="checkbox" value="4"> Participant 5</label><label class="share-check"><input class="expense-member" type="checkbox" value="5"> Participant 6</label><label class="share-check"><input class="expense-member" type="checkbox" value="6"> Participant 7</label><label class="share-check"><input class="expense-member" type="checkbox" value="7"> Participant 8</label><label class="share-check"><input class="expense-member" type="checkbox" value="8"> Participant 9</label><label class="share-check"><input class="expense-member" type="checkbox" value="9"> Participant 10</label><label class="share-check"><input class="expense-member" type="checkbox" value="10"> Participant 11</label><label class="share-check"><input class="expense-member" type="checkbox" value="11"> Participant 12</label>
 </div>
 </fieldset>
-<div class="field">
-<label>Participants</label>
-<p class="status-note">Indiquez ce que chacun a déjà payé. En mode personnalisé, les parts doivent totaliser 100 %.</p>
-<div class="calculator-people-head"><span>Participant</span><span>Part (%)</span><span>Déjà payé (€)</span></div>
-<div class="calculator-people" id="people"></div>
 </div>
-<div class="calculator-data"><strong>Vos données restent sur votre appareil</strong><p>Les montants et noms saisis servent uniquement au calcul dans votre navigateur. Aucune inscription n'est nécessaire.</p></div><button class="button-main" id="calculate" type="button">Calculer la répartition</button>
-<div id="results" class="result" aria-live="polite"></div>
+<p class="status-note">Vous pouvez laisser une dépense vide. Pour un week-end ou une colocation, ajoutez chaque dépense séparément : logement, repas, courses, essence, billets, etc.</p>
 </section>
+
+<div class="calculator-data"><strong>Calcul local</strong><p>Les noms et montants saisis restent dans votre navigateur : aucune inscription n'est nécessaire et le calcul ne dépend pas d'un compte.</p></div>
+<button class="button-main" id="calculate" type="button">Calculer qui doit combien</button>
+<div id="results" class="result share-result" aria-live="polite">Ajoutez vos participants et vos dépenses, puis lancez le calcul.</div>
+</div>
+</section>
+
 <section class="content-section">
-<h2>Comment fonctionne le partage de dépenses ?</h2>
-<p>Le calculateur détermine la part de chaque participant, puis compare cette part au montant déjà payé. Il indique ensuite les paiements ou remboursements nécessaires pour équilibrer la dépense.</p>
-<h2>Exemple</h2>
-<p>Pour une dépense de 120 € à trois, chacun doit supporter 40 €. Si Alice a payé 80 €, Bob 20 € et Charlie 20 €, Bob et Charlie doivent chacun verser 20 € à Alice.</p>
+<h2>Comment calculer qui doit combien à qui ?</h2>
+<p>Le principe est simple : pour chaque dépense, le montant est réparti entre les personnes sélectionnées. Le calculateur additionne ensuite ce que chacun a réellement payé et ce que chacun devait supporter. Un solde positif signifie que la personne doit recevoir de l'argent ; un solde négatif signifie qu'elle doit en verser.</p>
+<h2>Partager une addition, un voyage ou des dépenses de groupe</h2>
+<p>Vous pouvez saisir plusieurs dépenses dans le même calcul : restaurant, hébergement, courses, essence, billets ou autres frais communs. Chaque dépense peut concerner tout le groupe ou seulement certaines personnes. Le résultat regroupe les soldes pour éviter de multiplier les remboursements.</p>
+<h2>Exemple de partage de dépenses</h2>
+<p>Pour un restaurant de 120 € à trois, si Alice paie l'addition et que tout le monde participe à parts égales, chacun supporte 40 €. Alice a avancé 120 € et doit recevoir 80 € au total : Bob lui rembourse 40 € et Charlie 40 €. Avec plusieurs dépenses, le calculateur effectue le même raisonnement sur l'ensemble du groupe.</p>
+<h2>À savoir sur les remboursements</h2>
+<p>Le calculateur simplifie les dettes en mettant en relation les personnes qui doivent de l'argent avec celles qui doivent en recevoir. Il ne réalise aucun paiement. Les montants affichés sont arrondis au centime et la répartition de chaque dépense conserve exactement son total.</p>
+</section>
+
 <section class="calculator-faq" aria-labelledby="faq-title">
 <h2 id="faq-title">FAQ</h2>
-<details><summary>Comment partager une dépense à parts égales ?</summary><div class="calculator-faq-answer"><p>Indiquez le montant et le nombre de personnes, puis laissez le mode « Parts égales ». Le montant est réparti équitablement, au centime près.</p></div></details>
-<details><summary>Peut-on utiliser des pourcentages différents ?</summary><div class="calculator-faq-answer"><p>Oui. Sélectionnez « Parts personnalisées » et indiquez la part de chaque participant. Le total doit être exactement de 100 %.</p></div></details>
-<details><summary>Comment savoir qui doit rembourser qui ?</summary><div class="calculator-faq-answer"><p>Renseignez les montants déjà payés. Le calculateur compare ensuite chaque paiement à la part due et propose les transferts nécessaires.</p></div></details>
-<details><summary>Que se passe-t-il si la dépense n'est pas encore entièrement payée ?</summary><div class="calculator-faq-answer"><p>Le calculateur distingue les remboursements entre participants du montant qui reste à régler auprès du bénéficiaire de la dépense.</p></div></details>
-<details><summary>Combien de personnes peut-on ajouter ?</summary><div class="calculator-faq-answer"><p>Le calculateur accepte de 2 à 12 participants.</p></div></details>
+<details><summary>Comment partager une addition entre plusieurs personnes ?</summary><div class="calculator-faq-answer"><p>Ajoutez les participants, saisissez l'addition, indiquez qui l'a payée et cochez les personnes concernées. Le calculateur détermine ensuite la part de chacun et les remboursements nécessaires.</p></div></details>
+<details><summary>Comment savoir qui doit combien à qui ?</summary><div class="calculator-faq-answer"><p>Le calcul compare, pour chaque personne, ce qu'elle a payé avec ce qu'elle devait réellement supporter. Les soldes négatifs correspondent aux sommes à payer et les soldes positifs aux sommes à recevoir.</p></div></details>
+<details><summary>Peut-on calculer plusieurs dépenses pour un voyage ou une colocation ?</summary><div class="calculator-faq-answer"><p>Oui. Ajoutez une ligne pour chaque dépense et sélectionnez les participants concernés. Le résultat final regroupe toutes les dépenses afin de calculer les remboursements sur l'ensemble du groupe.</p></div></details>
+<details><summary>Peut-on faire participer seulement certaines personnes à une dépense ?</summary><div class="calculator-faq-answer"><p>Oui. Chaque dépense possède sa propre liste de participants. Décochez les personnes qui ne doivent pas supporter cette dépense ; seules les personnes cochées se partageront son montant.</p></div></details>
+<details><summary>Peut-on répartir les dépenses avec des parts différentes ?</summary><div class="calculator-faq-answer"><p>Oui. Choisissez « Parts personnalisées » et indiquez le pourcentage de chaque participant actif. Les parts doivent totaliser 100 %. Cette pondération s'applique aux dépenses concernées par ces participants.</p></div></details>
+<details><summary>Les données saisies sont-elles envoyées sur Internet ?</summary><div class="calculator-faq-answer"><p>Non. Le calcul est réalisé dans votre navigateur. Les noms et montants saisis ne sont pas nécessaires au fonctionnement d'un compte et ne sont pas transmis par ce calculateur.</p></div></details>
 </section>
-<div class="calculator-data"><strong>Méthode de calcul</strong><p>Les parts sont converties en centimes afin de limiter les erreurs d'arrondi. Les remboursements sont calculés à partir de la différence entre la part due et le montant déjà payé.</p></div>
+
+<section class="content-section">
+<h2>Méthode et limites du calculateur</h2>
+<p>Pour chaque dépense, le montant est divisé entre les participants sélectionnés. Les centimes restants après division sont attribués un par un afin que la somme des parts corresponde exactement au montant de la dépense. Les soldes sont ensuite rapprochés pour produire une liste de remboursements simple.</p>
+<p>Le calculateur ne gère pas les devises multiples, les paiements déjà effectués entre participants ni une répartition par article à l'intérieur d'une même dépense. Pour ces situations, séparez les dépenses en lignes distinctes lorsque cela permet de représenter correctement le partage.</p>
+<p>Référence méthodologique : <a href="https://calculons.fr/calculateurs/partage-addition">calcul d'un partage d'addition et rééquilibrage des soldes</a>.</p>
 </section>
-<section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Outils associés</h2><div class="related-links"><a class="related-link" href="/outil/pourboire/"><strong>Pourboire</strong><span>Calculer le pourboire et le montant par personne.</span></a><a class="related-link" href="/outil/promotions/"><strong>Comparateur de promotions</strong><span>Comparer le prix effectif d'un lot ou d'une offre.</span></a><a class="related-link" href="/outil/prix-unitaire/"><strong>Prix au kilo, litre ou unité</strong><span>Comparer des formats différents sur une base commune.</span></a></div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="/vie-quotidienne/">Vie quotidienne</a>.</p></div></section>
-</main><footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer>
+
+<section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Outils associés</h2><div class="related-links"><a class="related-link" href="/outil/pourboire/"><strong>Pourboire</strong><span>Calculer le pourboire et le montant par personne.</span></a><a class="related-link" href="/outil/promotions/"><strong>Comparateur de promotions</strong><span>Comparer le prix effectif d'une offre ou d'un lot.</span></a><a class="related-link" href="/outil/prix-unitaire/"><strong>Prix au kilo, litre ou unité</strong><span>Comparer des formats différents sur une base commune.</span></a></div><p class="status-note">Retrouvez aussi les autres outils de la rubrique <a href="/vie-quotidienne/">Vie quotidienne</a>.</p></div></section>
+</main>
+<footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer>
 <script>
 (function(){
-const euroCents=c=> (c/100).toLocaleString("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:2});
-const pct=v=>Number(v).toLocaleString("fr-FR",{maximumFractionDigits:2});
-const people=document.getElementById("people"),count=document.getElementById("count"),modeInputs=document.querySelectorAll('input[name="mode"]'),results=document.getElementById("results");
-function mode(){return document.querySelector('input[name="mode"]:checked').value}
-function defaultShares(n){
- const base=Math.floor((100/n)*100)/100,shares=Array(n).fill(base);
- shares[n-1]=Math.round((100-base*(n-1))*100)/100;
- return shares;
+const rows=[...document.querySelectorAll(".expense-row")],people=[...document.querySelectorAll(".person-row")],count=document.getElementById("count"),mode=document.getElementById("split-mode"),results=document.getElementById("results");
+const euro=c=>(c/100).toLocaleString("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:2});
+const pct=n=>Number(n).toLocaleString("fr-FR",{maximumFractionDigits:2});
+function parse(value){const raw=String(value).trim().replace(/[\u00a0\s]/g,"");if(raw===""||/[eE]/.test(raw))return null;let s=raw;if(raw.includes(","))s=raw.replace(/\./g,"").replace(",",".");const n=Number(s);return Number.isFinite(n)?n:null}
+function cents(value){const n=parse(value);return n!==null&&n>=0?Math.round(n*100):null}
+function activeCount(){const n=parse(count.value);return n!==null&&Number.isInteger(n)&&n>=2&&n<=12?n:null}
+function names(n){return people.slice(0,n).map((r,i)=>{const input=r.querySelector(".person-name");return input?.value.trim()||"Personne "+(i+1)})}
+function shareValues(n){
+ if(mode.value==="equal")return Array(n).fill(100/n);
+ const vals=people.slice(0,n).map(r=>parse(r.querySelector(".person-share")?.value));
+ if(vals.some(v=>v===null||v<0)){results.innerHTML='<div class="share-note" role="alert"><strong>Parts personnalisées invalides.</strong><p>Chaque part doit être un nombre positif ou nul.</p></div>';return null}
+ const sum=vals.reduce((a,b)=>a+b,0);
+ if(Math.abs(sum-100)>0.0001){results.innerHTML='<div class="share-note" role="alert"><strong>Répartition invalide.</strong><p>Les parts actives doivent totaliser 100 %. Total actuel : '+pct(sum)+' %.</p></div>';return null}
+ return vals;
 }
-function parseDecimal(value){
- const raw=String(value).trim().replace(/[\u00a0\s]/g,"");
- if(raw===""||/[eE]/.test(raw))return null;
- let normalized=raw;
- if(raw.includes(",")){
-  normalized=raw.replace(/\./g,"").replace(",",".");
- }else if((raw.match(/\./g)||[]).length===1){
-  const decimals=raw.split(".")[1]||"";
-  normalized=decimals.length<=2?raw:raw.replace(/\./g,"");
- }
- const n=Number(normalized);
- return Number.isFinite(n)?n:null;
+function allocate(total,weights){
+ const exact=weights.map(w=>total*w/100),out=exact.map(Math.floor);
+ let rest=total-out.reduce((a,b)=>a+b,0);
+ exact.map((v,i)=>({i,f:v-Math.floor(v)})).sort((a,b)=>b.f-a.f||a.i-b.i).forEach(x=>{if(rest>0){out[x.i]++;rest--}});
+ return out;
 }
-function parseCents(value){const n=parseDecimal(value);return n!==null&&n>=0?Math.round(n*100):null}
-function parseNumber(value){return parseDecimal(value)}
-function parsePercentage(value){
- const raw=String(value).trim().replace(/[\u00a0\s]/g,"");
- if(raw===""||/[eE]/.test(raw))return null;
- const normalized=raw.includes(",")?raw.replace(/\./g,"").replace(",","."):raw;
- const decimalPart=normalized.split(".")[1]||"";
- if(decimalPart.length>2)return null;
- const n=Number(normalized);
- return Number.isFinite(n)?n:null;
+function updateRows(n){
+ people.forEach((r,i)=>{r.hidden=i>=n});
+ rows.forEach(r=>{
+  r.querySelectorAll(".expense-payer option").forEach(o=>o.hidden=Number(o.value)>=n);
+  const payer=r.querySelector(".expense-payer");if(payer&&Number(payer.value)>=n)payer.value="0";
+  r.querySelectorAll(".share-check").forEach((label,i)=>{label.hidden=i>=n;const cb=label.querySelector(".expense-member");if(cb&&i>=n)cb.checked=false});
+  r.hidden=false;
+ });
+ document.querySelectorAll(".custom-share-field").forEach(x=>x.hidden=mode.value!=="custom");
 }
-function allocateCents(totalCents,shares){
- const exact=shares.map(share=>totalCents*share/100);
- const cents=exact.map(Math.floor);
- let remainder=totalCents-cents.reduce((a,b)=>a+b,0);
- exact.map((v,i)=>({i,fraction:v-Math.floor(v)})).sort((a,b)=>b.fraction-a.fraction||a.i-b.i).forEach(x=>{if(remainder>0){cents[x.i]++;remainder--}});
- return cents;
-}
-function renderPeople(){
- const rawCount=String(count.value).trim(),parsedCount=parseNumber(rawCount);
- if(rawCount===""||!Number.isInteger(parsedCount)||parsedCount<2||parsedCount>12){ results.innerHTML="<div class=\"status-note\" role=\"alert\"><strong>Nombre de personnes invalide.</strong><p>Saisissez un nombre entier compris entre 2 et 12.</p></div>"; return; }
- const n=parsedCount; count.value=n;
- const old=[...people.querySelectorAll(".person")].map(row=>({name:row.querySelector(".pname").value,paid:row.querySelector(".paid").value,share:row.querySelector(".share").value}));
- const defaults=defaultShares(n);
- let shares=defaults;
- if(mode()==="custom"&&old.length){
-  const weights=Array.from({length:n},(_,i)=>{
-   if(i<old.length){const v=parsePercentage(old[i].share);if(v!==null&&v>=0)return v;}
-   return defaults[i];
-  });
-  const weightSum=weights.reduce((a,b)=>a+b,0);
-  if(weightSum>0){
-   shares=weights.map(v=>Math.floor((v/weightSum*100)*100)/100);
-   const assigned=shares.reduce((a,b)=>a+b,0);
-   shares[n-1]=Math.round((shares[n-1]+(100-assigned))*100)/100;
-  }
- }
- people.replaceChildren();
- for(let i=0;i<n;i++){
-  const d=document.createElement("div");d.className="person";
-  const name=document.createElement("input");name.className="pname";name.type="text";name.setAttribute("aria-label","Nom du participant "+(i+1));name.value=old[i]?.name ?? ("Personne "+(i+1));
-  const share=document.createElement("input");share.className="share";share.type="text";share.inputMode="decimal";share.autocomplete="off";share.setAttribute("aria-label","Part du participant "+(i+1)+" en pourcentage");share.value=shares[i];
-  const paid=document.createElement("input");paid.className="paid";paid.type="text";paid.inputMode="decimal";paid.autocomplete="off";paid.setAttribute("aria-label","Montant déjà payé par le participant "+(i+1));paid.value=old[i]?.paid ?? "0";
-  d.append(name,share,paid);people.appendChild(d);
- }
- updateMode();calculate();
-}
-function updateMode(){people.querySelectorAll(".share").forEach(x=>x.disabled=mode()==="equal")}
 function calculate(){
- const totalRaw=document.getElementById("total").value,totalCents=parseCents(totalRaw),rows=[...people.querySelectorAll(".person")];
- if(!rows.length)return;
- const names=rows.map((r,i)=>r.querySelector(".pname").value.trim()||("Personne "+(i+1)));
- const paidCents=rows.map(r=>parseCents(r.querySelector(".paid").value));
- if(totalCents===null||totalCents<=0){results.innerHTML="<div class=\"status-note\" role=\"alert\"><strong>Montant total invalide.</strong><p>Saisissez un montant strictement supérieur à 0 €.</p></div>";return}
- if(paidCents.some(v=>v===null)){results.innerHTML="<div class=\"status-note\" role=\"alert\"><strong>Montant déjà payé invalide.</strong><p>Chaque montant déjà payé doit être un nombre positif ou égal à 0.</p></div>";return}
- let shares;
- if(mode()==="equal") shares=rows.map(()=>100/rows.length);
- else{
-  shares=rows.map(r=>{const raw=r.querySelector(".share").value.trim();const n=parsePercentage(raw);return raw!==""&&n!==null&&n>=0?n:null});
-  if(shares.some(v=>v===null)){
-   const invalidPrecision=rows.some(r=>{const raw=r.querySelector(".share").value.trim();return raw!==""&&parseDecimal(raw)!==null&&parsePercentage(raw)===null});
-   results.innerHTML="<div class=\"status-note\" role=\"alert\"><strong>Part invalide.</strong><p>"+(invalidPrecision?"Chaque pourcentage doit comporter au maximum 2 décimales.":"Chaque pourcentage doit être un nombre compris entre 0 et 100.")+"</p></div>";
-   return
-  }
-  if(shares.some(v=>v>100)){results.innerHTML="<div class=\"status-note\" role=\"alert\"><strong>Part invalide.</strong><p>Chaque pourcentage doit être compris entre 0 et 100.</p></div>";return}
-  const sum=shares.reduce((a,b)=>a+b,0);
-  if(Math.round(sum*100)!==10000){results.innerHTML='<strong>Répartition invalide.</strong><p>Les parts personnalisées doivent totaliser 100 %. Total actuel : '+pct(sum)+' %.</p>';return}
+ const n=activeCount();if(n===null){results.innerHTML='<div class="share-note" role="alert"><strong>Nombre de personnes invalide.</strong><p>Choisissez un nombre entier entre 2 et 12.</p></div>';return}
+ const weights=shareValues(n);if(!weights)return;
+ const participantNames=names(n),paid=Array(n).fill(0),due=Array(n).fill(0),expenseData=[];
+ for(const row of rows){
+  const amountInput=row.querySelector(".expense-amount"),amountRaw=amountInput.value.trim();
+  if(amountRaw==="")continue;
+  const amount=cents(amountRaw);
+  if(amount===null){results.innerHTML='<div class="share-note" role="alert"><strong>Montant invalide.</strong><p>Chaque dépense doit être un nombre positif ou nul.</p></div>';return}
+  if(amount===0)continue;
+  const selected=[...row.querySelectorAll(".expense-member")].filter(cb=>cb.checked&&Number(cb.value)<n).map(cb=>Number(cb.value));
+  if(!selected.length){results.innerHTML='<div class="share-note" role="alert"><strong>Dépense sans participant.</strong><p>Cochez au moins une personne pour chaque dépense renseignée.</p></div>';return}
+  const payer=Number(row.querySelector(".expense-payer").value);
+  if(payer>=n){results.innerHTML='<div class="share-note" role="alert"><strong>Personne payeuse invalide.</strong><p>Sélectionnez un participant actif pour chaque dépense.</p></div>';return}
+  paid[payer]+=amount;
+  const localWeights=mode.value==="equal"?selected.map(()=>100/selected.length):selected.map(i=>weights[i]);
+  const localSum=localWeights.reduce((a,b)=>a+b,0);
+  if(localSum<=0){results.innerHTML='<div class="share-note" role="alert"><strong>Répartition impossible.</strong><p>Les personnes sélectionnées doivent avoir une part supérieure à zéro.</p></div>';return}
+  const localShares=localWeights.map(v=>v/localSum*100),allocated=allocate(amount,localShares);
+  selected.forEach((i,k)=>due[i]+=allocated[k]);
+  expenseData.push({name:row.querySelector(".expense-name").value.trim()||"Dépense",amount,payer,selected});
  }
- const dueCents=allocateCents(totalCents,shares);
- const balances=dueCents.map((due,i)=>paidCents[i]-due),totalPaidCents=paidCents.reduce((a,b)=>a+b,0);
- const remaining=Math.max(0,totalCents-totalPaidCents),overpaid=Math.max(0,totalPaidCents-totalCents),fullyPaid=totalPaidCents===totalCents;
- const creditors=balances.map((b,i)=>({i,amount:b})).filter(x=>x.amount>0).sort((a,b)=>b.amount-a.amount);
- const debtors=balances.map((b,i)=>({i,amount:-b})).filter(x=>x.amount>0).sort((a,b)=>b.amount-a.amount);
- const transfers=[];
- let di=0,ci=0;
- while(di<debtors.length&&ci<creditors.length){
-  const amount=Math.min(debtors[di].amount,creditors[ci].amount);
-  transfers.push({from:names[debtors[di].i],to:names[creditors[ci].i],amount});
-  debtors[di].amount-=amount;creditors[ci].amount-=amount;
-  if(debtors[di].amount===0)di++;
-  if(creditors[ci].amount===0)ci++;
- }
- const externalRemaining=debtors.slice(di).reduce((sum,x)=>sum+x.amount,0);
- const externalRefund=creditors.slice(ci).reduce((sum,x)=>sum+x.amount,0);
- const status=remaining>0
-  ? '<div class="status-note"><strong>Reste à payer : '+euroCents(remaining)+'</strong>. Les remboursements entre participants sont calculés dès maintenant ; le solde restant doit encore être payé au bénéficiaire de la dépense.</div>'
-  : overpaid>0
-  ? '<div class="status-note"><strong>Surpaiement : '+euroCents(overpaid)+'</strong>. Les remboursements entre participants sont calculés ; le surplus doit être remboursé par le bénéficiaire de la dépense.</div>'
-  : '<div class="status-note">La totalité de la dépense est couverte. Les remboursements entre participants peuvent être réglés.</div>';
- const rowsHtml=names.map((name,i)=>'<tr><td>'+escapeHtml(name)+'</td><td>'+pct(shares[i])+' %</td><td>'+euroCents(dueCents[i])+'</td><td>'+euroCents(paidCents[i])+'</td><td class="'+(balances[i]>=0?"positive":"negative")+'">'+(balances[i]>=0?"+":"")+euroCents(balances[i])+'</td></tr>').join("");
- const transferHtml=transfers.length?transfers.map(x=>'<p>'+escapeHtml(x.from)+' → '+escapeHtml(x.to)+' : '+euroCents(x.amount)+'</p>').join(""):'<p>Aucun transfert entre participants nécessaire.</p>';
- const externalHtml=externalRemaining>0?'<p><strong>À payer au bénéficiaire : '+euroCents(externalRemaining)+'</strong></p>':externalRefund>0?'<p><strong>À récupérer du bénéficiaire : '+euroCents(externalRefund)+'</strong></p>':fullyPaid?'<p>Les paiements correspondent exactement aux parts calculées.</p>':'';
- results.innerHTML='<h2>Répartition</h2><div class="result-kpi"><div class="result-card primary"><small>Total</small><strong>'+euroCents(totalCents)+'</strong></div><div class="result-card"><small>Déjà payé</small><strong>'+euroCents(totalPaidCents)+'</strong></div></div>'+status+'<table class="result-table"><caption style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Détail de la répartition par participant</caption><thead><tr><th>Participant</th><th>Part</th><th>Doit supporter</th><th>Déjà payé</th><th>Solde</th></tr></thead><tbody>'+rowsHtml+'</tbody></table><div class="transfers"><h3>Remboursements à effectuer</h3>'+transferHtml+'</div>';
+ if(!expenseData.length){results.innerHTML='<div class="share-note" role="alert"><strong>Ajoutez au moins une dépense.</strong><p>Saisissez un montant dans une ligne pour calculer la répartition.</p></div>';return}
+ const total=expenseData.reduce((s,e)=>s+e.amount,0),balances=paid.map((v,i)=>v-due[i]);
+ const creditors=balances.map((v,i)=>({i,a:v})).filter(x=>x.a>0).sort((a,b)=>b.a-a.a),debtors=balances.map((v,i)=>({i,a:-v})).filter(x=>x.a>0).sort((a,b)=>b.a-a.a);
+ const transfers=[];let di=0,ci=0;
+ while(di<debtors.length&&ci<creditors.length){const a=Math.min(debtors[di].a,creditors[ci].a);transfers.push({from:debtors[di].i,to:creditors[ci].i,a});debtors[di].a-=a;creditors[ci].a-=a;if(debtors[di].a===0)di++;if(creditors[ci].a===0)ci++}
+ const table=participantNames.map((name,i)=>'<tr><td>'+escapeHtml(name)+'</td><td>'+euro(paid[i])+'</td><td>'+euro(due[i])+'</td><td class="'+(balances[i]>=0?"share-positive":"share-negative")+'">'+(balances[i]>=0?"+":"−")+euro(Math.abs(balances[i]))+'</td></tr>').join("");
+ const transferHtml=transfers.length?transfers.map(t=>'<div class="share-transfer"><span>'+escapeHtml(participantNames[t.from])+' → '+escapeHtml(participantNames[t.to])+'</span><strong>'+euro(t.a)+'</strong></div>').join(""):'<div class="share-note"><strong>Tout est équilibré.</strong><p>Personne ne doit rien à personne.</p></div>';
+ results.innerHTML='<div class="share-summary"><div class="share-kpi"><small>Dépenses</small><strong>'+euro(total)+'</strong></div><div class="share-kpi"><small>Participants</small><strong>'+n+'</strong></div><div class="share-kpi"><small>Remboursements</small><strong>'+transfers.length+'</strong></div></div><div class="share-table-wrap"><table class="share-table"><thead><tr><th>Participant</th><th>A payé</th><th>Sa part</th><th>Solde</th></tr></thead><tbody>'+table+'</tbody></table></div><div><h2>Qui doit payer qui ?</h2><div class="share-transfers">'+transferHtml+'</div></div><div class="share-note"><strong>Lecture du solde :</strong> un montant positif est à recevoir ; un montant négatif est à payer. Les remboursements proposés ne changent pas les soldes, ils les rapprochent de zéro.</div>';
 }
-function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
-count.addEventListener("change",renderPeople);
-modeInputs.forEach(x=>x.addEventListener("change",()=>{updateMode();calculate()}));
-people.addEventListener("input",calculate);
-document.getElementById("total").addEventListener("input",calculate);
-document.getElementById("calculate").addEventListener("click",()=>{const n=parseNumber(count.value);if(n===null||!Number.isInteger(n)||n<2||n>12){renderPeople();return}if(people.querySelectorAll(".person").length!==n){renderPeople();return}calculate();});
-renderPeople();
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
+count.addEventListener("input",()=>{const n=activeCount();if(n)updateRows(n);calculate()});
+mode.addEventListener("change",()=>{const n=activeCount();if(n){updateRows(n);calculate()}});
+document.getElementById("calculate").addEventListener("click",calculate);
+document.getElementById("people").addEventListener("input",calculate);
+document.querySelectorAll(".expense-amount,.expense-name,.expense-payer,.expense-member").forEach(el=>el.addEventListener("input",calculate));
+document.querySelectorAll(".expense-payer,.expense-member").forEach(el=>el.addEventListener("change",calculate));
+updateRows(3);calculate();
 })();
 </script>
 </body>
