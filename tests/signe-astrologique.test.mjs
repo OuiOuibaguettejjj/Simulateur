@@ -8,7 +8,10 @@ import {runInlineCalculator} from "./calculator-harness.mjs";
 // - 2026-04 : https://horoscopes.astro-seek.com/astrology-ephemeris-april-2026
 // - 2026-06 : https://horoscopes.astro-seek.com/astrology-ephemeris-june-2026
 // - 2026-08 : https://horoscopes.astro-seek.com/monthly-astro-calendar-august-2026
-// - 2026-11 : https://horoscopes.astro-seek.com/monthly-astro-calendar-november-2026\n// Référence ascendant : Jennifer Lawrence, née le 15 août 1990 à 15:20 à Louisville,\n// donnée publiquement comme Sagittaire ascendant sur Asteria :\n// https://heyasteria.com/explore/jennifer-lawrence
+// - 2026-11 : https://horoscopes.astro-seek.com/monthly-astro-calendar-november-2026
+// Référence ascendant : Jennifer Lawrence, née le 15 août 1990 à 15:20 à Louisville,
+// donnée publiquement comme Sagittaire ascendant sur Asteria :
+// https://heyasteria.com/explore/jennifer-lawrence
 const cases=[
   ["2026-04-15","♈ Bélier"],
   ["2026-06-15","♊ Gémeaux"],
@@ -38,19 +41,18 @@ const rising=await runInlineCalculator({
   family:"outil",
   slug:"signe-astrologique",
   inputs:{
-    "birth-date":"1990-08-15",
+    "birth-date":"15/08/1990",
     "birth-time":"15:20",
-    "birth-lat":"38.2527",
-    "birth-lon":"-85.7585",
-    "utc-offset":"-4"
+    "birth-city":"louisville"
   }
 });
 assert.match(rising.text,/♐\s+Sagittaire/,"15 août 1990, 15:20, Louisville : ascendant inattendu");
+assert.doesNotMatch(rising.text,/Valeurs invalides|undefined|NaN|Heure invalide/i,"parcours complet : résultat d'ascendant invalide");
 
 const noTime=await runInlineCalculator({
   family:"outil",
   slug:"signe-astrologique",
-  inputs:{"birth-date":"1990-08-15"}
+  inputs:{"birth-date":"15/08/1990"}
 });
 assert.match(noTime.text,/Heure nécessaire/i,"sans heure, l'ascendant doit être explicitement non calculé");
 
@@ -70,7 +72,7 @@ assert.match(missingTimezone.text,/Fuseau nécessaire|Décalage UTC manquant/i,"
 const invalidTime=await runInlineCalculator({
   family:"outil",
   slug:"signe-astrologique",
-  inputs:{"birth-date":"1990-08-15","birth-time":"25:00"}
+  inputs:{"birth-date":"15/08/1990","birth-time":"25:00"}
 });
 assert.match(invalidTime.text,/Heure invalide/i,"heure invalide : validation absente");
 
