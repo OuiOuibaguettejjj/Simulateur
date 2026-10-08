@@ -1109,5 +1109,29 @@
     "sortie": "1\\s*342,80\\s*€\\s*/\\s*an",
     "source": "https://particulier.edf.fr/fr/accueil/guide-energie/electricite/prix-kwh-electricite.html",
     "note": "Cas indépendant : 3 600 kWh en HP × 0,2142 € + 2 400 kWh en HC × 0,1589 € + 190,32 € d’abonnement = 1 342,80 €."
+  },
+  {
+    "outil": "cout-km",
+    "entrees": {
+      "achat": "25000",
+      "revente": "12000",
+      "duree": "5",
+      "km": "12000",
+      "fraisAchat": "500",
+      "energieMode": "conso",
+      "energieType": "fuel",
+      "conso": "6.5",
+      "prixEnergie": "1.85",
+      "assurance": "700",
+      "entretien": "800",
+      "parking": "300",
+      "autres": "200",
+      "interets": "1000"
+    },
+    "attendu": 6743,
+    "tolerance": 0.01,
+    "sortie": "Coût annuel",
+    "source": "https://presse.ademe.fr/files/consommations_carburant_2010.pdf",
+    "note": "Cas de référence indépendant : énergie 12 000 × 6,5 / 100 × 1,85 = 1 443 € ; dépréciation et frais d'achat = (25 000 − 12 000 + 500) / 5 = 2 700 € ; autres coûts annuels = 700 + 800 + 300 + 200 + 1 000 / 5 = 2 600 € ; total = 6 743 €. La source ADEME documente les principaux postes composant un coût complet automobile."
   }
 ]
