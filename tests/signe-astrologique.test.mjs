@@ -38,11 +38,9 @@ const rising=await runInlineCalculator({
   family:"outil",
   slug:"signe-astrologique",
   inputs:{
-    "birth-date":"1990-08-15",
+    "birth-date":"15/08/1990",
     "birth-time":"15:20",
-    "birth-lat":"38.2527",
-    "birth-lon":"-85.7585",
-    "utc-offset":"-4"
+    "birth-city":"Louisville"
   }
 });
 assert.match(rising.text,/♐\s+Sagittaire/,"15 août 1990, 15:20, Louisville : ascendant inattendu");
@@ -50,7 +48,7 @@ assert.match(rising.text,/♐\s+Sagittaire/,"15 août 1990, 15:20, Louisville : 
 const noTime=await runInlineCalculator({
   family:"outil",
   slug:"signe-astrologique",
-  inputs:{"birth-date":"1990-08-15"}
+  inputs:{"birth-date":"15/08/1990"}
 });
 assert.match(noTime.text,/Heure nécessaire/i,"sans heure, l'ascendant doit être explicitement non calculé");
 
@@ -70,7 +68,7 @@ assert.match(missingTimezone.text,/Fuseau nécessaire|Décalage UTC manquant/i,"
 const invalidTime=await runInlineCalculator({
   family:"outil",
   slug:"signe-astrologique",
-  inputs:{"birth-date":"1990-08-15","birth-time":"25:00"}
+  inputs:{"birth-date":"15/08/1990","birth-time":"25:00"}
 });
 assert.match(invalidTime.text,/Heure invalide/i,"heure invalide : validation absente");
 
