@@ -96,18 +96,6 @@
     "rule": "title"
   },
   {
-    "path": "public/outil/coefficient/index.html",
-    "rule": "formula"
-  },
-  {
-    "path": "public/outil/coefficient/index.html",
-    "rule": "result"
-  },
-  {
-    "path": "public/outil/coefficient/index.html",
-    "rule": "title"
-  },
-  {
     "path": "public/outil/comparateur-placements/index.html",
     "rule": "content-h2"
   },

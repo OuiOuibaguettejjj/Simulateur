@@ -8,7 +8,45 @@
     "attendu": 1.43,
     "tolerance": 0,
     "sortie": "Coefficient",
-    "source": "https://booper.fr/glossaire/calcul-prix-de-vente"
+    "source": "https://eduscol.education.gouv.fr/media/126080/download?attachment=1"
+  },
+  {
+    "outil": "coefficient",
+    "entrees": {
+      "mode": "final",
+      "a": "80",
+      "c": "1.25"
+    },
+    "attendu": 100,
+    "tolerance": 0,
+    "sortie": "Valeur finale",
+    "verifications": [
+      {
+        "sortie": "Variation",
+        "attendu": 25,
+        "tolerance": 0
+      }
+    ],
+    "source": "https://eduscol.education.gouv.fr/media/126080/download?attachment=1"
+  },
+  {
+    "outil": "coefficient",
+    "entrees": {
+      "mode": "initial",
+      "b": "100",
+      "c": "1.25"
+    },
+    "attendu": 80,
+    "tolerance": 0,
+    "sortie": "Valeur initiale",
+    "verifications": [
+      {
+        "sortie": "Variation",
+        "attendu": 25,
+        "tolerance": 0
+      }
+    ],
+    "source": "https://eduscol.education.gouv.fr/media/126080/download?attachment=1"
   },
   {
     "outil": "marge",
