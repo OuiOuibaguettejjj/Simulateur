@@ -869,7 +869,7 @@
     },
     "attendu": 1159.92,
     "tolerance": 0.01,
-    "sortie": "Mensualité",
+    "sortie": "Votre estimation",
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/R2924",
     "note": "Calcul indépendant : formule d’annuité à taux fixe, puis arrondi de la mensualité aux centimes. La valeur attendue n’est pas obtenue en exécutant le calculateur testé."
   }
