@@ -922,4 +922,29 @@
     "verificationSource": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000051397190",
     "note": "Calcul indépendant : revenu retenu = max(40 000 €, 250 000 €/9) = 40 000 € ; coefficient familial 1,8 ; 40 000/1,8 = 22 222,22 €, soit tranche 2 en zone B1 ; coût retenu 243 000 € ; quotité 40 % ; PTZ théorique 97 200 €."
   }
+,
+  {
+    "outil": "age",
+    "entrees": {
+      "dob": "2000-01-31",
+      "now": "2000-03-01"
+    },
+    "attendu": 0,
+    "tolerance": 0,
+    "sortie": "0 an[^|]*1 mois et 1 jour",
+    "source": "https://allinhub.app/fr/outils/calculateur-d-age/",
+    "note": "Cas frontière indépendant : du 31 janvier au 1er mars, un mois et un jour sont comptés selon la longueur réelle des mois."
+  },
+  {
+    "outil": "age",
+    "entrees": {
+      "dob": "2000-02-29",
+      "now": "2021-02-28"
+    },
+    "attendu": 21,
+    "tolerance": 0,
+    "sortie": "21 ans",
+    "source": "https://www.la-calculatrice.com/calcul-age.html",
+    "note": "Cas bissextile indépendant : la convention publiée traite le 29 février comme le 28 février dans une année non bissextile."
+  }
 ]
