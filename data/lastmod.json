@@ -38,7 +38,7 @@
     "/outil/coefficient/": "2026-10-03",
     "/outil/comparateur-placements/": "2026-10-03",
     "/outil/conges-payes/": "2026-10-03",
-    "/outil/consommation-carburant/": "2026-10-03",
+    "/outil/consommation-carburant/": "2026-10-08",
     "/outil/cout-km/": "2026-10-03",
     "/outil/difference-dates/": "2026-10-03",
     "/outil/donation/": "2026-10-03",
@@ -110,6 +110,5 @@
     "/vie-quotidienne/": "2026-10-03",
     "/outil/etes-vous-riche/": "2026-10-05",
     "/outil/prime-activite/": "2026-10-07"
-  },
-  "consommation-carburant/": "2026-10-08"
+  }
 }
