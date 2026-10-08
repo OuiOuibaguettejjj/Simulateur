@@ -250,10 +250,12 @@
           1
         ],
         "travauxMinimumRatio": 0.25,
-        "zonesAncienEligibles": [
-          "B2",
-          "C"
-        ],
+        "zonesAncienEligibles": {
+          "A": 0,
+          "B1": 0,
+          "B2": 1,
+          "C": 1
+        },
         "durees": {
           "1": {
             "defer": 10,
