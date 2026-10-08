@@ -13,6 +13,7 @@ Ce document recense les échéances actuellement suivies par `data/parametres.js
 | Indemnité de licenciement | 31/12/2026 | [Service-Public — indemnité de licenciement](https://www.service-public.gouv.fr/particuliers/vosdroits/F987) et [Légifrance — article R1234-2](https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000035644692/2026-05-10) |
 | PTZ | 31/12/2027 | [Service-Public — PTZ](https://www.service-public.gouv.fr/particuliers/vosdroits/F10871) et [Légifrance — article D31-10-9](https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000051397190) |
 | TVA | 31/12/2026 | [Ministère de l’Économie — taux de TVA](https://www.economie.gouv.fr/particuliers/impots-et-fiscalite/gerer-mes-autres-impots-et-taxes/tva-quels-sont-les-taux-de-votre-quotidien) et [Légifrance — articles 278 à 279](https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006069577/LEGISCTA000006179654/) et [article 281 octies](https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000044371385/2026-04-01) |
+| Électricité | 31/01/2027 | [CRE — tarifs réglementés de vente d’électricité](https://www.cre.fr/documents/deliberations/tarifs-reglementes-de-vente-delectricite-en-france-metropolitaine-continentale-et-en-zones-non-interconnectees.html) et [EDF — prix du kWh](https://particulier.edf.fr/fr/accueil/guide-energie/electricite/prix-kwh-electricite.html) |
 
 ## Procédure de renouvellement
 
