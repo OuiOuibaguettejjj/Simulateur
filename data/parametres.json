@@ -364,6 +364,170 @@
           "particulier": 2.1
         }
       }
+    },
+    "ptz": {
+      "label": "PTZ — prêt à taux zéro",
+      "year": 2026,
+      "usedBy": [
+        "ptz"
+      ],
+      "source": {
+        "label": "Service-Public et Légifrance — PTZ",
+        "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10871"
+      },
+      "effectiveFrom": "2025-04-01",
+      "effectiveTo": "2027-12-31",
+      "verifiedOn": "2026-10-08",
+      "notes": "Barème des offres émises du 1er avril 2025 au 31 décembre 2027 vérifié le 8 octobre 2026 sur Service-Public et Légifrance. Le calculateur applique les plafonds de ressources, coefficients familiaux, plafonds d'opération, quotités par type de logement, et durées/différés. Il ne modélise pas les régimes particuliers ni toutes les conditions administratives, techniques et les exceptions à la primo-accession.",
+      "values": {
+        "plafondsRessources": {
+          "A": [
+            49000,
+            73500,
+            88200,
+            102900,
+            117600,
+            132300,
+            147000,
+            161700
+          ],
+          "B1": [
+            34500,
+            51750,
+            62100,
+            72450,
+            82800,
+            93150,
+            103500,
+            113850
+          ],
+          "B2": [
+            31500,
+            47250,
+            56700,
+            66150,
+            75600,
+            85050,
+            94500,
+            103950
+          ],
+          "C": [
+            28500,
+            42750,
+            51300,
+            59850,
+            68400,
+            76950,
+            85500,
+            94050
+          ]
+        },
+        "coefficientsFamiliaux": [
+          1,
+          1.5,
+          1.8,
+          2.1,
+          2.4
+        ],
+        "tranches": {
+          "A": [
+            25000,
+            31000,
+            37000,
+            49000
+          ],
+          "B1": [
+            21500,
+            26000,
+            30000,
+            34500
+          ],
+          "B2": [
+            18000,
+            22500,
+            27000,
+            31500
+          ],
+          "C": [
+            15000,
+            19500,
+            24000,
+            28500
+          ]
+        },
+        "plafondsOperation": {
+          "A": [
+            150000,
+            225000,
+            270000,
+            315000,
+            360000
+          ],
+          "B1": [
+            135000,
+            202500,
+            243000,
+            283500,
+            324000
+          ],
+          "B2": [
+            110000,
+            165000,
+            198000,
+            231000,
+            264000
+          ],
+          "C": [
+            100000,
+            150000,
+            180000,
+            210000,
+            240000
+          ]
+        },
+        "quotites": {
+          "collectif": [
+            0.5,
+            0.4,
+            0.4,
+            0.2
+          ],
+          "individuel": [
+            0.3,
+            0.2,
+            0.2,
+            0.1
+          ],
+          "ancien": [
+            0.5,
+            0.4,
+            0.4,
+            0.2
+          ]
+        },
+        "durees": {
+          "1": {
+            "defer": 10,
+            "repay": 15,
+            "total": 25
+          },
+          "2": {
+            "defer": 8,
+            "repay": 12,
+            "total": 20
+          },
+          "3": {
+            "defer": 2,
+            "repay": 13,
+            "total": 15
+          },
+          "4": {
+            "defer": 0,
+            "repay": 10,
+            "total": 10
+          }
+        }
+      }
     }
   },
   "anneeAMigrer": {
@@ -385,7 +549,6 @@
       "plus-value-immobiliere",
       "plus-value-mobiliere",
       "preavis-demission",
-      "ptz",
       "retraite-simplifiee",
       "rupture-conventionnelle",
       "succession"
