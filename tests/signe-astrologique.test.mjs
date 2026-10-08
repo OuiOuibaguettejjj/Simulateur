@@ -44,6 +44,7 @@ const rising=await runInlineCalculator({
   }
 });
 assert.match(rising.text,/♐\s+Sagittaire/,"15 août 1990, 15:20, Louisville : ascendant inattendu");
+assert.doesNotMatch(rising.text,/Valeurs invalides|undefined|NaN|Heure invalide/i,"parcours complet : résultat d'ascendant invalide");
 
 const noTime=await runInlineCalculator({
   family:"outil",
