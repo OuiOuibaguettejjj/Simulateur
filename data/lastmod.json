@@ -94,7 +94,7 @@
     "/outil/solde-tout-compte/": "2026-10-03",
     "/outil/succession/": "2026-10-03",
     "/outil/surface/": "2026-10-03",
-    "/outil/tableau-amortissement/": "2026-10-03",
+    "/outil/tableau-amortissement/": "2026-10-08",
     "/outil/taux-endettement/": "2026-10-03",
     "/outil/temps-calcul/": "2026-10-03",
     "/outil/temps-partiel/": "2026-10-03",
@@ -110,6 +110,5 @@
     "/vie-quotidienne/": "2026-10-03",
     "/outil/etes-vous-riche/": "2026-10-05",
     "/outil/prime-activite/": "2026-10-07"
-  },
-  "/outil/tableau-amortissement/": "2026-10-08"
+  }
 }
