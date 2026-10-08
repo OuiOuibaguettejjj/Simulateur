@@ -8,6 +8,7 @@ Dernière vérification : **8 octobre 2026**.
 - [Légifrance — Code général des impôts, article 278](https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000026950057/2026-05-04) — taux normal de 20 %.
 - [Légifrance — Code général des impôts, article 278-0 bis](https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000053562844/2026-07-03) — taux réduit de 5,5 %.
 - [Légifrance — Code général des impôts, article 279](https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000053562872/2026-05-12) — taux réduit de 10 %.
+- [Légifrance — Code général des impôts, article 281 octies](https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000044371385/2026-04-01) — taux particulier de 2,1 % pour certaines catégories de médicaments et produits pharmaceutiques.
 
 ## Périmètre du calculateur
 
