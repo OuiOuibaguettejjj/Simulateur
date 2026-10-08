@@ -921,8 +921,7 @@
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10871",
     "verificationSource": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000051397190",
     "note": "Calcul indépendant : revenu retenu = max(40 000 €, 250 000 €/9) = 40 000 € ; coefficient familial 1,8 ; 40 000/1,8 = 22 222,22 €, soit tranche 2 en zone B1 ; coût retenu 243 000 € ; quotité 40 % ; PTZ théorique 97 200 €."
-  }
-,
+  },
   {
     "outil": "age",
     "entrees": {
@@ -946,5 +945,31 @@
     "sortie": "21 ans",
     "source": "https://www.la-calculatrice.com/calcul-age.html",
     "note": "Cas bissextile indépendant : la convention publiée traite le 29 février comme le 28 février dans une année non bissextile."
+  },
+  {
+    "outil": "inflation",
+    "entrees": {
+      "prix": "1000",
+      "taux": "2",
+      "annees": "10"
+    },
+    "attendu": 1218.99,
+    "tolerance": 0.01,
+    "sortie": "1\\s*218,99\\s*€",
+    "source": "https://www.insee.fr/fr/metadonnees/definition/c1557",
+    "note": "Cas de référence indépendant : 1 000 € × 1,02^10 = 1 218,9944 €, arrondi à 1 218,99 €. La valeur attendue est calculée indépendamment du calculateur testé."
+  },
+  {
+    "outil": "inflation",
+    "entrees": {
+      "prix": "10000",
+      "taux": "3",
+      "annees": "20"
+    },
+    "attendu": 18061.11,
+    "tolerance": 0.01,
+    "sortie": "18\\s*061,11\\s*€",
+    "source": "https://www.insee.fr/fr/metadonnees/definition/c1299",
+    "note": "Cas de non-régression indépendant : 10 000 € × 1,03^20 = 18 061,1123 €, arrondi à 18 061,11 €. Le taux est une hypothèse de projection, pas une donnée Insee."
   }
 ]
