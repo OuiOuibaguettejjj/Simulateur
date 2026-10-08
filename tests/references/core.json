@@ -858,5 +858,19 @@
     "sortie": "70,00\\s*€",
     "source": "https://calculons.fr/calculateurs/partage-addition",
     "note": "Cas de référence indépendant : les trois dépenses de l'exemple (120 €, 60 € et 30 €) totalisent 210 € et, avec trois participants, donnent une part moyenne de 70 € par personne. Valeur calculée directement par 210 ÷ 3, sans exécuter le calculateur testé."
+  },
+  {
+    "outil": "tableau-amortissement",
+    "entrees": {
+      "capital": "200000",
+      "taux": "3.50",
+      "duree": "20",
+      "lignes": "12"
+    },
+    "attendu": 1159.92,
+    "tolerance": 0.01,
+    "sortie": "Votre estimation",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/R2924",
+    "note": "Calcul indépendant : formule d’annuité à taux fixe, puis arrondi de la mensualité aux centimes. La valeur attendue n’est pas obtenue en exécutant le calculateur testé."
   }
 ]

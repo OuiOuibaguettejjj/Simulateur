@@ -1060,26 +1060,6 @@
     "rule": "title"
   },
   {
-    "path": "public/outil/tableau-amortissement/index.html",
-    "rule": "content-h2"
-  },
-  {
-    "path": "public/outil/tableau-amortissement/index.html",
-    "rule": "description"
-  },
-  {
-    "path": "public/outil/tableau-amortissement/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/tableau-amortissement/index.html",
-    "rule": "formula"
-  },
-  {
-    "path": "public/outil/tableau-amortissement/index.html",
-    "rule": "title"
-  },
-  {
     "path": "public/outil/taux-endettement/index.html",
     "rule": "faq"
   },
