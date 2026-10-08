@@ -9,7 +9,9 @@ import {runInlineCalculator} from "./calculator-harness.mjs";
 // - 2026-06 : https://horoscopes.astro-seek.com/astrology-ephemeris-june-2026
 // - 2026-08 : https://horoscopes.astro-seek.com/monthly-astro-calendar-august-2026
 // - 2026-11 : https://horoscopes.astro-seek.com/monthly-astro-calendar-november-2026
-// Référence ascendant : Jennifer Lawrence, née le 15 août 1990 à 15:20 à Louisville,\n// donnée publiquement comme Sagittaire ascendant sur Asteria :\n// https://heyasteria.com/explore/jennifer-lawrence
+// Référence ascendant : Jennifer Lawrence, née le 15 août 1990 à 15:20 à Louisville,
+// donnée publiquement comme Sagittaire ascendant sur Asteria :
+// https://heyasteria.com/explore/jennifer-lawrence
 const cases=[
   ["2026-04-15","♈ Bélier"],
   ["2026-06-15","♊ Gémeaux"],
