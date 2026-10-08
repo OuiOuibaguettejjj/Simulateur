@@ -891,5 +891,35 @@
     "sortie": "Votre estimation",
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/R2924",
     "note": "Calcul indépendant : formule d’annuité à taux fixe, puis arrondi de la mensualité aux centimes. La valeur attendue n’est pas obtenue en exécutant le calculateur testé."
+  },
+  {
+    "outil": "ptz",
+    "entrees": {
+      "rfr": "40000",
+      "cout": "250000",
+      "works": "",
+      "other-loans": "",
+      "zone": "B1",
+      "people": "3",
+      "type": "collectif"
+    },
+    "attendu": 97200,
+    "tolerance": 0.01,
+    "sortie": "PTZ estimé",
+    "verifications": [
+      {
+        "sortie": "Tranche de revenus",
+        "attendu": 2,
+        "tolerance": 0
+      },
+      {
+        "sortie": "Quotité",
+        "attendu": 40,
+        "tolerance": 0
+      }
+    ],
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10871",
+    "verificationSource": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000051397190",
+    "note": "Calcul indépendant : revenu retenu = max(40 000 €, 250 000 €/9) = 40 000 € ; coefficient familial 1,8 ; 40 000/1,8 = 22 222,22 €, soit tranche 2 en zone B1 ; coût retenu 243 000 € ; quotité 40 % ; PTZ théorique 97 200 €."
   }
 ]
