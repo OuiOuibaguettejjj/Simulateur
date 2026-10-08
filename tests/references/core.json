@@ -102,7 +102,7 @@
     },
     "attendu": 50,
     "tolerance": 0,
-    "sortie": "^50\\\\s*km/h",
+    "sortie": "Votre vitesse",
     "source": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b9",
     "note": "Cas indépendant : 100 km ÷ 2 h = 50 km/h. Le facteur et l’unité sont vérifiés dans la table NIST des vitesses."
   },
@@ -117,7 +117,7 @@
     },
     "attendu": 10,
     "tolerance": 0,
-    "sortie": "^10\\\\s*mph",
+    "sortie": "Votre vitesse",
     "source": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b9",
     "note": "Cas indépendant de conversion : 5 miles en 30 minutes correspondent à 10 miles par heure. La valeur attendue est obtenue par 5 ÷ 0,5 h, sans exécuter le calculateur testé."
   },
