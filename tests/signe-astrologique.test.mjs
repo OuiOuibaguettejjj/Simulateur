@@ -10,10 +10,10 @@ import {runInlineCalculator} from "./calculator-harness.mjs";
 // - 2026-08 : https://horoscopes.astro-seek.com/monthly-astro-calendar-august-2026
 // - 2026-11 : https://horoscopes.astro-seek.com/monthly-astro-calendar-november-2026
 const cases=[
-  ["2026-04-15","Bélier ♈"],
-  ["2026-06-15","Gémeaux ♊"],
-  ["2026-08-15","Lion ♌"],
-  ["2026-11-15","Scorpion ♏"]
+  ["2026-04-15","♈ Bélier"],
+  ["2026-06-15","♊ Gémeaux"],
+  ["2026-08-15","♌ Lion"],
+  ["2026-11-15","♏ Scorpion"]
 ];
 for(const [date,expected] of cases){
   const out=await runInlineCalculator({family:"outil",slug:"signe-astrologique",inputs:{"birth-date":date}});
