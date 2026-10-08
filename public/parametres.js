@@ -286,6 +286,25 @@
           "netMensuel35Indicatif": 1477.93
         }
       }
+    },
+    "tva": {
+      "label": "TVA — principaux taux en France métropolitaine",
+      "year": 2026,
+      "effectiveFrom": "2026-01-01",
+      "effectiveTo": "2026-12-31",
+      "verifiedOn": "2026-10-08",
+      "source": {
+        "label": "Ministère de l’Économie — taux de TVA",
+        "url": "https://www.economie.gouv.fr/particuliers/impots-et-fiscalite/gerer-mes-autres-impots-et-taxes/tva-quels-sont-les-taux-de-votre-quotidien"
+      },
+      "values": {
+        "rates": {
+          "intermediaire": 10,
+          "normal": 20,
+          "particulier": 2.1,
+          "reduit": 5.5
+        }
+      }
     }
   });
   root.Parametres = {
