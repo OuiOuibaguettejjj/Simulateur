@@ -1189,7 +1189,7 @@
     },
     "attendu": 15,
     "tolerance": 0,
-    "sortie": "16\\s*h\\s*00\\s*min",
+    "sortie": "15\\s*h\\s*00\\s*min",
     "verifications": [
       {
         "sortie": "Lundi :",
