@@ -1077,5 +1077,37 @@
     "sortie": "0(?:[,.]0*)?\\s*€",
     "source": "https://carlabelling.ademe.fr/recherche/",
     "note": "Cas limite indépendant : 300 km à 6,5 L/100 km représentent 19,5 L, mais à 0 €/L le coût est de 0 €. Deux trajets ne changent pas ce coût nul."
+  },
+  {
+    "outil": "electricite",
+    "entrees": {
+      "mode": "facture",
+      "tarif": "trve",
+      "option": "base",
+      "kwh": "3500",
+      "puissance": "6",
+      "hc": "40"
+    },
+    "attendu": 890.67,
+    "tolerance": 0.01,
+    "sortie": "890,67\\s*€\\s*/\\s*an",
+    "source": "https://particulier.edf.fr/fr/accueil/guide-energie/electricite/prix-kwh-electricite.html",
+    "note": "Cas indépendant : 3 500 kWh × 0,2001 € + 190,32 € d’abonnement annuel = 890,67 €."
+  },
+  {
+    "outil": "electricite",
+    "entrees": {
+      "mode": "facture",
+      "tarif": "trve",
+      "option": "hphc",
+      "kwh": "6000",
+      "puissance": "6",
+      "hc": "40"
+    },
+    "attendu": 1342.8,
+    "tolerance": 0.01,
+    "sortie": "1\\s*342,80\\s*€\\s*/\\s*an",
+    "source": "https://particulier.edf.fr/fr/accueil/guide-energie/electricite/prix-kwh-electricite.html",
+    "note": "Cas indépendant : 3 600 kWh en HP × 0,2142 € + 2 400 kWh en HC × 0,1589 € + 190,32 € d’abonnement = 1 342,80 €."
   }
 ]
