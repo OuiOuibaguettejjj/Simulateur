@@ -236,10 +236,10 @@ const pct=n=>Number(n).toLocaleString("fr-FR",{maximumFractionDigits:2});
 function parse(value){const raw=String(value).trim().replace(/[\u00a0\s]/g,"");if(raw===""||/[eE]/.test(raw))return null;let s=raw;if(raw.includes(","))s=raw.replace(/\./g,"").replace(",",".");const n=Number(s);return Number.isFinite(n)?n:null}
 function cents(value){const n=parse(value);return n!==null&&n>=0?Math.round(n*100):null}
 function activeCount(){const n=parse(count.value);return n!==null&&Number.isInteger(n)&&n>=2&&n<=12?n:null}
-function names(n){return people.slice(0,n).map((r,i)=>{const input=r.querySelector(".person-name");return input?.value.trim()||"Personne "+(i+1)})}
+function names(n){return Array.from({length:n},(_,i)=>{const input=document.getElementById("person-"+i);return input?.value.trim()||"Personne "+(i+1)})}
 function shareValues(n){
  if(mode.value==="equal")return Array(n).fill(100/n);
- const vals=people.slice(0,n).map(r=>parse(r.querySelector(".person-share")?.value));
+ const vals=Array.from({length:n},(_,i)=>parse(document.getElementById("share-"+i)?.value));
  if(vals.some(v=>v===null||v<0)){results.innerHTML='<div class="share-note" role="alert"><strong>Parts personnalisées invalides.</strong><p>Chaque part doit être un nombre positif ou nul.</p></div>';return null}
  const sum=vals.reduce((a,b)=>a+b,0);
  if(Math.abs(sum-100)>0.0001){results.innerHTML='<div class="share-note" role="alert"><strong>Répartition invalide.</strong><p>Les parts actives doivent totaliser 100 %. Total actuel : '+pct(sum)+' %.</p></div>';return null}
@@ -266,14 +266,14 @@ function calculate(){
  const weights=shareValues(n);if(!weights)return;
  const participantNames=names(n),paid=Array(n).fill(0),due=Array(n).fill(0),expenseData=[];
  for(const row of rows){
-  const amountInput=row.querySelector(".expense-amount"),amountRaw=amountInput.value.trim();
+  const amountInput=document.getElementById("expense-amount-"+e),amountRaw=amountInput.value.trim();
   if(amountRaw==="")continue;
   const amount=cents(amountRaw);
   if(amount===null){results.innerHTML='<div class="share-note" role="alert"><strong>Montant invalide.</strong><p>Chaque dépense doit être un nombre positif ou nul.</p></div>';return}
   if(amount===0)continue;
-  const selected=[...row.querySelectorAll(".expense-member")].filter(cb=>cb.checked&&Number(cb.value)<n).map(cb=>Number(cb.value));
+  const selected=Array.from({length:n},(_,i)=>document.getElementById("expense-member-"+e+"-"+i)).filter(cb=>cb&&cb.checked).map(cb=>Number(cb.value));
   if(!selected.length){results.innerHTML='<div class="share-note" role="alert"><strong>Dépense sans participant.</strong><p>Cochez au moins une personne pour chaque dépense renseignée.</p></div>';return}
-  const payer=Number(row.querySelector(".expense-payer").value);
+  const payer=Number(document.getElementById("expense-payer-"+e).value);
   if(payer>=n){results.innerHTML='<div class="share-note" role="alert"><strong>Personne payeuse invalide.</strong><p>Sélectionnez un participant actif pour chaque dépense.</p></div>';return}
   paid[payer]+=amount;
   const localWeights=mode.value==="equal"?selected.map(()=>100/selected.length):selected.map(i=>weights[i]);
@@ -281,7 +281,7 @@ function calculate(){
   if(localSum<=0){results.innerHTML='<div class="share-note" role="alert"><strong>Répartition impossible.</strong><p>Les personnes sélectionnées doivent avoir une part supérieure à zéro.</p></div>';return}
   const localShares=localWeights.map(v=>v/localSum*100),allocated=allocate(amount,localShares);
   selected.forEach((i,k)=>due[i]+=allocated[k]);
-  expenseData.push({name:row.querySelector(".expense-name").value.trim()||"Dépense",amount,payer,selected});
+  expenseData.push({name:document.getElementById("expense-name-"+e).value.trim()||"Dépense",amount,payer,selected});
  }
  if(!expenseData.length){results.innerHTML='<div class="share-note" role="alert"><strong>Ajoutez au moins une dépense.</strong><p>Saisissez un montant dans une ligne pour calculer la répartition.</p></div>';return}
  const total=expenseData.reduce((s,e)=>s+e.amount,0),balances=paid.map((v,i)=>v-due[i]);
