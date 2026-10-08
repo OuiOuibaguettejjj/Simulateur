@@ -66,7 +66,7 @@
 <section class="content-section speed-content">
 <h2>Comment calculer une vitesse ?</h2>
 <p>La vitesse moyenne correspond à la distance parcourue divisée par la durée du parcours. Il faut utiliser des unités cohérentes avant de diviser : le calculateur s’en charge automatiquement lorsque vous mélangez, par exemple, des kilomètres et des minutes.</p>
-<div class="formula speed-formula"><strong>Formule</strong><code>v = d ÷ t</code><span><strong>v</strong> = vitesse · <strong>d</strong> = distance parcourue · <strong>t</strong> = durée.</span><p>Facteurs de conversion : <a href="https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b9" target="_blank" rel="noopener">NIST</a>.</p></div>
+<div class="formula speed-formula"><strong>Formule</strong><code>v = d ÷ t</code><span><strong>v</strong> = vitesse · <strong>d</strong> = distance parcourue · <strong>t</strong> = durée.</span><p>Facteurs de conversion : <a href="https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b9" target="_blank" rel="noopener">NIST</a>.</p></div>
 
 <h2>Quelles unités de vitesse peut-on utiliser ?</h2>
 <p>En France, le <strong>km/h</strong> est l’unité la plus familière pour la route. Le <strong>m/s</strong> est courant en physique. Le <strong>mph</strong> (mile par heure) est notamment utilisé dans les pays anglo-saxons, tandis que le <strong>nœud</strong> est utilisé en navigation maritime et aérienne. Le calculateur permet aussi d’afficher les pieds par seconde (ft/s) pour les usages techniques.</p>
@@ -91,7 +91,7 @@
 <details><summary>Combien vaut un nœud en km/h ?</summary><div class="calculator-faq-answer"><p>Un nœud correspond à un mille marin par heure, soit exactement 1,852 km/h. Le nœud est notamment utilisé en navigation maritime et aérienne.</p></div></details>
 <details><summary>Quelle différence entre vitesse moyenne et vitesse instantanée ?</summary><div class="calculator-faq-answer"><p>La vitesse moyenne rapporte une distance totale à une durée totale. La vitesse instantanée décrit la vitesse à un instant donné. Ce calculateur estime uniquement la vitesse moyenne sur la durée saisie.</p></div></details>
 </section>
-<p class="speed-source">Sources : <a href="https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b9" target="_blank" rel="noopener">NIST — facteurs de conversion des unités, notamment temps et vitesse</a> · <a href="https://www.bipm.org/fr/si-brochure-9" target="_blank" rel="noopener">BIPM — Brochure sur le Système international d’unités</a>. Facteurs de conversion vérifiés le 8 octobre 2026.</p>
+<p class="speed-source">Sources : <a href="https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b9" target="_blank" rel="noopener">NIST — facteurs de conversion des unités, notamment temps et vitesse</a> · <a href="https://www.bipm.org/fr/si-brochure-9" target="_blank" rel="noopener">BIPM — Brochure sur le Système international d’unités</a>. Facteurs de conversion vérifiés le 8 octobre 2026.</p>
 </section>
 <section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Outils associés</h2><div class="related-links"><a class="related-link" href="/outil/consommation-carburant/"><strong>Consommation de carburant</strong><span>Estimer la consommation et le coût d’un trajet.</span></a><a class="related-link" href="/outil/cout-km/"><strong>Coût au kilomètre</strong><span>Calculer le coût d’un trajet au kilomètre.</span></a><a class="related-link" href="/outil/temps-calcul/"><strong>Calculateur de durée</strong><span>Convertir et calculer des heures, minutes et secondes.</span></a></div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="/mesures/">Mesures</a>.</p></div></section>
 </div></div></main>
@@ -109,7 +109,7 @@ const ms=d*distanceFactor[du]/(t*timeFactor[tu]);
 if(!Number.isFinite(ms))return '<div class="speed-kicker">Données à vérifier</div><div class="speed-main"><strong>Valeur trop grande</strong></div><p>Réduisez les valeurs saisies.</p>';
 const format=(v,unit)=>Number(v).toLocaleString("fr-FR",{maximumFractionDigits:2})+" "+unit;
 const outputs={kmh:format(ms*3.6,"km/h"),ms:format(ms,"m/s"),mph:format(ms/0.44704,"mph"),kn:format(ms/(1852/3600),"kn"),fts:format(ms/0.3048,"ft/s")};
-const main=outputs[su],kmh=ms*3.6;
+const main=outputs[su];
 const equivalents=[["km/h",outputs.kmh],["m/s",outputs.ms],["mph",outputs.mph],["nœuds",outputs.kn]].map(([label,v])=>"<div><span>"+label+"</span><strong>"+v+"</strong></div>").join("");
 return '<div class="speed-kicker">Votre vitesse</div><div class="speed-main"><strong>'+main+'</strong></div><p>Vitesse moyenne sur la distance et la durée saisies.</p><div class="speed-equivalents">'+equivalents+'</div>';
 }};
