@@ -27,7 +27,7 @@
 .ptz-hero{padding:42px 46px 34px;background:linear-gradient(135deg,#17483d 0%,#123a32 58%,#102f2a 100%);color:#fff;position:relative;overflow:hidden}
 .ptz-hero:after{content:"0 %";position:absolute;right:25px;top:-55px;font-size:13rem;line-height:1;font-weight:950;letter-spacing:-.12em;color:rgba(255,255,255,.055);transform:rotate(-7deg);pointer-events:none}
 .ptz-hero .eyebrow{color:#ffb29f;position:relative;z-index:1}
-.ptz-hero h1{position:relative;z-index:1;max-width:760px;margin:0 0 14px;font-size:clamp(2.7rem,6vw,5rem);line-height:.94;letter-spacing:-.075em}
+.ptz-hero .ptz-title{position:relative;z-index:1;max-width:760px;margin:0 0 14px;font-size:clamp(2.7rem,6vw,5rem);line-height:.94;letter-spacing:-.075em}
 .ptz-hero .tool-intro{position:relative;z-index:1;max-width:700px;margin:0;color:#dbe6df;font-size:1.05rem}
 .ptz-badges{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
 .ptz-badges span{padding:7px 10px;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:rgba(255,255,255,.07);font-size:.75rem;font-weight:800}
@@ -63,7 +63,7 @@
 .ptz-method td{padding:8px 0;border-bottom:1px solid var(--line)}
 .ptz-method td:last-child{text-align:right;font-weight:800}
 .ptz-content{max-width:920px;margin:52px auto 0}
-.ptz-content h2{font-size:clamp(2rem,4vw,3rem);line-height:1;letter-spacing:-.06em}
+.ptz-content .ptz-heading{font-size:clamp(2rem,4vw,3rem);line-height:1;letter-spacing:-.06em}
 .ptz-content p{max-width:780px}
 .ptz-content .ptz-callout{margin-top:22px;padding:18px 20px;border:1px solid var(--accent2);border-radius:12px;background:#edf3ef}
 .ptz-content .ptz-callout strong{display:block;color:var(--accent2);margin-bottom:4px}
@@ -80,7 +80,7 @@
 <section class="ptz-shell">
 <div class="ptz-hero">
 <div class="eyebrow">CRÉDIT IMMOBILIER</div>
-<h1>Simulateur PTZ 2026</h1>
+<h1 class="ptz-title">Simulateur PTZ 2026</h1>
 <p class="tool-intro">Estimez le montant du prêt à taux zéro selon votre logement, votre zone, votre foyer et votre revenu fiscal de référence.</p>
 <div class="ptz-badges"><span>Barème vérifié le 8 octobre 2026</span><span>Offres émises jusqu'au 31/12/2027</span><span>Calcul indicatif</span></div>
 </div>
@@ -115,11 +115,11 @@
 </section>
 </section>
 <section class="content-section ptz-content">
-<h2>Comment est calculé le montant du PTZ ?</h2>
+<h2 class="ptz-heading">Comment est calculé le montant du PTZ ?</h2>
 <p>Le calcul commence par le revenu retenu : c'est le plus élevé entre le RFR du foyer et le neuvième du coût total de l'opération. Ce montant est ensuite divisé par un coefficient familial qui dépend du nombre de personnes logées. Le résultat détermine une tranche de revenus, puis la quotité applicable.</p>
 <p>Le coût de l'opération pris en compte est plafonné selon la zone et le nombre de personnes. La quotité va de 50 % à 20 % pour un logement neuf collectif ou un ancien avec travaux, et de 30 % à 10 % pour un logement neuf individuel. Le montant théorique obtenu reste soumis au plafond lié aux autres prêts de plus de 2 ans.</p>
 <div class="ptz-callout"><strong>À retenir</strong> Le montant affiché est une estimation du PTZ calculée à partir du barème réglementaire. Il ne vaut pas accord de prêt : la banque vérifie notamment la solvabilité, les justificatifs, la primo-accession et les caractéristiques exactes de l'opération.</div>
-<h2>Quelles conditions ne sont pas entièrement vérifiées ici ?</h2>
+<h2 class="ptz-heading">Quelles conditions ne sont pas entièrement vérifiées ici ?</h2>
 <p>Le calculateur vérifie les principaux paramètres chiffrés du barème et les conditions de zone propres au type de logement. Il ne reconstitue pas tous les régimes particuliers du PTZ, les exceptions à la primo-accession, ni l'ensemble des conditions administratives et techniques propres à chaque opération.</p>
 <p>Pour l'ancien, la condition de travaux est contrôlée à partir du montant que vous saisissez, mais le calculateur ne peut pas déterminer si chaque dépense est juridiquement éligible ni vérifier les exigences de performance énergétique. Pour une décision de financement, les justificatifs et l'étude de la banque restent indispensables.</p>
 </section>
