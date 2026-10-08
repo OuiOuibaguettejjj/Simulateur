@@ -1,3 +1,7 @@
+## 2026-10-08 — Migration et enrichissement du PTZ
+
+Le calculateur PTZ est migré vers `data/parametres.json` avant l’enrichissement, conformément au processus d’enrichissement des calculateurs. Le jeu couvre les offres émises du 1er avril 2025 au 31 décembre 2027 et centralise les plafonds de ressources, coefficients familiaux, tranches, plafonds d’opération, quotités et durées/différés. La page reste une pré-estimation : les régimes particuliers, les exceptions à la primo-accession, la conformité détaillée des travaux et la solvabilité bancaire ne sont pas déterminés automatiquement.
+
 # Décisions techniques
 
 ## Êtes-vous riche ? — série statistique retenue 2026-10-05

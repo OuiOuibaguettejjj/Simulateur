@@ -832,22 +832,6 @@
     "rule": "title"
   },
   {
-    "path": "public/outil/ptz/index.html",
-    "rule": "description"
-  },
-  {
-    "path": "public/outil/ptz/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/ptz/index.html",
-    "rule": "formula"
-  },
-  {
-    "path": "public/outil/ptz/index.html",
-    "rule": "title"
-  },
-  {
     "path": "public/outil/recette/index.html",
     "rule": "content-h2"
   },
