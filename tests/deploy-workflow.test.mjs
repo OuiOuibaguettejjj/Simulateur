@@ -26,6 +26,7 @@ for (const test of [
   "tests/smoke-results.test.mjs",
   "tests/generic-calcs.test.mjs",
   "tests/reference-calcs.test.mjs",
+  "tests/signe-astrologique.test.mjs",
   "tests/check-pages.test.mjs",
   "tests/normalize-layout.test.mjs",
   "tests/interactive-families.test.mjs",
