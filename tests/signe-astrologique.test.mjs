@@ -40,7 +40,7 @@ const rising=await runInlineCalculator({
   inputs:{
     "birth-date":"15/08/1990",
     "birth-time":"15:20",
-    "birth-city":"Louisville"
+    "birth-city":"louisville"
   }
 });
 assert.match(rising.text,/♐\s+Sagittaire/,"15 août 1990, 15:20, Louisville : ascendant inattendu");
