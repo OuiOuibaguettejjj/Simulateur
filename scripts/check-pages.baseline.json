@@ -608,14 +608,6 @@
     "rule": "title"
   },
   {
-    "path": "public/outil/partage-depenses/index.html",
-    "rule": "formula"
-  },
-  {
-    "path": "public/outil/partage-depenses/index.html",
-    "rule": "result"
-  },
-  {
     "path": "public/outil/per/index.html",
     "rule": "content-h2"
   },
