@@ -150,7 +150,7 @@ window.TOOL={calc:function(){
   if(rfr===null||!Number.isFinite(rfr)||rfr<0||cost===null||!Number.isFinite(cost)||cost<=0||otherRaw!==null&&(!Number.isFinite(otherRaw)||otherRaw<0)) return "<strong>Valeurs invalides ou insuffisantes.</strong><p>Renseignez un RFR valide et un coût d'opération supérieur à 0 €.</p>";
   if(!$( "primo").checked) return "<strong>Condition de primo-accession non remplie.</strong><p>Cette simulation ne calcule pas le PTZ si la condition générale de primo-accession n'est pas déclarée remplie. Des exceptions légales existent et ne sont pas évaluées ici.</p>";
   if(type==="ancien"){
-    if(!params.zonesAncienEligibles[zone] === 1) return "<strong>PTZ non calculable dans cette configuration.</strong><p>Pour l'achat d'un logement ancien avec travaux, le logement doit être situé en zone B2 ou C.</p>";
+    if(params.zonesAncienEligibles[zone] !== 1) return "<strong>PTZ non calculable dans cette configuration.</strong><p>Pour l'achat d'un logement ancien avec travaux, le logement doit être situé en zone B2 ou C.</p>";
     if(works===null||!Number.isFinite(works)||works<0) return "<strong>Montant des travaux invalide.</strong><p>Renseignez un montant de travaux valide.</p>";
     if(works>cost) return "<strong>Montants incohérents.</strong><p>Les travaux ne peuvent pas dépasser le coût total de l'opération.</p>";
     if(works/cost<params.travauxMinimumRatio) return "<strong>Condition de travaux non remplie.</strong><p>Les travaux saisis doivent représenter au moins 25 % du coût total de l'opération.</p>";
