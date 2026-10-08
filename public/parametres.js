@@ -23,6 +23,104 @@
         "tauxEffortMax": 35
       }
     },
+    "electricite": {
+      "label": "Tarif réglementé de vente d’électricité — résidentiel",
+      "year": 2026,
+      "effectiveFrom": "2026-08-01",
+      "effectiveTo": "2027-01-31",
+      "verifiedOn": "2026-10-08",
+      "source": {
+        "label": "CRE et EDF — tarifs réglementés de vente d’électricité",
+        "url": "https://www.cre.fr/documents/deliberations/tarifs-reglementes-de-vente-delectricite-en-france-metropolitaine-continentale-et-en-zones-non-interconnectees.html"
+      },
+      "values": {
+        "base": {
+          "3": {
+            "abonnementAnnuel": 145.56,
+            "prixKwh": 0.2001
+          },
+          "6": {
+            "abonnementAnnuel": 190.32,
+            "prixKwh": 0.2001
+          },
+          "9": {
+            "abonnementAnnuel": 238.56,
+            "prixKwh": 0.1985
+          },
+          "12": {
+            "abonnementAnnuel": 285.12,
+            "prixKwh": 0.1985
+          },
+          "15": {
+            "abonnementAnnuel": 328.8,
+            "prixKwh": 0.1985
+          },
+          "18": {
+            "abonnementAnnuel": 373.68,
+            "prixKwh": 0.1985
+          },
+          "24": {
+            "abonnementAnnuel": 469.68,
+            "prixKwh": 0.1985
+          },
+          "30": {
+            "abonnementAnnuel": 557.64,
+            "prixKwh": 0.1985
+          },
+          "36": {
+            "abonnementAnnuel": 646.56,
+            "prixKwh": 0.1985
+          }
+        },
+        "hphc": {
+          "3": {
+            "abonnementAnnuel": 145.56,
+            "prixHc": 0.1589,
+            "prixHp": 0.2142
+          },
+          "6": {
+            "abonnementAnnuel": 190.32,
+            "prixHc": 0.1589,
+            "prixHp": 0.2142
+          },
+          "9": {
+            "abonnementAnnuel": 238.56,
+            "prixHc": 0.1589,
+            "prixHp": 0.2142
+          },
+          "12": {
+            "abonnementAnnuel": 285.12,
+            "prixHc": 0.1589,
+            "prixHp": 0.2142
+          },
+          "15": {
+            "abonnementAnnuel": 328.8,
+            "prixHc": 0.1589,
+            "prixHp": 0.2142
+          },
+          "18": {
+            "abonnementAnnuel": 373.68,
+            "prixHc": 0.1589,
+            "prixHp": 0.2142
+          },
+          "24": {
+            "abonnementAnnuel": 469.68,
+            "prixHc": 0.1589,
+            "prixHp": 0.2142
+          },
+          "30": {
+            "abonnementAnnuel": 557.64,
+            "prixHc": 0.1589,
+            "prixHp": 0.2142
+          },
+          "36": {
+            "abonnementAnnuel": 646.56,
+            "prixHc": 0.1589,
+            "prixHp": 0.2142
+          }
+        }
+      }
+    },
     "frais-kilometriques": {
       "label": "Barème kilométrique",
       "year": 2026,
