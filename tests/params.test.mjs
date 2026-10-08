@@ -158,7 +158,7 @@ const tva = pageTool("tva");
 assert.match(tva({ montant: "100,50", mode: "ht", taux: "20" }), /120,60\s*€\s*TTC/, "TVA : virgule décimale HT → TTC");
 assert.match(tva({ montant: "120,60", mode: "ttc", taux: "20" }), /100,50\s*€\s*HT/, "TVA : virgule décimale TTC → HT");
 assert.match(tva({ montant: "0", mode: "ht", taux: "20" }), /0,00\s*€\s*TTC/, "TVA : zéro accepté");
-assert.match(tva({ montant: "100.005", mode: "ht", taux: "20" }), /100,01\s*€\s*TTC/, "TVA : montant ramené au centime");
+assert.match(tva({ montant: "100.005", mode: "ht", taux: "20" }), /120,01\s*€\s*TTC/, "TVA : montant ramené au centime");
 assert.match(tva({ montant: "120.01", mode: "ttc", taux: "20" }), /100,01\s*€\s*HT/, "TVA : TTC → HT arrondi au centime");
 assert.match(tva({ montant: "100", mode: "invalide", taux: "20" }), /Renseignez un montant valide/, "TVA : mode invalide refusé");
 const euro = v => Number(v).toLocaleString("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: 2 });
