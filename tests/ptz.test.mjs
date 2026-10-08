@@ -7,7 +7,7 @@ const cases=[
   {name:"ancien avec travaux — tranche 3",inputs:{rfr:"40000",cout:"200000",works:"60000","other-loans":"",zone:"B2",people:"2",type:"ancien"},expected:66000},
   {name:"plafond des autres prêts",inputs:{rfr:"40000",cout:"250000",works:"","other-loans":"50000",zone:"B1",people:"3",type:"collectif"},expected:50000}
 ];
-function extract(text,label){const m=String(text).match(new RegExp(label+"\\s*([0-9\\s\\u00a0\\u202f.,]+)"));assert.ok(m,"sortie absente : "+label+" dans "+text);return Number(m[1].replace(/[\\s\\u00a0\\u202f]/g,"").replace(",","."))}
+function extract(text,label){const m=String(text).match(new RegExp("([0-9\\\\s\\\\u00a0\\\\u202f.,]+)\\\\s*€\\\\s*de "+label));assert.ok(m,"sortie absente : "+label+" dans "+text);return Number(m[1].replace(/[\\s\\u00a0\\u202f]/g,"").replace(",","."))}
 for(const c of cases){const out=await runInlineCalculator({family:"outil",slug:"ptz",caseKind:"default",inputs:c.inputs});const value=extract(out.text,"PTZ estimé");assert.ok(Math.abs(value-c.expected)<0.01,c.name+" : attendu "+c.expected+", obtenu "+value)}
 const oldZone=await runInlineCalculator({family:"outil",slug:"ptz",caseKind:"default",inputs:{rfr:"20000",cout:"150000",works:"50000","other-loans":"",zone:"A",people:"2",type:"ancien"}});assert.match(oldZone.text,/zone B2 ou C/i);
 const oldWorks=await runInlineCalculator({family:"outil",slug:"ptz",caseKind:"default",inputs:{rfr:"20000",cout:"150000",works:"30000","other-loans":"",zone:"C",people:"2",type:"ancien"}});assert.match(oldWorks.text,/25 %/);
