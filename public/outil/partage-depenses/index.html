@@ -9,7 +9,7 @@
 <link rel="canonical" href="https://simulateur.site/outil/partage-depenses/">
 <link rel="stylesheet" href="/styles.css"><script src="/enter-calcul.js" defer></script>
 <style>
-.share-tool{display:grid;gap:22px}
+.share-tool{display:grid;gap:22px}\n.share-tool [hidden]{display:none!important}
 .share-section{padding:20px;border:1px solid var(--line);border-radius:14px;background:rgba(255,254,250,.72)}
 .share-section-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:14px}
 .share-section-head p{margin:.25rem 0 0;color:var(--muted)}
@@ -69,9 +69,9 @@
 
 <div class="share-tool">
 <section class="share-section" aria-labelledby="participants-title">
-<div class="share-section-head"><div><h2 id="participants-title">1. Les participants</h2><p>De 2 à 12 personnes. Les noms servent uniquement à rendre le résultat lisible.</p></div></div>
+<div class="share-section-head"><div><h2 id="participants-title">1. Les participants</h2><p>Choisissez d’abord le nombre de participants. Seuls les participants sélectionnés sont ensuite affichés dans le calcul.</p></div></div>
 <div class="share-grid-2">
-<div class="share-field"><label for="count">Nombre de personnes</label><input id="count" type="number" min="2" max="12" step="1" value="3" inputmode="numeric" aria-describedby="count-help"><small id="count-help" class="status-note">Les personnes non utilisées sont ignorées dans le calcul.</small></div>
+<div class="share-field"><label for="count">Nombre de participants</label><select id="count" aria-describedby="count-help"><option value="2">2 participants</option><option value="3" selected>3 participants</option><option value="4">4 participants</option><option value="5">5 participants</option><option value="6">6 participants</option><option value="7">7 participants</option><option value="8">8 participants</option><option value="9">9 participants</option><option value="10">10 participants</option><option value="11">11 participants</option><option value="12">12 participants</option></select><small id="count-help" class="status-note">Les personnes non utilisées sont ignorées dans le calcul.</small></div>
 <div class="share-field"><label for="split-mode">Répartition par défaut</label><select id="split-mode"><option value="equal" selected>Parts égales</option><option value="custom">Parts personnalisées</option></select></div>
 </div>
 <div class="share-people" id="people">
