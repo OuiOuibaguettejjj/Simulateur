@@ -1160,7 +1160,49 @@
     "attendu": 35,
     "tolerance": 0,
     "sortie": "35\\s*h\\s*00\\s*min",
-    "source": "https://www.service-public.fr/particuliers/vosdroits/F1911",
-    "note": "Cas de référence indépendant : 8 heures de présence − 1 heure de pause = 7 heures par jour ; 7 × 5 = 35 heures par semaine."
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1911",
+    "note": "Cas de référence indépendant : 8 heures de présence − 1 heure de pause = 7 heures par jour ; 7 × 5 = 35 heures par semaine.",
+    "verifications": [
+      {
+        "sortie": "Journée type",
+        "attendu": 7,
+        "tolerance": 0
+      },
+      {
+        "sortie": "Écart : 0 h 00 min",
+        "attendu": 0,
+        "tolerance": 0
+      }
+    ]
+  },
+  {
+    "outil": "temps-travail",
+    "entrees": {
+      "mode": "week",
+      "reference": "35",
+      "mon-start": "09:00",
+      "mon-end": "17:00",
+      "mon-pause": "60",
+      "tue-start": "09:00",
+      "tue-end": "18:00",
+      "tue-pause": "60"
+    },
+    "attendu": 15,
+    "tolerance": 0,
+    "sortie": "16\\s*h\\s*00\\s*min",
+    "verifications": [
+      {
+        "sortie": "Lundi :",
+        "attendu": 7,
+        "tolerance": 0
+      },
+      {
+        "sortie": "Mardi :",
+        "attendu": 8,
+        "tolerance": 0
+      }
+    ],
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1911",
+    "note": "Cas indépendant : lundi 9 h–17 h avec 1 h de pause = 7 h ; mardi 9 h–18 h avec 1 h de pause = 8 h ; total = 15 h. Le résultat attendu est calculé indépendamment du calculateur."
   }
 ]
