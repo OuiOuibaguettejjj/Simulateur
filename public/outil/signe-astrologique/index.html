@@ -13,13 +13,13 @@
 .astro-shell{max-width:980px;margin:auto;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--card);box-shadow:var(--shadow)}
 .astro-hero{padding:38px 42px 32px;background:linear-gradient(135deg,#17483d,#102f2a);color:#fff}
 .astro-hero .eyebrow{color:#ffd0c5}
-.astro-title{margin:0 0 12px;font-size:clamp(2.25rem,5vw,3.65rem);line-height:1;letter-spacing:-.045em}
+.astro-title{margin:0 0 12px;font-size:clamp(2.15rem,4.5vw,3.2rem);line-height:1.04;letter-spacing:-.03em}
 .astro-hero .tool-intro{max-width:700px;margin:0;color:#dbe6df;font-size:1rem;line-height:1.55}
 .astro-form{padding:30px 42px 34px}
 .astro-panel{max-width:760px;margin:auto}
 .astro-grid-form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .astro-field{padding:15px;border:1px solid var(--line);border-radius:12px;background:var(--card)}
-.astro-field label{display:block;margin:0 0 7px;font-size:.82rem;font-weight:900}
+.astro-field label{display:block;margin:0 0 7px;font-size:.82rem;font-weight:800}
 .astro-field input,.astro-field select{width:100%;min-height:50px;border:1px solid #c9c7bf;border-radius:9px;background:#fff;padding:0 12px;font:inherit;color:var(--ink)}
 .astro-field input:focus,.astro-field select:focus{outline:3px solid var(--accent-soft);border-color:var(--accent)}
 .astro-help{margin:6px 0 0;color:var(--muted);font-size:.76rem;line-height:1.4}
@@ -33,13 +33,13 @@
 .astro-result-card.primary{background:#17483d;color:#fff;border-color:#17483d}
 .astro-result-card .eyebrow{margin-bottom:7px}
 .astro-result-card.primary .eyebrow{color:#ffd0c5}
-.astro-sign{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:950;line-height:1.05;letter-spacing:-.045em}
+.astro-sign{font-size:clamp(1.75rem,3.6vw,2.4rem);font-weight:800;line-height:1.08;letter-spacing:-.025em}
 .astro-degree{margin-top:7px;color:var(--muted);font-size:.82rem}
 .primary .astro-degree{color:#dbe6df}
 .astro-desc{margin:12px 0 0;font-size:.84rem;line-height:1.5}
 .astro-empty{color:var(--muted);font-size:.88rem}
 .astro-advanced{margin-top:14px;border:1px solid var(--line);border-radius:12px;padding:0 15px}
-.astro-advanced summary{padding:13px 0;cursor:pointer;font-weight:850}
+.astro-advanced summary{padding:13px 0;cursor:pointer;font-weight:700}
 .astro-advanced-content{padding:0 0 15px}
 .astro-content{max-width:980px;margin:46px auto 0}
 .astro-content-title{margin:0 0 12px;padding-left:12px;border-left:4px solid var(--accent);font-size:clamp(1.45rem,2.4vw,1.8rem);line-height:1.2;letter-spacing:-.035em}
@@ -51,7 +51,7 @@
 .astro-note{margin-top:14px;padding:14px 16px;border:1px solid #cfc7ba;border-radius:11px;background:#f7f4ec;font-size:.82rem;line-height:1.5}
 .astro-method{padding:17px 19px;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:0 11px 11px 0;background:#fbfaf6}
 .astro-method code{display:block;margin:5px 0 8px;font-size:.94rem}
-.astro-faq{margin-top:42px}.astro-faq details{border-bottom:1px solid var(--line);padding:13px 0}.astro-faq summary{cursor:pointer;font-weight:900}.astro-faq p{margin:7px 0 0;line-height:1.55}
+.astro-faq{margin-top:42px}.astro-faq details{border-bottom:1px solid var(--line);padding:13px 0}.astro-faq summary{cursor:pointer;font-weight:800}.astro-faq p{margin:7px 0 0;line-height:1.55}
 @media(max-width:760px){.astro-hero{padding:30px 22px}.astro-form{padding:24px 20px 28px}.astro-grid-form,.astro-results{grid-template-columns:1fr}.astro-place{grid-template-columns:1fr}.zodiac-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:480px){.zodiac-grid{grid-template-columns:1fr}}
 </style>
@@ -72,10 +72,8 @@
 </div>
 <div class="astro-place">
 <div class="astro-field"><label for="birth-city">Ville de naissance</label><input id="birth-city" list="cities" placeholder="Paris, Lyon, Grenoble…" autocomplete="off"><datalist id="cities"></datalist><p class="astro-help">Les principales villes sont reconnues automatiquement.</p></div>
-<div class="astro-field"><label for="birth-lat">Latitude</label><input id="birth-lat" type="number" step="0.0001" min="-89.9999" max="89.9999" placeholder="45.1885" inputmode="decimal"></div>
-<div class="astro-field"><label for="birth-lon">Longitude</label><input id="birth-lon" type="number" step="0.0001" min="-179.9999" max="179.9999" placeholder="5.7245" inputmode="decimal"></div>
 </div>
-<details class="astro-advanced"><summary>Ville non reconnue ? Renseigner le fuseau UTC</summary><div class="astro-advanced-content"><div class="astro-field"><label for="utc-offset">Décalage UTC à la naissance</label><select id="utc-offset"><option value="">Choisir</option><option value="-12">UTC−12</option><option value="-11">UTC−11</option><option value="-10">UTC−10</option><option value="-9">UTC−9</option><option value="-8">UTC−8</option><option value="-7">UTC−7</option><option value="-6">UTC−6</option><option value="-5">UTC−5</option><option value="-4">UTC−4</option><option value="-3">UTC−3</option><option value="-2">UTC−2</option><option value="-1">UTC−1</option><option value="0">UTC</option><option value="1">UTC+1</option><option value="2">UTC+2</option><option value="3">UTC+3</option><option value="4">UTC+4</option><option value="5">UTC+5</option><option value="5.5">UTC+5:30</option><option value="6">UTC+6</option><option value="7">UTC+7</option><option value="8">UTC+8</option><option value="9">UTC+9</option><option value="10">UTC+10</option><option value="11">UTC+11</option><option value="12">UTC+12</option></select><p class="astro-help">Pour une ville reconnue, le fuseau est géré automatiquement. Pour une autre ville, renseignez le décalage réellement applicable à cette date.</p></div></div></details>
+<details class="astro-advanced"><summary>Autre ville : coordonnées et fuseau horaire</summary><div class="astro-advanced-content"><div class="astro-grid-form"><div class="astro-field"><label for="birth-lat">Latitude</label><input id="birth-lat" type="number" step="0.0001" min="-89.9999" max="89.9999" placeholder="45.1885" inputmode="decimal"></div><div class="astro-field"><label for="birth-lon">Longitude</label><input id="birth-lon" type="number" step="0.0001" min="-179.9999" max="179.9999" placeholder="5.7245" inputmode="decimal"></div></div><div class="astro-field"><label for="utc-offset">Décalage UTC à la naissance</label><select id="utc-offset"><option value="">Choisir</option><option value="-12">UTC−12</option><option value="-11">UTC−11</option><option value="-10">UTC−10</option><option value="-9">UTC−9</option><option value="-8">UTC−8</option><option value="-7">UTC−7</option><option value="-6">UTC−6</option><option value="-5">UTC−5</option><option value="-4">UTC−4</option><option value="-3">UTC−3</option><option value="-2">UTC−2</option><option value="-1">UTC−1</option><option value="0">UTC</option><option value="1">UTC+1</option><option value="2">UTC+2</option><option value="3">UTC+3</option><option value="4">UTC+4</option><option value="5">UTC+5</option><option value="5.5">UTC+5:30</option><option value="6">UTC+6</option><option value="7">UTC+7</option><option value="8">UTC+8</option><option value="9">UTC+9</option><option value="10">UTC+10</option><option value="11">UTC+11</option><option value="12">UTC+12</option></select><p class="astro-help">Pour une ville reconnue, le fuseau est géré automatiquement. Pour une autre ville, renseignez le décalage réellement applicable à cette date.</p></div></div></details>
 <div class="astro-actions"><button class="button-main" id="calculate-button" type="button" onclick="Simulateurs.calc()">Calculer signe & ascendant</button></div><p class="astro-privacy">Les données de naissance restent dans votre navigateur.</p>
 <div class="result astro-result" id="result" aria-live="polite"><p class="astro-empty">Renseignez votre date pour calculer le signe astro. L’heure et le lieu permettent de calculer l’ascendant.</p></div>
 </div></section></div>
@@ -139,7 +137,7 @@ else if(n<=722)sun=["Cancer","♋","21 juin – 22 juillet","Eau"];
 else if(n<=822)sun=["Lion","♌","23 juillet – 22 août","Feu"];
 else if(n<=922)sun=["Vierge","♍","23 août – 22 septembre","Terre"];
 else if(n<=1022)sun=["Balance","♎","23 septembre – 22 octobre","Air"];
-else if(n<=1121)sun=["Scorpion","♏","22 novembre – 21 décembre","Eau"];
+else if(n<=1121)sun=["Scorpion","♏","23 octobre – 21 novembre","Eau"];
 else sun=["Sagittaire","♐","22 novembre – 21 décembre","Feu"];
 const boundary=[119,120,218,219,320,321,419,420,520,521,620,621,722,723,822,823,922,923,1022,1023,1121,1122,1221,1222].includes(n);
 let html='<div class="astro-results"><article class="astro-result-card primary"><div class="eyebrow">SIGNE ASTRO</div><div class="astro-sign">'+sun[1]+' '+sun[0]+'</div><div class="astro-degree">'+sun[2]+' · '+sun[3]+'</div><p class="astro-desc">Signe solaire selon la convention tropicale.</p></article>';
@@ -150,7 +148,8 @@ if(!time){html+='<article class="astro-result-card"><div class="eyebrow">ASCENDA
 const cities={Paris:[48.8566,2.3522,"Europe/Paris"],Lyon:[45.764,4.8357,"Europe/Paris"],Marseille:[43.2965,5.3698,"Europe/Paris"],Toulouse:[43.6047,1.4442,"Europe/Paris"],Bordeaux:[44.8378,-0.5792,"Europe/Paris"],Lille:[50.6292,3.0573,"Europe/Paris"],Nantes:[47.2184,-1.5536,"Europe/Paris"],Strasbourg:[48.5734,7.7521,"Europe/Paris"],Montpellier:[43.6119,3.8772,"Europe/Paris"],Rennes:[48.1173,-1.6778,"Europe/Paris"],Grenoble:[45.1885,5.7245,"Europe/Paris"],Dijon:[47.322,5.0415,"Europe/Paris"],Nice:[43.7102,7.262,"Europe/Paris"],Clermont_Ferrand:[45.7772,3.087,"Europe/Paris"],Tours:[47.3941,0.6848,"Europe/Paris"],Nancy:[48.6921,6.1844,"Europe/Paris"],Metz:[49.1193,6.1757,"Europe/Paris"],Rouen:[49.4432,1.0993,"Europe/Paris"],Reims:[49.2583,4.0317,"Europe/Paris"],Londres:[51.5074,-0.1278,"Europe/London"],Bruxelles:[50.8503,4.3517,"Europe/Brussels"],Geneve:[46.2044,6.1432,"Europe/Zurich"],Montreal:[45.5019,-73.5674,"America/Toronto"],New_York:[40.7128,-74.006,"America/New_York"],Los_Angeles:[34.0522,-118.2437,"America/Los_Angeles"],Tokyo:[35.6762,139.6503,"Asia/Tokyo"],Sydney:[-33.8688,151.2093,"Australia/Sydney"],Madrid:[40.4168,-3.7038,"Europe/Madrid"],Rome:[41.9028,12.4964,"Europe/Rome"]};
 const rawCity=$( "birth-city").value.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[ -]/g,"_");
 const city=cities[rawCity],lat=city?city[0]:Number($( "birth-lat").value),lon=city?city[1]:Number($( "birth-lon").value);
-if(!Number.isFinite(lat)||!Number.isFinite(lon)||Math.abs(lat)>=90||Math.abs(lon)>180)return html+'<article class="astro-result-card"><div class="eyebrow">ASCENDANT</div><div class="astro-sign">Lieu à préciser</div><div class="astro-degree">Coordonnées manquantes ou invalides.</div><p class="astro-desc">Choisissez une ville reconnue ou renseignez latitude, longitude et décalage UTC.</p></article></div>';
+if(!Number.isFinite(lat)||!Number.isFinite(lon)||Math.abs(lat)>=90||Math.abs(lon)>180)return html+'<article class="astro-result-card"><div class="eyebrow">ASCENDANT</div><div class="astro-sign">Lieu à préciser</div><div class="astro-degree">Coordonnées manquantes ou invalides.</div><p class="astro-desc">Choisissez une ville reconnue ou renseignez latitude et longitude.</p></article></div>';
+if(!city&&$( "utc-offset").value==="")return html+'<article class="astro-result-card"><div class="eyebrow">ASCENDANT</div><div class="astro-sign">Fuseau nécessaire</div><div class="astro-degree">Décalage UTC manquant.</div><p class="astro-desc">Pour une ville non reconnue, renseignez le décalage UTC applicable à votre date de naissance.</p></article></div>';
 function norm(x){x%=360;return x<0?x+360:x}
 function jd(date){return date.getTime()/86400000+2440587.5}
 function gmst(j){const z=j-2451545,T=z/36525;return norm(280.46061837+360.98564736629*z+0.000387933*T*T-T*T*T/38710000)}
@@ -160,11 +159,11 @@ if(tz){const approx=new Date(Date.UTC(...base)),parts=new Intl.DateTimeFormat("e
 return new Date(Date.UTC(...base)-Number(offset||0)*3600000)}
 const utc=utcDate(value,time,city?city[2]:null,$("utc-offset").value),J=jd(utc),T=(J-2451545)/36525,eps=(23.43929111-0.013004167*T-1.64e-7*T*T+5.04e-7*T*T*T)*Math.PI/180,lst=(norm(gmst(J)+lon))*Math.PI/180,phi=lat*Math.PI/180;
 const asc=norm(Math.atan2(Math.cos(lst),-(Math.sin(lst)*Math.cos(eps)+Math.tan(phi)*Math.sin(eps)))*180/Math.PI),idx=Math.floor(asc/30),names=[["Bélier","♈"],["Taureau","♉"],["Gémeaux","♊"],["Cancer","♋"],["Lion","♌"],["Vierge","♍"],["Balance","♎"],["Scorpion","♏"],["Sagittaire","♐"],["Capricorne","♑"],["Verseau","♒"],["Poissons","♓"]],rise=names[idx],degree=(asc%30).toFixed(2).replace(".",",");
-html+='<article class="astro-result-card"><div class="eyebrow">ASCENDANT</div><div class="astro-sign">'+rise[1]+' '+rise[0]+'</div><div class="astro-degree">'+degree+'° · longitude écliptique '+asc.toFixed(2).replace(".",",")+'°</div><p class="astro-desc">Calculé à partir de la date, de l’heure, du lieu et du temps sidéral local.</p></article></div>';
+html+='<article class="astro-result-card"><div class="eyebrow">ASCENDANT</div><div class="astro-sign">'+rise[1]+' '+rise[0]+'</div><div class="astro-degree">'+degree+'° dans le signe</div><p class="astro-desc">Calculé à partir de la date, de l’heure, du lieu et du temps sidéral local.</p></article></div>';
 return html+(boundary?'<div class="astro-note"><strong>Date charnière :</strong> le signe astro suit la convention standard ; l’entrée exacte du Soleil dépend de l’année et de l’heure.</div>':'');
 }};
 </script>
 <script>
-(function(){const cities=["Paris","Lyon","Marseille","Toulouse","Bordeaux","Lille","Nantes","Strasbourg","Montpellier","Rennes","Grenoble","Dijon","Nice","Clermont-Ferrand","Tours","Nancy","Metz","Rouen","Reims","Londres","Bruxelles","Genève","Montréal","New York","Los Angeles","Tokyo","Sydney","Madrid","Rome"],dl=document.querySelector("#cities"),city=document.querySelector("#birth-city"),lat=document.querySelector("#birth-lat"),lon=document.querySelector("#birth-lon");cities.forEach(x=>{const o=document.createElement("option");o.value=x;dl.appendChild(o)});city.addEventListener("change",function(){const key=this.value.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[ -]/g,"_");const coords={Paris:[48.8566,2.3522],Lyon:[45.764,4.8357],Marseille:[43.2965,5.3698],Toulouse:[43.6047,1.4442],Bordeaux:[44.8378,-0.5792],Lille:[50.6292,3.0573],Nantes:[47.2184,-1.5536],Strasbourg:[48.5734,7.7521],Montpellier:[43.6119,3.8772],Rennes:[48.1173,-1.6778],Grenoble:[45.1885,5.7245],Dijon:[47.322,5.0415],Nice:[43.7102,7.262],Clermont_Ferrand:[45.7772,3.087],Tours:[47.3941,.6848],Nancy:[48.6921,6.1844],Metz:[49.1193,6.1757],Rouen:[49.4432,1.0993],Reims:[49.2583,4.0317],Londres:[51.5074,-.1278],Bruxelles:[50.8503,4.3517],Geneve:[46.2044,6.1432],Montreal:[45.5019,-73.5674],New_York:[40.7128,-74.006],Los_Angeles:[34.0522,-118.2437],Tokyo:[35.6762,139.6503],Sydney:[-33.8688,151.2093],Madrid:[40.4168,-3.7038],Rome:[41.9028,12.4964]};if(coords[key]){lat.value=coords[key][0];lon.value=coords[key][1]}})})();
+(function(){const cities=["Paris","Lyon","Marseille","Toulouse","Bordeaux","Lille","Nantes","Strasbourg","Montpellier","Rennes","Grenoble","Dijon","Nice","Clermont-Ferrand","Tours","Nancy","Metz","Rouen","Reims","Londres","Bruxelles","Genève","Montréal","New York","Los Angeles","Tokyo","Sydney","Madrid","Rome"],dl=document.querySelector("#cities"),city=document.querySelector("#birth-city"),lat=document.querySelector("#birth-lat"),lon=document.querySelector("#birth-lon");cities.forEach(x=>{const o=document.createElement("option");o.value=x;dl.appendChild(o)});city.addEventListener("change",function(){const key=this.value.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[ -]/g,"_");const coords={Paris:[48.8566,2.3522],Lyon:[45.764,4.8357],Marseille:[43.2965,5.3698],Toulouse:[43.6047,1.4442],Bordeaux:[44.8378,-0.5792],Lille:[50.6292,3.0573],Nantes:[47.2184,-1.5536],Strasbourg:[48.5734,7.7521],Montpellier:[43.6119,3.8772],Rennes:[48.1173,-1.6778],Grenoble:[45.1885,5.7245],Dijon:[47.322,5.0415],Nice:[43.7102,7.262],Clermont_Ferrand:[45.7772,3.087],Tours:[47.3941,.6848],Nancy:[48.6921,6.1844],Metz:[49.1193,6.1757],Rouen:[49.4432,1.0993],Reims:[49.2583,4.0317],Londres:[51.5074,-.1278],Bruxelles:[50.8503,4.3517],Geneve:[46.2044,6.1432],Montreal:[45.5019,-73.5674],New_York:[40.7128,-74.006],Los_Angeles:[34.0522,-118.2437],Tokyo:[35.6762,139.6503],Sydney:[-33.8688,151.2093],Madrid:[40.4168,-3.7038],Rome:[41.9028,12.4964]};if(coords[key]){lat.value=coords[key][0];lon.value=coords[key][1]}else{lat.value="";lon.value=""}})})();
 </script>
 </body></html>
