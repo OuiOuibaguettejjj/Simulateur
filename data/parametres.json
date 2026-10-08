@@ -355,7 +355,7 @@
       "effectiveFrom": "2026-01-01",
       "effectiveTo": "2026-12-31",
       "verifiedOn": "2026-10-08",
-      "notes": "Principaux taux de TVA en France métropolitaine vérifiés le 8 octobre 2026 sur le Ministère de l’Économie et les articles 278, 278-0 bis et 279 du Code général des impôts. Le jeu ne couvre pas les taux territoriaux particuliers, les exonérations ni les conditions détaillées d’éligibilité.",
+      "notes": "Principaux taux de TVA en France métropolitaine vérifiés le 8 octobre 2026 sur le Ministère de l’Économie et les articles 278, 278-0 bis, 279 et 281 octies du Code général des impôts. Le jeu ne couvre pas les taux territoriaux particuliers, les exonérations ni les conditions détaillées d’éligibilité.",
       "values": {
         "rates": {
           "normal": 20,
