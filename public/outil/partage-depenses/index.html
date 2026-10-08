@@ -217,7 +217,7 @@ function calculate(){
   if(localSum<=0){results.innerHTML='<div class="share-note" role="alert"><strong>Répartition impossible.</strong><p>Les personnes sélectionnées doivent avoir une part supérieure à zéro.</p></div>';return}
   const localShares=localWeights.map(v=>v/localSum*100),allocated=allocate(amount,localShares);
   selected.forEach((i,k)=>due[i]+=allocated[k]);
-  expenseData.push({name:document.getElementById("expense-name-"+e).value.trim()||"Dépense",amount,payer,selected});
+  expenseData.push({amount});
  }
  if(!expenseData.length){results.innerHTML='<div class="share-note" role="alert"><strong>Ajoutez au moins une dépense.</strong><p>Saisissez un montant dans une ligne pour calculer la répartition.</p></div>';return}
  const total=expenseData.reduce((s,e)=>s+e.amount,0),balances=paid.map((v,i)=>v-due[i]);
@@ -241,6 +241,9 @@ addExpense.addEventListener("click",()=>{
  expenses.insertAdjacentHTML("beforeend",expenseMarkup(next));
  updateRows(activeCount()||3);
  const row=document.getElementById("expense-row-"+next);
+ const participantCount=activeCount()||3;
+ row.querySelector(".expense-member").checked=true;
+ row.querySelectorAll(".expense-member").forEach((cb,i)=>{cb.checked=i<participantCount});
  row.querySelector(".expense-name").focus();
 });
 expenses.addEventListener("click",event=>{
