@@ -947,6 +947,32 @@
     "note": "Cas bissextile indépendant : la convention publiée traite le 29 février comme le 28 février dans une année non bissextile."
   },
   {
+    "outil": "inflation",
+    "entrees": {
+      "prix": "1000",
+      "taux": "2",
+      "annees": "10"
+    },
+    "attendu": 1218.99,
+    "tolerance": 0.01,
+    "sortie": "1\\s*218,99\\s*€",
+    "source": "https://www.insee.fr/fr/metadonnees/definition/c1557",
+    "note": "Cas de référence indépendant : 1 000 € × 1,02^10 = 1 218,9944 €, arrondi à 1 218,99 €. La valeur attendue est calculée indépendamment du calculateur testé."
+  },
+  {
+    "outil": "inflation",
+    "entrees": {
+      "prix": "10000",
+      "taux": "3",
+      "annees": "20"
+    },
+    "attendu": 18061.11,
+    "tolerance": 0.01,
+    "sortie": "18\\s*061,11\\s*€",
+    "source": "https://www.insee.fr/fr/metadonnees/definition/c1299",
+    "note": "Cas de non-régression indépendant : 10 000 € × 1,03^20 = 18 061,1123 €, arrondi à 18 061,11 €. Le taux est une hypothèse de projection, pas une donnée Insee."
+  },
+  {
     "outil": "consommation-carburant",
     "entrees": {
       "mode": "consumption",
