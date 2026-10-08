@@ -8,7 +8,7 @@ import {runInlineCalculator} from "./calculator-harness.mjs";
 // - 2026-04 : https://horoscopes.astro-seek.com/astrology-ephemeris-april-2026
 // - 2026-06 : https://horoscopes.astro-seek.com/astrology-ephemeris-june-2026
 // - 2026-08 : https://horoscopes.astro-seek.com/monthly-astro-calendar-august-2026
-// - 2026-11 : https://horoscopes.astro-seek.com/monthly-astro-calendar-november-2026
+// - 2026-11 : https://horoscopes.astro-seek.com/monthly-astro-calendar-november-2026\n// Référence ascendant : Jennifer Lawrence, née le 15 août 1990 à 15:20 à Louisville,\n// donnée publiquement comme Sagittaire ascendant sur Asteria :\n// https://heyasteria.com/explore/jennifer-lawrence
 const cases=[
   ["2026-04-15","♈ Bélier"],
   ["2026-06-15","♊ Gémeaux"],
@@ -29,3 +29,26 @@ for(const date of ["2026-03-20","2026-06-21"]){
   assert.match(out.text,/Date charnière/i,date+" : avertissement de frontière absent");
 }
 console.log("Tests signe astrologique : 4 dates de référence non ambiguës + 2 dates charnières vérifiées.");
+
+
+const rising=await runInlineCalculator({
+  family:"outil",
+  slug:"signe-astrologique",
+  inputs:{
+    "birth-date":"1990-08-15",
+    "birth-time":"15:20",
+    "birth-lat":"38.2527",
+    "birth-lon":"-85.7585",
+    "utc-offset":"-4"
+  }
+});
+assert.match(rising.text,/♐\s+Sagittaire/,"15 août 1990, 15:20, Louisville : ascendant inattendu");
+
+const noTime=await runInlineCalculator({
+  family:"outil",
+  slug:"signe-astrologique",
+  inputs:{"birth-date":"1990-08-15"}
+});
+assert.match(noTime.text,/Heure nécessaire/i,"sans heure, l'ascendant doit être explicitement non calculé");
+
+console.log("Test ascendant : 15 août 1990, 15:20, Louisville → Sagittaire, plus contrôle de l'absence d'heure.");
