@@ -921,8 +921,7 @@
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10871",
     "verificationSource": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000051397190",
     "note": "Calcul indépendant : revenu retenu = max(40 000 €, 250 000 €/9) = 40 000 € ; coefficient familial 1,8 ; 40 000/1,8 = 22 222,22 €, soit tranche 2 en zone B1 ; coût retenu 243 000 € ; quotité 40 % ; PTZ théorique 97 200 €."
-  }
-,
+  },
   {
     "outil": "age",
     "entrees": {
@@ -946,5 +945,39 @@
     "sortie": "21 ans",
     "source": "https://www.la-calculatrice.com/calcul-age.html",
     "note": "Cas bissextile indépendant : la convention publiée traite le 29 février comme le 28 février dans une année non bissextile."
+  },
+  {
+    "outil": "consommation-carburant",
+    "entrees": {
+      "mode": "consumption",
+      "litres": "42",
+      "km": "650",
+      "prix": "1.85",
+      "trajets": "1",
+      "distance": "",
+      "conso": ""
+    },
+    "attendu": 6.46,
+    "tolerance": 0.01,
+    "sortie": "6,46\\\\s*L/100\\\\s*km",
+    "source": "https://carlabelling.ademe.fr/recherche/",
+    "note": "Cas indépendant : 42 × 100 ÷ 650 = 6,4615 L/100 km, affiché à deux décimales. La valeur attendue est calculée séparément, sans exécuter le calculateur testé."
+  },
+  {
+    "outil": "consommation-carburant",
+    "entrees": {
+      "mode": "trip",
+      "litres": "",
+      "km": "",
+      "prix": "1.85",
+      "trajets": "1",
+      "distance": "300",
+      "conso": "6.5"
+    },
+    "attendu": 36.08,
+    "tolerance": 0.01,
+    "sortie": "36,08\\\\s*€",
+    "source": "https://carlabelling.ademe.fr/recherche/",
+    "note": "Cas indépendant : 300 × 6,5 ÷ 100 = 19,5 L ; 19,5 × 1,85 = 36,075 €, arrondi à 36,08 €. La valeur attendue est calculée séparément, sans exécuter le calculateur testé."
   }
 ]
