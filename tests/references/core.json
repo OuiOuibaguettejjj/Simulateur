@@ -971,5 +971,73 @@
     "sortie": "18\\s*061,11\\s*€",
     "source": "https://www.insee.fr/fr/metadonnees/definition/c1299",
     "note": "Cas de non-régression indépendant : 10 000 € × 1,03^20 = 18 061,1123 €, arrondi à 18 061,11 €. Le taux est une hypothèse de projection, pas une donnée Insee."
+  },
+  {
+    "outil": "consommation-carburant",
+    "entrees": {
+      "mode": "consumption",
+      "litres": "42",
+      "km": "650",
+      "prix": "1.85",
+      "trajets": "1",
+      "distance": "",
+      "conso": ""
+    },
+    "attendu": 6.46,
+    "tolerance": 0.01,
+    "sortie": "6,46\\s*L/100\\s*km",
+    "source": "https://carlabelling.ademe.fr/recherche/",
+    "note": "Cas indépendant : 42 × 100 ÷ 650 = 6,4615 L/100 km, affiché à deux décimales. La valeur attendue est calculée séparément, sans exécuter le calculateur testé."
+  },
+  {
+    "outil": "consommation-carburant",
+    "entrees": {
+      "mode": "trip",
+      "litres": "",
+      "km": "",
+      "prix": "1.85",
+      "trajets": "1",
+      "distance": "300",
+      "conso": "6.5"
+    },
+    "attendu": 36.08,
+    "tolerance": 0.01,
+    "sortie": "36,08\\s*€",
+    "source": "https://carlabelling.ademe.fr/recherche/",
+    "note": "Cas indépendant : 300 × 6,5 ÷ 100 = 19,5 L ; 19,5 × 1,85 = 36,075 €, arrondi à 36,08 €. La valeur attendue est calculée séparément, sans exécuter le calculateur testé."
+  },
+  {
+    "outil": "consommation-carburant",
+    "entrees": {
+      "mode": "consumption",
+      "litres": "0",
+      "km": "500",
+      "prix": "1.85",
+      "trajets": "2",
+      "distance": "",
+      "conso": ""
+    },
+    "attendu": 0,
+    "tolerance": 0,
+    "sortie": "0(?:[,.]0*)?\\s*L/100\\s*km",
+    "source": "https://carlabelling.ademe.fr/recherche/",
+    "note": "Cas limite indépendant : 0 litre sur 500 km donne 0 L/100 km ; le résultat reste nul même pour 2 trajets. La valeur attendue est calculée séparément."
+  },
+  {
+    "outil": "consommation-carburant",
+    "entrees": {
+      "mode": "trip",
+      "litres": "",
+      "km": "",
+      "prix": "0",
+      "trajets": "2",
+      "distance": "300",
+      "conso": "6.5"
+    },
+    "attendu": 0,
+    "tolerance": 0,
+    "sortie": "0(?:[,.]0*)?\\s*€",
+    "source": "https://carlabelling.ademe.fr/recherche/",
+    "note": "Cas limite indépendant : 300 km à 6,5 L/100 km représentent 19,5 L, mais à 0 €/L le coût est de 0 €. Deux trajets ne changent pas ce coût nul."
   }
 ]

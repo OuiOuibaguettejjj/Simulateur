@@ -646,8 +646,8 @@
       "category": "mesures",
       "relatedTools": [
         "frais-kilometriques",
-        "prix-unitaire",
-        "promotions"
+        "cout-km",
+        "vitesse"
       ]
     },
     "cout-km": {
