@@ -104,14 +104,14 @@ const distanceFactor={km:1000,m:1,mi:1609.344,nmi:1852,ft:0.3048};
 const timeFactor={h:3600,min:60,s:1};
 const speedFactor={kmh:1,ms:1/3.6,mph:1/1.609344,kn:1/1.852,fts:1/3.6*3.280839895013123};
 const du=this.$("distance-unit")?.value||"km",tu=this.$("time-unit")?.value||"h",su=this.$("speed-unit")?.value||"kmh";
-if(!Number.isFinite(d)||!Number.isFinite(t)||d<0||t<=0||!distanceFactor[du]||!timeFactor[tu]||!speedFactor[su])return"<div class="speed-kicker">Données à vérifier</div><div class="speed-main"><strong>Valeurs invalides</strong></div><p>La distance doit être positive ou nulle et la durée strictement supérieure à zéro.</p>";
+if(!Number.isFinite(d)||!Number.isFinite(t)||d<0||t<=0||!distanceFactor[du]||!timeFactor[tu]||!speedFactor[su])return '<div class="speed-kicker">Données à vérifier</div><div class="speed-main"><strong>Valeurs invalides</strong></div><p>La distance doit être positive ou nulle et la durée strictement supérieure à zéro.</p>';
 const ms=d*distanceFactor[du]/(t*timeFactor[tu]);
-if(!Number.isFinite(ms))return"<div class="speed-kicker">Données à vérifier</div><div class="speed-main"><strong>Valeur trop grande</strong></div><p>Réduisez les valeurs saisies.</p>";
+if(!Number.isFinite(ms))return '<div class="speed-kicker">Données à vérifier</div><div class="speed-main"><strong>Valeur trop grande</strong></div><p>Réduisez les valeurs saisies.</p>';
 const format=(v,unit)=>Number(v).toLocaleString("fr-FR",{maximumFractionDigits:2})+" "+unit;
 const outputs={kmh:format(ms*3.6,"km/h"),ms:format(ms,"m/s"),mph:format(ms/0.44704,"mph"),kn:format(ms/(1852/3600),"kn"),fts:format(ms/0.3048,"ft/s")};
 const main=outputs[su],kmh=ms*3.6;
 const equivalents=[["km/h",outputs.kmh],["m/s",outputs.ms],["mph",outputs.mph],["nœuds",outputs.kn]].map(([label,v])=>"<div><span>"+label+"</span><strong>"+v+"</strong></div>").join("");
-return"<div class="speed-kicker">Votre vitesse</div><div class="speed-main"><strong>"+main+"</strong></div><p>Vitesse moyenne sur la distance et la durée saisies.</p><div class="speed-equivalents">"+equivalents+"</div>";
+return '<div class="speed-kicker">Votre vitesse</div><div class="speed-main"><strong>'+main+'</strong></div><p>Vitesse moyenne sur la distance et la durée saisies.</p><div class="speed-equivalents">'+equivalents+'</div>';
 }};
 </script>
 </body>
