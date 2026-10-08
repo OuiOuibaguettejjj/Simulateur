@@ -627,9 +627,9 @@
       "type": "calculateur",
       "category": "temps",
       "relatedTools": [
-        "salaire-horaire",
-        "jours-ouvres",
-        "temps-calcul"
+        "heures-supplementaires",
+        "temps-partiel",
+        "salaire-horaire"
       ]
     },
     "temps": {
