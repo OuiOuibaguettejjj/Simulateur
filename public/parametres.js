@@ -243,11 +243,6 @@
           1.8,
           2.1,
           2.4
-        ],        "plafondAutresPretsMultiplicateurs": [
-          1.25,
-          1,
-          1,
-          1
         ],
         "durees": {
           "1": {
@@ -271,6 +266,12 @@
             "total": 10
           }
         },
+        "plafondAutresPretsMultiplicateurs": [
+          1.25,
+          1,
+          1,
+          1
+        ],
         "plafondsOperation": {
           "A": [
             150000,
@@ -388,15 +389,15 @@
             24000,
             28500
           ]
-        }
-      
+        },
         "travauxMinimumRatio": 0.25,
         "zonesAncienEligibles": {
           "A": 0,
           "B1": 0,
           "B2": 1,
           "C": 1
-        },}
+        }
+      }
     },
     "rsa": {
       "label": "RSA",
