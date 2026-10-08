@@ -202,8 +202,8 @@ function calculate(){
  const n=activeCount();if(n===null){results.innerHTML='<div class="share-note" role="alert"><strong>Nombre de personnes invalide.</strong><p>Choisissez un nombre entier entre 2 et 12.</p></div>';return}
  const weights=shareValues(n);if(!weights)return;
  const participantNames=names(n),paid=Array(n).fill(0),due=Array(n).fill(0),expenseData=[];
- for(const row of rows()){
-  const e=Number(row.dataset.expense),amountRaw=document.getElementById("expense-amount-"+e).value.trim();
+ for(const [e,row] of rows().entries()){
+  const amountRaw=document.getElementById("expense-amount-"+e).value.trim();
   if(amountRaw==="")continue;
   const amount=cents(amountRaw);
   if(amount===null||amount<=0){results.innerHTML='<div class="share-note" role="alert"><strong>Montant invalide.</strong><p>Chaque dépense renseignée doit être un montant strictement supérieur à 0 €.</p></div>';return}
