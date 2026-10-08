@@ -561,7 +561,7 @@
     "temps-travail": {
       "label": "Durée du travail — références légales",
       "year": 2026,
-      "effectiveFrom": "2025-09-25",
+      "effectiveFrom": "2016-08-10",
       "effectiveTo": "2026-12-31",
       "verifiedOn": "2026-10-08",
       "source": {
