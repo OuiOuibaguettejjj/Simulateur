@@ -103,7 +103,7 @@
     "attendu": 50,
     "tolerance": 0,
     "sortie": "Votre vitesse",
-    "source": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b9",
+    "source": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b9",
     "note": "Cas indépendant : 100 km ÷ 2 h = 50 km/h. Le facteur et l’unité sont vérifiés dans la table NIST des vitesses."
   },
   {
@@ -118,7 +118,7 @@
     "attendu": 10,
     "tolerance": 0,
     "sortie": "Votre vitesse",
-    "source": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b9",
+    "source": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b9",
     "note": "Cas indépendant de conversion : 5 miles en 30 minutes correspondent à 10 miles par heure. La valeur attendue est obtenue par 5 ÷ 0,5 h, sans exécuter le calculateur testé."
   },
   {
@@ -294,7 +294,7 @@
     "attendu": 60,
     "tolerance": 0,
     "sortie": "60\\s*′",
-    "source": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b9"
+    "source": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b9"
   },
   {
     "famille": "conversion",
@@ -307,7 +307,7 @@
     "attendu": 1000,
     "tolerance": 0.0001,
     "sortie": "1\\s*000\\s*mrad",
-    "source": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b9"
+    "source": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b9"
   },
   {
     "famille": "conversion",
@@ -320,7 +320,7 @@
     "attendu": 0.9,
     "tolerance": 0.000001,
     "sortie": "0,9\\s*°",
-    "source": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b9"
+    "source": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b9"
   },
   {
     "famille": "conversion",
