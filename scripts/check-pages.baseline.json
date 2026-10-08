@@ -972,30 +972,6 @@
     "rule": "title"
   },
   {
-    "path": "public/outil/signe-astrologique/index.html",
-    "rule": "content-h2"
-  },
-  {
-    "path": "public/outil/signe-astrologique/index.html",
-    "rule": "description"
-  },
-  {
-    "path": "public/outil/signe-astrologique/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/signe-astrologique/index.html",
-    "rule": "formula"
-  },
-  {
-    "path": "public/outil/signe-astrologique/index.html",
-    "rule": "result"
-  },
-  {
-    "path": "public/outil/signe-astrologique/index.html",
-    "rule": "tool-block"
-  },
-  {
     "path": "public/outil/smic/index.html",
     "rule": "description"
   },
