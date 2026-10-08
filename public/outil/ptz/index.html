@@ -150,10 +150,10 @@ window.TOOL={calc:function(){
   if(rfr===null||!Number.isFinite(rfr)||rfr<0||cost===null||!Number.isFinite(cost)||cost<=0||otherRaw!==null&&(!Number.isFinite(otherRaw)||otherRaw<0)) return "<strong>Valeurs invalides ou insuffisantes.</strong><p>Renseignez un RFR valide et un coût d'opération supérieur à 0 €.</p>";
   if(!$( "primo").checked) return "<strong>Condition de primo-accession non remplie.</strong><p>Cette simulation ne calcule pas le PTZ si la condition générale de primo-accession n'est pas déclarée remplie. Des exceptions légales existent et ne sont pas évaluées ici.</p>";
   if(type==="ancien"){
-    if(!["B2","C"].includes(zone)) return "<strong>PTZ non calculable dans cette configuration.</strong><p>Pour l'achat d'un logement ancien avec travaux, le logement doit être situé en zone B2 ou C.</p>";
+    if(!params.zonesAncienEligibles.includes(zone)) return "<strong>PTZ non calculable dans cette configuration.</strong><p>Pour l'achat d'un logement ancien avec travaux, le logement doit être situé en zone B2 ou C.</p>";
     if(works===null||!Number.isFinite(works)||works<0) return "<strong>Montant des travaux invalide.</strong><p>Renseignez un montant de travaux valide.</p>";
     if(works>cost) return "<strong>Montants incohérents.</strong><p>Les travaux ne peuvent pas dépasser le coût total de l'opération.</p>";
-    if(works/cost<0.25) return "<strong>Condition de travaux non remplie.</strong><p>Les travaux saisis doivent représenter au moins 25 % du coût total de l'opération.</p>";
+    if(works/cost<params.travauxMinimumRatio) return "<strong>Condition de travaux non remplie.</strong><p>Les travaux saisis doivent représenter au moins 25 % du coût total de l'opération.</p>";
   }
   const cap=params.plafondsRessources[zone][people-1];
   const revenue=Math.max(rfr,cost/9);
@@ -166,10 +166,10 @@ window.TOOL={calc:function(){
   const operationCap=params.plafondsOperation[zone][Math.min(people,5)-1];
   const base=Math.min(cost,operationCap);
   const theoretical=base*quotient;
-  const otherLoanCap=otherRaw===null?null:otherRaw*(quotient===0.5?1.25:1);
+  const otherLoanCap=otherRaw===null?null:otherRaw*params.plafondAutresPretsMultiplicateurs[tranche-1];
   const amount=otherLoanCap===null?theoretical:Math.min(theoretical,otherLoanCap);
   const duration=params.durees[tranche];
-  const capNote=otherRaw===null?"Le plafond des autres prêts de plus de 2 ans n'est pas appliqué : vous avez laissé ce champ vide.":(quotient===0.5?"Plafond des autres prêts appliqué à 125 % (tranche 1).":"Plafond des autres prêts appliqué à 100 %.");
+  const capNote=otherRaw===null?"Le plafond des autres prêts de plus de 2 ans n'est pas appliqué : vous avez laissé ce champ vide.":("Plafond des autres prêts appliqué à "+this.num(params.plafondAutresPretsMultiplicateurs[tranche-1]*100)+" %.");
   return "<div class=\"ptz-result-main\"><strong>"+money(amount)+" de PTZ estimé</strong><p>"+(otherRaw!==null&&amount<theoretical?"Le montant est plafonné par vos autres prêts de plus de 2 ans.":"Montant calculé selon le barème, sous réserve des autres conditions du PTZ.")+"</p></div><div class=\"ptz-result-grid\"><div class=\"ptz-result-item\"><small>Tranche de revenus</small><strong>"+tranche+"/4</strong></div><div class=\"ptz-result-item\"><small>Quotité</small><strong>"+this.num(quotient*100)+" %</strong></div><div class=\"ptz-result-item\"><small>Coût retenu</small><strong>"+money(base)+"</strong></div><div class=\"ptz-result-item\"><small>Revenu retenu</small><strong>"+money(revenue)+"</strong></div><div class=\"ptz-result-item\"><small>Coefficient familial</small><strong>"+this.num(coeff)+"</strong></div><div class=\"ptz-result-item\"><small>Durée totale</small><strong>"+duration.total+" ans</strong></div></div><div class=\"ptz-note\">"+capNote+" Différé : "+duration.defer+" ans. Période de remboursement : "+duration.repay+" ans.</div><details class=\"ptz-method\"><summary>Voir le détail du calcul</summary><table><tr><td>RFR du foyer</td><td>"+money(rfr)+"</td></tr><tr><td>Coût ÷ 9</td><td>"+money(cost/9)+"</td></tr><tr><td>Revenu retenu</td><td>"+money(revenue)+"</td></tr><tr><td>Revenu / coefficient</td><td>"+this.num(weighted)+" €</td></tr><tr><td>Plafond d'opération</td><td>"+money(operationCap)+"</td></tr><tr><td>Assiette retenue</td><td>"+money(base)+"</td></tr><tr><td>Quotité</td><td>"+this.num(quotient*100)+" %</td></tr><tr><td>PTZ théorique</td><td>"+money(theoretical)+"</td></tr><tr><td>Montant retenu</td><td>"+money(amount)+"</td></tr></table></details>";
 }};
 const typeField=document.getElementById("type");
