@@ -1,3 +1,118 @@
-<!doctype html><html lang="fr"><head><meta name="calculator-rendering" content="static"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="google-adsense-account" content="ca-pub-2924580037451268"><title>Calculateur de vitesse</title><meta name="description" content="Calculez une vitesse à partir d'une distance et d'un temps."><link rel="canonical" href="https://simulateur.site/outil/vitesse/"><link rel="stylesheet" href="/styles.css"><script src="/simulateurs.js" defer></script><script src="/enter-calcul.js" defer></script><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur de vitesse","url":"https://simulateur.site/outil/vitesse/","description":"Calculez une vitesse à partir d\u0027une distance et d\u0027un temps.","inLanguage":"fr-FR","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"price":"0","priceCurrency":"EUR"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Mesures","item":"https://simulateur.site/mesures/"},{"@type":"ListItem","position":3,"name":"Calculateur de vitesse","item":"https://simulateur.site/outil/vitesse/"}]}</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta property="og:type" content="website"><meta property="og:site_name" content="Simulateur"><meta property="og:locale" content="fr_FR"><meta property="og:title" content="Calculateur de vitesse"><meta property="og:description" content="Calculez une vitesse à partir d'une distance et d'un temps."><meta property="og:url" content="https://simulateur.site/outil/vitesse/"><meta name="twitter:card" content="summary"></head><body><header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header><main><div class="wrap"><div class="breadcrumb"><a href="/">Accueil</a> · <a href="/mesures/">Mesures</a> · Calculateur de vitesse</div><section class="tool"><div class="eyebrow">PHYSIQUE</div><h1>Calculateur de vitesse</h1><p class="tool-intro">Calculez une vitesse à partir d'une distance et d'un temps.</p><div id="fields"><div class="field"><label for="d">Distance (km)</label><input id="d" type="number" value="100"></div><div class="field"><label for="t">Durée (h)</label><input id="t" type="number" value="2"></div></div><button class="button-main" onclick="Simulateurs.calc()">Calculer</button><div class="result" id="result" aria-live="polite"></div><div class="formula"><p>Calculez une vitesse à partir d'une distance et d'un temps.</p></div></section></div><section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Outils associés</h2><div class="related-links"><a class="related-link" href="/outil/consommation-carburant/"><strong>Consommation carburant</strong><span>Estimer les litres consommés et le coût d'un trajet.</span></a><a class="related-link" href="/outil/cout-km/"><strong>Coût au kilomètre</strong><span>Calculer le coût d'utilisation d'un véhicule au kilomètre.</span></a><a class="related-link" href="/outil/temps-calcul/"><strong>Addition d'heures</strong><span>Additionner des heures, minutes et durées.</span></a></div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="/mesures/">Mesures</a>.</p></div></section>
-</main><footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer><script>window.TOOL={calc:function(){const d=+this.$("d").value,t=+this.$("t").value;if(d<0||t<=0)return"Valeurs invalides.";const v=d/t;return"<strong>"+v.toLocaleString("fr-FR",{maximumFractionDigits:2})+" km/h</strong>"}};</script></body></html>
+<!doctype html>
+<html lang="fr">
+<head>
+<meta name="calculator-rendering" content="static">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="google-adsense-account" content="ca-pub-2924580037451268">
+<title>Calculateur de vitesse | km/h, mph, m/s, nœuds | Simulateur</title>
+<meta name="description" content="Calculez une vitesse à partir d’une distance et d’une durée en km/h, m/s, mph ou nœuds, avec conversion des unités de distance et de temps.">
+<link rel="canonical" href="https://simulateur.site/outil/vitesse/">
+<link rel="stylesheet" href="/styles.css">
+<script src="/simulateurs.js" defer></script>
+<script src="/enter-calcul.js" defer></script>
+<style>
+.speed-page{max-width:980px;margin:0 auto}
+.speed-hero{padding:42px 46px 32px;color:#fff;border:1px solid var(--ink);border-radius:22px 22px 0 0;background:linear-gradient(135deg,#17483d,#102f2a);box-shadow:0 18px 45px rgba(23,23,19,.12)}
+.speed-hero .eyebrow{color:#ffb29f}.speed-hero .tool-intro{max-width:720px;color:#dbe6df;margin:0;font-size:1.05rem}
+.speed-badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}.speed-badges span{padding:7px 10px;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:rgba(255,255,255,.07);font-size:.75rem;font-weight:800}
+.speed-form{padding:30px 36px 36px;border:1px solid var(--ink);border-top:0;border-radius:0 0 22px 22px;background:var(--card);box-shadow:0 24px 60px rgba(23,23,19,.1)}
+.speed-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(300px,.95fr);gap:22px;align-items:stretch}
+.speed-panel{padding:25px;border:1px solid var(--line);border-radius:17px;background:#fbfaf6}
+.speed-panel>p{margin:0 0 20px;color:var(--muted);font-size:.9rem}
+.speed-fields{display:grid;gap:12px}.speed-field{padding:14px;border:1px solid #dedbd2;border-radius:13px;background:#fff;transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease}.speed-field:focus-within{border-color:var(--accent2);box-shadow:0 0 0 3px rgba(23,72,61,.1);transform:translateY(-1px)}
+.speed-field label{display:block;margin:0 0 8px;font-size:.82rem;font-weight:850}
+.speed-control{display:grid;grid-template-columns:minmax(0,1fr) 135px;gap:8px}.speed-control input,.speed-control select{width:100%;min-height:48px;border:1px solid #c9c7bf;border-radius:10px;background:#fff;padding:0 12px;font:inherit;color:var(--ink)}.speed-control input:focus,.speed-control select:focus{outline:3px solid var(--accent-soft);outline-offset:0;border-color:var(--accent)}
+.speed-action{margin-top:16px}.speed-action .button-main{min-height:54px;border-radius:13px;box-shadow:0 4px 0 #9e2a18,0 10px 22px rgba(189,50,28,.16);transition:transform .12s ease,box-shadow .12s ease}.speed-action .button-main:hover{transform:translateY(-1px);box-shadow:0 5px 0 #9e2a18,0 13px 26px rgba(189,50,28,.18)}.speed-action .button-main:active{transform:translateY(2px);box-shadow:0 2px 0 #9e2a18}.speed-note{text-align:center;color:var(--muted);font-size:.73rem;margin:10px 0 0}
+.speed-result{position:relative;overflow:hidden;padding:27px!important;margin:0!important;background:linear-gradient(145deg,#f4f7f4,#edf3ef)!important;border:1px solid #d4ded7!important;border-radius:17px!important;box-shadow:inset 4px 0 0 var(--accent2),0 10px 28px rgba(23,23,19,.07)}
+.speed-result:after{content:"v = d / t";position:absolute;right:16px;top:16px;font-size:.72rem;font-weight:900;color:#6c7d74;opacity:.65}
+.speed-kicker{font-size:.7rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2)}.speed-main{margin-top:8px}.speed-main strong{font-size:clamp(2.2rem,4.8vw,3.4rem);line-height:1.02;letter-spacing:-.055em}.speed-result p{color:var(--muted);font-size:.84rem;line-height:1.5}
+.speed-equivalents{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:18px}.speed-equivalents>div{padding:11px 12px;border:1px solid #dfe4df;border-radius:10px;background:rgba(255,255,255,.8)}.speed-equivalents span{display:block;color:var(--muted);font-size:.7rem}.speed-equivalents strong{display:block;margin-top:2px;font-size:.98rem}
+.speed-content{max-width:900px;margin:48px auto 0}.speed-content p,.speed-content li{color:#44413b}.speed-content ul{padding-left:22px}.speed-content li{margin:7px 0}
+.speed-formula{margin-top:18px;padding:19px;border-left:4px solid var(--accent);background:#f0eadf}.speed-formula strong{display:block}.speed-formula code{display:block;margin:8px 0;font-size:1.1rem;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.speed-formula span{display:block;color:var(--muted);font-size:.82rem}
+.speed-table{width:100%;border-collapse:collapse;margin:18px 0 6px;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:.88rem}.speed-table th,.speed-table td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left}.speed-table th{background:#f0eadf;color:var(--muted);font-size:.74rem;text-transform:uppercase;letter-spacing:.04em}.speed-table tr:last-child td{border-bottom:0}
+.speed-example{margin-top:18px;padding:18px 20px;border:1px solid var(--accent2);border-radius:12px;background:#edf3ef}
+.speed-example strong{color:var(--accent2)}
+.speed-faq{margin-top:40px}.speed-faq details{border-bottom:1px solid var(--line);padding:15px 0}.speed-faq summary{cursor:pointer;font-weight:900}.speed-source{margin-top:22px;padding:16px;border-left:4px solid var(--accent2);background:#f4f7f4;color:var(--muted)!important;font-size:.82rem}
+@media(max-width:760px){.speed-hero{padding:34px 22px 29px}.speed-form{padding:22px 18px 28px}.speed-grid{grid-template-columns:1fr}.speed-panel{padding:19px}.speed-control{grid-template-columns:minmax(0,1fr) 125px}.speed-result{padding:23px!important}}
+@media(max-width:480px){.speed-control{grid-template-columns:1fr}.speed-equivalents{grid-template-columns:1fr}}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur de vitesse | km/h, mph, m/s, nœuds","url":"https://simulateur.site/outil/vitesse/","description":"Calculez une vitesse à partir d’une distance et d’une durée en km/h, m/s, mph ou nœuds, avec conversion des unités de distance et de temps.","inLanguage":"fr-FR","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"price":"0","priceCurrency":"EUR"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Mesures","item":"https://simulateur.site/mesures/"},{"@type":"ListItem","position":3,"name":"Calculateur de vitesse","item":"https://simulateur.site/outil/vitesse/"}]}</script>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Simulateur"><meta property="og:locale" content="fr_FR"><meta property="og:title" content="Calculateur de vitesse | km/h, mph, m/s, nœuds | Simulateur"><meta property="og:description" content="Calculez une vitesse à partir d’une distance et d’une durée en km/h, m/s, mph ou nœuds, avec conversion des unités de distance et de temps."><meta property="og:url" content="https://simulateur.site/outil/vitesse/"><meta name="twitter:card" content="summary">
+</head>
+<body>
+<header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header>
+<main><div class="wrap"><div class="speed-page">
+<div class="breadcrumb"><a href="/">Accueil</a> · <a href="/mesures/">Mesures</a> · Calculateur de vitesse</div>
+<section class="tool speed-hero"><div class="eyebrow">PHYSIQUE · MESURES</div><h1>Calculateur de vitesse</h1><p class="tool-intro">Calculez une vitesse moyenne à partir d’une distance et d’une durée, puis affichez-la dans l’unité qui vous convient.</p><div class="speed-badges"><span>✓ km/h</span><span>✓ m/s</span><span>✓ mph</span><span>✓ nœuds</span><span>✓ virgule décimale</span></div></section>
+<section class="speed-form" aria-labelledby="simulation-title">
+<div class="speed-grid">
+<div class="speed-panel">
+<h2 id="simulation-title">Vos données</h2>
+<p>Saisissez une distance et une durée. Les unités peuvent être différentes : par exemple, 5 miles en 30 minutes.</p>
+<div class="speed-fields">
+<div class="speed-field"><label for="d">Distance</label><div class="speed-control"><input id="d" type="number" min="0" step="any" value="100" inputmode="decimal"><select id="distance-unit" aria-label="Unité de distance"><option value="km" selected>kilomètres (km)</option><option value="m">mètres (m)</option><option value="mi">miles (mi)</option><option value="nmi">milles marins (nmi)</option><option value="ft">pieds (ft)</option></select></div></div>
+<div class="speed-field"><label for="t">Durée</label><div class="speed-control"><input id="t" type="number" min="0" step="any" value="2" inputmode="decimal"><select id="time-unit" aria-label="Unité de durée"><option value="h" selected>heures (h)</option><option value="min">minutes (min)</option><option value="s">secondes (s)</option></select></div></div>
+<div class="speed-field"><label for="speed-unit">Afficher la vitesse en</label><div class="speed-control" style="grid-template-columns:1fr"><select id="speed-unit"><option value="kmh" selected>kilomètres par heure (km/h)</option><option value="ms">mètres par seconde (m/s)</option><option value="mph">miles par heure (mph)</option><option value="kn">nœuds (kn)</option><option value="fts">pieds par seconde (ft/s)</option></select></div></div>
+</div>
+<div class="speed-action"><button class="button-main" type="button" onclick="Simulateurs.calc()">Calculer la vitesse <span aria-hidden="true">→</span></button></div>
+<p class="speed-note">Calcul local, sans inscription. Le résultat représente une vitesse moyenne sur la durée saisie.</p>
+</div>
+<div class="result speed-result" id="result" aria-live="polite"><div class="speed-kicker">Votre résultat</div><div class="speed-main"><strong>50 km/h</strong></div><p>Valeur calculée avec les données actuellement saisies. Modifiez les valeurs puis cliquez sur « Calculer la vitesse » pour actualiser le résultat.</p><div class="speed-equivalents"><div><span>m/s</span><strong>13,89 m/s</strong></div><div><span>mph</span><strong>31,07 mph</strong></div><div><span>nœuds</span><strong>27,00 kn</strong></div><div><span>km/h</span><strong>50 km/h</strong></div></div></div>
+</div>
+</section>
+<section class="content-section speed-content">
+<h2>Comment calculer une vitesse ?</h2>
+<p>La vitesse moyenne correspond à la distance parcourue divisée par la durée du parcours. Il faut utiliser des unités cohérentes avant de diviser : le calculateur s’en charge automatiquement lorsque vous mélangez, par exemple, des kilomètres et des minutes.</p>
+<div class="formula speed-formula"><strong>Formule</strong><code>v = d ÷ t</code><span><strong>v</strong> = vitesse · <strong>d</strong> = distance parcourue · <strong>t</strong> = durée.</span><p>Facteurs de conversion : <a href="https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b9" target="_blank" rel="noopener">NIST</a>.</p></div>
+
+<h2>Quelles unités de vitesse peut-on utiliser ?</h2>
+<p>En France, le <strong>km/h</strong> est l’unité la plus familière pour la route. Le <strong>m/s</strong> est courant en physique. Le <strong>mph</strong> (mile par heure) est notamment utilisé dans les pays anglo-saxons, tandis que le <strong>nœud</strong> est utilisé en navigation maritime et aérienne. Le calculateur permet aussi d’afficher les pieds par seconde (ft/s) pour les usages techniques.</p>
+<table class="speed-table"><thead><tr><th>Unité</th><th>Équivalence</th><th>Usage courant</th></tr></thead><tbody>
+<tr><td>km/h</td><td>1 km/h</td><td>route, trajets</td></tr>
+<tr><td>m/s</td><td>1 km/h = 0,277778 m/s</td><td>physique, sciences</td></tr>
+<tr><td>mph</td><td>1 mph = 1,609344 km/h</td><td>États-Unis, Royaume-Uni</td></tr>
+<tr><td>nœud (kn)</td><td>1 kn = 1,852 km/h</td><td>navigation, aviation</td></tr>
+<tr><td>ft/s</td><td>1 ft/s = 0,3048 m/s</td><td>usages techniques</td></tr>
+</tbody></table>
+
+<h2>Quelques exemples de calcul de vitesse</h2>
+<div class="speed-example"><p><strong>100 km en 2 heures</strong> donnent 50 km/h. La même vitesse vaut 13,89 m/s, 31,07 mph et 27,00 nœuds.</p><p><strong>5 miles en 30 minutes</strong> donnent 10 mph, soit environ 16,09 km/h.</p><p><strong>1 500 m en 5 minutes</strong> donnent 5 m/s, soit 18 km/h.</p></div>
+
+<h2>Vitesse moyenne : quelles limites ?</h2>
+<p>Ce calculateur donne une vitesse moyenne sur la durée saisie. Il ne décrit pas les accélérations ni les ralentissements et ne tient pas compte des pauses séparément. Pour un trajet réel, la vitesse moyenne dépend donc de la période exacte retenue : inclure une pause dans la durée diminue la vitesse moyenne calculée.</p>
+
+<section class="calculator-faq speed-faq" aria-labelledby="faq-title"><h2 id="faq-title">FAQ</h2>
+<details><summary>Comment calculer une vitesse à partir d’une distance et d’un temps ?</summary><div class="calculator-faq-answer"><p>Divisez la distance par la durée, après avoir rendu les unités cohérentes. Par exemple, 100 km parcourus en 2 heures donnent 50 km/h.</p></div></details>
+<details><summary>Comment convertir des km/h en m/s ?</summary><div class="calculator-faq-answer"><p>Divisez la valeur en km/h par 3,6. Ainsi, 90 km/h correspondent à 25 m/s.</p></div></details>
+<details><summary>Combien vaut 1 mph en km/h ?</summary><div class="calculator-faq-answer"><p>Un mile par heure vaut exactement 1,609344 km/h selon les facteurs de conversion du NIST. L’affichage du calculateur est arrondi à deux décimales.</p></div></details>
+<details><summary>Combien vaut un nœud en km/h ?</summary><div class="calculator-faq-answer"><p>Un nœud correspond à un mille marin par heure, soit exactement 1,852 km/h. Le nœud est notamment utilisé en navigation maritime et aérienne.</p></div></details>
+<details><summary>Quelle différence entre vitesse moyenne et vitesse instantanée ?</summary><div class="calculator-faq-answer"><p>La vitesse moyenne rapporte une distance totale à une durée totale. La vitesse instantanée décrit la vitesse à un instant donné. Ce calculateur estime uniquement la vitesse moyenne sur la durée saisie.</p></div></details>
+</section>
+<p class="speed-source">Sources : <a href="https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b9" target="_blank" rel="noopener">NIST — facteurs de conversion des unités, notamment temps et vitesse</a> · <a href="https://www.bipm.org/fr/si-brochure-9" target="_blank" rel="noopener">BIPM — Brochure sur le Système international d’unités</a>. Facteurs de conversion vérifiés le 8 octobre 2026.</p>
+</section>
+<section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Outils associés</h2><div class="related-links"><a class="related-link" href="/outil/consommation-carburant/"><strong>Consommation de carburant</strong><span>Estimer la consommation et le coût d’un trajet.</span></a><a class="related-link" href="/outil/cout-km/"><strong>Coût au kilomètre</strong><span>Calculer le coût d’un trajet au kilomètre.</span></a><a class="related-link" href="/outil/temps-calcul/"><strong>Calculateur de durée</strong><span>Convertir et calculer des heures, minutes et secondes.</span></a></div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="/mesures/">Mesures</a>.</p></div></section>
+</div></div></main>
+<footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer>
+<script>
+window.TOOL={calc:function(){
+const value=id=>String(this.$(id)?.value??"").trim().replace(/\s/g,"").replace(",",".");
+const d=Number(value("d")),t=Number(value("t"));
+const distanceFactor={km:1000,m:1,mi:1609.344,nmi:1852,ft:0.3048};
+const timeFactor={h:3600,min:60,s:1};
+const speedFactor={kmh:1,ms:1/3.6,mph:1/1.609344,kn:1/1.852,fts:1/3.6*3.280839895013123};
+const du=this.$("distance-unit")?.value||"km",tu=this.$("time-unit")?.value||"h",su=this.$("speed-unit")?.value||"kmh";
+if(!Number.isFinite(d)||!Number.isFinite(t)||d<0||t<=0||!distanceFactor[du]||!timeFactor[tu]||!speedFactor[su])return '<div class="speed-kicker">Données à vérifier</div><div class="speed-main"><strong>Valeurs invalides</strong></div><p>La distance doit être positive ou nulle et la durée strictement supérieure à zéro.</p>';
+const ms=d*distanceFactor[du]/(t*timeFactor[tu]);
+if(!Number.isFinite(ms))return '<div class="speed-kicker">Données à vérifier</div><div class="speed-main"><strong>Valeur trop grande</strong></div><p>Réduisez les valeurs saisies.</p>';
+const format=(v,unit)=>Number(v).toLocaleString("fr-FR",{maximumFractionDigits:2})+" "+unit;
+const outputs={kmh:format(ms*3.6,"km/h"),ms:format(ms,"m/s"),mph:format(ms/0.44704,"mph"),kn:format(ms/(1852/3600),"kn"),fts:format(ms/0.3048,"ft/s")};
+const main=outputs[su];
+const equivalents=[["km/h",outputs.kmh],["m/s",outputs.ms],["mph",outputs.mph],["nœuds",outputs.kn]].map(([label,v])=>"<div><span>"+label+"</span><strong>"+v+"</strong></div>").join("");
+return '<div class="speed-kicker">Votre vitesse</div><div class="speed-main"><strong>'+main+'</strong></div><p>Vitesse moyenne sur la distance et la durée saisies.</p><div class="speed-equivalents">'+equivalents+'</div>';
+}};
+</script>
+</body>
+</html>
