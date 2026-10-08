@@ -841,5 +841,22 @@
     "sortie": "TTC",
     "source": "https://www.economie.gouv.fr/particuliers/impots-et-fiscalite/gerer-mes-autres-impots-et-taxes/tva-quels-sont-les-taux-de-votre-quotidien",
     "note": "Cas indépendant : 100 € HT à 5,5 % donnent 5,50 € de TVA et 105,50 € TTC."
+  },
+  {
+    "outil": "partage-depenses",
+    "entrees": {
+      "count": "3",
+      "expense-amount-0": "120",
+      "expense-amount-1": "60",
+      "expense-amount-2": "30",
+      "expense-payer-0": "0",
+      "expense-payer-1": "1",
+      "expense-payer-2": "2"
+    },
+    "attendu": 70,
+    "tolerance": 0.01,
+    "sortie": "70,00\\s*€",
+    "source": "https://calculons.fr/calculateurs/partage-addition",
+    "note": "Cas de référence indépendant : les trois dépenses de l'exemple (120 €, 60 € et 30 €) totalisent 210 € et, avec trois participants, donnent une part moyenne de 70 € par personne. Valeur calculée directement par 210 ÷ 3, sans exécuter le calculateur testé."
   }
 ]
