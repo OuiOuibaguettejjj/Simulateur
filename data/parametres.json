@@ -422,6 +422,9 @@
             94050
           ]
         },
+        "zonesAncienEligibles": ["B2","C"],
+        "travauxMinimumRatio": 0.25,
+        "plafondAutresPretsMultiplicateurs": [1.25,1,1,1],
         "coefficientsFamiliaux": [
           1,
           1.5,
