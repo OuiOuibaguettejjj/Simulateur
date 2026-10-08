@@ -833,14 +833,6 @@
   },
   {
     "path": "public/outil/ptz/index.html",
-    "rule": "description"
-  },
-  {
-    "path": "public/outil/ptz/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/ptz/index.html",
     "rule": "formula"
   },
   {
