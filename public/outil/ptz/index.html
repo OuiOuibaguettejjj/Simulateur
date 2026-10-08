@@ -23,7 +23,7 @@
 <meta property="og:url" content="https://simulateur.site/outil/ptz/">
 <meta name="twitter:card" content="summary">
 <style>
-.ptz-shell{max-width:920px;margin:auto;background:var(--card);border:1px solid var(--ink);border-radius:24px;overflow:hidden;box-shadow:0 24px 70px rgba(23,23,19,.12)}
+.ptz-shell{padding:0;border-top:1px solid var(--ink);max-width:920px;margin:auto;background:var(--card);border:1px solid var(--ink);border-radius:24px;overflow:hidden;box-shadow:0 24px 70px rgba(23,23,19,.12)}
 .ptz-hero{padding:42px 46px 34px;background:linear-gradient(135deg,#17483d 0%,#123a32 58%,#102f2a 100%);color:#fff;position:relative;overflow:hidden}
 .ptz-hero:after{content:"0 %";position:absolute;right:25px;top:-55px;font-size:13rem;line-height:1;font-weight:950;letter-spacing:-.12em;color:rgba(255,255,255,.055);transform:rotate(-7deg);pointer-events:none}
 .ptz-hero .eyebrow{color:#ffb29f;position:relative;z-index:1}
@@ -77,14 +77,14 @@
 <main>
 <div class="wrap">
 <div class="breadcrumb"><a href="/">Accueil</a> · <a href="/immobilier/">Immobilier</a> · Simulateur PTZ 2026 : montant et éligibilité</div>
-<section class="ptz-shell">
+<section class="tool ptz-shell">
 <div class="ptz-hero">
 <div class="eyebrow">CRÉDIT IMMOBILIER</div>
 <h1 class="ptz-title">Simulateur PTZ 2026</h1>
 <p class="tool-intro">Estimez le montant du prêt à taux zéro selon votre logement, votre zone, votre foyer et votre revenu fiscal de référence.</p>
 <div class="ptz-badges"><span>Barème vérifié le 8 octobre 2026</span><span>Offres émises jusqu'au 31/12/2027</span><span>Calcul indicatif</span></div>
 </div>
-<section class="tool ptz-form">
+<div class="ptz-form">
 <div class="ptz-section">
 <div class="ptz-section-head"><strong>1. Votre projet immobilier</strong><span>Type de logement et zone</span></div>
 <div class="row">
@@ -112,7 +112,7 @@
 <button class="button-main" type="button" onclick="Simulateurs.calc()">Calculer mon PTZ</button>
 <div class="result ptz-result" id="result" aria-live="polite"><div class="ptz-result-main"><strong>Renseignez vos données</strong><p>Le résultat affichera le montant théorique, la tranche de revenus, la quotité et le différé applicables.</p></div></div>
 <div class="formula source-links"><strong>Méthode et sources officielles</strong><p>Le calcul applique le barème PTZ en vigueur pour les offres émises du 1er avril 2025 au 31 décembre 2027 : revenu retenu = maximum entre le RFR du foyer et le coût de l'opération divisé par 9 ; tranche déterminée après division par le coefficient familial ; coût plafonné ; quotité selon le type de logement et la tranche.</p><p><a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F10871" target="_blank" rel="noopener">Service-Public — PTZ</a> · <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000051397190" target="_blank" rel="noopener">Légifrance — article D31-10-9</a> · <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000049362873" target="_blank" rel="noopener">Légifrance — durée et différé</a></p></div>
-</section>
+</div>
 </section>
 <section class="content-section ptz-content">
 <h2 class="ptz-heading">Comment est calculé le montant du PTZ ?</h2>
