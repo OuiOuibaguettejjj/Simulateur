@@ -905,7 +905,7 @@
     },
     "attendu": 97200,
     "tolerance": 0.01,
-    "sortie": "[0-9\\\\s\\\\u00a0\\\\u202f.,]+\\\\s*€\\\\s*de PTZ estimé",
+    "sortie": "[0-9\\s\\u00a0\\u202f.,]+\\s*€\\s*de PTZ estimé",
     "verifications": [
       {
         "sortie": "Tranche de revenus",
