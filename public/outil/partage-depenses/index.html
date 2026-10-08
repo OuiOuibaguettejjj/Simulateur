@@ -203,13 +203,13 @@ function calculate(){
  const weights=shareValues(n);if(!weights)return;
  const participantNames=names(n),paid=Array(n).fill(0),due=Array(n).fill(0),expenseData=[];
  for(const [e,row] of rows().entries()){
-  const amountRaw=document.getElementById("expense-amount-"+e).value.trim();
+  const amountRaw=document.getElementById("expense-amount-"+e)?.value.trim()||"";
   if(amountRaw==="")continue;
   const amount=cents(amountRaw);
   if(amount===null||amount<=0){results.innerHTML='<div class="share-note" role="alert"><strong>Montant invalide.</strong><p>Chaque dépense renseignée doit être un montant strictement supérieur à 0 €.</p></div>';return}
   const selected=Array.from({length:n},(_,i)=>document.getElementById("expense-member-"+e+"-"+i)).filter(cb=>cb&&cb.checked).map(cb=>Number(cb.value));
   if(!selected.length){results.innerHTML='<div class="share-note" role="alert"><strong>Dépense sans participant.</strong><p>Cochez au moins une personne pour chaque dépense renseignée.</p></div>';return}
-  const payer=Number(document.getElementById("expense-payer-"+e).value);
+  const payerElement=document.getElementById("expense-payer-"+e);const payer=Number(payerElement?.value);
   if(payer>=n){results.innerHTML='<div class="share-note" role="alert"><strong>Personne payeuse invalide.</strong><p>Sélectionnez un participant actif pour chaque dépense.</p></div>';return}
   paid[payer]+=amount;
   const localWeights=mode.value==="equal"?selected.map(()=>100/selected.length):selected.map(i=>weights[i]);
