@@ -152,13 +152,12 @@ function pageTool(slug) {
   vm.runInContext(script[1], context, { filename: slug });
   const euro = v => Number(v).toLocaleString("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: 2 });
   const num = v => Number(v).toLocaleString("fr-FR", { maximumFractionDigits: 2 });
+  return inputs => context.window.TOOL.calc.call({ $: id => ({ value: String(inputs[id]) }), euro, num });
+}
 const tva = pageTool("tva");
 assert.match(tva({ montant: "100,50", mode: "ht", taux: "20" }), /120,60\s*€\s*TTC/, "TVA : virgule décimale HT → TTC");
 assert.match(tva({ montant: "120,60", mode: "ttc", taux: "20" }), /100,50\s*€\s*HT/, "TVA : virgule décimale TTC → HT");
 assert.match(tva({ montant: "0", mode: "ht", taux: "20" }), /0,00\s*€\s*TTC/, "TVA : zéro accepté");
-
-  return inputs => context.window.TOOL.calc.call({ $: id => ({ value: String(inputs[id]) }), euro, num });
-}
 const euro = v => Number(v).toLocaleString("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: 2 });
 const num = v => Number(v).toLocaleString("fr-FR", { maximumFractionDigits: 2 });
 
