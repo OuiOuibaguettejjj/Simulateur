@@ -41,7 +41,7 @@
     "/outil/cout-km/": "2026-10-03",
     "/outil/difference-dates/": "2026-10-03",
     "/outil/donation/": "2026-10-03",
-    "/outil/electricite/": "2026-10-03",
+    "/outil/electricite/": "2026-10-08",
     "/outil/epargne-mensuelle/": "2026-10-03",
     "/outil/epargne-reglementee/": "2026-10-03",
     "/outil/epargne/": "2026-10-03",
@@ -110,6 +110,5 @@
     "/outil/etes-vous-riche/": "2026-10-05",
     "/outil/prime-activite/": "2026-10-07",
     "/outil/coefficient/": "2026-10-08"
-  },
-  "/outil/electricite/": "2026-10-08"
+  }
 }
