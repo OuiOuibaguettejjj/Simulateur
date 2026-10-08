@@ -1131,7 +1131,7 @@
     "attendu": 6343,
     "tolerance": 0.01,
     "sortie": "Coût annuel",
-    "source": "https://presse.ademe.fr/files/consommations_carburant_2010.pdf",
-    "note": "Cas de référence indépendant : énergie 12 000 × 6,5 / 100 × 1,85 = 1 443 € ; dépréciation et frais d'achat = (25 000 − 12 000 + 500) / 5 = 2 700 € ; autres coûts annuels = 700 + 800 + 300 + 200 + 1 000 / 5 = 2 200 € ; total = 6 343 €. La source ADEME documente les principaux postes composant un coût complet automobile."
+    "source": "https://carlabelling.ademe.fr/recherche/",
+    "note": "Cas de référence indépendant : énergie 12 000 × 6,5 / 100 × 1,85 = 1 443 € ; dépréciation et frais d'achat = (25 000 − 12 000 + 500) / 5 = 2 700 € ; autres coûts annuels = 700 + 800 + 300 + 200 + 1 000 / 5 = 2 200 € ; total = 6 343 €. La valeur attendue est calculée indépendamment du calculateur testé ; la source ADEME actuelle sert de référence pour les données de consommation et de coût énergétique automobile."
   }
 ]
