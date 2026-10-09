@@ -1294,5 +1294,25 @@
     "sortie": "Droits de donation estimés",
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203",
     "verificationSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203"
+  },
+  {
+    "outil": "donation",
+    "entrees": {
+      "montant": "200 000,00",
+      "lien": "parent",
+      "natureDonation": "argent",
+      "abattementUtilise": "0",
+      "handicapEligible": "non",
+      "handicapUtilise": "0",
+      "donFamilial": "0",
+      "donFamilialEligible": "non",
+      "donLogement": "0",
+      "donLogementEligible": "non"
+    },
+    "attendu": 18194,
+    "tolerance": 0,
+    "sortie": "Droits de donation estimés",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203",
+    "verificationSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203"
   }
 ]
