@@ -28,9 +28,9 @@ assert.match(result, /Renseignez un montant/);
 result = await calculate({mode:"mensuel", montant:"3000", heures:"169"});
 assert.match(result, /Renseignez un montant/);
 result = await calculate({mode:"mensuel", montant:"7280", heures:"168"});
-assert.match(result, /10,00\\s?€/);
+assert.match(result, /10,00\s?€/);
 result = await calculate({mode:"mensuel", montant:"3000", heures:"0.01"});
-assert.match(result, /69\\s?230,77\\s?€/);
+assert.match(result, /69\s?230,77\s?€/);
 result = await calculate({mode:"mensuel", montant:"-10", heures:"35"});
 assert.match(result, /Renseignez un montant/);
 result = await calculate({mode:"mensuel", montant:"0", heures:"35"});
@@ -39,7 +39,7 @@ result = await calculate({mode:"mensuel", montant:"12,5", heures:"35"});
 assert.match(result, /12,50\s?€/);
 
 result = await calculate({mode:"mensuel", montant:"3000", heures:"0.01"});
-assert.match(result, /69\\s?230,77\\s?€/);
+assert.match(result, /69\s?230,77\s?€/);
 result = await calculate({mode:"horaire", montant:"1.7976931348623157e308", heures:"168"});
 assert.match(result, /Impossible de calculer ce montant/);
 
