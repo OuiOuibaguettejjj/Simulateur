@@ -1018,6 +1018,193 @@
         },
         "ancienneteMinMois": 0
       }
+    },
+    "preavis-demission": {
+      "label": "Préavis de démission — règles conventionnelles vérifiées",
+      "year": 2026,
+      "usedBy": [
+        "preavis-demission"
+      ],
+      "source": {
+        "label": "Code du travail numérique — préavis de démission",
+        "url": "https://code.travail.gouv.fr/outils/preavis-demission"
+      },
+      "effectiveFrom": "2026-10-09",
+      "effectiveTo": "2027-10-08",
+      "verifiedOn": "2026-10-09",
+      "notes": "Règles de branche contrôlées le 9 octobre 2026 à partir des fiches officielles du Code du travail numérique. Syntec : https://code.travail.gouv.fr/contribution/1486-quelle-est-la-duree-du-preavis-en-cas-de-demission ; assurances : https://code.travail.gouv.fr/contribution/1672-quelle-est-la-duree-du-preavis-en-cas-de-demission ; publicité : https://code.travail.gouv.fr/contribution/86-quelle-est-la-duree-du-preavis-en-cas-de-demission ; prestataires tertiaire : https://code.travail.gouv.fr/contribution/2098-quelle-est-la-duree-du-preavis-en-cas-de-demission ; commerce alimentaire : https://code.travail.gouv.fr/contribution/2216-quelle-est-la-duree-du-preavis-en-cas-de-demission ; HCR : https://code.travail.gouv.fr/contribution/1979-quelle-est-la-duree-du-preavis-en-cas-de-demission. Recontrôle annuel conseillé ; accords d'entreprise, contrat et situations individuelles peuvent modifier le résultat.",
+      "values": {
+        "rules": [
+          [
+            1486,
+            1,
+            0,
+            1,
+            0
+          ],
+          [
+            1486,
+            1,
+            24,
+            2,
+            0
+          ],
+          [
+            1486,
+            2,
+            0,
+            2,
+            0
+          ],
+          [
+            1486,
+            3,
+            0,
+            3,
+            0
+          ],
+          [
+            1486,
+            4,
+            0,
+            1,
+            0
+          ],
+          [
+            1672,
+            1,
+            0,
+            1,
+            0
+          ],
+          [
+            1672,
+            2,
+            0,
+            3,
+            0
+          ],
+          [
+            86,
+            1,
+            0,
+            1,
+            0
+          ],
+          [
+            86,
+            2,
+            0,
+            2,
+            0
+          ],
+          [
+            86,
+            3,
+            0,
+            3,
+            0
+          ],
+          [
+            2098,
+            1,
+            0,
+            1,
+            0
+          ],
+          [
+            2098,
+            2,
+            0,
+            2,
+            0
+          ],
+          [
+            2098,
+            3,
+            0,
+            3,
+            0
+          ],
+          [
+            2216,
+            1,
+            0,
+            1,
+            0
+          ],
+          [
+            2216,
+            2,
+            0,
+            2,
+            0
+          ],
+          [
+            2216,
+            3,
+            0,
+            3,
+            0
+          ],
+          [
+            1979,
+            1,
+            0,
+            0,
+            8
+          ],
+          [
+            1979,
+            1,
+            6,
+            0,
+            15
+          ],
+          [
+            1979,
+            1,
+            24,
+            1,
+            0
+          ],
+          [
+            1979,
+            2,
+            0,
+            0,
+            15
+          ],
+          [
+            1979,
+            2,
+            6,
+            1,
+            0
+          ],
+          [
+            1979,
+            2,
+            24,
+            2,
+            0
+          ],
+          [
+            1979,
+            3,
+            0,
+            1,
+            0
+          ],
+          [
+            1979,
+            3,
+            6,
+            3,
+            0
+          ]
+        ]
+      }
     }
   },
   "anneeAMigrer": {
@@ -1034,7 +1221,6 @@
       "per",
       "plus-value-immobiliere",
       "plus-value-mobiliere",
-      "preavis-demission",
       "succession"
     ]
   }
