@@ -1452,5 +1452,23 @@
     "tolerance": 0.001,
     "sortie": "9,56",
     "source": "https://www.legifrance.gouv.fr/eli/arrete/2026/5/22/TRST2612929A/jo/texte"
+  },
+  {
+    "outil": "smic",
+    "entrees": {"heures": "35", "zone": "metropole"},
+    "attendu": 12.31,
+    "tolerance": 0.001,
+    "sortie": "12,31",
+    "source": "https://www.legifrance.gouv.fr/eli/arrete/2026/5/22/TRST2612929A/jo/texte",
+    "note": "Cas de référence indépendant : l’arrêté officiel fixe le SMIC horaire brut à 12,31 € dans le cas général depuis le 1er juin 2026."
+  },
+  {
+    "outil": "smic",
+    "entrees": {"heures": "35", "zone": "mayotte"},
+    "attendu": 9.56,
+    "tolerance": 0.001,
+    "sortie": "9,56",
+    "source": "https://www.legifrance.gouv.fr/eli/arrete/2026/5/22/TRST2612929A/jo/texte",
+    "note": "Cas de référence indépendant : l’arrêté officiel fixe le SMIC horaire brut à 9,56 € à Mayotte depuis le 1er juin 2026."
   }
 ]
