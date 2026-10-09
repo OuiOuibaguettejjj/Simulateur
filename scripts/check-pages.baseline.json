@@ -556,22 +556,6 @@
     "rule": "tool-block"
   },
   {
-    "path": "public/outil/prelevement-source/index.html",
-    "rule": "content-h2"
-  },
-  {
-    "path": "public/outil/prelevement-source/index.html",
-    "rule": "description"
-  },
-  {
-    "path": "public/outil/prelevement-source/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/prelevement-source/index.html",
-    "rule": "title"
-  },
-  {
     "path": "public/outil/prix-unitaire/index.html",
     "rule": "content-h2"
   },
