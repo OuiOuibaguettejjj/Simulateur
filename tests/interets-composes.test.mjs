@@ -75,6 +75,7 @@ try{
   await page.locator("#hausse").fill("10");
   await page.locator("#inflation").fill("0");
   await page.locator("#duree").fill("2");
+  await page.locator("#calculate").click();
   assert.equal(await amount(page.locator("#final")),"2520","les versements doivent augmenter de 10 % à partir de la deuxième année");
   assert.equal(await amount(page.locator("#paid")),"2520","le total versé doit inclure la hausse annuelle des versements");
 
