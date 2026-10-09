@@ -72,6 +72,9 @@ jobs:
       - name: Test calculateur salaire brut net
         run: node tests/salaire-brut-net.test.js
 
+      - name: Test calculateur SMIC
+        run: node tests/smic.test.mjs
+
       - name: Test calculateur PTZ
         run: node tests/ptz.test.mjs
 

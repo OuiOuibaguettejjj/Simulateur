@@ -117,8 +117,8 @@
       },
       "effectiveFrom": "2026-06-01",
       "effectiveTo": "2026-12-31",
-      "verifiedOn": "2026-10-03",
-      "notes": "Montants bruts vérifiés sur Service-Public. Les montants nets sont indicatifs et ne sont pas issus de la source : ils sont déjà présentés comme tels dans l'outil. Revalorisation au 1er janvier, et en cours d'année si l'inflation dépasse 2 %.",
+      "verifiedOn": "2026-10-09",
+      "notes": "Montants bruts vérifiés le 9 octobre 2026 sur Service-Public et l’arrêté officiel du 22 mai 2026. Les montants nets sont indicatifs et publiés par Service-Public. Revalorisation annuelle au 1er janvier, avec possibilité de revalorisation en cours d’année.",
       "htmlMentions": [
         {
           "slug": "smic",

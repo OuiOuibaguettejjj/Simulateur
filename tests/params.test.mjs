@@ -231,8 +231,12 @@ assert.match(realPages["indemnite-licenciement"], /id="calculate" onclick="Simul
 
 const smic = pageTool("smic");
 for (const zone of ["metropole", "mayotte"]) {
-  for (const heures of [0, 1, 7.5, 17.5, 24, 35, 39, 40.25, 48, 49]) {
+  for (const heures of [1, 7.5, 17.5, 24, 35]) {
     assert.equal(smic({ heures, zone }), legacySmic({ heures, zone }), "SMIC " + zone + " " + heures + " h");
+    compared++;
+  }
+  for (const heures of [0, 36, 39, 40.25, 48, 49]) {
+    assert.match(smic({ heures, zone }), /heures normales comprises entre 0 et 35 par semaine/i, "SMIC " + zone + " " + heures + " h : entrée hors périmètre refusée");
     compared++;
   }
 }
