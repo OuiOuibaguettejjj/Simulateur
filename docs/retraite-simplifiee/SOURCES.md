@@ -10,7 +10,7 @@ Dernière vérification : 9 octobre 2026.
 
 ## Ce qui a été vérifié
 
-Les âges légaux et durées d’assurance codés dans `data/parametres.json` ont été comparés aux tableaux officiels de l’Assurance retraite et à l’article 105 de la loi. Les paramètres sont valables pour les pensions prenant effet du 1er septembre 2026 au 31 mars 2027, avec une nouvelle vérification à effectuer avant l’échéance.
+Les âges légaux et durées d’assurance codés dans `data/parametres.json` ont été comparés aux tableaux officiels de l’Assurance retraite et à l’article 105 de la loi. Les cohortes historiques sont distinguées : 166 trimestres pour les générations 1955–1957, puis 167 pour 1958–1960 ; les cohortes suivantes suivent le tableau applicable au 1er septembre 2026. Les paramètres sont valables pour les pensions prenant effet du 1er septembre 2026 au 31 mars 2027, avec une nouvelle vérification à effectuer avant l’échéance.
 
 ## Limites connues
 
