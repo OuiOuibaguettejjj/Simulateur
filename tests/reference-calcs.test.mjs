@@ -64,6 +64,49 @@ const donationUnconfirmedHousing = await runInlineCalculator({
 assert.match(donationUnconfirmedHousing.text, /conditions confirmées/i,
   "donation : l'exonération 790 A bis doit être refusée sans confirmation des conditions");
 
+
+const donationHousingBase = {
+  montant: "100000", natureDonation: "argent", lien: "parent",
+  abattementUtilise: "0", handicapEligible: "non", handicapUtilise: "0",
+  donFamilial: "0", donFamilialEligible: "non", donLogement: "1000",
+  donLogementEligible: "oui"
+};
+for (const [date, shouldPass] of [
+  ["2025-02-14", false],
+  ["2025-02-15", true],
+  ["2026-12-31", true],
+  ["2027-01-01", false]
+]) {
+  const result = await runInlineCalculator({
+    family: "outil", slug: "donation",
+    inputs: {...donationHousingBase, dateDonLogement: date}
+  });
+  if (shouldPass) {
+    assert.match(result.text, /Droits de donation estimés/i,
+      "donation : date 790 A bis autorisée " + date);
+  } else {
+    assert.match(result.text, /entre le 15 février 2025 et le 31 décembre 2026/i,
+      "donation : date 790 A bis refusée " + date);
+  }
+}
+const donationNoHousingDate = await runInlineCalculator({
+  family: "outil", slug: "donation",
+  inputs: {...donationHousingBase, dateDonLogement: ""}
+});
+assert.match(donationNoHousingDate.text, /entre le 15 février 2025 et le 31 décembre 2026/i,
+  "donation : date de versement requise pour 790 A bis");
+const donationOtherParent = await runInlineCalculator({
+  family: "outil", slug: "donation",
+  inputs: {
+    montant: "100000", natureDonation: "bien", lien: "autreParent",
+    abattementUtilise: "0", handicapEligible: "non", handicapUtilise: "0",
+    donFamilial: "0", donFamilialEligible: "non", donLogement: "0",
+    donLogementEligible: "non", baseTaxableAnterieure: "0"
+  }
+});
+assert.match(donationOtherParent.text, /Droits de donation estimés/i,
+  "donation : un autre parent jusqu'au quatrième degré doit être calculable");
+
 const refusedTools=[...forbidden];
 await assert.rejects(()=>runInlineCalculator({family:cases[0].famille||"outil",slug:cases[0].outil,inputs:{__unknown_reference_id__:"1"}}),/unknown input id/,"un identifiant d’entrée inconnu doit échouer");
 console.log("Couche 2 — "+covered.size+" outils testés sur un cas réel sourcé, "+cases.length+" cas.");
