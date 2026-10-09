@@ -151,7 +151,8 @@
       "relatedTools": [
         "pourcentage",
         "tva",
-        "promotions"
+        "promotions",
+        "coefficient"
       ]
     },
     "prix-unitaire": {
