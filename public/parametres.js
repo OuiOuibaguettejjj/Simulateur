@@ -37,14 +37,19 @@
         "abattements": {
           "ami": 0,
           "arriere": 5310,
+          "arriereAscendant": 5310,
+          "autreParent": 1594,
           "conjoint": 80724,
           "donFamilial": 31865,
           "donLogementParDonateur": 100000,
+          "enfant": 100000,
           "frere": 15932,
           "grandparent": 31865,
           "handicap": 159325,
           "neveu": 7967,
-          "parent": 100000
+          "oncle": 7967,
+          "parent": 100000,
+          "petitEnfant": 31865
         },
         "baremeConjoint": [
           [
