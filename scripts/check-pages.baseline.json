@@ -152,22 +152,6 @@
     "rule": "title"
   },
   {
-    "path": "public/outil/donation/index.html",
-    "rule": "description"
-  },
-  {
-    "path": "public/outil/donation/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/donation/index.html",
-    "rule": "formula"
-  },
-  {
-    "path": "public/outil/donation/index.html",
-    "rule": "title"
-  },
-  {
     "path": "public/outil/epargne-mensuelle/index.html",
     "rule": "content-h2"
   },
