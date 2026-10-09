@@ -178,6 +178,21 @@ assert.match(donationAvailableCapsAboveGift.text, /Droits de donation estimés/i
 assert.match(donationAvailableCapsAboveGift.text, /Exonérations appliquées[\s\S]*?10[\s\u00a0\u202f]?000(?:[,.]00)?\s*€/i,
   "donation : les exonérations appliquées ne doivent pas dépasser le montant du don");
 
+// Régression : le petit-neveu/la petite-nièce peut bénéficier du 790 G si son parent est décédé.
+const donationPetitNeveu = await runInlineCalculator({
+  family: "outil", slug: "donation",
+  inputs: {
+    montant: "10000", natureDonation: "argent", lien: "petitNeveu",
+    abattementUtilise: "0", handicapEligible: "non", handicapUtilise: "0",
+    donFamilial: "31865", donFamilialEligible: "oui",
+    donLogement: "0", donLogementEligible: "non", baseTaxableAnterieure: "0"
+  }
+});
+assert.match(donationPetitNeveu.text, /Droits de donation estimés/i,
+  "donation : le petit-neveu avec parent décédé doit être éligible au 790 G");
+assert.match(donationPetitNeveu.text, /Exonérations appliquées[\\s\\S]*?8[\\s\\u00a0\\u202f]?406(?:[,.]00)?\\s*€/i,
+  "donation : l'exonération 790 G du petit-neveu s'applique après l'abattement de 1 594 €");
+
 // Régression : le dernier taux progressif reste applicable au-delà du seuil sentinelle historique.
 const donationVeryLarge = await runInlineCalculator({
   family: "outil", slug: "donation",
