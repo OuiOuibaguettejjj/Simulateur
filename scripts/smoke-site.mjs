@@ -30,6 +30,22 @@ try{
    const response=await page.goto(baseUrl+route,{waitUntil:mode==="local"?"load":"domcontentloaded",timeout:mode==="local"?10000:20000});
    if(!response||response.status()!==200)errors.push(file+": "+(mode==="production"?"production ":"")+"HTTP "+(response&&response.status()));
    if(!(await page.title()))errors.push(file+": "+(mode==="production"?"production ":"")+"empty title");
+   if(file==="public/outil/preavis-demission/index.html"){
+    try{
+     if(await page.locator("#result").isHidden())errors.push(file+": le bloc de résultat initial devrait être visible et neutre");
+     await page.locator("#anciennete").selectOption("24");
+     await page.locator("#date").fill("2026-10-09");
+     await page.locator("#form button[type='submit']").click();
+     const boundaryMessage=(await page.locator("#err").textContent())||"";
+     if(!boundaryMessage.includes("sans préciser explicitement"))errors.push(file+": le seuil Syntec à 2 ans doit demander une vérification plutôt que produire une durée");
+     await page.locator("#conv").selectOption("autre");
+     if(await page.locator("#manual").isHidden())errors.push(file+": le formulaire de durée vérifiée devrait être visible pour une convention non intégrée");
+     if(!(await page.getByRole("link",{name:/module officiel/}).isVisible()))errors.push(file+": le module officiel de recherche de convention n’est pas accessible");
+     await page.setViewportSize({width:375,height:812});
+     const overflow=await page.locator(".pv").evaluate(el=>el.scrollWidth>el.clientWidth);
+     if(overflow)errors.push(file+": débordement horizontal du calculateur à 375 px");
+    }catch(e){errors.push(file+": vérification navigateur dédiée échouée: "+e.message)}
+   }
    if(isInteractivePage(file.slice("public/".length))){
     await populate(page);const buttons=page.locator("button"),n=await buttons.count();if(n===0)errors.push(file+": "+(mode==="production"?"production ":"")+"no button");
     for(let i=0;i<n;i++)try{await buttons.nth(i).click({timeout:mode==="local"?1500:2000});await page.waitForTimeout(mode==="local"?30:50)}catch(e){errors.push(file+": "+(mode==="production"?"production ":"")+"button "+i+" click failed: "+e.message)}
