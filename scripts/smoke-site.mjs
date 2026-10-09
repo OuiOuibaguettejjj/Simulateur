@@ -38,6 +38,12 @@ try{
      await page.locator("#form button[type='submit']").click();
      const boundaryMessage=(await page.locator("#err").textContent())||"";
      if(!boundaryMessage.includes("sans préciser explicitement"))errors.push(file+": le seuil Syntec à 2 ans doit demander une vérification plutôt que produire une durée");
+     await page.locator("#statut").selectOption("2");
+     await page.locator("#anciennete").selectOption("0");
+     await page.locator("#form button[type='submit']").click();
+     if(await page.locator("#result").isHidden())errors.push(file+": un calcul valide doit afficher son résultat");
+     await page.locator("#date").fill("2026-10-10");
+     if(!(await page.locator("#result").isHidden()))errors.push(file+": le résultat périmé doit être masqué après modification de la date");
      await page.locator("#conv").selectOption("autre");
      if(await page.locator("#manual").isHidden())errors.push(file+": le formulaire de durée vérifiée devrait être visible pour une convention non intégrée");
      if(!(await page.getByRole("link",{name:/module officiel/}).isVisible()))errors.push(file+": le module officiel de recherche de convention n’est pas accessible");
