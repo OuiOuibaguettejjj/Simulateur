@@ -1,2 +1,115 @@
-<!doctype html><html lang="fr"><head><meta name="calculator-rendering" content="static"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="google-adsense-account" content="ca-pub-2924580037451268"><title>Calculateur salaire horaire</title><meta name="description" content="Calculez votre salaire horaire brut ou annuel à partir du salaire mensuel et du temps de travail."><link rel="canonical" href="https://simulateur.site/outil/salaire-horaire/"><link rel="stylesheet" href="/styles.css"><script src="/simulateurs.js" defer></script><script src="/enter-calcul.js" defer></script><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur salaire horaire","url":"https://simulateur.site/outil/salaire-horaire/","description":"Calculez votre salaire horaire brut ou annuel à partir du salaire mensuel et du temps de travail.","inLanguage":"fr-FR","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"price":"0","priceCurrency":"EUR"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Salaire","item":"https://simulateur.site/salaire/"},{"@type":"ListItem","position":3,"name":"Calculateur salaire horaire","item":"https://simulateur.site/outil/salaire-horaire/"}]}</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta property="og:type" content="website"><meta property="og:site_name" content="Simulateur"><meta property="og:locale" content="fr_FR"><meta property="og:title" content="Calculateur salaire horaire"><meta property="og:description" content="Calculez votre salaire horaire brut ou annuel à partir du salaire mensuel et du temps de travail."><meta property="og:url" content="https://simulateur.site/outil/salaire-horaire/"><meta name="twitter:card" content="summary"></head><body><header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header><main><div class="wrap"><div class="breadcrumb"><a href="/">Accueil</a> · <a href="/salaire/">Salaire</a> · Calculateur salaire horaire</div><section class="tool"><div class="eyebrow">SALAIRE</div><h1>Calculateur salaire horaire</h1><p class="tool-intro">Calculez votre salaire horaire brut ou annuel à partir du salaire mensuel et du temps de travail.</p><div id="fields"><div class="row"><div class="field"><label for="mensuel">Salaire mensuel brut (€)</label><input id="mensuel" type="number" min="0" step="any" placeholder="3000"></div><div class="field"><label for="heures">Heures travaillées par semaine</label><input id="heures" type="number" min="0" step="any" placeholder="35"></div></div><div class="field"><label for="mode">Calcul</label><select id="mode"><option value="horaire">Mensuel → horaire</option><option value="annuel">Horaire → annuel</option></select></div><div class="field"><label for="valeur">Valeur à convertir</label><input id="valeur" type="number" min="0" step="any" placeholder="3000"></div></div><button class="button-main" onclick="Simulateurs.calc()">Calculer</button><div class="result" id="result" aria-live="polite">Saisissez vos données puis lancez le calcul.</div><div class="formula"><strong>Méthode et sources</strong><p>Pour un salarié à 35 heures hebdomadaires, la durée légale correspond à 1 607 heures annuelles dans le cas général. Le SMIC est exprimé en salaire horaire minimum légal. Ce calculateur applique la durée hebdomadaire saisie et ne traite pas les heures supplémentaires ni les absences.</p></div></section></div><section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Calculs associés</h2><div class="related-links"><a class="related-link" href="/outil/salaire-brut-net/"><strong>Salaire brut ↔ net</strong><span>Passer du brut au net avant impôt.</span></a><a class="related-link" href="/outil/frais-kilometriques/"><strong>Frais kilométriques</strong><span>Estimer les frais professionnels.</span></a><a class="related-link" href="/outil/temps-travail/"><strong>Temps de travail</strong><span>Calculer une durée travaillée.</span></a></div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="/salaire/">Salaire</a>.</p></div></section></main><footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer><script>window.TOOL={calc:function(){const h=+this.$("heures").value||35,mode=this.$("mode").value,v=+this.$("valeur").value||0;if(h<=0||v<0)return "Renseignez des valeurs valides.";const annualHours=1607*(h/35);if(mode==="horaire"){const x=v/(h*52/12);return "<strong>"+this.euro(x)+" brut / heure</strong><br>Base annuelle : "+this.euro(v*12)+" brut"}const ann=v*12;return "<strong>"+this.euro(ann)+" brut / an</strong><br>Base mensuelle moyenne : "+this.euro(ann/12)}};</script></body></html>
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta name="calculator-rendering" content="static">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="google-adsense-account" content="ca-pub-2924580037451268">
+  <title>Calcul salaire horaire brut | Simulateur</title>
+  <meta name="description" content="Convertissez un salaire mensuel brut en taux horaire ou estimez le salaire annuel selon vos heures hebdomadaires, avec une méthode expliquée.">
+  <link rel="canonical" href="https://simulateur.site/outil/salaire-horaire/">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/simulateurs.js" defer></script>
+  <script src="/enter-calcul.js" defer></script>
+  <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"WebApplication","name":"Calcul salaire horaire brut","url":"https://simulateur.site/outil/salaire-horaire/","description":"Convertissez un salaire mensuel brut en taux horaire ou estimez le salaire annuel selon vos heures hebdomadaires, avec une méthode expliquée.","inLanguage":"fr-FR","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"price":"0","priceCurrency":"EUR"}}
+  </script>
+  <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Salaire","item":"https://simulateur.site/salaire/"},{"@type":"ListItem","position":3,"name":"Calcul salaire horaire brut","item":"https://simulateur.site/outil/salaire-horaire/"}]}
+  </script>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Simulateur">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:title" content="Calcul salaire horaire brut | Simulateur">
+  <meta property="og:description" content="Convertissez un salaire mensuel brut en taux horaire ou estimez le salaire annuel selon vos heures hebdomadaires, avec une méthode expliquée.">
+  <meta property="og:url" content="https://simulateur.site/outil/salaire-horaire/">
+  <meta name="twitter:card" content="summary">
+</head>
+<body>
+  <header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header>
+  <main>
+    <div class="wrap">
+      <div class="breadcrumb"><a href="/">Accueil</a> · <a href="/salaire/">Salaire</a> · Calcul salaire horaire brut</div>
+      <section class="tool">
+        <div class="eyebrow">SALAIRE</div>
+        <h1>Calcul salaire horaire brut</h1>
+        <p class="tool-intro">Convertissez un salaire mensuel brut en taux horaire ou estimez le salaire annuel à partir d’un taux horaire et de votre durée de travail hebdomadaire.</p>
+        <div id="fields">
+          <div class="field">
+            <label for="mode">Je connais</label>
+            <select id="mode">
+              <option value="mensuel">Mon salaire mensuel brut</option>
+              <option value="horaire">Mon taux horaire brut</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="montant">Montant brut (€)</label>
+            <input id="montant" type="number" min="0" step="any" inputmode="decimal" placeholder="3000" aria-describedby="montant-help">
+            <p id="montant-help">Saisissez le montant correspondant au choix ci-dessus, sans primes ni heures supplémentaires.</p>
+          </div>
+          <div class="field">
+            <label for="heures">Heures de travail par semaine</label>
+            <input id="heures" type="number" min="0.01" max="168" step="any" value="35" inputmode="decimal">
+          </div>
+        </div>
+        <button class="button-main" type="button" onclick="Simulateurs.calc()">Calculer</button>
+        <div class="result" id="result" aria-live="polite">Saisissez votre montant et votre durée de travail pour obtenir une estimation.</div>
+        <div class="formula">
+          <strong>Méthode et sources</strong>
+          <p>Le calcul utilise une moyenne de 52 semaines par an. Pour convertir un salaire mensuel en taux horaire, il divise le salaire mensuel par les heures hebdomadaires multipliées par 52 puis divisées par 12. Pour annualiser un taux horaire, il le multiplie par les heures hebdomadaires et par 52.</p>
+          <p>Il s’agit d’une équivalence théorique à durée de travail constante, et non d’un décompte des heures réellement travaillées. Les congés, absences, heures supplémentaires, primes, conventions collectives et particularités du contrat peuvent modifier la rémunération réelle. Les montants restent exprimés en brut.</p>
+          <p>Source sur la durée légale du travail : <a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F1911" rel="noopener noreferrer">Service-Public — durée du travail d’un salarié à temps plein</a>.</p>
+        </div>
+      </section>
+    </div>
+    <section class="content-section">
+      <h2>Comment calculer un salaire horaire à partir du salaire mensuel ?</h2>
+      <p>Pour obtenir une équivalence horaire, divisez le salaire mensuel brut par le nombre moyen d’heures payées dans un mois. Avec 35 heures par semaine, la moyenne utilisée est de 35 × 52 ÷ 12, soit environ 151,67 heures par mois. Un salaire de 3 000 € brut par mois correspond ainsi à environ 19,78 € brut par heure.</p>
+      <p>La conversion donne une moyenne théorique : elle ne permet pas, à elle seule, de vérifier le respect du SMIC, d’une convention collective ou des règles relatives aux heures supplémentaires.</p>
+      <h2>Comment estimer le salaire annuel à partir du taux horaire ?</h2>
+      <p>Multipliez le taux horaire brut par le nombre d’heures prévues chaque semaine, puis par 52 semaines. Par exemple, 20 € brut de l’heure à raison de 35 heures par semaine représentent une équivalence annuelle de 36 400 € brut, soit 3 033,33 € brut par mois en moyenne.</p>
+      <p>Cette annualisation suppose une durée hebdomadaire stable sur l’année. Elle ne doit pas être confondue avec le nombre d’heures de travail effectif après déduction des congés et jours fériés.</p>
+    </section>
+    <section class="calculator-faq" aria-labelledby="faq-title">
+      <h2 id="faq-title">FAQ</h2>
+      <details>
+        <summary>Le calcul donne-t-il un salaire net ?</summary>
+        <div class="calculator-faq-answer"><p>Non. Tous les résultats sont exprimés en brut, avant cotisations sociales et prélèvement à la source. Le net dépend notamment du statut et de la situation du salarié.</p></div>
+      </details>
+      <details>
+        <summary>Pourquoi utiliser 52 semaines ?</summary>
+        <div class="calculator-faq-answer"><p>Il s’agit d’une convention d’annualisation pour convertir une durée hebdomadaire constante en équivalence annuelle. Ce n’est pas un décompte des heures réellement travaillées ni une estimation tenant compte des absences ou des variations d’horaire.</p></div>
+      </details>
+      <details>
+        <summary>Le résultat vérifie-t-il le SMIC ou les heures supplémentaires ?</summary>
+        <div class="calculator-faq-answer"><p>Non. L’outil convertit des montants bruts et ne vérifie ni le minimum légal applicable, ni une convention collective, ni les majorations d’heures supplémentaires.</p></div>
+      </details>
+    </section>
+    <section class="related-tools">
+      <div><div class="eyebrow">À VOIR AUSSI</div><h2>Calculs associés</h2>
+        <div class="related-links">
+          <a class="related-link" href="/outil/salaire-brut-net/"><strong>Salaire brut ↔ net</strong><span>Passer du brut au net avant impôt.</span></a>
+          <a class="related-link" href="/outil/frais-kilometriques/"><strong>Frais kilométriques</strong><span>Estimer les frais professionnels.</span></a>
+          <a class="related-link" href="/outil/temps-travail/"><strong>Temps de travail</strong><span>Calculer une durée travaillée.</span></a>
+        </div>
+      </div>
+      <p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="/salaire/">Salaire</a>.</p>
+    </section>
+  </main>
+  <footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer>
+  <script>
+    window.TOOL={calc:function(){
+      const read=id=>{const raw=String(this.$(id)?.value??"").trim().replace(",",".");return raw===""?NaN:Number(raw)};
+      const montant=read("montant"),heures=read("heures"),mode=this.$("mode")?.value;
+      if(!Number.isFinite(montant)||montant<0||!Number.isFinite(heures)||heures<=0||heures>168)return "Renseignez un montant strictement positif et une durée hebdomadaire comprise entre 0,01 et 168 heures.";
+      if(montant===0)return "Le montant doit être supérieur à zéro pour effectuer cette conversion.";
+      const horaire=mode==="mensuel"?montant/(heures*52/12):montant;
+      const mensuel=mode==="mensuel"?montant:montant*heures*52/12;
+      const annuel=mensuel*12;
+      if(![horaire,mensuel,annuel].every(Number.isFinite))return "Impossible de calculer ce montant. Vérifiez les valeurs saisies.";
+      return "<strong>"+this.euro(horaire)+" brut / heure</strong><br>"+this.euro(mensuel)+" brut / mois en moyenne<br>"+this.euro(annuel)+" brut / an en équivalence théorique";
+    }};
+  </script>
+</body>
+</html>
