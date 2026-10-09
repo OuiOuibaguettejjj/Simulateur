@@ -140,7 +140,12 @@ assert.equal(
   "/outil/ sans TOOLS_META conserve related-meta"
 );
 
-assert.deepEqual(errs(fixture()),[],"page conforme");const oneEditorialH2=fixture().replace(
+assert.deepEqual(errs(fixture()),[],"page conforme");
+const svgTitleA=fixture().replace('<body>', '<body><svg role="img"><title>Évolution du capital</title></svg>').replace("<title>Mot-clé | Simulateur</title>","<title>Outil A | Simulateur</title>");
+const svgTitleB=fixture(DESC.replace("clair","net")).replace('<body>', '<body><svg role="img"><title>Évolution du capital</title></svg>').replace("<title>Mot-clé | Simulateur</title>","<title>Outil B | Simulateur</title>");
+assert.deepEqual(errs(svgTitleA),[],"un title SVG ne doit pas invalider le title SEO du head");
+assert.deepEqual(checkAll([{path:"a",html:svgTitleA},{path:"b",html:svgTitleB}]),[],"les title SVG ne doivent pas créer de doublons SEO");
+const oneEditorialH2=fixture().replace(
   '<h2>Exemple de calcul</h2><p>Exemple.</p>',
   ''
 );
