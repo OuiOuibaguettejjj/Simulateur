@@ -15,7 +15,7 @@ Dernière vérification : 9 octobre 2026. Les règles intégrées sont limitées
 
 ## Contrôles et limites
 
-- Les seuils d’ancienneté stockés dans `data/parametres.json` sont exprimés en mois. L’interface distingue « 2 ans exactement » et « plus de 2 ans » pour respecter le seuil Syntec.
+- Les seuils d’ancienneté stockés dans `data/parametres.json` sont exprimés en mois. L’interface distingue « 2 ans exactement » et « plus de 2 ans » ; la règle Syntec utilise une condition strictement supérieure à 24 mois. La valeur 25 du sélecteur est un code de tranche, pas une ancienneté de 25 mois.
 - Les durées conventionnelles sont uniquement dans `data/parametres.json` ; le JavaScript de page ne duplique plus ces durées.
 - Les règles ne couvrent pas toutes les conventions collectives françaises. Le nom ou l’IDCC d’une convention non listée peut être noté, mais la durée doit être recherchée dans la source officielle et saisie manuellement.
 - Le calcul de date ne modélise pas les suspensions, dispenses, congés ou accords individuels.
