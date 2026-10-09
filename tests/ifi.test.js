@@ -34,4 +34,6 @@ const detteAvecException=run({autresBiens:"6000000",dettes:"4000000",exceptionPl
 const detteResidence=run({residence:"1000000",abattementResidence:"oui",dettesResidence:"900000"});assert.match(detteResidence,/700\s?000/,"la dette de résidence principale est plafonnée à la valeur taxable après abattement");
 const detteResidenceSansAbattement=run({residence:"1000000",abattementResidence:"non",dettesResidence:"1200000"});assert.match(detteResidenceSansAbattement,/1\s?000\s?000/,"sans abattement, la dette de résidence est plafonnée à la valeur totale taxable");
 assert.match(run({autresBiens:"-1"}),/montants positifs ou nuls/i);
+assert.match(run({autresBiens:"1e308",partsImmo:"1e308"}),/dépassent la plage de calcul/i,"la somme d’actifs qui déborde doit être rejetée proprement");
+assert.match(run({residence:"1e308",abattementResidence:"non",dettesResidence:"1e308",dettes:"1e308"}),/dépassent la plage de calcul/i,"la somme des dettes qui déborde doit être rejetée proprement");
 console.log("IFI deterministic tests passed.");
