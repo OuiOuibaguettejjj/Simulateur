@@ -1561,7 +1561,7 @@
     "sortie": "Rendement brut",
     "verifications": [
       {
-        "sortie": "Rendement net avant financement et impôts",
+        "sortie": "Rendement net sur coût total avant financement et impôts",
         "attendu": 3.1438430983118173,
         "tolerance": 0.02
       }
