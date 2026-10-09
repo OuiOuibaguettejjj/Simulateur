@@ -482,6 +482,59 @@
         }
       }
     },
+    "preavis-demission": {
+      "label": "Préavis de démission — durées de conventions collectives",
+      "year": 2026,
+      "effectiveFrom": "2026-01-01",
+      "effectiveTo": "2027-12-31",
+      "verifiedOn": "2026-10-09",
+      "source": {
+        "label": "Code du travail numérique — préavis de démission",
+        "url": "https://code.travail.gouv.fr/outils/preavis-demission"
+      },
+      "values": {
+        "assurance": {
+          "cadre": 3,
+          "nonCadre": 1
+        },
+        "commerceAlimentaire": {
+          "agentMaitriseTechnicien": 2,
+          "cadre": 3,
+          "employeOuvrier": 1
+        },
+        "hcr": {
+          "agentMaitrise2AnsEtPlus": 2,
+          "agentMaitrise6Mois2Ans": 1,
+          "agentMaitriseMoins6Mois": 0.5,
+          "cadre6MoisEtPlus": 3,
+          "cadreMoins6Mois": 1,
+          "employe2AnsEtPlus": 1,
+          "employe6Mois2Ans": 0.5,
+          "employeMoins6Mois": 0.26666666666666666
+        },
+        "particulierEmployeur": {
+          "2AnsEtPlus": 1,
+          "6Mois2Ans": 0.4666666666666667,
+          "moins6Mois": 0.23333333333333334
+        },
+        "publicite": {
+          "cadre": 3,
+          "employe": 1,
+          "technicienAgentMaitrise": 2
+        },
+        "syntec": {
+          "cadre": 3,
+          "chargeEnqueteIntermittent": 1,
+          "etam2AnsEtPlus": 2,
+          "etamMoins2Ans": 1
+        },
+        "tertiaire": {
+          "cadre": 3,
+          "employe": 1,
+          "technicienAgentMaitrise": 2
+        }
+      }
+    },
     "prime-activite": {
       "label": "Prime d’activité",
       "year": 2026,
