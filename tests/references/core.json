@@ -1464,7 +1464,7 @@
     },
     "attendu": 30,
     "tolerance": 0.01,
-    "sortie": "Taux lié aux crédits après projet:\\s*30\\s*%",
+    "sortie": "Taux lié aux crédits après projet\\s*:\\s*30\\s*%",
     "source": "https://www.economie.gouv.fr/hcsf/mesures/mesure-relative-loctroi-de-credits-immobiliers",
     "note": "Cas de référence indépendant : 400 € de mensualités de crédits existants et 800 € de nouveau crédit assuré sur 4 000 € de revenus donnent (400 + 800) / 4 000 × 100 = 30 %. Le seuil HCSF est chargé depuis le jeu de paramètres réglementaires. Les pensions et le loyer conservé sont pris en compte séparément dans le budget restant, pas dans ce taux lié aux crédits."
   }
