@@ -102,7 +102,7 @@
     window.TOOL={calc:function(){
       const read=id=>{const raw=String(this.$(id)?.value??"").trim().replace(",",".");return raw===""?NaN:Number(raw)};
       const montant=read("montant"),heures=read("heures"),mode=this.$("mode")?.value;
-      if(!Number.isFinite(montant)||montant<0||!Number.isFinite(heures)||heures<=0||heures>168)return "Renseignez un montant positif ou nul et une durée hebdomadaire comprise entre 0,01 et 168 heures.";
+      if(!Number.isFinite(montant)||montant<0||!Number.isFinite(heures)||heures<=0||heures>168)return "Renseignez un montant strictement positif et une durée hebdomadaire comprise entre 0,01 et 168 heures.";
       if(montant===0)return "Le montant doit être supérieur à zéro pour effectuer cette conversion.";
       const horaire=mode==="mensuel"?montant/(heures*52/12):montant;
       const mensuel=mode==="mensuel"?montant:montant*heures*52/12;
