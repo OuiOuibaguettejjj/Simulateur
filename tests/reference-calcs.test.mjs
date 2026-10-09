@@ -131,6 +131,37 @@ const donationReverseHousing = await runInlineCalculator({
 assert.match(donationReverseHousing.text, /lien familial éligible/i,
   "donation : le 790 A bis ne doit pas s'appliquer dans le sens enfant vers parent");
 
+
+// Régression : les plafonds encore disponibles peuvent dépasser le montant du don.
+// Le simulateur applique seulement l'exonération réellement utilisable, sans refuser la saisie.
+const donationAvailableCapsAboveGift = await runInlineCalculator({
+  family: "outil", slug: "donation",
+  inputs: {
+    montant: "10000", natureDonation: "argent", lien: "parent",
+    abattementUtilise: "100000", handicapEligible: "non", handicapUtilise: "0",
+    donFamilial: "31865", donFamilialEligible: "oui",
+    donLogement: "100000", donLogementEligible: "oui", dateDonLogement: "2026-06-01",
+    baseTaxableAnterieure: "0"
+  }
+});
+assert.match(donationAvailableCapsAboveGift.text, /Droits de donation estimés/i,
+  "donation : les plafonds d'exonération disponibles supérieurs au don ne doivent pas provoquer de refus");
+assert.match(donationAvailableCapsAboveGift.text, /Exonérations appliquées[\s\S]*?10[\s\u00a0\u202f]?000\s*€/i,
+  "donation : les exonérations appliquées ne doivent pas dépasser le montant du don");
+
+// Régression : le dernier taux progressif reste applicable au-delà du seuil sentinelle historique.
+const donationVeryLarge = await runInlineCalculator({
+  family: "outil", slug: "donation",
+  inputs: {
+    montant: "2000000000000", natureDonation: "argent", lien: "parent",
+    abattementUtilise: "100000", handicapEligible: "non", handicapUtilise: "0",
+    donFamilial: "0", donFamilialEligible: "non", donLogement: "0",
+    donLogementEligible: "non", baseTaxableAnterieure: "0"
+  }
+});
+assert.match(donationVeryLarge.text, /899[\s\u00a0\u202f]?999[\s\u00a0\u202f]?762[\s\u00a0\u202f]?394\s*€/i,
+  "donation : le barème doit appliquer 45 % à la base excédant l'ancien dernier seuil");
+
 const refusedTools=[...forbidden];
 await assert.rejects(()=>runInlineCalculator({family:cases[0].famille||"outil",slug:cases[0].outil,inputs:{__unknown_reference_id__:"1"}}),/unknown input id/,"un identifiant d’entrée inconnu doit échouer");
 console.log("Couche 2 — "+covered.size+" outils testés sur un cas réel sourcé, "+cases.length+" cas.");
