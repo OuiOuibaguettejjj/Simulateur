@@ -1243,9 +1243,53 @@
       "abattementUtilise": "0",
       "donFamilial": "0",
       "donLogement": "0",
-      "handicapUtilise": "0"
+      "handicapUtilise": "0",
+      "natureDonation": "argent",
+      "handicapEligible": "non",
+      "donFamilialEligible": "non",
+      "donLogementEligible": "non"
     },
     "attendu": 18194,
+    "tolerance": 0,
+    "sortie": "Droits de donation estimés",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203",
+    "verificationSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203"
+  },
+  {
+    "outil": "donation",
+    "entrees": {
+      "montant": "200000",
+      "lien": "conjoint",
+      "natureDonation": "argent",
+      "abattementUtilise": "0",
+      "handicapEligible": "non",
+      "handicapUtilise": "0",
+      "donFamilial": "0",
+      "donFamilialEligible": "non",
+      "donLogement": "0",
+      "donLogementEligible": "non"
+    },
+    "attendu": 21061,
+    "tolerance": 0,
+    "sortie": "Droits de donation estimés",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14205",
+    "verificationSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14205"
+  },
+  {
+    "outil": "donation",
+    "entrees": {
+      "montant": "200000",
+      "lien": "parent",
+      "natureDonation": "argent",
+      "abattementUtilise": "0",
+      "handicapEligible": "oui",
+      "handicapUtilise": "0",
+      "donFamilial": "0",
+      "donFamilialEligible": "non",
+      "donLogement": "0",
+      "donLogementEligible": "non"
+    },
+    "attendu": 0,
     "tolerance": 0,
     "sortie": "Droits de donation estimés",
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203",
