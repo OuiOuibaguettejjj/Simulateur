@@ -28,7 +28,7 @@ assert.match(residenceOui,/700\s?000/,"abattement appliqué si éligible");
 assert.match(residenceNon,/1\s?000\s?000/,"aucun abattement sans éligibilité");
 assert.equal(amount(residenceOui),0);
 assert.equal(amount(residenceNon),0);
-assert.equal(amount(run({autresBiens:"10000000000000"})),149999850098190,"tranche supérieure prolongée pour les patrimoines très élevés");
+assert.equal(amount(run({autresBiens:"10000000000000"})),149999948190,"tranche supérieure prolongée pour les patrimoines très élevés");
 const dette=run({autresBiens:"6000000",dettes:"4000000"});assert.match(dette,/3\s?800\s?000/);assert.equal(amount(dette),8800);
 assert.match(run({autresBiens:"-1"}),/montants positifs ou nuls/i);
 console.log("IFI deterministic tests passed.");
