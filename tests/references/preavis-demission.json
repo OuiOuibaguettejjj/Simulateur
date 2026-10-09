@@ -1,0 +1,62 @@
+[
+  {
+    "outil": "preavis-demission",
+    "cas": "syntec-etam-exactement-2-ans",
+    "entrees": {
+      "idcc": 1486,
+      "categorie": 1,
+      "ancienneteMois": 24
+    },
+    "attendu": {
+      "mois": 1,
+      "jours": 0
+    },
+    "source": "https://code.travail.gouv.fr/contribution/1486-quelle-est-la-duree-du-preavis-en-cas-de-demission",
+    "verificationSource": "https://code.travail.gouv.fr/outils/preavis-demission"
+  },
+  {
+    "outil": "preavis-demission",
+    "cas": "syntec-etam-plus-de-2-ans",
+    "entrees": {
+      "idcc": 1486,
+      "categorie": 1,
+      "ancienneteMois": 25
+    },
+    "attendu": {
+      "mois": 2,
+      "jours": 0
+    },
+    "source": "https://code.travail.gouv.fr/contribution/1486-quelle-est-la-duree-du-preavis-en-cas-de-demission",
+    "verificationSource": "https://code.travail.gouv.fr/outils/preavis-demission"
+  },
+  {
+    "outil": "preavis-demission",
+    "cas": "hcr-employe-6-mois",
+    "entrees": {
+      "idcc": 1979,
+      "categorie": 1,
+      "ancienneteMois": 6
+    },
+    "attendu": {
+      "mois": 0,
+      "jours": 15
+    },
+    "source": "https://code.travail.gouv.fr/contribution/1979-quelle-est-la-duree-du-preavis-en-cas-de-demission",
+    "verificationSource": "https://code.travail.gouv.fr/outils/preavis-demission"
+  },
+  {
+    "outil": "preavis-demission",
+    "cas": "particulier-employeur-moins-de-6-mois",
+    "entrees": {
+      "idcc": 3239,
+      "categorie": 1,
+      "ancienneteMois": 0
+    },
+    "attendu": {
+      "mois": 0,
+      "jours": 7
+    },
+    "source": "https://code.travail.gouv.fr/fiche-service-public/demission-du-salarie-a-domicile-employe-par-un-particulier",
+    "verificationSource": "https://code.travail.gouv.fr/outils/preavis-demission"
+  }
+]
