@@ -1234,5 +1234,21 @@
     "source": "https://www.impots.gouv.fr/www2/fichiers/documentation/brochure/ir_2026/pdf_som/18-IFI_337a340.pdf",
     "verificationSource": "https://www.impots.gouv.fr/particulier/calcul-de-lifi",
     "note": "Calcul indépendant : barème progressif à 1 350 000 € = 2 850 € ; décote = 17 500 € − 1,25 % × 1 350 000 € = 625 € ; estimation = 2 225 €, avant autres réductions ou plafonnements."
+  },
+  {
+    "outil": "donation",
+    "entrees": {
+      "montant": "200000",
+      "lien": "parent",
+      "abattementUtilise": "0",
+      "handicap": "non",
+      "donFamilial": "0",
+      "donLogement": "0"
+    },
+    "attendu": 18194,
+    "tolerance": 0,
+    "sortie": "Droits de donation estimés",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203",
+    "verificationSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203"
   }
 ]
