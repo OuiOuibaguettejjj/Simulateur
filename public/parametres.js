@@ -234,7 +234,6 @@
         "contributionSecuriteMinimum": 15,
         "deboursAncien": 800,
         "deboursNeuf": 500,
-        "deboursesNeuf": 500,
         "tauxAncienMax": 0.0632,
         "tauxAncienPrimoMax": 0.0581,
         "tauxNeuf": 0.0071,
