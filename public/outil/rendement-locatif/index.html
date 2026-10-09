@@ -27,9 +27,9 @@ const raw=id=>String(this.$(id).value??"").trim().replace(/[\s\u00a0\u202f]/g,""
 const read=id=>{const s=raw(id);if(s==="")return 0;if(!/^(?:\d+(?:\.\d*)?|\.\d+)$/.test(s))return NaN;return Number(s);};
 const ids=["prix","frais","travaux","mobilier","loyer","vac","charges","taxe","assurance","gestion","entretien"];
 const x=Object.fromEntries(ids.map(id=>[id,read(id)]));
-if(!Number.isFinite(x.prix)||x.prix<=0)return "Renseignez un prix d’achat supérieur à zéro.";
-if(!Number.isFinite(x.loyer)||x.loyer<=0)return "Renseignez un loyer mensuel supérieur à zéro.";
 for(const id of ids)if(!Number.isFinite(x[id])||x[id]<0)return "Vérifiez les montants et pourcentages : saisissez uniquement des nombres positifs ou nuls, avec une virgule ou un point décimal.";
+if(x.prix===0)return "Renseignez un prix d’achat supérieur à zéro.";
+if(x.loyer===0)return "Renseignez un loyer mensuel supérieur à zéro.";
 if(x.vac>100)return "La vacance locative doit être comprise entre 0 et 100 %.";
 if(x.gestion>100)return "Les frais de gestion doivent être compris entre 0 et 100 %.";
 const cout=x.prix+x.frais+x.travaux+x.mobilier;
