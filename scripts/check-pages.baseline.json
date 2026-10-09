@@ -304,10 +304,6 @@
     "rule": "result"
   },
   {
-    "path": "public/outil/interets-composes/index.html",
-    "rule": "title"
-  },
-  {
     "path": "public/outil/jours-ouvres/index.html",
     "rule": "content-h2"
   },
