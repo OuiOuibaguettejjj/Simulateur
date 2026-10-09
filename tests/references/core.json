@@ -160,17 +160,6 @@
     "note": "Cas indépendant de conversion : 5 miles en 30 minutes correspondent à 10 miles par heure. La valeur attendue est obtenue par 5 ÷ 0,5 h, sans exécuter le calculateur testé."
   },
   {
-    "outil": "smic",
-    "entrees": {
-      "heures": "35",
-      "zone": "metropole"
-    },
-    "attendu": 12.31,
-    "tolerance": 0.01,
-    "sortie": "12,31\\s*€\\s*brut / heure",
-    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2300"
-  },
-  {
     "outil": "frais-kilometriques",
     "entrees": {
       "km": "4000",
@@ -1441,5 +1430,27 @@
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203",
     "verificationSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203",
     "note": "Le neveu ou la nièce qui donne à son oncle ou sa tante ne reçoit pas l'abattement spécifique réservé au neveu/nièce bénéficiaire ; abattement général de 1 594 € et taux de 55 %."
+  },
+  {
+    "outil": "smic",
+    "entrees": {
+      "heures": "35",
+      "zone": "metropole"
+    },
+    "attendu": 12.31,
+    "tolerance": 0.001,
+    "sortie": "12,31",
+    "source": "https://www.legifrance.gouv.fr/eli/arrete/2026/5/22/TRST2612929A/jo/texte"
+  },
+  {
+    "outil": "smic",
+    "entrees": {
+      "heures": "35",
+      "zone": "mayotte"
+    },
+    "attendu": 9.56,
+    "tolerance": 0.001,
+    "sortie": "9,56",
+    "source": "https://www.legifrance.gouv.fr/eli/arrete/2026/5/22/TRST2612929A/jo/texte"
   }
 ]
