@@ -15,7 +15,8 @@ Vérification effectuée le 9 octobre 2026.
 - Primo-acquisition destinée à la résidence principale : taux maximal de 5,81 % des droits de mutation, sous réserve des conditions légales.
 - Acquisition relevant du régime réduit : taux indicatif de 0,71 %.
 - Contribution de sécurité immobilière : 0,1 %, avec minimum de 15 €.
-- Émoluments : barème proportionnel réglementé, calculé par tranches, puis majoré de la TVA de 20 %.
+- Émoluments : estimation au barème proportionnel standard, calculée par tranches, puis majorée de la TVA de 20 %.
+- Limite spécifique au neuf : certaines premières ventes de logements neufs peuvent relever du tarif de l’article A444-95 du Code de commerce, avec des émoluments dépendant notamment du nombre de logements concernés par le permis de construire. Le simulateur ne recueille pas cette donnée et applique le barème standard ; il ne doit donc pas être utilisé comme estimation complète des émoluments dans ces cas.
 
 ## Limites explicites du simulateur
 
