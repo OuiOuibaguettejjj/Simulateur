@@ -15,13 +15,13 @@
 <form id="form">
 <div class="rc-grid">
 <div class="field"><label for="entry">Date d'entrée dans l'entreprise</label><input id="entry" type="date" required></div>
-<div class="field"><label for="exit">Date envisagée de rupture</label><input id="exit" type="date" required></div>
+<div class="field"><label for="exit">Date effective de fin du contrat (estimée)</label><input id="exit" type="date" required></div>
 </div>
 <div class="rc-grid">
 <div class="field"><label for="s12">Salaire mensuel brut moyen de référence (€)</label><input id="s12" type="text" inputmode="decimal" autocomplete="off" placeholder="3500,00" required></div>
 <div class="field"><label for="s3">Salaire mensuel brut moyen des 3 derniers mois (€)</label><input id="s3" type="text" inputmode="decimal" autocomplete="off" placeholder="3500,00" required></div>
 </div>
-<p class="rc-small">Saisissez des moyennes mensuelles brutes, et non les montants cumulés. Pour la première valeur, divisez le total des rémunérations de référence par 12 si vous avez au moins 12 mois d’ancienneté ; si vous avez moins de 12 mois, divisez-le par le nombre de mois de rémunération de toute la période travaillée. Pour la seconde valeur, divisez par 3 le total des rémunérations des trois derniers mois. Les primes annuelles ou exceptionnelles doivent être prises en compte selon les règles légales, notamment au prorata prévu pour la méthode des trois mois. Le calculateur compare ensuite les deux moyennes. La virgule ou le point est accepté pour les centimes.</p>
+<p class="rc-small">Saisissez des moyennes mensuelles brutes, et non les montants cumulés. Pour la première valeur, divisez le total des rémunérations de référence par 12 si vous avez au moins 12 mois d’ancienneté ; si vous avez moins de 12 mois, divisez-le par le nombre de mois de rémunération de toute la période travaillée. Pour la seconde valeur, divisez par 3 le total des rémunérations des trois derniers mois. Les périodes de salaire à examiner sont celles qui précèdent la signature de la convention de rupture ; la date de fin du contrat sert ici à calculer l’ancienneté. Les primes annuelles ou exceptionnelles doivent être prises en compte selon les règles légales, notamment au prorata prévu pour la méthode des trois mois. Le calculateur compare ensuite les deux moyennes. La virgule ou le point est accepté pour les centimes.</p>
 <button class="button-main" type="submit">Calculer mon indemnité</button><div id="err" class="rc-error" hidden></div></form>
 <div id="result" class="rc-result result" aria-live="polite" hidden><p>Renseignez les dates et les deux salaires de référence, puis lancez le calcul.</p></div></section>
 <section class="rc-card"><h2>Comment le calcul fonctionne</h2>
