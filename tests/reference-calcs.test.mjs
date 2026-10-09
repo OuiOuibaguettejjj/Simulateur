@@ -24,6 +24,46 @@ for(const c of cases){
   if(Array.isArray(c.verifications))for(const v of c.verifications){const re=new RegExp(v.sortie,"i");assert.ok(re.test(out.text),c.outil+" : sortie secondaire absente : "+v.sortie);const part=out.text.slice(out.text.search(re));const value=numbers(part)[0];assert.ok(Number.isFinite(value),c.outil+" : valeur secondaire absente : "+v.sortie);assert.ok(withinTolerance(value,v.attendu,v.tolerance),c.outil+" : "+v.sortie+" attendu "+v.attendu+", obtenu "+value)}
   covered.add(c.outil);
 }
+// Régressions propres au calculateur de donation : les exonérations ne s'appliquent
+// pas à un bien autre qu'une somme d'argent, même si un montant a été saisi.
+const donationNonCashExemption = await runInlineCalculator({
+  family: "outil",
+  slug: "donation",
+  inputs: {
+    montant: "100000",
+    natureDonation: "bien",
+    lien: "parent",
+    abattementUtilise: "0",
+    handicapEligible: "non",
+    handicapUtilise: "0",
+    donFamilial: "1000",
+    donFamilialEligible: "oui",
+    donLogement: "0",
+    donLogementEligible: "non"
+  }
+});
+assert.match(donationNonCashExemption.text, /exige une somme d’argent/i,
+  "donation : l'exonération 790 G doit être refusée pour un bien autre qu'une somme d'argent");
+
+const donationUnconfirmedHousing = await runInlineCalculator({
+  family: "outil",
+  slug: "donation",
+  inputs: {
+    montant: "100000",
+    natureDonation: "argent",
+    lien: "parent",
+    abattementUtilise: "0",
+    handicapEligible: "non",
+    handicapUtilise: "0",
+    donFamilial: "0",
+    donFamilialEligible: "non",
+    donLogement: "1000",
+    donLogementEligible: "non"
+  }
+});
+assert.match(donationUnconfirmedHousing.text, /conditions confirmées/i,
+  "donation : l'exonération 790 A bis doit être refusée sans confirmation des conditions");
+
 const refusedTools=[...forbidden];
 await assert.rejects(()=>runInlineCalculator({family:cases[0].famille||"outil",slug:cases[0].outil,inputs:{__unknown_reference_id__:"1"}}),/unknown input id/,"un identifiant d’entrée inconnu doit échouer");
 console.log("Couche 2 — "+covered.size+" outils testés sur un cas réel sourcé, "+cases.length+" cas.");
