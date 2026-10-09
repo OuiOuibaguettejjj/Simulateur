@@ -113,7 +113,7 @@ document.getElementById('form').addEventListener('submit',e=>{
   basis='Durée saisie après vérification'+(name?' — '+name:'')+(idcc?' (IDCC '+idcc.padStart(4,'0')+')':'');
  }else{
   const idcc=ids[c.value],category=Number(st.value),seniorityBand=Number(an.value);
-  const matches=rules.filter(r=>r[0]===idcc&&r[1]===category&&(r[5]==='gt'?seniorityBand>r[2]:r[2]<=seniorityBand)).sort((a,b)=>b[2]-a[2]);
+  const matches=rules.filter(r=>r[0]===idcc&&r[1]===category&&(r[5]===1?seniorityBand>r[2]:r[2]<=seniorityBand)).sort((a,b)=>b[2]-a[2]);
   if(!matches.length){error('Aucune règle vérifiée ne correspond à cette sélection. Vérifiez la convention sur le site officiel.');return;}
   const rule=matches[0];months=rule[3];days=rule[4];
   label=(months?months+' mois':'')+(months&&days?' + ':'')+(days?days+' jour'+(days>1?'s':''):'');
