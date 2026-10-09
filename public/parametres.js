@@ -685,7 +685,7 @@
       "year": 2026,
       "effectiveFrom": "2026-06-01",
       "effectiveTo": "2026-12-31",
-      "verifiedOn": "2026-10-03",
+      "verifiedOn": "2026-10-09",
       "source": {
         "label": "Service-Public — SMIC",
         "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2300"
