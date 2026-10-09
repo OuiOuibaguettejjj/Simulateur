@@ -13,7 +13,7 @@ assert(html.includes("departure.getDate()!==1"), "departure date must be first o
 assert(html.includes('effectiveFrom+"T12:00:00"'), "effective start date must come from regulatory parameters");
 assert(html.includes("const effectiveTo=window.Parametres.get"), "effective end date must come from regulatory parameters");
 assert(html.includes("Date de départ hors période couverte"), "out-of-period departures must be rejected");
-assert(html.includes("samValue===""||trTotalValue===""||trGeneralValue==="""), "empty numeric fields must be rejected");
+assert(html.includes('samValue===""||trTotalValue===""||trGeneralValue===""'), "empty numeric fields must be rejected");
 assert(html.includes("d.getFullYear()===parts[0]"), "impossible calendar dates must be rejected");
 assert(html.includes('<script src="/parametres.js" defer></script>'), "regulatory parameters must be loaded");
 assert(html.includes("birthCohorts.find"), "birth cohort rules must come from parameters");
@@ -42,7 +42,7 @@ assert.strictEqual(fullRate, 50, "full-rate regression");
 
 // Execute the actual browser calculator against representative valid and invalid inputs.
 const paramsJs = fs.readFileSync("public/parametres.js", "utf8");
-const inlineScript = html.match(/<script>\\s*([\\s\\S]*?)<\\/script><\\/body>/i);
+const inlineScript = html.match(/<script>\s*([\s\S]*?)<\/script><\/body>/i);
 assert(inlineScript, "inline calculator script must be present");
 const context = { console, Date, Math, Number, Object, Array, String };
 context.window = context;
