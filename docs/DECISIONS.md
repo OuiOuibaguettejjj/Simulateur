@@ -1,6 +1,6 @@
 ## 2026-10-09 — Migration et enrichissement de la donation
 
-Le calculateur donation est migré vers `data/parametres.json` : abattements usuels, abattement handicap, barème progressif en ligne directe, barème distinct entre époux/Pacs, barème entre frères et sœurs et taux des autres liens. Les montants ont été recoupés avec Service-Public et les articles applicables du CGI le 9 octobre 2026. Le calcul reste volontairement borné : il ne reconstitue pas les tranches déjà consommées par des donations antérieures et ne valide pas les plafonds globaux ni les conditions factuelles des exonérations. L’article 790 A bis est temporaire jusqu’au 31 décembre 2026 ; son renouvellement éventuel nécessite une vérification réglementaire.
+Le calculateur donation est migré vers `data/parametres.json` : abattements usuels, abattement handicap, barème progressif en ligne directe, barème distinct entre époux/Pacs, barème entre frères et sœurs et taux des autres liens. Les montants ont été recoupés avec Service-Public et les articles applicables du CGI le 9 octobre 2026. Le calcul prend en compte la base taxable déjà soumise au barème lorsque l’utilisateur la renseigne, mais ne reconstitue pas automatiquement les déclarations antérieures. Il ne valide pas les plafonds globaux ni les conditions factuelles des exonérations. L’article 790 A bis est temporaire jusqu’au 31 décembre 2026 ; son renouvellement éventuel nécessite une vérification réglementaire.
 
 ## 2026-10-09 — Migration et enrichissement de l’IFI
 
