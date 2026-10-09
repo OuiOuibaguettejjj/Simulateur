@@ -226,14 +226,12 @@
       "effectiveTo": "2028-03-31",
       "verifiedOn": "2026-10-09",
       "source": {
-        "label": "impots.gouv.fr — frais d’acquisition immobilière et BOFiP — droits de mutation",
+        "label": "impots.gouv.fr — droits de mutation immobiliers",
         "url": "https://www.impots.gouv.fr/particulier/questions/jachete-un-bien-immobilier-quaurai-je-payer-comme-frais-au-notaire"
       },
       "values": {
         "contributionSecurite": 0.001,
         "contributionSecuriteMinimum": 15,
-        "deboursAncien": 800,
-        "deboursNeuf": 500,
         "tauxAncienMax": 0.0632,
         "tauxAncienPrimoMax": 0.0581,
         "tauxNeuf": 0.0071,
