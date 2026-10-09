@@ -47,6 +47,7 @@ assert.ok(html.includes('class="result pv-result pv-result--empty" aria-live="po
 assert.ok(html.includes("widget-loader.js"), "le module officiel de recherche de convention est intégré");
 assert.ok(html.includes("https://code.travail.gouv.fr/widgets/convention-collective"), "le parcours de recherche officielle est disponible");
 assert.ok(html.includes("sans préciser explicitement la durée à 2 ans exactement"), "le cas Syntec non documenté est expliqué sans inventer de durée");
+assert.ok(html.includes("form.querySelectorAll('input,select')") && html.includes("el.addEventListener('input',invalidateResult)"), "toute modification d’entrée invalide l’ancien résultat");
 assert.ok(html.includes('class="calculator-faq-answer"'));
 assert.ok(html.includes('src="/parametres.js"'));
 assert.ok(!html.includes("préavis de démission 2026 | Simulateur"));
