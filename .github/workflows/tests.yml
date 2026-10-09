@@ -81,6 +81,9 @@ jobs:
       - name: Test calculateur PTZ
         run: node tests/ptz.test.mjs
 
+      - name: Test calculateur préavis de démission
+        run: node tests/preavis-demission.test.mjs
+
       - name: Test filtre publicitaire
         run: node tests/ad-filter.test.mjs
 
