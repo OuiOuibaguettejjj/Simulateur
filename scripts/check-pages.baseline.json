@@ -516,26 +516,6 @@
     "rule": "title"
   },
   {
-    "path": "public/outil/preavis-demission/index.html",
-    "rule": "content-h2"
-  },
-  {
-    "path": "public/outil/preavis-demission/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/preavis-demission/index.html",
-    "rule": "formula"
-  },
-  {
-    "path": "public/outil/preavis-demission/index.html",
-    "rule": "result"
-  },
-  {
-    "path": "public/outil/preavis-demission/index.html",
-    "rule": "tool-block"
-  },
-  {
     "path": "public/outil/prix-unitaire/index.html",
     "rule": "content-h2"
   },
