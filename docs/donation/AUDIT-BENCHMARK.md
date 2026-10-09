@@ -13,7 +13,7 @@
 2. Le barème des époux/Pacs est distinct du barème en ligne directe. Il est maintenant stocké séparément dans `data/parametres.json` et utilisé pour la relation `conjoint`.
 3. Les exonérations des articles 790 G et 790 A bis ne s’appliquent qu’aux sommes d’argent et à certains liens familiaux. Le formulaire demande la nature du don et une confirmation des conditions. Les plafonds globaux et justificatifs restent à vérifier par l’utilisateur.
 4. Le maillage visible correspond maintenant aux trois slugs déclarés dans `data/tools.json` : `succession`, `plus-value-mobiliere`, `impot-sur-le-revenu`.
-5. Les donations antérieures peuvent modifier l’utilisation du barème, pas seulement l’abattement disponible. Le simulateur ne reconstitue toujours pas la liquidation complète des donations antérieures ; cette limite est affichée. Le résultat reste une estimation et ne doit pas être présenté comme une liquidation fiscale complète.
+5. Les donations antérieures peuvent modifier l’utilisation du barème, pas seulement l’abattement disponible. Le formulaire demande donc la base taxable antérieure déjà soumise au barème et calcule les droits marginaux sur la base cumulée. Il ne reconstitue pas automatiquement les déclarations passées et le plafond global 790 A bis reste à vérifier. Le résultat reste une estimation, pas une liquidation fiscale complète.
 
 ## Benchmark (consulté le 9 octobre 2026)
 
