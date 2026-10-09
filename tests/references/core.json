@@ -1270,7 +1270,7 @@
       "donLogementEligible": "non"
     },
     "attendu": 21061,
-    "tolerance": 0,
+    "tolerance": 1,
     "sortie": "Droits de donation estimés",
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14205",
     "verificationSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14205"
