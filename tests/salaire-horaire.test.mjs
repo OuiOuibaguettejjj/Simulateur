@@ -32,6 +32,6 @@ assert.match(result, /Renseignez un montant/);
 result = await calculate({mode:"mensuel", montant:"0", heures:"35"});
 assert.match(result, /montant doit être supérieur à zéro/);
 result = await calculate({mode:"mensuel", montant:"12,5", heures:"35"});
-assert.match(result, /12,5\s?€/);
+assert.match(result, /12,50\s?€/);
 
 console.log("Salaire horaire tests passed.");
