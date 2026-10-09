@@ -47,7 +47,7 @@
           "grandparent": 31865,
           "handicap": 159325,
           "neveu": 7967,
-          "oncle": 7967,
+          "oncle": 1594,
           "parent": 100000,
           "petitEnfant": 100000
         },
