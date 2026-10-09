@@ -1314,5 +1314,27 @@
     "sortie": "Droits de donation estimés",
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203",
     "verificationSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203"
+  },
+  {
+    "outil": "donation",
+    "entrees": {
+      "montant": "110000",
+      "lien": "parent",
+      "natureDonation": "argent",
+      "abattementUtilise": "0",
+      "handicapEligible": "non",
+      "handicapUtilise": "0",
+      "baseTaxableAnterieure": "10000",
+      "donFamilial": "0",
+      "donFamilialEligible": "non",
+      "donLogement": "0",
+      "donLogementEligible": "non"
+    },
+    "attendu": 821,
+    "tolerance": 0,
+    "sortie": "Droits de donation estimés",
+    "source": "https://www.impots.gouv.fr/particulier/calcul-et-paiement-des-droits",
+    "verificationSource": "https://www.impots.gouv.fr/particulier/calcul-et-paiement-des-droits",
+    "note": "Calcul marginal indépendant : T(20 000 €) − T(10 000 €) = 1 417,50 € − 596,40 € = 821,10 €, arrondi à 821 €."
   }
 ]
