@@ -217,7 +217,7 @@ const donationAllowanceDisplayCapped = await runInlineCalculator({
     donLogement: "0", donLogementEligible: "non", baseTaxableAnterieure: "0"
   }
 });
-assert.match(donationAllowanceDisplayCapped.text, /Abattements appliqués[\\s\\S]*?10[\\s\\u00a0\\u202f]?000(?:[,.]00)?\\s*€/i,
+assert.match(donationAllowanceDisplayCapped.text, /Abattements appliqués[\s\S]*?10[\s\u00a0\u202f]?000(?:[,.]00)?\s*€/i,
   "donation : les abattements appliqués affichés ne doivent pas dépasser la donation");
 
 // Régression : le dernier taux progressif reste applicable au-delà du seuil sentinelle historique.
