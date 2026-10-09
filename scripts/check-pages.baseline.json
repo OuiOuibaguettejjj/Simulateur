@@ -560,26 +560,6 @@
     "rule": "title"
   },
   {
-    "path": "public/outil/remise/index.html",
-    "rule": "description"
-  },
-  {
-    "path": "public/outil/remise/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/remise/index.html",
-    "rule": "formula"
-  },
-  {
-    "path": "public/outil/remise/index.html",
-    "rule": "result"
-  },
-  {
-    "path": "public/outil/remise/index.html",
-    "rule": "title"
-  },
-  {
     "path": "public/outil/sasu-vs-ei-micro/index.html",
     "rule": "content-h2"
   },
