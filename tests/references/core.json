@@ -1701,5 +1701,18 @@
     "tolerance": 0.02,
     "sortie": "Indemnité minimale légale estimée",
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31539"
+  },
+  {
+    "outil": "rupture-conventionnelle",
+    "entrees": {
+      "entry": "2022-01-01",
+      "exit": "2026-01-01",
+      "s12": "2000,50",
+      "s3": "2000,50"
+    },
+    "attendu": 2000.5,
+    "tolerance": 0.02,
+    "sortie": "Indemnité minimale légale estimée",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31539"
   }
 ]
