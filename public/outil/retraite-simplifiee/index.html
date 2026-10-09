@@ -103,7 +103,7 @@ function retirementEstimate(s,trTotal,trGeneral,req,departure,birth,rules){
   const age67=addMonths(birth,rules.values.ageTauxPleinAutomatique*12);
   const missingByDuration=Math.max(0,req-trTotal);
   const monthsToAge67=completedMonthsBetween(departure,age67);
-  const missingByAge=departure>=age67?0:Math.ceil(monthsToAge67/3);
+  const missingByAge=departure>=age67?0:Math.floor(monthsToAge67/3);
   const missing=Math.min(rules.values.trimestresMaximumDecote,missingByDuration,missingByAge);
   const decote=missing*rules.values.decotePointParTrimestre;
   const rate=rules.values.tauxPlein-decote;
