@@ -3,6 +3,107 @@
   "staleAfterDays": 180,
   "warnExpiryDays": 30,
   "sets": {
+    "donation": {
+      "label": "Droits de donation — abattements et barèmes",
+      "year": 2026,
+      "usedBy": [
+        "donation"
+      ],
+      "source": {
+        "label": "Service-Public et Légifrance — droits de donation",
+        "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203"
+      },
+      "effectiveFrom": "2026-01-01",
+      "effectiveTo": "2026-12-31",
+      "verifiedOn": "2026-10-09",
+      "notes": "Barèmes et abattements vérifiés le 9 octobre 2026 sur les sources officielles citées. Le calculateur ne reconstitue pas automatiquement les donations antérieures : il permet de déclarer la base taxable déjà soumise au barème. Il ne contrôle pas les plafonds globaux des exonérations.",
+      "values": {
+        "abattements": {
+          "parent": 100000,
+          "grandparent": 31865,
+          "arriere": 5310,
+          "conjoint": 80724,
+          "frere": 15932,
+          "neveu": 7967,
+          "ami": 0,
+          "handicap": 159325,
+          "donFamilial": 31865,
+          "donLogementParDonateur": 100000,
+          "enfant": 100000,
+          "petitEnfant": 100000,
+          "arriereAscendant": 100000,
+          "oncle": 1594,
+          "autreParent": 1594
+        },
+        "baremeLigneDirecte": [
+          [
+            8072,
+            0.05
+          ],
+          [
+            12109,
+            0.1
+          ],
+          [
+            15932,
+            0.15
+          ],
+          [
+            552324,
+            0.2
+          ],
+          [
+            902838,
+            0.3
+          ],
+          [
+            1805677,
+            0.4
+          ],
+          [
+            999999999999,
+            0.45
+          ]
+        ],
+        "baremeFreresSoeurs": {
+          "seuil": 24430,
+          "tauxInitial": 0.35,
+          "tauxSuivant": 0.45
+        },
+        "tauxNeveu": 0.55,
+        "tauxAutre": 0.6,
+        "baremeConjoint": [
+          [
+            8072,
+            0.05
+          ],
+          [
+            15932,
+            0.1
+          ],
+          [
+            31865,
+            0.15
+          ],
+          [
+            552324,
+            0.2
+          ],
+          [
+            902838,
+            0.3
+          ],
+          [
+            1805677,
+            0.4
+          ],
+          [
+            999999999999,
+            0.45
+          ]
+        ]
+      }
+    },
     "smic": {
       "label": "SMIC",
       "year": 2026,
@@ -422,19 +523,9 @@
             94050
           ]
         },
-        "zonesAncienEligibles": {
-          "A": 0,
-          "B1": 0,
-          "B2": 1,
-          "C": 1
-        },
+        "zonesAncienEligibles": {"A":0,"B1":0,"B2":1,"C":1},
         "travauxMinimumRatio": 0.25,
-        "plafondAutresPretsMultiplicateurs": [
-          1.25,
-          1,
-          1,
-          1
-        ],
+        "plafondAutresPretsMultiplicateurs": [1.25,1,1,1],
         "coefficientsFamiliaux": [
           1,
           1.5,
@@ -558,89 +649,26 @@
       "notes": "Tarifs TTC du Tarif Bleu résidentiel en France métropolitaine continentale, en vigueur depuis le 1er août 2026. Vérifiés le 8 octobre 2026 sur la grille EDF et la délibération CRE n°2026-147. La prochaine révision réglementaire est attendue en février 2027 ; les offres de marché peuvent appliquer d’autres prix.",
       "values": {
         "base": {
-          "3": {
-            "abonnementAnnuel": 145.56,
-            "prixKwh": 0.2001
-          },
-          "6": {
-            "abonnementAnnuel": 190.32,
-            "prixKwh": 0.2001
-          },
-          "9": {
-            "abonnementAnnuel": 238.56,
-            "prixKwh": 0.1985
-          },
-          "12": {
-            "abonnementAnnuel": 285.12,
-            "prixKwh": 0.1985
-          },
-          "15": {
-            "abonnementAnnuel": 328.8,
-            "prixKwh": 0.1985
-          },
-          "18": {
-            "abonnementAnnuel": 373.68,
-            "prixKwh": 0.1985
-          },
-          "24": {
-            "abonnementAnnuel": 469.68,
-            "prixKwh": 0.1985
-          },
-          "30": {
-            "abonnementAnnuel": 557.64,
-            "prixKwh": 0.1985
-          },
-          "36": {
-            "abonnementAnnuel": 646.56,
-            "prixKwh": 0.1985
-          }
+          "3": {"abonnementAnnuel": 145.56, "prixKwh": 0.2001},
+          "6": {"abonnementAnnuel": 190.32, "prixKwh": 0.2001},
+          "9": {"abonnementAnnuel": 238.56, "prixKwh": 0.1985},
+          "12": {"abonnementAnnuel": 285.12, "prixKwh": 0.1985},
+          "15": {"abonnementAnnuel": 328.80, "prixKwh": 0.1985},
+          "18": {"abonnementAnnuel": 373.68, "prixKwh": 0.1985},
+          "24": {"abonnementAnnuel": 469.68, "prixKwh": 0.1985},
+          "30": {"abonnementAnnuel": 557.64, "prixKwh": 0.1985},
+          "36": {"abonnementAnnuel": 646.56, "prixKwh": 0.1985}
         },
         "hphc": {
-          "3": {
-            "abonnementAnnuel": 145.56,
-            "prixHp": 0.2142,
-            "prixHc": 0.1589
-          },
-          "6": {
-            "abonnementAnnuel": 190.32,
-            "prixHp": 0.2142,
-            "prixHc": 0.1589
-          },
-          "9": {
-            "abonnementAnnuel": 238.56,
-            "prixHp": 0.2142,
-            "prixHc": 0.1589
-          },
-          "12": {
-            "abonnementAnnuel": 285.12,
-            "prixHp": 0.2142,
-            "prixHc": 0.1589
-          },
-          "15": {
-            "abonnementAnnuel": 328.8,
-            "prixHp": 0.2142,
-            "prixHc": 0.1589
-          },
-          "18": {
-            "abonnementAnnuel": 373.68,
-            "prixHp": 0.2142,
-            "prixHc": 0.1589
-          },
-          "24": {
-            "abonnementAnnuel": 469.68,
-            "prixHp": 0.2142,
-            "prixHc": 0.1589
-          },
-          "30": {
-            "abonnementAnnuel": 557.64,
-            "prixHp": 0.2142,
-            "prixHc": 0.1589
-          },
-          "36": {
-            "abonnementAnnuel": 646.56,
-            "prixHp": 0.2142,
-            "prixHc": 0.1589
-          }
+          "3": {"abonnementAnnuel": 145.56, "prixHp": 0.2142, "prixHc": 0.1589},
+          "6": {"abonnementAnnuel": 190.32, "prixHp": 0.2142, "prixHc": 0.1589},
+          "9": {"abonnementAnnuel": 238.56, "prixHp": 0.2142, "prixHc": 0.1589},
+          "12": {"abonnementAnnuel": 285.12, "prixHp": 0.2142, "prixHc": 0.1589},
+          "15": {"abonnementAnnuel": 328.80, "prixHp": 0.2142, "prixHc": 0.1589},
+          "18": {"abonnementAnnuel": 373.68, "prixHp": 0.2142, "prixHc": 0.1589},
+          "24": {"abonnementAnnuel": 469.68, "prixHp": 0.2142, "prixHc": 0.1589},
+          "30": {"abonnementAnnuel": 557.64, "prixHp": 0.2142, "prixHc": 0.1589},
+          "36": {"abonnementAnnuel": 646.56, "prixHp": 0.2142, "prixHc": 0.1589}
         }
       }
     },
@@ -670,9 +698,7 @@
     "ifi": {
       "label": "Impôt sur la fortune immobilière — barème 2026",
       "year": 2026,
-      "usedBy": [
-        "ifi"
-      ],
+      "usedBy": ["ifi"],
       "source": {
         "label": "impots.gouv.fr — calcul de l’IFI et brochure pratique 2026",
         "url": "https://www.impots.gouv.fr/particulier/calcul-de-lifi"
@@ -684,141 +710,10 @@
       "values": {
         "seuilAssujettissement": 1300000,
         "debutBareme": 800000,
-        "tranches": [
-          [
-            1300000,
-            0.005
-          ],
-          [
-            2570000,
-            0.007
-          ],
-          [
-            5000000,
-            0.01
-          ],
-          [
-            10000000,
-            0.0125
-          ],
-          [
-            999999999999,
-            0.015
-          ]
-        ],
-        "decote": {
-          "seuil": 1300000,
-          "plafond": 1400000,
-          "base": 17500,
-          "taux": 0.0125
-        },
+        "tranches": [[1300000, 0.005], [2570000, 0.007], [5000000, 0.01], [10000000, 0.0125], [999999999999, 0.015]],
+        "decote": {"seuil": 1300000, "plafond": 1400000, "base": 17500, "taux": 0.0125},
         "abattementResidencePrincipale": 0.3,
-        "plafondDettes": {
-          "seuilPatrimoine": 5000000,
-          "tauxPatrimoine": 0.6,
-          "tauxExcedentDeductible": 0.5
-        }
-      }
-    },
-    "donation": {
-      "label": "Droits de donation — abattements et barèmes",
-      "year": 2026,
-      "usedBy": [
-        "donation"
-      ],
-      "source": {
-        "label": "Service-Public et Légifrance — droits de donation",
-        "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203"
-      },
-      "effectiveFrom": "2026-01-01",
-      "effectiveTo": "2026-12-31",
-      "verifiedOn": "2026-10-09",
-      "notes": "Barèmes et abattements vérifiés le 9 octobre 2026 sur les sources officielles citées. Le calculateur ne reconstitue pas automatiquement les donations antérieures : il permet de déclarer la base taxable déjà soumise au barème. Il ne contrôle pas les plafonds globaux des exonérations.",
-      "values": {
-        "abattements": {
-          "parent": 100000,
-          "grandparent": 31865,
-          "arriere": 5310,
-          "conjoint": 80724,
-          "frere": 15932,
-          "neveu": 7967,
-          "ami": 0,
-          "handicap": 159325,
-          "donFamilial": 31865,
-          "donLogementParDonateur": 100000,
-          "enfant": 100000,
-          "petitEnfant": 100000,
-          "arriereAscendant": 100000,
-          "oncle": 1594,
-          "autreParent": 1594
-        },
-        "baremeLigneDirecte": [
-          [
-            8072,
-            0.05
-          ],
-          [
-            12109,
-            0.1
-          ],
-          [
-            15932,
-            0.15
-          ],
-          [
-            552324,
-            0.2
-          ],
-          [
-            902838,
-            0.3
-          ],
-          [
-            1805677,
-            0.4
-          ],
-          [
-            999999999999,
-            0.45
-          ]
-        ],
-        "baremeFreresSoeurs": {
-          "seuil": 24430,
-          "tauxInitial": 0.35,
-          "tauxSuivant": 0.45
-        },
-        "tauxNeveu": 0.55,
-        "tauxAutre": 0.6,
-        "baremeConjoint": [
-          [
-            8072,
-            0.05
-          ],
-          [
-            15932,
-            0.1
-          ],
-          [
-            31865,
-            0.15
-          ],
-          [
-            552324,
-            0.2
-          ],
-          [
-            902838,
-            0.3
-          ],
-          [
-            1805677,
-            0.4
-          ],
-          [
-            999999999999,
-            0.45
-          ]
-        ]
+        "plafondDettes": {"seuilPatrimoine": 5000000, "tauxPatrimoine": 0.6, "tauxExcedentDeductible": 0.5}
       }
     }
   },
