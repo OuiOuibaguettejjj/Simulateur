@@ -30,5 +30,8 @@ assert.equal(amount(residenceOui),0);
 assert.equal(amount(residenceNon),0);
 assert.equal(amount(run({autresBiens:"10000000000000"})),149999948190,"tranche supérieure prolongée pour les patrimoines très élevés");
 const dette=run({autresBiens:"6000000",dettes:"4000000"});assert.match(dette,/3\s?800\s?000/);assert.equal(amount(dette),8800);
+const detteAvecException=run({autresBiens:"6000000",dettes:"4000000",exceptionPlafond:"oui"});assert.match(detteAvecException,/4\s?000\s?000/,"l’exception déclarée permet de ne pas appliquer le plafonnement général");
+const detteResidence=run({residence:"1000000",abattementResidence:"oui",dettesResidence:"900000"});assert.match(detteResidence,/700\s?000/,"la dette de résidence principale est plafonnée à la valeur taxable après abattement");
+const detteResidenceSansAbattement=run({residence:"1000000",abattementResidence:"non",dettesResidence:"1200000"});assert.match(detteResidenceSansAbattement,/1\s?000\s?000/,"sans abattement, la dette de résidence est plafonnée à la valeur totale taxable");
 assert.match(run({autresBiens:"-1"}),/montants positifs ou nuls/i);
 console.log("IFI deterministic tests passed.");
