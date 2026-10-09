@@ -5,8 +5,7 @@ Vérification effectuée le 9 octobre 2026.
 ## Sources officielles
 
 - [Service-Public — droits de donation selon le lien avec le donateur](https://www.service-public.gouv.fr/particuliers/vosdroits/F14203) : abattements usuels, barème en ligne directe, taux entre frères et sœurs et taux applicables aux autres liens ; règles générales de cumul des abattements.
-- [Service-Public — calcul et paiement des droits de donation](https://www.service-public.gouv.fr/particuliers/vosdroits/F14205) : barème distinct applicable aux donations entre époux ou partenaires de Pacs.
-- [Service-Public — droits de donation, calcul et paiement](https://www.service-public.gouv.fr/particuliers/vosdroits/F14205) : procédure générale et points d’attention sur la valorisation des biens et les abattements.
+- [Service-Public — calcul et paiement des droits de donation](https://www.service-public.gouv.fr/particuliers/vosdroits/F14205) : barème distinct applicable aux donations entre époux ou partenaires de Pacs, procédure générale et points d’attention sur la valorisation des biens et les abattements.
 - [Service-Public — exonérations, dont les dons familiaux affectés au logement](https://www.service-public.gouv.fr/particuliers/vosdroits/F10203) : conditions de l’exonération temporaire de l’article 790 A bis et échéance au 31 décembre 2026.
 - [Légifrance — CGI, articles 779 et suivants](https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006069577/LEGISCTA000006197327/2026-09-01/) : base légale des abattements et droits de mutation à titre gratuit.
 - [Légifrance — article 790 A bis du CGI](https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000051203670/2026-04-16) : exonération temporaire des dons de sommes d’argent affectées à l’acquisition d’un logement neuf ou à certains travaux de rénovation énergétique.
