@@ -22,6 +22,7 @@ try{
   await page.locator("#versement").fill("100");
   await page.locator("#rendement").fill("12");
   await page.locator("#duree").fill("1");
+  await page.locator("details").first().locator("summary").click();
   await page.locator("#frais").fill("0");
   await page.locator("#hausse").fill("0");
   await page.locator("#inflation").fill("0");
