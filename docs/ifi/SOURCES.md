@@ -16,3 +16,7 @@ Dernière vérification : 9 octobre 2026. Année du calcul : IFI 2026, patrimoin
 
 ## Limites
 L’outil ne qualifie pas juridiquement chaque dette ou actif et ne modélise pas toutes les exonérations, le démembrement, les situations complexes de détention indirecte, la réduction pour dons, le plafonnement de l’IFI ni les impôts similaires payés à l’étranger. Vérifier la notice 2042-IFI et les textes applicables à la situation du foyer.
+
+## Cas de référence indépendant
+
+Pour un patrimoine net taxable de 1 350 000 €, le barème donne 2 850 € avant décote. La décote vaut 17 500 € − (1,25 % × 1 350 000 €) = 625 €, soit un IFI estimé de 2 225 € avant réductions et plafonnements non modélisés. Ce calcul manuel sert de référence aux tests.
