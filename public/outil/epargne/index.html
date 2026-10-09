@@ -1,3 +1,86 @@
-<!doctype html><html lang="fr"><head><meta name="calculator-rendering" content="static"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="google-adsense-account" content="ca-pub-2924580037451268"><title>Épargne</title><meta name="description" content="Projetez un capital avec versements et rendement."><link rel="canonical" href="https://simulateur.site/outil/epargne/"><link rel="stylesheet" href="/styles.css"><script src="/simulateurs.js" defer></script><script src="/enter-calcul.js" defer></script><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Épargne","url":"https://simulateur.site/outil/epargne/","description":"Projetez un capital avec versements et rendement.","inLanguage":"fr-FR","applicationCategory":"FinanceApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"price":"0","priceCurrency":"EUR"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Épargne","item":"https://simulateur.site/epargne/"},{"@type":"ListItem","position":3,"name":"Épargne","item":"https://simulateur.site/outil/epargne/"}]}</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta property="og:type" content="website"><meta property="og:site_name" content="Simulateur"><meta property="og:locale" content="fr_FR"><meta property="og:title" content="Épargne"><meta property="og:description" content="Projetez un capital avec versements et rendement."><meta property="og:url" content="https://simulateur.site/outil/epargne/"><meta name="twitter:card" content="summary"></head><body><header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header><main><div class="wrap"><div class="breadcrumb"><a href="/">Accueil</a> · <a href="/epargne/">Épargne</a> · Épargne</div><section class="tool"><div class="eyebrow">ÉPARGNE</div><h1>Épargne</h1><p class="tool-intro">Projetez un capital avec versements et rendement.</p><div id="fields"><div class="field"><label for="c">Capital initial (€)</label><input id="c" type="number" value="10000"></div><div class="field"><label for="m">Versement mensuel (€)</label><input id="m" type="number" value="300"></div><div class="field"><label for="r">Rendement annuel (%)</label><input id="r" type="number" value="4"></div><div class="field"><label for="y">Durée (années)</label><input id="y" type="number" value="10"></div></div><button class="button-main" onclick="Simulateurs.calc()">Calculer</button><div class="result" id="result" aria-live="polite"></div><div class="formula"><p>Projetez un capital avec versements et rendement.</p></div></section></div><section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Outils associés</h2><div class="related-links"><a class="related-link" href="/outil/epargne-mensuelle/"><strong>Épargne mensuelle</strong><span>Projeter un capital avec des versements réguliers.</span></a><a class="related-link" href="/outil/interets-composes/"><strong>Intérêts composés</strong><span>Simuler la croissance d'un capital et de versements.</span></a><a class="related-link" href="/outil/inflation/"><strong>Inflation</strong><span>Mesurer l'effet de l'inflation sur un montant.</span></a></div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="/epargne/">Épargne</a>.</p></div></section>
-</main><footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer><script>window.TOOL={calc:function(){const c=+this.$("c").value,m=+this.$("m").value,r=(+this.$("r").value||0)/1200,n=(+this.$("y").value||0)*12,f=c*Math.pow(1+r,n)+m*(r?((Math.pow(1+r,n)-1)/r):n);return"<strong>"+this.euro(f)+"</strong>"}};</script></body></html>
+<!doctype html>
+<html lang="fr">
+<head>
+<meta name="calculator-rendering" content="static">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="google-adsense-account" content="ca-pub-2924580037451268">
+<title>Simulateur d’épargne | Simulateur</title>
+<meta name="description" content="Estimez votre capital d’épargne selon le montant de départ, vos versements mensuels, le rendement annuel et la durée, avec une projection détaillée.">
+<link rel="canonical" href="https://simulateur.site/outil/epargne/">
+<link rel="stylesheet" href="/styles.css">
+<script src="/simulateurs.js" defer></script>
+<script src="/enter-calcul.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Simulateur d’épargne","url":"https://simulateur.site/outil/epargne/","description":"Estimez votre capital d’épargne selon le montant de départ, vos versements mensuels, le rendement annuel et la durée, avec une projection détaillée.","inLanguage":"fr-FR","applicationCategory":"FinanceApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"price":"0","priceCurrency":"EUR"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Épargne","item":"https://simulateur.site/epargne/"},{"@type":"ListItem","position":3,"name":"Simulateur d’épargne","item":"https://simulateur.site/outil/epargne/"}]}</script>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Simulateur">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Simulateur d’épargne | Simulateur">
+<meta property="og:description" content="Estimez votre capital d’épargne selon le montant de départ, vos versements mensuels, le rendement annuel et la durée, avec une projection détaillée.">
+<meta property="og:url" content="https://simulateur.site/outil/epargne/">
+<meta name="twitter:card" content="summary">
+</head>
+<body>
+<header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header>
+<main>
+<div class="wrap">
+<div class="breadcrumb"><a href="/">Accueil</a> · <a href="/epargne/">Épargne</a> · Simulateur d’épargne</div>
+<section class="tool">
+<div class="eyebrow">ÉPARGNE</div>
+<h1>Simulateur d’épargne</h1>
+<p class="tool-intro">Projetez votre capital à partir de votre épargne de départ, de vos versements mensuels, d’un rendement annuel hypothétique et de votre horizon de placement.</p>
+<div id="fields">
+<div class="field"><label for="c">Capital initial (€)</label><input id="c" type="number" min="0" max="1000000000" step="any" value="10000" inputmode="decimal"></div>
+<div class="field"><label for="m">Versement mensuel (€)</label><input id="m" type="number" min="0" max="10000000" step="any" value="300" inputmode="decimal"></div>
+<div class="field"><label for="r">Rendement annuel estimé (%)</label><input id="r" type="number" min="0" max="100" step="any" value="4" inputmode="decimal"></div>
+<div class="field"><label for="y">Durée (années)</label><input id="y" type="number" min="0" max="100" step="1" value="10" inputmode="numeric"></div>
+</div>
+<button class="button-main" type="button" onclick="Simulateurs.calc()">Calculer</button>
+<div class="result" id="result" aria-live="polite">Modifiez les hypothèses si besoin, puis lancez le calcul pour estimer votre capital final.</div>
+<div class="formula">
+<strong>Méthode et source</strong>
+<p>La projection applique un taux mensuel égal au rendement annuel saisi divisé par 12. Le capital initial produit des intérêts chaque mois ; les versements sont supposés effectués en fin de mois. Les résultats sont des estimations, avant frais, fiscalité et éventuelle variation du rendement.</p>
+<p>Pour comprendre les risques et les caractéristiques des placements, consultez les informations pédagogiques de l’<a href="https://www.amf-france.org/fr/espace-epargnants" target="_blank" rel="noopener noreferrer">Autorité des marchés financiers (AMF)</a>.</p>
+</div>
+</section>
+</div>
+<section class="content-section"><div class="wrap">
+<h2>Comment utiliser le simulateur d’épargne</h2>
+<p>Indiquez le capital que vous avez déjà constitué, le montant que vous pensez mettre de côté chaque mois, le rendement annuel moyen envisagé et la durée. Le simulateur estime ensuite le capital obtenu et distingue l’argent versé des intérêts théoriques.</p>
+<p>Vous pouvez comparer plusieurs scénarios en modifiant un seul paramètre à la fois : augmenter l’effort mensuel, commencer avec un capital plus élevé ou prolonger la durée. Cela permet de visualiser l’effet des versements réguliers et du temps, sans présumer qu’un rendement sera effectivement obtenu.</p>
+<h2>Comprendre le capital projeté et ses limites</h2>
+<p>Le capital final comprend le capital initial, les versements mensuels et les intérêts calculés selon le taux saisi. Avec un taux nul, le résultat correspond simplement au capital initial augmenté de tous les versements. Le calcul suppose un rendement constant et une capitalisation mensuelle simplifiée.</p>
+<p>Dans la réalité, le rendement dépend du produit choisi : il peut être variable, soumis à des frais et à une fiscalité, ou ne pas être garanti. L’inflation peut également réduire le pouvoir d’achat du capital futur. Utilisez donc le résultat comme une comparaison d’hypothèses, et non comme une promesse de gain ou un conseil d’investissement personnalisé.</p>
+</div></section>
+<section class="content-section"><div class="wrap calculator-faq" aria-labelledby="faq-title">
+<h2 id="faq-title">FAQ</h2>
+<details><summary>Comment est calculé le capital final ?</summary><div class="calculator-faq-answer"><p>Le capital initial est capitalisé chaque mois. Les versements mensuels sont ajoutés en fin de mois et capitalisés jusqu’à la fin de la période. Le taux mensuel utilisé est le rendement annuel saisi divisé par 12.</p></div></details>
+<details><summary>Que se passe-t-il si le rendement est de 0 % ?</summary><div class="calculator-faq-answer"><p>Aucun intérêt n’est ajouté. Le capital final est égal au capital initial plus le total des versements mensuels effectués sur la durée.</p></div></details>
+<details><summary>Le rendement indiqué est-il garanti ?</summary><div class="calculator-faq-answer"><p>Non. Il s’agit d’une hypothèse de calcul. Le rendement réel peut varier selon le placement, les frais, la fiscalité et les conditions de marché.</p></div></details>
+<details><summary>Le résultat tient-il compte de l’inflation et des impôts ?</summary><div class="calculator-faq-answer"><p>Non. La projection est réalisée avant frais et fiscalité et n’ajuste pas le capital en fonction de l’inflation. Le pouvoir d’achat futur peut donc être inférieur à ce que le montant affiché laisse penser.</p></div></details>
+</div></section>
+<section class="related-tools"><div class="wrap"><div class="eyebrow">À VOIR AUSSI</div><h2>Calculs associés</h2><div class="related-links">
+<a class="related-link" href="/outil/epargne-mensuelle/"><strong>Épargne mensuelle</strong><span>Projeter un capital avec des versements réguliers.</span></a>
+<a class="related-link" href="/outil/interets-composes/"><strong>Intérêts composés</strong><span>Comprendre la croissance d’un capital dans le temps.</span></a>
+<a class="related-link" href="/outil/inflation/"><strong>Inflation</strong><span>Estimer l’évolution du pouvoir d’achat dans le temps.</span></a>
+</div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="/epargne/">Épargne</a>.</p></div></section>
+</main>
+<footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer>
+<script>
+window.TOOL={calc:function(){
+  const raw=[this.$("c").value,this.$("m").value,this.$("r").value,this.$("y").value];
+  if(raw.some(v=>v.trim()===""))return "Renseignez les quatre champs pour effectuer la projection.";
+  const [c,m,r,y]=raw.map(Number);
+  if(![c,m,r,y].every(Number.isFinite)||c<0||m<0||r<0||r>100||y<0||y>100||!Number.isInteger(y)||c>1000000000||m>10000000)return "Vérifiez les valeurs : montants positifs, rendement de 0 à 100 % et durée entière de 0 à 100 ans.";
+  const n=y*12,rm=r/1200;
+  const growth=Math.pow(1+rm,n);
+  const future=c*growth+(rm===0?m*n:m*(growth-1)/rm);
+  const paid=c+m*n,interest=future-paid;
+  if(![growth,future,paid,interest].every(Number.isFinite))return "Le résultat dépasse la plage calculable. Réduisez les montants ou la durée.";
+  return "<strong>Capital final estimé : "+this.euro(future)+"</strong><p>Total versé : "+this.euro(paid)+"</p><p>Intérêts estimés : "+this.euro(interest)+"</p><small>Estimation avant frais, fiscalité et inflation. Le rendement réel peut différer de l’hypothèse saisie.</small>";
+}};
+</script>
+</body>
+</html>
