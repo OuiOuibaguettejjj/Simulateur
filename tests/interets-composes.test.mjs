@@ -38,6 +38,12 @@ try{
   assert.equal((await page.locator("#paid").innerText()).trim(),"—","le total versé précédent doit être effacé");
   assert.equal(await page.locator("#chart path.capital-line").count(),0,"le graphique précédent doit être effacé après une entrée invalide");
   assert.equal((await page.locator("#breakdown").innerText()).trim(),"","le tableau précédent doit être effacé après une entrée invalide");
+
+  await page.locator("#rendement").fill("7");
+  await page.locator("#duree").fill("1.5");
+  await page.locator("#calculate").click();
+  assert.equal((await page.locator("#final").innerText()).trim(),"Valeurs invalides","une durée fractionnaire ne doit pas produire un résultat tronqué à la dernière année complète");
+  assert.equal((await page.locator("#paid").innerText()).trim(),"—","les montants précédents doivent être effacés pour une durée invalide");
   await browser.close();
   console.log("Intérêts composés : capitalisation annuelle, total versé, rendement hors limite et effacement des résultats précédents vérifiés.");
 }finally{
