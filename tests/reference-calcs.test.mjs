@@ -107,6 +107,30 @@ const donationOtherParent = await runInlineCalculator({
 assert.match(donationOtherParent.text, /Droits de donation estimés/i,
   "donation : un autre parent jusqu'au quatrième degré doit être calculable");
 
+
+const donationReverseFamily = await runInlineCalculator({
+  family: "outil", slug: "donation",
+  inputs: {
+    montant: "100000", natureDonation: "argent", lien: "enfant",
+    abattementUtilise: "0", handicapEligible: "non", handicapUtilise: "0",
+    donFamilial: "1000", donFamilialEligible: "oui", donLogement: "0",
+    donLogementEligible: "non"
+  }
+});
+assert.match(donationReverseFamily.text, /lien familial éligible/i,
+  "donation : le 790 G ne doit pas s'appliquer dans le sens enfant vers parent");
+const donationReverseHousing = await runInlineCalculator({
+  family: "outil", slug: "donation",
+  inputs: {
+    montant: "100000", natureDonation: "argent", lien: "enfant",
+    abattementUtilise: "0", handicapEligible: "non", handicapUtilise: "0",
+    donFamilial: "0", donFamilialEligible: "non", donLogement: "1000",
+    donLogementEligible: "oui", dateDonLogement: "2026-06-01"
+  }
+});
+assert.match(donationReverseHousing.text, /lien familial éligible/i,
+  "donation : le 790 A bis ne doit pas s'appliquer dans le sens enfant vers parent");
+
 const refusedTools=[...forbidden];
 await assert.rejects(()=>runInlineCalculator({family:cases[0].famille||"outil",slug:cases[0].outil,inputs:{__unknown_reference_id__:"1"}}),/unknown input id/,"un identifiant d’entrée inconnu doit échouer");
 console.log("Couche 2 — "+covered.size+" outils testés sur un cas réel sourcé, "+cases.length+" cas.");
