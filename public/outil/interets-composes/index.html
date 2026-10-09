@@ -127,7 +127,7 @@
 
 <div class="formula">
 <strong>Hypothèses et limites</strong>
-<p>Versements en fin de mois : les intérêts de la période sont calculés avant l’ajout du versement du mois. Le rendement annuel est supposé constant et les frais sont appliqués comme une réduction du rendement annuel. La fréquence choisie détermine la composition des intérêts. Avec « Jamais », les intérêts sont simples et ne produisent pas eux-mêmes d’intérêts. L’inflation est utilisée pour convertir le capital final en pouvoir d’achat actuel.</p>
+<p>Versements en fin de mois : les intérêts de la période sont calculés avant l’ajout du versement du mois. Le taux saisi est traité comme un taux nominal annuel : il est divisé par 12 en composition mensuelle et par 365 en composition quotidienne. En composition annuelle, le capital déjà présent reçoit le taux annuel complet ; les versements de fin de mois accumulent des intérêts simples au prorata jusqu’à la capitalisation de fin d’année. Les frais sont modélisés comme une réduction du taux annuel en points (rendement moins frais), et non comme un prélèvement distinct sur l’encours. Avec « Jamais », les intérêts sont simples et ne produisent pas eux-mêmes d’intérêts. L’inflation est utilisée pour convertir le capital final en pouvoir d’achat actuel.</p>
 <p class="note">* Capital ajusté de l’inflation : estimation de la valeur du capital final en pouvoir d’achat actuel, en tenant compte du taux d’inflation indiqué.</p>
 <p>Il s'agit d'une projection mathématique, pas d'une prévision de performance. Les rendements réels peuvent varier et les résultats dépendent notamment du placement, de la fiscalité et des frais effectivement supportés. La fiscalité n'est pas intégrée car elle dépend de l'enveloppe utilisée (par exemple PEA, compte-titres ou assurance-vie).</p>
 </div>
@@ -277,7 +277,7 @@
   function calculate(){
     const C=value($("capital")),V=value($("versement")),R=value($("rendement")),Y=value($("duree"));
     const F=value($("frais")),H=value($("hausse")),I=value($("inflation")),freq=frequency.value;
-    if(![C,V,R,Y,F,H,I].every(Number.isFinite)||C<0||V<0||R<0||R>100||Y<1||Y>100||F<0||H<0||I<0||F>20||H>20||I>20){
+    if(![C,V,R,Y,F,H,I].every(Number.isFinite)||C<0||V<0||R<0||R>100||!Number.isInteger(Y)||Y<1||Y>100||F<0||H<0||I<0||F>20||H>20||I>20){
       clearResults("Valeurs invalides"); return;
     }
     const result=simulate(C,V,R,F,Y,H,freq);
