@@ -56,7 +56,7 @@ const form=document.getElementById('form'),result=document.getElementById('resul
 function parse(v){if(!/^\d{4}-\d{2}-\d{2}$/.test(v))return null;const [y,m,d]=v.split('-').map(Number),x=new Date(Date.UTC(y,m-1,d));return x.getUTCFullYear()===y&&x.getUTCMonth()===m-1&&x.getUTCDate()===d?x:null}
 function monthsBetween(a,b){let m=(b.getUTCFullYear()-a.getUTCFullYear())*12+(b.getUTCMonth()-a.getUTCMonth());if(b.getUTCDate()<a.getUTCDate())m--;return m}
 function euro(n){return new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR'}).format(n)}
-function amount(id){const raw=document.getElementById(id).value.trim().replace(/[\\s\\u00a0\\u202f]/g,'').replace(',','.');if(!/^(?:\\d+\\.?\\d*|\\.\\d+)$/.test(raw))return NaN;return Number(raw)}
+function amount(id){const raw=document.getElementById(id).value.trim().replace(/[\s\u00a0\u202f]/g,'').replace(',','.');if(!/^(?:\d+\.?\d*|\.\d+)$/.test(raw))return NaN;return Number(raw)}
 form.addEventListener('submit',e=>{e.preventDefault();err.hidden=true;result.hidden=true;
 const a=parse(document.getElementById('entry').value),b=parse(document.getElementById('exit').value),s12=amount('s12'),s3=amount('s3');
 if(!a||!b||b<=a){err.textContent='Les dates doivent être valides et la date de rupture doit être postérieure à la date d’entrée.';err.hidden=false;return}
