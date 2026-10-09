@@ -1624,7 +1624,7 @@
     "sortie": "Prélèvement mensuel estimé",
     "verifications": [
       {
-        "sortie": "Projection sur 12 mois",
+        "sortie": "Total annuel estimé",
         "attendu": 2700,
         "tolerance": 0.001
       },
