@@ -4,7 +4,8 @@ Dernière vérification : 9 octobre 2026. Les règles intégrées sont limitées
 
 ## Sources officielles
 
-- [Code du travail numérique — simulateur officiel du préavis de démission](https://code.travail.gouv.fr/outils/preavis-demission) — recherche de la convention et vérification de la durée.
+- [Code du travail numérique — recherche de convention collective](https://code.travail.gouv.fr/outils/convention-collective/convention) — recherche officielle par nom ou IDCC.
+- [Code du travail numérique — simulateur officiel du préavis de démission](https://code.travail.gouv.fr/outils/preavis-demission) — vérification de la durée de préavis.
 - [Syntec, IDCC 1486](https://code.travail.gouv.fr/contribution/1486-quelle-est-la-duree-du-preavis-en-cas-de-demission) — catégories ETAM, coefficients particuliers, ingénieurs/cadres et chargé d’enquête intermittent. Pour l’ETAM général, « plus de 2 ans » est distinct de « 2 ans exactement ».
 - [Sociétés d’assurances, IDCC 1672](https://code.travail.gouv.fr/contribution/1672-quelle-est-la-duree-du-preavis-en-cas-de-demission) — classes 1 à 4 et 5 à 7.
 - [Publicité, IDCC 0086](https://code.travail.gouv.fr/contribution/86-quelle-est-la-duree-du-preavis-en-cas-de-demission) — catégories professionnelles.
