@@ -1492,10 +1492,53 @@
       "type": "ancien",
       "acquisition": "standard"
     },
-    "attendu": 19723.7,
+    "attendu": 18923.7,
     "tolerance": 0.02,
-    "sortie": "Frais estimés",
+    "sortie": "Estimation hors formalités et débours variables",
     "source": "https://www.impots.gouv.fr/particulier/questions/jachete-un-bien-immobilier-quaurai-je-payer-comme-frais-au-notaire",
-    "note": "Cas indépendant : 250 000 × 6,32 % = 15 800 € de droits ; contribution de sécurité immobilière 250 € ; émoluments HT par tranches 2 394,75 €, TVA 478,95 €, débours provisionnés 800 € ; total 19 723,70 €. Le taux de 6,32 % est un plafond et non le taux effectif de chaque département."
+    "verificationSource": "https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000005634379/LEGISCTA000032132146/2026-07-01/",
+    "note": "Cas indépendant : droits au plafond 6,32 % = 15 800 € ; contribution de sécurité immobilière 250 € ; émoluments HT par tranches 2 394,75 €, TVA 478,95 € ; total 18 923,70 €. Formalités et débours variables exclus."
+  },
+  {
+    "outil": "frais-de-notaire",
+    "entrees": {
+      "prix": "250000",
+      "type": "ancien",
+      "acquisition": "primo"
+    },
+    "attendu": 17648.7,
+    "tolerance": 0.02,
+    "sortie": "Estimation hors formalités et débours variables",
+    "source": "https://www.impots.gouv.fr/particulier/questions/jachete-un-bien-immobilier-quaurai-je-payer-comme-frais-au-notaire",
+    "verificationSource": "https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000005634379/LEGISCTA000032132146/2026-07-01/",
+    "note": "Cas indépendant primo-acquisition : droits au taux plafond de 5,81 % = 14 525 € ; contribution 250 € ; émoluments TTC 2 873,70 € ; total 17 648,70 €, hors formalités et débours variables."
+  },
+  {
+    "outil": "frais-de-notaire",
+    "entrees": {
+      "prix": "250000",
+      "type": "neuf",
+      "acquisition": "standard"
+    },
+    "attendu": 4898.7,
+    "tolerance": 0.02,
+    "sortie": "Estimation hors formalités et débours variables",
+    "source": "https://www.notaires.fr/fr/immobilier-fiscalite/financement/acquerir-en-frais-de-notaire-reduits",
+    "verificationSource": "https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000005634379/LEGISCTA000032132146/2026-07-01/",
+    "note": "Cas indépendant relevant du régime réduit : droits à 0,71 % = 1 775 € ; contribution 250 € ; émoluments TTC 2 873,70 € ; total 4 898,70 €, hors formalités et débours variables."
+  },
+  {
+    "outil": "frais-de-notaire",
+    "entrees": {
+      "prix": "250000,50",
+      "type": "ancien",
+      "acquisition": "standard"
+    },
+    "attendu": 18923.74,
+    "tolerance": 0.02,
+    "sortie": "Estimation hors formalités et débours variables",
+    "source": "https://www.impots.gouv.fr/particulier/questions/jachete-un-bien-immobilier-quaurai-je-payer-comme-frais-au-notaire",
+    "verificationSource": "https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000005634379/LEGISCTA000032132146/2026-07-01/",
+    "note": "Cas de saisie décimale : 250 000,50 € est normalisé en nombre, calculé au centime ; total 18 923,74 € hors formalités et débours variables."
   }
 ]
