@@ -33,7 +33,7 @@ Restent hors calcul : reconstitution détaillée des tranches consommées par de
 ## Références de tests
 
 - Parent → enfant, 200 000 €, abattement de 100 000 € : 18 194 € de droits selon Service-Public.
-- Parent → enfant, base taxable courante de 10 000 € et base taxable antérieure déclarée de 10 000 € : 1 598 € de droits marginaux calculés par différence entre le barème cumulé et les droits correspondant à la base antérieure.
+- Parent → enfant, base taxable courante de 10 000 € et base taxable antérieure déclarée de 10 000 € : environ 814 € de droits marginaux, à condition que l’abattement de parenté soit déjà entièrement consommé. Une base antérieure positive associée à un abattement encore disponible est refusée.
 - Époux/Pacs, 200 000 €, abattement de 80 724 € : la page officielle affiche 21 061 €. Le calcul des tranches publiées totalise 21 061,75 €, soit 21 062 € après arrondi à l’euro ; le test accepte cet écart d’un euro et le signale plutôt que de masquer l’incohérence d’arrondi de l’exemple.
 - Parent → enfant, 200 000 €, abattement de parenté et abattement handicap complet : 0 € de droits dans le scénario hypothétique où l’éligibilité handicap est confirmée.
 
