@@ -127,7 +127,7 @@
 
 <div class="formula">
 <strong>Hypothèses et limites</strong>
-<p>Versements en fin de mois : les intérêts de la période sont calculés avant l’ajout du versement du mois. Le rendement annuel est supposé constant et les frais sont appliqués comme une réduction du rendement annuel. La fréquence choisie détermine la composition des intérêts. Avec « Jamais », les intérêts sont simples et ne produisent pas eux-mêmes d’intérêts. L’inflation est utilisée pour convertir le capital final en pouvoir d’achat actuel.</p>
+<p>Versements en fin de mois : les intérêts de la période sont calculés avant l’ajout du versement du mois. Le taux saisi est traité comme un taux nominal annuel : il est divisé par 12 en composition mensuelle et par 365 en composition quotidienne. Le mode quotidien utilise une année de 365 jours et répartit les versements mensuels à intervalles réguliers ; il s’agit d’une approximation, sans calendrier réel ni année bissextile. En composition annuelle, le capital déjà présent reçoit le taux annuel complet ; les versements de fin de mois accumulent des intérêts simples au prorata jusqu’à la capitalisation de fin d’année. Les frais sont modélisés comme une réduction du taux annuel en points (rendement moins frais), et non comme un prélèvement distinct sur l’encours. Avec « Jamais », les intérêts sont simples et ne produisent pas eux-mêmes d’intérêts. L’inflation est utilisée pour convertir le capital final en pouvoir d’achat actuel.</p>
 <p class="note">* Capital ajusté de l’inflation : estimation de la valeur du capital final en pouvoir d’achat actuel, en tenant compte du taux d’inflation indiqué.</p>
 <p>Il s'agit d'une projection mathématique, pas d'une prévision de performance. Les rendements réels peuvent varier et les résultats dépendent notamment du placement, de la fiscalité et des frais effectivement supportés. La fiscalité n'est pas intégrée car elle dépend de l'enveloppe utilisée (par exemple PEA, compte-titres ou assurance-vie).</p>
 </div>
@@ -182,10 +182,12 @@
     };
 
     const simpleAtMonth=(rate,m)=>{
-      let total=C*(1+rate*(m/12));
+      // A negative simple return may erode each invested amount, but must not
+      // turn an investment balance into a negative capital.
+      let total=Math.max(0,C*(1+rate*(m/12)));
       for(let i=1;i<=m;i++){
         const payment=paymentAtMonth(i);
-        total+=payment*(1+rate*((m-i)/12));
+        total+=Math.max(0,payment*(1+rate*((m-i)/12)));
       }
       return total;
     };
@@ -236,19 +238,26 @@
         }
       }
     } else {
-      // Annual composition: interest is added once per year, before the
-      // final monthly payment of that year (payments are made at month-end).
+      // Annual capitalization: opening capital earns a full year of interest.
+      // Each month-end payment earns only simple prorated interest until year-end,
+      // then its accumulated interest is capitalized with the rest.
+      let yearOpeningCapital=capital,yearOpeningGross=grossCapital;
+      let yearPayments=0,yearGrossPayments=0,yearPaymentInterest=0,yearGrossPaymentInterest=0;
       for(let m=1;m<=months;m++){
-        if(m%12===0){
-          capital*=1+netAnnual;
-          grossCapital*=1+grossAnnual;
-        }
         const payment=paymentAtMonth(m);
-        capital+=payment;
-        grossCapital+=payment;
+        const monthsInvested=12-((m-1)%12)-1;
+        yearPayments+=payment;
+        yearGrossPayments+=payment;
+        yearPaymentInterest+=payment*netAnnual*monthsInvested/12;
+        yearGrossPaymentInterest+=payment*grossAnnual*monthsInvested/12;
         paid+=payment;
         if(m%12===0){
+          capital=yearOpeningCapital*(1+netAnnual)+yearPayments+yearPaymentInterest;
+          grossCapital=yearOpeningGross*(1+grossAnnual)+yearGrossPayments+yearGrossPaymentInterest;
           rows.push({year:m/12,paid,gains:capital-paid,capital,grossCapital});
+          yearOpeningCapital=capital;
+          yearOpeningGross=grossCapital;
+          yearPayments=0;yearGrossPayments=0;yearPaymentInterest=0;yearGrossPaymentInterest=0;
         }
       }
     }
@@ -256,22 +265,36 @@
     const final=rows[rows.length-1];
     return {rows,capital:final.capital,paid,gains:final.capital-paid,grossCapital:final.grossCapital};
   }
+  function clearResults(message="—"){
+    ["years-label","gains","paid","real","fees-impact","multiple","take-final","take-gains","scenario-monthly","scenario-rate"].forEach(id=>$(id).textContent="—");
+    $("final").textContent=message;
+    $("crossover").textContent="";
+    $("breakdown").innerHTML="";
+    $("chart").innerHTML='<title id="chart-title">Évolution du capital</title><desc id="chart-desc">Graphique comparant les versements cumulés et le capital projeté.</desc><defs><linearGradient id="capitalGradient" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ff5a36" stop-opacity=".22"/><stop offset="100%" stop-color="#ff5a36" stop-opacity="0"/></linearGradient></defs>';
+    $("chart-tooltip").textContent="";
+    $("chart-tooltip").style.opacity="0";
+    $("chart-tooltip").setAttribute("aria-hidden","true");
+  }
+
   function calculate(){
     const C=value($("capital")),V=value($("versement")),R=value($("rendement")),Y=value($("duree"));
     const F=value($("frais")),H=value($("hausse")),I=value($("inflation")),freq=frequency.value;
-    if(![C,V,R,Y,F,H,I].every(Number.isFinite)||C<0||V<0||R<0||Y<1||Y>100||F<0||H<0||I<0||F>20||H>20||I>20){
-      $("final").textContent="Valeurs invalides"; return;
+    if(![C,V,R,Y,F,H,I].every(Number.isFinite)||C<0||V<0||R<0||R>100||!Number.isInteger(Y)||Y<1||Y>100||F<0||H<0||I<0||F>20||H>20||I>20){
+      clearResults("Valeurs invalides"); return;
     }
     const result=simulate(C,V,R,F,Y,H,freq);
     const gross=simulate(C,V,R,0,Y,H,freq);
     const capital=result.capital,paid=result.paid,gains=result.gains;
     const real=capital/Math.pow(1+I/100,Y);
     const feeImpact=Math.max(0,gross.capital-capital);
-    const simpleCapital=simulate(C,V,R,F,Y,H,"never").capital;
 
     const altMonthly=simulate(C,V+50,R,F,Y,H,freq).capital;
     const altRate=simulate(C,V,R+1,F,Y,H,freq).capital;
-    const crossover=result.rows.find(r=>r.gains>r.paid-C);
+    const crossover=result.rows.find(r=>r.gains>r.paid);
+    const checkedValues=[capital,paid,gains,real,feeImpact,altMonthly,altRate,gross.capital,...result.rows.flatMap(r=>[r.capital,r.paid,r.gains])];
+    if(!checkedValues.every(Number.isFinite)){
+      clearResults("Valeurs trop élevées pour une projection fiable"); return;
+    }
     $("years-label").textContent=Y;
     $("final").textContent=money(capital);
     $("gains").textContent=money(gains);
