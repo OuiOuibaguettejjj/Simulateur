@@ -716,22 +716,6 @@
     "rule": "title"
   },
   {
-    "path": "public/outil/solde-tout-compte/index.html",
-    "rule": "description"
-  },
-  {
-    "path": "public/outil/solde-tout-compte/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/solde-tout-compte/index.html",
-    "rule": "formula"
-  },
-  {
-    "path": "public/outil/solde-tout-compte/index.html",
-    "rule": "title"
-  },
-  {
     "path": "public/outil/succession/index.html",
     "rule": "description"
   },
