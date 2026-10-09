@@ -1018,6 +1018,63 @@
         },
         "ancienneteMinMois": 0
       }
+    },
+    "preavis-demission": {
+      "label": "Préavis de démission — durées de conventions collectives",
+      "year": 2026,
+      "usedBy": [
+        "preavis-demission"
+      ],
+      "source": {
+        "label": "Code du travail numérique — préavis de démission",
+        "url": "https://code.travail.gouv.fr/outils/preavis-demission"
+      },
+      "effectiveFrom": "2026-01-01",
+      "effectiveTo": "2027-12-31",
+      "verifiedOn": "2026-10-09",
+      "notes": "Migration technique des durées déjà présentes dans la page, sans modification des règles de calcul ni validation juridique exhaustive. Les liens de référence par convention restent affichés sur la page ; les durées doivent être confrontées aux textes applicables avant toute extension du périmètre. Le 31 décembre 2027 est une échéance de réexamen éditorial, pas une date d'expiration légale des conventions.",
+      "values": {
+        "syntec": {
+          "etamMoins2Ans": 1,
+          "etam2AnsEtPlus": 2,
+          "cadre": 3,
+          "chargeEnqueteIntermittent": 1
+        },
+        "assurance": {
+          "nonCadre": 1,
+          "cadre": 3
+        },
+        "publicite": {
+          "employe": 1,
+          "technicienAgentMaitrise": 2,
+          "cadre": 3
+        },
+        "tertiaire": {
+          "employe": 1,
+          "technicienAgentMaitrise": 2,
+          "cadre": 3
+        },
+        "commerceAlimentaire": {
+          "employeOuvrier": 1,
+          "agentMaitriseTechnicien": 2,
+          "cadre": 3
+        },
+        "hcr": {
+          "employeMoins6Mois": 0.26666666666666666,
+          "employe6Mois2Ans": 0.5,
+          "employe2AnsEtPlus": 1,
+          "agentMaitriseMoins6Mois": 0.5,
+          "agentMaitrise6Mois2Ans": 1,
+          "agentMaitrise2AnsEtPlus": 2,
+          "cadreMoins6Mois": 1,
+          "cadre6MoisEtPlus": 3
+        },
+        "particulierEmployeur": {
+          "moins6Mois": 0.23333333333333334,
+          "6Mois2Ans": 0.4666666666666667,
+          "2AnsEtPlus": 1
+        }
+      }
     }
   },
   "anneeAMigrer": {
@@ -1034,7 +1091,6 @@
       "per",
       "plus-value-immobiliere",
       "plus-value-mobiliere",
-      "preavis-demission",
       "succession"
     ]
   }
