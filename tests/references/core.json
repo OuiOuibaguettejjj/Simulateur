@@ -1540,5 +1540,33 @@
     "source": "https://www.impots.gouv.fr/particulier/questions/jachete-un-bien-immobilier-quaurai-je-payer-comme-frais-au-notaire",
     "verificationSource": "https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000005634379/LEGISCTA000032132146/2026-07-01/",
     "note": "Cas de saisie décimale : 250 000,50 € est normalisé en nombre, calculé au centime ; total 18 923,74 € hors formalités et débours variables."
+  },
+  {
+    "outil": "rendement-locatif",
+    "entrees": {
+      "prix": "180000",
+      "frais": "14400",
+      "travaux": "5000",
+      "mobilier": "2000",
+      "loyer": "850",
+      "vac": "5",
+      "charges": "900",
+      "taxe": "1100",
+      "assurance": "180",
+      "gestion": "7",
+      "entretien": "500"
+    },
+    "attendu": 5.064548163853029,
+    "tolerance": 0.01,
+    "sortie": "Rendement brut",
+    "verifications": [
+      {
+        "sortie": "Rendement net avant financement et impôts",
+        "attendu": 3.144041708043694,
+        "tolerance": 0.02
+      }
+    ],
+    "source": "https://www.anil.org/outil-mise-en-location-simulation-investissement-immobilier-rendement/",
+    "note": "Cas arithmétique de référence pour contrôler le calcul du rendement brut et du rendement net avant financement et impôts. Les hypothèses sont explicites et les valeurs attendues sont recalculées indépendamment à partir des formules documentées ; la source ANIL justifie la prise en compte du coût d’acquisition, des travaux et des frais de détention."
   }
 ]
