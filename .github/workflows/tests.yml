@@ -42,6 +42,9 @@ jobs:
       - name: Check layout
         run: node scripts/check-layout.mjs
 
+      - name: Test calculateur de droits de donation
+        run: node tests/donation.test.mjs
+
       - name: Test calculateur IFI
         run: node tests/ifi.test.js
 
