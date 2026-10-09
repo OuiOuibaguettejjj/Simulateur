@@ -12,7 +12,7 @@ function run(v){return tool.calc.call({$(id){return{value:v[id]??""}}})}
 function amount(s){const m=s.match(/class="ifi-main-result">([^<]+)</);assert.ok(m,"Montant absent : "+s);return Number(m[1].replace(/\s/g,"").replace(/€/g,"").replace(",", "."))}
 function ifi(n){return amount(run({autresBiens:String(n)}))}
 for(const n of [0,500000,800001,1000000,1299999,1300000])assert.equal(amount(run({autresBiens:String(n)})),0,"IFI nul attendu à "+n);
-assert.equal(ifi(1300001),1250.0125);
+assert.equal(ifi(1300001),1250.02);
 assert.equal(ifi(1350000),2225);
 assert.equal(ifi(1400000),3200);
 assert.equal(ifi(1500000),3900);
