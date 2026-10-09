@@ -59,6 +59,8 @@ function calculate(values) {
 }
 const valid = calculate({birth:"1963-01-01", departure:"2026-10-01", sam:"30000", trTotal:"170", trGeneral:"150"});
 assert(valid.includes("13 235") || valid.includes("13235") || valid.includes("13 235"), "valid reference scenario should return pension estimate");
+const boundary = calculate({birth:"1963-01-01", departure:"2027-03-01", sam:"30000", trTotal:"170", trGeneral:"150"});
+assert(boundary.includes("13235"), "last covered month should remain available");
 const expired = calculate({birth:"1963-01-01", departure:"2027-04-01", sam:"30000", trTotal:"170", trGeneral:"150"});
 assert(expired.includes("hors période couverte"), "departures after parameter expiry must be rejected");
 const emptyQuarter = calculate({birth:"1963-01-01", departure:"2026-10-01", sam:"30000", trTotal:"", trGeneral:"150"});
