@@ -150,7 +150,7 @@ assert.match(donationInconsistentPriorBase.text, /base taxable antérieure est p
 const donationConsistentPriorBase = await runInlineCalculator({
   family: "outil", slug: "donation",
   inputs: {
-    montant: "110000", natureDonation: "argent", lien: "parent",
+    montant: "10000", natureDonation: "argent", lien: "parent",
     abattementUtilise: "100000", handicapEligible: "non", handicapUtilise: "0",
     donFamilial: "0", donFamilialEligible: "non", donLogement: "0",
     donLogementEligible: "non", baseTaxableAnterieure: "10000"
@@ -158,8 +158,8 @@ const donationConsistentPriorBase = await runInlineCalculator({
 });
 assert.match(donationConsistentPriorBase.text, /Droits de donation estimés/i,
   "donation : calculer les droits marginaux quand les données antérieures sont cohérentes");
-assert.match(donationConsistentPriorBase.text, /814(?:[,.]00)?\s*€/i,
-  "donation : 10 000 € de base antérieure et 10 000 € de base courante produisent environ 814 € de droits marginaux");
+assert.match(donationConsistentPriorBase.text, /1[\s\u00a0\u202f]?598(?:[,.]00)?\s*€/i,
+  "donation : 10 000 € de base antérieure et 10 000 € de base courante produisent 1 598 € de droits marginaux");
 
 // Régression : les plafonds encore disponibles peuvent dépasser le montant du don.
 // Le simulateur applique seulement l'exonération réellement utilisable, sans refuser la saisie.
