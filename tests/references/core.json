@@ -1568,5 +1568,37 @@
     ],
     "source": "https://www.anil.org/outil-mise-en-location-simulation-investissement-immobilier-rendement/",
     "note": "Cas arithmétique de référence pour contrôler le calcul du rendement brut et du rendement net avant financement et impôts. Les hypothèses sont explicites et les valeurs attendues sont recalculées indépendamment à partir des formules documentées ; la source ANIL justifie la prise en compte du coût d’acquisition, des travaux et des frais de détention."
+  },
+  {
+    "outil": "retraite-simplifiee",
+    "entrees": {
+      "birth": "1963-01-01",
+      "departure": "2026-10-01",
+      "sam": "30000",
+      "trTotal": "170",
+      "trGeneral": "150"
+    },
+    "attendu": 13235.29,
+    "tolerance": 0.02,
+    "sortie": "Pension de base estimée",
+    "source": "https://www.lassuranceretraite.fr/portail-info/home/actif/age-depart/age-depart-retraite.html",
+    "verificationSource": "https://www.legifrance.gouv.fr/jorf/article_jo/JORFARTI000053227007",
+    "note": "Calcul indépendant : 30 000 × 50 % × 150 / 170 = 13 235,29 € brut/an. Cohorte 1963 : âge légal 62 ans et 9 mois, durée requise 170 trimestres pour une pension prenant effet à partir du 1er septembre 2026."
+  },
+  {
+    "outil": "retraite-simplifiee",
+    "entrees": {
+      "birth": "1958-01-01",
+      "departure": "2026-10-01",
+      "sam": "30000",
+      "trTotal": "167",
+      "trGeneral": "167"
+    },
+    "attendu": 15000,
+    "tolerance": 0.01,
+    "sortie": "Pension de base estimée",
+    "source": "https://www.lassuranceretraite.fr/portail-info/home/actif/age-depart/age-depart-retraite.html",
+    "verificationSource": "https://www.lassuranceretraite.fr/portail-info/portail-info/home/actif/montant-retraite/montant-retraite.html",
+    "note": "Calcul indépendant : 30 000 × 50 % × 167 / 167 = 15 000 € brut/an. Pour la génération 1958, la durée requise est de 167 trimestres."
   }
 ]

@@ -681,6 +681,129 @@
         }
       }
     },
+    "retraite-simplifiee": {
+      "label": "Retraite de base — âge légal et durée d’assurance",
+      "year": 2026,
+      "effectiveFrom": "2026-09-01",
+      "effectiveTo": "2027-03-31",
+      "verifiedOn": "2026-10-09",
+      "source": {
+        "label": "Assurance retraite et Légifrance — règles applicables au 1er septembre 2026",
+        "url": "https://www.lassuranceretraite.fr/portail-info/home/actif/age-depart/age-depart-retraite.html"
+      },
+      "values": {
+        "ageTauxPleinAutomatique": 67,
+        "birthCohorts": [
+          [
+            1955,
+            1,
+            1957,
+            12,
+            744,
+            166
+          ],
+          [
+            1958,
+            1,
+            1960,
+            12,
+            744,
+            167
+          ],
+          [
+            1961,
+            1,
+            1961,
+            8,
+            744,
+            168
+          ],
+          [
+            1961,
+            9,
+            1961,
+            12,
+            747,
+            169
+          ],
+          [
+            1962,
+            1,
+            1962,
+            12,
+            750,
+            169
+          ],
+          [
+            1963,
+            1,
+            1963,
+            12,
+            753,
+            170
+          ],
+          [
+            1964,
+            1,
+            1964,
+            12,
+            753,
+            170
+          ],
+          [
+            1965,
+            1,
+            1965,
+            3,
+            753,
+            170
+          ],
+          [
+            1965,
+            4,
+            1965,
+            12,
+            756,
+            171
+          ],
+          [
+            1966,
+            1,
+            1966,
+            12,
+            759,
+            172
+          ],
+          [
+            1967,
+            1,
+            1967,
+            12,
+            762,
+            172
+          ],
+          [
+            1968,
+            1,
+            1968,
+            12,
+            765,
+            172
+          ],
+          [
+            1969,
+            1,
+            2100,
+            12,
+            768,
+            172
+          ]
+        ],
+        "decotePointParTrimestre": 0.625,
+        "tauxPlein": 50,
+        "trimestresMaximumDecote": 20
+      }
+    },
     "rsa": {
       "label": "RSA",
       "year": 2026,

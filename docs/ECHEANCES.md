@@ -4,6 +4,7 @@ Ce document recense les échéances actuellement suivies par `data/parametres.js
 
 | Jeu | Expiration actuelle | Source officielle à consulter |
 |---|---|---|
+| Retraite simplifiée | 31/03/2027 | [Assurance retraite — âge légal et durée d’assurance](https://www.lassuranceretraite.fr/portail-info/home/actif/age-depart/age-depart-retraite.html) et [Légifrance — loi n° 2025-1403, article 105](https://www.legifrance.gouv.fr/jorf/article_jo/JORFARTI000053227007) |
 | SMIC | 31/12/2026 | [Service-Public — SMIC](https://www.service-public.gouv.fr/particuliers/vosdroits/F2300) |
 | RSA | 31/03/2027 | [Service-Public — RSA](https://www.service-public.gouv.fr/particuliers/vosdroits/F19778) et [Légifrance](https://www.legifrance.gouv.fr/) |
 | Frais d’acquisition immobilière | 31/03/2028 | [impots.gouv.fr — frais à payer au notaire](https://www.impots.gouv.fr/particulier/questions/jachete-un-bien-immobilier-quaurai-je-payer-comme-frais-au-notaire), [BOFiP — droits de mutation immobiliers](https://bofip.impots.gouv.fr/bofip/3311-PGP.html/identifiant%3DBOI-ENR-DMTOI-10-20-20260617) et [Légifrance — tarifs réglementés des notaires](https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000005634379/LEGISCTA000032132146/2026-07-01/) |

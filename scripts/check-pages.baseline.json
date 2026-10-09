@@ -660,14 +660,6 @@
     "rule": "title"
   },
   {
-    "path": "public/outil/retraite-simplifiee/index.html",
-    "rule": "title"
-  },
-  {
-    "path": "public/outil/retraite-simplifiee/index.html",
-    "rule": "tool-block"
-  },
-  {
     "path": "public/outil/rupture-conventionnelle/index.html",
     "rule": "faq"
   },
