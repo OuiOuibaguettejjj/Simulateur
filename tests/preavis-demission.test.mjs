@@ -17,13 +17,13 @@ for (const c of references) {
   assert.equal(c.outil, "preavis-demission");
   assert.ok(/^https:\/\//.test(c.source));
   const seniorityBand = c.entrees.anciennete === "plus-de-2-ans" ? 25 : c.entrees.ancienneteMois;
-  const rule = rules.filter(r => r[0] === c.entrees.idcc && r[1] === c.entrees.categorie && (r[5] === "gt" ? seniorityBand > r[2] : r[2] <= seniorityBand)).sort((a,b) => b[2]-a[2])[0];
+  const rule = rules.filter(r => r[0] === c.entrees.idcc && r[1] === c.entrees.categorie && (r[5] === 1 ? seniorityBand > r[2] : r[2] <= seniorityBand)).sort((a,b) => b[2]-a[2])[0];
   assert.ok(rule, "aucune règle pour le cas de référence " + c.cas);
   assert.deepEqual({mois:rule[3],jours:rule[4]}, c.attendu, "valeur réglementaire incorrecte pour " + c.cas);
 }
 const has = (...expected) => assert.ok(rules.some(rule => JSON.stringify(rule) === JSON.stringify(expected)), "règle absente : " + expected.join(","));
 [
-  [1486, 1, 0, 1, 0], [1486, 1, 24, 2, 0, "gt"], [1486, 2, 0, 2, 0],
+  [1486, 1, 0, 1, 0], [1486, 1, 24, 2, 0, 1], [1486, 2, 0, 2, 0],
   [1486, 3, 0, 3, 0], [1486, 4, 0, 1, 0],
   [1672, 1, 0, 1, 0], [1672, 2, 0, 3, 0],
   [86, 1, 0, 1, 0], [86, 2, 0, 2, 0], [86, 3, 0, 3, 0],
@@ -47,10 +47,10 @@ assert.ok(!html.includes("préavis de démission 2026 | Simulateur"));
 assert.match(html, /value="6">De 6 mois à moins de 2 ans/);
 assert.match(html, /value="24">2 ans exactement/);
 assert.match(html, /value="25">Plus de 2 ans/);
-assert.ok(html.includes("r[5]==='gt'?seniorityBand>r[2]:r[2]<=seniorityBand"), "seuil strict supérieur à 24 mois traité séparément");
+assert.ok(html.includes("r[5]===1?seniorityBand>r[2]:r[2]<=seniorityBand"), "seuil strict supérieur à 24 mois traité séparément");
 assert.ok(html.includes("particulier:3239"), "la convention des particuliers employeurs est intégrée");
 assert.ok(!html.includes("const descriptions="), "les durées réglementaires ne sont pas dupliquées dans le JavaScript de page");
-const resolveRule=(idcc,category,seniorityBand)=>rules.filter(r=>r[0]===idcc&&r[1]===category&&(r[5]==="gt"?seniorityBand>r[2]:r[2]<=seniorityBand)).sort((a,b)=>b[2]-a[2])[0];
+const resolveRule=(idcc,category,seniorityBand)=>rules.filter(r=>r[0]===idcc&&r[1]===category&&(r[5]===1?seniorityBand>r[2]:r[2]<=seniorityBand)).sort((a,b)=>b[2]-a[2])[0];
 assert.equal(resolveRule(1486,1,24)[3],1,"Syntec : exactement 2 ans reste à un mois");
 assert.equal(resolveRule(1486,1,25)[3],2,"Syntec : plus de 2 ans passe à deux mois");
 assert.equal(resolveRule(1979,1,6)[4],15,"HCR employé : six mois donne quinze jours");
