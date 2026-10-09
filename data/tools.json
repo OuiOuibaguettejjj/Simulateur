@@ -330,7 +330,9 @@
       "category": "immobilier",
       "relatedTools": [
         "capacite-emprunt",
-        "pret-immobilier"
+        "pret-immobilier",
+        "mensualite-pret",
+        "tableau-amortissement"
       ]
     },
     "donation": {

@@ -12,6 +12,13 @@ Le calculateur PTZ est migré vers `data/parametres.json` avant l’enrichisseme
 
 # Décisions techniques
 
+## Taux d’endettement — classement et méthode (2026-10-09)
+
+Le calculateur `/outil/taux-endettement/` est classé **B — réglementaire migré** : le repère HCSF est lu dans le jeu `capacite-emprunt` de `data/parametres.json`. Le jeu est partagé avec le calculateur de capacité d’emprunt ; aucune valeur réglementaire n’est dupliquée dans la page.
+
+Le taux affiché porte sur les mensualités des crédits existants et du nouveau crédit, assurance comprise, rapportées aux revenus mensuels nets avant impôt. Les pensions alimentaires versées et le loyer conservé après le projet sont exclus de ce taux simplifié et déduits séparément pour calculer le budget restant. La page indique explicitement que cette estimation ne reproduit pas l’intégralité de l’analyse bancaire. Un cas de référence sourcé est maintenu dans `tests/references/core.json`, et la note de vérification des sources se trouve dans `docs/taux-endettement/SOURCES.md`.
+
+
 ## Êtes-vous riche ? — série statistique retenue 2026-10-05
 
 Le calculateur `/outil/etes-vous-riche/` utilise les seuils 2024 publiés dans l’Insee Première n°2079, « Les salaires dans le secteur privé en 2024 » (publication du 23 octobre 2025). Cette publication fournit D1 à D9 ainsi que les 95e et 99e centiles nécessaires au positionnement proposé par le calculateur.

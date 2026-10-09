@@ -316,7 +316,8 @@
       "label": "Cadre HCSF — capacité d'emprunt immobilier",
       "year": 2026,
       "usedBy": [
-        "capacite-emprunt"
+        "capacite-emprunt",
+        "taux-endettement"
       ],
       "source": {
         "label": "HCSF — conditions d’octroi de crédits immobiliers",
@@ -325,7 +326,7 @@
       "effectiveFrom": "2022-01-01",
       "effectiveTo": "2026-12-31",
       "verifiedOn": "2026-10-07",
-      "notes": "Le jeu centralise le cadre HCSF actuellement en vigueur : taux d’effort maximal de 35 % et maturité maximale de 25 ans, avec les exceptions et la marge de flexibilité prévues par les décisions HCSF. La date de fin 2026 constitue une échéance de vérification éditoriale du jeu ; elle ne signifie pas que la norme HCSF expire à cette date. Le taux de marché affiché par défaut dans l’outil est une donnée distincte et n’est pas incluse dans ce jeu.",
+      "notes": "Le jeu centralise le cadre HCSF actuellement en vigueur : taux d’effort maximal et maturité maximale, avec les exceptions et la marge de flexibilité prévues par les décisions HCSF. Il est utilisé par les calculateurs capacité d’emprunt et taux d’endettement. La date de fin 2026 constitue une échéance de vérification éditoriale du jeu ; elle ne signifie pas que la norme HCSF expire à cette date. Le taux de marché affiché par défaut dans l’outil capacité d’emprunt est une donnée distincte.",
       "values": {
         "tauxEffortMax": 35,
         "maturiteMax": 25
