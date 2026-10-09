@@ -21,6 +21,11 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: TEMP - générer la baseline de l’outil en cours
+        run: |
+          node scripts/check-pages.mjs --update-baseline
+          git diff -- scripts/check-pages.baseline.json
+
       - name: Pre-production security and architecture gate
         run: node scripts/check-security.mjs
 
