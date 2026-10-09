@@ -52,6 +52,7 @@ try{
      if(overflow)errors.push(file+": débordement horizontal du calculateur à 375 px");
      await page.setViewportSize({width:1280,height:720});
      await page.reload({waitUntil:mode==="local"?"load":"domcontentloaded",timeout:mode==="local"?10000:20000});
+     await page.evaluate(()=>window.scrollTo(0,0));
     }catch(e){errors.push(file+": vérification navigateur dédiée échouée: "+e.message)}
    }
    if(isInteractivePage(file.slice("public/".length))){
