@@ -288,22 +288,6 @@
     "rule": "title"
   },
   {
-    "path": "public/outil/interets-composes/index.html",
-    "rule": "content-h2"
-  },
-  {
-    "path": "public/outil/interets-composes/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/interets-composes/index.html",
-    "rule": "formula"
-  },
-  {
-    "path": "public/outil/interets-composes/index.html",
-    "rule": "result"
-  },
-  {
     "path": "public/outil/jours-ouvres/index.html",
     "rule": "content-h2"
   },
