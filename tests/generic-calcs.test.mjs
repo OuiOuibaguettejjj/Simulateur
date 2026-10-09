@@ -44,3 +44,6 @@ const fullyExempted=new Set(pages.filter(page=>cases.every(kind=>exceptionMap.ha
 console.log("Couverture : "+pages.length+" pages interactives testées sur au moins un cas réel, "+fullyExempted.size+" pages entièrement exemptées.");
 if(failures.length){console.error("Échecs couche 1 hors exceptions :");for(const f of failures)console.error(" - "+f.slug+" ["+f.case+"] : "+f.error);process.exit(1)}
 console.log("Couche 1 : tous les cas passent ou correspondent exactement à une exception documentée.");
+
+// Les régressions métier ciblées de l’épargne mensuelle sont exécutées dans cette suite CI.
+await import("./epargne-mensuelle.test.mjs");
