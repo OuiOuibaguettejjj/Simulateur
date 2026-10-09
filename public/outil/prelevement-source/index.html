@@ -112,7 +112,7 @@ window.TOOL={calc:function(){
   // comme sur une paie ; les montants affichés restent cohérents entre eux.
   const mensuel=Math.round((brut+Number.EPSILON)*100)/100,annuel=mensuel*12,net=Math.round((revenu-mensuel+Number.EPSILON)*100)/100;
   if(!Number.isFinite(annuel)||!Number.isFinite(net)||!Number.isSafeInteger(Math.round(annuel*100)))return "Valeurs trop élevées pour une estimation fiable.";
-  return "<strong>Prélèvement mensuel estimé : "+this.euro(mensuel)+"</strong><small>Sur ce revenu, il resterait "+this.euro(net)+" après PAS, avant les autres retenues éventuelles.</small><div class=\"pas-result-grid\"><div class=\"pas-result-item\"><span>Projection sur 12 mois</span><b>"+this.euro(annuel)+"</b></div><div class=\"pas-result-item\"><span>Revenu après PAS, par mois</span><b>"+this.euro(net)+"</b></div></div><p class=\"pas-note\">Estimation indicative, à taux et revenu constants. Le résultat n’est pas le calcul de l’impôt définitif.</p>";
+  return "<strong>Prélèvement mensuel estimé : "+this.euro(mensuel)+"</strong><small>Sur ce revenu, il resterait "+this.euro(net)+" après PAS, avant les autres retenues éventuelles.</small><div class=\"pas-result-grid\"><div class=\"pas-result-item\"><span>Total annuel estimé</span><b>"+this.euro(annuel)+"</b></div><div class=\"pas-result-item\"><span>Revenu après PAS, par mois</span><b>"+this.euro(net)+"</b></div></div><p class=\"pas-note\">Estimation indicative, à taux et revenu constants. Le résultat n’est pas le calcul de l’impôt définitif.</p>";
 }};
 </script>
 </body>
