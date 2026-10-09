@@ -1484,5 +1484,18 @@
         "tolerance": 0.01
       }
     ]
+  },
+  {
+    "outil": "frais-de-notaire",
+    "entrees": {
+      "prix": "250000",
+      "type": "ancien",
+      "acquisition": "standard"
+    },
+    "attendu": 19723.7,
+    "tolerance": 0.02,
+    "sortie": "Frais estimés",
+    "source": "https://www.impots.gouv.fr/particulier/questions/jachete-un-bien-immobilier-quaurai-je-payer-comme-frais-au-notaire",
+    "note": "Cas indépendant : 250 000 × 6,32 % = 15 800 € de droits ; contribution de sécurité immobilière 250 € ; émoluments HT par tranches 2 394,75 €, TVA 478,95 €, débours provisionnés 800 € ; total 19 723,70 €. Le taux de 6,32 % est un plafond et non le taux effectif de chaque département."
   }
 ]
