@@ -1649,5 +1649,57 @@
     "tolerance": 0.01,
     "sortie": "Indemnité minimale légale estimée",
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31539"
+  },
+  {
+    "outil": "rupture-conventionnelle",
+    "entrees": {
+      "entry": "2025-07-01",
+      "exit": "2026-01-01",
+      "s12": "2000",
+      "s3": "2000"
+    },
+    "attendu": 250,
+    "tolerance": 0.02,
+    "sortie": "Indemnité minimale légale estimée",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31539"
+  },
+  {
+    "outil": "rupture-conventionnelle",
+    "entrees": {
+      "entry": "2016-01-01",
+      "exit": "2026-01-01",
+      "s12": "2000",
+      "s3": "2000"
+    },
+    "attendu": 5000,
+    "tolerance": 0.02,
+    "sortie": "Indemnité minimale légale estimée",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31539"
+  },
+  {
+    "outil": "rupture-conventionnelle",
+    "entrees": {
+      "entry": "2013-04-01",
+      "exit": "2026-01-01",
+      "s12": "2000",
+      "s3": "2000"
+    },
+    "attendu": 6833.333333333333,
+    "tolerance": 0.02,
+    "sortie": "Indemnité minimale légale estimée",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31539"
+  },
+  {
+    "outil": "rupture-conventionnelle",
+    "entrees": {
+      "entry": "2022-01-01",
+      "exit": "2026-01-01",
+      "s12": "2000",
+      "s3": "2400"
+    },
+    "attendu": 2400,
+    "tolerance": 0.02,
+    "sortie": "Indemnité minimale légale estimée",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31539"
   }
 ]
