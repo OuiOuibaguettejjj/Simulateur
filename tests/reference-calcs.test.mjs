@@ -193,6 +193,33 @@ assert.match(donationPetitNeveu.text, /Droits de donation estimés/i,
 assert.match(donationPetitNeveu.text, /Exonérations appliquées[\s\S]*?8[\s\u00a0\u202f]?406(?:[,.]00)?\s*€/i,
   "donation : l'exonération 790 G du petit-neveu s'applique après l'abattement de 1 594 €");
 
+// Régression : un petit-neveu peut relever du 790 G, mais pas du 790 A bis.
+const donationPetitNeveuHousing = await runInlineCalculator({
+  family: "outil", slug: "donation",
+  inputs: {
+    montant: "10000", natureDonation: "argent", lien: "petitNeveu",
+    abattementUtilise: "0", handicapEligible: "non", handicapUtilise: "0",
+    donFamilial: "0", donFamilialEligible: "non",
+    donLogement: "1000", donLogementEligible: "oui", dateDonLogement: "2026-06-01",
+    baseTaxableAnterieure: "0"
+  }
+});
+assert.match(donationPetitNeveuHousing.text, /790 A bis exige une somme d’argent, un lien familial éligible/i,
+  "donation : le petit-neveu ne doit pas être éligible au 790 A bis");
+
+// Régression : les abattements affichés sont plafonnés au montant effectivement donné.
+const donationAllowanceDisplayCapped = await runInlineCalculator({
+  family: "outil", slug: "donation",
+  inputs: {
+    montant: "10000", natureDonation: "argent", lien: "parent",
+    abattementUtilise: "0", handicapEligible: "non", handicapUtilise: "0",
+    donFamilial: "0", donFamilialEligible: "non",
+    donLogement: "0", donLogementEligible: "non", baseTaxableAnterieure: "0"
+  }
+});
+assert.match(donationAllowanceDisplayCapped.text, /Abattements appliqués[\\s\\S]*?10[\\s\\u00a0\\u202f]?000(?:[,.]00)?\\s*€/i,
+  "donation : les abattements appliqués affichés ne doivent pas dépasser la donation");
+
 // Régression : le dernier taux progressif reste applicable au-delà du seuil sentinelle historique.
 const donationVeryLarge = await runInlineCalculator({
   family: "outil", slug: "donation",
