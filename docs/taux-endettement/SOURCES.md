@@ -18,7 +18,7 @@ Le taux lié aux crédits est calculé comme suit :
 
 Le seuil de référence est lu dans le jeu `capacite-emprunt` de `data/parametres.json`, et non codé en dur dans la page.
 
-Les pensions alimentaires versées et le loyer qui demeure après le projet sont exclus du taux lié aux crédits affiché par cet outil simplifié. Ils sont déduits séparément pour estimer le budget restant. Cette estimation ne reproduit pas l’ensemble des règles d’analyse ni les dérogations appliquées par un établissement prêteur.
+Les pensions alimentaires versées et le loyer qui demeure après le projet sont exclus du taux lié aux mensualités de crédit affiché par cet outil. L’écart au repère est donc explicitement présenté comme un écart indicatif sur les seuls crédits, et non comme une marge globale de capacité d’emprunt. Les pensions et le loyer sont déduits séparément pour estimer le budget restant. Ces charges fixes restent pertinentes dans l’analyse globale du dossier par la banque. Cette estimation ne reproduit pas l’ensemble des règles d’analyse ni les dérogations appliquées par un établissement prêteur.
 
 ## Limites
 
