@@ -108,7 +108,6 @@ jobs:
       - name: Tests génériques des calculateurs
         run: node tests/generic-calcs.test.mjs
 
-
       - name: Test métier du signe astrologique
         run: node tests/signe-astrologique.test.mjs
 
