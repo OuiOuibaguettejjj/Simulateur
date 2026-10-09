@@ -472,30 +472,6 @@
     "rule": "title"
   },
   {
-    "path": "public/outil/pourboire/index.html",
-    "rule": "content-h2"
-  },
-  {
-    "path": "public/outil/pourboire/index.html",
-    "rule": "description"
-  },
-  {
-    "path": "public/outil/pourboire/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/pourboire/index.html",
-    "rule": "formula"
-  },
-  {
-    "path": "public/outil/pourboire/index.html",
-    "rule": "result"
-  },
-  {
-    "path": "public/outil/pourboire/index.html",
-    "rule": "title"
-  },
-  {
     "path": "public/outil/pourcentage/index.html",
     "rule": "description"
   },
