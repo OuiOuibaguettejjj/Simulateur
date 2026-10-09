@@ -31,6 +31,12 @@ try{
   assert.equal(await amount(page.locator("#paid")),"1200","le total versé doit rester égal à 12 versements de 100 €");
   assert.ok(await page.locator("#chart path.capital-line").count()>0,"le graphique doit être tracé après un calcul valide");
 
+  await page.locator("#frequence").selectOption("monthly");
+  assert.equal(await amount(page.locator("#final")),"1268","la composition mensuelle doit capitaliser les intérêts à chaque mois");
+  await page.locator("#frequence").selectOption("never");
+  assert.equal(await amount(page.locator("#final")),"1266","les intérêts simples doivent rémunérer chaque versement au prorata sans capitaliser les intérêts");
+  await page.locator("#frequence").selectOption("annual");
+
   await page.locator("#rendement").fill("100.1");
   await page.locator("#calculate").click();
   assert.equal((await page.locator("#final").innerText()).trim(),"Valeurs invalides","un rendement supérieur à 100 % doit être refusé");
