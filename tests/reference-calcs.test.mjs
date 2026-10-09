@@ -146,7 +146,7 @@ const donationAvailableCapsAboveGift = await runInlineCalculator({
 });
 assert.match(donationAvailableCapsAboveGift.text, /Droits de donation estimés/i,
   "donation : les plafonds d'exonération disponibles supérieurs au don ne doivent pas provoquer de refus");
-assert.match(donationAvailableCapsAboveGift.text, /Exonérations appliquées[\s\S]*?10[\s\u00a0\u202f]?000\s*€/i,
+assert.match(donationAvailableCapsAboveGift.text, /Exonérations appliquées[\s\S]*?10[\s\u00a0\u202f]?000(?:[,.]00)?\s*€/i,
   "donation : les exonérations appliquées ne doivent pas dépasser le montant du don");
 
 // Régression : le dernier taux progressif reste applicable au-delà du seuil sentinelle historique.
@@ -159,7 +159,7 @@ const donationVeryLarge = await runInlineCalculator({
     donLogementEligible: "non", baseTaxableAnterieure: "0"
   }
 });
-assert.match(donationVeryLarge.text, /899[\s\u00a0\u202f]?999[\s\u00a0\u202f]?762[\s\u00a0\u202f]?394\s*€/i,
+assert.match(donationVeryLarge.text, /899[\s\u00a0\u202f]?999[\s\u00a0\u202f]?762[\s\u00a0\u202f]?394(?:[,.]00)?\s*€/i,
   "donation : le barème doit appliquer 45 % à la base excédant l'ancien dernier seuil");
 
 const refusedTools=[...forbidden];
