@@ -1,2 +1,114 @@
-<!doctype html><html lang="fr"><head><meta name="calculator-rendering" content="static"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="google-adsense-account" content="ca-pub-2924580037451268"><title>Calculateur de prélèvement à la source</title><meta name="description" content="Calculez le montant de prélèvement à la source sur un revenu mensuel imposable à partir de votre taux PAS."><link rel="canonical" href="https://simulateur.site/outil/prelevement-source/"><link rel="stylesheet" href="/styles.css"><script src="/simulateurs.js" defer></script><script src="/enter-calcul.js" defer></script><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur de prélèvement à la source","url":"https://simulateur.site/outil/prelevement-source/","description":"Calculez le montant de prélèvement à la source sur un revenu mensuel imposable à partir de votre taux PAS.","inLanguage":"fr-FR","applicationCategory":"FinanceApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"price":"0","priceCurrency":"EUR"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Fiscalité","item":"https://simulateur.site/fiscalite/"},{"@type":"ListItem","position":3,"name":"Calculateur de prélèvement à la source","item":"https://simulateur.site/outil/prelevement-source/"}]}</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta property="og:type" content="website"><meta property="og:site_name" content="Simulateur"><meta property="og:locale" content="fr_FR"><meta property="og:title" content="Calculateur de prélèvement à la source"><meta property="og:description" content="Calculez le montant de prélèvement à la source sur un revenu mensuel imposable à partir de votre taux PAS."><meta property="og:url" content="https://simulateur.site/outil/prelevement-source/"><meta name="twitter:card" content="summary"></head><body><header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header><main><div class="wrap"><div class="breadcrumb"><a href="/">Accueil</a> · <a href="/fiscalite/">Fiscalité</a> · Calculateur de prélèvement à la source</div><section class="tool"><div class="eyebrow">FISCALITÉ</div><h1>Calculateur de prélèvement à la source</h1><p class="tool-intro">Calculez le montant prélevé sur votre revenu à partir de votre taux PAS.</p><div id="fields"><div class="field"><label for="revenu">Revenu mensuel net imposable (€)</label><input id="revenu" type="number" min="0" step="0.01" placeholder="3000"></div><div class="field"><label for="taux">Taux de prélèvement à la source (%)</label><input id="taux" type="number" min="0" step="0.01" placeholder="7.5"></div></div><button class="button-main" onclick="Simulateurs.calc()">Calculer</button><div class="result" id="result" aria-live="polite">Saisissez vos données puis lancez le calcul.</div><div class="formula"><strong>Méthode et sources</strong><p>Le montant est calculé comme revenu net imposable × taux PAS. Le taux doit être celui communiqué par l'administration fiscale ; le calculateur ne détermine pas le taux personnalisé officiel.</p></div></section></div><section class="content-section"><h2>Comment fonctionne le prélèvement à la source ?</h2><p>Le prélèvement est calculé en appliquant votre taux de prélèvement au revenu net imposable entrant dans le champ du PAS. Ce calculateur reproduit donc le calcul du prélèvement sur une paie lorsque <strong>le taux PAS est déjà connu</strong>.</p><p>Il ne prétend pas déterminer votre taux fiscal officiel : celui-ci est calculé par l'administration à partir de votre situation et de vos revenus. Depuis le 1er septembre 2025, le taux individualisé est le taux par défaut pour les couples mariés ou pacsés soumis à imposition commune, avec possibilité d'opter pour le taux foyer.</p><p class="source-links">Sources officielles : <a href="https://www.impots.gouv.fr/particulier/questions/comment-gerer-mon-prelevement-la-source">impots.gouv.fr</a> et <a href="https://bofip.impots.gouv.fr/bofip/11247-PGP.html/identifiant=BOI-IR-PAS-20-20-10-20260407">BOFiP — calcul du taux PAS</a>.</p></section><section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Calculs associés</h2><div class="related-links"><a class="related-link" href="/outil/impot-sur-le-revenu/"><strong>Impôt sur le revenu</strong><span>Estimer l'impôt annuel.</span></a><a class="related-link" href="/outil/salaire-brut-net/"><strong>Salaire brut ↔ net</strong><span>Estimer le net avant impôt.</span></a></div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="/fiscalite/">Fiscalité</a>.</p></div></section></main><footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer><script>window.TOOL={calc:function(){const r=+this.$("revenu").value||0,t=+this.$("taux").value||0;if(r<0||t<0||t>100)return"Renseignez un revenu et un taux valides.";const p=r*t/100;return"<strong>"+this.euro(p)+"</strong> de prélèvement à la source<br><small>Il vous resterait "+this.euro(r-p)+" après PAS, avant les autres retenues éventuelles.</small>"}};</script></body></html>
+<!doctype html>
+<html lang="fr">
+<head>
+<meta name="calculator-rendering" content="static">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="google-adsense-account" content="ca-pub-2924580037451268">
+<title>Calcul prélèvement à la source : montant mensuel | Simulateur</title>
+<meta name="description" content="Calculez votre prélèvement à la source à partir de votre revenu net imposable et de votre taux PAS. Estimation mensuelle, annuelle et du revenu après impôt.">
+<link rel="canonical" href="https://simulateur.site/outil/prelevement-source/">
+<link rel="stylesheet" href="/styles.css">
+<script src="/simulateurs.js" defer></script>
+<script src="/enter-calcul.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calcul du prélèvement à la source","url":"https://simulateur.site/outil/prelevement-source/","description":"Calculez le montant du prélèvement à la source à partir du revenu net imposable et du taux communiqué par l'administration fiscale.","inLanguage":"fr-FR","applicationCategory":"FinanceApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"price":"0","priceCurrency":"EUR"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Fiscalité","item":"https://simulateur.site/fiscalite/"},{"@type":"ListItem","position":3,"name":"Prélèvement à la source","item":"https://simulateur.site/outil/prelevement-source/"}]}</script>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Simulateur"><meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Calcul prélèvement à la source : montant mensuel | Simulateur">
+<meta property="og:description" content="Estimez le montant mensuel et annuel du prélèvement à la source à partir de votre revenu imposable et de votre taux PAS.">
+<meta property="og:url" content="https://simulateur.site/outil/prelevement-source/"><meta name="twitter:card" content="summary">
+<style>
+.pas-page{max-width:980px;margin:0 auto}
+.pas-hero{position:relative;overflow:hidden;padding:clamp(24px,5vw,46px);border:1px solid var(--ink);border-radius:22px;background:linear-gradient(135deg,#17483d,#102f2a);color:#fff;box-shadow:var(--shadow)}
+.pas-hero:after{content:"%";position:absolute;right:24px;top:-48px;font-size:17rem;font-weight:950;line-height:1;color:rgba(255,255,255,.055);pointer-events:none}
+.pas-hero .eyebrow{color:#ffb29f;position:relative;z-index:1}
+.pas-hero h1{position:relative;z-index:1;max-width:720px;margin:0 0 14px;font-size:clamp(2.2rem,5vw,4.2rem);line-height:1;letter-spacing:-.065em}
+.pas-hero .tool-intro{position:relative;z-index:1;max-width:690px;margin:0;color:#e0e9e4;font-size:1.05rem}
+.pas-trust{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.pas-trust span{padding:6px 10px;border:1px solid rgba(255,255,255,.25);border-radius:999px;font-size:.78rem;font-weight:800}
+.pas-card{margin-top:18px;padding:clamp(20px,4vw,32px);border:1px solid var(--ink);border-radius:18px;background:var(--card);box-shadow:var(--shadow)}
+.pas-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.pas-fields .field{min-width:0}
+.pas-fields input{width:100%;min-height:50px;font:inherit;font-size:1.05rem;padding:12px 14px;border:1px solid #8d887d;border-radius:10px;background:#fffefa;color:var(--ink)}
+.pas-help{margin:7px 0 0;color:var(--muted);font-size:.86rem}
+.pas-actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:22px}
+.pas-actions .button-main{min-height:48px;padding:12px 22px}
+.pas-result{margin-top:20px;padding:18px;border:1px solid var(--line);border-radius:12px;background:#f4f1e8}
+.pas-result strong{font-size:clamp(1.6rem,4vw,2.3rem);letter-spacing:-.04em}
+.pas-result small{display:block;margin-top:6px;color:#4f4c45;font-size:.95rem}
+.pas-result-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}
+.pas-result-item{padding:14px;border:1px solid var(--line);border-radius:10px;background:#fffefa}
+.pas-result-item span{display:block;color:var(--muted);font-size:.82rem}
+.pas-result-item b{display:block;margin-top:4px;font-size:1.15rem}
+.pas-note{font-size:.9rem;color:var(--muted)}
+.pas-page .content-section,.pas-page .calculator-faq{max-width:780px;margin:42px auto 0}
+.pas-page .content-section h2,.pas-page .calculator-faq h2{font-size:clamp(1.5rem,3vw,2rem);letter-spacing:-.035em}
+.pas-page .content-section p{max-width:74ch}
+.pas-page .related-tools{margin-top:42px}
+.pas-page .source-links{padding-top:12px;border-top:1px solid var(--line);font-size:.92rem}
+@media(max-width:620px){.pas-fields,.pas-result-grid{grid-template-columns:1fr}.pas-hero:after{right:-10px;top:-24px;font-size:10rem}.pas-actions .button-main{width:100%}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header>
+<main class="pas-page">
+<div class="breadcrumb"><a href="/">Accueil</a> · <a href="/fiscalite/">Fiscalité</a> · Prélèvement à la source</div>
+<section class="pas-hero">
+<div class="eyebrow">FISCALITÉ · SALAIRE</div>
+<h1>Calcul du prélèvement à la source</h1>
+<p class="tool-intro">Estimez ce qui sera prélevé sur votre revenu chaque mois à partir du taux PAS transmis par l’administration fiscale. Le calcul se fait en quelques secondes, sans chercher à reconstituer votre taux officiel.</p>
+<div class="pas-trust"><span>Taux officiel à renseigner</span><span>Estimation immédiate</span><span>Montants mensuel et annuel</span></div>
+</section>
+<section class="pas-card tool" aria-label="Calculateur de prélèvement à la source">
+<h2>Votre estimation</h2>
+<p class="pas-note">Reprenez le revenu net imposable et le taux indiqués sur votre bulletin de paie ou dans votre espace fiscal.</p>
+<div id="fields" class="pas-fields">
+<div class="field"><label for="revenu">Revenu net imposable mensuel (€)</label><input id="revenu" name="revenu" type="text" inputmode="decimal" autocomplete="off" placeholder="Ex. : 3 000,00" aria-describedby="revenu-help" required><p id="revenu-help" class="pas-help">Utilisez le montant soumis au PAS, pas le salaire brut. La virgule décimale est acceptée.</p></div>
+<div class="field"><label for="taux">Taux de prélèvement à la source (%)</label><input id="taux" name="taux" type="text" inputmode="decimal" autocomplete="off" placeholder="Ex. : 7,5" aria-describedby="taux-help" required><p id="taux-help" class="pas-help">Saisissez le taux communiqué par l’administration, entre 0 et 100 %.</p></div>
+</div>
+<div class="pas-actions"><button class="button-main" type="button" onclick="Simulateurs.calc()">Calculer mon prélèvement</button><span class="pas-note">Aucun taux n’est deviné ou calculé à votre place.</span></div>
+<div class="pas-result result" id="result" aria-live="polite" aria-atomic="true">Renseignez les deux champs puis lancez le calcul.</div>
+<div class="formula"><strong>Méthode de calcul</strong><p>Prélèvement estimé = revenu net imposable mensuel × taux PAS ÷ 100. Le montant annuel est une projection sur 12 mois constants, et non le calcul de votre impôt annuel définitif.</p></div>
+</section>
+<section class="content-section">
+<h2>Comment calculer le prélèvement à la source sur son salaire ?</h2>
+<p>Le prélèvement à la source (PAS) est une avance d’impôt sur le revenu retenue au fil de l’année. Pour estimer la retenue d’un mois, multipliez le revenu net imposable soumis au PAS par le taux applicable à ce revenu. Par exemple, avec 3 000 € de revenu net imposable et un taux de 7,5 %, la retenue est de 225 € pour le mois.</p>
+<p>Le revenu net imposable n’est pas nécessairement égal au salaire brut ni au montant versé sur votre compte. Pour éviter une estimation trompeuse, utilisez la ligne de votre bulletin de paie correspondant au net imposable et vérifiez le taux réellement appliqué par votre employeur.</p>
+</section>
+<section class="content-section">
+<h2>Quel taux de prélèvement faut-il utiliser ?</h2>
+<p>Le taux à saisir est celui transmis par l’administration fiscale et appliqué par votre collecteur. Selon votre situation, il peut s’agir d’un taux personnalisé, d’un taux individualisé au sein d’un couple imposé en commun ou d’un taux neutre. Ce calculateur ne choisit pas entre ces options et ne détermine pas le taux auquel vous avez droit.</p>
+<p>Si vos revenus ou votre situation familiale changent, vous pouvez consulter les démarches de gestion du prélèvement à la source sur impots.gouv.fr. Une modification du taux ne s’applique pas nécessairement immédiatement : le délai dépend de la transmission de l’information au collecteur.</p>
+</section>
+<section class="content-section">
+<h2>Ce que cette estimation inclut — et ses limites</h2>
+<p>Le résultat estime la retenue correspondant à un revenu mensuel et à un taux fournis. Il affiche aussi une projection annuelle si ce revenu et ce taux restent identiques pendant 12 mois. Il ne calcule ni le taux personnalisé officiel, ni les crédits et réductions d’impôt, ni le solde définitif après déclaration. Votre situation réelle peut donc aboutir à un remboursement ou à un complément d’impôt.</p>
+<p>Pour estimer l’impôt annuel, utilisez également notre <a href="/outil/impot-sur-le-revenu/">calculateur d’impôt sur le revenu</a>. Pour convertir un salaire brut en net, consultez le <a href="/outil/salaire-brut-net/">calculateur salaire brut-net</a> ; les montants ne sont pas interchangeables avec le revenu net imposable.</p>
+<p class="source-links"><strong>Sources officielles :</strong> <a href="https://www.impots.gouv.fr/particulier/questions/comment-gerer-mon-prelevement-la-source">impots.gouv.fr — gérer son prélèvement à la source</a> · <a href="https://www.impots.gouv.fr/particulier/questions/quelles-sont-les-differences-entre-les-taux-de-prelevement-la-source-proposes">impots.gouv.fr — différences entre les taux</a> · <a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F34009">Service-Public — prélèvement à la source</a>. Sources consultées le 9 octobre 2026.</p>
+</section>
+<section class="calculator-faq" aria-labelledby="faq-title">
+<h2 id="faq-title">Questions fréquentes sur le prélèvement à la source</h2>
+<details><summary>Comment calculer le montant prélevé chaque mois ?</summary><div class="calculator-faq-answer"><p>Multipliez le revenu net imposable mensuel soumis au PAS par le taux appliqué, puis divisez par 100. Pour 2 500 € à 6 %, la retenue estimée est de 150 € par mois.</p></div></details>
+<details><summary>Le taux de prélèvement à la source est-il calculé par cet outil ?</summary><div class="calculator-faq-answer"><p>Non. Le taux doit être repris depuis votre espace fiscal ou votre bulletin de paie. Le calculateur estime uniquement la retenue à partir du taux saisi.</p></div></details>
+<details><summary>Faut-il saisir le salaire brut ou le salaire net ?</summary><div class="calculator-faq-answer"><p>Saisissez le revenu net imposable soumis au PAS, généralement indiqué sur le bulletin de paie. Le brut et le net versé sur le compte bancaire peuvent être différents de ce montant.</p></div></details>
+<details><summary>Pourquoi le montant prélevé diffère-t-il de l’impôt annuel ?</summary><div class="calculator-faq-answer"><p>Le PAS est une retenue effectuée pendant l’année. L’impôt définitif est calculé ensuite selon l’ensemble des revenus, la situation du foyer et les éventuels crédits ou réductions d’impôt ; un solde ou un remboursement reste possible.</p></div></details>
+<details><summary>Que signifie le taux neutre ou individualisé ?</summary><div class="calculator-faq-answer"><p>Le taux neutre est un taux non personnalisé appliqué dans certaines situations. Le taux individualisé permet, pour les couples mariés ou pacsés soumis à imposition commune, de répartir le prélèvement selon les revenus de chacun. Consultez impots.gouv.fr pour vérifier le taux adapté à votre situation.</p></div></details>
+</section>
+<section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Calculs associés</h2><div class="related-links"><a class="related-link" href="/outil/impot-sur-le-revenu/"><strong>Impôt sur le revenu</strong><span>Estimer l’impôt annuel.</span></a><a class="related-link" href="/outil/salaire-brut-net/"><strong>Salaire brut ↔ net</strong><span>Passer du brut au net estimé.</span></a></div><p class="status-note">Retrouvez aussi les autres outils de la rubrique <a href="/fiscalite/">Fiscalité</a>.</p></div></section>
+</main>
+<footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer>
+<script>
+window.TOOL={calc:function(){
+  const rawRevenu=String(this.$("revenu").value??"").trim();
+  const rawTaux=String(this.$("taux").value??"").trim();
+  const parseFr=value=>{const normalized=value.replace(/[\s\u00a0\u202f]/g,"").replace(",",".");return normalized!==""&&/^(?:\d+\.?\d*|\.\d+)$/.test(normalized)?Number(normalized):NaN};
+  const revenu=parseFr(rawRevenu),taux=parseFr(rawTaux);
+  if(!rawRevenu||!rawTaux||!Number.isFinite(revenu)||!Number.isFinite(taux)||revenu<0||taux<0||taux>100)return "Renseignez un revenu et un taux valides (revenu positif ou nul, taux de 0 à 100 %).";
+  const mensuel=revenu*taux/100,annuel=mensuel*12,net=revenu-mensuel;
+  if(!Number.isFinite(mensuel)||!Number.isFinite(annuel)||!Number.isFinite(net))return "Valeurs trop élevées pour une estimation fiable.";
+  return "<strong>Prélèvement mensuel estimé : "+this.euro(mensuel)+"</strong><small>Sur ce revenu, il resterait "+this.euro(net)+" après PAS, avant les autres retenues éventuelles.</small><div class=\"pas-result-grid\"><div class=\"pas-result-item\"><span>Projection sur 12 mois</span><b>"+this.euro(annuel)+"</b></div><div class=\"pas-result-item\"><span>Revenu après PAS, par mois</span><b>"+this.euro(net)+"</b></div></div><p class=\"pas-note\">Estimation indicative, à taux et revenu constants. Le résultat n’est pas le calcul de l’impôt définitif.</p>";
+}};
+</script>
+</body>
+</html>
