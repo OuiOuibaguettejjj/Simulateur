@@ -13,6 +13,6 @@ Vérification effectuée le 9 octobre 2026.
 - Avant le 1er juin 2026 : 12,02 € brut/heure dans le cas général et 9,33 € à Mayotte.
 
 ## Méthode et limites
-Les montants mensuels et annuels sont proratisés selon le ratio heures hebdomadaires saisies / 35 ; la référence de temps plein correspond à 151,67 heures par mois. Les montants officiels de référence sont conservés tels que publiés, puis le résultat proratisé est arrondi au centime. Le net n’est affiché qu’en métropole et reste indicatif.
+Les montants mensuels et annuels sont proratisés selon le ratio d’heures hebdomadaires normales saisies / 35 ; la saisie est limitée à 35 heures afin de ne pas assimiler les heures supplémentaires à des heures ordinaires. La référence de temps plein correspond à 151,67 heures par mois. Les montants officiels de référence sont conservés tels que publiés, puis le résultat proratisé est arrondi au centime. Le net n’est affiché qu’en métropole et reste indicatif ; sous 35 heures, il est extrapolé au prorata et ne constitue pas une estimation individuelle de paie.
 
 La page ne calcule pas une paie complète, ne vérifie pas les règles de rémunération des heures supplémentaires, les éléments de salaire entrant dans l’assiette de comparaison au SMIC, les minorations possibles pour certains salariés mineurs, ni les minima conventionnels. Les montants nets sont publiés à titre indicatif par Service-Public et ne doivent pas être présentés comme une garantie individuelle.
