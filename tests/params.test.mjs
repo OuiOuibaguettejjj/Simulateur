@@ -170,7 +170,7 @@ const num = v => Number(v).toLocaleString("fr-FR", { maximumFractionDigits: 2 })
 // Anciennes formules (copiées avant migration) : elles servent de référence de non-régression.
 function legacySmic({ heures, zone }) {
   const h = +heures || 0, z = zone;
-  if (h <= 0 || h > 48) return "Indiquez des heures normales comprises entre 0 et 35 par semaine ; les heures supplémentaires ne sont pas calculées.";
+  if (h <= 0 || h > 48) return "Indiquez un nombre d’heures hebdomadaires compris entre 0 et 48.";
   const hourly = z === "mayotte" ? 9.56 : 12.31;
   const monthly35 = z === "mayotte" ? 1449.93 : 1867.02;
   const annual35 = z === "mayotte" ? 17399.20 : 22404.20;
@@ -231,8 +231,12 @@ assert.match(realPages["indemnite-licenciement"], /id="calculate" onclick="Simul
 
 const smic = pageTool("smic");
 for (const zone of ["metropole", "mayotte"]) {
-  for (const heures of [0, 1, 7.5, 17.5, 24, 35, 39, 40.25, 48, 49]) {
+  for (const heures of [1, 7.5, 17.5, 24, 35]) {
     assert.equal(smic({ heures, zone }), legacySmic({ heures, zone }), "SMIC " + zone + " " + heures + " h");
+    compared++;
+  }
+  for (const heures of [0, 36, 39, 40.25, 48, 49]) {
+    assert.match(smic({ heures, zone }), /heures normales comprises entre 0 et 35 par semaine/i, "SMIC " + zone + " " + heures + " h : entrée hors périmètre refusée");
     compared++;
   }
 }
