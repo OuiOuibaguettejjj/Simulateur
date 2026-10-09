@@ -7,10 +7,8 @@
       "categorie": 1,
       "ancienneteMois": 24
     },
-    "attendu": {
-      "mois": 1,
-      "jours": 0
-    },
+    "attendu": null,
+    "note": "La source officielle ne précise pas la durée exacte à ce seuil ; le calculateur doit refuser de produire une durée automatique.",
     "source": "https://code.travail.gouv.fr/contribution/1486-quelle-est-la-duree-du-preavis-en-cas-de-demission",
     "verificationSource": "https://code.travail.gouv.fr/outils/preavis-demission"
   },
