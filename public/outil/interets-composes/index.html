@@ -290,7 +290,7 @@
 
     const altMonthly=simulate(C,V+50,R,F,Y,H,freq).capital;
     const altRate=simulate(C,V,R+1,F,Y,H,freq).capital;
-    const crossover=result.rows.find(r=>r.gains>r.paid-C);
+    const crossover=result.rows.find(r=>r.gains>r.paid);
     const checkedValues=[capital,paid,gains,real,feeImpact,altMonthly,altRate,gross.capital,...result.rows.flatMap(r=>[r.capital,r.paid,r.gains])];
     if(!checkedValues.every(Number.isFinite)){
       clearResults("Valeurs trop élevées pour une projection fiable"); return;
