@@ -53,7 +53,9 @@
 function parseDate(value){
   if(!/^\d{4}-\d{2}-\d{2}$/.test(value)) return null;
   const d=new Date(value+"T12:00:00");
-  return Number.isFinite(d.getTime()) ? d : null;
+  if(!Number.isFinite(d.getTime())) return null;
+  const parts=value.split("-").map(Number);
+  return d.getFullYear()===parts[0] && d.getMonth()+1===parts[1] && d.getDate()===parts[2] ? d : null;
 }
 
 function addMonths(date,months){
@@ -115,12 +117,15 @@ window.TOOL={calc:function(){
   const departureValue=this.$("departure").value;
   const birth=parseDate(birthValue);
   const departure=parseDate(departureValue);
-  const s=Number(this.$("sam").value);
-  const trTotal=Number(this.$("trTotal").value);
-  const trGeneral=Number(this.$("trGeneral").value);
+  const samValue=this.$("sam").value.trim();
+  const trTotalValue=this.$("trTotal").value.trim();
+  const trGeneralValue=this.$("trGeneral").value.trim();
+  const s=Number(samValue);
+  const trTotal=Number(trTotalValue);
+  const trGeneral=Number(trGeneralValue);
   const p=paramsForBirth(birthValue);
 
-  if(!p||p.year<1955||p.year>2100||!departure||!Number.isFinite(s)||s<=0||s>1000000||
+  if(!p||p.year<1955||p.year>2100||!birth||!departure||samValue===""||trTotalValue===""||trGeneralValue===""||!Number.isFinite(s)||s<=0||s>1000000||
      !Number.isInteger(trTotal)||trTotal<0||trTotal>400||
      !Number.isInteger(trGeneral)||trGeneral<0||trGeneral>400||
      trGeneral>trTotal){
@@ -137,6 +142,11 @@ window.TOOL={calc:function(){
 
   if(departure<new Date(window.Parametres.get("retraite-simplifiee").effectiveFrom+"T12:00:00")){
     return '<div class="result-error"><strong>Date de départ hors périmètre.</strong><br>Cette version applique les règles des retraites prenant effet à partir du 1er septembre 2026.</div>';
+  }
+
+  const effectiveTo=window.Parametres.get("retraite-simplifiee").effectiveTo;
+  if(departure>new Date(effectiveTo+"T12:00:00")){
+    return '<div class="result-error"><strong>Date de départ hors période couverte.</strong><br>Les paramètres réglementaires de cette simulation sont vérifiés jusqu’au '+effectiveTo.split("-").reverse().join("/")+'. Choisissez une date couverte ou consultez les sources officielles pour les règles ultérieures.</div>';
   }
 
   if(departure<p.legalDate){
