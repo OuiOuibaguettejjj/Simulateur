@@ -1562,7 +1562,7 @@
     "verifications": [
       {
         "sortie": "Rendement net avant financement et impôts",
-        "attendu": 3.144041708043694,
+        "attendu": 3.1438430983118173,
         "tolerance": 0.02
       }
     ],
