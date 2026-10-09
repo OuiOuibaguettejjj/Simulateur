@@ -11,6 +11,15 @@ assert.equal(set.verifiedOn, "2026-10-09");
 assert.match(set.source.url, /^https:\/\/code\.travail\.gouv\.fr\//);
 
 const rules = set.values.rules;
+const references = JSON.parse(fs.readFileSync("tests/references/preavis-demission.json", "utf8"));
+assert.equal(references.length, 4, "les cas de référence sourcés du préavis sont présents");
+for (const c of references) {
+  assert.equal(c.outil, "preavis-demission");
+  assert.ok(/^https:\/\//.test(c.source));
+  const rule = rules.filter(r => r[0] === c.entrees.idcc && r[1] === c.entrees.categorie && r[2] <= c.entrees.ancienneteMois).sort((a,b) => b[2]-a[2])[0];
+  assert.ok(rule, "aucune règle pour le cas de référence " + c.cas);
+  assert.deepEqual({mois:rule[3],jours:rule[4]}, c.attendu, "valeur réglementaire incorrecte pour " + c.cas);
+}
 const has = (...expected) => assert.ok(rules.some(rule => JSON.stringify(rule) === JSON.stringify(expected)), "règle absente : " + expected.join(","));
 [
   [1486, 1, 0, 1, 0], [1486, 1, 25, 2, 0], [1486, 2, 0, 2, 0],
