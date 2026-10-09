@@ -219,6 +219,43 @@
         }
       }
     },
+    "frais-de-notaire": {
+      "label": "Frais d’acquisition immobilière — taux et barème des émoluments",
+      "year": 2026,
+      "effectiveFrom": "2026-01-01",
+      "effectiveTo": "2028-03-31",
+      "verifiedOn": "2026-10-09",
+      "source": {
+        "label": "impots.gouv.fr — droits de mutation immobiliers",
+        "url": "https://www.impots.gouv.fr/particulier/questions/jachete-un-bien-immobilier-quaurai-je-payer-comme-frais-au-notaire"
+      },
+      "values": {
+        "contributionSecurite": 0.001,
+        "contributionSecuriteMinimum": 15,
+        "tauxAncienMax": 0.0632,
+        "tauxAncienPrimoMax": 0.0581,
+        "tauxNeuf": 0.0071,
+        "tranchesEmoluments": [
+          [
+            6500,
+            0.0387
+          ],
+          [
+            17000,
+            0.01596
+          ],
+          [
+            60000,
+            0.01064
+          ],
+          [
+            1000000000000,
+            0.00799
+          ]
+        ],
+        "tvaEmoluments": 0.2
+      }
+    },
     "frais-kilometriques": {
       "label": "Barème kilométrique",
       "year": 2026,

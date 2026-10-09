@@ -80,7 +80,7 @@ function localScripts(html){return[...html.matchAll(/<script[^>]+src=[\"']([^\"'
 export async function runInlineCalculator({slug,family="outil",caseKind="default",inputs={},mockRates={}}){
   if(!INTERACTIVE_FAMILIES.includes(family))throw new Error("unknown interactive family: "+family);
   const file=path.join(ROOT,"public",family,slug,"index.html");const html=fs.readFileSync(file,"utf8");const {context,document,window}=loadContext(html,mockRates);
-  for(const [id,value] of Object.entries(inputs)){const el=document.getElementById(id);if(!el)throw new Error("unknown input id: "+id);const raw=String(value);el.value=el.type==="number"?raw.replace(",","." ):raw}
+  for(const [id,value] of Object.entries(inputs)){const el=document.getElementById(id);if(!el)throw new Error("unknown input id: "+id);const raw=String(value);el.value=el.type==="number"&&!(family==="outil"&&slug==="frais-de-notaire"&&id==="prix")?raw.replace(",","." ):raw}
   setCase(document,caseKind);
   for(const src of localScripts(html)){const full=path.join(ROOT,"public",src);if(fs.existsSync(full))vm.runInContext(fs.readFileSync(full,"utf8"),context,{filename:src,timeout:500})}
   const inline=[...html.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/gi)].filter(m=>!/\bsrc=/.test(m[1])&&!/application\/ld\+json/i.test(m[1]));

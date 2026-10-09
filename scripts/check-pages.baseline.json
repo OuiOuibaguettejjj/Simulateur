@@ -216,18 +216,6 @@
     "rule": "title"
   },
   {
-    "path": "public/outil/frais-de-notaire/index.html",
-    "rule": "description"
-  },
-  {
-    "path": "public/outil/frais-de-notaire/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/frais-de-notaire/index.html",
-    "rule": "title"
-  },
-  {
     "path": "public/outil/heures-supplementaires/index.html",
     "rule": "content-h2"
   },

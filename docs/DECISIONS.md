@@ -1,3 +1,9 @@
+# Décisions d’architecture
+
+## 2026-10-09 — Migration et enrichissement des frais de notaire
+
+Le calculateur frais de notaire est migré vers `data/parametres.json`. Les paramètres recensent le plafond global indicatif des droits de mutation pour l’ancien, le plafond lié à la première acquisition destinée à la résidence principale, le taux réduit de certaines acquisitions dans le neuf, la contribution de sécurité immobilière, le barème standard des émoluments et la TVA. Aucune provision forfaitaire de débours n’est ajoutée, car elle ne serait pas justifiée par les sources. Les sources sont impots.gouv.fr et le BOFiP, vérifiées le 9 octobre 2026. Le calcul ne détermine pas le taux exact voté par chaque département ni toutes les conditions juridiques ; il reste une estimation et l’indique explicitement.
+
 ## 2026-10-09 — Migration et enrichissement de la donation
 
 Le calculateur donation est migré vers `data/parametres.json` : abattements usuels, abattement handicap, barème progressif en ligne directe, barème distinct entre époux/Pacs, barème entre frères et sœurs et taux des autres liens. Les montants ont été recoupés avec Service-Public et les articles applicables du CGI le 9 octobre 2026. Le calcul prend en compte la base taxable déjà soumise au barème lorsque l’utilisateur la renseigne, mais ne reconstitue pas automatiquement les déclarations antérieures. Il ne valide pas les plafonds globaux ni les conditions factuelles des exonérations. L’article 790 A bis est temporaire jusqu’au 31 décembre 2026 ; son renouvellement éventuel nécessite une vérification réglementaire.
