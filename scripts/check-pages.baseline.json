@@ -796,18 +796,6 @@
     "rule": "title"
   },
   {
-    "path": "public/outil/smic/index.html",
-    "rule": "description"
-  },
-  {
-    "path": "public/outil/smic/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/smic/index.html",
-    "rule": "title"
-  },
-  {
     "path": "public/outil/solde-tout-compte/index.html",
     "rule": "description"
   },
