@@ -111,6 +111,9 @@ jobs:
       - name: Tests de référence sourcés
         run: node tests/reference-calcs.test.mjs
 
+      - name: Test calculateur rendement locatif
+        run: node tests/rendement-locatif.test.mjs
+
       - name: Test paramètres réglementaires
         run: node tests/params.test.mjs
 

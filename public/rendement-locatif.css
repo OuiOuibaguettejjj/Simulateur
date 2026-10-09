@@ -1,0 +1,17 @@
+/* Présentation propre au calculateur de rendement locatif. Le socle global reste inchangé. */
+#fields .rental-input-group{margin:18px 0 0;padding:15px 16px 5px;border:1px solid var(--line);border-radius:12px;background:rgba(255,254,250,.72)}
+#fields .rental-input-heading{display:flex;align-items:center;gap:10px;margin:0 0 10px;color:var(--accent2);font-size:.82rem;font-weight:900;letter-spacing:.055em;text-transform:uppercase}
+#fields .rental-step{display:inline-grid;place-items:center;flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:var(--accent-soft);color:var(--ink);letter-spacing:0}
+#fields .rental-input-group .row{gap:12px}
+#fields .rental-input-group .field{margin:10px 0}
+#fields .rental-input-group .field label{font-size:.92rem}
+#fields .rental-input-group .field input{min-height:46px;font-variant-numeric:tabular-nums}
+#fields #aide-prix{margin:0 0 12px;color:var(--muted);font-size:.86rem}
+#result .rental-result-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:18px}
+#result .rental-result-metric{min-width:0;padding:15px;border:1px solid var(--line);border-radius:11px;background:var(--card)}
+#result .rental-result-metric span{display:block;color:var(--muted);font-size:.8rem;font-weight:800;line-height:1.35}
+#result .rental-result-metric strong{display:block;margin-top:7px;color:var(--accent2);font-size:clamp(1.45rem,3.6vw,2rem);line-height:1.15;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+#result .rental-result-metric.is-net{border-color:var(--accent2);background:var(--accent-soft)}
+#result .rental-result-metric.is-net strong{color:var(--ink)}
+#result hr{border:0;border-top:1px solid var(--line);margin:18px 0}
+@media(max-width:650px){#fields .rental-input-group{padding:12px 12px 4px}#fields .rental-input-group .row{grid-template-columns:1fr}#result .rental-result-grid{grid-template-columns:1fr}#result .rental-result-metric{padding:13px}}
