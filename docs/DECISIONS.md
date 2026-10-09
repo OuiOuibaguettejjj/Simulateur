@@ -1,5 +1,11 @@
 # Décisions d’architecture
 
+## 2026-10-09 — Migration et enrichissement de la rupture conventionnelle
+
+Le calculateur de rupture conventionnelle est migré vers `data/parametres.json`. Les taux légaux (1/4 de mois par année jusqu’à 10 ans, puis 1/3 au-delà), le palier et la convention de mois sont centralisés, sourcés sur Service-Public et suivis jusqu’au 31 décembre 2026. Le calcul reste limité au minimum légal brut ; il ne recherche pas automatiquement la convention collective ni son indemnité potentiellement plus favorable, et ne calcule pas les prélèvements fiscaux et sociaux. Le cas de référence est indépendant du code testé et utilise 4 ans d’ancienneté et un salaire de référence de 2 000 €.
+
+
+
 ## 2026-10-09 — Migration et enrichissement des frais de notaire
 
 Le calculateur frais de notaire est migré vers `data/parametres.json`. Les paramètres recensent le plafond global indicatif des droits de mutation pour l’ancien, le plafond lié à la première acquisition destinée à la résidence principale, le taux réduit de certaines acquisitions dans le neuf, la contribution de sécurité immobilière, le barème standard des émoluments et la TVA. Aucune provision forfaitaire de débours n’est ajoutée, car elle ne serait pas justifiée par les sources. Les sources sont impots.gouv.fr et le BOFiP, vérifiées le 9 octobre 2026. Le calcul ne détermine pas le taux exact voté par chaque département ni toutes les conditions juridiques ; il reste une estimation et l’indique explicitement.
