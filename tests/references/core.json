@@ -1479,7 +1479,7 @@
         "tolerance": 0.01
       },
       {
-        "sortie": "Écart indicatif sur les seules mensualités de crédit (hors loyer et pensions)",
+        "sortie": "Écart indicatif sur les seules mensualités de crédit",
         "attendu": 200,
         "tolerance": 0.01
       }
