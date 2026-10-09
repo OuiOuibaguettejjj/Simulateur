@@ -18,18 +18,18 @@
 <div class="field"><label for="exit">Date envisagée de rupture</label><input id="exit" type="date" required></div>
 </div>
 <div class="rc-grid">
-<div class="field"><label for="s12">Salaire mensuel brut moyen des 12 derniers mois (€)</label><input id="s12" type="number" min="0" step="0.01" placeholder="3500" required></div>
-<div class="field"><label for="s3">Salaire mensuel brut moyen des 3 derniers mois (€)</label><input id="s3" type="number" min="0" step="0.01" placeholder="3500" required></div>
+<div class="field"><label for="s12">Salaire mensuel brut moyen de référence (€)</label><input id="s12" type="text" inputmode="decimal" autocomplete="off" placeholder="3500,00" required></div>
+<div class="field"><label for="s3">Salaire mensuel brut moyen des 3 derniers mois (€)</label><input id="s3" type="text" inputmode="decimal" autocomplete="off" placeholder="3500,00" required></div>
 </div>
-<p class="rc-small">Saisissez des moyennes mensuelles brutes, et non les montants cumulés : total des rémunérations de référence ÷ 12 pour la période de 12 mois ; total des rémunérations des 3 mois ÷ 3 pour la période de 3 mois. Pour la seconde méthode, les primes annuelles ou exceptionnelles sont prises en compte au prorata de la période, selon les règles applicables. Comparez les deux montants après avoir appliqué ces règles.</p>
+<p class="rc-small">Saisissez des moyennes mensuelles brutes, et non les montants cumulés. Pour la première valeur, divisez le total des rémunérations de référence par 12 si vous avez au moins 12 mois d’ancienneté ; si vous avez moins de 12 mois, divisez-le par le nombre de mois de rémunération de toute la période travaillée. Pour la seconde valeur, divisez par 3 le total des rémunérations des trois derniers mois. Les primes annuelles ou exceptionnelles doivent être prises en compte selon les règles légales, notamment au prorata prévu pour la méthode des trois mois. Le calculateur compare ensuite les deux moyennes. La virgule ou le point est accepté pour les centimes.</p>
 <button class="button-main" type="submit">Calculer mon indemnité</button><div id="err" class="rc-error" hidden></div></form>
 <div id="result" class="rc-result result" aria-live="polite" hidden><p>Renseignez les dates et les deux salaires de référence, puis lancez le calcul.</p></div></section>
 <section class="rc-card"><h2>Comment le calcul fonctionne</h2>
 <p>La rupture conventionnelle est réservée au <strong>CDI</strong>. Il n'y a pas de condition minimale d'ancienneté pour bénéficier d'une indemnité de rupture conventionnelle.</p>
-<p>Le salaire de référence retenu est celui qui est le plus favorable entre la moyenne mensuelle des <strong>12 derniers mois</strong> et la moyenne mensuelle des <strong>3 derniers mois</strong>, avec les règles de prise en compte des primes prévues par la réglementation.</p>
+<p>Le salaire de référence retenu est le plus favorable entre la moyenne mensuelle des <strong>12 derniers mois</strong> (ou de toute la période travaillée si elle est inférieure à 12 mois) et la moyenne mensuelle des <strong>3 derniers mois</strong>, avec les règles légales de prise en compte des primes.</p>
 <p>Le minimum légal correspond à <strong>1/4 de mois de salaire par année d'ancienneté jusqu'à 10 ans</strong>, puis <strong>1/3 de mois par année au-delà de 10 ans</strong>. L'année incomplète est calculée proportionnellement aux mois complets.</p>
 <p class="rc-small">Ce calculateur estime uniquement le minimum légal de référence. Il ne détermine pas l'indemnité conventionnelle éventuelle, le montant négocié entre les parties, ni le régime fiscal et social applicable à votre situation.</p></section>
-<section class="rc-card"><h2>Exemple de calcul</h2><p>Avec un salaire de référence de 3 500 € et 8 ans d'ancienneté : 3 500 × 1/4 × 8 = <strong>7 000 €</strong> minimum légal.</p><p>Avec 12 ans d'ancienneté : (3 500 × 1/4 × 10) + (3 500 × 1/3 × 2) = <strong>8 583,33 €</strong>.</p></section>
+<section class="rc-card"><h2>Exemple de calcul</h2><p>Avec un salaire de référence de 3 500 € et 8 ans d'ancienneté : 3 500 × 1/4 × 8 = <strong>7 000 €</strong> minimum légal.</p><p>Avec 12 ans d'ancienneté : (3 500 × 1/4 × 10) + (3 500 × 1/3 × 2) = <strong>11 083,33 €</strong>.</p></section>
 <section class="rc-card"><h2>Sources officielles</h2><ul class="rc-sources">
 <li><a href="https://www.service-public.fr/particuliers/vosdroits/F31539" target="_blank" rel="noopener">Service-Public — Comment calculer l'indemnité spécifique de rupture conventionnelle ?</a></li>
 <li><a href="https://code.travail.gouv.fr/fiche-service-public/comment-calculer-lindemnite-specifique-de-rupture-conventionnelle" target="_blank" rel="noopener">Code du travail numérique — Indemnité spécifique de rupture conventionnelle</a></li>
@@ -56,16 +56,18 @@ const form=document.getElementById('form'),result=document.getElementById('resul
 function parse(v){if(!/^\d{4}-\d{2}-\d{2}$/.test(v))return null;const [y,m,d]=v.split('-').map(Number),x=new Date(Date.UTC(y,m-1,d));return x.getUTCFullYear()===y&&x.getUTCMonth()===m-1&&x.getUTCDate()===d?x:null}
 function monthsBetween(a,b){let m=(b.getUTCFullYear()-a.getUTCFullYear())*12+(b.getUTCMonth()-a.getUTCMonth());if(b.getUTCDate()<a.getUTCDate())m--;return m}
 function euro(n){return new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR'}).format(n)}
+function amount(id){const raw=document.getElementById(id).value.trim().replace(/[\\s\\u00a0\\u202f]/g,'').replace(',','.');if(!/^(?:\\d+\\.?\\d*|\\.\\d+)$/.test(raw))return NaN;return Number(raw)}
 form.addEventListener('submit',e=>{e.preventDefault();err.hidden=true;result.hidden=true;
-const a=parse(document.getElementById('entry').value),b=parse(document.getElementById('exit').value),s12=Number(document.getElementById('s12').value),s3=Number(document.getElementById('s3').value);
+const a=parse(document.getElementById('entry').value),b=parse(document.getElementById('exit').value),s12=amount('s12'),s3=amount('s3');
 if(!a||!b||b<=a){err.textContent='Les dates doivent être valides et la date de rupture doit être postérieure à la date d’entrée.';err.hidden=false;return}
-if(!Number.isFinite(s12)||!Number.isFinite(s3)||!(s12>0)||!(s3>0)){err.textContent='Renseignez deux salaires bruts mensuels valides.';err.hidden=false;return}
-const totalMonths=monthsBetween(a,b), ref=Math.max(s12,s3), years=totalMonths/12;
-if(!Number.isSafeInteger(totalMonths)||totalMonths<0||!Number.isFinite(ref)){err.textContent="Les données saisies ne permettent pas un calcul fiable.";err.hidden=false;return}
+if(!Number.isFinite(s12)||!Number.isFinite(s3)||!(s12>0)||!(s3>0)){err.textContent='Renseignez deux salaires bruts mensuels positifs, avec au plus une virgule ou un point décimal.';err.hidden=false;return}
+const totalMonths=monthsBetween(a,b);
+if(!Number.isSafeInteger(totalMonths)||totalMonths<0){err.textContent="Les dates saisies ne permettent pas un calcul fiable.";err.hidden=false;return}
+const ref=Math.max(s12,s3), years=totalMonths/12;
 const rule=window.Parametres.get("rupture-conventionnelle").values;
 const legal=ref*(Math.min(years,rule.palierAnnees)*rule.tauxAvantPalier.numerateur/rule.tauxAvantPalier.denominateur+Math.max(0,years-rule.palierAnnees)*rule.tauxApresPalier.numerateur/rule.tauxApresPalier.denominateur);
 if(!Number.isFinite(legal)||legal<0){err.textContent="Le résultat dépasse les limites de calcul prises en charge.";err.hidden=false;return}
-const used=s12>=s3?'12 derniers mois':'3 derniers mois';
+const used=s12>=s3?(totalMonths<12?'toute la période travaillée':'12 derniers mois'):'3 derniers mois';
 const y=Math.floor(totalMonths/12), mo=totalMonths%12;
 result.innerHTML='<p><strong>Indemnité minimale légale estimée : '+euro(legal)+'</strong></p><div class="rc-detail"><div><strong>Ancienneté retenue</strong>'+y+' an'+(y>1?'s':'')+(mo?' et '+mo+' mois':'')+'</div><div><strong>Salaire de référence</strong>'+euro(ref)+'/mois</div><div><strong>Base retenue</strong>'+used+'</div><div><strong>Formule</strong>'+(years<=10?'1/4 de mois par année':'1/4 jusqu’à 10 ans, puis 1/3 au-delà')+'</div></div><p class="rc-small">Ce montant est un minimum légal indicatif. Une règle conventionnelle plus favorable peut conduire à une indemnité supérieure.</p>';
 result.hidden=false;result.scrollIntoView({behavior:'smooth',block:'nearest'});
