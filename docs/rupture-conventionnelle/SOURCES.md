@@ -12,7 +12,7 @@ Vérification effectuée le 9 octobre 2026.
 
 - Le calcul estime uniquement le minimum légal brut : un quart de mois de salaire de référence par année d’ancienneté jusqu’à dix ans, puis un tiers par année au-delà.
 - L’ancienneté est calculée en mois complets entre la date d’entrée et la date de rupture saisies, puis rapportée à douze mois. Les jours incomplets ne sont pas assimilés à un mois complet.
-- Le salaire de référence est le plus favorable entre les moyennes mensuelles des douze derniers mois et des trois derniers mois, après application des règles de proratisation des primes. Les deux moyennes sont saisies par l’utilisateur ; le calculateur ne vérifie pas la paie réelle ni la qualification des primes.
+- Le salaire de référence est le plus favorable entre la moyenne mensuelle des douze derniers mois (ou de tous les mois travaillés si l’ancienneté est inférieure à douze mois) et la moyenne mensuelle des trois derniers mois, après application des règles de proratisation des primes. Les deux moyennes sont saisies par l’utilisateur ; le calculateur ne vérifie pas la paie réelle ni la qualification des primes.
 - L’indemnité conventionnelle éventuellement plus favorable n’est pas calculée automatiquement : l’utilisateur doit vérifier sa convention collective, son contrat et les accords applicables.
 - Le montant final négocié, le net après prélèvements, les exonérations et les autres éléments du solde de tout compte sont hors périmètre.
 
