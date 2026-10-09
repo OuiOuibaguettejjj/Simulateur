@@ -13,7 +13,7 @@
 <body><header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header>
 <main><div class="wrap">
 <div class="breadcrumb"><a href="/">Accueil</a> · <a href="/retraite/">Retraite</a> · Simulateur retraite 2026</div>
-<div class="retirement-shell tool">
+<section class="retirement-shell tool">
 <div class="retirement-hero"><div class="eyebrow">RETRAITE · 2026</div><h1>Estimer sa retraite de base</h1><p class="tool-intro">Estimez votre retraite de base à partir de votre carrière et de votre date de départ.</p><div class="retirement-badges"><span>Retraite de base</span><span>Calcul simplifié</span><span>2026</span></div></div>
 <div class="retirement-form">
 <div class="retirement-section-title"><strong>Votre situation</strong><span>Quelques informations de votre carrière suffisent pour obtenir une estimation.</span></div>
@@ -22,7 +22,7 @@
 <p class="privacy-note">Calcul effectué dans votre navigateur · aucune donnée personnelle n'est envoyée.</p>
 <div class="result retirement-result" id="result" aria-live="polite">Renseignez vos données puis lancez le calcul.</div>
 <div class="formula"><strong>Méthode et sources</strong><p>Principe : revenu annuel moyen × taux de liquidation × proratisation au régime général. Le taux est de 50 % à taux plein. Avant 67 ans, la décote retient le plus petit nombre entre les trimestres manquants pour atteindre la durée requise et les trimestres restant avant 67 ans, avec une minoration de 0,625 point par trimestre. Le revenu annuel moyen est saisi directement : le calculateur ne reconstitue pas vos meilleures années.</p></div>
-</div></div></div>
+</div></section></div>
 
 <section class="content-section retirement-content">
 <h2>Comment lire votre estimation</h2>
@@ -98,7 +98,7 @@ function ageAt(birth,date){
 
 function retirementEstimate(s,trTotal,trGeneral,req,departure,birth,rules){
   const age=ageAt(birth,departure);
-  const age67=addMonths(birth,67*12);
+  const age67=addMonths(birth,rules.values.ageTauxPleinAutomatique*12);
   const missingByDuration=Math.max(0,req-trTotal);
   const monthsToAge67=completedMonthsBetween(departure,age67);
   const missingByAge=departure>=age67?0:Math.ceil(monthsToAge67/3);
