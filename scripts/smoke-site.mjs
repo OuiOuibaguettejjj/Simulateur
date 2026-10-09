@@ -50,6 +50,7 @@ try{
      await page.setViewportSize({width:375,height:812});
      const overflow=await page.locator(".pv").evaluate(el=>el.scrollWidth>el.clientWidth);
      if(overflow)errors.push(file+": débordement horizontal du calculateur à 375 px");
+     await page.setViewportSize({width:1280,height:720});
     }catch(e){errors.push(file+": vérification navigateur dédiée échouée: "+e.message)}
    }
    if(isInteractivePage(file.slice("public/".length))){
