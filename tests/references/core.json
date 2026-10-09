@@ -1234,5 +1234,212 @@
     "source": "https://www.impots.gouv.fr/www2/fichiers/documentation/brochure/ir_2026/pdf_som/18-IFI_337a340.pdf",
     "verificationSource": "https://www.impots.gouv.fr/particulier/calcul-de-lifi",
     "note": "Calcul indépendant : barème progressif à 1 350 000 € = 2 850 € ; décote = 17 500 € − 1,25 % × 1 350 000 € = 625 € ; estimation = 2 225 €, avant autres réductions ou plafonnements."
+  },
+  {
+    "outil": "donation",
+    "entrees": {
+      "montant": "200000",
+      "lien": "parent",
+      "abattementUtilise": "0",
+      "donFamilial": "0",
+      "donLogement": "0",
+      "handicapUtilise": "0",
+      "natureDonation": "argent",
+      "handicapEligible": "non",
+      "donFamilialEligible": "non",
+      "donLogementEligible": "non"
+    },
+    "attendu": 18194,
+    "tolerance": 0,
+    "sortie": "Droits de donation estimés",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203",
+    "verificationSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203"
+  },
+  {
+    "outil": "donation",
+    "entrees": {
+      "montant": "200000",
+      "lien": "conjoint",
+      "natureDonation": "argent",
+      "abattementUtilise": "0",
+      "handicapEligible": "non",
+      "handicapUtilise": "0",
+      "donFamilial": "0",
+      "donFamilialEligible": "non",
+      "donLogement": "0",
+      "donLogementEligible": "non"
+    },
+    "attendu": 21061,
+    "tolerance": 1,
+    "sortie": "Droits de donation estimés",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14205",
+    "verificationSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14205"
+  },
+  {
+    "outil": "donation",
+    "entrees": {
+      "montant": "200000",
+      "lien": "parent",
+      "natureDonation": "argent",
+      "abattementUtilise": "0",
+      "handicapEligible": "oui",
+      "handicapUtilise": "0",
+      "donFamilial": "0",
+      "donFamilialEligible": "non",
+      "donLogement": "0",
+      "donLogementEligible": "non"
+    },
+    "attendu": 0,
+    "tolerance": 0,
+    "sortie": "Droits de donation estimés",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203",
+    "verificationSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203"
+  },
+  {
+    "outil": "donation",
+    "entrees": {
+      "montant": "200 000,00",
+      "lien": "parent",
+      "natureDonation": "argent",
+      "abattementUtilise": "0",
+      "handicapEligible": "non",
+      "handicapUtilise": "0",
+      "donFamilial": "0",
+      "donFamilialEligible": "non",
+      "donLogement": "0",
+      "donLogementEligible": "non"
+    },
+    "attendu": 18194,
+    "tolerance": 0,
+    "sortie": "Droits de donation estimés",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203",
+    "verificationSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203"
+  },
+  {
+    "outil": "donation",
+    "entrees": {
+      "montant": "10000",
+      "lien": "parent",
+      "natureDonation": "argent",
+      "abattementUtilise": "100000",
+      "handicapEligible": "non",
+      "handicapUtilise": "0",
+      "baseTaxableAnterieure": "10000",
+      "donFamilial": "0",
+      "donFamilialEligible": "non",
+      "donLogement": "0",
+      "donLogementEligible": "non"
+    },
+    "attendu": 1598,
+    "tolerance": 0,
+    "sortie": "Droits de donation estimés",
+    "source": "https://www.impots.gouv.fr/particulier/calcul-et-paiement-des-droits",
+    "verificationSource": "https://www.impots.gouv.fr/particulier/calcul-et-paiement-des-droits",
+    "note": "Calcul marginal : droits sur la base taxable cumulee de 20 000 euros moins droits sur 10 000 euros precedemment taxes, arrondi à 1 598 euros."
+  },
+  {
+    "outil": "donation",
+    "entrees": {
+      "montant": "200000",
+      "lien": "enfant",
+      "natureDonation": "argent",
+      "abattementUtilise": "0",
+      "handicapEligible": "non",
+      "handicapUtilise": "0",
+      "donFamilial": "0",
+      "donFamilialEligible": "non",
+      "donLogement": "0",
+      "donLogementEligible": "non"
+    },
+    "attendu": 18194,
+    "tolerance": 0,
+    "sortie": "Droits de donation estimés",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203",
+    "verificationSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203",
+    "note": "Donation d'un enfant à son parent : abattement ascendant de 100 000 € et barème en ligne directe."
+  },
+  {
+    "outil": "donation",
+    "entrees": {
+      "montant": "100000",
+      "lien": "autreParent",
+      "natureDonation": "argent",
+      "abattementUtilise": "0",
+      "handicapEligible": "non",
+      "handicapUtilise": "0",
+      "donFamilial": "0",
+      "donFamilialEligible": "non",
+      "donLogement": "0",
+      "donLogementEligible": "non"
+    },
+    "attendu": 54123,
+    "tolerance": 1,
+    "sortie": "Droits de donation estimés",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203",
+    "verificationSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203",
+    "note": "Autre parent jusqu'au quatrième degré : abattement de 1 594 € puis taux de 55 %."
+  },
+  {
+    "outil": "donation",
+    "entrees": {
+      "montant": "200000",
+      "lien": "petitEnfant",
+      "natureDonation": "argent",
+      "abattementUtilise": "0",
+      "handicapEligible": "non",
+      "handicapUtilise": "0",
+      "donFamilial": "0",
+      "donFamilialEligible": "non",
+      "donLogement": "0",
+      "donLogementEligible": "non"
+    },
+    "attendu": 18194,
+    "tolerance": 0,
+    "sortie": "Droits de donation estimés",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203",
+    "verificationSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203",
+    "note": "Un ascendant qui reçoit une donation bénéficie de l'abattement de 100 000 € selon Service-Public, quel que soit le degré de la ligne directe."
+  },
+  {
+    "outil": "donation",
+    "entrees": {
+      "montant": "200000",
+      "lien": "arriereAscendant",
+      "natureDonation": "argent",
+      "abattementUtilise": "0",
+      "handicapEligible": "non",
+      "handicapUtilise": "0",
+      "donFamilial": "0",
+      "donFamilialEligible": "non",
+      "donLogement": "0",
+      "donLogementEligible": "non"
+    },
+    "attendu": 18194,
+    "tolerance": 0,
+    "sortie": "Droits de donation estimés",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203",
+    "verificationSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203",
+    "note": "Un ascendant qui reçoit une donation bénéficie de l'abattement de 100 000 € selon Service-Public, quel que soit le degré de la ligne directe."
+  },
+  {
+    "outil": "donation",
+    "entrees": {
+      "montant": "100000",
+      "lien": "oncle",
+      "natureDonation": "argent",
+      "abattementUtilise": "0",
+      "handicapEligible": "non",
+      "handicapUtilise": "0",
+      "donFamilial": "0",
+      "donFamilialEligible": "non",
+      "donLogement": "0",
+      "donLogementEligible": "non"
+    },
+    "attendu": 54123,
+    "tolerance": 1,
+    "sortie": "Droits de donation estimés",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203",
+    "verificationSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203",
+    "note": "Le neveu ou la nièce qui donne à son oncle ou sa tante ne reçoit pas l'abattement spécifique réservé au neveu/nièce bénéficiaire ; abattement général de 1 594 € et taux de 55 %."
   }
 ]

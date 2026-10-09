@@ -23,6 +23,104 @@
         "tauxEffortMax": 35
       }
     },
+    "donation": {
+      "label": "Droits de donation — abattements et barèmes",
+      "year": 2026,
+      "effectiveFrom": "2026-01-01",
+      "effectiveTo": "2026-12-31",
+      "verifiedOn": "2026-10-09",
+      "source": {
+        "label": "Service-Public et Légifrance — droits de donation",
+        "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203"
+      },
+      "values": {
+        "abattements": {
+          "ami": 0,
+          "arriere": 5310,
+          "arriereAscendant": 100000,
+          "autreParent": 1594,
+          "conjoint": 80724,
+          "donFamilial": 31865,
+          "donLogementParDonateur": 100000,
+          "enfant": 100000,
+          "frere": 15932,
+          "grandparent": 31865,
+          "handicap": 159325,
+          "neveu": 7967,
+          "oncle": 1594,
+          "parent": 100000,
+          "petitEnfant": 100000,
+          "petitNeveu": 1594
+        },
+        "baremeConjoint": [
+          [
+            8072,
+            0.05
+          ],
+          [
+            15932,
+            0.1
+          ],
+          [
+            31865,
+            0.15
+          ],
+          [
+            552324,
+            0.2
+          ],
+          [
+            902838,
+            0.3
+          ],
+          [
+            1805677,
+            0.4
+          ],
+          [
+            999999999999,
+            0.45
+          ]
+        ],
+        "baremeFreresSoeurs": {
+          "seuil": 24430,
+          "tauxInitial": 0.35,
+          "tauxSuivant": 0.45
+        },
+        "baremeLigneDirecte": [
+          [
+            8072,
+            0.05
+          ],
+          [
+            12109,
+            0.1
+          ],
+          [
+            15932,
+            0.15
+          ],
+          [
+            552324,
+            0.2
+          ],
+          [
+            902838,
+            0.3
+          ],
+          [
+            1805677,
+            0.4
+          ],
+          [
+            999999999999,
+            0.45
+          ]
+        ],
+        "tauxAutre": 0.6,
+        "tauxNeveu": 0.55
+      }
+    },
     "electricite": {
       "label": "Tarif réglementé de vente d’électricité — résidentiel",
       "year": 2026,

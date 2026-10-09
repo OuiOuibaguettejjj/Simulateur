@@ -24,6 +24,215 @@ for(const c of cases){
   if(Array.isArray(c.verifications))for(const v of c.verifications){const re=new RegExp(v.sortie,"i");assert.ok(re.test(out.text),c.outil+" : sortie secondaire absente : "+v.sortie);const part=out.text.slice(out.text.search(re));const value=numbers(part)[0];assert.ok(Number.isFinite(value),c.outil+" : valeur secondaire absente : "+v.sortie);assert.ok(withinTolerance(value,v.attendu,v.tolerance),c.outil+" : "+v.sortie+" attendu "+v.attendu+", obtenu "+value)}
   covered.add(c.outil);
 }
+// Régressions propres au calculateur de donation : les exonérations ne s'appliquent
+// pas à un bien autre qu'une somme d'argent, même si un montant a été saisi.
+const donationNonCashExemption = await runInlineCalculator({
+  family: "outil",
+  slug: "donation",
+  inputs: {
+    montant: "100000",
+    natureDonation: "bien",
+    lien: "parent",
+    abattementUtilise: "0",
+    handicapEligible: "non",
+    handicapUtilise: "0",
+    donFamilial: "1000",
+    donFamilialEligible: "oui",
+    donLogement: "0",
+    donLogementEligible: "non"
+  }
+});
+assert.match(donationNonCashExemption.text, /exige une somme d’argent/i,
+  "donation : l'exonération 790 G doit être refusée pour un bien autre qu'une somme d'argent");
+
+const donationUnconfirmedHousing = await runInlineCalculator({
+  family: "outil",
+  slug: "donation",
+  inputs: {
+    montant: "100000",
+    natureDonation: "argent",
+    lien: "parent",
+    abattementUtilise: "0",
+    handicapEligible: "non",
+    handicapUtilise: "0",
+    donFamilial: "0",
+    donFamilialEligible: "non",
+    donLogement: "1000",
+    donLogementEligible: "non"
+  }
+});
+assert.match(donationUnconfirmedHousing.text, /conditions confirmées/i,
+  "donation : l'exonération 790 A bis doit être refusée sans confirmation des conditions");
+
+
+const donationHousingBase = {
+  montant: "100000", natureDonation: "argent", lien: "parent",
+  abattementUtilise: "0", handicapEligible: "non", handicapUtilise: "0",
+  donFamilial: "0", donFamilialEligible: "non", donLogement: "1000",
+  donLogementEligible: "oui"
+};
+for (const [date, shouldPass] of [
+  ["2025-02-14", false],
+  ["2025-02-15", true],
+  ["2026-12-31", true],
+  ["2027-01-01", false]
+]) {
+  const result = await runInlineCalculator({
+    family: "outil", slug: "donation",
+    inputs: {...donationHousingBase, dateDonLogement: date}
+  });
+  if (shouldPass) {
+    assert.match(result.text, /Droits de donation estimés/i,
+      "donation : date 790 A bis autorisée " + date);
+  } else {
+    assert.match(result.text, /entre le 15 février 2025 et le 31 décembre 2026/i,
+      "donation : date 790 A bis refusée " + date);
+  }
+}
+const donationNoHousingDate = await runInlineCalculator({
+  family: "outil", slug: "donation",
+  inputs: {...donationHousingBase, dateDonLogement: ""}
+});
+assert.match(donationNoHousingDate.text, /entre le 15 février 2025 et le 31 décembre 2026/i,
+  "donation : date de versement requise pour 790 A bis");
+const donationOtherParent = await runInlineCalculator({
+  family: "outil", slug: "donation",
+  inputs: {
+    montant: "100000", natureDonation: "bien", lien: "autreParent",
+    abattementUtilise: "0", handicapEligible: "non", handicapUtilise: "0",
+    donFamilial: "0", donFamilialEligible: "non", donLogement: "0",
+    donLogementEligible: "non", baseTaxableAnterieure: "0"
+  }
+});
+assert.match(donationOtherParent.text, /Droits de donation estimés/i,
+  "donation : un autre parent jusqu'au quatrième degré doit être calculable");
+
+
+const donationReverseFamily = await runInlineCalculator({
+  family: "outil", slug: "donation",
+  inputs: {
+    montant: "100000", natureDonation: "argent", lien: "enfant",
+    abattementUtilise: "0", handicapEligible: "non", handicapUtilise: "0",
+    donFamilial: "1000", donFamilialEligible: "oui", donLogement: "0",
+    donLogementEligible: "non"
+  }
+});
+assert.match(donationReverseFamily.text, /lien familial éligible/i,
+  "donation : le 790 G ne doit pas s'appliquer dans le sens enfant vers parent");
+const donationReverseHousing = await runInlineCalculator({
+  family: "outil", slug: "donation",
+  inputs: {
+    montant: "100000", natureDonation: "argent", lien: "enfant",
+    abattementUtilise: "0", handicapEligible: "non", handicapUtilise: "0",
+    donFamilial: "0", donFamilialEligible: "non", donLogement: "1000",
+    donLogementEligible: "oui", dateDonLogement: "2026-06-01"
+  }
+});
+assert.match(donationReverseHousing.text, /lien familial éligible/i,
+  "donation : le 790 A bis ne doit pas s'appliquer dans le sens enfant vers parent");
+
+
+// Régression : une base taxable antérieure positive ne peut coexister avec un abattement
+// de parenté déclaré comme encore entièrement disponible.
+const donationInconsistentPriorBase = await runInlineCalculator({
+  family: "outil", slug: "donation",
+  inputs: {
+    montant: "110000", natureDonation: "argent", lien: "parent",
+    abattementUtilise: "0", handicapEligible: "non", handicapUtilise: "0",
+    donFamilial: "0", donFamilialEligible: "non", donLogement: "0",
+    donLogementEligible: "non", baseTaxableAnterieure: "10000"
+  }
+});
+assert.match(donationInconsistentPriorBase.text, /base taxable antérieure est positive[\s\S]*abattement de parenté/i,
+  "donation : refuser une base antérieure positive avec un abattement de parenté non consommé");
+
+// La même situation avec l'abattement parent-enfant entièrement consommé calcule les droits marginaux.
+const donationConsistentPriorBase = await runInlineCalculator({
+  family: "outil", slug: "donation",
+  inputs: {
+    montant: "10000", natureDonation: "argent", lien: "parent",
+    abattementUtilise: "100000", handicapEligible: "non", handicapUtilise: "0",
+    donFamilial: "0", donFamilialEligible: "non", donLogement: "0",
+    donLogementEligible: "non", baseTaxableAnterieure: "10000"
+  }
+});
+assert.match(donationConsistentPriorBase.text, /Droits de donation estimés/i,
+  "donation : calculer les droits marginaux quand les données antérieures sont cohérentes");
+assert.match(donationConsistentPriorBase.text, /1[\s\u00a0\u202f]?598(?:[,.]00)?\s*€/i,
+  "donation : 10 000 € de base antérieure et 10 000 € de base courante produisent 1 598 € de droits marginaux");
+
+// Régression : les plafonds encore disponibles peuvent dépasser le montant du don.
+// Le simulateur applique seulement l'exonération réellement utilisable, sans refuser la saisie.
+const donationAvailableCapsAboveGift = await runInlineCalculator({
+  family: "outil", slug: "donation",
+  inputs: {
+    montant: "10000", natureDonation: "argent", lien: "parent",
+    abattementUtilise: "100000", handicapEligible: "non", handicapUtilise: "0",
+    donFamilial: "31865", donFamilialEligible: "oui",
+    donLogement: "100000", donLogementEligible: "oui", dateDonLogement: "2026-06-01",
+    baseTaxableAnterieure: "0"
+  }
+});
+assert.match(donationAvailableCapsAboveGift.text, /Droits de donation estimés/i,
+  "donation : les plafonds d'exonération disponibles supérieurs au don ne doivent pas provoquer de refus");
+assert.match(donationAvailableCapsAboveGift.text, /Exonérations appliquées[\s\S]*?10[\s\u00a0\u202f]?000(?:[,.]00)?\s*€/i,
+  "donation : les exonérations appliquées ne doivent pas dépasser le montant du don");
+
+// Régression : le petit-neveu/la petite-nièce peut bénéficier du 790 G si son parent est décédé.
+const donationPetitNeveu = await runInlineCalculator({
+  family: "outil", slug: "donation",
+  inputs: {
+    montant: "10000", natureDonation: "argent", lien: "petitNeveu",
+    abattementUtilise: "0", handicapEligible: "non", handicapUtilise: "0",
+    donFamilial: "31865", donFamilialEligible: "oui",
+    donLogement: "0", donLogementEligible: "non", baseTaxableAnterieure: "0"
+  }
+});
+assert.match(donationPetitNeveu.text, /Droits de donation estimés/i,
+  "donation : le petit-neveu avec parent décédé doit être éligible au 790 G");
+assert.match(donationPetitNeveu.text, /Exonérations appliquées[\s\S]*?8[\s\u00a0\u202f]?406(?:[,.]00)?\s*€/i,
+  "donation : l'exonération 790 G du petit-neveu s'applique après l'abattement de 1 594 €");
+
+// Régression : un petit-neveu peut relever du 790 G, mais pas du 790 A bis.
+const donationPetitNeveuHousing = await runInlineCalculator({
+  family: "outil", slug: "donation",
+  inputs: {
+    montant: "10000", natureDonation: "argent", lien: "petitNeveu",
+    abattementUtilise: "0", handicapEligible: "non", handicapUtilise: "0",
+    donFamilial: "0", donFamilialEligible: "non",
+    donLogement: "1000", donLogementEligible: "oui", dateDonLogement: "2026-06-01",
+    baseTaxableAnterieure: "0"
+  }
+});
+assert.match(donationPetitNeveuHousing.text, /790 A bis exige une somme d’argent, un lien familial éligible/i,
+  "donation : le petit-neveu ne doit pas être éligible au 790 A bis");
+
+// Régression : les abattements affichés sont plafonnés au montant effectivement donné.
+const donationAllowanceDisplayCapped = await runInlineCalculator({
+  family: "outil", slug: "donation",
+  inputs: {
+    montant: "10000", natureDonation: "argent", lien: "parent",
+    abattementUtilise: "0", handicapEligible: "non", handicapUtilise: "0",
+    donFamilial: "0", donFamilialEligible: "non",
+    donLogement: "0", donLogementEligible: "non", baseTaxableAnterieure: "0"
+  }
+});
+assert.match(donationAllowanceDisplayCapped.text, /Abattements appliqués[\s\S]*?10[\s\u00a0\u202f]?000(?:[,.]00)?\s*€/i,
+  "donation : les abattements appliqués affichés ne doivent pas dépasser la donation");
+
+// Régression : le dernier taux progressif reste applicable au-delà du seuil sentinelle historique.
+const donationVeryLarge = await runInlineCalculator({
+  family: "outil", slug: "donation",
+  inputs: {
+    montant: "2000000000000", natureDonation: "argent", lien: "parent",
+    abattementUtilise: "100000", handicapEligible: "non", handicapUtilise: "0",
+    donFamilial: "0", donFamilialEligible: "non", donLogement: "0",
+    donLogementEligible: "non", baseTaxableAnterieure: "0"
+  }
+});
+assert.match(donationVeryLarge.text, /899[\s\u00a0\u202f]?999[\s\u00a0\u202f]?762[\s\u00a0\u202f]?394(?:[,.]00)?\s*€/i,
+  "donation : le barème doit appliquer 45 % à la base excédant l'ancien dernier seuil");
+
 const refusedTools=[...forbidden];
 await assert.rejects(()=>runInlineCalculator({family:cases[0].famille||"outil",slug:cases[0].outil,inputs:{__unknown_reference_id__:"1"}}),/unknown input id/,"un identifiant d’entrée inconnu doit échouer");
 console.log("Couche 2 — "+covered.size+" outils testés sur un cas réel sourcé, "+cases.length+" cas.");
