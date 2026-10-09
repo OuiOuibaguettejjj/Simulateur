@@ -1420,5 +1420,26 @@
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203",
     "verificationSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203",
     "note": "Un ascendant qui reçoit une donation bénéficie de l'abattement de 100 000 € selon Service-Public, quel que soit le degré de la ligne directe."
+  },
+  {
+    "outil": "donation",
+    "entrees": {
+      "montant": "100000",
+      "lien": "oncle",
+      "natureDonation": "argent",
+      "abattementUtilise": "0",
+      "handicapEligible": "non",
+      "handicapUtilise": "0",
+      "donFamilial": "0",
+      "donFamilialEligible": "non",
+      "donLogement": "0",
+      "donLogementEligible": "non"
+    },
+    "attendu": 54123,
+    "tolerance": 1,
+    "sortie": "Droits de donation estimés",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203",
+    "verificationSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203",
+    "note": "Le neveu ou la nièce qui donne à son oncle ou sa tante ne reçoit pas l'abattement spécifique réservé au neveu/nièce bénéficiaire ; abattement général de 1 594 € et taux de 55 %."
   }
 ]
