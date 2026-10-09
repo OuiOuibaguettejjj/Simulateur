@@ -1032,7 +1032,7 @@
       "effectiveFrom": "2026-10-09",
       "effectiveTo": "2027-10-08",
       "verifiedOn": "2026-10-09",
-      "notes": "Règles de branche contrôlées le 9 octobre 2026 à partir des fiches officielles du Code du travail numérique. Syntec : https://code.travail.gouv.fr/contribution/1486-quelle-est-la-duree-du-preavis-en-cas-de-demission ; assurances : https://code.travail.gouv.fr/contribution/1672-quelle-est-la-duree-du-preavis-en-cas-de-demission ; publicité : https://code.travail.gouv.fr/contribution/86-quelle-est-la-duree-du-preavis-en-cas-de-demission ; prestataires tertiaire : https://code.travail.gouv.fr/contribution/2098-quelle-est-la-duree-du-preavis-en-cas-de-demission ; commerce alimentaire : https://code.travail.gouv.fr/contribution/2216-quelle-est-la-duree-du-preavis-en-cas-de-demission ; HCR : https://code.travail.gouv.fr/contribution/1979-quelle-est-la-duree-du-preavis-en-cas-de-demission. Recontrôle annuel conseillé ; accords d'entreprise, contrat et situations individuelles peuvent modifier le résultat.",
+      "notes": "Règles de branche contrôlées le 9 octobre 2026 à partir des fiches officielles du Code du travail numérique. Syntec : https://code.travail.gouv.fr/contribution/1486-quelle-est-la-duree-du-preavis-en-cas-de-demission ; assurances : https://code.travail.gouv.fr/contribution/1672-quelle-est-la-duree-du-preavis-en-cas-de-demission ; publicité : https://code.travail.gouv.fr/contribution/86-quelle-est-la-duree-du-preavis-en-cas-de-demission ; prestataires tertiaire : https://code.travail.gouv.fr/contribution/2098-quelle-est-la-duree-du-preavis-en-cas-de-demission ; commerce alimentaire : https://code.travail.gouv.fr/contribution/2216-quelle-est-la-duree-du-preavis-en-cas-de-demission ; HCR : https://code.travail.gouv.fr/contribution/1979-quelle-est-la-duree-du-preavis-en-cas-de-demission. Recontrôle annuel conseillé ; accords d'entreprise, contrat et situations individuelles peuvent modifier le résultat. Les seuils d’ancienneté des règles sont exprimés en mois révolus ; le palier Syntec « plus de 2 ans » est distinct du palier « 2 ans exactement ». Pour les salariés du particulier employeur (IDCC 3239), la durée est d’une semaine avant 6 mois, deux semaines de 6 mois à moins de 2 ans, puis un mois à partir de 2 ans.",
       "values": {
         "rules": [
           [
@@ -1045,7 +1045,7 @@
           [
             1486,
             1,
-            24,
+            25,
             2,
             0
           ],
@@ -1201,6 +1201,27 @@
             3,
             6,
             3,
+            0
+          ],
+          [
+            3239,
+            1,
+            0,
+            0,
+            7
+          ],
+          [
+            3239,
+            1,
+            6,
+            0,
+            14
+          ],
+          [
+            3239,
+            1,
+            24,
+            1,
             0
           ]
         ]
