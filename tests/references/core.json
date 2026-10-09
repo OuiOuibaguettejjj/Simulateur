@@ -1336,5 +1336,47 @@
     "source": "https://www.impots.gouv.fr/particulier/calcul-et-paiement-des-droits",
     "verificationSource": "https://www.impots.gouv.fr/particulier/calcul-et-paiement-des-droits",
     "note": "Calcul marginal : droits sur la base taxable cumulee de 20 000 euros moins droits sur 10 000 euros precedemment taxes, arrondi a 1 598 euros."
+  },
+  {
+    "outil": "donation",
+    "entrees": {
+      "montant": "200000",
+      "lien": "enfant",
+      "natureDonation": "argent",
+      "abattementUtilise": "0",
+      "handicapEligible": "non",
+      "handicapUtilise": "0",
+      "donFamilial": "0",
+      "donFamilialEligible": "non",
+      "donLogement": "0",
+      "donLogementEligible": "non"
+    },
+    "attendu": 18194,
+    "tolerance": 0,
+    "sortie": "Droits de donation estimés",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203",
+    "verificationSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203",
+    "note": "Donation d'un enfant à son parent : abattement ascendant de 100 000 € et barème en ligne directe."
+  },
+  {
+    "outil": "donation",
+    "entrees": {
+      "montant": "100000",
+      "lien": "autreParent",
+      "natureDonation": "argent",
+      "abattementUtilise": "0",
+      "handicapEligible": "non",
+      "handicapUtilise": "0",
+      "donFamilial": "0",
+      "donFamilialEligible": "non",
+      "donLogement": "0",
+      "donLogementEligible": "non"
+    },
+    "attendu": 54123,
+    "tolerance": 1,
+    "sortie": "Droits de donation estimés",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203",
+    "verificationSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203",
+    "note": "Autre parent jusqu'au quatrième degré : abattement de 1 594 € puis taux de 55 %."
   }
 ]
