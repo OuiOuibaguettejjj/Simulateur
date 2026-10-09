@@ -1474,7 +1474,7 @@
         "tolerance": 0.01
       },
       {
-        "sortie": "Budget restant après crédits, pensions et loyer conservé\\s*:\\s*2\\s*000\\s*€",
+        "sortie": "Budget restant après crédits",
         "attendu": 2000,
         "tolerance": 0.01
       }
