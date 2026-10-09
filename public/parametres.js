@@ -49,7 +49,8 @@
           "neveu": 7967,
           "oncle": 1594,
           "parent": 100000,
-          "petitEnfant": 100000
+          "petitEnfant": 100000,
+          "petitNeveu": 1594
         },
         "baremeConjoint": [
           [
