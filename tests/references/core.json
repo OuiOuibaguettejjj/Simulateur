@@ -1321,7 +1321,7 @@
       "montant": "110000",
       "lien": "parent",
       "natureDonation": "argent",
-      "abattementUtilise": "0",
+      "abattementUtilise": "100000",
       "handicapEligible": "non",
       "handicapUtilise": "0",
       "baseTaxableAnterieure": "10000",
@@ -1330,12 +1330,12 @@
       "donLogement": "0",
       "donLogementEligible": "non"
     },
-    "attendu": 1598,
-    "tolerance": 0,
+    "attendu": 814,
+    "tolerance": 1,
     "sortie": "Droits de donation estimés",
     "source": "https://www.impots.gouv.fr/particulier/calcul-et-paiement-des-droits",
     "verificationSource": "https://www.impots.gouv.fr/particulier/calcul-et-paiement-des-droits",
-    "note": "Calcul marginal : droits sur la base taxable cumulee de 20 000 euros moins droits sur 10 000 euros precedemment taxes, arrondi a 1 598 euros."
+    "note": "Calcul marginal : droits sur la base taxable cumulee de 20 000 euros moins droits sur 10 000 euros precedemment taxes, arrondi à environ 814 euros."
   },
   {
     "outil": "donation",
