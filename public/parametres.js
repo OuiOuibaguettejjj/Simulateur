@@ -840,6 +840,30 @@
         "youngActiveHours": 3214
       }
     },
+    "rupture-conventionnelle": {
+      "label": "Indemnité minimale de rupture conventionnelle",
+      "year": 2026,
+      "effectiveFrom": "2026-01-01",
+      "effectiveTo": "2026-12-31",
+      "verifiedOn": "2026-10-09",
+      "source": {
+        "label": "Service-Public — indemnité spécifique de rupture conventionnelle",
+        "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31539"
+      },
+      "values": {
+        "ancienneteMinMois": 0,
+        "moisParAnnee": 12,
+        "palierAnnees": 10,
+        "tauxApresPalier": {
+          "denominateur": 3,
+          "numerateur": 1
+        },
+        "tauxAvantPalier": {
+          "denominateur": 4,
+          "numerateur": 1
+        }
+      }
+    },
     "smic": {
       "label": "SMIC",
       "year": 2026,

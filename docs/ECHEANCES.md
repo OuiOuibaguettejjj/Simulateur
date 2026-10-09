@@ -20,6 +20,8 @@ Ce document recense les échéances actuellement suivies par `data/parametres.js
 | Électricité | 31/01/2027 | [CRE — tarifs réglementés de vente d’électricité](https://www.cre.fr/documents/deliberations/tarifs-reglementes-de-vente-delectricite-en-france-metropolitaine-continentale-et-en-zones-non-interconnectees.html) et [EDF — prix du kWh](https://particulier.edf.fr/fr/accueil/guide-energie/electricite/prix-kwh-electricite.html) |
 | Temps de travail | 31/12/2026 | [Service-Public — durée du travail](https://www.service-public.gouv.fr/particuliers/vosdroits/F1911) et [Ministère du Travail — durée légale du travail](https://travail-emploi.gouv.fr/la-duree-legale-du-travail) |
 
+| Indemnité de rupture conventionnelle | 31/12/2026 | [Service-Public — indemnité spécifique de rupture conventionnelle](https://www.service-public.gouv.fr/particuliers/vosdroits/F31539) et [Code du travail](https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006072050/LEGISCTA000006195624/) |
+
 ## Procédure de renouvellement
 
 1. Consulter la source officielle correspondant au jeu.

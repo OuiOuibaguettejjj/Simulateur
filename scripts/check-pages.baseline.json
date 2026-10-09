@@ -644,18 +644,6 @@
     "rule": "title"
   },
   {
-    "path": "public/outil/rupture-conventionnelle/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/rupture-conventionnelle/index.html",
-    "rule": "result"
-  },
-  {
-    "path": "public/outil/rupture-conventionnelle/index.html",
-    "rule": "tool-block"
-  },
-  {
     "path": "public/outil/sasu-vs-ei-micro/index.html",
     "rule": "content-h2"
   },
