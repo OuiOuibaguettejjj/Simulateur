@@ -37,6 +37,47 @@ try{
   assert.equal(await amount(page.locator("#final")),"1266","les intérêts simples doivent rémunérer chaque versement au prorata sans capitaliser les intérêts");
   await page.locator("#frequence").selectOption("annual");
 
+  // Independent closed-form references with no periodic deposits:
+  // monthly: 1000 * (1 + 0.12/12)^24 = 1269.73...
+  // annual:  1000 * (1 + 0.12)^2 = 1254.40
+  // daily:   1000 * (1 + 0.12/365)^730 = 1271.12...
+  // simple:  1000 * (1 + 0.12*2) = 1240
+  await page.locator("#capital").fill("1000");
+  await page.locator("#versement").fill("0");
+  await page.locator("#rendement").fill("12");
+  await page.locator("#duree").fill("2");
+  await page.locator("#frais").fill("0");
+  await page.locator("#hausse").fill("0");
+  await page.locator("#inflation").fill("0");
+  await page.locator("#frequence").selectOption("monthly");
+  assert.equal(await amount(page.locator("#final")),"1270","composition mensuelle doit correspondre à la formule fermée");
+  await page.locator("#frequence").selectOption("annual");
+  assert.equal(await amount(page.locator("#final")),"1254","composition annuelle doit correspondre à la formule fermée");
+  await page.locator("#frequence").selectOption("daily");
+  assert.equal(await amount(page.locator("#final")),"1271","composition quotidienne doit correspondre à la formule fermée sur 730 jours");
+  await page.locator("#frequence").selectOption("never");
+  assert.equal(await amount(page.locator("#final")),"1240","intérêts simples sans versement doivent suivre C*(1+r*t)");
+
+  // Fees are deducted from the annual rate; inflation is applied to final value.
+  await page.locator("#capital").fill("1000");
+  await page.locator("#rendement").fill("12");
+  await page.locator("#frais").fill("2");
+  await page.locator("#inflation").fill("2");
+  await page.locator("#frequence").selectOption("monthly");
+  assert.equal(await amount(page.locator("#final")),"1220","le rendement net de frais doit utiliser 10 % nominal annuel");
+  assert.equal(await amount(page.locator("#real")),"1173","le capital réel doit être déflaté sur deux ans à 2 %");
+
+  // Annual increase of payments: 12 x 100 in year 1, 12 x 110 in year 2.
+  await page.locator("#capital").fill("0");
+  await page.locator("#versement").fill("100");
+  await page.locator("#rendement").fill("0");
+  await page.locator("#frais").fill("0");
+  await page.locator("#hausse").fill("10");
+  await page.locator("#inflation").fill("0");
+  await page.locator("#duree").fill("2");
+  assert.equal(await amount(page.locator("#final")),"2520","les versements doivent augmenter de 10 % à partir de la deuxième année");
+  assert.equal(await amount(page.locator("#paid")),"2520","le total versé doit inclure la hausse annuelle des versements");
+
   await page.locator("#rendement").fill("100.1");
   await page.locator("#calculate").click();
   assert.equal((await page.locator("#final").innerText()).trim(),"Valeurs invalides","un rendement supérieur à 100 % doit être refusé");
