@@ -1458,14 +1458,26 @@
     "entrees": {
       "revenus": "4000",
       "credits": "400",
-      "pension": "0",
-      "loyer": "0",
+      "pension": "200",
+      "loyer": "600",
       "nouveau": "800"
     },
     "attendu": 30,
     "tolerance": 0.01,
     "sortie": "Taux lié aux crédits après projet\\s*:\\s*30\\s*%",
     "source": "https://www.economie.gouv.fr/hcsf/mesures/mesure-relative-loctroi-de-credits-immobiliers",
-    "note": "Cas de référence indépendant : 400 € de mensualités de crédits existants et 800 € de nouveau crédit assuré sur 4 000 € de revenus donnent (400 + 800) / 4 000 × 100 = 30 %. Le seuil HCSF est chargé depuis le jeu de paramètres réglementaires. Les pensions et le loyer conservé sont pris en compte séparément dans le budget restant, pas dans ce taux lié aux crédits."
+    "note": "Cas de référence indépendant : 400 € de mensualités de crédits existants et 800 € de nouveau crédit assuré sur 4 000 € de revenus donnent (400 + 800) / 4 000 × 100 = 30 %. Le seuil HCSF est chargé depuis le jeu de paramètres réglementaires. Les pensions et le loyer conservé sont pris en compte séparément dans le budget restant, pas dans ce taux lié aux crédits.",
+    "verifications": [
+      {
+        "sortie": "Taux lié aux crédits actuels\\s*:\\s*10\\s*%",
+        "attendu": 10,
+        "tolerance": 0.01
+      },
+      {
+        "sortie": "Budget restant après crédits, pensions et loyer conservé\\s*:\\s*2\\s*000\\s*€",
+        "attendu": 2000,
+        "tolerance": 0.01
+      }
+    ]
   }
 ]
