@@ -90,7 +90,7 @@
     "/outil/sasu-vs-ei-micro/": "2026-10-03",
     "/outil/signe-astrologique/": "2026-10-08",
     "/outil/smic/": "2026-10-09",
-    "/outil/solde-tout-compte/": "2026-10-03",
+    "/outil/solde-tout-compte/": "2026-10-09",
     "/outil/succession/": "2026-10-03",
     "/outil/surface/": "2026-10-03",
     "/outil/tableau-amortissement/": "2026-10-08",
@@ -110,6 +110,5 @@
     "/outil/etes-vous-riche/": "2026-10-05",
     "/outil/prime-activite/": "2026-10-07",
     "/outil/coefficient/": "2026-10-08"
-  },
-  "/outil/solde-tout-compte/": "2026-10-09"
+  }
 }
