@@ -990,6 +990,34 @@
         "ageTauxPleinAutomatique": 67,
         "trimestresMaximumDecote": 20
       }
+    },
+    "rupture-conventionnelle": {
+      "label": "Indemnité minimale de rupture conventionnelle",
+      "year": 2026,
+      "usedBy": [
+        "rupture-conventionnelle"
+      ],
+      "source": {
+        "label": "Service-Public — indemnité spécifique de rupture conventionnelle",
+        "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31539"
+      },
+      "effectiveFrom": "2026-01-01",
+      "effectiveTo": "2026-12-31",
+      "verifiedOn": "2026-10-09",
+      "notes": "Minimum légal vérifié le 9 octobre 2026. La rupture conventionnelle n'exige pas d'ancienneté minimale ; le montant légal est calculé au prorata de l'ancienneté, avec 1/4 de salaire de référence par année jusqu'à 10 ans puis 1/3 au-delà. Le salaire de référence est la formule la plus favorable entre les 12 derniers mois et les 3 derniers mois, primes proratisées selon les règles applicables. Le jeu ne détermine pas le minimum conventionnel éventuellement plus favorable ni les exonérations fiscales et sociales.",
+      "values": {
+        "moisParAnnee": 12,
+        "palierAnnees": 10,
+        "tauxAvantPalier": {
+          "numerateur": 1,
+          "denominateur": 4
+        },
+        "tauxApresPalier": {
+          "numerateur": 1,
+          "denominateur": 3
+        },
+        "ancienneteMinMois": 0
+      }
     }
   },
   "anneeAMigrer": {
@@ -1007,7 +1035,6 @@
       "plus-value-immobiliere",
       "plus-value-mobiliere",
       "preavis-demission",
-      "rupture-conventionnelle",
       "succession"
     ]
   }
