@@ -190,7 +190,7 @@ const donationPetitNeveu = await runInlineCalculator({
 });
 assert.match(donationPetitNeveu.text, /Droits de donation estimés/i,
   "donation : le petit-neveu avec parent décédé doit être éligible au 790 G");
-assert.match(donationPetitNeveu.text, /Exonérations appliquées[\\s\\S]*?8[\\s\\u00a0\\u202f]?406(?:[,.]00)?\\s*€/i,
+assert.match(donationPetitNeveu.text, /Exonérations appliquées[\s\S]*?8[\s\u00a0\u202f]?406(?:[,.]00)?\s*€/i,
   "donation : l'exonération 790 G du petit-neveu s'applique après l'abattement de 1 594 €");
 
 // Régression : le dernier taux progressif reste applicable au-delà du seuil sentinelle historique.
