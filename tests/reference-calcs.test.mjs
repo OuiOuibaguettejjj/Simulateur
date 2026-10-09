@@ -69,7 +69,7 @@ const donationHousingBase = {
   montant: "100000", natureDonation: "argent", lien: "parent",
   abattementUtilise: "0", handicapEligible: "non", handicapUtilise: "0",
   donFamilial: "0", donFamilialEligible: "non", donLogement: "1000",
-  donLogementEligible: "oui"
+  donLogementAffecte: "1000", donLogementEligible: "oui"
 };
 for (const [date, shouldPass] of [
   ["2025-02-14", false],
@@ -168,8 +168,9 @@ const donationAvailableCapsAboveGift = await runInlineCalculator({
   inputs: {
     montant: "10000", natureDonation: "argent", lien: "parent",
     abattementUtilise: "100000", handicapEligible: "non", handicapUtilise: "0",
-    donFamilial: "31865", donFamilialEligible: "oui",
-    donLogement: "100000", donLogementEligible: "oui", dateDonLogement: "2026-06-01",
+    donFamilial: "0", donFamilialEligible: "non",
+    donLogement: "100000", donLogementAffecte: "10000",
+    donLogementEligible: "oui", dateDonLogement: "2026-06-01",
     baseTaxableAnterieure: "0"
   }
 });
