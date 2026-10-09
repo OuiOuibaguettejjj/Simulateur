@@ -236,19 +236,26 @@
         }
       }
     } else {
-      // Annual composition: interest is added once per year, before the
-      // final monthly payment of that year (payments are made at month-end).
+      // Annual capitalization: opening capital earns a full year of interest.
+      // Each month-end payment earns only simple prorated interest until year-end,
+      // then its accumulated interest is capitalized with the rest.
+      let yearOpeningCapital=capital,yearOpeningGross=grossCapital;
+      let yearPayments=0,yearGrossPayments=0,yearPaymentInterest=0,yearGrossPaymentInterest=0;
       for(let m=1;m<=months;m++){
-        if(m%12===0){
-          capital*=1+netAnnual;
-          grossCapital*=1+grossAnnual;
-        }
         const payment=paymentAtMonth(m);
-        capital+=payment;
-        grossCapital+=payment;
+        const monthsInvested=12-((m-1)%12)-1;
+        yearPayments+=payment;
+        yearGrossPayments+=payment;
+        yearPaymentInterest+=payment*netAnnual*monthsInvested/12;
+        yearGrossPaymentInterest+=payment*grossAnnual*monthsInvested/12;
         paid+=payment;
         if(m%12===0){
+          capital=yearOpeningCapital*(1+netAnnual)+yearPayments+yearPaymentInterest;
+          grossCapital=yearOpeningGross*(1+grossAnnual)+yearGrossPayments+yearGrossPaymentInterest;
           rows.push({year:m/12,paid,gains:capital-paid,capital,grossCapital});
+          yearOpeningCapital=capital;
+          yearOpeningGross=grossCapital;
+          yearPayments=0;yearGrossPayments=0;yearPaymentInterest=0;yearGrossPaymentInterest=0;
         }
       }
     }
@@ -256,11 +263,22 @@
     const final=rows[rows.length-1];
     return {rows,capital:final.capital,paid,gains:final.capital-paid,grossCapital:final.grossCapital};
   }
+  function clearResults(message="—"){
+    ["years-label","gains","paid","real","fees-impact","multiple","take-final","take-gains","scenario-monthly","scenario-rate"].forEach(id=>$(id).textContent="—");
+    $("final").textContent=message;
+    $("crossover").textContent="";
+    $("breakdown").innerHTML="";
+    $("chart").innerHTML='<title id="chart-title">Évolution du capital</title><desc id="chart-desc">Graphique comparant les versements cumulés et le capital projeté.</desc><defs><linearGradient id="capitalGradient" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ff5a36" stop-opacity=".22"/><stop offset="100%" stop-color="#ff5a36" stop-opacity="0"/></linearGradient></defs>';
+    $("chart-tooltip").textContent="";
+    $("chart-tooltip").style.opacity="0";
+    $("chart-tooltip").setAttribute("aria-hidden","true");
+  }
+
   function calculate(){
     const C=value($("capital")),V=value($("versement")),R=value($("rendement")),Y=value($("duree"));
     const F=value($("frais")),H=value($("hausse")),I=value($("inflation")),freq=frequency.value;
-    if(![C,V,R,Y,F,H,I].every(Number.isFinite)||C<0||V<0||R<0||Y<1||Y>100||F<0||H<0||I<0||F>20||H>20||I>20){
-      $("final").textContent="Valeurs invalides"; return;
+    if(![C,V,R,Y,F,H,I].every(Number.isFinite)||C<0||V<0||R<0||R>100||Y<1||Y>100||F<0||H<0||I<0||F>20||H>20||I>20){
+      clearResults("Valeurs invalides"); return;
     }
     const result=simulate(C,V,R,F,Y,H,freq);
     const gross=simulate(C,V,R,0,Y,H,freq);
