@@ -236,7 +236,7 @@ for (const zone of ["metropole", "mayotte"]) {
     compared++;
   }
   for (const heures of [0, 36, 39, 40.25, 48, 49]) {
-    assert.match(smic({ heures, zone }), /heures normales comprises entre 0 et 35 par semaine/i, "SMIC " + zone + " " + heures + " h : entrée hors périmètre refusée");
+    assert.match(smic({ heures, zone }), /entre 0,01 et 35 heures normales par semaine, par pas de 0,01 h/i, "SMIC " + zone + " " + heures + " h : entrée hors périmètre refusée");
     compared++;
   }
 }
