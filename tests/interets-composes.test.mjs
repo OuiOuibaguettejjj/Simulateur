@@ -50,6 +50,20 @@ try{
   await page.locator("#calculate").click();
   assert.equal((await page.locator("#final").innerText()).trim(),"Valeurs invalides","une durée fractionnaire ne doit pas produire un résultat tronqué à la dernière année complète");
   assert.equal((await page.locator("#paid").innerText()).trim(),"—","les montants précédents doivent être effacés pour une durée invalide");
+
+  await page.locator("#duree").fill("100");
+  await page.locator("#rendement").fill("0");
+  await page.locator("#frais").fill("20");
+  await page.locator("#versement").fill("0");
+  await page.locator("#capital").fill("1000");
+  await page.locator("#frequence").selectOption("never");
+  assert.equal(await amount(page.locator("#final")),"0","les intérêts simples négatifs ne doivent jamais créer un capital négatif");
+
+  await page.locator("#capital").fill("1e308");
+  await page.locator("#rendement").fill("100");
+  await page.locator("#frais").fill("0");
+  await page.locator("#frequence").selectOption("monthly");
+  assert.equal((await page.locator("#final").innerText()).trim(),"Valeurs trop élevées pour une projection fiable","un dépassement numérique ne doit jamais afficher Infinity");
   await browser.close();
   console.log("Intérêts composés : capitalisation annuelle, total versé, rendement hors limite et effacement des résultats précédents vérifiés.");
 }finally{
