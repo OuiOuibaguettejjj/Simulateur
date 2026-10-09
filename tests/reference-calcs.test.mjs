@@ -132,6 +132,35 @@ assert.match(donationReverseHousing.text, /lien familial éligible/i,
   "donation : le 790 A bis ne doit pas s'appliquer dans le sens enfant vers parent");
 
 
+// Régression : une base taxable antérieure positive ne peut coexister avec un abattement
+// de parenté déclaré comme encore entièrement disponible.
+const donationInconsistentPriorBase = await runInlineCalculator({
+  family: "outil", slug: "donation",
+  inputs: {
+    montant: "110000", natureDonation: "argent", lien: "parent",
+    abattementUtilise: "0", handicapEligible: "non", handicapUtilise: "0",
+    donFamilial: "0", donFamilialEligible: "non", donLogement: "0",
+    donLogementEligible: "non", baseTaxableAnterieure: "10000"
+  }
+});
+assert.match(donationInconsistentPriorBase.text, /base taxable antérieure est positive[\s\S]*abattement de parenté/i,
+  "donation : refuser une base antérieure positive avec un abattement de parenté non consommé");
+
+// La même situation avec l'abattement parent-enfant entièrement consommé calcule les droits marginaux.
+const donationConsistentPriorBase = await runInlineCalculator({
+  family: "outil", slug: "donation",
+  inputs: {
+    montant: "110000", natureDonation: "argent", lien: "parent",
+    abattementUtilise: "100000", handicapEligible: "non", handicapUtilise: "0",
+    donFamilial: "0", donFamilialEligible: "non", donLogement: "0",
+    donLogementEligible: "non", baseTaxableAnterieure: "10000"
+  }
+});
+assert.match(donationConsistentPriorBase.text, /Droits de donation estimés/i,
+  "donation : calculer les droits marginaux quand les données antérieures sont cohérentes");
+assert.match(donationConsistentPriorBase.text, /814(?:[,.]00)?\s*€/i,
+  "donation : 10 000 € de base antérieure et 10 000 € de base courante produisent environ 814 € de droits marginaux");
+
 // Régression : les plafonds encore disponibles peuvent dépasser le montant du don.
 // Le simulateur applique seulement l'exonération réellement utilisable, sans refuser la saisie.
 const donationAvailableCapsAboveGift = await runInlineCalculator({
