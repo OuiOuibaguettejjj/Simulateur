@@ -99,8 +99,11 @@ function show(end,label,basis,start){
  result.append(heading,detail,grid,note);result.hidden=false;
 }
 function error(message){err.textContent=message;err.hidden=false;}
-c.addEventListener('change',()=>{result.hidden=true;err.hidden=true;populate();});st.addEventListener('change',()=>{result.hidden=true;});an.addEventListener('change',()=>{result.hidden=true;});populate();
-document.getElementById('form').addEventListener('submit',e=>{
+const form=document.getElementById('form');
+function invalidateResult(){result.hidden=true;err.hidden=true;}
+form.querySelectorAll('input,select').forEach(el=>{el.addEventListener('input',invalidateResult);el.addEventListener('change',invalidateResult);});
+c.addEventListener('change',populate);populate();
+form.addEventListener('submit',e=>{
  e.preventDefault();err.hidden=true;result.hidden=true;result.replaceChildren();
  const start=parseDate(document.getElementById('date').value);
  if(!start){error('Saisissez une date de notification valide.');return;}
