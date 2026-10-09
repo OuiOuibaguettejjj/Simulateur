@@ -223,6 +223,55 @@
         }
       }
     },
+    "ifi": {
+      "label": "Impôt sur la fortune immobilière — barème 2026",
+      "year": 2026,
+      "effectiveFrom": "2026-01-01",
+      "effectiveTo": "2026-12-31",
+      "verifiedOn": "2026-10-09",
+      "source": {
+        "label": "impots.gouv.fr — calcul de l’IFI et brochure pratique 2026",
+        "url": "https://www.impots.gouv.fr/particulier/calcul-de-lifi"
+      },
+      "values": {
+        "abattementResidencePrincipale": 0.3,
+        "debutBareme": 800000,
+        "decote": {
+          "base": 17500,
+          "plafond": 1400000,
+          "seuil": 1300000,
+          "taux": 0.0125
+        },
+        "plafondDettes": {
+          "seuilPatrimoine": 5000000,
+          "tauxExcedentDeductible": 0.5,
+          "tauxPatrimoine": 0.6
+        },
+        "seuilAssujettissement": 1300000,
+        "tranches": [
+          [
+            1300000,
+            0.005
+          ],
+          [
+            2570000,
+            0.007
+          ],
+          [
+            5000000,
+            0.01
+          ],
+          [
+            10000000,
+            0.0125
+          ],
+          [
+            999999999999,
+            0.015
+          ]
+        ]
+      }
+    },
     "impot-sur-le-revenu": {
       "label": "Impôt sur le revenu — barème 2026",
       "year": 2026,

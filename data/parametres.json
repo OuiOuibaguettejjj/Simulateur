@@ -593,6 +593,27 @@
         "weeklyMaxHours": 48,
         "weeklyAverageMaxHours": 44
       }
+    },
+    "ifi": {
+      "label": "Impôt sur la fortune immobilière — barème 2026",
+      "year": 2026,
+      "usedBy": ["ifi"],
+      "source": {
+        "label": "impots.gouv.fr — calcul de l’IFI et brochure pratique 2026",
+        "url": "https://www.impots.gouv.fr/particulier/calcul-de-lifi"
+      },
+      "effectiveFrom": "2026-01-01",
+      "effectiveTo": "2026-12-31",
+      "verifiedOn": "2026-10-09",
+      "notes": "Seuil, barème, décote, abattement de résidence principale et plafonnement de la déduction des dettes vérifiés sur impots.gouv.fr et la brochure IFI 2026. Estimation avant réduction pour dons, plafonnement de l’IFI et imputation d’impôts étrangers ; les exonérations et règles complexes de valorisation ne sont pas entièrement modélisées.",
+      "values": {
+        "seuilAssujettissement": 1300000,
+        "debutBareme": 800000,
+        "tranches": [[1300000, 0.005], [2570000, 0.007], [5000000, 0.01], [10000000, 0.0125], [999999999999, 0.015]],
+        "decote": {"seuil": 1300000, "plafond": 1400000, "base": 17500, "taux": 0.0125},
+        "abattementResidencePrincipale": 0.3,
+        "plafondDettes": {"seuilPatrimoine": 5000000, "tauxPatrimoine": 0.6, "tauxExcedentDeductible": 0.5}
+      }
     }
   },
   "anneeAMigrer": {
@@ -604,7 +625,6 @@
       "donation",
       "epargne-reglementee",
       "frais-de-notaire",
-      "ifi",
       "indemnite-precarite",
       "indemnites-maladie",
       "indemnites-maternite-paternite",

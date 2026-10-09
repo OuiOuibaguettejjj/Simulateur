@@ -1,61 +1,39 @@
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const vm = require("node:vm");
-
-// Le calculateur IFI est défini dans le HTML (window.TOOL) : on exécute le vrai code de la page.
-const file = "public/outil/ifi/index.html";
-const html = fs.readFileSync(file, "utf8");
-const script = [...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)]
-  .map(match => match[1])
-  .find(source => /window\.TOOL\s*=/.test(source));
-assert.ok(script, "La page IFI doit définir window.TOOL");
-
-const window = { addEventListener() {} };
-vm.runInNewContext(script, { window, document: {}, console }, { filename: file, timeout: 1000 });
-const tool = window.TOOL;
-assert.equal(typeof tool.calc, "function", "TOOL.calc doit être une fonction");
-
-const euro = value => "€" + Number(value).toFixed(2);
-function run(value) {
-  return tool.calc.call({ $: () => ({ value: String(value) }), euro, num: euro });
-}
-
-function amount(result) {
-  const match = result.match(/<strong>€(-?\d+(?:\.\d+)?)<\/strong>/);
-  assert.ok(match, "Montant introuvable dans : " + result);
-  return Number(match[1]);
-}
-
-function ifi(value) { return amount(run(value)); }
-
-// Non assujetti sous 1,3 M€ : 0 € et message explicite (régression : 1 000 000 € affichait 1 000 €).
-for (const value of ["", 0, 500000, 800001, 1000000, 1250000, 1299999, 1300000]) {
-  const result = run(value);
-  assert.equal(amount(result), 0, "IFI attendu à 0 € pour " + value);
-  assert.match(result, /Non assujetti/, "Message « non assujetti » attendu pour " + value);
-}
-
-// Exemples officiels Service-Public : 1 350 000 € (avec décote) et 1 500 000 €.
-assert.equal(ifi(1300001), 1250.02);
-assert.match(run(1300001), /Décote estimée/);
-assert.doesNotMatch(run(1300001), /Non assujetti/);
-
-assert.equal(ifi(1350000), 2225);
-assert.match(run(1350000), /Décote estimée : €625\.00/);
-assert.equal(ifi(1500000), 3900);
-assert.doesNotMatch(run(1500000), /Décote/);
-
-// Fin de la décote à 1,4 M€ : 2 500 + 100 000 × 0,7 % = 3 200 €.
-assert.equal(ifi(1400000), 3200);
-assert.doesNotMatch(run(1400000), /Décote/);
-
-// Tranches supérieures du barème.
-assert.equal(ifi(2570000), 11390);
-assert.equal(ifi(5000000), 35690);
-assert.equal(ifi(10000000), 98190);
-assert.equal(ifi(12000000), 128190);
-
-// Saisie invalide.
-assert.equal(run(-5), "Renseignez un patrimoine valide.");
-
+const html = fs.readFileSync("public/outil/ifi/index.html", "utf8");
+const inline = [...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)].map(m=>m[1]).find(s=>/window\.TOOL\s*=/.test(s));
+assert.ok(inline, "window.TOOL doit être défini");
+const window = {};
+vm.runInNewContext(fs.readFileSync("public/parametres.js","utf8"), {window,Object,JSON,Date,globalThis:window});
+vm.runInNewContext(inline,{window,Parametres:window.Parametres,Intl,Number,String,Math},{timeout:1000});
+const tool=window.TOOL;
+function run(v){return tool.calc.call({$(id){return{value:v[id]??""}}})}
+function amount(s){const m=s.match(/class="ifi-main-result">([^<]+)</);assert.ok(m,"Montant absent : "+s);return Number(m[1].replace(/\s/g,"").replace(/€/g,"").replace(",", "."))}
+function ifi(n){return amount(run({autresBiens:String(n)}))}
+for(const n of [0,500000,800001,1000000,1299999,1300000])assert.equal(amount(run({autresBiens:String(n)})),0,"IFI nul attendu à "+n);
+assert.equal(ifi(1300001),1250.02);
+assert.equal(ifi(1350000),2225);
+assert.equal(ifi(1400000),3200);
+assert.equal(ifi(1500000),3900);
+assert.equal(ifi(2570000),11390);
+assert.equal(ifi(5000000),35690);
+assert.equal(ifi(10000000),98190);
+assert.equal(ifi(12000000),128190);
+assert.match(run({}),/Saisissez au moins un montant/i,"un formulaire vide doit demander une saisie");
+assert.match(run({residence:"1000000"}),/Précisez si les conditions/i,"l’éligibilité doit être explicitée");
+const residenceOui=run({residence:"1000000",abattementResidence:"oui"});
+const residenceNon=run({residence:"1000000",abattementResidence:"non"});
+assert.match(residenceOui,/700\s?000/,"abattement appliqué si éligible");
+assert.match(residenceNon,/1\s?000\s?000/,"aucun abattement sans éligibilité");
+assert.equal(amount(residenceOui),0);
+assert.equal(amount(residenceNon),0);
+assert.equal(amount(run({autresBiens:"10000000000000"})),149999948190,"tranche supérieure prolongée pour les patrimoines très élevés");
+const dette=run({autresBiens:"6000000",dettes:"4000000"});assert.match(dette,/3\s?800\s?000/);assert.equal(amount(dette),8800);
+const detteAvecException=run({autresBiens:"6000000",dettes:"4000000",exceptionPlafond:"oui"});assert.match(detteAvecException,/4\s?000\s?000/,"l’exception déclarée permet de ne pas appliquer le plafonnement général");
+const detteResidence=run({residence:"1000000",abattementResidence:"oui",dettesResidence:"900000"});assert.match(detteResidence,/700\s?000/,"la dette de résidence principale est plafonnée à la valeur taxable après abattement");
+const detteResidenceSansAbattement=run({residence:"1000000",abattementResidence:"non",dettesResidence:"1200000"});assert.match(detteResidenceSansAbattement,/1\s?000\s?000/,"sans abattement, la dette de résidence est plafonnée à la valeur totale taxable");
+assert.match(run({autresBiens:"-1"}),/montants positifs ou nuls/i);
+assert.match(run({autresBiens:"1e308",partsImmo:"1e308"}),/dépassent la plage de calcul/i,"la somme d’actifs qui déborde doit être rejetée proprement");
+assert.match(run({residence:"1e308",abattementResidence:"non",dettesResidence:"1e308",dettes:"1e308"}),/dépassent la plage de calcul/i,"la somme des dettes qui déborde doit être rejetée proprement");
 console.log("IFI deterministic tests passed.");

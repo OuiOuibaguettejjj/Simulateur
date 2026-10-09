@@ -284,14 +284,6 @@
     "rule": "title"
   },
   {
-    "path": "public/outil/ifi/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/ifi/index.html",
-    "rule": "title"
-  },
-  {
     "path": "public/outil/indemnite-precarite/index.html",
     "rule": "description"
   },

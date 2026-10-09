@@ -1219,5 +1219,20 @@
     ],
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1911",
     "note": "Cas indépendant : lundi 9 h–17 h avec 1 h de pause = 7 h ; mardi 9 h–18 h avec 1 h de pause = 8 h ; total = 15 h. Le résultat attendu est calculé indépendamment du calculateur."
+  },
+  {
+    "outil": "ifi",
+    "entrees": {
+      "residence": "0",
+      "autresBiens": "1350000",
+      "partsImmo": "0",
+      "dettes": "0"
+    },
+    "attendu": 2225,
+    "tolerance": 0.01,
+    "sortie": "IFI estimé après décote",
+    "source": "https://www.impots.gouv.fr/www2/fichiers/documentation/brochure/ir_2026/pdf_som/18-IFI_337a340.pdf",
+    "verificationSource": "https://www.impots.gouv.fr/particulier/calcul-de-lifi",
+    "note": "Calcul indépendant : barème progressif à 1 350 000 € = 2 850 € ; décote = 17 500 € − 1,25 % × 1 350 000 € = 625 € ; estimation = 2 225 €, avant autres réductions ou plafonnements."
   }
 ]
