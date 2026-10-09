@@ -13,15 +13,15 @@
 <div class="pv-note"><strong>Le statut cadre ne suffit pas.</strong><br>La durée du préavis dépend notamment de la convention collective, de la catégorie professionnelle et parfois de l'ancienneté. Des accords d'entreprise ou le contrat peuvent aussi prévoir des règles plus favorables.</div>
 <form id="form">
 <div class="field"><label for="conv">Convention collective</label><select id="conv">
-<option value="syntec">Bureaux d'études techniques / Syntec (IDCC 1486)</option><option value="assurance">Sociétés d'assurances (IDCC 1672)</option><option value="publicite">Publicité (IDCC 0086)</option><option value="tertiaire">Prestataires de services tertiaire (IDCC 2098)</option><option value="alim">Commerce alimentaire (IDCC 2216)</option><option value="hrc">Hôtels, cafés, restaurants (IDCC 1979)</option><option value="autre">Autre convention / durée connue</option></select></div>
-<div id="known"><div class="pv-grid"><div class="field"><label for="statut">Statut / catégorie</label><select id="statut"></select></div><div class="field"><label for="anciennete">Ancienneté</label><select id="anciennete"><option value="0">Moins de 6 mois</option><option value=".5">De 6 mois à moins de 2 ans</option><option value="2">2 ans ou plus</option></select></div></div><p id="help" class="pv-small"></p></div>
+<option value="syntec">Bureaux d'études techniques / Syntec (IDCC 1486)</option><option value="assurance">Sociétés d'assurances (IDCC 1672)</option><option value="publicite">Publicité (IDCC 0086)</option><option value="tertiaire">Prestataires de services tertiaire (IDCC 2098)</option><option value="alim">Commerce alimentaire (IDCC 2216)</option><option value="hrc">Hôtels, cafés, restaurants (IDCC 1979)</option><option value="particulier">Particuliers employeurs et emploi à domicile (IDCC 3239)</option><option value="autre">Autre convention / durée vérifiée</option></select></div>
+<div id="known"><div class="pv-grid"><div class="field"><label for="statut">Statut / catégorie</label><select id="statut"></select></div><div class="field"><label for="anciennete">Ancienneté</label><select id="anciennete"><option value="0">Moins de 6 mois</option><option value="6">De 6 mois à moins de 2 ans</option><option value="24">2 ans exactement</option><option value="25">Plus de 2 ans</option></select></div></div><p id="help" class="pv-small"></p></div>
 <div id="manual" hidden>
 <div class="field"><label for="collectiveName">Nom de votre convention collective</label><input id="collectiveName" type="text" maxlength="160" placeholder="Ex. : convention collective du bâtiment"></div>
 <div class="field"><label for="collectiveId">Identifiant IDCC (si connu)</label><input id="collectiveId" type="text" inputmode="numeric" pattern="[0-9]{1,5}" maxlength="5" placeholder="Ex. : 1486"><p class="pv-small">La liste ci-dessus ne couvre pas toutes les conventions. Recherchez votre convention et sa règle de préavis dans le <a href="https://code.travail.gouv.fr/outils/preavis-demission" target="_blank" rel="noopener">simulateur officiel du Code du travail numérique</a>, puis saisissez ici la durée vérifiée.</p></div>
 <div class="pv-grid"><div class="field"><label for="months">Préavis connu (mois entiers)</label><input id="months" type="number" min="0" step="1" placeholder="3"></div><div class="field"><label for="days">Jours supplémentaires</label><input id="days" type="number" min="0" step="1" placeholder="0"></div></div>
 </div>
 <div class="field"><label for="date">Date de notification à l'employeur</label><input id="date" type="date" required></div>
-<button class="button-main" type="submit">Calculer mon préavis</button><div id="err" class="pv-error" role="alert" aria-live="assertive" hidden></div></form><div id="result" class="result pv-result" aria-live="polite">Renseignez votre situation et la date de notification, puis lancez le calcul pour obtenir une estimation.</div><div class="formula"><strong>Méthode et source</strong><p>Les durées intégrées proviennent des fiches conventionnelles du Code du travail numérique, vérifiées le 9 octobre 2026. Les règles d’entreprise, le contrat et certaines situations individuelles peuvent modifier le résultat.</p><p><a href="https://code.travail.gouv.fr/outils/preavis-demission" target="_blank" rel="noopener">Vérifier ma situation sur le simulateur officiel du Code du travail numérique</a>.</p></div></section>
+<button class="button-main" type="submit">Calculer mon préavis</button><div id="err" class="pv-error" role="alert" aria-live="assertive" hidden></div></form><div id="result" class="result pv-result" aria-live="polite" hidden></div><div class="formula"><strong>Méthode et source</strong><p>Les durées intégrées proviennent des fiches conventionnelles du Code du travail numérique, vérifiées le 9 octobre 2026. Les règles d’entreprise, le contrat et certaines situations individuelles peuvent modifier le résultat.</p><p><a href="https://code.travail.gouv.fr/outils/preavis-demission" target="_blank" rel="noopener">Vérifier ma situation sur le simulateur officiel du Code du travail numérique</a>.</p></div></section>
 <section class="pv-card content-section"><h2>Comment calculer la date de fin ?</h2><p>Le préavis court à partir de la notification de la démission. Pour une lettre recommandée avec AR, le Code du travail numérique indique que le point de départ est la date de première présentation à l'employeur.</p><p>La date de fin est calculée <strong>de date à date</strong> : par exemple, un préavis d'un mois commençant le 13 juillet se termine le 12 août. Les règles particulières de suspension ou de report ne sont pas automatiquement appliquées par ce calculateur.</p><p class="pv-small">Le résultat est une estimation fondée sur le régime sélectionné. Vérifiez toujours votre convention collective, les accords applicables et votre contrat avant de fixer votre date de départ.</p></section>
 <section class="pv-card content-section"><h2>Comment trouver votre convention collective ?</h2><p>Le nom et l’IDCC de votre convention collective figurent souvent sur votre bulletin de paie. Si elle n’apparaît pas dans la liste, utilisez le simulateur officiel du Code du travail numérique pour rechercher la règle applicable. Le champ « Autre convention » sert uniquement à noter votre convention et à calculer une date à partir d’une durée déjà vérifiée : il ne déduit pas automatiquement la durée à partir de l’IDCC.</p></section><section class="pv-card"><h2>Sources officielles</h2><ul class="pv-sources">
 <li><a href="https://code.travail.gouv.fr/outils/preavis-demission" target="_blank" rel="noopener">Code du travail numérique — simulateur officiel du préavis de démission</a></li>
@@ -32,8 +32,9 @@
 <li><a href="https://code.travail.gouv.fr/contribution/2098-quelle-est-la-duree-du-preavis-en-cas-de-demission" target="_blank" rel="noopener">Prestataires tertiaire / IDCC 2098</a></li>
 <li><a href="https://code.travail.gouv.fr/contribution/2216-quelle-est-la-duree-du-preavis-en-cas-de-demission" target="_blank" rel="noopener">Commerce alimentaire / IDCC 2216</a></li>
 <li><a href="https://code.travail.gouv.fr/contribution/1979-quelle-est-la-duree-du-preavis-en-cas-de-demission" target="_blank" rel="noopener">HCR / IDCC 1979</a></li>
-</ul><p class="pv-small">Le calculateur ne couvre pas toutes les conventions collectives françaises. Le mode « Autre convention / durée connue » permet de calculer la date de fin lorsque la durée a déjà été vérifiée dans le texte applicable.</p></section>
-<section class="pv-card calculator-faq" aria-labelledby="faq-title"><h2 id="faq-title">FAQ</h2><details><summary>Comment connaître l’IDCC de ma convention collective ?</summary><div class="calculator-faq-answer"><p>Consultez votre bulletin de paie ou recherchez votre convention sur le site officiel du Code du travail numérique. L’IDCC est un identifiant numérique de la convention collective.</p></div></details><details><summary>Pourquoi ma convention n’apparaît-elle pas dans la liste ?</summary><div class="calculator-faq-answer"><p>La liste intégrée est partielle. Consultez le simulateur officiel pour déterminer la règle applicable, puis utilisez la saisie manuelle seulement après avoir vérifié la durée auprès d’une source officielle.</p></div></details><details><summary>La date calculée est-elle toujours ma date réelle de départ ?</summary><div class="calculator-faq-answer"><p>Non nécessairement. Une dispense, une suspension du préavis, des congés ou une règle particulière peuvent modifier son déroulement. Vérifiez les textes applicables avant de confirmer votre départ.</p></div></details></section><section class="pv-card"><h2>Points importants</h2><ul><li>Une convention ou un accord d'entreprise peut modifier la règle applicable.</li><li>Le contrat peut contenir une disposition plus favorable.</li><li>Les cas particuliers (grossesse, congés, maladie, dispense, suspension, etc.) peuvent modifier le déroulement du préavis.</li><li>En cas de doute, le simulateur officiel du Code du travail numérique reste la référence à consulter.</li></ul></section>
+<li><a href="https://code.travail.gouv.fr/fiche-service-public/demission-du-salarie-a-domicile-employe-par-un-particulier" target="_blank" rel="noopener">Particuliers employeurs et emploi à domicile / IDCC 3239</a></li>
+</ul><p class="pv-small">Le calculateur intègre des règles sourcées pour les conventions listées. Pour toute autre convention, recherchez la règle dans le simulateur officiel puis saisissez la durée vérifiée : l’IDCC seul ne permet pas de déduire une durée fiable sans disposer de la règle applicable.</p></section>
+<section class="pv-card calculator-faq" aria-labelledby="faq-title"><h2 id="faq-title">FAQ</h2><details><summary>Comment connaître l’IDCC de ma convention collective ?</summary><div class="calculator-faq-answer"><p>Consultez votre bulletin de paie ou recherchez votre convention sur le site officiel du Code du travail numérique. L’IDCC est un identifiant numérique de la convention collective.</p></div></details><details><summary>Pourquoi ma convention n’apparaît-elle pas dans la liste ?</summary><div class="calculator-faq-answer"><p>La liste intégrée est partielle : vous pouvez noter le nom ou l’IDCC de toute convention, mais le calculateur ne prétend pas déduire sa règle. Consultez le simulateur officiel, vérifiez la durée applicable, puis saisissez-la ici.</p></div></details><details><summary>La date calculée est-elle toujours ma date réelle de départ ?</summary><div class="calculator-faq-answer"><p>Non nécessairement. Une dispense, une suspension du préavis, des congés ou une règle particulière peuvent modifier son déroulement. Vérifiez les textes applicables avant de confirmer votre départ.</p></div></details></section><section class="pv-card"><h2>Points importants</h2><ul><li>Une convention ou un accord d'entreprise peut modifier la règle applicable.</li><li>Le contrat peut contenir une disposition plus favorable.</li><li>Les cas particuliers (grossesse, congés, maladie, dispense, suspension, etc.) peuvent modifier le déroulement du préavis.</li><li>En cas de doute, le simulateur officiel du Code du travail numérique reste la référence à consulter.</li></ul></section>
 </div><section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Calculs associés</h2><div class="related-links"><a class="related-link" href="/outil/rupture-conventionnelle/"><strong>Rupture conventionnelle</strong><span>Estimer l’indemnité minimale.</span></a><a class="related-link" href="/outil/indemnite-licenciement/"><strong>Indemnité de licenciement</strong><span>Estimer l’indemnité légale.</span></a><a class="related-link" href="/outil/solde-tout-compte/"><strong>Solde de tout compte</strong><span>Estimer les sommes dues au départ.</span></a><a class="related-link" href="/outil/are-chomage/"><strong>Allocation chômage (ARE)</strong><span>Estimer l’allocation chômage.</span></a></div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="/travail/">Travail</a>.</p></div></section></main>
 <footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer>
 <script>
@@ -50,17 +51,12 @@ const categories={
  publicite:[['1','Employé — coefficients 120 à 215'],['2','Technicien / agent de maîtrise — coefficients 220 à 390'],['3','Cadre — coefficient 400 ou plus']],
  tertiaire:[['1','Employé'],['2','Technicien / agent de maîtrise'],['3','Cadre']],
  alim:[['1','Employé / ouvrier'],['2','Agent de maîtrise / technicien'],['3','Cadre']],
- hrc:[['1','Employé'],['2','Agent de maîtrise'],['3','Cadre']]
+ hrc:[['1','Employé'],['2','Agent de maîtrise'],['3','Cadre']],
+ particulier:[['1','Salarié du particulier employeur']]
 };
-const ids={syntec:1486,assurance:1672,publicite:86,tertiaire:2098,alim:2216,hrc:1979};
-const descriptions={
- syntec:'Syntec (IDCC 1486) : ETAM généralement 1 mois avant 2 ans puis 2 mois ; coefficients 400, 450 et 500 : 2 mois ; ingénieurs et cadres : 3 mois ; chargé d’enquête intermittent : 1 mois.',
- assurance:'Sociétés d’assurances (IDCC 1672) : classes 1 à 4 : 1 mois ; classes 5 à 7 : 3 mois.',
- publicite:'Publicité (IDCC 0086) : employés : 1 mois ; techniciens et agents de maîtrise : 2 mois ; cadres : 3 mois.',
- tertiaire:'Prestataires de services du secteur tertiaire (IDCC 2098) : employés : 1 mois ; techniciens et agents de maîtrise : 2 mois ; cadres : 3 mois.',
- alim:'Commerce de détail et de gros à prédominance alimentaire (IDCC 2216) : employés et ouvriers : 1 mois ; agents de maîtrise et techniciens : 2 mois ; cadres : 3 mois.',
- hrc:'Hôtels, cafés, restaurants (IDCC 1979) : la durée dépend de la catégorie et de l’ancienneté.'
-};
+const ids={syntec:1486,assurance:1672,publicite:86,tertiaire:2098,alim:2216,hrc:1979,particulier:3239};
+function ruleHelp(k){const labels={syntec:'Syntec',assurance:'Sociétés d’assurances',publicite:'Publicité',tertiaire:'Prestataires de services tertiaire',alim:'Commerce alimentaire',hrc:'Hôtels, cafés, restaurants',particulier:'Particuliers employeurs et emploi à domicile'};return labels[k]+' : la règle correspondant à la catégorie et à l’ancienneté est chargée depuis les paramètres sourcés. Vérifiez la fiche officielle avant toute décision.';}
+
 function setDisabled(container,disabled){container.querySelectorAll('input,select,textarea').forEach(el=>{el.disabled=disabled;});}
 function populate(){
  const k=c.value,other=k==='autre';
@@ -68,7 +64,7 @@ function populate(){
  st.replaceChildren();
  if(!other){
   categories[k].forEach(([value,label])=>{const o=document.createElement('option');o.value=value;o.textContent=label;st.appendChild(o);});
-  help.textContent=descriptions[k]+' Durées à confirmer avec le texte applicable.';
+  help.textContent=ruleHelp(k);
  }
 }
 function parseDate(v){
@@ -101,9 +97,9 @@ function show(end,label,basis,start){
  result.append(heading,detail,grid,note);result.hidden=false;
 }
 function error(message){err.textContent=message;err.hidden=false;}
-c.addEventListener('change',populate);populate();
+c.addEventListener('change',()=>{result.hidden=true;err.hidden=true;populate();});st.addEventListener('change',()=>{result.hidden=true;});an.addEventListener('change',()=>{result.hidden=true;});populate();
 document.getElementById('form').addEventListener('submit',e=>{
- e.preventDefault();err.hidden=true;result.textContent='Renseignez votre situation et la date de notification, puis lancez le calcul pour obtenir une estimation.';
+ e.preventDefault();err.hidden=true;result.hidden=true;result.replaceChildren();
  const start=parseDate(document.getElementById('date').value);
  if(!start){error('Saisissez une date de notification valide.');return;}
  let months=0,days=0,label,basis;
@@ -116,8 +112,8 @@ document.getElementById('form').addEventListener('submit',e=>{
   label=(months?months+' mois':'')+(months&&days?' + ':'')+(days?days+' jour'+(days>1?'s':''):'');
   basis='Durée saisie après vérification'+(name?' — '+name:'')+(idcc?' (IDCC '+idcc.padStart(4,'0')+')':'');
  }else{
-  const idcc=ids[c.value],category=Number(st.value),seniority=Number(an.value);
-  const matches=rules.filter(r=>r[0]===idcc&&r[1]===category&&r[2]<=seniority).sort((a,b)=>b[2]-a[2]);
+  const idcc=ids[c.value],category=Number(st.value),seniorityMonths=Number(an.value);
+  const matches=rules.filter(r=>r[0]===idcc&&r[1]===category&&r[2]<=seniorityMonths).sort((a,b)=>b[2]-a[2]);
   if(!matches.length){error('Aucune règle vérifiée ne correspond à cette sélection. Vérifiez la convention sur le site officiel.');return;}
   const rule=matches[0];months=rule[3];days=rule[4];
   label=(months?months+' mois':'')+(months&&days?' + ':'')+(days?days+' jour'+(days>1?'s':''):'');
