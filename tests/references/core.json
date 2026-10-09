@@ -1612,5 +1612,29 @@
     "sortie": "Prélèvement mensuel estimé",
     "source": "https://www.impots.gouv.fr/gerer-mon-prelevement-la-source-1",
     "note": "Calcul indépendant : 3 000 × 7,5 / 100 = 225 € par mois. Le site officiel décrit le PAS ; le cas vérifie la multiplication à taux déjà connu."
+  },
+  {
+    "outil": "prelevement-source",
+    "entrees": {
+      "revenu": "3000.03",
+      "taux": "7.5"
+    },
+    "attendu": 225,
+    "tolerance": 0.001,
+    "sortie": "Prélèvement mensuel estimé",
+    "verifications": [
+      {
+        "sortie": "Projection sur 12 mois",
+        "attendu": 2700,
+        "tolerance": 0.001
+      },
+      {
+        "sortie": "Revenu après PAS, par mois",
+        "attendu": 2775.03,
+        "tolerance": 0.001
+      }
+    ],
+    "source": "https://www.impots.gouv.fr/calcul-du-prelevement-la-source-2018",
+    "note": "Cas d'arrondi : la retenue mensuelle de 225,00225 € est arrondie à 225,00 € ; la projection sur 12 mois constants est donc 2 700,00 €, et le revenu après PAS 2 775,03 €."
   }
 ]
