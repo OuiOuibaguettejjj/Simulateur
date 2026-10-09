@@ -20,8 +20,9 @@
 - [Service-Public — droits de donation selon le lien familial](https://www.service-public.gouv.fr/particuliers/vosdroits/F14203) : référence réglementaire pour les abattements et barèmes.
 - [Service-Public — calcul et paiement des droits](https://www.service-public.gouv.fr/particuliers/vosdroits/F14205) : distingue notamment le barème ligne directe de celui applicable entre époux/Pacs.
 - [Service-Public — exonérations et dons de sommes d’argent](https://www.service-public.gouv.fr/particuliers/vosdroits/F10203) : conditions et limites du don familial et de l’exonération logement temporaire.
-- [Mon Petit Fiscaliste — simulateur de donation](https://www.monpetitfiscaliste.fr/simuler/donation) : référence concurrente pour comparer les informations demandées et la couverture des cas usuels.
-- [France Succession](https://www.france-succession.fr/) et [CalcFacile](https://www.calcfacile.com/) : pistes complémentaires de comparaison éditoriale ; les valeurs réglementaires ne sont jamais reprises de ces sites.
+- [Mon Petit Fiscaliste — simulateurs](https://www.monpetitfiscaliste.fr/simuler) et [fiche sur le barème en ligne directe](https://www.monpetitfiscaliste.fr/transmission/bareme-ligne-directe) : comparaison de parcours et d'explications sur les donations antérieures.
+- [France Succession — simulateur de droits de donation](https://francesuccession.fr/simulateurs/droits-donation/) : comparaison de la couverture de l'abattement handicap et de l'exonération immobilière temporaire.
+- [CalcFacile — simulateur succession/donation](https://calcfacile.fr/outils/droits-succession-donation/) : comparaison de l'interface et des champs liés aux donations antérieures et au handicap. Sa description du barème époux/Pacs n'est pas retenue comme source réglementaire, car les taux sont vérifiés exclusivement auprès de Service-Public et de Légifrance.
 
 ## Couverture et limites
 
