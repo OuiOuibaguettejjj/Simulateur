@@ -33,11 +33,11 @@
 .rc-section-title{font-size:clamp(1.3rem,3vw,1.65rem);line-height:1.25;letter-spacing:-.025em;margin:30px 0 9px}
 .rc-content p{line-height:1.7;margin:10px 0}
 .rc-sources{margin-top:22px;padding-top:15px;border-top:1px solid var(--line)}
-.rc-sources h2{font-size:1.05rem;margin:0 0 8px}
+.rc-source-title{font-size:1.05rem;margin:0 0 8px}
 .rc-sources ul{margin:0;padding-left:20px}
 .rc-sources li{margin:7px 0;line-height:1.55}
 .rc-faq{max-width:760px;margin:28px auto 0}
-.rc-faq h2{font-size:clamp(1.3rem,3vw,1.65rem);letter-spacing:-.025em;margin:0 0 8px}
+.rc-faq-title{font-size:clamp(1.3rem,3vw,1.65rem);letter-spacing:-.025em;margin:0 0 8px}
 .rc-faq details{border-top:1px solid var(--line);padding:13px 0}
 .rc-faq details:last-child{border-bottom:1px solid var(--line)}
 .rc-faq summary{font-weight:700;cursor:pointer;line-height:1.5}
@@ -63,8 +63,8 @@
 <section class="content-section rc-content"><h2 class="rc-section-title">Quel salaire de référence retenir ?</h2><p>Le calcul compare la moyenne des douze derniers mois de rémunération de référence à celle des trois derniers mois. La méthode la plus favorable est retenue. Si vous avez moins de douze mois d’ancienneté, la première moyenne porte sur toute la période travaillée.</p><p>Les primes annuelles ou exceptionnelles peuvent nécessiter une proratisation, notamment pour la méthode des trois mois. Le simulateur ne vérifie pas vos bulletins de paie : la précision du résultat dépend des montants que vous saisissez.</p>
 <h2 class="rc-section-title">Exemples de calcul</h2><p>Avec un salaire de référence de <strong>3 500 €</strong> et <strong>8 ans</strong> d’ancienneté : 3 500 × 1/4 × 8 = <strong>7 000 € brut</strong>.</p><p>Avec le même salaire et <strong>12 ans</strong> d’ancienneté : (3 500 × 1/4 × 10) + (3 500 × 1/3 × 2) = <strong>11 083,33 € brut</strong>.</p>
 <h2 class="rc-section-title">Ce que cette estimation ne couvre pas</h2><p>Le simulateur ne calcule pas une éventuelle indemnité conventionnelle plus favorable, le montant net versé, ni les conséquences fiscales et sociales. Il ne modélise pas non plus les parcours alternant périodes à temps plein et à temps partiel : dans ce cas, faites vérifier le calcul avant de vous y fier.</p><p>Avant de signer, vérifiez votre convention collective, les accords applicables et vos bulletins de paie. Consultez si nécessaire <a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F19030" target="_blank" rel="noopener">les informations officielles de Service-Public</a>.</p>
-<div class="rc-sources"><h2>Sources officielles</h2><ul><li><a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F31539" target="_blank" rel="noopener">Service-Public — indemnité spécifique de rupture conventionnelle</a></li><li><a href="https://code.travail.gouv.fr/outils/indemnite-rupture-conventionnelle" target="_blank" rel="noopener">Code du travail numérique — simulateur officiel</a></li><li><a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000046772393" target="_blank" rel="noopener">Légifrance — Code du travail</a></li></ul></div></section>
-<section class="calculator-faq rc-faq" aria-labelledby="faq-title"><h2 id="faq-title">Questions fréquentes</h2>
+<div class="rc-sources"><h2 class="rc-source-title">Sources officielles</h2><ul><li><a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F31539" target="_blank" rel="noopener">Service-Public — indemnité spécifique de rupture conventionnelle</a></li><li><a href="https://code.travail.gouv.fr/outils/indemnite-rupture-conventionnelle" target="_blank" rel="noopener">Code du travail numérique — simulateur officiel</a></li><li><a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000046772393" target="_blank" rel="noopener">Légifrance — Code du travail</a></li></ul></div></section>
+<section class="calculator-faq rc-faq" aria-labelledby="faq-title"><h2 class="rc-faq-title" id="faq-title">Questions fréquentes</h2>
 <details><summary>Peut-on percevoir une indemnité avec moins d’un an d’ancienneté ?</summary><div class="calculator-faq-answer"><p>Oui. Il n’existe pas de condition minimale d’ancienneté. Le minimum légal est calculé en fonction de l’ancienneté retenue, même lorsqu’elle est inférieure à un an.</p></div></details>
 <details><summary>Le montant calculé est-il forcément celui qui sera versé ?</summary><div class="calculator-faq-answer"><p>Non. Il s’agit d’une estimation du minimum légal brut. Le montant convenu peut être supérieur et une règle conventionnelle plus favorable peut s’appliquer.</p></div></details>
 <details><summary>Le simulateur calcule-t-il le montant net ?</summary><div class="calculator-faq-answer"><p>Non. Il n’estime ni le net versé, ni les prélèvements fiscaux et sociaux qui dépendent notamment du montant et de votre situation.</p></div></details>
