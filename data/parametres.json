@@ -16,7 +16,7 @@
       "effectiveFrom": "2026-01-01",
       "effectiveTo": "2026-12-31",
       "verifiedOn": "2026-10-09",
-      "notes": "Barèmes et abattements vérifiés le 9 octobre 2026 sur les sources officielles citées. Le calculateur n'est pas une liquidation fiscale complète : il ne reconstitue pas les tranches consommées par des donations antérieures et ne contrôle pas les plafonds globaux des exonérations.",
+      "notes": "Barèmes et abattements vérifiés le 9 octobre 2026 sur les sources officielles citées. Le calculateur ne reconstitue pas automatiquement les donations antérieures : il permet de déclarer la base taxable déjà soumise au barème. Il ne contrôle pas les plafonds globaux des exonérations.",
       "values": {
         "abattements": {
           "parent": 100000,
