@@ -49,7 +49,7 @@
     "/outil/frais-de-notaire/": "2026-10-03",
     "/outil/frais-kilometriques/": "2026-10-07",
     "/outil/heures-supplementaires/": "2026-10-03",
-    "/outil/ifi/": "2026-10-03",
+    "/outil/ifi/": "2026-10-09",
     "/outil/impot-sur-le-revenu/": "2026-10-07",
     "/outil/indemnite-licenciement/": "2026-10-07",
     "/outil/indemnite-precarite/": "2026-10-03",
@@ -110,6 +110,5 @@
     "/outil/etes-vous-riche/": "2026-10-05",
     "/outil/prime-activite/": "2026-10-07",
     "/outil/coefficient/": "2026-10-08"
-  },
-  "/outil/ifi/": "2026-10-09"
+  }
 }
