@@ -23,7 +23,7 @@
 .pas-hero{position:relative;overflow:hidden;padding:clamp(24px,5vw,46px);border:1px solid var(--ink);border-radius:22px;background:linear-gradient(135deg,#17483d,#102f2a);color:#fff;box-shadow:var(--shadow)}
 .pas-hero:after{content:"%";position:absolute;right:24px;top:-48px;font-size:17rem;font-weight:950;line-height:1;color:rgba(255,255,255,.055);pointer-events:none}
 .pas-hero .eyebrow{color:#ffb29f;position:relative;z-index:1}
-.pas-hero h1{position:relative;z-index:1;max-width:720px;margin:0 0 14px;font-size:clamp(2.2rem,5vw,4.2rem);line-height:1;letter-spacing:-.065em}
+.pas-title{position:relative;z-index:1;max-width:720px;margin:0 0 14px;font-size:clamp(2.2rem,5vw,4.2rem);line-height:1;letter-spacing:-.065em}
 .pas-hero .tool-intro{position:relative;z-index:1;max-width:690px;margin:0;color:#e0e9e4;font-size:1.05rem}
 .pas-trust{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
 .pas-trust span{padding:6px 10px;border:1px solid rgba(255,255,255,.25);border-radius:999px;font-size:.78rem;font-weight:800}
@@ -43,7 +43,7 @@
 .pas-result-item b{display:block;margin-top:4px;font-size:1.15rem}
 .pas-note{font-size:.9rem;color:var(--muted)}
 .pas-page .content-section,.pas-page .calculator-faq{max-width:780px;margin:42px auto 0}
-.pas-page .content-section h2,.pas-page .calculator-faq h2{font-size:clamp(1.5rem,3vw,2rem);letter-spacing:-.035em}
+.pas-section-title{font-size:clamp(1.5rem,3vw,2rem);letter-spacing:-.035em}
 .pas-page .content-section p{max-width:74ch}
 .pas-page .related-tools{margin-top:42px}
 .pas-page .source-links{padding-top:12px;border-top:1px solid var(--line);font-size:.92rem}
@@ -56,7 +56,7 @@
 <div class="breadcrumb"><a href="/">Accueil</a> · <a href="/fiscalite/">Fiscalité</a> · Prélèvement à la source</div>
 <section class="pas-hero">
 <div class="eyebrow">FISCALITÉ · SALAIRE</div>
-<h1>Calcul du prélèvement à la source</h1>
+<h1 class="pas-title">Calcul du prélèvement à la source</h1>
 <p class="tool-intro">Estimez ce qui sera prélevé sur votre revenu chaque mois à partir du taux PAS transmis par l’administration fiscale. Le calcul se fait en quelques secondes, sans chercher à reconstituer votre taux officiel.</p>
 <div class="pas-trust"><span>Taux officiel à renseigner</span><span>Estimation immédiate</span><span>Montants mensuel et annuel</span></div>
 </section>
@@ -72,23 +72,23 @@
 <div class="formula"><strong>Méthode de calcul</strong><p>Prélèvement estimé = revenu net imposable mensuel × taux PAS ÷ 100. Le montant annuel est une projection sur 12 mois constants, et non le calcul de votre impôt annuel définitif.</p></div>
 </section>
 <section class="content-section">
-<h2>Comment calculer le prélèvement à la source sur son salaire ?</h2>
+<h2 class="pas-section-title">Comment calculer le prélèvement à la source sur son salaire ?</h2>
 <p>Le prélèvement à la source (PAS) est une avance d’impôt sur le revenu retenue au fil de l’année. Pour estimer la retenue d’un mois, multipliez le revenu net imposable soumis au PAS par le taux applicable à ce revenu. Par exemple, avec 3 000 € de revenu net imposable et un taux de 7,5 %, la retenue est de 225 € pour le mois.</p>
 <p>Le revenu net imposable n’est pas nécessairement égal au salaire brut ni au montant versé sur votre compte. Pour éviter une estimation trompeuse, utilisez la ligne de votre bulletin de paie correspondant au net imposable et vérifiez le taux réellement appliqué par votre employeur.</p>
 </section>
 <section class="content-section">
-<h2>Quel taux de prélèvement faut-il utiliser ?</h2>
+<h2 class="pas-section-title">Quel taux de prélèvement faut-il utiliser ?</h2>
 <p>Le taux à saisir est celui transmis par l’administration fiscale et appliqué par votre collecteur. Selon votre situation, il peut s’agir d’un taux personnalisé, d’un taux individualisé au sein d’un couple imposé en commun ou d’un taux neutre. Ce calculateur ne choisit pas entre ces options et ne détermine pas le taux auquel vous avez droit.</p>
 <p>Si vos revenus ou votre situation familiale changent, vous pouvez consulter les démarches de gestion du prélèvement à la source sur impots.gouv.fr. Une modification du taux ne s’applique pas nécessairement immédiatement : le délai dépend de la transmission de l’information au collecteur.</p>
 </section>
 <section class="content-section">
-<h2>Ce que cette estimation inclut — et ses limites</h2>
+<h2 class="pas-section-title">Ce que cette estimation inclut — et ses limites</h2>
 <p>Le résultat estime la retenue correspondant à un revenu mensuel et à un taux fournis. Il affiche aussi une projection annuelle si ce revenu et ce taux restent identiques pendant 12 mois. Il ne calcule ni le taux personnalisé officiel, ni les crédits et réductions d’impôt, ni le solde définitif après déclaration. Votre situation réelle peut donc aboutir à un remboursement ou à un complément d’impôt.</p>
 <p>Pour estimer l’impôt annuel, utilisez également notre <a href="/outil/impot-sur-le-revenu/">calculateur d’impôt sur le revenu</a>. Pour convertir un salaire brut en net, consultez le <a href="/outil/salaire-brut-net/">calculateur salaire brut-net</a> ; les montants ne sont pas interchangeables avec le revenu net imposable.</p>
 <p class="source-links"><strong>Sources officielles :</strong> <a href="https://www.impots.gouv.fr/particulier/questions/comment-gerer-mon-prelevement-la-source">impots.gouv.fr — gérer son prélèvement à la source</a> · <a href="https://www.impots.gouv.fr/particulier/questions/quelles-sont-les-differences-entre-les-taux-de-prelevement-la-source-proposes">impots.gouv.fr — différences entre les taux</a> · <a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F34009">Service-Public — prélèvement à la source</a>. Sources consultées le 9 octobre 2026.</p>
 </section>
 <section class="calculator-faq" aria-labelledby="faq-title">
-<h2 id="faq-title">Questions fréquentes sur le prélèvement à la source</h2>
+<h2 id="faq-title" class="pas-section-title">Questions fréquentes sur le prélèvement à la source</h2>
 <details><summary>Comment calculer le montant prélevé chaque mois ?</summary><div class="calculator-faq-answer"><p>Multipliez le revenu net imposable mensuel soumis au PAS par le taux appliqué, puis divisez par 100. Pour 2 500 € à 6 %, la retenue estimée est de 150 € par mois.</p></div></details>
 <details><summary>Le taux de prélèvement à la source est-il calculé par cet outil ?</summary><div class="calculator-faq-answer"><p>Non. Le taux doit être repris depuis votre espace fiscal ou votre bulletin de paie. Le calculateur estime uniquement la retenue à partir du taux saisi.</p></div></details>
 <details><summary>Faut-il saisir le salaire brut ou le salaire net ?</summary><div class="calculator-faq-answer"><p>Saisissez le revenu net imposable soumis au PAS, généralement indiqué sur le bulletin de paie. Le brut et le net versé sur le compte bancaire peuvent être différents de ce montant.</p></div></details>
