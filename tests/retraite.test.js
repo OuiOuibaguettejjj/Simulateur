@@ -50,6 +50,14 @@ vm.createContext(context);
 vm.runInContext(paramsJs, context);
 vm.runInContext(inlineScript[1], context);
 
+// Assurance retraite example: from 62 years and 4 months to age 67,
+// 4 years and 7 months remaining correspond to 18 age-related quarters.
+const ageRules = { values: { ageTauxPleinAutomatique: 67, decotePointParTrimestre: 0.625, tauxPlein: 50, trimestresMaximumDecote: 20 } };
+const ageExample = context.retirementEstimate(30000, 100, 100, 169, new Date("2024-04-01T12:00:00"), new Date("1961-11-08T12:00:00"), ageRules);
+assert.strictEqual(ageExample.missing, 18, "4 years and 7 months before age 67 must count as 18 age-related quarters");
+assert.strictEqual(ageExample.rate, 38.75, "age-based reduction must be 18 x 0.625 points when duration is not the limiting factor");
+
+
 function calculate(values) {
   const fields = values;
   return context.window.TOOL.calc.call({
