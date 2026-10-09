@@ -1610,7 +1610,7 @@
     "attendu": 225,
     "tolerance": 0.01,
     "sortie": "Prélèvement mensuel estimé",
-    "source": "https://www.impots.gouv.fr/particulier/questions/comment-gerer-mon-prelevement-la-source",
+    "source": "https://www.impots.gouv.fr/gerer-mon-prelevement-la-source-1",
     "note": "Calcul indépendant : 3 000 × 7,5 / 100 = 225 € par mois. Le site officiel décrit le PAS ; le cas vérifie la multiplication à taux déjà connu."
   }
 ]
