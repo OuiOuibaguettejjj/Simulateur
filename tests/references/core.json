@@ -1241,9 +1241,9 @@
       "montant": "200000",
       "lien": "parent",
       "abattementUtilise": "0",
-      "handicap": "non",
       "donFamilial": "0",
-      "donLogement": "0"
+      "donLogement": "0",
+      "handicapUtilise": "0"
     },
     "attendu": 18194,
     "tolerance": 0,
