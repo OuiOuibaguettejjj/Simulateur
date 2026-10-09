@@ -1636,5 +1636,18 @@
     ],
     "source": "https://www.impots.gouv.fr/calcul-du-prelevement-la-source-2018",
     "note": "Cas d'arrondi : la retenue mensuelle de 225,00225 € est arrondie à 225,00 € ; la projection sur 12 mois constants est donc 2 700,00 €, et le revenu après PAS 2 775,03 €."
+  },
+  {
+    "outil": "rupture-conventionnelle",
+    "entrees": {
+      "entry": "2022-01-01",
+      "exit": "2026-01-01",
+      "s12": "2000",
+      "s3": "2000"
+    },
+    "attendu": 2000,
+    "tolerance": 0.01,
+    "sortie": "Indemnité minimale légale estimée",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31539"
   }
 ]
