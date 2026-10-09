@@ -182,10 +182,12 @@
     };
 
     const simpleAtMonth=(rate,m)=>{
-      let total=C*(1+rate*(m/12));
+      // A negative simple return may erode each invested amount, but must not
+      // turn an investment balance into a negative capital.
+      let total=Math.max(0,C*(1+rate*(m/12)));
       for(let i=1;i<=m;i++){
         const payment=paymentAtMonth(i);
-        total+=payment*(1+rate*((m-i)/12));
+        total+=Math.max(0,payment*(1+rate*((m-i)/12)));
       }
       return total;
     };
@@ -285,11 +287,14 @@
     const capital=result.capital,paid=result.paid,gains=result.gains;
     const real=capital/Math.pow(1+I/100,Y);
     const feeImpact=Math.max(0,gross.capital-capital);
-    const simpleCapital=simulate(C,V,R,F,Y,H,"never").capital;
 
     const altMonthly=simulate(C,V+50,R,F,Y,H,freq).capital;
     const altRate=simulate(C,V,R+1,F,Y,H,freq).capital;
     const crossover=result.rows.find(r=>r.gains>r.paid-C);
+    const checkedValues=[capital,paid,gains,real,feeImpact,altMonthly,altRate,gross.capital,...result.rows.flatMap(r=>[r.capital,r.paid,r.gains])];
+    if(!checkedValues.every(Number.isFinite)){
+      clearResults("Valeurs trop élevées pour une projection fiable"); return;
+    }
     $("years-label").textContent=Y;
     $("final").textContent=money(capital);
     $("gains").textContent=money(gains);
