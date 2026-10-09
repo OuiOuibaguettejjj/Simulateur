@@ -1378,5 +1378,47 @@
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203",
     "verificationSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203",
     "note": "Autre parent jusqu'au quatrième degré : abattement de 1 594 € puis taux de 55 %."
+  },
+  {
+    "outil": "donation",
+    "entrees": {
+      "montant": "200000",
+      "lien": "petitEnfant",
+      "natureDonation": "argent",
+      "abattementUtilise": "0",
+      "handicapEligible": "non",
+      "handicapUtilise": "0",
+      "donFamilial": "0",
+      "donFamilialEligible": "non",
+      "donLogement": "0",
+      "donLogementEligible": "non"
+    },
+    "attendu": 18194,
+    "tolerance": 0,
+    "sortie": "Droits de donation estimés",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203",
+    "verificationSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203",
+    "note": "Un ascendant qui reçoit une donation bénéficie de l'abattement de 100 000 € selon Service-Public, quel que soit le degré de la ligne directe."
+  },
+  {
+    "outil": "donation",
+    "entrees": {
+      "montant": "200000",
+      "lien": "arriereAscendant",
+      "natureDonation": "argent",
+      "abattementUtilise": "0",
+      "handicapEligible": "non",
+      "handicapUtilise": "0",
+      "donFamilial": "0",
+      "donFamilialEligible": "non",
+      "donLogement": "0",
+      "donLogementEligible": "non"
+    },
+    "attendu": 18194,
+    "tolerance": 0,
+    "sortie": "Droits de donation estimés",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203",
+    "verificationSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203",
+    "note": "Un ascendant qui reçoit une donation bénéficie de l'abattement de 100 000 € selon Service-Public, quel que soit le degré de la ligne directe."
   }
 ]
