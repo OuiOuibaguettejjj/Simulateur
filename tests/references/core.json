@@ -1802,5 +1802,36 @@
     "sortie": "Minutes totales",
     "source": "https://www.iso.org/fr/iso-8601-date-and-time-format.html",
     "note": "Calcul indépendant : 10 minutes − 30 minutes = −20 minutes ; la soustraction peut produire une durée négative."
+  },
+  {
+    "outil": "temps",
+    "entrees": {
+      "durationMode": "datetime",
+      "dateTimeStart": "2026-01-01T09:00",
+      "dateTimeEnd": "2026-01-02T10:30"
+    },
+    "attendu": 25.5,
+    "tolerance": 0,
+    "sortie": "Heures",
+    "source": "https://www.iso.org/fr/iso-8601-date-and-time-format.html",
+    "note": "Calcul indépendant : du 1er janvier à 9 h au 2 janvier à 10 h 30, il s’écoule 25 h 30, soit 25,5 heures."
+  },
+  {
+    "outil": "temps",
+    "entrees": {
+      "durationMode": "add",
+      "addDateTime": "2024-01-31T10:00",
+      "addYears": "0",
+      "addMonths": "1",
+      "addDays": "0",
+      "addHours": "0",
+      "addMinutes": "0",
+      "addSeconds": "0"
+    },
+    "attendu": 29,
+    "tolerance": 0,
+    "sortie": "^29/02/2024",
+    "source": "https://www.iso.org/fr/iso-8601-date-and-time-format.html",
+    "note": "Cas calendaire indépendant : un mois après le 31 janvier 2024, le jour 31 n’existe pas en février ; le résultat est ramené au 29 février, dernier jour du mois bissextile."
   }
 ]
