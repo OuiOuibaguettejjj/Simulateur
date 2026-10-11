@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import os from "node:os";
+import {execFileSync} from "node:child_process";
 import path from "node:path";
 import { buildRatchetMessages,checkPage,checkAll,loadToolsMeta,parseHtml,summarize,STRUCTURAL_RULES,EDITORIAL_RULES,TRACKED_RULES,toolDirsWithoutIndex,trackedPairs,parseBaseline,compareToBaseline,nextBaseline,seedBaseline,interactivePagesFromChangedFiles,changedMandatoryFailures} from "../scripts/check-pages.mjs";
 
@@ -392,3 +393,34 @@ assert.equal(migrated.ok,true,"outil migré : retrait des écarts autorisé");
 assert.deepEqual(migrated.removed,[P(debtPath,"description"),P(debtPath,"content-h2"),P(debtPath,"formula"),P(debtPath,"faq")],"outil migré : écarts retirables");
 
 console.log("check-pages tests passed.");
+
+// Vérifie sur une copie isolée que la baseline committée est exactement celle
+// produite par la procédure canonique. Le test ne modifie jamais le checkout CI.
+const baselineProbe = fs.mkdtempSync(path.join(os.tmpdir(), "check-pages-baseline-"));
+try {
+  const originalBaseline = JSON.parse(fs.readFileSync("scripts/check-pages.baseline.json", "utf8"));
+  fs.cpSync(process.cwd(), baselineProbe, {
+    recursive: true,
+    filter: source => {
+      const relative = path.relative(process.cwd(), source);
+      return relative === "" || !relative.split(path.sep).some(part => part === ".git" || part === "node_modules");
+    }
+  });
+  let baselineCommandOutput = "";
+  try {
+    baselineCommandOutput = execFileSync(process.execPath, ["scripts/check-pages.mjs", "--update-baseline"], {
+      cwd: baselineProbe,
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "pipe"]
+    });
+  } catch (error) {
+    throw new Error("La procédure --update-baseline a échoué sur une copie isolée : " +
+      String(error.stderr || error.message));
+  }
+  const generatedBaseline = JSON.parse(fs.readFileSync(path.join(baselineProbe, "scripts/check-pages.baseline.json"), "utf8"));
+  assert.deepEqual(generatedBaseline, originalBaseline,
+    "La baseline committée doit correspondre exactement au résultat de --update-baseline. Sortie : " + baselineCommandOutput.trim());
+} finally {
+  fs.rmSync(baselineProbe, {recursive: true, force: true});
+}
+
