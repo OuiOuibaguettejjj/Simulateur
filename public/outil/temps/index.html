@@ -256,8 +256,8 @@
     document.getElementById("convertUnit").closest(".field").hidden=true;
     let html='<div class="duration-grid">';
     if(mode==="hm"||mode==="hms") html+=F.field("compoundH","Heures","number",'min="0" step="1" inputmode="numeric" value="0"');
-    html+=F.field("compoundM","Minutes","number",'min="0" step="any" inputmode="decimal" value="0"');
-    if(mode==="hms"||mode==="ms") html+=F.field("compoundS","Secondes","number",'min="0" step="any" inputmode="decimal" value="0"');
+    html+=F.field("compoundM","Minutes","number",'min="0" step="1" inputmode="numeric" value="0"');
+    if(mode==="hms"||mode==="ms") html+=F.field("compoundS","Secondes","number",'min="0" step="1" inputmode="numeric" value="0"');
     host.innerHTML=html+"</div>";
   };
   const setMode=mode=>{
