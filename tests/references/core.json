@@ -1714,5 +1714,18 @@
     "tolerance": 0.02,
     "sortie": "Indemnité minimale légale estimée",
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31539"
+  },
+  {
+    "outil": "temps",
+    "entrees": {
+      "convertValue": "150",
+      "convertUnit": "minutes",
+      "convertCompound": "single"
+    },
+    "attendu": 2.5,
+    "tolerance": 0,
+    "sortie": "Heures",
+    "source": "https://www.iso.org/fr/iso-8601-date-and-time-format.html",
+    "note": "Vérification indépendante de la conversion : 150 minutes ÷ 60 = 2,5 heures. La source ISO documente la représentation normalisée des dates et intervalles, tandis que l’équivalence numérique est obtenue par conversion arithmétique indépendante."
   }
 ]
