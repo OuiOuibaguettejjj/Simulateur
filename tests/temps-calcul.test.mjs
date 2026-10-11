@@ -21,7 +21,7 @@ await expectConversion({
 });
 await expectConversion({
   value:"86400",fromUnit:"seconds",toUnit:"days",
-  expected:/86400 seconde\(s\) = 1 jour\(s\) de 24 h/
+  expected:/86 400 seconde\(s\) = 1 jour\(s\) de 24 h/
 });
 await expectConversion({
   value:"604800",fromUnit:"seconds",toUnit:"weeks",
