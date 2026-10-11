@@ -1881,7 +1881,7 @@
     },
     "attendu": 90,
     "tolerance": 0,
-    "sortie": "Minutes",
+    "sortie": "Minutes(?=90)",
     "source": "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9-FR.pdf",
     "note": "Contrôle décimal indépendant : 1,5 heure = 90 minutes. Les relations entre unités de temps sont vérifiées à partir de la Brochure sur le SI du BIPM."
   },
