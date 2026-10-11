@@ -236,9 +236,7 @@ assert.match(donationVeryLarge.text, /899[\s\u00a0\u202f]?999[\s\u00a0\u202f]?76
 
 const refusedTools=[...forbidden];
 await assert.rejects(()=>runInlineCalculator({family:cases[0].famille||"outil",slug:cases[0].outil,inputs:{__unknown_reference_id__:"1"}}),/unknown input id/,"un identifiant d’entrée inconnu doit échouer");
-console.log("Couche 2 — "+covered.size+" outils testés sur un cas réel sourcé, "+cases.length+" cas.");
-console.log("Couverture : "+covered.size+" outils testés sur au moins un cas réel.");
-console.log("Outils refusés (anneeAMigrer) : "+refusedTools.length+".");
+
 
 // Régression propre au calculateur Temps : un champ de conversion vidé n'est pas zéro.
 const emptyTimeConversion = await runInlineCalculator({
@@ -301,3 +299,6 @@ const invalidTimeAddRange = await runInlineCalculator({
 assert.match(invalidTimeAddRange.text, /nombres entiers compris/i,
   "temps : une durée hors plage doit être refusée");
 
+console.log("Couche 2 — "+covered.size+" outils testés sur un cas réel sourcé, "+cases.length+" cas.");
+console.log("Couverture : "+covered.size+" outils testés sur au moins un cas réel.");
+console.log("Outils refusés (anneeAMigrer) : "+refusedTools.length+".");
