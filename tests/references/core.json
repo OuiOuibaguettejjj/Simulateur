@@ -1820,5 +1820,51 @@
     "sortie": "^29/02/2024",
     "source": "https://www.iso.org/fr/iso-8601-date-and-time-format.html",
     "note": "Cas calendaire indépendant : un mois après le 31 janvier 2024, le jour 31 n’existe pas en février ; le résultat est ramené au 29 février, dernier jour du mois bissextile."
+  },
+  {
+    "outil": "temps",
+    "entrees": {
+      "durationMode": "convert",
+      "convertCompound": "single",
+      "convertValue": "0.5",
+      "convertUnit": "seconds"
+    },
+    "attendu": 0.5,
+    "tolerance": 0,
+    "sortie": "^0,5 seconde",
+    "source": "https://www.iso.org/iso-8601-date-and-time-format.html",
+    "note": "Non-régression : une demi-seconde doit rester visible dans la durée principale et dans les équivalences."
+  },
+  {
+    "outil": "temps",
+    "entrees": {
+      "durationMode": "convert",
+      "convertCompound": "single",
+      "convertValue": "0.1",
+      "convertUnit": "minutes"
+    },
+    "attendu": 6,
+    "tolerance": 0,
+    "sortie": "^6 secondes",
+    "source": "https://www.iso.org/iso-8601-date-and-time-format.html",
+    "note": "Non-régression : 0,1 minute correspond exactement à 6 secondes."
+  },
+  {
+    "outil": "temps",
+    "entrees": {
+      "durationMode": "add",
+      "addDateTime": "0099-12-31T23:00",
+      "addYears": "0",
+      "addMonths": "0",
+      "addDays": "0",
+      "addHours": "1",
+      "addMinutes": "0",
+      "addSeconds": "0"
+    },
+    "attendu": 100,
+    "tolerance": 0,
+    "sortie": "^01/01/0100",
+    "source": "https://www.iso.org/iso-8601-date-and-time-format.html",
+    "note": "Non-régression calendaire : les années 0001–0099 ne doivent pas être décalées de 1900 ans par Date.UTC."
   }
 ]
