@@ -285,7 +285,7 @@ const invalidTimeAddStart = await runInlineCalculator({
     addHours: "0", addMinutes: "0", addSeconds: "0"
   }
 });
-assert.match(invalidTimeAddStart.text, /date et heure de départ valides/i,
+assert.match(invalidTimeAddStart.text, /date et une heure de départ valides/i,
   "temps : une date de départ vide doit être refusée");
 
 const invalidTimeAddRange = await runInlineCalculator({
