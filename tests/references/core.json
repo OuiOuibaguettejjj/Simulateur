@@ -1727,5 +1727,80 @@
     "sortie": "Heures",
     "source": "https://www.iso.org/fr/iso-8601-date-and-time-format.html",
     "note": "Vérification indépendante de la conversion : 150 minutes ÷ 60 = 2,5 heures. La source ISO documente la représentation normalisée des dates et intervalles, tandis que l’équivalence numérique est obtenue par conversion arithmétique indépendante."
+  },
+  {
+    "outil": "temps",
+    "entrees": {
+      "convertValue": "150",
+      "convertUnit": "minutes",
+      "convertCompound": "single"
+    },
+    "attendu": 2.5,
+    "tolerance": 0,
+    "sortie": "Heures",
+    "source": "https://www.iso.org/fr/iso-8601-date-and-time-format.html",
+    "note": "Conversion arithmétique indépendante : 150 minutes ÷ 60 = 2,5 heures. La source ISO est utilisée pour la représentation normalisée des dates et intervalles, pas comme source du facteur de conversion."
+  },
+  {
+    "outil": "temps",
+    "entrees": {
+      "durationMode": "sum",
+      "sumAH": "2",
+      "sumAM": "30",
+      "sumAS": "0",
+      "sumOperation": "add",
+      "sumBH": "1",
+      "sumBM": "45",
+      "sumBS": "0"
+    },
+    "attendu": 4.25,
+    "tolerance": 0,
+    "sortie": "Heures décimales",
+    "source": "https://www.iso.org/fr/iso-8601-date-and-time-format.html",
+    "note": "Calcul indépendant : 2 h 30 + 1 h 45 = 4 h 15, soit 4,25 heures."
+  },
+  {
+    "outil": "temps",
+    "entrees": {
+      "durationMode": "times",
+      "timeStart": "22:00",
+      "timeEnd": "06:00"
+    },
+    "attendu": 8,
+    "tolerance": 0,
+    "sortie": "^8 heures",
+    "source": "https://www.iso.org/fr/iso-8601-date-and-time-format.html",
+    "note": "Calcul indépendant du passage à minuit : 22 h à minuit = 2 h, puis minuit à 6 h = 6 h, total 8 h."
+  },
+  {
+    "outil": "temps",
+    "entrees": {
+      "durationMode": "dates",
+      "dateStart": "2024-02-28",
+      "dateEnd": "2024-03-01"
+    },
+    "attendu": 2,
+    "tolerance": 0,
+    "sortie": "^2 jours",
+    "source": "https://www.iso.org/fr/iso-8601-date-and-time-format.html",
+    "note": "Calcul indépendant sur calendrier : du 28 février 2024 au 1er mars 2024, l’année étant bissextile, il s’écoule deux jours."
+  },
+  {
+    "outil": "temps",
+    "entrees": {
+      "durationMode": "sum",
+      "sumAH": "0",
+      "sumAM": "10",
+      "sumAS": "0",
+      "sumOperation": "subtract",
+      "sumBH": "0",
+      "sumBM": "30",
+      "sumBS": "0"
+    },
+    "attendu": -20,
+    "tolerance": 0,
+    "sortie": "Minutes totales",
+    "source": "https://www.iso.org/fr/iso-8601-date-and-time-format.html",
+    "note": "Calcul indépendant : 10 minutes − 30 minutes = −20 minutes ; la soustraction peut produire une durée négative."
   }
 ]
