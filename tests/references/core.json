@@ -1724,22 +1724,9 @@
     },
     "attendu": 2.5,
     "tolerance": 0,
-    "sortie": "Heures",
+    "sortie": "Heures(?=2,5)",
     "source": "https://www.iso.org/fr/iso-8601-date-and-time-format.html",
     "note": "Vérification indépendante de la conversion : 150 minutes ÷ 60 = 2,5 heures. La source ISO documente la représentation normalisée des dates et intervalles, tandis que l’équivalence numérique est obtenue par conversion arithmétique indépendante."
-  },
-  {
-    "outil": "temps",
-    "entrees": {
-      "convertValue": "150",
-      "convertUnit": "minutes",
-      "convertCompound": "single"
-    },
-    "attendu": 2.5,
-    "tolerance": 0,
-    "sortie": "Heures",
-    "source": "https://www.iso.org/fr/iso-8601-date-and-time-format.html",
-    "note": "Conversion arithmétique indépendante : 150 minutes ÷ 60 = 2,5 heures. La source ISO est utilisée pour la représentation normalisée des dates et intervalles, pas comme source du facteur de conversion."
   },
   {
     "outil": "temps",
@@ -1812,7 +1799,7 @@
     },
     "attendu": 25.5,
     "tolerance": 0,
-    "sortie": "Heures",
+    "sortie": "Heures(?=25,5)",
     "source": "https://www.iso.org/fr/iso-8601-date-and-time-format.html",
     "note": "Calcul indépendant : du 1er janvier à 9 h au 2 janvier à 10 h 30, il s’écoule 25 h 30, soit 25,5 heures."
   },
