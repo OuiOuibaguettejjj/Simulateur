@@ -48,3 +48,4 @@ console.log("Couche 1 : tous les cas passent ou correspondent exactement à une 
 // Les régressions métier ciblées de l’épargne mensuelle sont exécutées dans cette suite CI.
 await import("./epargne-mensuelle.test.mjs");
 await import("./remise.test.mjs");
+await import("./temps-calcul.test.mjs");
