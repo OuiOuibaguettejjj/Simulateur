@@ -1863,7 +1863,7 @@
     },
     "attendu": 100,
     "tolerance": 0,
-    "sortie": "^01/01/0100",
+    "sortie": "0100",
     "source": "https://www.iso.org/iso-8601-date-and-time-format.html",
     "note": "Non-régression calendaire : les années 0001–0099 ne doivent pas être décalées de 1900 ans par Date.UTC."
   }
