@@ -658,25 +658,5 @@
   {
     "path": "public/outil/temps-partiel/index.html",
     "rule": "title"
-  },
-  {
-    "path": "public/outil/temps/index.html",
-    "rule": "content-h2"
-  },
-  {
-    "path": "public/outil/temps/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/temps/index.html",
-    "rule": "formula"
-  },
-  {
-    "path": "public/outil/temps/index.html",
-    "rule": "meta-unique"
-  },
-  {
-    "path": "public/outil/temps/index.html",
-    "rule": "title"
   }
 ]
