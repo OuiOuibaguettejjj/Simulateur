@@ -253,3 +253,51 @@ const emptyTimeConversion = await runInlineCalculator({
 });
 assert.match(emptyTimeConversion.text, /Valeur invalide/i,
   "temps : une conversion dont la valeur est vide doit être refusée");
+
+// Régressions supplémentaires du calculateur Temps : champs requis et bornes.
+const emptyTimeSumField = await runInlineCalculator({
+  family: "outil", slug: "temps",
+  inputs: {
+    durationMode: "sum",
+    sumAH: "1", sumAM: "0", sumAS: "",
+    sumOperation: "add",
+    sumBH: "0", sumBM: "30", sumBS: "0"
+  }
+});
+assert.match(emptyTimeSumField.text, /Complétez tous les champs de durée/i,
+  "temps : un champ vide dans une durée composée doit être refusé");
+
+const invalidTimeSumMinute = await runInlineCalculator({
+  family: "outil", slug: "temps",
+  inputs: {
+    durationMode: "sum",
+    sumAH: "1", sumAM: "60", sumAS: "0",
+    sumOperation: "add",
+    sumBH: "0", sumBM: "30", sumBS: "0"
+  }
+});
+assert.match(invalidTimeSumMinute.text, /durées valides/i,
+  "temps : les minutes doivent rester dans la plage 0–59");
+
+const invalidTimeAddStart = await runInlineCalculator({
+  family: "outil", slug: "temps",
+  inputs: {
+    durationMode: "add", addDateTime: "",
+    addYears: "0", addMonths: "0", addDays: "0",
+    addHours: "0", addMinutes: "0", addSeconds: "0"
+  }
+});
+assert.match(invalidTimeAddStart.text, /date et heure de départ valides/i,
+  "temps : une date de départ vide doit être refusée");
+
+const invalidTimeAddRange = await runInlineCalculator({
+  family: "outil", slug: "temps",
+  inputs: {
+    durationMode: "add", addDateTime: "2026-01-01T10:00",
+    addYears: "0", addMonths: "0", addDays: "100001",
+    addHours: "0", addMinutes: "0", addSeconds: "0"
+  }
+});
+assert.match(invalidTimeAddRange.text, /nombres entiers compris/i,
+  "temps : une durée hors plage doit être refusée");
+
