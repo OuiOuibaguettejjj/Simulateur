@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="google-adsense-account" content="ca-pub-2924580037451268">
-<title>Calculateur de durée</title>
-<meta name="description" content="Calculez et convertissez une durée : minutes, heures, secondes, dates et horaires. Ajoutez ou retirez une durée d'une date.">
+<title>Calculateur de durée : heures, minutes et dates | Simulateur</title>
+<meta name="description" content="Convertissez des durées, calculez le temps entre deux heures ou dates et ajoutez ou retirez des jours, mois et années en quelques secondes.">
 <link rel="canonical" href="https://simulateur.site/outil/temps/">
 <link rel="stylesheet" href="/styles.css">
 <script src="/simulateurs.js" defer></script>
@@ -24,6 +24,10 @@
 
 
 .duration-content p{color:#504d46}
+.duration-content p{line-height:1.7}
+.duration-content .duration-example{box-shadow:0 4px 0 rgba(23,23,19,.06)}
+.duration-content .duration-example p{margin-bottom:0}
+.duration-panel input:focus,.duration-panel select:focus,.duration-modes select:focus{outline:3px solid var(--accent-soft);outline-offset:2px}
 .duration-faq{border-top:1px solid var(--line);padding-top:8px}
 .duration-faq details{border-bottom:1px solid var(--line);padding:15px 0}
 .duration-faq summary{font-weight:900;cursor:pointer}
@@ -31,7 +35,7 @@
 .duration-example strong{font-size:1.35rem}
 @media(max-width:650px){.duration-grid{grid-template-columns:1fr}.duration-panel{padding:14px 14px 2px}}
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur de durée","url":"https://simulateur.site/outil/temps/","description":"Calculez et convertissez une durée : minutes, heures, secondes, dates et horaires. Ajoutez ou retirez une durée d\u0027une date.","inLanguage":"fr-FR","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"price":"0","priceCurrency":"EUR"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Temps","item":"https://simulateur.site/temps/"},{"@type":"ListItem","position":3,"name":"Calculateur de durée","item":"https://simulateur.site/outil/temps/"}]}</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta property="og:type" content="website"><meta property="og:site_name" content="Simulateur"><meta property="og:locale" content="fr_FR"><meta property="og:title" content="Calculateur de durée"><meta property="og:description" content="Calculez et convertissez une durée : minutes, heures, secondes, dates et horaires. Ajoutez ou retirez une durée d'une date."><meta property="og:url" content="https://simulateur.site/outil/temps/"><meta name="twitter:card" content="summary"></head>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur de durée","url":"https://simulateur.site/outil/temps/","description":"Convertissez des durées, calculez le temps entre deux heures ou dates et ajoutez ou retirez des jours, mois et années en quelques secondes.","inLanguage":"fr-FR","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"price":"0","priceCurrency":"EUR"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Temps","item":"https://simulateur.site/temps/"},{"@type":"ListItem","position":3,"name":"Calculateur de durée","item":"https://simulateur.site/outil/temps/"}]}</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta property="og:type" content="website"><meta property="og:site_name" content="Simulateur"><meta property="og:locale" content="fr_FR"><meta property="og:title" content="Calculateur de durée : heures, minutes et dates | Simulateur"><meta property="og:description" content="Convertissez des durées, calculez le temps entre deux heures ou dates et ajoutez ou retirez des jours, mois et années en quelques secondes."><meta property="og:url" content="https://simulateur.site/outil/temps/"><meta name="twitter:card" content="summary"></head>
 <body>
 <header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header>
 <main>
@@ -46,6 +50,7 @@
 <label for="durationMode">Que souhaitez-vous calculer ?</label>
 <select id="durationMode">
 <option value="convert">Convertir une durée</option>
+<option value="sum">Additionner ou soustraire des durées</option>
 <option value="dates">Entre deux dates</option>
 <option value="times">Entre deux heures</option>
 <option value="datetime">Entre deux dates et heures</option>
@@ -82,6 +87,19 @@
 <div id="compoundFields"></div>
 </div>
 
+<div class="duration-panel" data-panel="sum" hidden>
+<div class="duration-grid">
+<div class="field"><label for="sumAH">Première durée — heures</label><input id="sumAH" type="number" min="0" step="1" value="2"></div>
+<div class="field"><label for="sumAM">Première durée — minutes</label><input id="sumAM" type="number" min="0" max="59" step="1" value="30"></div>
+<div class="field"><label for="sumAS">Première durée — secondes</label><input id="sumAS" type="number" min="0" max="59" step="1" value="0"></div>
+<div class="field"><label for="sumOperation">Opération</label><select id="sumOperation"><option value="add">Additionner (+)</option><option value="subtract">Soustraire (−)</option></select></div>
+<div class="field"><label for="sumBH">Deuxième durée — heures</label><input id="sumBH" type="number" min="0" step="1" value="1"></div>
+<div class="field"><label for="sumBM">Deuxième durée — minutes</label><input id="sumBM" type="number" min="0" max="59" step="1" value="45"></div>
+<div class="field"><label for="sumBS">Deuxième durée — secondes</label><input id="sumBS" type="number" min="0" max="59" step="1" value="0"></div>
+</div>
+<p class="duration-help">Les minutes et secondes doivent être comprises entre 0 et 59. Une soustraction peut produire une durée négative.</p>
+</div>
+
 <div class="duration-panel" data-panel="dates" hidden>
 <div class="duration-grid">
 <div class="field"><label for="dateStart">Date de début</label><input id="dateStart" type="date"></div>
@@ -107,42 +125,45 @@
 <div class="duration-panel" data-panel="add" hidden>
 <div class="field"><label for="addDateTime">Date et heure de départ</label><input id="addDateTime" type="datetime-local" step="1"></div>
 <div class="duration-grid">
-<div class="field"><label for="addYears">Années</label><input id="addYears" type="number" min="0" step="1" value="0"></div>
+<div class="field"><label for="addYears">Années</label><input id="addYears" type="number" step="1" value="0"></div>
 <div class="field"><label for="addMonths">Mois</label><input id="addMonths" type="number" step="1" value="0"></div>
 <div class="field"><label for="addDays">Jours</label><input id="addDays" type="number" step="1" value="0"></div>
 <div class="field"><label for="addHours">Heures</label><input id="addHours" type="number" step="1" value="0"></div>
 <div class="field"><label for="addMinutes">Minutes</label><input id="addMinutes" type="number" step="1" value="0"></div>
 <div class="field"><label for="addSeconds">Secondes</label><input id="addSeconds" type="number" step="1" value="0"></div>
 </div>
-<p class="duration-help">Utilisez des valeurs négatives pour retirer une durée.</p>
+<p class="duration-help">Les valeurs négatives retirent une durée. Si le jour demandé n’existe pas dans le mois d’arrivée, le calcul retient le dernier jour de ce mois.</p>
 </div>
 </div>
 
-<button class="button-main" onclick="Simulateurs.calc()">Calculer</button>
+<button class="button-main" type="button" onclick="Simulateurs.calc()">Calculer</button>
 <div class="result" id="result" aria-live="polite">Saisissez vos données puis lancez le calcul.</div>
-<div class="formula"><strong>Méthode et conventions</strong><p>Les conversions utilisent 60 secondes par minute, 60 minutes par heure, 24 heures par jour et 7 jours par semaine. Les mois et années sont traités comme des unités calendaires, dont la durée dépend de la date.</p></div>
+<div class="formula"><strong>Méthode et sources</strong><p>Les conversions fixes utilisent 60 secondes par minute, 60 minutes par heure, 24 heures par jour et 7 jours par semaine. Les écarts entre dates sont calculés en jours calendaires écoulés, sans compter le jour de départ comme une journée complète. Les mois et années restent des unités de calendrier : leur longueur dépend de la date de départ.</p><p>Pour l’écriture des dates et heures, voir la <a href="https://www.iso.org/iso-8601-date-and-time-format.html" target="_blank" rel="noopener noreferrer">présentation de la norme ISO 8601</a>. Pour les relations entre secondes, minutes et heures, consulter la <a href="https://www.bipm.org/documents/20126/41483022/SI-Brochure-9-FR.pdf" target="_blank" rel="noopener noreferrer">Brochure sur le Système international d’unités (BIPM)</a>. Ce calculateur ne calcule pas les heures réellement travaillées et ne tient pas compte des changements de fuseau horaire.</p></div>
 </section>
 
-<div class="duration-content">
-<div class="duration-example"><div class="eyebrow">Exemple</div><strong>150 minutes = 2 h 30 min = 2,5 heures = 9 000 secondes</strong></div>
-<h2>Calculer une durée simplement</h2>
+<section class="duration-content content-section">
+<div class="duration-example"><div class="eyebrow">Exemple vérifié</div><strong>150 minutes = 2 h 30 min = 2,5 heures = 9 000 secondes</strong><p>Calcul : 150 × 60 = 9 000 secondes ; 9 000 ÷ 3 600 = 2,5 heures.</p></div>
+<h2>Calculer et convertir une durée</h2>
 <p>Ce calculateur regroupe les principaux calculs de durée sur une seule page : conversion d'unités, différence entre deux dates, durée entre deux horaires, durée entre deux dates et heures, et ajout ou retrait d'une durée.</p>
-<h3>Convertir une durée</h3>
+<h2>Additionner ou soustraire des durées</h2>
+<p>Utilisez ce mode pour cumuler deux durées ou retirer un temps à un autre, par exemple 2 h 30 min + 1 h 45 min = 4 h 15 min. Le résultat affiche aussi les heures décimales et les totaux en minutes et secondes.</p>
+<h2>Convertir une durée composée</h2>
 <p>Pour une conversion simple, saisissez uniquement la valeur et son unité. Pour une durée composée, choisissez les unités nécessaires : par exemple 2 heures et 30 minutes peuvent être converties directement en minutes.</p>
-<h3>Différence entre deux dates</h3>
-<p>Le résultat donne le nombre total de jours ainsi qu'une présentation en années, mois et jours lorsque celle-ci est pertinente. Les jours calendaires comprennent tous les jours du calendrier ; une année bissextile comporte 366 jours. Source : Service-Public.fr, définition des jours calendaires et années bissextiles.</p>
-<h3>Entre deux heures</h3>
-<p>Deux horaires suffisent. Lorsque l'heure de fin précède l'heure de début, le calcul considère qu'elle correspond au lendemain afin de permettre les plages qui passent minuit.</p>
-<h3>Ajouter ou retirer une durée</h3>
+<h2>Calculer le temps entre deux dates</h2>
+<p>Le résultat donne le nombre total de jours ainsi qu’une présentation en années, mois et jours lorsque celle-ci est pertinente. Les jours calendaires comprennent tous les jours du calendrier ; une année bissextile comporte 366 jours. Pour compter uniquement les jours de semaine, utilisez le <a href="/outil/jours-ouvres/">calculateur de jours ouvrés</a>.</p>
+<h2>Calculer une durée entre deux heures</h2>
+<p>Deux horaires suffisent. Lorsque l’heure de fin précède l’heure de début, le calcul considère qu’elle correspond au lendemain afin de permettre les plages qui passent minuit. Ce mode ne déduit pas de pause : pour une journée de travail, utilisez le <a href="/outil/temps-travail/">calculateur de temps de travail</a>.</p>
+<h2>Ajouter ou retirer une durée à une date</h2>
 <p>Vous pouvez ajouter ou soustraire des années, mois, jours, heures, minutes et secondes à une date et une heure. Les mois et années sont traités comme des unités calendaires : leur longueur dépend du calendrier, contrairement à une durée fixe exprimée en heures ou secondes. Référence : ISO 8601, représentation des dates, heures et durées.</p>
-<div class="duration-faq">
-<h2>Questions fréquentes</h2>
-<details><summary>Combien font 150 minutes en heures ?</summary><p>150 minutes correspondent à 2 heures et 30 minutes, soit 2,5 heures ou 9 000 secondes.</p></details>
-<details><summary>Comment calculer le nombre de jours entre deux dates ?</summary><p>Sélectionnez « Entre deux dates », indiquez les deux dates et lancez le calcul. Le résultat indique le total de jours et une décomposition calendaire lorsque celle-ci est utile.</p></details>
-<details><summary>Comment calculer une durée qui passe minuit ?</summary><p>Dans « Entre deux heures », saisissez l'heure de début et l'heure de fin. Si la fin est antérieure au début, elle est interprétée comme l'heure du lendemain.</p></details>
-<details><summary>Quelle est la différence entre un mois et 30 jours ?</summary><p>Un mois est une unité calendaire dont la longueur peut varier. Il ne doit donc pas être assimilé automatiquement à 30 jours. ISO 8601 distingue les unités calendaires des durées fixes.</p></details>
-</div>
-</div>
+</section>
+<section class="calculator-faq duration-faq" aria-labelledby="faq-title">
+<h2 id="faq-title">FAQ</h2>
+<details><summary>Combien font 150 minutes en heures ?</summary><div class="calculator-faq-answer"><p>150 minutes correspondent à 2 heures et 30 minutes, soit 2,5 heures ou 9 000 secondes.</p></div></details>
+<details><summary>Comment calculer le nombre de jours entre deux dates ?</summary><div class="calculator-faq-answer"><p>Sélectionnez « Entre deux dates », indiquez les deux dates et lancez le calcul. Le résultat indique le total de jours écoulés et une décomposition calendaire en années, mois et jours.</p></div></details>
+<details><summary>Comment calculer une durée qui passe minuit ?</summary><div class="calculator-faq-answer"><p>Dans « Entre deux heures », saisissez l’heure de début et l’heure de fin. Si la fin est antérieure au début, elle est interprétée comme l’heure du lendemain. Si les deux horaires sont identiques, le résultat est zéro : ce mode ne permet pas de distinguer une durée nulle d’une journée complète.</p></div></details>
+<details><summary>Quelle est la différence entre un mois et 30 jours ?</summary><div class="calculator-faq-answer"><p>Un mois est une unité calendaire dont la longueur varie selon le mois. Il ne doit pas être assimilé automatiquement à 30 jours : pour les calculs calendaires, le résultat dépend de la date de départ.</p></div></details>
+<details><summary>Le calcul tient-il compte du changement d’heure ?</summary><div class="calculator-faq-answer"><p>Non. Les dates et heures saisies sont comparées comme des horaires civils, sans fuseau horaire. Le résultat ne représente donc pas nécessairement le temps réellement écoulé lors d’un passage à l’heure d’été ou d’hiver.</p></div></details>
+</section>
 </div>
 <section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Calculs associés</h2><div class="related-links"><a class="related-link" href="/outil/difference-dates/"><strong>Différence entre deux dates</strong><span>Calculer l’écart entre deux dates.</span></a><a class="related-link" href="/outil/temps-travail/"><strong>Temps de travail</strong><span>Calculer une durée de travail.</span></a><a class="related-link" href="/outil/age/"><strong>Calcul d’âge</strong><span>Calculer précisément un âge.</span></a></div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="/temps/">Temps</a>.</p></div></section></main>
 <footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer>
@@ -151,13 +172,15 @@
 (function(){
   const F={field:(id,label,type="number",attrs="")=>'<div class="field"><label for="'+id+'">'+label+'</label><input id="'+id+'" type="'+type+'" '+attrs+'></div>'};
   const pad=n=>String(n).padStart(2,"0");
+  const yearText=y=>String(y).padStart(4,"0");
   const number=n=>Number(n).toLocaleString("fr-FR",{maximumFractionDigits:6});
   const plural=(n,s,p)=>Math.abs(n)===1?s:p;
   const unitText=(n,u)=>number(n)+" "+(Math.abs(n)===1?u:(u==="mois"?"mois":u+"s"));
+  const makeUTCDate=(y,m,d,h=0,mi=0,s=0)=>{const date=new Date(0);date.setUTCFullYear(y,m-1,d);date.setUTCHours(h,mi,s,0);return date;};
   const parseDate=value=>{
     if(!/^\d{4}-\d{2}-\d{2}$/.test(value)) return null;
     const [y,m,d]=value.split("-").map(Number);
-    const date=new Date(Date.UTC(y,m-1,d));
+    const date=makeUTCDate(y,m,d);
     return date.getUTCFullYear()===y&&date.getUTCMonth()===m-1&&date.getUTCDate()===d?{y,m,d,date}:null;
   };
   const parseDateTime=value=>{
@@ -166,23 +189,23 @@
     if(!d) return null;
     const parts=ts.split(":").map(Number),h=parts[0],mi=parts[1],s=parts[2]||0;
     if(h>23||mi>59||s>59) return null;
-    return {y:d.y,m:d.m,d:d.d,h,mi,s,date:new Date(Date.UTC(d.y,d.m-1,d.d,h,mi,s))};
+    return {y:d.y,m:d.m,d:d.d,h,mi,s,date:makeUTCDate(d.y,d.m,d.d,h,mi,s)};
   };
   const parseTime=value=>{
     if(!/^\d{2}:\d{2}(?::\d{2})?$/.test(value)) return null;
     const p=value.split(":").map(Number),h=p[0],m=p[1],s=p[2]||0;
     return h<=23&&m<=59&&s<=59?{h,m,s,total:h*3600+m*60+s}:null;
   };
-  const dateLabel=d=>pad(d.d)+"/"+pad(d.m)+"/"+d.y+" à "+pad(d.h)+":"+pad(d.mi)+(d.s?":"+pad(d.s):"");
-  const daysInMonth=(y,m)=>new Date(Date.UTC(y,m,0)).getUTCDate();
+  const dateLabel=d=>pad(d.d)+"/"+pad(d.m)+"/"+yearText(d.y)+" à "+pad(d.h)+":"+pad(d.mi)+(d.s?":"+pad(d.s):"");
+  const daysInMonth=(y,m)=>makeUTCDate(y,m+1,0).getUTCDate();
   const addCalendarMonths=(parts,years,months)=>{
     let total=parts.y*12+(parts.m-1)+years*12+months;
     let y=Math.floor(total/12),m=((total%12)+12)%12+1;
     let d=Math.min(parts.d,daysInMonth(y,m));
     return {y,m,d,h:parts.h||0,mi:parts.mi||0,s:parts.s||0};
   };
-  const toDateTime=p=>new Date(Date.UTC(p.y,p.m-1,p.d,p.h||0,p.mi||0,p.s||0));
-  const formatDateTime=p=>pad(p.d)+"/"+pad(p.m)+"/"+p.y+" à "+pad(p.h||0)+":"+pad(p.mi||0)+(p.s?":"+pad(p.s):"");
+  const toDateTime=p=>makeUTCDate(p.y,p.m,p.d,p.h||0,p.mi||0,p.s||0);
+  const formatDateTime=p=>pad(p.d)+"/"+pad(p.m)+"/"+yearText(p.y)+" à "+pad(p.h||0)+":"+pad(p.mi||0)+(p.s?":"+pad(p.s):"");
   const diffCalendar=(a,b)=>{
     let years=b.y-a.y;
     let candidate=addCalendarMonths(a,years,0);
@@ -195,29 +218,36 @@
   };
   const formatDuration=(seconds,includeSeconds=true)=>{
     const sign=seconds<0?"−":"",total=Math.abs(seconds);
-    let s=Math.floor(total),h=Math.floor(s/3600);s%=3600;
+    if(!Number.isFinite(total)) return "Valeur hors plage";
+    const normalized=Number(total.toFixed(6));
+    let whole=Math.floor(normalized),fraction=normalized-whole;
+    let h=Math.floor(whole/3600);whole%=3600;
     const d=Math.floor(h/24);h%=24;
-    const m=Math.floor(s/60);s%=60;
+    const m=Math.floor(whole/60),s=whole%60;
     const parts=[];
     if(d) parts.push(unitText(d,"jour"));
     if(h) parts.push(unitText(h,"heure"));
     if(m) parts.push(unitText(m,"minute"));
-    if(includeSeconds&&s) parts.push(unitText(s,"seconde"));
+    if(includeSeconds&&(s||fraction>0)){const secondsPart=s+fraction;parts.push(number(secondsPart)+" "+(secondsPart<=1?"seconde":"secondes"));}
     if(!parts.length) parts.push("0 seconde");
     return sign+parts.join(" ");
   };
   const conversionSeconds=()=>{
     const compound=document.getElementById("convertCompound").value;
     if(compound==="single"){
-      const v=Number(document.getElementById("convertValue").value),u=document.getElementById("convertUnit").value;
+      const raw=document.getElementById("convertValue").value,u=document.getElementById("convertUnit").value;
+      if(raw.trim()==="") return null;
+      const v=Number(raw);
       if(!Number.isFinite(v)||v<0) return null;
       const seconds=v*({seconds:1,minutes:60,hours:3600,days:86400,weeks:604800}[u]);
       if(!Number.isFinite(seconds)) return null;
       return {seconds,label:number(v)+" "+u};
     }
     const ids=compound==="hm"?["compoundH","compoundM"]:compound==="hms"?["compoundH","compoundM","compoundS"]:["compoundM","compoundS"];
-    const vals=ids.map(id=>Number(document.getElementById(id).value||0));
-    if(vals.some(v=>!Number.isFinite(v)||v<0)) return null;
+    const rawValues=ids.map(id=>document.getElementById(id).value);
+    if(rawValues.some(v=>v.trim()==="")) return null;
+    const vals=rawValues.map(Number);
+    if(vals.some(v=>!Number.isFinite(v)||v<0)||vals.some(v=>!Number.isInteger(v))) return null;
     let seconds=0;
     if(compound==="hm"||compound==="hms") seconds+=vals[0]*3600+vals[1]*60+(vals[2]||0);
     else seconds+=vals[0]*60+vals[1];
@@ -229,15 +259,16 @@
     document.getElementById("convertValue").closest(".field").hidden=true;
     document.getElementById("convertUnit").closest(".field").hidden=true;
     let html='<div class="duration-grid">';
-    if(mode==="hm"||mode==="hms") html+=F.field("compoundH","Heures","number",'min="0" step="any" inputmode="decimal" value="0"');
-    html+=F.field("compoundM","Minutes","number",'min="0" step="any" inputmode="decimal" value="0"');
-    if(mode==="hms"||mode==="ms") html+=F.field("compoundS","Secondes","number",'min="0" step="any" inputmode="decimal" value="0"');
+    if(mode==="hm"||mode==="hms") html+=F.field("compoundH","Heures","number",'min="0" step="1" inputmode="numeric" value="0"');
+    html+=F.field("compoundM","Minutes","number",'min="0" step="1" inputmode="numeric" value="0"');
+    if(mode==="hms"||mode==="ms") html+=F.field("compoundS","Secondes","number",'min="0" step="1" inputmode="numeric" value="0"');
     host.innerHTML=html+"</div>";
   };
   const setMode=mode=>{
     document.querySelectorAll("[data-panel]").forEach(p=>p.hidden=p.dataset.panel!==mode);
     const intro={
       convert:"Convertissez une durée en secondes, minutes, heures, jours ou semaines.",
+      sum:"Additionnez deux durées ou soustrayez la seconde de la première.",
       dates:"Calculez précisément l'écart entre deux dates.",
       times:"Calculez la durée entre deux horaires, y compris lorsqu'elle passe minuit.",
       datetime:"Calculez la durée entre deux dates et heures.",
@@ -254,6 +285,16 @@
       const s=c.seconds;
       const hours=s/3600,minutes=s/60,days=s/86400;
       return '<div class="result-main"><strong>'+formatDuration(s,true)+'</strong></div><div class="takeaway"><div class="takeaway-title">Équivalences</div><div class="takeaway-grid"><div class="takeaway-item"><small>Heures</small><strong>'+number(hours)+'</strong></div><div class="takeaway-item"><small>Minutes</small><strong>'+number(minutes)+'</strong></div><div class="takeaway-item"><small>Secondes</small><strong>'+number(s)+'</strong></div></div></div><p class="small">Soit '+number(days)+' jour(s).</p>';
+    }
+    if(mode==="sum"){
+      const ids=["sumAH","sumAM","sumAS","sumBH","sumBM","sumBS"];
+      const rawValues=ids.map(id=>document.getElementById(id).value);
+      if(rawValues.some(v=>v.trim()==="")) return "Complétez tous les champs de durée avant de calculer.";
+      const vals=rawValues.map(Number);
+      if(vals.some(v=>!Number.isFinite(v)||!Number.isInteger(v)||v<0)||vals[1]>59||vals[2]>59||vals[4]>59||vals[5]>59) return "Saisissez des durées valides : heures positives, minutes et secondes de 0 à 59."
+      const first=vals[0]*3600+vals[1]*60+vals[2],second=vals[3]*3600+vals[4]*60+vals[5];
+      const total=document.getElementById("sumOperation").value==="subtract"?first-second:first+second;
+      return '<div class="result-main"><strong>'+formatDuration(total,true)+'</strong></div><div class="takeaway"><div class="takeaway-title">Équivalences</div><div class="takeaway-grid"><div class="takeaway-item"><small>Heures décimales</small><strong>'+number(total/3600)+'</strong></div><div class="takeaway-item"><small>Minutes totales</small><strong>'+number(total/60)+'</strong></div><div class="takeaway-item"><small>Secondes totales</small><strong>'+number(total)+'</strong></div></div></div>';
     }
     if(mode==="dates"){
       const a=parseDate(document.getElementById("dateStart").value),b=parseDate(document.getElementById("dateEnd").value);
@@ -276,10 +317,13 @@
     if(mode==="add"){
       const start=parseDateTime(document.getElementById("addDateTime").value);
       if(!start) return "Saisissez une date et une heure de départ valides.";
-      const vals=["addYears","addMonths","addDays","addHours","addMinutes","addSeconds"].map(id=>Number(document.getElementById(id).value||0));
-      if(vals.some(v=>!Number.isFinite(v)||!Number.isInteger(v))) return "Les années, mois, jours, heures, minutes et secondes doivent être des nombres entiers.";
+      const rawValues=["addYears","addMonths","addDays","addHours","addMinutes","addSeconds"].map(id=>document.getElementById(id).value);
+      if(rawValues.some(v=>v.trim()==="")) return "Complétez chaque unité avec un nombre entier, ou saisissez 0 si elle ne doit pas changer.";
+      const vals=rawValues.map(Number);
+      if(vals.some(v=>!Number.isFinite(v)||!Number.isInteger(v))||vals.some(v=>Math.abs(v)>100000)) return "Saisissez des nombres entiers compris entre −100 000 et 100 000 pour chaque unité.";
       let p=addCalendarMonths(start,vals[0],vals[1]);
-      const base=toDateTime(p)+((vals[2]*86400+vals[3]*3600+vals[4]*60+vals[5])*1000);
+      const base=toDateTime(p).getTime()+((vals[2]*86400+vals[3]*3600+vals[4]*60+vals[5])*1000);
+      if(!Number.isFinite(base)||Math.abs(base)>8640000000000000) return "La date calculée dépasse la plage de dates prise en charge.";
       const result=new Date(base);
       const rp={y:result.getUTCFullYear(),m:result.getUTCMonth()+1,d:result.getUTCDate(),h:result.getUTCHours(),mi:result.getUTCMinutes(),s:result.getUTCSeconds()};
       return '<div class="result-main"><strong>'+formatDateTime(rp)+'</strong></div><p>Résultat obtenu après application de la durée saisie.</p><p class="small">Les années et mois suivent le calendrier ; les jours, heures, minutes et secondes sont ajoutés comme durées fixes.</p>';

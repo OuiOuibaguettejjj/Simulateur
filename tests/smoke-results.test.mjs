@@ -14,5 +14,21 @@ const buttons=page.locator("button"),relative=file.slice("public/".length),inter
 if(interactive){const primary=page.locator("button.button-main");const primaryCount=await primary.count();if(primaryCount!==1)throw new Error(relative+" : exactement un button.button-main est requis, trouvé "+primaryCount);const input=page.locator("input:not([type=\"hidden\"]):not([type=\"radio\"]):not([type=\"checkbox\"]):visible").first();if(await input.count()===0)throw new Error(relative+" : aucune entrée compatible avec le mécanisme Entrée");await primary.evaluate(button=>{window.__mainButtonClicks=0;button.addEventListener("click",()=>window.__mainButtonClicks++,{capture:true})});const type=await input.getAttribute("type");if(type==="date")await input.fill("2020-01-15");else await input.fill("10");await input.press("Enter");await page.waitForTimeout(30);const clicks=await page.evaluate(()=>window.__mainButtonClicks||0);if(clicks!==1)throw new Error(relative+" : Entrée doit déclencher exactement un clic sur button.button-main, obtenu "+clicks)}
 for(let i=0;i<n;i++){try{await buttons.nth(i).click({timeout:1500});await page.waitForTimeout(30)}catch{}}
 for(const t of await page.locator(".result").allTextContents())if(isInvalidResult(t))invalid.push(file+": "+t.trim().slice(0,120));await page.close()}
-const known=await browser.newPage();await known.goto("http://127.0.0.1:4173/outil/pourcentage/",{waitUntil:"load",timeout:10000});await known.locator("#v").fill("150");await known.locator("#p").fill("20");await known.getByRole("button",{name:"Calculer"}).click();const knownText=await known.locator(".result").innerText();if(isInvalidResult(knownText)||!/30(?:[,.]0*)?\s*€/.test(knownText))throw new Error("pourcentage 150/20 : résultat inattendu : "+knownText);await known.close();await browser.close();
+const known=await browser.newPage();await known.goto("http://127.0.0.1:4173/outil/pourcentage/",{waitUntil:"load",timeout:10000});await known.locator("#v").fill("150");await known.locator("#p").fill("20");await known.getByRole("button",{name:"Calculer"}).click();const knownText=await known.locator(".result").innerText();if(isInvalidResult(knownText)||!/30(?:[,.]0*)?\s*€/.test(knownText))throw new Error("pourcentage 150/20 : résultat inattendu : "+knownText);await known.close();
+// Contrôle responsive ciblé du calculateur Temps sur mobile et ordinateur.
+for (const viewport of [{label:"mobile",width:390,height:844},{label:"ordinateur",width:1365,height:900}]) {
+  const responsive = await browser.newPage({viewport:{width:viewport.width,height:viewport.height}});
+  await responsive.goto("http://127.0.0.1:4173/outil/temps/",{waitUntil:"load",timeout:10000});
+  const layout = await responsive.evaluate(() => ({
+    viewport: window.innerWidth,
+    document: document.documentElement.scrollWidth,
+    modeVisible: !!document.querySelector("#durationMode") && document.querySelector("#durationMode").getBoundingClientRect().width > 0,
+    buttonVisible: !!document.querySelector(".button-main") && document.querySelector(".button-main").getBoundingClientRect().width > 0,
+    resultVisible: !!document.querySelector(".result") && document.querySelector(".result").getBoundingClientRect().width > 0
+  }));
+  if (layout.document > layout.viewport) throw new Error("temps : débordement horizontal en "+viewport.label+" ("+layout.document+" > "+layout.viewport+" px)");
+  if (!layout.modeVisible || !layout.buttonVisible || !layout.resultVisible) throw new Error("temps : élément principal masqué en "+viewport.label+" : "+JSON.stringify(layout));
+  await responsive.close();
+}
+await browser.close();
 if(resultPages===0)throw new Error("aucune page interactive ne contient .result");console.log("Smoke résultats : "+files.length+" pages HTML contrôlées ; "+resultPages+" pages avec .result ; "+invalid.length+" occurrence(s) invalide(s).");if(invalid.length){console.error(invalid.join("\n"));process.exit(1)}}finally{server.kill("SIGTERM")}
