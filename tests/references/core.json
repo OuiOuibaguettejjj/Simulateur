@@ -1743,7 +1743,7 @@
     "attendu": 4.25,
     "tolerance": 0,
     "sortie": "Heures décimales",
-    "source": "https://www.iso.org/fr/iso-8601-date-and-time-format.html",
+    "source": "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9-FR.pdf",
     "note": "Calcul indépendant : 2 h 30 + 1 h 45 = 4 h 15, soit 4,25 heures."
   },
   {
@@ -1757,7 +1757,8 @@
     "tolerance": 0,
     "sortie": "^8 heures",
     "source": "https://www.iso.org/fr/iso-8601-date-and-time-format.html",
-    "note": "Calcul indépendant du passage à minuit : 22 h à minuit = 2 h, puis minuit à 6 h = 6 h, total 8 h."
+    "note": "Calcul indépendant du passage à minuit : 22 h à minuit = 2 h, puis minuit à 6 h = 6 h, total 8 h.",
+    "verificationSource": "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9-FR.pdf"
   },
   {
     "outil": "temps",
@@ -1787,7 +1788,7 @@
     "attendu": -20,
     "tolerance": 0,
     "sortie": "Minutes totales",
-    "source": "https://www.iso.org/fr/iso-8601-date-and-time-format.html",
+    "source": "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9-FR.pdf",
     "note": "Calcul indépendant : 10 minutes − 30 minutes = −20 minutes ; la soustraction peut produire une durée négative."
   },
   {
@@ -1801,7 +1802,8 @@
     "tolerance": 0,
     "sortie": "Heures(?=25,5)",
     "source": "https://www.iso.org/fr/iso-8601-date-and-time-format.html",
-    "note": "Calcul indépendant : du 1er janvier à 9 h au 2 janvier à 10 h 30, il s’écoule 25 h 30, soit 25,5 heures."
+    "note": "Calcul indépendant : du 1er janvier à 9 h au 2 janvier à 10 h 30, il s’écoule 25 h 30, soit 25,5 heures.",
+    "verificationSource": "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9-FR.pdf"
   },
   {
     "outil": "temps",
@@ -1819,7 +1821,8 @@
     "tolerance": 0,
     "sortie": "^29/02/2024",
     "source": "https://www.iso.org/fr/iso-8601-date-and-time-format.html",
-    "note": "Cas calendaire indépendant : un mois après le 31 janvier 2024, le jour 31 n’existe pas en février ; le résultat est ramené au 29 février, dernier jour du mois bissextile."
+    "note": "Cas calendaire indépendant : un mois après le 31 janvier 2024, le jour 31 n’existe pas en février ; le résultat est ramené au 29 février, dernier jour du mois bissextile.",
+    "verificationSource": "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9-FR.pdf"
   },
   {
     "outil": "temps",
@@ -1832,7 +1835,7 @@
     "attendu": 0.5,
     "tolerance": 0,
     "sortie": "^0,5 seconde",
-    "source": "https://www.iso.org/iso-8601-date-and-time-format.html",
+    "source": "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9-FR.pdf",
     "note": "Non-régression : une demi-seconde doit rester visible dans la durée principale et dans les équivalences."
   },
   {
@@ -1846,7 +1849,7 @@
     "attendu": 6,
     "tolerance": 0,
     "sortie": "^6 secondes",
-    "source": "https://www.iso.org/iso-8601-date-and-time-format.html",
+    "source": "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9-FR.pdf",
     "note": "Non-régression : 0,1 minute correspond exactement à 6 secondes."
   },
   {
@@ -1864,7 +1867,53 @@
     "attendu": 100,
     "tolerance": 0,
     "sortie": "0100",
-    "source": "https://www.iso.org/iso-8601-date-and-time-format.html",
-    "note": "Non-régression calendaire : les années 0001–0099 ne doivent pas être décalées de 1900 ans par Date.UTC."
+    "source": "https://www.iso.org/fr/iso-8601-date-and-time-format.html",
+    "note": "Non-régression calendaire : les années 0001–0099 ne doivent pas être décalées de 1900 ans par Date.UTC.",
+    "verificationSource": "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9-FR.pdf"
+  },
+  {
+    "outil": "temps",
+    "entrees": {
+      "durationMode": "convert",
+      "convertCompound": "single",
+      "convertValue": "1.5",
+      "convertUnit": "hours"
+    },
+    "attendu": 90,
+    "tolerance": 0,
+    "sortie": "Minutes",
+    "source": "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9-FR.pdf",
+    "note": "Contrôle décimal indépendant : 1,5 heure = 90 minutes. Les relations entre unités de temps sont vérifiées à partir de la Brochure sur le SI du BIPM."
+  },
+  {
+    "outil": "temps",
+    "entrees": {
+      "durationMode": "dates",
+      "dateStart": "2024-02-29",
+      "dateEnd": "2024-03-01"
+    },
+    "attendu": 1,
+    "tolerance": 0,
+    "sortie": "^1 jour",
+    "source": "https://www.iso.org/fr/iso-8601-date-and-time-format.html",
+    "note": "Cas de frontière calendaire : du 29 février 2024 au 1er mars 2024, un jour calendaire s’écoule."
+  },
+  {
+    "outil": "temps",
+    "entrees": {
+      "durationMode": "add",
+      "addDateTime": "2023-01-31T10:00",
+      "addYears": "0",
+      "addMonths": "1",
+      "addDays": "0",
+      "addHours": "0",
+      "addMinutes": "0",
+      "addSeconds": "0"
+    },
+    "attendu": 28,
+    "tolerance": 0,
+    "sortie": "^28/02/2023",
+    "source": "https://www.iso.org/fr/iso-8601-date-and-time-format.html",
+    "note": "Cas de fin de mois non bissextile : un mois après le 31 janvier 2023, le résultat est ramené au 28 février."
   }
 ]
