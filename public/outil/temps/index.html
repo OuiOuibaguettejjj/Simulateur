@@ -56,6 +56,7 @@
 <label for="durationMode">Que souhaitez-vous calculer ?</label>
 <select id="durationMode">
 <option value="convert">Convertir une durée</option>
+<option value="sum">Additionner ou soustraire des durées</option>
 <option value="dates">Entre deux dates</option>
 <option value="times">Entre deux heures</option>
 <option value="datetime">Entre deux dates et heures</option>
@@ -90,6 +91,19 @@
 </select>
 </div>
 <div id="compoundFields"></div>
+</div>
+
+<div class="duration-panel" data-panel="sum" hidden>
+<div class="duration-grid">
+<div class="field"><label for="sumAH">Première durée — heures</label><input id="sumAH" type="number" min="0" step="1" value="2"></div>
+<div class="field"><label for="sumAM">Première durée — minutes</label><input id="sumAM" type="number" min="0" max="59" step="1" value="30"></div>
+<div class="field"><label for="sumAS">Première durée — secondes</label><input id="sumAS" type="number" min="0" max="59" step="1" value="0"></div>
+<div class="field"><label for="sumOperation">Opération</label><select id="sumOperation"><option value="add">Additionner (+)</option><option value="subtract">Soustraire (−)</option></select></div>
+<div class="field"><label for="sumBH">Deuxième durée — heures</label><input id="sumBH" type="number" min="0" step="1" value="1"></div>
+<div class="field"><label for="sumBM">Deuxième durée — minutes</label><input id="sumBM" type="number" min="0" max="59" step="1" value="45"></div>
+<div class="field"><label for="sumBS">Deuxième durée — secondes</label><input id="sumBS" type="number" min="0" max="59" step="1" value="0"></div>
+</div>
+<p class="duration-help">Les minutes et secondes doivent être comprises entre 0 et 59. Une soustraction peut produire une durée négative.</p>
 </div>
 
 <div class="duration-panel" data-panel="dates" hidden>
@@ -137,6 +151,8 @@
 <div class="duration-example"><div class="eyebrow">Exemple vérifié</div><strong>150 minutes = 2 h 30 min = 2,5 heures = 9 000 secondes</strong><p>Calcul : 150 × 60 = 9 000 secondes ; 9 000 ÷ 3 600 = 2,5 heures.</p></div>
 <h2>Calculer et convertir une durée</h2>
 <p>Ce calculateur regroupe les principaux calculs de durée sur une seule page : conversion d'unités, différence entre deux dates, durée entre deux horaires, durée entre deux dates et heures, et ajout ou retrait d'une durée.</p>
+<h2>Additionner ou soustraire des durées</h2>
+<p>Utilisez ce mode pour cumuler deux durées ou retirer un temps à un autre, par exemple 2 h 30 min + 1 h 45 min = 4 h 15 min. Le résultat affiche aussi les heures décimales et les totaux en minutes et secondes.</p>
 <h2>Convertir une durée composée</h2>
 <p>Pour une conversion simple, saisissez uniquement la valeur et son unité. Pour une durée composée, choisissez les unités nécessaires : par exemple 2 heures et 30 minutes peuvent être converties directement en minutes.</p>
 <h2>Calculer le temps entre deux dates</h2>
@@ -248,6 +264,7 @@
     document.querySelectorAll("[data-panel]").forEach(p=>p.hidden=p.dataset.panel!==mode);
     const intro={
       convert:"Convertissez une durée en secondes, minutes, heures, jours ou semaines.",
+      sum:"Additionnez deux durées ou soustrayez la seconde de la première.",
       dates:"Calculez précisément l'écart entre deux dates.",
       times:"Calculez la durée entre deux horaires, y compris lorsqu'elle passe minuit.",
       datetime:"Calculez la durée entre deux dates et heures.",
@@ -264,6 +281,14 @@
       const s=c.seconds;
       const hours=s/3600,minutes=s/60,days=s/86400;
       return '<div class="result-main"><strong>'+formatDuration(s,true)+'</strong></div><div class="takeaway"><div class="takeaway-title">Équivalences</div><div class="takeaway-grid"><div class="takeaway-item"><small>Heures</small><strong>'+number(hours)+'</strong></div><div class="takeaway-item"><small>Minutes</small><strong>'+number(minutes)+'</strong></div><div class="takeaway-item"><small>Secondes</small><strong>'+number(s)+'</strong></div></div></div><p class="small">Soit '+number(days)+' jour(s).</p>';
+    }
+    if(mode==="sum"){
+      const ids=["sumAH","sumAM","sumAS","sumBH","sumBM","sumBS"];
+      const vals=ids.map(id=>Number(document.getElementById(id).value));
+      if(vals.some(v=>!Number.isFinite(v)||!Number.isInteger(v)||v<0)||vals[1]>59||vals[2]>59||vals[4]>59||vals[5]>59) return "Saisissez des durées valides : heures positives, minutes et secondes de 0 à 59.";
+      const first=vals[0]*3600+vals[1]*60+vals[2],second=vals[3]*3600+vals[4]*60+vals[5];
+      const total=document.getElementById("sumOperation").value==="subtract"?first-second:first+second;
+      return '<div class="result-main"><strong>'+formatDuration(total,true)+'</strong></div><div class="takeaway"><div class="takeaway-title">Équivalences</div><div class="takeaway-grid"><div class="takeaway-item"><small>Heures décimales</small><strong>'+number(total/3600)+'</strong></div><div class="takeaway-item"><small>Minutes totales</small><strong>'+number(total/60)+'</strong></div><div class="takeaway-item"><small>Secondes totales</small><strong>'+number(total)+'</strong></div></div></div>';
     }
     if(mode==="dates"){
       const a=parseDate(document.getElementById("dateStart").value),b=parseDate(document.getElementById("dateEnd").value);
