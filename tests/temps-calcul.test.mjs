@@ -25,11 +25,11 @@ await expectConversion({
 });
 await expectConversion({
   value:"604800",fromUnit:"seconds",toUnit:"weeks",
-  expected:/604 800 seconde\(s\) = 1 semaine\(s\) de 7 jours/
+  expected:/604 800 seconde\(s\) = 1 semaine\(s\) de 7 jours/
 });
 await expectConversion({
   value:"1",fromUnit:"weeks",toUnit:"seconds",
-  expected:/1 semaine\(s\) de 7 jours = 604 800 seconde\(s\)/
+  expected:/1 semaine\(s\) de 7 jours = 604 800 seconde\(s\)/
 });
 await expectConversion({
   value:"0",fromUnit:"seconds",toUnit:"minutes",
