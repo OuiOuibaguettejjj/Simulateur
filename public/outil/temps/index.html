@@ -175,10 +175,11 @@
   const number=n=>Number(n).toLocaleString("fr-FR",{maximumFractionDigits:6});
   const plural=(n,s,p)=>Math.abs(n)===1?s:p;
   const unitText=(n,u)=>number(n)+" "+(Math.abs(n)===1?u:(u==="mois"?"mois":u+"s"));
+  const makeUTCDate=(y,m,d,h=0,mi=0,s=0)=>{const date=new Date(0);date.setUTCFullYear(y,m-1,d);date.setUTCHours(h,mi,s,0);return date;};
   const parseDate=value=>{
     if(!/^\d{4}-\d{2}-\d{2}$/.test(value)) return null;
     const [y,m,d]=value.split("-").map(Number);
-    const date=new Date(Date.UTC(y,m-1,d));
+    const date=makeUTCDate(y,m,d);
     return date.getUTCFullYear()===y&&date.getUTCMonth()===m-1&&date.getUTCDate()===d?{y,m,d,date}:null;
   };
   const parseDateTime=value=>{
@@ -187,7 +188,7 @@
     if(!d) return null;
     const parts=ts.split(":").map(Number),h=parts[0],mi=parts[1],s=parts[2]||0;
     if(h>23||mi>59||s>59) return null;
-    return {y:d.y,m:d.m,d:d.d,h,mi,s,date:new Date(Date.UTC(d.y,d.m-1,d.d,h,mi,s))};
+    return {y:d.y,m:d.m,d:d.d,h,mi,s,date:makeUTCDate(d.y,d.m,d.d,h,mi,s)};
   };
   const parseTime=value=>{
     if(!/^\d{2}:\d{2}(?::\d{2})?$/.test(value)) return null;
@@ -195,14 +196,14 @@
     return h<=23&&m<=59&&s<=59?{h,m,s,total:h*3600+m*60+s}:null;
   };
   const dateLabel=d=>pad(d.d)+"/"+pad(d.m)+"/"+d.y+" à "+pad(d.h)+":"+pad(d.mi)+(d.s?":"+pad(d.s):"");
-  const daysInMonth=(y,m)=>new Date(Date.UTC(y,m,0)).getUTCDate();
+  const daysInMonth=(y,m)=>makeUTCDate(y,m+1,0).getUTCDate();
   const addCalendarMonths=(parts,years,months)=>{
     let total=parts.y*12+(parts.m-1)+years*12+months;
     let y=Math.floor(total/12),m=((total%12)+12)%12+1;
     let d=Math.min(parts.d,daysInMonth(y,m));
     return {y,m,d,h:parts.h||0,mi:parts.mi||0,s:parts.s||0};
   };
-  const toDateTime=p=>new Date(Date.UTC(p.y,p.m-1,p.d,p.h||0,p.mi||0,p.s||0));
+  const toDateTime=p=>makeUTCDate(p.y,p.m,p.d,p.h||0,p.mi||0,p.s||0);
   const formatDateTime=p=>pad(p.d)+"/"+pad(p.m)+"/"+p.y+" à "+pad(p.h||0)+":"+pad(p.mi||0)+(p.s?":"+pad(p.s):"");
   const diffCalendar=(a,b)=>{
     let years=b.y-a.y;
@@ -216,28 +217,35 @@
   };
   const formatDuration=(seconds,includeSeconds=true)=>{
     const sign=seconds<0?"−":"",total=Math.abs(seconds);
-    let s=Math.floor(total),h=Math.floor(s/3600);s%=3600;
+    if(!Number.isFinite(total)) return "Valeur hors plage";
+    const normalized=Number(total.toFixed(6));
+    let whole=Math.floor(normalized),fraction=normalized-whole;
+    let h=Math.floor(whole/3600);whole%=3600;
     const d=Math.floor(h/24);h%=24;
-    const m=Math.floor(s/60);s%=60;
+    const m=Math.floor(whole/60),s=whole%60;
     const parts=[];
     if(d) parts.push(unitText(d,"jour"));
     if(h) parts.push(unitText(h,"heure"));
     if(m) parts.push(unitText(m,"minute"));
-    if(includeSeconds&&s) parts.push(unitText(s,"seconde"));
+    if(includeSeconds&&(s||fraction>0)) parts.push(unitText(s+fraction,"seconde"));
     if(!parts.length) parts.push("0 seconde");
     return sign+parts.join(" ");
   };
   const conversionSeconds=()=>{
     const compound=document.getElementById("convertCompound").value;
     if(compound==="single"){
-      const v=Number(document.getElementById("convertValue").value),u=document.getElementById("convertUnit").value;
+      const raw=document.getElementById("convertValue").value,u=document.getElementById("convertUnit").value;
+      if(raw.trim()==="") return null;
+      const v=Number(raw);
       if(!Number.isFinite(v)||v<0) return null;
       const seconds=v*({seconds:1,minutes:60,hours:3600,days:86400,weeks:604800}[u]);
       if(!Number.isFinite(seconds)) return null;
       return {seconds,label:number(v)+" "+u};
     }
     const ids=compound==="hm"?["compoundH","compoundM"]:compound==="hms"?["compoundH","compoundM","compoundS"]:["compoundM","compoundS"];
-    const vals=ids.map(id=>Number(document.getElementById(id).value||0));
+    const rawValues=ids.map(id=>document.getElementById(id).value);
+    if(rawValues.some(v=>v.trim()==="")) return null;
+    const vals=rawValues.map(Number);
     if(vals.some(v=>!Number.isFinite(v)||v<0)||vals.some(v=>!Number.isInteger(v))) return null;
     let seconds=0;
     if(compound==="hm"||compound==="hms") seconds+=vals[0]*3600+vals[1]*60+(vals[2]||0);
@@ -279,8 +287,10 @@
     }
     if(mode==="sum"){
       const ids=["sumAH","sumAM","sumAS","sumBH","sumBM","sumBS"];
-      const vals=ids.map(id=>Number(document.getElementById(id).value));
-      if(vals.some(v=>!Number.isFinite(v)||!Number.isInteger(v)||v<0)||vals[1]>59||vals[2]>59||vals[4]>59||vals[5]>59) return "Saisissez des durées valides : heures positives, minutes et secondes de 0 à 59.";
+      const rawValues=ids.map(id=>document.getElementById(id).value);
+      if(rawValues.some(v=>v.trim()==="")) return "Complétez tous les champs de durée avant de calculer.";
+      const vals=rawValues.map(Number);
+      if(vals.some(v=>!Number.isFinite(v)||!Number.isInteger(v)||v<0)||vals[1]>59||vals[2]>59||vals[4]>59||vals[5]>59) return "Saisissez des durées valides : heures positives, minutes et secondes de 0 à 59."
       const first=vals[0]*3600+vals[1]*60+vals[2],second=vals[3]*3600+vals[4]*60+vals[5];
       const total=document.getElementById("sumOperation").value==="subtract"?first-second:first+second;
       return '<div class="result-main"><strong>'+formatDuration(total,true)+'</strong></div><div class="takeaway"><div class="takeaway-title">Équivalences</div><div class="takeaway-grid"><div class="takeaway-item"><small>Heures décimales</small><strong>'+number(total/3600)+'</strong></div><div class="takeaway-item"><small>Minutes totales</small><strong>'+number(total/60)+'</strong></div><div class="takeaway-item"><small>Secondes totales</small><strong>'+number(total)+'</strong></div></div></div>';
@@ -306,7 +316,9 @@
     if(mode==="add"){
       const start=parseDateTime(document.getElementById("addDateTime").value);
       if(!start) return "Saisissez une date et une heure de départ valides.";
-      const vals=["addYears","addMonths","addDays","addHours","addMinutes","addSeconds"].map(id=>Number(document.getElementById(id).value||0));
+      const rawValues=["addYears","addMonths","addDays","addHours","addMinutes","addSeconds"].map(id=>document.getElementById(id).value);
+      if(rawValues.some(v=>v.trim()==="")) return "Complétez chaque unité avec un nombre entier, ou saisissez 0 si elle ne doit pas changer.";
+      const vals=rawValues.map(Number);
       if(vals.some(v=>!Number.isFinite(v)||!Number.isInteger(v))||vals.some(v=>Math.abs(v)>100000)) return "Saisissez des nombres entiers compris entre −100 000 et 100 000 pour chaque unité.";
       let p=addCalendarMonths(start,vals[0],vals[1]);
       const base=toDateTime(p).getTime()+((vals[2]*86400+vals[3]*3600+vals[4]*60+vals[5])*1000);
