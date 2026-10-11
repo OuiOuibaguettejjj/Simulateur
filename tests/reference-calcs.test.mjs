@@ -239,3 +239,17 @@ await assert.rejects(()=>runInlineCalculator({family:cases[0].famille||"outil",s
 console.log("Couche 2 — "+covered.size+" outils testés sur un cas réel sourcé, "+cases.length+" cas.");
 console.log("Couverture : "+covered.size+" outils testés sur au moins un cas réel.");
 console.log("Outils refusés (anneeAMigrer) : "+refusedTools.length+".");
+
+// Régression propre au calculateur Temps : un champ de conversion vidé n'est pas zéro.
+const emptyTimeConversion = await runInlineCalculator({
+  family: "outil",
+  slug: "temps",
+  inputs: {
+    durationMode: "convert",
+    convertCompound: "single",
+    convertValue: "",
+    convertUnit: "seconds"
+  }
+});
+assert.match(emptyTimeConversion.text, /Valeur invalide/i,
+  "temps : une conversion dont la valeur est vide doit être refusée");
