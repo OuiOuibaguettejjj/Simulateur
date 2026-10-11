@@ -1725,8 +1725,8 @@
     "attendu": 2.5,
     "tolerance": 0,
     "sortie": "Heures(?=2,5)",
-    "source": "https://www.iso.org/fr/iso-8601-date-and-time-format.html",
-    "note": "Vérification indépendante de la conversion : 150 minutes ÷ 60 = 2,5 heures. La source ISO documente la représentation normalisée des dates et intervalles, tandis que l’équivalence numérique est obtenue par conversion arithmétique indépendante."
+    "source": "https://www.bipm.org/fr/si-brochure-9",
+    "note": "Vérification indépendante de la conversion : 150 minutes ÷ 60 = 2,5 heures. Les relations entre unités de temps sont documentées par la Brochure sur le SI du BIPM ; la valeur attendue est obtenue par conversion arithmétique indépendante."
   },
   {
     "outil": "temps",
