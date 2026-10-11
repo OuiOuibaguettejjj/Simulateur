@@ -172,6 +172,7 @@
 (function(){
   const F={field:(id,label,type="number",attrs="")=>'<div class="field"><label for="'+id+'">'+label+'</label><input id="'+id+'" type="'+type+'" '+attrs+'></div>'};
   const pad=n=>String(n).padStart(2,"0");
+  const yearText=y=>String(y).padStart(4,"0");
   const number=n=>Number(n).toLocaleString("fr-FR",{maximumFractionDigits:6});
   const plural=(n,s,p)=>Math.abs(n)===1?s:p;
   const unitText=(n,u)=>number(n)+" "+(Math.abs(n)===1?u:(u==="mois"?"mois":u+"s"));
@@ -195,7 +196,7 @@
     const p=value.split(":").map(Number),h=p[0],m=p[1],s=p[2]||0;
     return h<=23&&m<=59&&s<=59?{h,m,s,total:h*3600+m*60+s}:null;
   };
-  const dateLabel=d=>pad(d.d)+"/"+pad(d.m)+"/"+d.y+" à "+pad(d.h)+":"+pad(d.mi)+(d.s?":"+pad(d.s):"");
+  const dateLabel=d=>pad(d.d)+"/"+pad(d.m)+"/"+yearText(d.y)+" à "+pad(d.h)+":"+pad(d.mi)+(d.s?":"+pad(d.s):"");
   const daysInMonth=(y,m)=>makeUTCDate(y,m+1,0).getUTCDate();
   const addCalendarMonths=(parts,years,months)=>{
     let total=parts.y*12+(parts.m-1)+years*12+months;
@@ -204,7 +205,7 @@
     return {y,m,d,h:parts.h||0,mi:parts.mi||0,s:parts.s||0};
   };
   const toDateTime=p=>makeUTCDate(p.y,p.m,p.d,p.h||0,p.mi||0,p.s||0);
-  const formatDateTime=p=>pad(p.d)+"/"+pad(p.m)+"/"+p.y+" à "+pad(p.h||0)+":"+pad(p.mi||0)+(p.s?":"+pad(p.s):"");
+  const formatDateTime=p=>pad(p.d)+"/"+pad(p.m)+"/"+yearText(p.y)+" à "+pad(p.h||0)+":"+pad(p.mi||0)+(p.s?":"+pad(p.s):"");
   const diffCalendar=(a,b)=>{
     let years=b.y-a.y;
     let candidate=addCalendarMonths(a,years,0);
@@ -227,7 +228,7 @@
     if(d) parts.push(unitText(d,"jour"));
     if(h) parts.push(unitText(h,"heure"));
     if(m) parts.push(unitText(m,"minute"));
-    if(includeSeconds&&(s||fraction>0)) parts.push(unitText(s+fraction,"seconde"));
+    if(includeSeconds&&(s||fraction>0)){const secondsPart=s+fraction;parts.push(number(secondsPart)+" "+(secondsPart<=1?"seconde":"secondes"));}
     if(!parts.length) parts.push("0 seconde");
     return sign+parts.join(" ");
   };
