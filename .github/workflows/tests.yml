@@ -102,6 +102,9 @@ jobs:
       - name: Smoke-test du site de déploiement en local
         run: node scripts/smoke-site.mjs --base-url http://127.0.0.1:4173 --mode local
 
+      - name: Test navigateur Promotions (virgule, Entrée, responsive)
+        run: node tests/promotions-browser.test.mjs
+
       - name: Test régression ratio
         run: node tests/ratio.test.mjs
 
@@ -142,6 +145,15 @@ jobs:
 
       - name: Test check-pages
         run: node tests/check-pages.test.mjs
+
+      - name: Vérifier la régénération de la baseline depuis main
+        if: github.event_name == 'pull_request'
+        run: |
+          cp scripts/check-pages.baseline.json "$RUNNER_TEMP/check-pages-baseline.expected.json"
+          trap 'cp "$RUNNER_TEMP/check-pages-baseline.expected.json" scripts/check-pages.baseline.json' EXIT
+          git show origin/main:scripts/check-pages.baseline.json > scripts/check-pages.baseline.json
+          node scripts/check-pages.mjs --update-baseline
+          diff -u "$RUNNER_TEMP/check-pages-baseline.expected.json" scripts/check-pages.baseline.json
 
       - name: Test normalisation du layout
         run: node tests/normalize-layout.test.mjs

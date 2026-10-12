@@ -49,3 +49,4 @@ console.log("Couche 1 : tous les cas passent ou correspondent exactement à une 
 await import("./epargne-mensuelle.test.mjs");
 await import("./remise.test.mjs");
 await import("./temps-calcul.test.mjs");
+await import("./promotions.test.mjs");
