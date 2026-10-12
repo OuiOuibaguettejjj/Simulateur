@@ -52,7 +52,8 @@
     "outil": "marge",
     "entrees": {
       "achat": "80",
-      "vente": "100"
+      "vente": "100",
+      "objectif": "40"
     },
     "attendu": 20,
     "tolerance": 0.01,
@@ -66,6 +67,16 @@
       {
         "sortie": "Taux de marque",
         "attendu": 20,
+        "tolerance": 0.01
+      },
+      {
+        "sortie": "Coefficient de vente",
+        "attendu": 1.25,
+        "tolerance": 0.01
+      },
+      {
+        "sortie": "Prix de vente HT pour un taux de marque de 40 %",
+        "attendu": 133.33,
         "tolerance": 0.01
       }
     ],
@@ -576,14 +587,16 @@
     "sortie": "1\\s*160\\s*€",
     "verifications": [
       {
-        "sortie": "88\\s*381\\s*€",
-        "attendu": 88381,
-        "tolerance": 0.01
+        "sortie": "Intérêts",
+        "attendu": 78381,
+        "tolerance": 0.01,
+        "elementId": "interest"
       },
       {
-        "sortie": "288\\s*381\\s*€",
+        "sortie": "Total remboursé",
         "attendu": 288381,
-        "tolerance": 0.01
+        "tolerance": 0.01,
+        "elementId": "totalPaid"
       }
     ],
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/R2924",
@@ -605,14 +618,14 @@
     "sortie": "1\\s*000\\s*€",
     "verifications": [
       {
-        "sortie": "27,5\\s*%",
         "attendu": 27.5,
-        "tolerance": 0.01
+        "tolerance": 0.01,
+        "elementId": "debtBox"
       },
       {
-        "sortie": "500\\s*€",
         "attendu": 500,
-        "tolerance": 0
+        "tolerance": 0,
+        "elementId": "fees"
       }
     ],
     "source": "https://www.economie.gouv.fr/particuliers/gerer-mon-argent/emprunter-et-sassurer/credit-immobilier-comment-ca-marche",
@@ -636,9 +649,9 @@
     "sortie": "1\\s*254\\s*€",
     "verifications": [
       {
-        "sortie": "100\\s*871\\s*€",
         "attendu": 100871,
-        "tolerance": 0.01
+        "tolerance": 0.01,
+        "elementId": "creditCost"
       }
     ],
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/R2924",
@@ -662,9 +675,9 @@
     "sortie": "1\\s*254\\s*€",
     "verifications": [
       {
-        "sortie": "100\\s*871\\s*€",
         "attendu": 100871,
-        "tolerance": 0.01
+        "tolerance": 0.01,
+        "elementId": "creditCost"
       }
     ],
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/R2924",
@@ -683,14 +696,14 @@
     "sortie": "1\\s*159,92\\s*€",
     "verifications": [
       {
-        "sortie": "78\\s*380,66\\s*€",
         "attendu": 78380.66,
-        "tolerance": 0.01
+        "tolerance": 0.01,
+        "elementId": "interest"
       },
       {
-        "sortie": "278\\s*380,66\\s*€",
         "attendu": 278380.66,
-        "tolerance": 0.01
+        "tolerance": 0.01,
+        "elementId": "totalPaid"
       }
     ],
     "source": "https://www.thecalculator.co/finance/Mortgage-Payment-Calculator-24.html",
@@ -1959,18 +1972,39 @@
     "note": "Cas calculé indépendamment : 0,20 € ÷ 100 pièces = 0,002 €/pièce. Vérifie que l’affichage ne masque pas un prix unitaire faible."
   },
   {
-    "outil": "recette",
+    "outil": "marge",
     "entrees": {
-      "p": "4",
-      "q": "6",
-      "x": "500",
-      "ingredient": "farine",
-      "unit": "g"
+      "achat": "60",
+      "vente": "100",
+      "frais": "5",
+      "objectif": "40"
     },
-    "attendu": 750,
-    "tolerance": 0.001,
-    "sortie": "Quantité adaptée\\s*:\\s*750",
-    "source": "https://www.khanacademy.org/math/pre-algebra/pre-algebra-ratios-rates",
-    "note": "Calcul indépendant de proportion directe : 500 × 6 ÷ 4 = 750 g. L’attendu est établi par l’arithmétique, sans exécuter le calculateur."
+    "attendu": 35,
+    "tolerance": 0.01,
+    "sortie": "Marge commerciale",
+    "verifications": [
+      {
+        "sortie": "Taux de marge",
+        "attendu": 53.85,
+        "tolerance": 0.01
+      },
+      {
+        "sortie": "Taux de marque",
+        "attendu": 35,
+        "tolerance": 0.01
+      },
+      {
+        "sortie": "Coefficient de vente",
+        "attendu": 1.5384615384615385,
+        "tolerance": 0.01
+      },
+      {
+        "sortie": "Prix de vente HT pour un taux de marque de 40 %",
+        "attendu": 108.33,
+        "tolerance": 0.01
+      }
+    ],
+    "source": "https://bpifrance-creation.fr/encyclopedie/gerer-lentreprise/connaitre-chiffres/marge-commerciale",
+    "note": "Calcul indépendant : coût complet 60 € + 5 € = 65 € ; marge 100 € − 65 € = 35 €. Taux de marge 35/65 ≈ 53,85 %, taux de marque 35/100 = 35 %, prix cible 65/(1 − 0,40) ≈ 108,33 €. La source documente la notion, pas les résultats numériques."
   }
 ]

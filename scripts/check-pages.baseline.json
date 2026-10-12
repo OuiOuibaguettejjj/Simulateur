@@ -272,26 +272,6 @@
     "rule": "title"
   },
   {
-    "path": "public/outil/marge/index.html",
-    "rule": "content-h2"
-  },
-  {
-    "path": "public/outil/marge/index.html",
-    "rule": "description"
-  },
-  {
-    "path": "public/outil/marge/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/marge/index.html",
-    "rule": "formula"
-  },
-  {
-    "path": "public/outil/marge/index.html",
-    "rule": "title"
-  },
-  {
     "path": "public/outil/median-mode/index.html",
     "rule": "content-h2"
   },
