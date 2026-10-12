@@ -1,3 +1,126 @@
-<!doctype html><html lang="fr"><head><meta name="calculator-rendering" content="static"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="google-adsense-account" content="ca-pub-2924580037451268"><title>Calculateur cash-flow immobilier</title><meta name="description" content="Mesurez le cash-flow mensuel et annuel d'un investissement locatif avant fiscalité."><link rel="canonical" href="https://simulateur.site/outil/cash-flow-immobilier/"><link rel="stylesheet" href="/styles.css"><script src="/simulateurs.js" defer></script><script src="/enter-calcul.js" defer></script><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur cash-flow immobilier","url":"https://simulateur.site/outil/cash-flow-immobilier/","description":"Mesurez le cash-flow mensuel et annuel d\u0027un investissement locatif avant fiscalité.","inLanguage":"fr-FR","applicationCategory":"FinanceApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"price":"0","priceCurrency":"EUR"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Immobilier","item":"https://simulateur.site/immobilier/"},{"@type":"ListItem","position":3,"name":"Calculateur cash-flow immobilier","item":"https://simulateur.site/outil/cash-flow-immobilier/"}]}</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta property="og:type" content="website"><meta property="og:site_name" content="Simulateur"><meta property="og:locale" content="fr_FR"><meta property="og:title" content="Calculateur cash-flow immobilier"><meta property="og:description" content="Mesurez le cash-flow mensuel et annuel d'un investissement locatif avant fiscalité."><meta property="og:url" content="https://simulateur.site/outil/cash-flow-immobilier/"><meta name="twitter:card" content="summary"></head><body><header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header><main><div class="wrap"><div class="breadcrumb"><a href="/">Accueil</a> · <a href="/immobilier/">Immobilier</a> · Calculateur cash-flow immobilier</div><section class="tool"><div class="eyebrow">IMMOBILIER LOCATIF</div><h1>Calculateur cash-flow immobilier</h1><p class="tool-intro">Mesurez le cash-flow mensuel et annuel d'un investissement locatif avant fiscalité.</p><div id="fields"><div class="row"><div class="field"><label for="loyer">Loyer mensuel hors charges (€)</label><input id="loyer" type="number" min="0" step="any" placeholder="1000"></div><div class="field"><label for="vac">Vacance locative (%)</label><input id="vac" type="number" min="0" step="any" placeholder="5"></div><div class="field"><label for="credit">Mensualité de crédit (€)</label><input id="credit" type="number" min="0" step="any" placeholder="750"></div><div class="field"><label for="charges">Charges mensuelles non récupérables (€)</label><input id="charges" type="number" min="0" step="any" placeholder="120"></div><div class="field"><label for="taxe">Taxe foncière annuelle (€)</label><input id="taxe" type="number" min="0" step="any" placeholder="1200"></div><div class="field"><label for="autres">Assurance et autres coûts annuels (€)</label><input id="autres" type="number" min="0" step="any" placeholder="300"></div></div></div><button class="button-main" onclick="Simulateurs.calc()">Calculer</button><div class="result" id="result" aria-live="polite">Saisissez vos données puis lancez le calcul.</div><div class="formula"><strong>Méthode et sources</strong><p>Calcul de trésorerie à partir des recettes locatives estimées et des sorties saisies. Les conséquences fiscales et comptables varient selon le régime de location et ne sont pas déduites par une formule universelle.</p></div></section></div><section class="content-section"><h2>Le cash-flow mesure la trésorerie de l'investissement</h2><p>Le cash-flow locatif correspond ici aux loyers réellement retenus après vacance, diminués des mensualités de crédit, charges non récupérables, taxe foncière et autres coûts saisis.</p><p>Un cash-flow positif signifie que les recettes retenues dépassent ces sorties de trésorerie. Un résultat négatif indique au contraire un effort de trésorerie mensuel.</p><h2>Cash-flow et rentabilité sont deux indicateurs différents</h2><p>Le cash-flow dépend fortement du financement. La rentabilité locative compare plutôt les revenus au coût du bien. Il est donc possible d'avoir une bonne rentabilité avec un cash-flow négatif si le financement est lourd, et inversement.</p><p>Cette simulation est avant fiscalité et ne traite pas les travaux exceptionnels ni tous les frais de gestion.</p></section><section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Outils associés</h2><div class="related-links"><a class="related-link" href="/outil/rendement-locatif/"><strong>Rendement locatif</strong><span>Estimer la rentabilité d'un investissement locatif.</span></a><a class="related-link" href="/outil/pret-immobilier/"><strong>Prêt immobilier</strong><span>Calculer mensualité, intérêts et coût total d'un crédit.</span></a><a class="related-link" href="/outil/frais-de-notaire/"><strong>Frais de notaire</strong><span>Estimer les frais liés à l'achat d'un bien immobilier.</span></a></div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="/immobilier/">Immobilier</a>.</p></div></section>
-</main><footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer><script>window.TOOL={calc:function(){const l=+this.$('loyer').value||0,v=Math.min(100,Math.max(0,+this.$('vac').value||0)),c=+this.$('credit').value||0,ch=+this.$('charges').value||0,t=+this.$('taxe').value||0,o=+this.$('autres').value||0;if(l<0||c<0)return 'Renseignez des valeurs valides.';const r=l*(1-v/100),cf=r-c-ch-(t+o)/12;return '<strong>'+this.euro(cf)+' / mois</strong><br>Cash-flow annuel : <strong>'+this.euro(cf*12)+'</strong><br><br>Loyer après vacance : '+this.euro(r)+'<br>Crédit : -'+this.euro(c)+'<br>Charges : -'+this.euro(ch)+'<br>Taxe + autres : -'+this.euro((t+o)/12)+'<p class="small">Avant impôt, travaux exceptionnels, comptabilité et fiscalité. Le cash-flow n’est pas le rendement locatif.</p>'}};</script></body></html>
+<!doctype html>
+<html lang="fr">
+<head>
+<meta name="calculator-rendering" content="static">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="google-adsense-account" content="ca-pub-2924580037451268">
+<title>Calcul cash-flow immobilier : simulateur locatif | Simulateur</title>
+<meta name="description" content="Calculez le cash-flow immobilier mensuel et annuel de votre investissement locatif, avec vacance, crédit, charges et frais récurrents.">
+<link rel="canonical" href="https://simulateur.site/outil/cash-flow-immobilier/">
+<link rel="stylesheet" href="/styles.css">
+<script src="/simulateurs.js" defer></script>
+<script src="/enter-calcul.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calcul cash-flow immobilier : simulateur locatif","url":"https://simulateur.site/outil/cash-flow-immobilier/","description":"Calculez le cash-flow immobilier mensuel et annuel de votre investissement locatif, avec vacance, crédit, charges et frais récurrents.","inLanguage":"fr-FR","applicationCategory":"FinanceApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"price":"0","priceCurrency":"EUR"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Immobilier","item":"https://simulateur.site/immobilier/"},{"@type":"ListItem","position":3,"name":"Calcul cash-flow immobilier","item":"https://simulateur.site/outil/cash-flow-immobilier/"}]}</script>
+<style>
+.cashflow-tool{max-width:900px;margin-inline:auto}
+.cashflow-lead{max-width:68ch}
+.cashflow-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.cashflow-group{margin:1.25rem 0 0;padding:1rem;border:1px solid var(--border-color,#d9dee7);border-radius:14px}
+.cashflow-group h2{font-size:1.05rem;margin:0 0 .85rem}
+.cashflow-fields .field{min-width:0}
+.cashflow-fields input{width:100%;max-width:100%;box-sizing:border-box}
+.cashflow-actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.25rem}
+.cashflow-secondary{border:1px solid currentColor;border-radius:8px;padding:.65rem 1rem;background:transparent;cursor:pointer}
+.cashflow-result{margin-top:1.25rem;padding:1.25rem;border-radius:14px;background:var(--surface,#f4f6f8);overflow-wrap:anywhere}
+.cashflow-kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem;margin:.75rem 0}
+.cashflow-kpi{padding:.85rem;border:1px solid var(--border-color,#d9dee7);border-radius:10px;background:var(--card-bg,#fff)}
+.cashflow-kpi strong{display:block;font-size:1.25rem;margin-top:.25rem}
+.cashflow-breakdown{width:100%;border-collapse:collapse;margin-top:.75rem}
+.cashflow-breakdown th,.cashflow-breakdown td{padding:.55rem .35rem;border-bottom:1px solid var(--border-color,#d9dee7);text-align:left}
+.cashflow-breakdown td{text-align:right;font-variant-numeric:tabular-nums}
+.cashflow-note{font-size:.92rem}
+@media(max-width:600px){.cashflow-fields,.cashflow-kpis{grid-template-columns:minmax(0,1fr)}.cashflow-group{padding:.8rem}.cashflow-breakdown{font-size:.9rem}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header>
+<main>
+<div class="wrap">
+<div class="breadcrumb"><a href="/">Accueil</a> · <a href="/immobilier/">Immobilier</a> · Calcul cash-flow immobilier</div>
+<section class="tool cashflow-tool">
+<div class="eyebrow">INVESTISSEMENT LOCATIF</div>
+<h1>Calculateur de cash-flow immobilier</h1>
+<p class="tool-intro cashflow-lead">Estimez ce que votre bien locatif vous laisse réellement chaque mois après les loyers perdus en vacance, le crédit et les dépenses courantes. Le résultat est présenté avant impôts.</p>
+<div class="cashflow-group">
+<h2>1. Revenus locatifs</h2>
+<div class="cashflow-fields">
+<div class="field"><label for="loyer">Loyer mensuel hors charges (€)</label><input id="loyer" name="loyer" type="number" min="0" step="any" inputmode="decimal" value="1000"></div>
+<div class="field"><label for="vac">Vacance locative estimée (%)</label><input id="vac" name="vac" type="number" min="0" max="100" step="any" inputmode="decimal" value="5"></div>
+</div>
+</div>
+<div class="cashflow-group">
+<h2>2. Financement</h2>
+<div class="cashflow-fields">
+<div class="field"><label for="credit">Mensualité de crédit (€)</label><input id="credit" name="credit" type="number" min="0" step="any" inputmode="decimal" value="750"></div>
+<div class="field"><label for="assurance-credit">Assurance emprunteur mensuelle (€)</label><input id="assurance-credit" name="assurance-credit" type="number" min="0" step="any" inputmode="decimal" value="0"></div>
+</div>
+</div>
+<div class="cashflow-group">
+<h2>3. Dépenses récurrentes</h2>
+<div class="cashflow-fields">
+<div class="field"><label for="charges">Charges non récupérables / mois (€)</label><input id="charges" name="charges" type="number" min="0" step="any" inputmode="decimal" value="120"></div>
+<div class="field"><label for="gestion">Gestion locative (% des loyers encaissés)</label><input id="gestion" name="gestion" type="number" min="0" max="100" step="any" inputmode="decimal" value="0"></div>
+<div class="field"><label for="taxe">Taxe foncière annuelle (€)</label><input id="taxe" name="taxe" type="number" min="0" step="any" inputmode="decimal" value="1200"></div>
+<div class="field"><label for="assurance">Assurance propriétaire annuelle (€)</label><input id="assurance" name="assurance" type="number" min="0" step="any" inputmode="decimal" value="150"></div>
+<div class="field"><label for="entretien">Provision entretien / travaux annuels (€)</label><input id="entretien" name="entretien" type="number" min="0" step="any" inputmode="decimal" value="300"></div>
+<div class="field"><label for="autres">Autres coûts annuels (€)</label><input id="autres" name="autres" type="number" min="0" step="any" inputmode="decimal" value="0"></div>
+</div>
+</div>
+<div class="cashflow-actions"><button class="button-main" type="button" onclick="Simulateurs.calc()">Calculer mon cash-flow</button><button class="cashflow-secondary" type="button" id="reset-cashflow">Réinitialiser</button></div>
+<div class="result cashflow-result" id="result" aria-live="polite" aria-atomic="true">Modifiez les hypothèses si nécessaire, puis lancez le calcul. Les valeurs proposées sont un exemple et ne constituent pas une estimation de votre bien.</div>
+<div class="formula">
+<strong>Méthode de calcul</strong>
+<p>Cash-flow mensuel estimé = loyer après vacance − mensualité de crédit − assurance emprunteur − charges non récupérables − gestion locative − dépenses annuelles ramenées au mois.</p>
+<p class="cashflow-note">La simulation est avant fiscalité. Elle ne calcule pas les frais d’acquisition, les travaux exceptionnels, les impayés, ni les particularités de votre régime fiscal. Vérifiez les postes applicables à votre situation.</p>
+<p>Pour préparer un projet locatif, consultez également les informations de l’<a href="https://www.anil.org/" target="_blank" rel="noopener noreferrer">Agence nationale pour l’information sur le logement (ANIL)</a>.</p>
+</div>
+</section>
+</div>
+<section class="content-section">
+<h2>Comment interpréter le cash-flow immobilier ?</h2>
+<p>Le cash-flow locatif mesure la trésorerie estimée qui reste chaque mois après les revenus locatifs retenus et les dépenses saisies. Un montant positif signifie que les recettes couvrent les coûts pris en compte ; un montant négatif indique qu’il faut compléter le financement avec d’autres ressources.</p>
+<p>Le résultat dépend notamment du taux de vacance, du coût du crédit, des charges de copropriété non récupérables, de la taxe foncière et des dépenses d’entretien. Les valeurs omises peuvent rendre le résultat trop optimiste : utilisez des hypothèses réalistes et prévoyez une marge pour les imprévus.</p>
+<h2>Cash-flow, rendement locatif et fiscalité : quelles différences ?</h2>
+<p>Le cash-flow s’intéresse à la trésorerie après les sorties retenues, tandis que le rendement locatif rapporte les revenus au coût du bien selon une méthode donnée. Un bien peut afficher un rendement intéressant mais un cash-flow négatif lorsque les mensualités de crédit sont élevées. À l’inverse, un cash-flow positif ne garantit pas à lui seul la rentabilité globale de l’investissement.</p>
+<p>Cette estimation ne constitue pas un calcul de bénéfice imposable. Les intérêts d’emprunt, les charges déductibles, l’amortissement éventuel et les règles applicables varient selon le régime fiscal et la situation du bailleur.</p>
+</section>
+<section class="calculator-faq" aria-labelledby="faq-title">
+<h2 id="faq-title">FAQ</h2>
+<details><summary>Comment calculer le cash-flow locatif mensuel ?</summary><div class="calculator-faq-answer"><p>Retenez les loyers après vacance, puis soustrayez les mensualités et assurances de crédit, les charges non récupérables, la gestion et les dépenses annuelles divisées par douze. Le résultat de cet outil est avant impôts.</p></div></details>
+<details><summary>Un cash-flow immobilier négatif est-il forcément mauvais ?</summary><div class="calculator-faq-answer"><p>Pas à lui seul. Il signifie que le bien demande un effort de trésorerie selon les postes saisis. Il faut aussi étudier le rendement, le capital remboursé, les risques, les travaux, la fiscalité et votre capacité à financer cet effort.</p></div></details>
+<details><summary>La fiscalité et les travaux sont-ils inclus ?</summary><div class="calculator-faq-answer"><p>Non. Le calcul est avant fiscalité et les travaux exceptionnels ne sont pas automatiquement inclus. Vous pouvez intégrer une provision d’entretien annuelle, mais elle ne remplace pas un budget travaux détaillé.</p></div></details>
+<details><summary>Quelle vacance locative faut-il prévoir ?</summary><div class="calculator-faq-answer"><p>Elle dépend du secteur, du type de logement, du loyer demandé et du délai habituel entre deux locataires. Utilisez une hypothèse prudente adaptée au marché local plutôt qu’une valeur universelle.</p></div></details>
+</section>
+<section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Outils associés</h2><div class="related-links"><a class="related-link" href="/outil/rendement-locatif/"><strong>Rendement locatif</strong><span>Estimer la rentabilité d’un investissement locatif.</span></a><a class="related-link" href="/outil/pret-immobilier/"><strong>Prêt immobilier</strong><span>Calculer les mensualités et le coût du crédit.</span></a><a class="related-link" href="/outil/frais-de-notaire/"><strong>Frais de notaire</strong><span>Estimer les frais d’acquisition du bien.</span></a></div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="/immobilier/">Immobilier</a>.</p></div></section>
+</main>
+<footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer>
+<script>
+(function(){
+ const ids=["loyer","vac","credit","assurance-credit","charges","gestion","taxe","assurance","entretien","autres"];
+ const defaults={"loyer":"1000","vac":"5","credit":"750","assurance-credit":"0","charges":"120","gestion":"0","taxe":"1200","assurance":"150","entretien":"300","autres":"0"};
+ const euro=n=>new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:2}).format(n);
+ const read=id=>{const raw=document.getElementById(id).value.trim().replace(",",".");if(raw==="")return NaN;return Number(raw)};
+ window.TOOL={
+  calc:function(){
+   const v=Object.fromEntries(ids.map(id=>[id,read(id)]));
+   const invalid=ids.filter(id=>!Number.isFinite(v[id])||v[id]<0);
+   if(invalid.length)return '<p role="alert">Renseignez un nombre valide et positif ou nul dans chaque champ.</p>';
+   if(v.vac>100||v.gestion>100)return '<p role="alert">La vacance locative et les frais de gestion doivent être compris entre 0 et 100 %.</p>';
+   const loyerEncaisse=v.loyer*(1-v.vac/100);
+   const gestion=loyerEncaisse*v.gestion/100;
+   const chargesAnnuelles=v.taxe+v.assurance+v.entretien+v.autres;
+   const depensesMensuelles=v.credit+v["assurance-credit"]+v.charges+gestion+chargesAnnuelles/12;
+   const cf=loyerEncaisse-depensesMensuelles;
+   const annuel=cf*12;
+   const montant=(n)=>euro(n);
+   const status=cf>0?"Cash-flow positif":cf<0?"Effort de trésorerie estimé":"Équilibre de trésorerie estimé";
+   return '<div><p><strong>'+status+'</strong></p><div class="cashflow-kpis"><div class="cashflow-kpi"><span>Cash-flow mensuel</span><strong>'+montant(cf)+'</strong></div><div class="cashflow-kpi"><span>Cash-flow annuel</span><strong>'+montant(annuel)+'</strong></div></div><table class="cashflow-breakdown"><tbody><tr><th scope="row">Loyer après vacance</th><td>'+montant(loyerEncaisse)+'</td></tr><tr><th scope="row">Mensualité de crédit</th><td>− '+montant(v.credit)+'</td></tr><tr><th scope="row">Assurance emprunteur</th><td>− '+montant(v["assurance-credit"])+'</td></tr><tr><th scope="row">Charges non récupérables</th><td>− '+montant(v.charges)+'</td></tr><tr><th scope="row">Gestion locative estimée</th><td>− '+montant(gestion)+'</td></tr><tr><th scope="row">Autres dépenses mensuelles équivalentes</th><td>− '+montant(chargesAnnuelles/12)+'</td></tr></tbody></table><p class="cashflow-note">Estimation avant impôts, frais ponctuels et imprévus non saisis. Le remboursement du capital est inclus dans la mensualité de crédit ; le cash-flow n’est pas le rendement locatif.</p></div>';
+  }
+ };
+ document.getElementById("reset-cashflow").addEventListener("click",function(){ids.forEach(id=>document.getElementById(id).value=defaults[id]);document.getElementById("result").textContent="Valeurs réinitialisées. Lancez le calcul pour actualiser le résultat.";});
+})();
+</script>
+</body>
+</html>
