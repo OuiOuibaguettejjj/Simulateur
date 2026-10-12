@@ -5,7 +5,7 @@ const html = fs.readFileSync("public/outil/age-retraite/index.html", "utf8");
 const title = (html.match(/<title>([^<]+)<\/title>/i) || [, ""])[1];
 const description = (html.match(/<meta name="description" content="([^"]+)"/i) || [, ""])[1];
 
-assert(title === "Calcul âge de départ à la retraite 2026 | Simulateur");
+assert(title === "Calculateur âge de départ à la retraite 2026 | Simulateur");
 assert(title.length <= 60);
 assert(description.length >= 120 && description.length <= 160);
 assert(html.includes('"@type":"WebApplication"'));
