@@ -52,7 +52,8 @@
     "outil": "marge",
     "entrees": {
       "achat": "80",
-      "vente": "100"
+      "vente": "100",
+      "objectif": "40"
     },
     "attendu": 20,
     "tolerance": 0.01,
