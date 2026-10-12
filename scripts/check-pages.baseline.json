@@ -8,10 +8,6 @@
     "rule": "faq"
   },
   {
-    "path": "public/outil/are-chomage/index.html",
-    "rule": "title"
-  },
-  {
     "path": "public/outil/arrondi/index.html",
     "rule": "content-h2"
   },
@@ -56,10 +52,6 @@
     "rule": "result"
   },
   {
-    "path": "public/outil/calculatrice/index.html",
-    "rule": "title"
-  },
-  {
     "path": "public/outil/charges-independant/index.html",
     "rule": "content-h2"
   },
@@ -94,10 +86,6 @@
   {
     "path": "public/outil/comparateur-placements/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/comparateur-placements/index.html",
-    "rule": "title"
   },
   {
     "path": "public/outil/conges-payes/index.html",
@@ -174,10 +162,6 @@
   {
     "path": "public/outil/fractions/index.html",
     "rule": "result"
-  },
-  {
-    "path": "public/outil/fractions/index.html",
-    "rule": "title"
   },
   {
     "path": "public/outil/heures-supplementaires/index.html",
@@ -292,10 +276,6 @@
     "rule": "result"
   },
   {
-    "path": "public/outil/median-mode/index.html",
-    "rule": "title"
-  },
-  {
     "path": "public/outil/micro-entrepreneur/index.html",
     "rule": "description"
   },
@@ -306,10 +286,6 @@
   {
     "path": "public/outil/micro-entrepreneur/index.html",
     "rule": "formula"
-  },
-  {
-    "path": "public/outil/micro-entrepreneur/index.html",
-    "rule": "title"
   },
   {
     "path": "public/outil/moyenne-ponderee/index.html",
@@ -332,10 +308,6 @@
     "rule": "result"
   },
   {
-    "path": "public/outil/moyenne-ponderee/index.html",
-    "rule": "title"
-  },
-  {
     "path": "public/outil/moyenne/index.html",
     "rule": "content-h2"
   },
@@ -354,10 +326,6 @@
   {
     "path": "public/outil/moyenne/index.html",
     "rule": "result"
-  },
-  {
-    "path": "public/outil/moyenne/index.html",
-    "rule": "title"
   },
   {
     "path": "public/outil/per/index.html",
@@ -398,10 +366,6 @@
   {
     "path": "public/outil/perimetre/index.html",
     "rule": "result"
-  },
-  {
-    "path": "public/outil/perimetre/index.html",
-    "rule": "title"
   },
   {
     "path": "public/outil/plus-value-immobiliere/index.html",
@@ -452,10 +416,6 @@
     "rule": "result"
   },
   {
-    "path": "public/outil/pourcentage/index.html",
-    "rule": "title"
-  },
-  {
     "path": "public/outil/sasu-vs-ei-micro/index.html",
     "rule": "content-h2"
   },
@@ -474,10 +434,6 @@
   {
     "path": "public/outil/sasu-vs-ei-micro/index.html",
     "rule": "result"
-  },
-  {
-    "path": "public/outil/sasu-vs-ei-micro/index.html",
-    "rule": "title"
   },
   {
     "path": "public/outil/succession/index.html",
