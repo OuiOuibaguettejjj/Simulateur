@@ -1915,5 +1915,19 @@
     "sortie": "^28/02/2023",
     "source": "https://www.iso.org/fr/iso-8601-date-and-time-format.html",
     "note": "Cas de fin de mois non bissextile : un mois après le 31 janvier 2023, le résultat est ramené au 28 février."
+  },
+  {
+    "outil": "marge",
+    "entrees": {
+      "achat": "60",
+      "vente": "100",
+      "frais": "5",
+      "objectif": "40"
+    },
+    "attendu": 35,
+    "tolerance": 0.01,
+    "sortie": "Marge commerciale",
+    "source": "https://bpifrance-creation.fr/encyclopedie/gerer-lentreprise/connaitre-chiffres/marge-commerciale",
+    "note": "Vérification arithmétique indépendante : 100 € − (60 € + 5 €) = 35 € de marge. Le taux de marge est 35 / 65 × 100 ≈ 53,85 % et le taux de marque 35 / 100 × 100 = 35 %. La source documente la notion de marge commerciale, pas la valeur numérique attendue."
   }
 ]
