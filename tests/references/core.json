@@ -1969,7 +1969,7 @@
     },
     "attendu": 750,
     "tolerance": 0.001,
-    "sortie": "Quantité adaptée\\\\s*:\\\\s*750",
+    "sortie": "Quantité adaptée\\s*:\\s*750",
     "source": "https://www.khanacademy.org/math/arithmetic/arith-review-ratios-proportions",
     "note": "Calcul indépendant de proportion directe : 500 × 6 ÷ 4 = 750 g. L’attendu est établi par l’arithmétique, sans exécuter le calculateur."
   }
