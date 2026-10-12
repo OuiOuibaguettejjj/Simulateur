@@ -472,30 +472,6 @@
     "rule": "title"
   },
   {
-    "path": "public/outil/recette/index.html",
-    "rule": "content-h2"
-  },
-  {
-    "path": "public/outil/recette/index.html",
-    "rule": "description"
-  },
-  {
-    "path": "public/outil/recette/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/recette/index.html",
-    "rule": "formula"
-  },
-  {
-    "path": "public/outil/recette/index.html",
-    "rule": "result"
-  },
-  {
-    "path": "public/outil/recette/index.html",
-    "rule": "title"
-  },
-  {
     "path": "public/outil/sasu-vs-ei-micro/index.html",
     "rule": "content-h2"
   },
