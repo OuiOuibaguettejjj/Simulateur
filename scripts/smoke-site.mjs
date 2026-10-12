@@ -33,6 +33,23 @@ try{
    if(isInteractivePage(file.slice("public/".length))){
     await populate(page);const buttons=page.locator("button"),n=await buttons.count();if(n===0)errors.push(file+": "+(mode==="production"?"production ":"")+"no button");
     for(let i=0;i<n;i++)try{await buttons.nth(i).click({timeout:mode==="local"?1500:2000});await page.waitForTimeout(mode==="local"?30:50)}catch(e){errors.push(file+": "+(mode==="production"?"production ":"")+"button "+i+" click failed: "+e.message)}
+    if(file==="public/outil/prix-unitaire/index.html"){
+     const result=page.locator("#result");
+     try{
+      await page.locator("#p").fill("3,50");await page.locator("#q").fill("0,5");await page.locator("#u").selectOption("kg");
+      await page.getByRole("button",{name:"Calculer le prix unitaire"}).click();
+      if(!/7,00\s*€\s*\/\s*kg/.test(await result.innerText()))errors.push(file+": virgule décimale non calculée correctement");
+      await page.locator("#p").fill("0,20");await page.locator("#q").fill("100");await page.locator("#u").selectOption("pièce");
+      await page.getByRole("button",{name:"Calculer le prix unitaire"}).click();
+      if(!/0,002\s*€\s*\/\s*pièce/.test(await result.innerText()))errors.push(file+": le petit prix unitaire n'est pas affiché avec assez de précision");
+      await page.locator("#p").fill("3,50");await page.locator("#q").fill("0,5");await page.locator("#u").selectOption("kg");
+      await page.locator("#q").press("Enter");
+      if(!/7,00\s*€\s*\/\s*kg/.test(await result.innerText()))errors.push(file+": la touche Entrée ne déclenche pas le calcul");
+      await page.locator("#p").fill("1");await page.locator("#q").fill("0");
+      await page.getByRole("button",{name:"Calculer le prix unitaire"}).click();
+      if(!/strictement supérieure à zéro/.test(await result.innerText()))errors.push(file+": la quantité nulle n'est pas refusée");
+     }catch(e){errors.push(file+": test navigateur dédié échoué: "+e.message)}
+    }
    }else if(mode==="local")await populate(page);
    const texts=await page.locator(".result").allTextContents();
    const badResults=texts.filter(t=>isInvalidResult(t));
