@@ -102,6 +102,9 @@ jobs:
       - name: Smoke-test du site de déploiement en local
         run: node scripts/smoke-site.mjs --base-url http://127.0.0.1:4173 --mode local
 
+      - name: Test navigateur Promotions (virgule, Entrée, responsive)
+        run: node tests/promotions-browser.test.mjs
+
       - name: Test régression ratio
         run: node tests/ratio.test.mjs
 
