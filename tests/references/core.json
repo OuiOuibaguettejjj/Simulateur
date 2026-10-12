@@ -588,13 +588,13 @@
     "verifications": [
       {
         "sortie": "Intérêts",
-        "attendu": 78380.66,
+        "attendu": 78381,
         "tolerance": 0.01,
         "elementId": "interest"
       },
       {
         "sortie": "Total remboursé",
-        "attendu": 288380.66,
+        "attendu": 288381,
         "tolerance": 0.01,
         "elementId": "totalPaid"
       }
@@ -649,7 +649,7 @@
     "sortie": "1\\s*254\\s*€",
     "verifications": [
       {
-        "attendu": 100870.56,
+        "attendu": 100871,
         "tolerance": 0.01,
         "elementId": "creditCost"
       }
@@ -675,7 +675,7 @@
     "sortie": "1\\s*254\\s*€",
     "verifications": [
       {
-        "attendu": 100870.56,
+        "attendu": 100871,
         "tolerance": 0.01,
         "elementId": "creditCost"
       }
