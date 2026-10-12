@@ -77,7 +77,6 @@ const format=(n)=>n.toLocaleString("fr-FR",{maximumFractionDigits:3});
 const escapeHtml=(value)=>String(value).replace(/[&<>"']/g,(c)=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const ingredient=String(this.$("ingredient").value||"").trim().slice(0,80);
 const unit=this.$("unit").value;
-const label=ingredient?escapeHtml(ingredient)+" : ":"";
 return "<strong>Quantité adaptée : "+format(amount)+" "+escapeHtml(unit)+"</strong>"+(ingredient?"<p>Ingrédient : "+escapeHtml(ingredient)+".</p>":"")+"<p>Coefficient d’adaptation : "+format(factor)+"</p><p>Calcul : "+format(x)+" × "+format(q)+" ÷ "+format(p)+" = "+format(amount)+" "+escapeHtml(unit)+".</p>";
 }};
 </script>
