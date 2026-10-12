@@ -618,14 +618,14 @@
     "sortie": "1\\s*000\\s*€",
     "verifications": [
       {
-        "sortie": "27,5\\s*%",
         "attendu": 27.5,
-        "tolerance": 0.01
+        "tolerance": 0.01,
+        "elementId": "debtBox"
       },
       {
-        "sortie": "500\\s*€",
         "attendu": 500,
-        "tolerance": 0
+        "tolerance": 0,
+        "elementId": "fees"
       }
     ],
     "source": "https://www.economie.gouv.fr/particuliers/gerer-mon-argent/emprunter-et-sassurer/credit-immobilier-comment-ca-marche",
@@ -649,9 +649,9 @@
     "sortie": "1\\s*254\\s*€",
     "verifications": [
       {
-        "sortie": "Coût du crédit",
         "attendu": 100871,
-        "tolerance": 0.01
+        "tolerance": 0.01,
+        "elementId": "creditCost"
       }
     ],
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/R2924",
@@ -675,9 +675,9 @@
     "sortie": "1\\s*254\\s*€",
     "verifications": [
       {
-        "sortie": "Coût du crédit",
         "attendu": 100871,
-        "tolerance": 0.01
+        "tolerance": 0.01,
+        "elementId": "creditCost"
       }
     ],
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/R2924",
