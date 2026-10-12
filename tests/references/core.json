@@ -587,12 +587,12 @@
     "sortie": "1\\s*160\\s*€",
     "verifications": [
       {
-        "sortie": "88\\s*381\\s*€",
+        "sortie": "Intérêts",
         "attendu": 78381,
         "tolerance": 0.01
       },
       {
-        "sortie": "288\\s*381\\s*€",
+        "sortie": "Total remboursé",
         "attendu": 288381,
         "tolerance": 0.01
       }
@@ -647,7 +647,7 @@
     "sortie": "1\\s*254\\s*€",
     "verifications": [
       {
-        "sortie": "100\\s*871\\s*€",
+        "sortie": "Intérêts",
         "attendu": 100871,
         "tolerance": 0.01
       }
@@ -673,7 +673,7 @@
     "sortie": "1\\s*254\\s*€",
     "verifications": [
       {
-        "sortie": "100\\s*871\\s*€",
+        "sortie": "Intérêts",
         "attendu": 100871,
         "tolerance": 0.01
       }
