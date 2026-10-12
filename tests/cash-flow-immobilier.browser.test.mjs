@@ -19,7 +19,7 @@ try{
  browser=await chromium.launch({headless:true});
  const page=await browser.newPage({viewport:{width:1280,height:900}});
  await page.goto(baseUrl+"/outil/cash-flow-immobilier/",{waitUntil:"load"});
- assert.equal(await page.title(),"Calcul cash-flow immobilier : simulateur locatif | Simulateur");
+ assert.equal(await page.title(),"Calculateur de cash-flow immobilier locatif | Simulateur");
  await page.locator("#result").waitFor();
  await page.locator("#loyer").fill("1000");
  await page.locator("#credit").fill("750");
