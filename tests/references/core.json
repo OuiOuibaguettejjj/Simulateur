@@ -1957,5 +1957,20 @@
     "sortie": "Prix unitaire\\s*:\\s*0,002\\s*€\\s*/\\s*pièce",
     "source": "https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/linformation-sur-les-prix",
     "note": "Cas calculé indépendamment : 0,20 € ÷ 100 pièces = 0,002 €/pièce. Vérifie que l’affichage ne masque pas un prix unitaire faible."
+  },
+  {
+    "outil": "recette",
+    "entrees": {
+      "p": "4",
+      "q": "6",
+      "x": "500",
+      "ingredient": "farine",
+      "unit": "g"
+    },
+    "attendu": 750,
+    "tolerance": 0.001,
+    "sortie": "Quantité adaptée\\\\s*:\\\\s*750",
+    "source": "https://www.khanacademy.org/math/arithmetic/arith-review-ratios-proportions",
+    "note": "Calcul indépendant de proportion directe : 500 × 6 ÷ 4 = 750 g. L’attendu est établi par l’arithmétique, sans exécuter le calculateur."
   }
 ]
