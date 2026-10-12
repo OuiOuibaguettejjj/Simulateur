@@ -1915,5 +1915,33 @@
     "sortie": "^28/02/2023",
     "source": "https://www.iso.org/fr/iso-8601-date-and-time-format.html",
     "note": "Cas de fin de mois non bissextile : un mois après le 31 janvier 2023, le résultat est ramené au 28 février."
+  },
+  {
+    "famille": "outil",
+    "outil": "prix-unitaire",
+    "entrees": {
+      "p": "10",
+      "q": "2",
+      "u": "kg"
+    },
+    "attendu": 5,
+    "tolerance": 0,
+    "sortie": "Prix unitaire\\s*:\\s*5,00\\s*€\\s*/\\s*kg",
+    "source": "https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/linformation-sur-les-prix",
+    "note": "Calcul indépendant : 10 € ÷ 2 kg = 5 €/kg."
+  },
+  {
+    "famille": "outil",
+    "outil": "prix-unitaire",
+    "entrees": {
+      "p": "3,50",
+      "q": "0,5",
+      "u": "kg"
+    },
+    "attendu": 7,
+    "tolerance": 0.01,
+    "sortie": "Prix unitaire\\s*:\\s*7,00\\s*€\\s*/\\s*kg",
+    "source": "https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/linformation-sur-les-prix",
+    "note": "Vérification indépendante de la virgule décimale : 3,50 € ÷ 0,5 kg = 7 €/kg."
   }
 ]
