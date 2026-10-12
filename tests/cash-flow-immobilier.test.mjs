@@ -6,7 +6,7 @@ const cases=[
   {name:"hypothèses par défaut",inputs:base,expected:["-57,50 €","-690,00 €"]},
   {name:"cash-flow nul",inputs:{loyer:100,vac:0,credit:0,"assurance-credit":0,charges:0,gestion:0,taxe:1200,assurance:0,entretien:0,autres:0},expected:["0,00 €","0,00 €"]},
   {name:"vacance de 100 %",inputs:{loyer:1000,vac:100,credit:0,"assurance-credit":0,charges:0,gestion:0,taxe:0,assurance:0,entretien:0,autres:0},expected:["0,00 €"]},
-  {name:"virgule décimale",inputs:{loyer:"1000,50",vac:0,credit:"700,25","assurance-credit":0,charges:0,gestion:0,taxe:0,assurance:0,entretien:0,autres:0},expected:["300,25 €","3 603,00 €"]}
+  {name:"virgule décimale",inputs:{loyer:"1000,50",vac:0,credit:"700,25","assurance-credit":0,charges:0,gestion:0,taxe:0,assurance:0,entretien:0,autres:0},expected:["300,25 €","3 603,00 €"]}
 ];
 for(const test of cases){
   const out=await runInlineCalculator({slug:"cash-flow-immobilier",inputs:test.inputs});
