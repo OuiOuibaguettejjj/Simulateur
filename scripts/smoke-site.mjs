@@ -38,13 +38,13 @@ try{
      try{
       await page.locator("#p").fill("3,50");await page.locator("#q").fill("0,5");await page.locator("#u").selectOption("kg");
       await page.getByRole("button",{name:"Calculer le prix unitaire"}).click();
-      if(!/7,00\\s*€\\s*\\/\\s*kg/.test(await result.innerText()))errors.push(file+": virgule décimale non calculée correctement");
+      if(!/7,00\s*€\s*\/\s*kg/.test(await result.innerText()))errors.push(file+": virgule décimale non calculée correctement");
       await page.locator("#p").fill("0,20");await page.locator("#q").fill("100");await page.locator("#u").selectOption("pièce");
       await page.getByRole("button",{name:"Calculer le prix unitaire"}).click();
-      if(!/0,002\\s*€\\s*\\/\\s*pièce/.test(await result.innerText()))errors.push(file+": le petit prix unitaire n'est pas affiché avec assez de précision");
+      if(!/0,002\s*€\s*\/\s*pièce/.test(await result.innerText()))errors.push(file+": le petit prix unitaire n'est pas affiché avec assez de précision");
       await page.locator("#p").fill("3,50");await page.locator("#q").fill("0,5");await page.locator("#u").selectOption("kg");
       await page.locator("#q").press("Enter");
-      if(!/7,00\\s*€\\s*\\/\\s*kg/.test(await result.innerText()))errors.push(file+": la touche Entrée ne déclenche pas le calcul");
+      if(!/7,00\s*€\s*\/\s*kg/.test(await result.innerText()))errors.push(file+": la touche Entrée ne déclenche pas le calcul");
       await page.locator("#p").fill("1");await page.locator("#q").fill("0");
       await page.getByRole("button",{name:"Calculer le prix unitaire"}).click();
       if(!/strictement supérieure à zéro/.test(await result.innerText()))errors.push(file+": la quantité nulle n'est pas refusée");
