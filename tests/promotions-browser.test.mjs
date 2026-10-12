@@ -27,13 +27,13 @@ try{
  await page.locator("#qB").fill("2");
  await page.locator("#tB").fill("5");
  await page.locator("#tA").press("Enter");
- let result=await page.locator("#result").innerText();
+ let result=(await page.locator("#result").innerText()).replace(/[\u00a0\u202f]/g," ");
  assert.match(result,/Offre A : 2,25 €/);
  assert.match(result,/Offre B : 2,50 €/);
  assert.match(result,/Offre A.*plus avantageuse de 0,25 € par unité/s);
  await page.locator("#pA").fill("2,001");
  await page.locator(".button-main").click();
- result=await page.locator("#result").innerText();
+ result=(await page.locator("#result").innerText()).replace(/[\u00a0\u202f]/g," ");
  assert.match(result,/Valeurs à vérifier/);
  for(const width of [320,360,375,390,768,1280]){
   await page.setViewportSize({width,height:900});
