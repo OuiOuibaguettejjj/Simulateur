@@ -696,14 +696,14 @@
     "sortie": "1\\s*159,92\\s*€",
     "verifications": [
       {
-        "sortie": "78\\s*380,66\\s*€",
         "attendu": 78380.66,
-        "tolerance": 0.01
+        "tolerance": 0.01,
+        "elementId": "interest"
       },
       {
-        "sortie": "278\\s*380,66\\s*€",
         "attendu": 278380.66,
-        "tolerance": 0.01
+        "tolerance": 0.01,
+        "elementId": "totalPaid"
       }
     ],
     "source": "https://www.thecalculator.co/finance/Mortgage-Payment-Calculator-24.html",
