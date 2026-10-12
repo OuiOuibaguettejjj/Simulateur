@@ -17,7 +17,7 @@ const invalidCases=[
   {name:"valeur négative",inputs:{...base,credit:-1}},
   {name:"vacance supérieure à 100 %",inputs:{...base,vac:100.01}},
   {name:"gestion supérieure à 100 %",inputs:{...base,gestion:100.01}},
-  {name:"dépenses extrêmes",inputs:{...base,loyer:"1e308",credit:"1e308",taxe:"1e308"}}
+  {name:"dépenses extrêmes",inputs:{...base,loyer:"1e308",credit:"1.7e308",taxe:"1.7e308"}}
 ];
 for(const test of invalidCases){
   const out=await runInlineCalculator({slug:"cash-flow-immobilier",inputs:test.inputs});
