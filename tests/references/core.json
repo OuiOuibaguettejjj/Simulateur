@@ -49,6 +49,39 @@
     "source": "https://eduscol.education.gouv.fr/media/126080/download?attachment=1"
   },
   {
+    "outil": "marge",
+    "entrees": {
+      "achat": "80",
+      "vente": "100"
+    },
+    "attendu": 20,
+    "tolerance": 0.01,
+    "sortie": "Marge",
+    "verifications": [
+      {
+        "sortie": "Taux de marge",
+        "attendu": 25,
+        "tolerance": 0.01
+      },
+      {
+        "sortie": "Taux de marque",
+        "attendu": 20,
+        "tolerance": 0.01
+      },
+      {
+        "sortie": "Coefficient de vente",
+        "attendu": 1.25,
+        "tolerance": 0.01
+      },
+      {
+        "sortie": "Prix de vente HT pour un taux de marque de 40 %",
+        "attendu": 133.33,
+        "tolerance": 0.01
+      }
+    ],
+    "source": "https://calculette.org/calculateurs/marge"
+  },
+  {
     "outil": "pourcentage",
     "entrees": {
       "v": "150",
@@ -1938,12 +1971,14 @@
   {
     "outil": "marge",
     "entrees": {
-      "achat": "80",
-      "vente": "100"
+      "achat": "60",
+      "vente": "100",
+      "frais": "5",
+      "objectif": "40"
     },
-    "attendu": 20,
+    "attendu": 35,
     "tolerance": 0.01,
-    "sortie": "Marge",
+    "sortie": "Marge commerciale",
     "verifications": [
       {
         "sortie": "Taux de marge",
@@ -1966,6 +2001,7 @@
         "tolerance": 0.01
       }
     ],
-    "source": "https://calculette.org/calculateurs/marge"
+    "source": "https://bpifrance-creation.fr/encyclopedie/gerer-lentreprise/connaitre-chiffres/marge-commerciale",
+    "note": "Calcul indépendant : coût complet 60 € + 5 € = 65 € ; marge 100 € − 65 € = 35 €. Taux de marge 35/65 ≈ 53,85 %, taux de marque 35/100 = 35 %, prix cible 65/(1 − 0,40) ≈ 108,33 €. La source documente la notion, pas les résultats numériques."
   }
 ]
