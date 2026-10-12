@@ -60,22 +60,6 @@
     "rule": "title"
   },
   {
-    "path": "public/outil/cash-flow-immobilier/index.html",
-    "rule": "description"
-  },
-  {
-    "path": "public/outil/cash-flow-immobilier/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/cash-flow-immobilier/index.html",
-    "rule": "formula"
-  },
-  {
-    "path": "public/outil/cash-flow-immobilier/index.html",
-    "rule": "title"
-  },
-  {
     "path": "public/outil/charges-independant/index.html",
     "rule": "content-h2"
   },
