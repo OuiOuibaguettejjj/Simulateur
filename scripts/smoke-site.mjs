@@ -65,6 +65,9 @@ try{
       await page.locator("#objectif").fill("100");
       await page.getByRole("button",{name:"Calculer"}).click();
       if(!/moins de 100\s*%/.test(await result.innerText()))errors.push(file+": taux cible de 100 % non refusé");
+      await page.locator("#objectif").fill("0");
+      await page.getByRole("button",{name:"Calculer"}).click();
+      if(!/Prix de vente HT pour un taux de marque de 0\s*%\s*:\s*65,00\s*€/.test(await result.innerText()))errors.push(file+": taux cible de 0 % incorrect");
       await page.locator("#objectif").fill("");
       await page.locator("#achat").fill("-1");
       await page.getByRole("button",{name:"Calculer"}).click();
