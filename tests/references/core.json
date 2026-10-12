@@ -1954,7 +1954,7 @@
     },
     "attendu": 0.002,
     "tolerance": 1e-9,
-    "sortie": "Prix unitaire\\\\s*:\\\\s*0,002\\\\s*€\\\\s*/\\\\s*pièce",
+    "sortie": "Prix unitaire\\s*:\\s*0,002\\s*€\\s*/\\s*pièce",
     "source": "https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/linformation-sur-les-prix",
     "note": "Cas calculé indépendamment : 0,20 € ÷ 100 pièces = 0,002 €/pièce. Vérifie que l’affichage ne masque pas un prix unitaire faible."
   }
