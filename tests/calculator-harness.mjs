@@ -95,7 +95,7 @@ export async function runInlineCalculator({slug,family="outil",caseKind="default
   if(family==="outil"&&window.TOOL?.calc){const $=id=>document.getElementById(id);const euro=value=>Number(value).toLocaleString("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:2});const num=value=>Number(value).toLocaleString("fr-FR",{maximumFractionDigits:2});const result=window.TOOL.calc.call({$,euro,num});if(typeof result!=="string")throw new Error("calc ne retourne pas une chaîne");returned=strip(result)}
   const calculationButton=document.querySelector(".button-main");
   if(calculationButton)calculationButton.click();
-  return{text:[returned,resultText(document)].filter(Boolean).join(" | "),hasTool:!!window.TOOL};
+  return{text:[returned,resultText(document)].filter(Boolean).join(" | "),fields:Object.fromEntries(document.elements.filter(e=>e.id).map(e=>[e.id,strip(e.textContent||e.innerHTML||"")])),hasTool:!!window.TOOL};
 }
 export function listIntegratedPages(){const pages=[];for(const family of INTERACTIVE_FAMILIES){const dir=path.join(ROOT,"public",family);if(!fs.existsSync(dir))continue;for(const entry of fs.readdirSync(dir,{withFileTypes:true})){if(!entry.isDirectory())continue;const slug=entry.name;const html=fs.readFileSync(path.join(dir,slug,"index.html"),"utf8");const hasInline=[...html.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/gi)].some(m=>!/\bsrc=/.test(m[1])&&!/application\/ld\+json/i.test(m[1]));if(hasInline)pages.push({family,slug})}}return pages.sort((a,b)=>(a.family+"/"+a.slug).localeCompare(b.family+"/"+b.slug))}
 export function listIntegratedTools(){return listIntegratedPages().filter(page=>page.family==="outil").map(page=>page.slug)}
