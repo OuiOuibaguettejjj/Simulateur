@@ -49,29 +49,6 @@
     "source": "https://eduscol.education.gouv.fr/media/126080/download?attachment=1"
   },
   {
-    "outil": "marge",
-    "entrees": {
-      "achat": "80",
-      "vente": "100"
-    },
-    "attendu": 20,
-    "tolerance": 0.01,
-    "sortie": "Marge",
-    "verifications": [
-      {
-        "sortie": "Taux de marge",
-        "attendu": 25,
-        "tolerance": 0.01
-      },
-      {
-        "sortie": "Taux de marque",
-        "attendu": 20,
-        "tolerance": 0.01
-      }
-    ],
-    "source": "https://calculette.org/calculateurs/marge"
-  },
-  {
     "outil": "pourcentage",
     "entrees": {
       "v": "150",
@@ -1917,17 +1894,78 @@
     "note": "Cas de fin de mois non bissextile : un mois après le 31 janvier 2023, le résultat est ramené au 28 février."
   },
   {
+    "famille": "outil",
+    "outil": "prix-unitaire",
+    "entrees": {
+      "p": "10",
+      "q": "2",
+      "u": "kg"
+    },
+    "attendu": 5,
+    "tolerance": 0,
+    "sortie": "Prix unitaire\\s*:\\s*5,00\\s*€\\s*/\\s*kg",
+    "source": "https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/linformation-sur-les-prix",
+    "note": "Calcul indépendant : 10 € ÷ 2 kg = 5 €/kg."
+  },
+  {
+    "famille": "outil",
+    "outil": "prix-unitaire",
+    "entrees": {
+      "p": "3,50",
+      "q": "0,5",
+      "u": "kg"
+    },
+    "attendu": 7,
+    "tolerance": 0.01,
+    "sortie": "Prix unitaire\\s*:\\s*7,00\\s*€\\s*/\\s*kg",
+    "source": "https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/linformation-sur-les-prix",
+    "note": "Vérification indépendante de la virgule décimale : 3,50 € ÷ 0,5 kg = 7 €/kg."
+  },
+  {
+    "famille": "outil",
+    "outil": "prix-unitaire",
+    "entrees": {
+      "p": "0,20",
+      "q": "100",
+      "u": "pièce"
+    },
+    "attendu": 0.002,
+    "tolerance": 1e-9,
+    "sortie": "Prix unitaire\\s*:\\s*0,002\\s*€\\s*/\\s*pièce",
+    "source": "https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/linformation-sur-les-prix",
+    "note": "Cas calculé indépendamment : 0,20 € ÷ 100 pièces = 0,002 €/pièce. Vérifie que l’affichage ne masque pas un prix unitaire faible."
+  },
+  {
     "outil": "marge",
     "entrees": {
-      "achat": "60",
-      "vente": "100",
-      "frais": "5",
-      "objectif": "40"
+      "achat": "80",
+      "vente": "100"
     },
-    "attendu": 35,
+    "attendu": 20,
     "tolerance": 0.01,
-    "sortie": "Marge commerciale",
-    "source": "https://bpifrance-creation.fr/encyclopedie/gerer-lentreprise/connaitre-chiffres/marge-commerciale",
-    "note": "Vérification arithmétique indépendante : 100 € − (60 € + 5 €) = 35 € de marge. Le taux de marge est 35 / 65 × 100 ≈ 53,85 % et le taux de marque 35 / 100 × 100 = 35 %. La source documente la notion de marge commerciale, pas la valeur numérique attendue."
+    "sortie": "Marge",
+    "verifications": [
+      {
+        "sortie": "Taux de marge",
+        "attendu": 53.85,
+        "tolerance": 0.01
+      },
+      {
+        "sortie": "Taux de marque",
+        "attendu": 35,
+        "tolerance": 0.01
+      },
+      {
+        "sortie": "Coefficient de vente",
+        "attendu": 1.5384615384615385,
+        "tolerance": 0.01
+      },
+      {
+        "sortie": "Prix de vente HT pour un taux de marque de 40 %",
+        "attendu": 108.33,
+        "tolerance": 0.01
+      }
+    ],
+    "source": "https://calculette.org/calculateurs/marge"
   }
 ]
