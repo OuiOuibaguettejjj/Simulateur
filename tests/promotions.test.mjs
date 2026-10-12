@@ -4,7 +4,7 @@ import {runInlineCalculator} from "./calculator-harness.mjs";
 const cases=[
   {name:"compare les prix unitaires et identifie l'offre la moins chère",inputs:{pA:2,qA:3,tA:5,pB:2.2,qB:3,tB:5.7},expected:["1,67 €","1,90 €","L’offre A","1,00 €","0,90 €"]},
   {name:"accepte une virgule décimale",inputs:{pA:"2,5",qA:2,tA:"4,5",pB:3,qB:2,tB:5},expected:["2,25 €","2,50 €"]},
-  {name:"détecte deux offres au même prix unitaire",inputs:{pA:2,qA:3,tA:5,pB:3,qB:2,tB:5},expected:["même prix par unité"]},
+  {name:"détecte deux offres au même prix unitaire",inputs:{pA:2,qA:3,tA:6,pB:3,qB:2,tB:4},expected:["même prix par unité"]},
   {name:"indique un surcoût quand l'offre dépasse le prix habituel",inputs:{pA:2,qA:2,tA:5,pB:3,qB:2,tB:5},expected:["surcoût"]}
 ];
 for(const testCase of cases){
