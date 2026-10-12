@@ -589,12 +589,14 @@
       {
         "sortie": "Intérêts",
         "attendu": 78381,
-        "tolerance": 0.01
+        "tolerance": 0.01,
+        "elementId": "interest"
       },
       {
         "sortie": "Total remboursé",
         "attendu": 288381,
-        "tolerance": 0.01
+        "tolerance": 0.01,
+        "elementId": "totalPaid"
       }
     ],
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/R2924",
