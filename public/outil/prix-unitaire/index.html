@@ -31,8 +31,8 @@
 <h1>Calculateur de prix unitaire</h1>
 <p class="tool-intro">Calculez le prix d’un produit au kilogramme, au litre ou à la pièce pour mieux comparer son coût selon la quantité achetée.</p>
 <div id="fields">
-<div class="field"><label for="p">Prix payé (€)</label><input id="p" type="number" min="0" step="0.01" value="10" inputmode="decimal" placeholder="10,00"></div>
-<div class="field"><label for="q">Quantité achetée (<span id="unit-label">kg</span>)</label><input id="q" type="number" min="0" step="any" value="2" inputmode="decimal" placeholder="2"></div>
+<div class="field"><label for="p">Prix payé (€)</label><input id="p" type="text" inputmode="decimal" value="10" autocomplete="off" placeholder="10,00"></div>
+<div class="field"><label for="q">Quantité achetée (<span id="unit-label">kg</span>)</label><input id="q" type="text" inputmode="decimal" value="2" autocomplete="off" placeholder="2"></div>
 <div class="field"><label for="u">Unité de comparaison</label><select id="u"><option value="kg">Kilogramme (kg)</option><option value="L">Litre (L)</option><option value="pièce">Pièce</option></select></div>
 </div>
 <button class="button-main" type="button" onclick="Simulateurs.calc()">Calculer le prix unitaire</button>
@@ -67,7 +67,11 @@ window.TOOL={calc:function(){
   const price=Number(rawPrice.replace(",", ".")),quantity=Number(rawQuantity.replace(",", "."));
   if(!Number.isFinite(price)||!Number.isFinite(quantity)||price<0||quantity<=0)return "Saisissez un prix positif ou nul et une quantité strictement supérieure à zéro.";
   const label=unit==="pièce"?"pièce":unit;
-  return "Prix unitaire : <strong>"+this.euro(price/quantity)+" / "+label+"</strong>";
+  const unitPrice=price/quantity;
+  const formatted=unitPrice>0&&unitPrice<0.00000001
+    ? "< 0,00000001"
+    : new Intl.NumberFormat("fr-FR",{minimumFractionDigits:2,maximumFractionDigits:8}).format(unitPrice);
+  return "Prix unitaire : <strong>"+formatted+" € / "+label+"</strong>";
 }};
 </script>
 </body>
