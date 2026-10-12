@@ -1943,5 +1943,19 @@
     "sortie": "Prix unitaire\\s*:\\s*7,00\\s*€\\s*/\\s*kg",
     "source": "https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/linformation-sur-les-prix",
     "note": "Vérification indépendante de la virgule décimale : 3,50 € ÷ 0,5 kg = 7 €/kg."
+  },
+  {
+    "famille": "outil",
+    "outil": "prix-unitaire",
+    "entrees": {
+      "p": "0,20",
+      "q": "100",
+      "u": "pièce"
+    },
+    "attendu": 0.002,
+    "tolerance": 1e-9,
+    "sortie": "Prix unitaire\\\\s*:\\\\s*0,002\\\\s*€\\\\s*/\\\\s*pièce",
+    "source": "https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/linformation-sur-les-prix",
+    "note": "Cas calculé indépendamment : 0,20 € ÷ 100 pièces = 0,002 €/pièce. Vérifie que l’affichage ne masque pas un prix unitaire faible."
   }
 ]
