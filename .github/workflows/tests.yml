@@ -146,6 +146,15 @@ jobs:
       - name: Test check-pages
         run: node tests/check-pages.test.mjs
 
+      - name: Vérifier la régénération de la baseline depuis main
+        if: github.event_name == 'pull_request'
+        run: |
+          cp scripts/check-pages.baseline.json "$RUNNER_TEMP/check-pages-baseline.expected.json"
+          trap 'cp "$RUNNER_TEMP/check-pages-baseline.expected.json" scripts/check-pages.baseline.json' EXIT
+          git show origin/main:scripts/check-pages.baseline.json > scripts/check-pages.baseline.json
+          node scripts/check-pages.mjs --update-baseline
+          diff -u "$RUNNER_TEMP/check-pages-baseline.expected.json" scripts/check-pages.baseline.json
+
       - name: Test normalisation du layout
         run: node tests/normalize-layout.test.mjs
 
