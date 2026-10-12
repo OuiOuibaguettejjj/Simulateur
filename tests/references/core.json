@@ -647,7 +647,7 @@
     "sortie": "1\\s*254\\s*€",
     "verifications": [
       {
-        "sortie": "Intérêts",
+        "sortie": "Coût du crédit",
         "attendu": 100871,
         "tolerance": 0.01
       }
@@ -673,7 +673,7 @@
     "sortie": "1\\s*254\\s*€",
     "verifications": [
       {
-        "sortie": "Intérêts",
+        "sortie": "Coût du crédit",
         "attendu": 100871,
         "tolerance": 0.01
       }
