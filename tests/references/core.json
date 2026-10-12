@@ -1927,7 +1927,7 @@
     "attendu": 35,
     "tolerance": 0.01,
     "sortie": "Marge commerciale",
-    "source": "https://bpifrance-creation.fr/encyclopedie/gerer-lentreprise/connaitre-chiffres/marge-commerciale",
+    "source": "https://bpifrance-creation.fr/marge-commerciale",
     "note": "Vérification arithmétique indépendante : 100 € − (60 € + 5 €) = 35 € de marge. Le taux de marge est 35 / 65 × 100 ≈ 53,85 % et le taux de marque 35 / 100 × 100 = 35 %. La source documente la notion de marge commerciale, pas la valeur numérique attendue."
   }
 ]
