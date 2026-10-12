@@ -105,6 +105,9 @@ jobs:
       - name: Test navigateur Promotions (virgule, Entrée, responsive)
         run: node tests/promotions-browser.test.mjs
 
+      - name: Test navigateur cash-flow immobilier (calcul, Entrée, responsive)
+        run: node tests/cash-flow-immobilier.browser.test.mjs
+
       - name: Test régression ratio
         run: node tests/ratio.test.mjs
 
