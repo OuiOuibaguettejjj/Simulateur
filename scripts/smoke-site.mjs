@@ -33,6 +33,44 @@ try{
    if(isInteractivePage(file.slice("public/".length))){
     await populate(page);const buttons=page.locator("button"),n=await buttons.count();if(n===0)errors.push(file+": "+(mode==="production"?"production ":"")+"no button");
     for(let i=0;i<n;i++)try{await buttons.nth(i).click({timeout:mode==="local"?1500:2000});await page.waitForTimeout(mode==="local"?30:50)}catch(e){errors.push(file+": "+(mode==="production"?"production ":"")+"button "+i+" click failed: "+e.message)}
+    if(file==="public/outil/prix-unitaire/index.html"){
+     const result=page.locator("#result");
+     try{
+      await page.locator("#p").fill("3,50");await page.locator("#q").fill("0,5");await page.locator("#u").selectOption("kg");
+      await page.getByRole("button",{name:"Calculer le prix unitaire"}).click();
+      if(!/7,00\s*€\s*\/\s*kg/.test(await result.innerText()))errors.push(file+": virgule décimale non calculée correctement");
+      await page.locator("#p").fill("0,20");await page.locator("#q").fill("100");await page.locator("#u").selectOption("pièce");
+      await page.getByRole("button",{name:"Calculer le prix unitaire"}).click();
+      if(!/0,002\s*€\s*\/\s*pièce/.test(await result.innerText()))errors.push(file+": le petit prix unitaire n'est pas affiché avec assez de précision");
+      await page.locator("#p").fill("3,50");await page.locator("#q").fill("0,5");await page.locator("#u").selectOption("kg");
+      await page.locator("#q").press("Enter");
+      if(!/7,00\s*€\s*\/\s*kg/.test(await result.innerText()))errors.push(file+": la touche Entrée ne déclenche pas le calcul");
+      await page.locator("#p").fill("1");await page.locator("#q").fill("0");
+      await page.getByRole("button",{name:"Calculer le prix unitaire"}).click();
+      if(!/strictement supérieure à zéro/.test(await result.innerText()))errors.push(file+": la quantité nulle n'est pas refusée");
+     }catch(e){errors.push(file+": test navigateur dédié échoué: "+e.message)}
+    }
+    if(file==="public/outil/marge/index.html"){
+     const result=page.locator("#result");
+     try{
+      await page.locator("#achat").fill("60,00");await page.locator("#vente").fill("100,00");await page.locator("#frais").fill("5,00");await page.locator("#objectif").fill("40,00");
+      await page.getByRole("button",{name:"Calculer"}).click();
+      let text=await result.innerText();
+      if(!/Marge commerciale\s*:\s*35,00\s*€/.test(text))errors.push(file+": marge avec frais unitaires incorrecte");
+      if(!/Taux de marge\s*:\s*53,85\s*%/.test(text))errors.push(file+": taux de marge incorrect");
+      if(!/Taux de marque\s*:\s*35\s*%/.test(text))errors.push(file+": taux de marque incorrect");
+      if(!/Prix de vente HT pour un taux de marque de 40\s*%\s*:\s*108,33\s*€/.test(text))errors.push(file+": prix cible incorrect");
+      await page.locator("#objectif").press("Enter");
+      if(!/108,33\s*€/.test(await result.innerText()))errors.push(file+": la touche Entrée ne déclenche pas le calcul de marge");
+      await page.locator("#objectif").fill("100");
+      await page.getByRole("button",{name:"Calculer"}).click();
+      if(!/moins de 100\s*%/.test(await result.innerText()))errors.push(file+": taux cible de 100 % non refusé");
+      await page.locator("#objectif").fill("");
+      await page.locator("#achat").fill("-1");
+      await page.getByRole("button",{name:"Calculer"}).click();
+      if(!/prix d'achat positif ou nul/.test(await result.innerText()))errors.push(file+": prix d'achat négatif non refusé");
+     }catch(e){errors.push(file+": test navigateur marge échoué: "+e.message)}
+    }
    }else if(mode==="local")await populate(page);
    const texts=await page.locator(".result").allTextContents();
    const badResults=texts.filter(t=>isInvalidResult(t));
