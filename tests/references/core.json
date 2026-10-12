@@ -588,7 +588,7 @@
     "verifications": [
       {
         "sortie": "88\\s*381\\s*€",
-        "attendu": 88381,
+        "attendu": 78381,
         "tolerance": 0.01
       },
       {
