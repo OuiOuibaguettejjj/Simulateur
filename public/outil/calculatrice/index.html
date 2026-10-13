@@ -1,3 +1,97 @@
-<!doctype html><html lang="fr"><head><meta name="calculator-rendering" content="static"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="google-adsense-account" content="ca-pub-2924580037451268"><title>Calculateur en ligne : calculatrice gratuite | Simulateur</title><meta name="description" content="Effectuez les quatre opérations de base."><link rel="canonical" href="https://simulateur.site/outil/calculatrice/"><link rel="stylesheet" href="/styles.css"><script src="/simulateurs.js" defer></script><script src="/enter-calcul.js" defer></script><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculatrice en ligne","url":"https://simulateur.site/outil/calculatrice/","description":"Effectuez les quatre opérations de base.","inLanguage":"fr-FR","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"price":"0","priceCurrency":"EUR"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Maths","item":"https://simulateur.site/maths/"},{"@type":"ListItem","position":3,"name":"Calculatrice en ligne","item":"https://simulateur.site/outil/calculatrice/"}]}</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta property="og:type" content="website"><meta property="og:site_name" content="Simulateur"><meta property="og:locale" content="fr_FR"><meta property="og:title" content="Calculatrice en ligne"><meta property="og:description" content="Effectuez les quatre opérations de base."><meta property="og:url" content="https://simulateur.site/outil/calculatrice/"><meta name="twitter:card" content="summary"></head><body><header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header><main><div class="wrap"><div class="breadcrumb"><a href="/">Accueil</a> · <a href="/maths/">Maths</a> · Calculatrice en ligne</div><section class="tool"><div class="eyebrow">MATHÉMATIQUES</div><h1>Calculatrice en ligne</h1><p class="tool-intro">Effectuez les quatre opérations de base.</p><div id="fields"><div class="field"><label for="a">Nombre A</label><input id="a" type="number" step="any" value="10"></div><div class="field"><label for="b">Nombre B</label><input id="b" type="number" value="5"></div><div class="field"><label for="op">Opération</label><select id="op"><option>+</option><option>-</option><option>×</option><option>÷</option></select></div></div><button class="button-main" onclick="Simulateurs.calc()">Calculer</button><div class="result" id="result" aria-live="polite"></div><div class="formula"><p>Calcul selon une formule mathématique standard.</p></div></section></div><section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Outils associés</h2><div class="related-links"><a class="related-link" href="/outil/pourcentage/"><strong>Calcul de pourcentage</strong><span>Calculer une part, une évolution ou un ratio.</span></a><a class="related-link" href="/outil/moyenne/"><strong>Moyenne</strong><span>Calculer la moyenne arithmétique d'une série de valeurs.</span></a><a class="related-link" href="/outil/fractions/"><strong>Fractions</strong><span>Additionner, soustraire, multiplier ou diviser des fractions.</span></a></div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="/maths/">Maths</a>.</p></div></section>
-</main><footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer><script>window.TOOL={calc:function(){const a=+this.$("a").value,b=+this.$("b").value,o=this.$("op").value;if(!Number.isFinite(a)||!Number.isFinite(b)||(o==="÷"&&b===0))return"Valeurs invalides.";const r=o==="+"?a+b:o==="-"?a-b:o==="×"?a*b:a/b;return"<strong>"+r.toLocaleString("fr-FR")+"</strong>"}};</script></body></html>
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta name="calculator-rendering" content="static">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="google-adsense-account" content="ca-pub-2924580037451268">
+  <title>Calculatrice en ligne : calculateur gratuit | Simulateur</title>
+  <meta name="description" content="Utilisez cette calculatrice en ligne pour calculer une somme, une différence, un produit, un quotient, une puissance ou un reste. Résultat immédiat et gratuit.">
+  <link rel="canonical" href="https://simulateur.site/outil/calculatrice/">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/simulateurs.js" defer></script>
+  <script src="/enter-calcul.js" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculatrice en ligne","url":"https://simulateur.site/outil/calculatrice/","description":"Utilisez cette calculatrice en ligne pour calculer une somme, une différence, un produit, un quotient, une puissance ou un reste. Résultat immédiat et gratuit.","inLanguage":"fr-FR","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"price":"0","priceCurrency":"EUR"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Maths","item":"https://simulateur.site/maths/"},{"@type":"ListItem","position":3,"name":"Calculatrice en ligne","item":"https://simulateur.site/outil/calculatrice/"}]}</script>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Simulateur">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:title" content="Calculatrice en ligne : calculateur gratuit | Simulateur">
+  <meta property="og:description" content="Utilisez cette calculatrice en ligne pour calculer une somme, une différence, un produit, un quotient, une puissance ou un reste. Résultat immédiat et gratuit.">
+  <meta property="og:url" content="https://simulateur.site/outil/calculatrice/">
+  <meta name="twitter:card" content="summary">
+</head>
+<body>
+  <header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header>
+  <main>
+    <div class="wrap">
+      <div class="breadcrumb"><a href="/">Accueil</a> · <a href="/maths/">Maths</a> · Calculatrice en ligne</div>
+      <section class="tool">
+        <div class="eyebrow">MATHÉMATIQUES</div>
+        <h1>Calculatrice en ligne : calculer simplement</h1>
+        <p class="tool-intro">Effectuez vos calculs courants avec deux nombres : addition, soustraction, multiplication, division, puissance ou reste de division. Le résultat s’affiche immédiatement après le calcul.</p>
+        <div id="fields">
+          <div class="field"><label for="a">Premier nombre</label><input id="a" type="number" step="any" inputmode="decimal" value="10"></div>
+          <div class="field"><label for="op">Opération</label><select id="op"><option value="+">Addition (+)</option><option value="-">Soustraction (−)</option><option value="×">Multiplication (×)</option><option value="÷">Division (÷)</option><option value="^">Puissance (a exposant b)</option><option value="%">Reste de division (%)</option></select></div>
+          <div class="field"><label for="b">Deuxième nombre</label><input id="b" type="number" step="any" inputmode="decimal" value="5"></div>
+        </div>
+        <button class="button-main" type="button" onclick="Simulateurs.calc()">Calculer</button>
+        <div class="result" id="result" aria-live="polite">Le résultat s’affichera ici après votre calcul.</div>
+        <div class="formula">
+          <p><strong>Méthode :</strong> la calculatrice applique l’opération choisie aux deux nombres saisis. Le résultat est affiché avec une précision maximale de 10 décimales ; l’affichage peut donc arrondir les dernières décimales.</p>
+          <p><strong>Limites :</strong> la division et le reste de division par zéro sont impossibles. Les résultats non finis ou trop grands ne sont pas affichés comme des valeurs valides.</p>
+          <p>Pour revoir les opérations arithmétiques de base : <a href="https://fr.khanacademy.org/math/arithmetic" rel="noopener noreferrer">cours d’arithmétique de Khan Academy</a>.</p>
+        </div>
+      </section>
+    </div>
+    <section class="content-section">
+      <h2>Comment utiliser cette calculatrice en ligne ?</h2>
+      <p>Saisissez un premier nombre, choisissez l’opération, puis indiquez le deuxième nombre. Cliquez sur <strong>Calculer</strong> ou appuyez sur Entrée depuis un champ numérique. Vous pouvez utiliser des nombres entiers, des nombres négatifs et des décimales.</p>
+      <p>Les opérations disponibles sont l’addition, la soustraction, la multiplication, la division, la puissance et le reste de division. Pour une division, le premier nombre est le dividende et le deuxième le diviseur.</p>
+      <h2>Exemples de calcul</h2>
+      <p>Avec 10 et 5, l’addition donne 15, la multiplication donne 50 et la division donne 2. Pour une puissance, 10 exposant 5 donne 100&nbsp;000. Pour le reste de division, 10 % 5 donne 0, car 10 est divisible par 5.</p>
+      <p>Le reste de division correspond au reste de l’opération entière selon la convention JavaScript ; avec des nombres négatifs, son signe peut suivre celui du premier nombre. Pour les calculs nécessitant une précision décimale exacte (par exemple en comptabilité), vérifiez les décimales affichées avant d’utiliser le résultat.</p>
+    </section>
+    <section class="calculator-faq" aria-labelledby="faq-title">
+      <h2 id="faq-title">FAQ</h2>
+      <details><summary>Quelles opérations permet cette calculatrice ?</summary><div class="calculator-faq-answer"><p>Elle permet l’addition, la soustraction, la multiplication, la division, le calcul d’une puissance et le reste de division de deux nombres.</p></div></details>
+      <details><summary>Peut-on saisir des nombres négatifs ou décimaux ?</summary><div class="calculator-faq-answer"><p>Oui. Les champs acceptent les nombres négatifs et les décimales. Le navigateur peut adapter la saisie décimale à ses paramètres régionaux.</p></div></details>
+      <details><summary>Pourquoi la division par zéro est-elle refusée ?</summary><div class="calculator-faq-answer"><p>La division par zéro n’a pas de résultat réel défini. Le calculateur signale donc les valeurs insuffisantes plutôt que d’afficher une valeur infinie.</p></div></details>
+      <details><summary>Le résultat conserve-t-il toutes les décimales ?</summary><div class="calculator-faq-answer"><p>Le résultat affiché est formaté avec au maximum 10 décimales. Les nombres à virgule sont représentés par le navigateur en précision finie ; pour un usage nécessitant une exactitude stricte, contrôlez le résultat et son arrondi.</p></div></details>
+    </section>
+    <section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Outils associés</h2><div class="related-links"><a class="related-link" href="/outil/pourcentage/"><strong>Calcul de pourcentage</strong><span>Calculer une part, une évolution ou un ratio.</span></a><a class="related-link" href="/outil/moyenne/"><strong>Calcul de moyenne</strong><span>Calculer la moyenne arithmétique d’une série.</span></a><a class="related-link" href="/outil/fractions/"><strong>Calculateur de fractions</strong><span>Effectuer des opérations sur des fractions.</span></a></div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="/maths/">Maths</a>.</p></div></section>
+  </main>
+  <footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer>
+  <script>
+    window.TOOL = {
+      calc: function () {
+        const aRaw = this.$("a").value.trim();
+        const bRaw = this.$("b").value.trim();
+        const a = Number(aRaw);
+        const b = Number(bRaw);
+        const op = this.$("op").value;
+        if (aRaw === "" || bRaw === "" || !Number.isFinite(a) || !Number.isFinite(b)) {
+          return "Valeurs invalides ou insuffisantes : saisissez deux nombres finis.";
+        }
+        if ((op === "÷" || op === "%") && b === 0) {
+          return "Impossible de diviser par zéro. Choisissez un deuxième nombre différent de zéro.";
+        }
+        let result;
+        if (op === "+") result = a + b;
+        else if (op === "-") result = a - b;
+        else if (op === "×") result = a * b;
+        else if (op === "÷") result = a / b;
+        else if (op === "^") result = Math.pow(a, b);
+        else if (op === "%") result = a % b;
+        else return "Choisissez une opération valide.";
+        if (!Number.isFinite(result)) return "Le résultat dépasse les limites numériques prises en charge.";
+        const formatted = result.toLocaleString("fr-FR", { maximumFractionDigits: 10 });
+        const left = a.toLocaleString("fr-FR", { maximumFractionDigits: 10 });
+        const right = b.toLocaleString("fr-FR", { maximumFractionDigits: 10 });
+        return "<p><strong>" + left + " " + op + " " + right + " = " + formatted + "</strong></p><p>Résultat du calcul</p>";
+      }
+    };
+  </script>
+</body>
+</html>

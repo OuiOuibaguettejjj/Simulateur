@@ -28,26 +28,6 @@
     "rule": "result"
   },
   {
-    "path": "public/outil/calculatrice/index.html",
-    "rule": "content-h2"
-  },
-  {
-    "path": "public/outil/calculatrice/index.html",
-    "rule": "description"
-  },
-  {
-    "path": "public/outil/calculatrice/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/calculatrice/index.html",
-    "rule": "formula"
-  },
-  {
-    "path": "public/outil/calculatrice/index.html",
-    "rule": "result"
-  },
-  {
     "path": "public/outil/charges-independant/index.html",
     "rule": "content-h2"
   },
