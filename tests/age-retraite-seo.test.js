@@ -10,7 +10,7 @@ const webApplication = [...html.matchAll(/<script[^>]+type="application\/ld\+jso
   .flatMap(data => Array.isArray(data) ? data : data && data["@graph"] ? data["@graph"] : [data])
   .find(node => node && node["@type"] === "WebApplication");
 assert(webApplication, "JSON-LD WebApplication must be present and valid");
-assert(html.includes("1er septembre 2026"), "regulatory scope date must remain disclosed");
+assert((html.match(/<body[^>]*>([\s\S]*?)<\/body>/i) || [,""])[1].includes("1er septembre 2026"), "regulatory scope date must remain disclosed in page content");
 
 assert(/Dernière mise à jour : \d{1,2} (janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre) 20\d{2}\./.test(html), "last update date must be disclosed");
 assert(html.includes("suspendu jusqu’en 2028"), "suspension duration must be disclosed");
