@@ -9,6 +9,12 @@ const ROOT=process.cwd();
 export const STRUCTURAL_RULES=["html-base","markup-balance","title","canonical","breadcrumb","h1","tool-block","result","related-block","jsonld","related-meta","citation-marker"];
 export const EDITORIAL_RULES=["description","content-h2","formula","faq","meta-unique"];
 export const MIGRATION_LOCK_RULES=["description","content-h2","formula","faq"];
+// Dettes historiques devenues obsolètes après suppression du plafond de 160 caractères.
+// Exceptions limitées aux deux entrées qui étaient uniquement dues à cette règle retirée.
+const MIGRATION_LOCK_EXEMPTIONS=new Set([
+ "public/outil/indemnite-precarite/index.html|description",
+ "public/outil/succession/index.html|description"
+]);
 export const TRACKED_RULES=[...STRUCTURAL_RULES,...EDITORIAL_RULES];
 const STRUCT=new Set(["div","section","main","header","footer","nav","article","aside","details","ul","ol","table","form"]);
 const OPTIONAL_END=new Set(["p","li","dt","dd","tr","td","th","thead","tbody","tfoot","option"]);
@@ -46,7 +52,7 @@ export function checkPage(html,ctx){
  if(!/<!doctype\s+html\s*>/i.test(html)||he.length!==1||attr(he[0],"lang")!=="fr"||!metas.some(n=>(attr(n,"name")||"").toLowerCase()==="viewport")||!metas.some(n=>(attr(n,"name")||"").toLowerCase()==="calculator-rendering"&&(attr(n,"content")||"").toLowerCase()==="static")||!find(root,{tag:"link"}).some(n=>(attr(n,"rel")||"").toLowerCase().split(/\s+/).includes("stylesheet")&&attr(n,"href")==="/styles.css"))fail("html-base","doctype/lang/viewport/static rendering/stylesheet incomplet");
  bal.forEach(m=>fail("markup-balance",m));
  const heads=find(root,{tag:"head"}),headTitles=heads.length===1?find(heads[0],{tag:"title"}):[],title=norm(headTitles[0]?text(headTitles[0]):"");if(heads.length!==1||headTitles.length!==1||!title)fail("title","un unique <title> non vide est requis ; aucun suffixe fixe n’est imposé");
- const ds=metas.filter(n=>(attr(n,"name")||"").toLowerCase()==="description"),description=norm(ds[0]?attr(ds[0],"content")||"":"");if(!description)fail("html-base","meta description absente ou vide");if(ds.length!==1||[...description].length<120||[...description].length>160)fail("description","meta description : "+[...description].length+" caractères, attendu 120–160");if(description&&!/\bcalculer\b/i.test(description))fail("seo-calculer","la meta description doit contenir le mot exact « calculer »");
+ const ds=metas.filter(n=>(attr(n,"name")||"").toLowerCase()==="description"),description=norm(ds[0]?attr(ds[0],"content")||"":"");if(!description)fail("html-base","meta description absente ou vide");if(ds.length!==1||[...description].length<120)fail("description","meta description : "+[...description].length+" caractères, minimum attendu 120");if(description&&!/\bcalculer\b/i.test(description))fail("seo-calculer","la meta description doit contenir le mot exact « calculer »");
  const canonical="https://simulateur.site/"+dir+"/"+slug+"/",cs=find(root,{tag:"link"}).filter(n=>(attr(n,"rel")||"").toLowerCase().split(/\s+/).includes("canonical"));if(cs.length!==1||attr(cs[0],"href")!==canonical)fail("canonical","canonique attendue : "+canonical);
  if(/(?:turn\d+search\d+|citeturn\d+search\d+)/i.test(visibleText(root)))fail("citation-marker","marqueur de citation ChatGPT détecté dans le texte visible");
  const bs=find(root,{className:"breadcrumb"}),b=bs[0],bl=b?links(b):[];if(!b||!bl.length||text(bl[0])!=="Accueil")fail("breadcrumb","le premier lien du breadcrumb doit être « Accueil »");
@@ -110,7 +116,7 @@ export function nextBaseline(current,baseline,migrationSlugs=[]){
  const debt=new Set(migrationSlugs);
  const blocked=stale.filter(x=>{
    const m=/^public\/outil\/([^/]+)\/index\.html$/.exec(x.path);
-   return m&&debt.has(m[1])&&MIGRATION_LOCK_RULES.includes(x.rule);
+   return m&&debt.has(m[1])&&MIGRATION_LOCK_RULES.includes(x.rule)&&!MIGRATION_LOCK_EXEMPTIONS.has(x.path+"|"+x.rule);
  });
  if(blocked.length)return{ok:false,added,next:baseline,removed:[],blocked};
  if(added.length)return{ok:false,added,next:baseline,removed:[],blocked:[]};

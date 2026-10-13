@@ -36,7 +36,7 @@ Le squelette ci-dessous décrit les blocs attendus. Les commentaires indiquent l
   <!-- Principal mot-clé / intention de recherche + marque. -->
   <title>Mot-clé principal | Simulateur</title>
 
-  <!-- 120 à 160 caractères, description utile et spécifique à la page. -->
+  <!-- Au moins 120 caractères, description utile et spécifique à la page ; pas de plafond fixe. -->
   <meta name="description" content="Description spécifique, claire et utile de l'outil et de son usage principal.">
 
   <!-- URL existante de la page : ne jamais la modifier pour uniformiser le gabarit. -->
@@ -122,7 +122,7 @@ Chaque page interactive doit fournir dans son HTML initial :
 - `<!doctype html>` et `lang="fr"` ;
 - un `<head>` complet avec viewport ;
 - un `<title>` suivant la forme **« Mot-clé principal | Simulateur »** ; une précision utile (année, HT/TTC, etc.) peut compléter le mot-clé principal sans retirer la marque ;
-- une meta description non vide de **120 à 160 caractères** ;
+- une meta description non vide d'**au moins 120 caractères**, sans plafond maximal fixe ;
 - une URL canonique correspondant exactement à l'URL publique existante ;
 - `public/styles.css` comme feuille de style commune ;
 - un `<header>`, un `<main>` et un `<footer>` uniques ;
@@ -169,7 +169,7 @@ Le mot-clé doit décrire l'intention principale de la page. Les précisions uti
 
 ### Meta description
 
-La meta description doit contenir **120 à 160 caractères**, être spécifique à la page et décrire concrètement l'utilité de l'outil. Elle ne doit pas être une phrase générique réutilisée sur plusieurs pages.
+La meta description doit contenir **au moins 120 caractères**, sans plafond maximal fixe. Elle doit être spécifique à la page et décrire concrètement l'utilité de l'outil. Elle ne doit pas être une phrase générique réutilisée sur plusieurs pages.
 
 ### WebApplication
 
