@@ -71,7 +71,7 @@ Cette table est tirée du code de `scripts/check-pages.mjs`. En cas de doute ou 
 
 | Règle | Exigence vérifiée par `check-pages` |
 |---|---|
-| `title` | un seul `<title>` non vide ; aucun suffixe ou format fixe n’est imposé. Le titre choisit le terme adapté à l’intention (calculateur, calculer, convertir, comparateur, etc.) et conserve le mot-clé métier principal |
+| `title` | un seul `<title>` non vide ; aucun suffixe ou format fixe n’est imposé. Les consignes éditoriales sur le terme à privilégier sont détaillées dans « Consignes SEO éditoriales pour les pages interactives » (§ 1) |
 | `description` | une seule meta description de 120 à 160 caractères. Le mot exact « calculer » est obligatoire. Elle doit aussi être identique à `WebApplication.description` du JSON-LD (règle `jsonld`) |
 | `content-h2` | au moins 2 titres h2 éditoriaux, situés dans des `.content-section` et hors `.related-tools` |
 | `formula` | un bloc `.formula` ou `.source-links` contenant un lien externe http(s) (hors simulateur.site) |
@@ -163,6 +163,37 @@ Le socle partagé **ne contient aucune règle de calcul, aucun moteur métier, a
 Le socle impose une **structure commune**, pas une longueur uniforme ni un contenu identique. La profondeur de chaque section dépend du calculateur, de sa complexité et de l'intention utilisateur.
 
 Toute évolution du socle partagé (gabarit, normaliseur de layout, règles de `check-pages`) est une **décision d'architecture distincte**, documentée dans `docs/DECISIONS.md`. Elle n'est jamais introduite pour enrichir un calculateur particulier.
+
+## Consignes SEO éditoriales pour les pages interactives
+
+Ces consignes s'appliquent à chaque enrichissement de page interactive (`/outil/`, `/conversion/` et `/comparateur/`). Elles définissent la cible éditoriale ; elles ne signifient pas que chaque terme doit être ajouté mécaniquement à chaque balise. Les contrôles bloquants réellement présents dans le dépôt sont ceux décrits dans le tableau de la § 0.2 et dans les scripts de test.
+
+### Title SEO
+
+- **« calculateur » est le terme à privilégier par défaut** dans le title.
+- S'il est réellement inadapté à l'intention ou à la nature de la page, employer le terme le plus juste : « simulateur », « convertisseur », « comparateur » ou une autre formulation métier pertinente. L'exception doit être justifiée par la page, pas par une préférence de rédaction.
+- Préserver le mot-clé métier principal et les termes qui expriment précisément ce que l'utilisateur cherche.
+- Aucun format rigide ni suffixe générique n'est imposé. Le title doit rester clair, spécifique à la page et naturel.
+
+### H1
+
+- **« calculateur » est également à privilégier par défaut** dans le H1, selon le même principe d'exception justifiée.
+- Si « simulateur », « convertisseur », « comparateur » ou une formulation métier décrit plus exactement l'outil, préférer le terme exact plutôt que de forcer « calculateur ».
+- Conserver le sujet métier principal. Le H1 doit décrire clairement la page et rester cohérent avec le title et le contenu.
+
+### Meta description
+
+- Respecter les contraintes techniques actuelles : une seule meta description de **120 à 160 caractères** et présence du terme exact **« calculer »**. La description doit rester identique à `WebApplication.description` dans le JSON-LD lorsque cette règle s'applique.
+- Le vocabulaire cible comprend **« calculateur », « calculer », « calcul », « simulateur » et « simulation »**. « Calculer » est obligatoire ; intégrer les autres termes lorsqu'ils décrivent utilement la page et peuvent être employés naturellement.
+- Ne pas chercher à faire entrer artificiellement les cinq termes dans chaque description. La formulation doit répondre à l'intention de recherche, conserver le mot-clé métier et expliquer concrètement ce que l'utilisateur peut faire.
+- Ne pas répéter les mêmes mots-clés ni remplacer une expression métier précise par une formulation générique uniquement pour satisfaire cette consigne.
+
+### Cohérence et validation
+
+- Vérifier les title, H1 et meta description ensemble : même sujet et même intention, sans contradiction.
+- Les mots-clés métier utiles ne doivent pas être supprimés pour ajouter du vocabulaire SEO générique.
+- Distinguer une exigence bloquante déjà testée d'une consigne éditoriale. **Ne pas modifier la CI ni la baseline pour faire appliquer une nouvelle règle sans décision explicite distincte.**
+- En cas d'exception au terme « calculateur » dans le title ou le H1, consigner brièvement pourquoi un autre terme est plus exact pour cette page.
 
 ## 1.1 Fonctionnement propre à chaque calculateur
 
