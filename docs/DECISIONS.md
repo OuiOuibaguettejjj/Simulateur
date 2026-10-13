@@ -229,3 +229,8 @@ Le jeu centralise le taux d’effort maximal de 35 % et la maturité maximale de
 ## 2026-10-07 — Salaire brut net : hors migration réglementaire
 
 Le calculateur `salaire-brut-net` est retiré de `data/parametres.json > anneeAMigrer.slugs`. Les coefficients internes de 23 % pour le non-cadre et 25 % pour le cadre sont des hypothèses d'estimation, pas un barème réglementaire officiel pouvant être centralisé comme tel dans `data/parametres.json`. La page n'est donc pas traitée comme une migration de barème. L'année est retirée du titre et du H1 afin de respecter le contrôle de cohérence des paramètres. L'enrichissement du calculateur fera l'objet d'une PR distincte.
+
+
+## 2026-10-13 — Contrat SEO souple pour les pages interactives
+
+Le `<title>` doit être unique et non vide, mais aucun format fixe ni suffixe `| Simulateur` n’est imposé. Le titre et le H1 sont rédigés selon l’intention de recherche de la page : calculateur, calcul, conversion, comparaison ou simulation selon le cas, sans supprimer le mot-clé métier utile. La meta description conserve la plage de 120 à 160 caractères et doit contenir le mot exact « calculer » ; `WebApplication.description`, Open Graph et Twitter restent synchronisés via le contrôle JSON-LD et `normalize-layout.mjs`. Le contrat bloquant s’applique aux pages interactives nouvelles ou modifiées afin de permettre la mise en conformité progressive des pages historiques, sans refonte massive automatique ni changement des calculs métier.
