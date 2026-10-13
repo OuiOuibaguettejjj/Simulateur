@@ -1,3 +1,9 @@
+## 2026-10-13 — CI : point d'entrée unique et tests de titres par contrat
+- Nouveau `scripts/run-tests.mjs` (`npm test`) : exécute toutes les étapes de l'ancien `tests.yml` (41 commandes, plus l'horizon à 60 jours et un test de couverture), sans s'arrêter au premier échec, et liste tous les échecs avec la commande pour les relancer. `tests.yml` l'appelle tel quel ; en local `npm test`, `npm run test:fast` (sans Chromium) ou `npm test -- --only=<étape>`.
+- `tests/run-tests.test.mjs` échoue si un test de `tests/` n'est référencé par aucune étape (les cinq tests importés par `generic-calcs` sont déclarés comme indirects) ou si un fichier qui importe Playwright n'est pas marqué `browser`.
+- Nouveau `package.json` (outillage seul, aucune dépendance d'exécution) : Playwright en version exacte `1.55.0`, la même que la CI utilisait ; `tests.yml` et `deploy.yml` n'exécutent plus `npm init -y` et mettent Chromium en cache.
+- Tests de titres par contrat : `age-retraite-seo`, `promotions-browser` et `cash-flow-immobilier.browser` ne figent plus le texte du titre mais sa forme « Mot-clé | Simulateur » et le radical « calcul » ; `age-retraite-seo` contrôle aussi le H1, la description (120 à 160 caractères) et le nom JSON-LD. `age-retraite-final.test.js` est supprimé, ses assertions propres sont reprises dans `age-retraite-seo`.
+
 ## 2026-10-04 — Balises de partage Open Graph et Twitter
 - Le normaliseur de layout ajoute de façon idempotente `og:type`, `og:site_name`, `og:locale`, `og:title`, `og:description`, `og:url` et `twitter:card` (`summary`) dans le `<head>` des pages, à partir du titre, de la meta description et de la canonique déjà présents.
 - Une balise déjà présente est respectée ; une page sans titre, description ou canonique (`404.html`) n'est pas modifiée. Aucune image n'est déclarée : le dépôt n'en contient pas.

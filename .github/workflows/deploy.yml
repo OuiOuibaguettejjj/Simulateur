@@ -138,16 +138,21 @@ jobs:
           node tests/retraite.test.js
           node tests/age-retraite.test.js
           node tests/age-retraite-seo.test.js
-          node tests/age-retraite-final.test.js
           node tests/simulateurs.test.js
           node tests/ratio.test.mjs
           node tests/params.test.mjs
 
+      - name: Installer les dépendances de test (Playwright épinglé dans package.json)
+        run: npm install --no-audit --no-fund
+
+      - name: Restaurer le cache de Chromium
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('package.json') }}
+
       - name: Préparer Chromium pour les contrôles interactifs
-        run: |
-          npm init -y >/dev/null 2>&1
-          npm install --no-save playwright@1.55.0 >/dev/null 2>&1
-          npx playwright install chromium >/dev/null 2>&1
+        run: npx playwright install chromium
 
       - name: Smoke bloquant des résultats et du mécanisme Entrée
         run: node tests/smoke-results.test.mjs
@@ -295,8 +300,8 @@ jobs:
 
       - name: Smoke-test production after deploy
         run: |
-          npm install --no-save playwright@1.55.0 >/dev/null 2>&1
-          npx playwright install chromium >/dev/null 2>&1
+          npm install --no-audit --no-fund
+          npx playwright install chromium
           node scripts/smoke-site.mjs --base-url https://simulateur.site --mode production
 
       - name: Roll back failed production deployment

@@ -19,7 +19,9 @@ try{
  browser=await chromium.launch({headless:true});
  const page=await browser.newPage({viewport:{width:1280,height:900}});
  await page.goto(baseUrl+"/outil/promotions/",{waitUntil:"load"});
- assert.equal(await page.title(),"Calcul de promotions : comparez deux offres | Simulateur");
+ const title=await page.title();
+ assert.match(title,/^.+ \| Simulateur$/,"titre : forme « Mot-clé | Simulateur » attendue, obtenu « "+title+" »");
+ assert.match(title,/calcul/i,"titre : le radical calcul (calculateur/calculer/calcul) doit rester présent, obtenu « "+title+" »");
  await page.locator("#pA").fill("2,50");
  await page.locator("#qA").fill("2");
  await page.locator("#tA").fill("4,50");

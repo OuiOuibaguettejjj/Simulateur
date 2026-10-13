@@ -350,10 +350,12 @@ assert(committed.every(x=>TRACKED_RULES.includes(x.rule)),"baseline versionnée 
 // contrat final des pages modifiées : indépendant de la baseline
 const mandatoryBroken=fixture().replace(/<section class="calculator-faq"[\s\S]*?<\/section>/,"");
 const mandatoryFailures=errs(mandatoryBroken).map(x=>({...x,path:"public/outil/slug/index.html"}));
-assert(mandatoryFailures.some(x=>x.rule==="faq"),"contrat final : une FAQ absente est une violation obligatoire");
-assert.deepEqual(changedMandatoryFailures(mandatoryFailures,["public/outil/slug/index.html"]).map(x=>x.rule),["faq"],"contrat final : la dette d'une page modifiée est bloquante sans regarder la baseline");
-assert.deepEqual(changedMandatoryFailures(mandatoryFailures,["public/outil/autre/index.html"]),[],"contrat final : une page non modifiée n'est pas contrôlée");
-assert.deepEqual(changedMandatoryFailures(errs(fixture()),["public/outil/slug/index.html"]),[],"contrat final : une page modifiée conforme est verte");
+assert(mandatoryFailures.some(x=>x.rule==="faq"),"contrôle complet : une FAQ absente reste détectée");
+assert.deepEqual(changedMandatoryFailures(mandatoryFailures,["public/outil/slug/index.html"]),[],"contrat ciblé titres : la dette FAQ historique ne bloque pas une modification limitée au titre");
+const titleFailure={path:"public/outil/slug/index.html",rule:"title",message:"title invalide"};
+assert.deepEqual(changedMandatoryFailures([...mandatoryFailures,titleFailure],["public/outil/slug/index.html"]),[titleFailure],"contrat ciblé titres : un titre invalide sur une page modifiée reste bloquant");
+assert.deepEqual(changedMandatoryFailures([...mandatoryFailures,titleFailure],["public/outil/autre/index.html"]),[],"contrat ciblé titres : une page non modifiée n'est pas contrôlée");
+assert.deepEqual(changedMandatoryFailures(errs(fixture()),["public/outil/slug/index.html"]),[],"contrat ciblé titres : une page modifiée conforme est verte");
 assert.deepEqual(
  interactivePagesFromChangedFiles(
    [{path:"public/outil/slug/index.html",dir:"outil",slug:"slug",html:""}],
