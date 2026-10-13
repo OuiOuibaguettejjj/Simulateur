@@ -252,55 +252,9 @@ Aucune modification ne commence avant l'audit. Le résultat s'écrit dans la fic
 - maillage interne entrant et sortant ;
 - différenciation par rapport aux résultats pertinents.
 
-### Audit SEO détaillé des balises principales (réutilisable à tout moment)
+### Audit SEO détaillé
 
-Cet audit peut être lancé indépendamment de l'enrichissement complet : il suffit de fournir l'URL ou le slug d'une page interactive. Il commence par constater l'existant et formule ensuite des recommandations adaptées à cette page. **Il ne déclenche aucune modification du dépôt** : les corrections sont décidées séparément, après présentation et validation du diagnostic.
-
-#### 1. Relever l'existant sans le réécrire
-
-Lire la version actuelle de la page et restituer textuellement, sans paraphrase :
-
-- l'URL et la famille de page (`outil`, `conversion` ou `comparateur`) ;
-- le `<title>` ;
-- le H1 ;
-- la meta description ;
-- la description `WebApplication` du JSON-LD ;
-- les métadonnées Open Graph/Twitter pertinentes ;
-- la canonical et les directives d'indexation pertinentes.
-
-Si une donnée ne peut pas être vérifiée dans le code ou le rendu disponible, la marquer « non vérifiée » plutôt que la supposer.
-
-#### 2. Évaluer les termes en fonction de la page
-
-Examiner séparément le title, le H1 et la meta description. Considérer, selon le sujet et l'intention, les termes et variantes tels que :
-
-- « calculateur », « calcul », « calculer » ;
-- « simulateur », « simulation », « simuler » ;
-- « convertisseur », « conversion », « convertir » ;
-- « comparateur », « comparer » ;
-- le vocabulaire métier précis et les formulations réellement employées par les internautes.
-
-Il n'existe pas de règle éditoriale générale imposant tous ces termes dans chaque balise. Pour chaque emplacement, déterminer quels termes sont utiles, lesquels sont absents, lesquels sont déjà couverts et lesquels rendraient la formulation artificielle. La nature de la page compte : une conversion d'unités, un simulateur de situation et un comparateur ne répondent pas nécessairement à la même intention.
-
-L'observation historique du site — baisse des statistiques après le retrait de certains termes — est un signal à examiner, pas une preuve isolée de causalité. Lorsque les données sont accessibles, confronter l'analyse aux requêtes, impressions, clics et CTR de Search Console, en notant les périodes et les limites de comparaison. Ne pas attribuer une évolution à un changement unique sans éléments suffisants.
-
-#### 3. Présenter les recommandations une par une
-
-Pour chaque élément, fournir :
-
-1. **Valeur actuelle exacte** ;
-2. **Constat vérifiable** : termes présents/absents, sujet exprimé, cohérence et éventuel défaut technique ;
-3. **Amélioration proposée**, ou mention explicite qu'aucune modification n'est justifiée ;
-4. **Justification** liée à l'intention, au vocabulaire métier, à la lisibilité ou à une règle technique du projet ;
-5. **Niveau de certitude** : défaut avéré, recommandation éditoriale argumentée ou hypothèse à tester.
-
-Proposer, si utile, une version révisée du title, du H1 et de la meta description. Préserver les mots-clés métier utiles et éviter le bourrage de mots-clés, les formulations interchangeables et les promesses que l'outil ne tient pas. Ne pas présenter une préférence de rédaction comme un facteur de classement Google démontré.
-
-#### 4. Contrôler la cohérence technique et la décision
-
-Vérifier notamment l'unicité et la présence des balises, la longueur de description exigée par le projet, la cohérence avec `WebApplication.description`, la canonical et les métadonnées sociales. Distinguer les exigences actuelles de la CI des recommandations éditoriales : une suggestion ne devient pas une règle bloquante sans décision explicite.
-
-Terminer par une synthèse : éléments conservés, modifications recommandées et raisons, points non vérifiés, éventuelles données Search Console utiles. **Attendre l'accord avant de modifier les fichiers.** Après correction autorisée, vérifier le résultat dans le code et lancer les contrôles pertinents.
+Pour auditer une page interactive indépendamment d'un enrichissement complet, suivre le processus dédié : [docs/PROCESS-AUDIT-SEO-PAGES-INTERACTIVES.md](PROCESS-AUDIT-SEO-PAGES-INTERACTIVES.md). Les recommandations restent individualisées ; aucune modification de page ne commence sans validation explicite.
 
 ### UX et technique
 
@@ -752,24 +706,15 @@ Ce processus privilégie la qualité, l'exactitude, l'originalité et la satisfa
 - Cas limites testés : 
 - Problèmes constatés (nécessaire / souhaitable) : 
 
-## Audit SEO détaillé des balises principales
+## Audit SEO détaillé
+- Processus : [docs/PROCESS-AUDIT-SEO-PAGES-INTERACTIVES.md](PROCESS-AUDIT-SEO-PAGES-INTERACTIVES.md).
 - URL / famille de page : 
-- Source et date de vérification : 
-- Title actuel (copie exacte) : 
-- H1 actuel (copie exacte) : 
-- Meta description actuelle (copie exacte) : 
-- WebApplication.description : 
-- Canonical / indexation / métadonnées sociales : 
-- Vocabulaire métier et intention visée : 
-- Termes pertinents à examiner (calculateur / calcul / calculer / simulateur / simuler / convertir / comparateur / autres) : 
-- Analyse du title et recommandation justifiée : 
-- Analyse du H1 et recommandation justifiée : 
-- Analyse de la meta description et recommandation justifiée : 
-- Cohérence technique et contrôles à exécuter : 
-- Données Search Console disponibles, période et limites : 
-- Éléments à conserver : 
-- Points non vérifiés : 
-- Décision : à corriger / à arbitrer / conforme sans changement
+- Valeurs actuelles exactes (title / H1 / meta description) : 
+- Constats vérifiés et cohérence technique : 
+- Recommandations individualisées et justifications : 
+- Données Search Console / période / limites : 
+- Éléments à conserver et points non vérifiés : 
+- Décision et validation avant modification :
 
 ## Page et contenu
 - Title / description / H1 : 
