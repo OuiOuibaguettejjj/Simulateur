@@ -74,7 +74,7 @@
   const fields = Array.from(document.querySelectorAll(".surface-field"));
   function updateFields() {
     for (const field of fields) {
-      const visible = field.dataset.shapes.split(" ").includes(shape.value);
+      const visible = (field.getAttribute("data-shapes") || "").split(" ").includes(shape.value);
       field.hidden = !visible;
       const input = field.querySelector("input");
       if (input) input.disabled = !visible;
