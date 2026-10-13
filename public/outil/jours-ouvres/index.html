@@ -1,3 +1,132 @@
-<!doctype html><html lang="fr"><head><meta name="calculator-rendering" content="static"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="google-adsense-account" content="ca-pub-2924580037451268"><title>Calculateur jours ouvrés</title><meta name="description" content="Comptez les jours ouvrés entre deux dates, du lundi au vendredi, avec option jours fériés."><link rel="canonical" href="https://simulateur.site/outil/jours-ouvres/"><link rel="stylesheet" href="/styles.css"><script src="/simulateurs.js" defer></script><script src="/enter-calcul.js" defer></script><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur jours ouvrés","url":"https://simulateur.site/outil/jours-ouvres/","description":"Comptez les jours ouvrés entre deux dates, du lundi au vendredi, avec option jours fériés.","inLanguage":"fr-FR","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"price":"0","priceCurrency":"EUR"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Temps","item":"https://simulateur.site/temps/"},{"@type":"ListItem","position":3,"name":"Calculateur jours ouvrés","item":"https://simulateur.site/outil/jours-ouvres/"}]}</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta property="og:type" content="website"><meta property="og:site_name" content="Simulateur"><meta property="og:locale" content="fr_FR"><meta property="og:title" content="Calculateur jours ouvrés"><meta property="og:description" content="Comptez les jours ouvrés entre deux dates, du lundi au vendredi, avec option jours fériés."><meta property="og:url" content="https://simulateur.site/outil/jours-ouvres/"><meta name="twitter:card" content="summary"></head><body><header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header><main><div class="wrap"><div class="breadcrumb"><a href="/">Accueil</a> · <a href="/temps/">Temps</a> · Calculateur jours ouvrés</div><section class="tool"><div class="eyebrow">TRAVAIL</div><h1>Calculateur jours ouvrés</h1><p class="tool-intro">Comptez les jours ouvrés entre deux dates, du lundi au vendredi, avec option jours fériés.</p><div id="fields"><div class="row"><div class="field"><label for="j1">Jour début</label><input id="j1" type="number" min="0" step="1" placeholder="1"></div><div class="field"><label for="m1">Mois début</label><input id="m1" type="number" min="0" step="1" placeholder="1"></div><div class="field"><label for="a1">Année début</label><input id="a1" type="number" min="0" step="1" placeholder="2026"></div></div><div class="row"><div class="field"><label for="j2">Jour fin</label><input id="j2" type="number" min="0" step="1" placeholder="31"></div><div class="field"><label for="m2">Mois fin</label><input id="m2" type="number" min="0" step="1" placeholder="12"></div><div class="field"><label for="a2">Année fin</label><input id="a2" type="number" min="0" step="1" placeholder="2026"></div></div><div class="field"><label for="feries">Exclure les jours fériés</label><select id="feries"><option value="oui">Oui</option><option value="non">Non</option></select></div></div><button class="button-main" onclick="Simulateurs.calc()">Calculer</button><div class="result" id="result" aria-live="polite">Saisissez vos données puis lancez le calcul.</div><div class="formula"><strong>Méthode et sources</strong><p>Service-Public rappelle qu'une semaine de jours ouvrés comprend généralement lundi à vendredi, tandis que les jours ouvrables comprennent 6 jours. Les conventions et horaires propres à l'entreprise peuvent modifier la situation.</p></div></section></div><section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Outils associés</h2><div class="related-links"><a class="related-link" href="/outil/difference-dates/"><strong>Différence entre deux dates</strong><span>Calculer le nombre de jours entre deux dates.</span></a><a class="related-link" href="/outil/temps-travail/"><strong>Temps de travail</strong><span>Calculer une durée travaillée avec la pause.</span></a><a class="related-link" href="/outil/conges-payes/"><strong>Congés payés</strong><span>Estimer l'indemnité correspondant aux congés.</span></a></div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="/temps/">Temps</a>.</p></div></section>
-</main><footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer><script>window.TOOL={calc:function(){const d1=new Date(Date.UTC(+this.$("a1").value,+this.$("m1").value-1,+this.$("j1").value)),d2=new Date(Date.UTC(+this.$("a2").value,+this.$("m2").value-1,+this.$("j2").value));if(d2<d1)return "Vérifiez les dates.";const fer=["2026-01-01","2026-04-06","2026-05-01","2026-05-08","2026-05-14","2026-05-25","2026-07-14","2026-08-15","2026-11-01","2026-11-11","2026-12-25"];let n=0;for(let d=new Date(d1);d<=d2;d.setUTCDate(d.getUTCDate()+1)){const wd=d.getUTCDay(),key=d.toISOString().slice(0,10);if(wd>=1&&wd<=5&&!(this.$("feries").value==="oui"&&fer.includes(key)))n++}return "<strong>"+n+" jour(s) ouvré(s)</strong><br><p class='small'>Par défaut, jours ouvrés = lundi à vendredi. Les jours fériés sont exclus selon le calendrier 2026 sélectionné.</p>"}};</script></body></html>
+<!doctype html>
+<html lang="fr">
+<head>
+<meta name="calculator-rendering" content="static">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="google-adsense-account" content="ca-pub-2924580037451268">
+<title>Calculateur de jours ouvrés entre deux dates | Simulateur</title>
+<meta name="description" content="Utilisez ce calculateur pour calculer le nombre de jours ouvrés entre deux dates, avec ou sans exclusion des jours fériés nationaux. Saisie au format jj/mm/aaaa.">
+<link rel="canonical" href="https://simulateur.site/outil/jours-ouvres/">
+<link rel="stylesheet" href="/styles.css">
+<script src="/simulateurs.js" defer></script>
+<script src="/enter-calcul.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur de jours ouvrés entre deux dates","url":"https://simulateur.site/outil/jours-ouvres/","description":"Utilisez ce calculateur pour calculer le nombre de jours ouvrés entre deux dates, avec ou sans exclusion des jours fériés nationaux. Saisie au format jj/mm/aaaa.","inLanguage":"fr-FR","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"price":"0","priceCurrency":"EUR"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Temps","item":"https://simulateur.site/temps/"},{"@type":"ListItem","position":3,"name":"Calculateur de jours ouvrés entre deux dates","item":"https://simulateur.site/outil/jours-ouvres/"}]}</script>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Simulateur">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Calculateur de jours ouvrés entre deux dates | Simulateur">
+<meta property="og:description" content="Utilisez ce calculateur pour calculer le nombre de jours ouvrés entre deux dates, avec ou sans exclusion des jours fériés nationaux. Saisie au format jj/mm/aaaa.">
+<meta property="og:url" content="https://simulateur.site/outil/jours-ouvres/">
+<meta name="twitter:card" content="summary">
+</head>
+<body>
+<header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header>
+<main>
+<div class="wrap">
+<div class="breadcrumb"><a href="/">Accueil</a> · <a href="/temps/">Temps</a> · Calculateur de jours ouvrés</div>
+<section class="tool">
+<div class="eyebrow">TEMPS ET DATES</div>
+<h1>Calculateur de jours ouvrés entre deux dates</h1>
+<p class="tool-intro">Calculez le nombre de jours ouvrés sur une période, en comptant les jours du lundi au vendredi et, si vous le souhaitez, en retirant les jours fériés nationaux.</p>
+<div id="fields">
+<div class="field"><label for="date-debut">Date de début (jj/mm/aaaa)</label><input id="date-debut" name="date-debut" type="text" inputmode="numeric" autocomplete="off" placeholder="13/07/2026" aria-describedby="date-format"></div>
+<div class="field"><label for="date-fin">Date de fin (jj/mm/aaaa)</label><input id="date-fin" name="date-fin" type="text" inputmode="numeric" autocomplete="off" placeholder="17/07/2026" aria-describedby="date-format"></div>
+<p id="date-format" class="small">Les deux dates sont incluses dans le décompte. Saisissez les dates au clavier au format jj/mm/aaaa.</p>
+<div class="field"><label for="feries">Exclure les jours fériés nationaux</label><select id="feries" name="feries"><option value="oui" selected>Oui, les exclure</option><option value="non">Non, les compter s'ils tombent en semaine</option></select></div>
+</div>
+<button class="button-main" type="button" onclick="Simulateurs.calc()">Calculer les jours ouvrés</button>
+<div class="result" id="result" aria-live="polite">Saisissez une date de début et une date de fin, puis lancez le calcul.</div>
+<div class="formula"><strong>Méthode de calcul et source</strong><p>Le calcul compte les jours du lundi au vendredi dans la période, dates de début et de fin comprises. L'option jours fériés applique le calendrier national français. Les jours fériés locaux et les particularités de l'Alsace-Moselle ne sont pas ajoutés automatiquement.</p><p>Définition officielle : <a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F35697" target="_blank" rel="noopener noreferrer">Service-Public.fr — jour ouvré, jour ouvrable et jour calendaire</a>.</p></div>
+</section>
+<section class="content-section">
+<h2>Qu'est-ce qu'un jour ouvré ?</h2>
+<p>Un jour ouvré est un jour habituellement travaillé dans une entreprise ou une administration. Il s'agit généralement du lundi au vendredi, soit cinq jours par semaine. Le calendrier réel peut varier selon l'activité : certains établissements travaillent le samedi et ferment un autre jour.</p>
+<p>Un jour ouvré n'est pas la même chose qu'un jour ouvrable, qui comprend généralement le samedi en plus des jours du lundi au vendredi. Pour un délai administratif ou contractuel, vérifiez toujours la convention ou la règle qui s'applique à votre situation.</p>
+<h2>Comment sont comptés les jours fériés ?</h2>
+<p>Lorsque l'option est activée, le calcul exclut les jours fériés nationaux français qui tombent du lundi au vendredi. Les jours fériés qui tombent le week-end ne changent donc pas le résultat. Ce réglage est une convention de calcul : un jour férié n'est pas nécessairement chômé dans toutes les entreprises.</p>
+<p>Exemple : du lundi 13 au vendredi 17 juillet 2026, il y a cinq jours de semaine. Si le 14 juillet est exclu comme jour férié, le résultat est de quatre jours ouvrés.</p>
+</section>
+<section class="calculator-faq" aria-labelledby="faq-title">
+<h2 id="faq-title">FAQ</h2>
+<details><summary>Les dates de début et de fin sont-elles incluses ?</summary><div class="calculator-faq-answer"><p>Oui. Le calcul inclut les deux dates lorsqu'elles se situent du lundi au vendredi et qu'elles ne sont pas exclues comme jours fériés.</p></div></details>
+<details><summary>Quelle est la différence entre jours ouvrés et jours ouvrables ?</summary><div class="calculator-faq-answer"><p>Les jours ouvrés correspondent généralement aux jours travaillés du lundi au vendredi. Les jours ouvrables comprennent généralement le samedi, mais excluent le jour de repos hebdomadaire et les jours fériés habituellement non travaillés.</p></div></details>
+<details><summary>Le calcul tient-il compte des jours fériés en Alsace-Moselle ?</summary><div class="calculator-faq-answer"><p>Non. L'outil applique le calendrier national et n'ajoute pas automatiquement les jours fériés spécifiques à l'Alsace-Moselle ni les jours propres à une entreprise ou une convention collective.</p></div></details>
+<details><summary>Peut-on calculer une période qui traverse plusieurs années ?</summary><div class="calculator-faq-answer"><p>Oui. Les jours de semaine et les jours fériés nationaux sont calculés pour chaque année de la période. Les dates acceptées vont de 1900 à 2100.</p></div></details>
+</section>
+<section class="related-tools">
+<div><div class="eyebrow">À VOIR AUSSI</div><h2>Outils associés</h2><div class="related-links">
+<a class="related-link" href="/outil/difference-dates/"><strong>Différence entre deux dates</strong><span>Calculer le nombre de jours calendaires entre deux dates.</span></a>
+<a class="related-link" href="/outil/temps-travail/"><strong>Temps de travail</strong><span>Calculer une durée travaillée avec la pause.</span></a>
+<a class="related-link" href="/outil/conges-payes/"><strong>Congés payés</strong><span>Estimer une indemnité de congés payés.</span></a>
+</div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="/temps/">Temps</a>.</p></div>
+</section>
+</div>
+</main>
+<footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer>
+<script>
+function parseFrenchDate(value) {
+  const match = String(value ?? "").trim().match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+  if (!match) return null;
+  const day = Number(match[1]), month = Number(match[2]), year = Number(match[3]);
+  if (year < 1900 || year > 2100 || month < 1 || month > 12 || day < 1 || day > 31) return null;
+  const date = new Date(Date.UTC(year, month - 1, day));
+  return date.getUTCFullYear() === year && date.getUTCMonth() === month - 1 && date.getUTCDate() === day ? date : null;
+}
+function easterSunday(year) {
+  const a = year % 19, b = Math.floor(year / 100), c = year % 100;
+  const d = Math.floor(b / 4), e = b % 4, f = Math.floor((b + 8) / 25);
+  const g = Math.floor((b - f + 1) / 3), h = (19 * a + b - d - g + 15) % 30;
+  const i = Math.floor(c / 4), k = c % 4, l = (32 + 2 * e + 2 * i - h - k) % 7;
+  const m = Math.floor((a + 11 * h + 22 * l) / 451);
+  const month = Math.floor((h + l - 7 * m + 114) / 31);
+  const day = ((h + l - 7 * m + 114) % 31) + 1;
+  return new Date(Date.UTC(year, month - 1, day));
+}
+function frenchPublicHolidays(year) {
+  const fixed = ["01-01", "05-01", "05-08", "07-14", "08-15", "11-01", "11-11", "12-25"];
+  const easterMonday = easterSunday(year);
+  easterMonday.setUTCDate(easterMonday.getUTCDate() + 1);
+  const ascension = new Date(easterMonday);
+  ascension.setUTCDate(ascension.getUTCDate() + 38);
+  const whitMonday = new Date(easterMonday);
+  whitMonday.setUTCDate(whitMonday.getUTCDate() + 49);
+  const key = date => date.toISOString().slice(0, 10);
+  return new Set([
+    ...fixed.map(day => year + "-" + day),
+    key(easterMonday),
+    key(ascension),
+    key(whitMonday)
+  ]);
+}
+function countBusinessDays(start, end, excludeHolidays) {
+  if (!(start instanceof Date) || !(end instanceof Date) || Number.isNaN(start.getTime()) || Number.isNaN(end.getTime()) || start > end) return null;
+  let count = 0;
+  const holidaysByYear = new Map();
+  for (let day = new Date(start); day <= end; day.setUTCDate(day.getUTCDate() + 1)) {
+    const weekday = day.getUTCDay();
+    if (weekday === 0 || weekday === 6) continue;
+    const year = day.getUTCFullYear();
+    if (!holidaysByYear.has(year)) holidaysByYear.set(year, frenchPublicHolidays(year));
+    const key = day.toISOString().slice(0, 10);
+    if (excludeHolidays && holidaysByYear.get(year).has(key)) continue;
+    count++;
+  }
+  return count;
+}
+window.TOOL = {
+  calc: function () {
+    const start = parseFrenchDate(this.$("date-debut").value);
+    const end = parseFrenchDate(this.$("date-fin").value);
+    if (!start || !end) return "Saisissez deux dates valides au format jj/mm/aaaa (de 1900 à 2100).";
+    if (start > end) return "La date de fin doit être postérieure ou égale à la date de début.";
+    const excludeHolidays = this.$("feries").value === "oui";
+    const count = countBusinessDays(start, end, excludeHolidays);
+    return "<strong>" + count + " jour" + (count === 1 ? "" : "s") + " ouvré" + (count === 1 ? "" : "s") + "</strong><p class='small'>Période incluse, du lundi au vendredi" + (excludeHolidays ? ", hors jours fériés nationaux." : ", jours fériés compris.") + "</p>";
+  }
+};
+</script>
+</body>
+</html>
