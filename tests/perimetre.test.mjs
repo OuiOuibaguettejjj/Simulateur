@@ -8,5 +8,6 @@ await run({shape:"circle",radius:"2"},/12,57/);
 await run({a:"5,5",b:"2,5"},/16/);
 await run({a:"0",b:"3"},/strictement positives/);
 await run({shape:"triangle",side1:"1",side2:"2",side3:"3"},/triangle valide/);
+await run({shape:"triangle",side1:"0,1",side2:"0,2",side3:"0,3"},/triangle valide/);
 await run({shape:"circle",radius:""},/rayon strictement positif/);
 console.log("Calculateur périmètre : cas rectangle, triangle, cercle, virgule décimale et entrées invalides validés.");
