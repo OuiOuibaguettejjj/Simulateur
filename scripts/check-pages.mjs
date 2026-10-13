@@ -8,13 +8,6 @@ import {getInteractiveFamily,INTERACTIVE_FAMILIES} from "./interactive-families.
 const ROOT=process.cwd();
 export const STRUCTURAL_RULES=["html-base","markup-balance","title","canonical","breadcrumb","h1","tool-block","result","related-block","jsonld","related-meta","citation-marker"];
 export const EDITORIAL_RULES=["description","content-h2","formula","faq","meta-unique"];
-export const MIGRATION_LOCK_RULES=["description","content-h2","formula","faq"];
-// Dettes historiques devenues obsolètes après suppression du plafond de 160 caractères.
-// Exceptions limitées aux deux entrées qui étaient uniquement dues à cette règle retirée.
-const MIGRATION_LOCK_EXEMPTIONS=new Set([
- "public/outil/indemnite-precarite/index.html|description",
- "public/outil/succession/index.html|description"
-]);
 export const TRACKED_RULES=[...STRUCTURAL_RULES,...EDITORIAL_RULES];
 const STRUCT=new Set(["div","section","main","header","footer","nav","article","aside","details","ul","ol","table","form"]);
 const OPTIONAL_END=new Set(["p","li","dt","dd","tr","td","th","thead","tbody","tfoot","option"]);
@@ -110,25 +103,17 @@ const pairKey=x=>x.path+"\u0000"+x.rule;
 export function trackedPairs(failures){const seen=new Map();for(const x of failures)if(TRACKED_RULES.includes(x.rule))seen.set(pairKey(x),{path:x.path,rule:x.rule});return[...seen.values()].sort((a,b)=>a.path.localeCompare(b.path)||a.rule.localeCompare(b.rule))}
 export function parseBaseline(text){let v;try{v=JSON.parse(text)}catch(e){throw Error(BASELINE_FILE+" illisible : "+e.message)}if(!Array.isArray(v))throw Error(BASELINE_FILE+" doit être une liste de { path, rule }");const seen=new Set();for(const x of v){if(!x||typeof x.path!=="string"||typeof x.rule!=="string")throw Error(BASELINE_FILE+" : entrée invalide "+JSON.stringify(x));if(!TRACKED_RULES.includes(x.rule))throw Error(BASELINE_FILE+" : règle inconnue « "+x.rule+" »");if(seen.has(pairKey(x)))throw Error(BASELINE_FILE+" : doublon "+x.path+" ["+x.rule+"]");seen.add(pairKey(x))}return v.map(x=>({path:x.path,rule:x.rule}))}
 export function compareToBaseline(current,baseline){const cur=new Set(current.map(pairKey)),base=new Set(baseline.map(pairKey));return{added:current.filter(x=>!base.has(pairKey(x))),stale:baseline.filter(x=>!cur.has(pairKey(x)))}}
-export function nextBaseline(current,baseline,migrationSlugs=[]){
- if(baseline===null)return{ok:true,initial:true,next:current,removed:[],blocked:[]};
+export function nextBaseline(current,baseline){
+ if(baseline===null)return{ok:true,initial:true,next:current,removed:[]};
  const{added,stale}=compareToBaseline(current,baseline);
- const debt=new Set(migrationSlugs);
- const blocked=stale.filter(x=>{
-   const m=/^public\/outil\/([^/]+)\/index\.html$/.exec(x.path);
-   return m&&debt.has(m[1])&&MIGRATION_LOCK_RULES.includes(x.rule)&&!MIGRATION_LOCK_EXEMPTIONS.has(x.path+"|"+x.rule);
- });
- if(blocked.length)return{ok:false,added,next:baseline,removed:[],blocked};
- if(added.length)return{ok:false,added,next:baseline,removed:[],blocked:[]};
+ if(added.length)return{ok:false,added,next:baseline,removed:[]};
  const gone=new Set(stale.map(pairKey));
- return{ok:true,initial:false,next:baseline.filter(x=>!gone.has(pairKey(x))),removed:stale,blocked:[]}
+ return{ok:true,initial:false,next:baseline.filter(x=>!gone.has(pairKey(x))),removed:stale};
 }
-export function buildRatchetMessages({added=[],stale=[],blocked=[]}){
- const blockedKeys=new Set(blocked.map(pairKey));
+export function buildRatchetMessages({added=[],stale=[]}={}){
  return [
   ...added.map(x=>"::error file="+x.path+"::cliquet : nouvel écart ["+x.rule+"] absent de la baseline"),
-  ...stale.filter(x=>!blockedKeys.has(pairKey(x))).map(x=>"::error file="+x.path+"::cliquet : entrée périmée ["+x.rule+"] : l'écart est corrigé, retirez-la avec --update-baseline"),
-  ...blocked.map(x=>"::error file="+x.path+"::cliquet anneeAMigrer : migrez le barème vers parametres.json, retirez anneeAMigrer, puis enrichissez l'outil ["+x.rule+"]")
+  ...stale.map(x=>"::error file="+x.path+"::cliquet : entrée périmée ["+x.rule+"] : l'écart est corrigé, retirez-la avec --update-baseline")
  ];
 }
 export function seedBaseline(current,baseline){const present=new Set(baseline.map(x=>x.rule));const refused=EDITORIAL_RULES.filter(rule=>present.has(rule));if(refused.length)return{ok:false,refused,next:baseline,added:[]};const added=current.filter(x=>EDITORIAL_RULES.includes(x.rule));const next=[...baseline,...added].sort((a,b)=>a.path.localeCompare(b.path)||a.rule.localeCompare(b.rule));return{ok:true,refused:[],next,added};
@@ -150,8 +135,6 @@ function main(){
  if(process.env.GITHUB_STEP_SUMMARY&&!process.argv.includes("--json"))fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,[a,b,c].join("\n\n")+"\n");
  if(process.argv.includes("--json"))console.log(JSON.stringify({pages:pages.map(p=>({path:p.path,dir:p.dir,slug:p.slug,family:family(p,meta)})),rules:{structural:STRUCTURAL_RULES,editorial:EDITORIAL_RULES},counts,families:fam,indicators:ind,pagesUnder120:under,pagesWithoutExternalLink:noext,structuralFailures:sf,editorialFailures:ef,failures:all},null,2));else if(!process.argv.includes("--update-baseline"))console.log(out);
  const baselinePath=path.join(ROOT,BASELINE_FILE),pairs=trackedPairs(all);
- const migrationData=JSON.parse(read("data/parametres.json"));
- const migrationSlugs=Array.isArray(migrationData?.anneeAMigrer?.slugs)?migrationData.anneeAMigrer.slugs:[];
  if(process.argv.includes("--seed-baseline")){
   let base;try{base=parseBaseline(fs.readFileSync(baselinePath,"utf8"))}catch(e){console.error(e.code==="ENOENT"?BASELINE_FILE+" introuvable.":e.message);process.exit(1)}
   const r=seedBaseline(pairs,base);
@@ -162,13 +145,8 @@ function main(){
  }
  if(process.argv.includes("--update-baseline")){
   let base=null;if(fs.existsSync(baselinePath)){try{base=parseBaseline(fs.readFileSync(baselinePath,"utf8"))}catch(e){console.error(e.message);process.exit(1)}}
-  const r=nextBaseline(pairs,base,migrationSlugs);
+  const r=nextBaseline(pairs,base);
   if(!r.ok){
-   if(r.blocked.length){
-    console.error("--update-baseline refusé : un outil marqué anneeAMigrer ne peut pas résorber ses écarts éditoriaux avant migration du barème.");
-    for(const x of r.blocked)console.error("  - "+x.path+" ["+x.rule+"] : migrez le barème vers parametres.json, retirez anneeAMigrer, puis enrichissez l'outil.");
-    process.exit(1)
-   }
    console.error("--update-baseline refusé : la baseline ne peut que perdre des entrées, jamais en gagner.\n"+r.added.length+" écart(s) suivi(s) absent(s) de la baseline (régression ou nouvelle page non conforme) :");for(const x of r.added)console.error("  - "+x.path+" ["+x.rule+"]");console.error("Corrigez ces écarts au lieu de les ajouter à la baseline.");process.exit(1)
   }
   fs.writeFileSync(baselinePath,JSON.stringify(r.next,null,2)+"\n");console.log(r.initial?"Baseline créée : "+r.next.length+" entrée(s).":"Baseline mise à jour : "+r.removed.length+" entrée(s) retirée(s), "+r.next.length+" restante(s).");return
@@ -184,9 +162,8 @@ function main(){
  }
  if(process.argv.includes("--ratchet")){
   let base;try{base=parseBaseline(fs.readFileSync(baselinePath,"utf8"))}catch(e){console.error(e.code==="ENOENT"?BASELINE_FILE+" introuvable : lancez --update-baseline une première fois.":e.message);process.exit(1)}
-  const r=nextBaseline(pairs,base,migrationSlugs);
   const {added,stale}=compareToBaseline(pairs,base);
-  let addedForRatchet=added,staleForRatchet=stale,blockedForRatchet=r.blocked||[];
+  let addedForRatchet=added,staleForRatchet=stale;
   if(process.argv.includes("--check-changed-contract")){
    let changedPaths;
    try{changedPaths=changedInteractivePages(pages,process.env.CHECK_PAGES_BASE_REF)}catch(e){console.error(e.message);process.exit(1)}
@@ -195,12 +172,11 @@ function main(){
    // ne pas re-bloquer la PR sur leur dette historique hors périmètre.
    addedForRatchet=added.filter(x=>!changed.has(x.path));
    staleForRatchet=stale.filter(x=>!changed.has(x.path));
-   blockedForRatchet=blockedForRatchet.filter(x=>!changed.has(x.path));
   }
   const line="Cliquet : "+pairs.length+" écart(s) suivi(s) connu(s) ou nouveaux, "+base.length+" en baseline, "+addedForRatchet.length+" nouveau(x), "+staleForRatchet.length+" périmé(s) bloquant(s).";
   console.log(line);if(process.env.GITHUB_STEP_SUMMARY)fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,"### Cliquet\n\n"+line+"\n");
-  for(const message of buildRatchetMessages({added:addedForRatchet,stale:staleForRatchet,blocked:blockedForRatchet}))console.error(message);
-  if(addedForRatchet.length||staleForRatchet.length||blockedForRatchet.length)process.exit(1)
+  for(const message of buildRatchetMessages({added:addedForRatchet,stale:staleForRatchet}))console.error(message);
+  if(addedForRatchet.length||staleForRatchet.length)process.exit(1)
  }
  if(process.argv.includes("--strict")&&sf.length){for(const x of sf)console.error("::error file="+x.path+"::"+x.rule+" "+x.message);process.exit(1)}
 }

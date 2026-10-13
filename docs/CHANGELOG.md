@@ -1,3 +1,8 @@
+## 2026-10-13 — Enrichissement SEO et éditorial sans migration préalable
+- `anneeAMigrer` reste un signal de dette technique sur le calcul/barème, mais ne bloque plus les métadonnées SEO, le contenu éditorial prudent, la FAQ, les sources ni l'UX.
+- Suppression du verrou spécifique dans le cliquet de baseline ; les nouveaux écarts restent bloquants et la baseline ne peut toujours que perdre des entrées.
+- Migration toujours requise dans la même PR dès qu'un changement touche le calcul ou les paramètres réglementaires ; aucune valeur ni règle légale non vérifiée n'est ajoutée.
+
 ## 2026-10-13 — CI : point d'entrée unique et tests de titres par contrat
 - Nouveau `scripts/run-tests.mjs` (`npm test`) : exécute toutes les étapes de l'ancien `tests.yml` (41 commandes, plus l'horizon à 60 jours et un test de couverture), sans s'arrêter au premier échec, et liste tous les échecs avec la commande pour les relancer. `tests.yml` l'appelle tel quel ; en local `npm test`, `npm run test:fast` (sans Chromium) ou `npm test -- --only=<étape>`.
 - `tests/run-tests.test.mjs` échoue si un test de `tests/` n'est référencé par aucune étape (les cinq tests importés par `generic-calcs` sont déclarés comme indirects) ou si un fichier qui importe Playwright n'est pas marqué `browser`.
