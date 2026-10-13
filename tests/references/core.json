@@ -2006,5 +2006,18 @@
     ],
     "source": "https://bpifrance-creation.fr/encyclopedie/gerer-lentreprise/connaitre-chiffres/marge-commerciale",
     "note": "Calcul indépendant : coût complet 60 € + 5 € = 65 € ; marge 100 € − 65 € = 35 €. Taux de marge 35/65 ≈ 53,85 %, taux de marque 35/100 = 35 %, prix cible 65/(1 − 0,40) ≈ 108,33 €. La source documente la notion, pas les résultats numériques."
+  },
+  {
+    "outil": "jours-ouvres",
+    "entrees": {
+      "date-debut": "13/07/2026",
+      "date-fin": "17/07/2026",
+      "feries": "oui"
+    },
+    "attendu": 4,
+    "tolerance": 0,
+    "sortie": "\\d+\\s+jours? ouvrés?",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2405",
+    "note": "Valeur attendue calculée indépendamment : du 13 au 17 juillet 2026, cinq jours du lundi au vendredi moins le 14 juillet, fête légale nationale confirmée par le calendrier officiel Service-Public."
   }
 ]

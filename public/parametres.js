@@ -482,6 +482,58 @@
         }
       }
     },
+    "jours-ouvres": {
+      "label": "Calendrier des jours fériés nationaux français",
+      "year": 2026,
+      "effectiveFrom": "1900-01-01",
+      "effectiveTo": "2100-12-31",
+      "verifiedOn": "2026-10-13",
+      "source": {
+        "label": "Service-Public — jours fériés en France",
+        "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2405"
+      },
+      "values": {
+        "easterOffsetsFromSunday": [
+          1,
+          39,
+          50
+        ],
+        "fixedHolidays": [
+          [
+            1,
+            1
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            5,
+            8
+          ],
+          [
+            7,
+            14
+          ],
+          [
+            8,
+            15
+          ],
+          [
+            11,
+            1
+          ],
+          [
+            11,
+            11
+          ],
+          [
+            12,
+            25
+          ]
+        ]
+      }
+    },
     "preavis-demission": {
       "label": "Préavis de démission — durées de conventions collectives",
       "year": 2026,

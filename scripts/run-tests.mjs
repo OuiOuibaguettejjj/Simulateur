@@ -45,6 +45,8 @@ export const STEPS=[
   step("ptz","unit","tests/ptz.test.mjs"),
   step("ad-filter","unit","tests/ad-filter.test.mjs"),
   step("invalid-result","unit","tests/invalid-result.test.mjs"),
+  step("jours-ouvres","unit","tests/jours-ouvres.test.mjs"),
+  step("jours-ouvres-browser","browser","tests/jours-ouvres.browser.test.mjs",[],{browser:true}),
 
   step("smoke-results","browser","tests/smoke-results.test.mjs",[],{browser:true}),
   step("interets-composes","browser","tests/interets-composes.test.mjs",[],{browser:true}),
