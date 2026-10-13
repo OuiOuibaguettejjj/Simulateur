@@ -157,9 +157,9 @@ const faqWithTwoEditorialH2=oneEditorialH2.replace(
 );
 assert.equal(has(faqWithTwoEditorialH2,"content-h2"),false,"deux H2 éditoriaux hors FAQ restent valides");
 
-assert.equal(only(fixture().replace("<title>Mot-clé | Simulateur</title>","<title>Mot-clé pertinent</title>"),"title").length,0,"un titre pertinent sans suffixe imposé est valide");
-assert(only(fixture().replace("<title>Mot-clé | Simulateur</title>","<title></title>"),"title").length>0,"un titre vide est refusé");
-assert(only(fixture(DESC.replace("Pour calculer","Pour estimer")),"seo-calculer").length>0,"la meta description doit contenir le mot exact calculer");
+assert.equal(errs(fixture().replace("<title>Mot-clé | Simulateur</title>","<title>Mot-clé pertinent</title>")).filter(x=>x.rule==="title").length,0,"un titre pertinent sans suffixe imposé est valide");
+assert(errs(fixture().replace("<title>Mot-clé | Simulateur</title>","<title></title>")).some(x=>x.rule==="title"),"un titre vide est refusé");
+assert(errs(fixture(DESC.replace("Pour calculer","Pour estimer"))).some(x=>x.rule==="seo-calculer"),"la meta description doit contenir le mot exact calculer");
 for(const [n,bad] of [[119,true],[120,false],[160,false],[161,true]])assert.equal(has(fixture("x".repeat(n)),"description"),bad,"description "+n);
 for(const a of ["'","&#39;","&apos;","’"])assert.equal(has(fixture("x".repeat(118)+a+"."),"description"),false,"apostrophe "+a);
 assert(has(fixture().replace("<section class=\"tool\">","<div class=\"tool\">"),"tool-block"));
