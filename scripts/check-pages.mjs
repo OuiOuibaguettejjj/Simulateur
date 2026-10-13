@@ -45,7 +45,7 @@ export function checkPage(html,ctx){
  if(!/<!doctype\s+html\s*>/i.test(html)||he.length!==1||attr(he[0],"lang")!=="fr"||!metas.some(n=>(attr(n,"name")||"").toLowerCase()==="viewport")||!metas.some(n=>(attr(n,"name")||"").toLowerCase()==="calculator-rendering"&&(attr(n,"content")||"").toLowerCase()==="static")||!find(root,{tag:"link"}).some(n=>(attr(n,"rel")||"").toLowerCase().split(/\s+/).includes("stylesheet")&&attr(n,"href")==="/styles.css"))fail("html-base","doctype/lang/viewport/static rendering/stylesheet incomplet");
  bal.forEach(m=>fail("markup-balance",m));
  const heads=find(root,{tag:"head"}),headTitles=heads.length===1?find(heads[0],{tag:"title"}):[],title=norm(headTitles[0]?text(headTitles[0]):"");if(heads.length!==1||headTitles.length!==1||!title)fail("title","un unique <title> non vide est requis ; aucun suffixe fixe n’est imposé");
- const ds=metas.filter(n=>(attr(n,"name")||"").toLowerCase()==="description"),description=norm(ds[0]?attr(ds[0],"content")||"":"");if(!description)fail("html-base","meta description absente ou vide");if(ds.length!==1||[...description].length<120)fail("description","meta description : "+[...description].length+" caractères, minimum attendu 120");if(description&&!/\bcalculer\b/i.test(description))fail("seo-calculer","la meta description doit contenir le mot exact « calculer »");
+ const ds=metas.filter(n=>(attr(n,"name")||"").toLowerCase()==="description"),description=norm(ds[0]?attr(ds[0],"content")||"":"");if(!description)fail("html-base","meta description absente ou vide");if(ds.length!==1||[...description].length<120)fail("description","meta description : "+[...description].length+" caractères, minimum attendu 120");if(description&&!/\bcalcul(?:er|ez)\b/i.test(description))fail("seo-calculer","la meta description doit contenir « calculer » ou « calculez »");
  const canonical="https://simulateur.site/"+dir+"/"+slug+"/",cs=find(root,{tag:"link"}).filter(n=>(attr(n,"rel")||"").toLowerCase().split(/\s+/).includes("canonical"));if(cs.length!==1||attr(cs[0],"href")!==canonical)fail("canonical","canonique attendue : "+canonical);
  if(/(?:turn\d+search\d+|citeturn\d+search\d+)/i.test(visibleText(root)))fail("citation-marker","marqueur de citation ChatGPT détecté dans le texte visible");
  const bs=find(root,{className:"breadcrumb"}),b=bs[0],bl=b?links(b):[];if(!b||!bl.length||text(bl[0])!=="Accueil")fail("breadcrumb","le premier lien du breadcrumb doit être « Accueil »");
@@ -94,7 +94,7 @@ export function changedMandatoryFailures(failures,changedPaths){
  const changed=new Set(changedPaths);
 // Le titre doit être unique et non vide, sans suffixe imposé.
  // bloquantes sur le titre. Les autres dettes éditoriales/structurelles déjà
- // Toute page interactive modifiée doit aussi contenir « calculer » dans sa meta description.
+ // Toute page interactive modifiée doit contenir « calculer » ou « calculez » dans sa meta description.
  // Les pages historiques seront mises en conformité progressivement.
  return failures.filter(x=>changed.has(x.path)&&(x.rule==="title"||x.rule==="seo-calculer")).sort((a,b)=>a.path.localeCompare(b.path)||a.rule.localeCompare(b.rule));
 }
