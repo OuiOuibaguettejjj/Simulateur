@@ -1,3 +1,82 @@
-<!doctype html><html lang="fr"><head><meta name="calculator-rendering" content="static"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="google-adsense-account" content="ca-pub-2924580037451268"><title>Calculateur différence entre deux dates</title><meta name="description" content="Calculez précisément le nombre de jours entre deux dates."><link rel="canonical" href="https://simulateur.site/outil/difference-dates/"><link rel="stylesheet" href="/styles.css"><script src="/simulateurs.js" defer></script><script src="/enter-calcul.js" defer></script><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur différence entre deux dates","url":"https://simulateur.site/outil/difference-dates/","description":"Calculez précisément le nombre de jours entre deux dates.","inLanguage":"fr-FR","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"price":"0","priceCurrency":"EUR"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Temps","item":"https://simulateur.site/temps/"},{"@type":"ListItem","position":3,"name":"Calculateur différence entre deux dates","item":"https://simulateur.site/outil/difference-dates/"}]}</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta property="og:type" content="website"><meta property="og:site_name" content="Simulateur"><meta property="og:locale" content="fr_FR"><meta property="og:title" content="Calculateur différence entre deux dates"><meta property="og:description" content="Calculez précisément le nombre de jours entre deux dates."><meta property="og:url" content="https://simulateur.site/outil/difference-dates/"><meta name="twitter:card" content="summary"></head><body><header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header><main><div class="wrap"><div class="breadcrumb"><a href="/">Accueil</a> · <a href="/temps/">Temps</a> · Calculateur différence entre deux dates</div><section class="tool"><div class="eyebrow">DATES</div><h1>Calculateur différence entre deux dates</h1><p class="tool-intro">Calculez précisément le nombre de jours entre deux dates.</p><div id="fields"><div class="row"><div class="field"><label for="j1">Jour de départ</label><input id="j1" type="number" min="0" step="1" placeholder="1"></div><div class="field"><label for="m1">Mois de départ</label><input id="m1" type="number" min="0" step="1" placeholder="1"></div><div class="field"><label for="a1">Année de départ</label><input id="a1" type="number" min="0" step="1" placeholder="2026"></div></div><div class="row"><div class="field"><label for="j2">Jour d'arrivée</label><input id="j2" type="number" min="0" step="1" placeholder="25"></div><div class="field"><label for="m2">Mois d'arrivée</label><input id="m2" type="number" min="0" step="1" placeholder="9"></div><div class="field"><label for="a2">Année d'arrivée</label><input id="a2" type="number" min="0" step="1" placeholder="2026"></div></div></div><button class="button-main" onclick="Simulateurs.calc()">Calculer</button><div class="result" id="result" aria-live="polite">Saisissez vos données puis lancez le calcul.</div><div class="formula"><strong>Méthode et sources</strong><p>Différence calendaire calculée en UTC pour éviter les effets d'heure d'été lors du calcul du nombre entier de jours.</p></div></section></div><section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Outils associés</h2><div class="related-links"><a class="related-link" href="/outil/jours-ouvres/"><strong>Jours ouvrés</strong><span>Compter les jours du lundi au vendredi entre deux dates.</span></a><a class="related-link" href="/outil/temps-travail/"><strong>Temps de travail</strong><span>Calculer une durée travaillée avec la pause.</span></a><a class="related-link" href="/outil/age-retraite/"><strong>Âge de retraite</strong><span>Estimer l'âge de départ selon les paramètres saisis.</span></a></div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="/temps/">Temps</a>.</p></div></section>
-</main><footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer><script>window.TOOL={calc:function(){const d1=new Date(Date.UTC(+this.$("a1").value,+this.$("m1").value-1,+this.$("j1").value)),d2=new Date(Date.UTC(+this.$("a2").value,+this.$("m2").value-1,+this.$("j2").value));if(isNaN(d1)||isNaN(d2)||d2<d1)return "Vérifiez les dates.";const days=Math.round((d2-d1)/86400000),weeks=Math.floor(days/7),rem=days%7;return "<strong>"+days+" jour(s)</strong><br><br>Soit "+weeks+" semaine(s) et "+rem+" jour(s).<p class='small'>Le calcul mesure l'écart calendaire entre les deux dates, sans compter automatiquement le jour de départ.</p>"}};</script></body></html>
+<!doctype html>
+<html lang="fr">
+<head>
+<meta name="calculator-rendering" content="static">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="google-adsense-account" content="ca-pub-2924580037451268">
+<title>Calculateur différence entre deux dates | Simulateur</title>
+<meta name="description" content="Utilisez ce calculateur pour calculer le nombre de jours entre deux dates, en jours et en semaines. Saisie au format jj/mm/aaaa, avec méthode et exemple expliqués.">
+<link rel="canonical" href="https://simulateur.site/outil/difference-dates/">
+<link rel="stylesheet" href="/styles.css">
+<script src="/simulateurs.js" defer></script>
+<script src="/enter-calcul.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur différence entre deux dates","url":"https://simulateur.site/outil/difference-dates/","description":"Utilisez ce calculateur pour calculer le nombre de jours entre deux dates, en jours et en semaines. Saisie au format jj/mm/aaaa, avec méthode et exemple expliqués.","inLanguage":"fr-FR","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"price":"0","priceCurrency":"EUR"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Temps","item":"https://simulateur.site/temps/"},{"@type":"ListItem","position":3,"name":"Calculateur différence entre deux dates","item":"https://simulateur.site/outil/difference-dates/"}]}</script>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Simulateur">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Calculateur différence entre deux dates | Simulateur">
+<meta property="og:description" content="Utilisez ce calculateur pour calculer le nombre de jours entre deux dates, en jours et en semaines. Saisie au format jj/mm/aaaa, avec méthode et exemple expliqués.">
+<meta property="og:url" content="https://simulateur.site/outil/difference-dates/">
+<meta name="twitter:card" content="summary">
+</head>
+<body>
+<header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header>
+<main>
+<div class="wrap">
+<div class="breadcrumb"><a href="/">Accueil</a> · <a href="/temps/">Temps</a> · Calculateur différence entre deux dates</div>
+<section class="tool">
+<div class="eyebrow">TEMPS ET DATES</div>
+<h1>Calculateur de différence entre deux dates</h1>
+<p class="tool-intro">Calculez l’écart entre deux dates en jours calendaires, puis retrouvez son équivalent en semaines et jours. Les dates se saisissent au clavier au format jj/mm/aaaa.</p>
+<div id="fields">
+<div class="field"><label for="date-debut">Date de départ (jj/mm/aaaa)</label><input id="date-debut" name="date-debut" type="text" inputmode="numeric" autocomplete="off" placeholder="13/10/2026" aria-describedby="date-format"></div>
+<div class="field"><label for="date-fin">Date d’arrivée (jj/mm/aaaa)</label><input id="date-fin" name="date-fin" type="text" inputmode="numeric" autocomplete="off" placeholder="25/10/2026" aria-describedby="date-format"></div>
+<p id="date-format" class="small">Période acceptée : du 01/01/1900 au 31/12/2100. La date d’arrivée doit être égale ou postérieure à la date de départ.</p>
+</div>
+<button class="button-main" type="button" onclick="Simulateurs.calc()">Calculer la différence</button>
+<div class="result" id="result" aria-live="polite">Saisissez une date de départ et une date d’arrivée, puis lancez le calcul.</div>
+<div class="formula"><strong>Méthode de calcul et source</strong><p>Le calcul compare les deux dates calendaires à minuit UTC et divise l’écart par 86 400 000 millisecondes. Cela évite que le passage à l’heure d’été ou d’hiver modifie le nombre de jours. Le jour de départ n’est pas compté comme une journée écoulée.</p><p>Référence technique : <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Date/UTC" target="_blank" rel="noopener noreferrer">MDN — Date.UTC()</a>.</p></div>
+</section>
+<section class="content-section">
+<h2>Comment calculer la différence entre deux dates ?</h2>
+<p>Indiquez la date de départ et la date d’arrivée au format jour/mois/année. Le calculateur mesure le nombre de jours calendaires écoulés entre ces deux dates, puis exprime aussi cette durée en semaines complètes et jours restants.</p>
+<p>Par exemple, du 1er au 8 janvier 2026, il s’écoule 7 jours, soit une semaine. Le résultat est un écart de dates : il ne compte pas automatiquement les deux dates comme deux journées incluses dans une période.</p>
+<h2>Quelle différence entre jours calendaires et jours ouvrés ?</h2>
+<p>Les jours calendaires comprennent tous les jours du calendrier, week-ends et jours fériés inclus. Les jours ouvrés correspondent généralement aux jours travaillés du lundi au vendredi. Le résultat de ce calculateur est donc différent d’un décompte de jours ouvrés ou ouvrables.</p>
+<p>Pour compter les jours de semaine sur une période, utilisez aussi le <a href="/outil/jours-ouvres/">calculateur de jours ouvrés</a>. Cette page ne calcule pas les heures réellement écoulées entre deux instants et ne tient pas compte d’un fuseau horaire.</p>
+</section>
+<section class="calculator-faq" aria-labelledby="faq-title">
+<h2 id="faq-title">FAQ</h2>
+<details><summary>Le jour de départ est-il inclus dans le résultat ?</summary><div class="calculator-faq-answer"><p>Non. Le résultat représente le nombre de jours écoulés entre les deux dates. Entre le 1er et le 2 janvier, il s’écoule un jour. Pour compter les dates de début et de fin incluses dans une période, ajoutez un jour au résultat.</p></div></details>
+<details><summary>Les week-ends et jours fériés sont-ils comptés ?</summary><div class="calculator-faq-answer"><p>Oui. Le calcul porte sur les jours calendaires : les samedis, dimanches et jours fériés sont inclus dans l’écart.</p></div></details>
+<details><summary>Que se passe-t-il si la date n’existe pas ?</summary><div class="calculator-faq-answer"><p>Le calculateur vérifie le jour, le mois et l’année saisis. Une date impossible, comme le 31/02/2026, est refusée au lieu d’être automatiquement reportée au mois suivant.</p></div></details>
+<details><summary>Le calcul tient-il compte des changements d’heure ?</summary><div class="calculator-faq-answer"><p>Non, car il compare des dates calendaires à minuit UTC et non des heures locales. Le nombre entier de jours reste ainsi indépendant des changements d’heure saisonniers.</p></div></details>
+</section>
+<section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Calculs associés</h2><div class="related-links"><a class="related-link" href="/outil/jours-ouvres/"><strong>Calculateur de jours ouvrés</strong><span>Compter les jours du lundi au vendredi sur une période.</span></a><a class="related-link" href="/outil/temps-travail/"><strong>Calculateur de temps de travail</strong><span>Calculer une durée travaillée avec la pause.</span></a><a class="related-link" href="/outil/temps/"><strong>Calculateur de durée</strong><span>Calculer et comparer des durées.</span></a></div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="/temps/">Temps</a>.</p></div></section>
+</div>
+</main>
+<footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer>
+<script>
+window.TOOL={calc:function(){
+  const parseDate=id=>{
+    const value=this.$(id).value.trim();
+    const match=/^(\d{2})\/(\d{2})\/(\d{4})$/.exec(value);
+    if(!match)return null;
+    const day=Number(match[1]),month=Number(match[2]),year=Number(match[3]);
+    if(year<1900||year>2100||month<1||month>12||day<1||day>31)return null;
+    const date=new Date(Date.UTC(year,month-1,day));
+    if(date.getUTCFullYear()!==year||date.getUTCMonth()!==month-1||date.getUTCDate()!==day)return null;
+    return date;
+  };
+  const start=parseDate("date-debut"),end=parseDate("date-fin");
+  if(!start||!end)return "Vérifiez les deux dates : saisissez une date réelle au format jj/mm/aaaa, entre 1900 et 2100.";
+  if(end<start)return "La date d’arrivée doit être égale ou postérieure à la date de départ.";
+  const days=(end-start)/86400000, weeks=Math.floor(days/7), remaining=days%7;
+  return "<strong>"+days+" jour"+(days>1?"s":"")+"</strong><p>Soit "+weeks+" semaine"+(weeks>1?"s":"")+" et "+remaining+" jour"+(remaining>1?"s":"")+".</p><p class='small'>L’écart est calculé sans compter automatiquement le jour de départ.</p>";
+}};
+</script>
+</body>
+</html>
