@@ -157,10 +157,6 @@
   },
   {
     "path": "public/outil/indemnite-precarite/index.html",
-    "rule": "description"
-  },
-  {
-    "path": "public/outil/indemnite-precarite/index.html",
     "rule": "faq"
   },
   {
@@ -386,10 +382,6 @@
   {
     "path": "public/outil/sasu-vs-ei-micro/index.html",
     "rule": "result"
-  },
-  {
-    "path": "public/outil/succession/index.html",
-    "rule": "description"
   },
   {
     "path": "public/outil/succession/index.html",
