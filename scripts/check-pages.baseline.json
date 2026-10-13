@@ -360,26 +360,6 @@
     "rule": "tool-block"
   },
   {
-    "path": "public/outil/surface/index.html",
-    "rule": "content-h2"
-  },
-  {
-    "path": "public/outil/surface/index.html",
-    "rule": "description"
-  },
-  {
-    "path": "public/outil/surface/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/surface/index.html",
-    "rule": "formula"
-  },
-  {
-    "path": "public/outil/surface/index.html",
-    "rule": "result"
-  },
-  {
     "path": "public/outil/temps-partiel/index.html",
     "rule": "content-h2"
   },
