@@ -377,36 +377,20 @@ assert.deepEqual(
  "détection : JavaScript propre au calculateur référencé par la page"
 );
 
-// Exception étroite : deux dettes description provenaient uniquement du plafond de 160 caractères retiré.
-for(const obsoletePath of ["public/outil/indemnite-precarite/index.html","public/outil/succession/index.html"]){
- const obsolete=nextBaseline([], [P(obsoletePath,"description")], [obsoletePath.split("/")[2]]);
- assert.equal(obsolete.ok,true,"la dette description rendue obsolète par la suppression du plafond peut être retirée : "+obsoletePath);
- assert.deepEqual(obsolete.removed,[P(obsoletePath,"description")]);
-}
-const unrelatedDescription=nextBaseline([], [P("public/outil/autre/index.html","description")], ["autre"]);
-assert.equal(unrelatedDescription.ok,false,"le verrou conserve les autres dettes description anneeAMigrer");
-assert.deepEqual(unrelatedDescription.blocked,[P("public/outil/autre/index.html","description")]);
-
-// anneeAMigrer : les écarts éditoriaux ne peuvent pas être résorbés avant migration.
+// anneeAMigrer signale une dette de migration du calcul/barème, pas un verrou éditorial.
 const debtPath="public/outil/ancien/index.html";
-const lockedBaseline=[P(debtPath,"description"),P(debtPath,"content-h2"),P(debtPath,"formula"),P(debtPath,"faq"),P(debtPath,"result")];
-const lockedCurrent=[P(debtPath,"result")];
-const locked=nextBaseline(lockedCurrent,lockedBaseline,["ancien"]);
-assert.equal(locked.ok,false,"anneeAMigrer bloque le retrait des écarts éditoriaux");
-assert.deepEqual(locked.blocked,[P(debtPath,"description"),P(debtPath,"content-h2"),P(debtPath,"formula"),P(debtPath,"faq")],"les quatre écarts éditoriaux sont verrouillés");
-const lockedMessages=buildRatchetMessages({stale:lockedBaseline.slice(0,4),blocked:locked.blocked});
-assert.equal(lockedMessages.length,4,"entrée verrouillée : un seul message par écart");
-assert(lockedMessages.every(m=>m.includes("cliquet anneeAMigrer")),"entrée verrouillée : seul le message anneeAMigrer apparaît");
-assert(!lockedMessages.some(m=>m.includes("entrée périmée")),"entrée verrouillée : aucun message entrée périmée");
-const addedMessages=buildRatchetMessages({added:[P("public/outil/test/index.html","result")]});
-assert.equal(addedMessages.length,1,"écart ajouté : un seul message");
-assert(addedMessages[0].includes("nouvel écart"),"écart ajouté : message attendu");
-const unlockedMessages=buildRatchetMessages({stale:[P(debtPath,"description")]});
-assert.equal(unlockedMessages.length,1,"entrée périmée non verrouillée : un message");
-assert(unlockedMessages[0].includes("entrée périmée"),"entrée périmée non verrouillée : message périmé présent");
-const migrated=nextBaseline(lockedCurrent,lockedBaseline,[]);
-assert.equal(migrated.ok,true,"outil migré : retrait des écarts autorisé");
-assert.deepEqual(migrated.removed,[P(debtPath,"description"),P(debtPath,"content-h2"),P(debtPath,"formula"),P(debtPath,"faq")],"outil migré : écarts retirables");
+const preMigrationBaseline=[P(debtPath,"description"),P(debtPath,"content-h2"),P(debtPath,"formula"),P(debtPath,"faq"),P(debtPath,"result")];
+const preMigrationCurrent=[P(debtPath,"result")];
+const preMigration=nextBaseline(preMigrationCurrent,preMigrationBaseline);
+assert.equal(preMigration.ok,true,"les dettes éditoriales peuvent être retirées avant migration du barème");
+assert.deepEqual(preMigration.removed,[P(debtPath,"description"),P(debtPath,"content-h2"),P(debtPath,"formula"),P(debtPath,"faq")],"les écarts éditoriaux corrigés sont retirables indépendamment de la migration");
+assert.deepEqual(preMigration.next,[P(debtPath,"result")],"les dettes non corrigées restent dans la baseline");
+const preMigrationMessages=buildRatchetMessages({stale:preMigration.removed});
+assert.equal(preMigrationMessages.length,4,"chaque entrée périmée reçoit un message");
+assert(preMigrationMessages.every(m=>m.includes("entrée périmée")),"les messages de baseline n'imposent plus une migration préalable");
+const stillRegressed=nextBaseline([...preMigrationCurrent,P("public/outil/nouveau/index.html","faq")],preMigrationBaseline);
+assert.equal(stillRegressed.ok,false,"le cliquet continue de refuser tout nouvel écart");
+assert.deepEqual(stillRegressed.added,[P("public/outil/nouveau/index.html","faq")],"un nouvel écart éditorial reste bloquant");
 
 console.log("check-pages tests passed.");
 
