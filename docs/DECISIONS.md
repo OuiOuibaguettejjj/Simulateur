@@ -233,7 +233,7 @@ Le calculateur `salaire-brut-net` est retiré de `data/parametres.json > anneeAM
 
 ## 2026-10-13 — Contrat SEO souple pour les pages interactives
 
-Le `<title>` doit être unique et non vide, mais aucun format fixe ni suffixe `| Simulateur` n’est imposé. Le titre et le H1 sont rédigés selon l’intention de recherche de la page : calculateur, calcul, conversion, comparaison ou simulation selon le cas, sans supprimer le mot-clé métier utile. La meta description doit contenir au moins 120 caractères, sans plafond maximal fixe, et le mot exact « calculer » ; `WebApplication.description`, Open Graph et Twitter restent synchronisés via le contrôle JSON-LD et `normalize-layout.mjs`. Le contrat bloquant s’applique aux pages interactives nouvelles ou modifiées afin de permettre la mise en conformité progressive des pages historiques, sans refonte massive automatique ni changement des calculs métier.
+Le `<title>` doit être unique et non vide, mais aucun format fixe ni suffixe `| Simulateur` n’est imposé. Le titre et le H1 sont rédigés selon l’intention de recherche de la page : calculateur, calcul, conversion, comparaison ou simulation selon le cas, sans supprimer le mot-clé métier utile. La meta description doit contenir au moins 120 caractères, sans plafond maximal fixe, et le mot « calculer » ou « calculez » ; `WebApplication.description`, Open Graph et Twitter restent synchronisés via le contrôle JSON-LD et `normalize-layout.mjs`. Le contrat bloquant s’applique aux pages interactives nouvelles ou modifiées afin de permettre la mise en conformité progressive des pages historiques, sans refonte massive automatique ni changement des calculs métier.
 
 
 ## 2026-10-13 — Séparer dette de migration et droit à l'enrichissement
