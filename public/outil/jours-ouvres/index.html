@@ -9,6 +9,7 @@
 <meta name="description" content="Utilisez ce calculateur pour calculer le nombre de jours ouvrés entre deux dates, avec ou sans exclusion des jours fériés nationaux. Saisie au format jj/mm/aaaa.">
 <link rel="canonical" href="https://simulateur.site/outil/jours-ouvres/">
 <link rel="stylesheet" href="/styles.css">
+<script src="/parametres.js" defer></script>
 <script src="/simulateurs.js" defer></script>
 <script src="/enter-calcul.js" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur de jours ouvrés entre deux dates","url":"https://simulateur.site/outil/jours-ouvres/","description":"Utilisez ce calculateur pour calculer le nombre de jours ouvrés entre deux dates, avec ou sans exclusion des jours fériés nationaux. Saisie au format jj/mm/aaaa.","inLanguage":"fr-FR","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"price":"0","priceCurrency":"EUR"}}</script>
@@ -86,20 +87,18 @@ function easterSunday(year) {
   return new Date(Date.UTC(year, month - 1, day));
 }
 function frenchPublicHolidays(year) {
-  const fixed = ["01-01", "05-01", "05-08", "07-14", "08-15", "11-01", "11-11", "12-25"];
-  const easterMonday = easterSunday(year);
-  easterMonday.setUTCDate(easterMonday.getUTCDate() + 1);
-  const ascension = new Date(easterMonday);
-  ascension.setUTCDate(ascension.getUTCDate() + 38);
-  const whitMonday = new Date(easterMonday);
-  whitMonday.setUTCDate(whitMonday.getUTCDate() + 49);
+  const calendar = window.Parametres.get("jours-ouvres").values;
   const key = date => date.toISOString().slice(0, 10);
-  return new Set([
-    ...fixed.map(day => year + "-" + day),
-    key(easterMonday),
-    key(ascension),
-    key(whitMonday)
-  ]);
+  const fixed = calendar.fixedHolidays.map(([month, day]) =>
+    year + "-" + String(month).padStart(2, "0") + "-" + String(day).padStart(2, "0")
+  );
+  const easter = easterSunday(year);
+  const movable = calendar.easterOffsetsFromSunday.map(offset => {
+    const date = new Date(easter);
+    date.setUTCDate(date.getUTCDate() + offset);
+    return key(date);
+  });
+  return new Set([...fixed, ...movable]);
 }
 function countBusinessDays(start, end, excludeHolidays) {
   if (!(start instanceof Date) || !(end instanceof Date) || Number.isNaN(start.getTime()) || Number.isNaN(end.getTime()) || start > end) return null;
