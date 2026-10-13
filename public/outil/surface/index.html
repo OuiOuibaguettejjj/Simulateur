@@ -1,3 +1,117 @@
-<!doctype html><html lang="fr"><head><meta name="calculator-rendering" content="static"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="google-adsense-account" content="ca-pub-2924580037451268"><title>Calculateur de surface</title><meta name="description" content="Calculez la surface d'un rectangle."><link rel="canonical" href="https://simulateur.site/outil/surface/"><link rel="stylesheet" href="/styles.css"><script src="/simulateurs.js" defer></script><script src="/enter-calcul.js" defer></script><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur de surface","url":"https://simulateur.site/outil/surface/","description":"Calculez la surface d\u0027un rectangle.","inLanguage":"fr-FR","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"price":"0","priceCurrency":"EUR"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Mesures","item":"https://simulateur.site/mesures/"},{"@type":"ListItem","position":3,"name":"Calculateur de surface","item":"https://simulateur.site/outil/surface/"}]}</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta property="og:type" content="website"><meta property="og:site_name" content="Simulateur"><meta property="og:locale" content="fr_FR"><meta property="og:title" content="Calculateur de surface"><meta property="og:description" content="Calculez la surface d'un rectangle."><meta property="og:url" content="https://simulateur.site/outil/surface/"><meta name="twitter:card" content="summary"></head><body><header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header><main><div class="wrap"><div class="breadcrumb"><a href="/">Accueil</a> · <a href="/mesures/">Mesures</a> · Calculateur de surface</div><section class="tool"><div class="eyebrow">GÉOMÉTRIE</div><h1>Calculateur de surface</h1><p class="tool-intro">Calculez la surface d'un rectangle.</p><div id="fields"><div class="field"><label for="a">Longueur</label><input id="a" type="number" value="5"></div><div class="field"><label for="b">Largeur</label><input id="b" type="number" value="3"></div></div><button class="button-main" onclick="Simulateurs.calc()">Calculer</button><div class="result" id="result" aria-live="polite"></div><div class="formula"><p>Calculez la surface d'un rectangle.</p></div></section></div><section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Outils associés</h2><div class="related-links"><a class="related-link" href="/outil/perimetre/"><strong>Périmètre</strong><span>Calculer le périmètre d'une figure courante.</span></a><a class="related-link" href="/outil/calculatrice/"><strong>Calculatrice en ligne</strong><span>Effectuer rapidement des calculs courants directement en ligne.</span></a><a class="related-link" href="/outil/proportion/"><strong>Proportion et règle de trois</strong><span>Résoudre une proportion simplement.</span></a></div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="/mesures/">Mesures</a>.</p></div></section>
-</main><footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer><script>window.TOOL={calc:function(){const a=+this.$("a").value,b=+this.$("b").value;if(a<=0||b<=0)return"Valeurs invalides.";return"<strong>"+(a*b).toLocaleString("fr-FR")+" unités²</strong>"}};</script></body></html>
+<!doctype html>
+<html lang="fr">
+<head>
+<meta name="calculator-rendering" content="static">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="google-adsense-account" content="ca-pub-2924580037451268">
+<title>Calculateur de surface : rectangle, cercle, triangle | Simulateur</title>
+<meta name="description" content="Utilisez ce calculateur de surface pour calculer l’aire d’un rectangle, carré, triangle, cercle ou trapèze. Saisissez les dimensions pour obtenir le résultat en m².">
+<link rel="canonical" href="https://simulateur.site/outil/surface/">
+<link rel="stylesheet" href="/styles.css">
+<script src="/simulateurs.js" defer></script>
+<script src="/enter-calcul.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur de surface","url":"https://simulateur.site/outil/surface/","description":"Utilisez ce calculateur de surface pour calculer l’aire d’un rectangle, carré, triangle, cercle ou trapèze. Saisissez les dimensions pour obtenir le résultat en m².","inLanguage":"fr-FR","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"price":"0","priceCurrency":"EUR"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Mesures","item":"https://simulateur.site/mesures/"},{"@type":"ListItem","position":3,"name":"Calculateur de surface","item":"https://simulateur.site/outil/surface/"}]}</script>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Simulateur">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Calculateur de surface : rectangle, cercle, triangle | Simulateur">
+<meta property="og:description" content="Utilisez ce calculateur de surface pour calculer l’aire d’un rectangle, carré, triangle, cercle ou trapèze. Saisissez les dimensions pour obtenir le résultat en m².">
+<meta property="og:url" content="https://simulateur.site/outil/surface/">
+<meta name="twitter:card" content="summary">
+</head>
+<body>
+<header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header>
+<main>
+<div class="wrap">
+<div class="breadcrumb"><a href="/">Accueil</a> · <a href="/mesures/">Mesures</a> · Calculateur de surface</div>
+<section class="tool">
+<div class="eyebrow">GÉOMÉTRIE</div>
+<h1>Calculateur de surface : calculer une aire</h1>
+<p class="tool-intro">Calculez l’aire d’une figure plane à partir de ses dimensions. Choisissez la forme, renseignez les mesures en mètres et obtenez une surface en mètres carrés (m²).</p>
+<div id="fields">
+<div class="field"><label for="shape">Figure à calculer</label><select id="shape" name="shape"><option value="rectangle">Rectangle</option><option value="square">Carré</option><option value="triangle">Triangle (base et hauteur)</option><option value="circle">Cercle (rayon)</option><option value="trapezoid">Trapèze (deux bases et hauteur)</option></select></div>
+<div class="field surface-field" data-shapes="rectangle"><label for="a">Longueur (m)</label><input id="a" name="a" type="number" min="0" step="any" value="5" inputmode="decimal"></div>
+<div class="field surface-field" data-shapes="rectangle"><label for="b">Largeur (m)</label><input id="b" name="b" type="number" min="0" step="any" value="3" inputmode="decimal"></div>
+<div class="field surface-field" data-shapes="square" hidden><label for="side">Côté (m)</label><input id="side" name="side" type="number" min="0" step="any" value="4" inputmode="decimal"></div>
+<div class="field surface-field" data-shapes="triangle" hidden><label for="base">Base (m)</label><input id="base" name="base" type="number" min="0" step="any" value="4" inputmode="decimal"></div>
+<div class="field surface-field" data-shapes="triangle" hidden><label for="height">Hauteur perpendiculaire à la base (m)</label><input id="height" name="height" type="number" min="0" step="any" value="3" inputmode="decimal"></div>
+<div class="field surface-field" data-shapes="circle" hidden><label for="radius">Rayon (m)</label><input id="radius" name="radius" type="number" min="0" step="any" value="2" inputmode="decimal"></div>
+<div class="field surface-field" data-shapes="trapezoid" hidden><label for="base1">Petite base (m)</label><input id="base1" name="base1" type="number" min="0" step="any" value="3" inputmode="decimal"></div>
+<div class="field surface-field" data-shapes="trapezoid" hidden><label for="base2">Grande base (m)</label><input id="base2" name="base2" type="number" min="0" step="any" value="5" inputmode="decimal"></div>
+<div class="field surface-field" data-shapes="trapezoid" hidden><label for="trapHeight">Hauteur perpendiculaire aux bases (m)</label><input id="trapHeight" name="trapHeight" type="number" min="0" step="any" value="2" inputmode="decimal"></div>
+</div>
+<button class="button-main" type="button" onclick="Simulateurs.calc()">Calculer la surface</button>
+<div class="result" id="result" aria-live="polite">Pour un rectangle de 5 m sur 3 m, la surface est de 15 m².</div>
+<div class="formula"><strong>Méthode de calcul</strong><p>La formule dépend de la figure choisie. Les dimensions sont saisies en mètres ; le résultat est exprimé en mètres carrés (m²).</p><p>Repère mathématique : <a href="https://www.mathsisfun.com/area.html" target="_blank" rel="noopener noreferrer">formules d’aire des figures courantes</a>.</p></div>
+</section>
+</div>
+<section class="content-section">
+<div class="wrap">
+<h2>Quelle formule utiliser pour calculer une surface ?</h2>
+<p>Pour un rectangle, multipliez la longueur par la largeur. Pour un carré, multipliez le côté par lui-même. Pour un triangle, multipliez la base par la hauteur perpendiculaire puis divisez par deux. Pour un cercle, multipliez π par le carré du rayon. Pour un trapèze, additionnez les deux bases, multipliez par la hauteur puis divisez par deux.</p>
+<p>Ce calculateur utilise des dimensions exprimées en mètres. Si vos mesures sont en centimètres, convertissez-les en mètres avant la saisie (par exemple, 250 cm = 2,5 m). La surface est une grandeur au carré : une mesure en mètres donne un résultat en m².</p>
+<h2>Exemples de calcul de surface</h2>
+<p>Un rectangle de 5 m de longueur et 3 m de largeur a une aire de 5 × 3 = 15 m². Un carré de 4 m de côté couvre 4 × 4 = 16 m². Un triangle de base 4 m et de hauteur 3 m a une aire de (4 × 3) ÷ 2 = 6 m².</p>
+<p>Pour une pièce, une terrasse ou un terrain de forme irrégulière, ce calculateur ne remplace pas un relevé détaillé : découpez éventuellement la surface en figures simples, calculez chaque aire séparément puis additionnez les résultats.</p>
+</div>
+</section>
+<section class="calculator-faq" aria-labelledby="faq-title"><div class="wrap">
+<h2 id="faq-title">FAQ</h2>
+<details><summary>Comment calculer la surface d’une pièce rectangulaire ?</summary><div class="calculator-faq-answer"><p>Mesurez sa longueur et sa largeur dans la même unité, puis multipliez-les. Avec 5 m sur 3 m, l’aire est de 15 m².</p></div></details>
+<details><summary>Quelle est la différence entre surface et périmètre ?</summary><div class="calculator-faq-answer"><p>La surface mesure l’espace à l’intérieur d’une figure et s’exprime en unités carrées, comme les m². Le périmètre mesure la longueur du contour et s’exprime en unités simples, comme les mètres.</p></div></details>
+<details><summary>Comment convertir des centimètres en mètres avant le calcul ?</summary><div class="calculator-faq-answer"><p>Divisez la mesure en centimètres par 100. Par exemple, 180 cm correspondent à 1,8 m. Utilisez la même unité pour toutes les dimensions d’un calcul.</p></div></details>
+<details><summary>Le calculateur peut-il calculer l’aire d’un terrain irrégulier ?</summary><div class="calculator-faq-answer"><p>Pas directement. Il calcule cinq formes simples. Pour une forme irrégulière, vous pouvez la décomposer en figures simples, calculer chaque surface puis additionner les résultats, à condition de disposer de mesures fiables.</p></div></details>
+</div></section>
+<section class="related-tools"><div class="wrap"><div class="eyebrow">À VOIR AUSSI</div><h2>Outils associés</h2><div class="related-links"><a class="related-link" href="/outil/perimetre/"><strong>Calculateur de périmètre</strong><span>Calculer la longueur du contour d’une figure.</span></a><a class="related-link" href="/outil/calculatrice/"><strong>Calculatrice en ligne</strong><span>Effectuer des opérations et des calculs courants.</span></a><a class="related-link" href="/outil/proportion/"><strong>Calculateur de proportion</strong><span>Résoudre une proportion et appliquer une règle de trois.</span></a></div></div></section>
+</main>
+<footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer>
+<script>
+(function () {
+  const shape = document.getElementById("shape");
+  const fields = Array.from(document.querySelectorAll(".surface-field"));
+  function updateFields() {
+    for (const field of fields) {
+      const visible = field.dataset.shapes.split(" ").includes(shape.value);
+      field.hidden = !visible;
+      const input = field.querySelector("input");
+      if (input) input.disabled = !visible;
+    }
+  }
+  shape.addEventListener("change", updateFields);
+  updateFields();
+  window.TOOL = {
+    calc: function () {
+      const get = (id) => Number(this.$(id).value);
+      const selected = this.$("shape").value;
+      let area, label, values;
+      if (selected === "rectangle") {
+        values = [get("a"), get("b")]; label = "rectangle";
+        area = values[0] * values[1];
+      } else if (selected === "square") {
+        values = [get("side")]; label = "carré";
+        area = values[0] * values[0];
+      } else if (selected === "triangle") {
+        values = [get("base"), get("height")]; label = "triangle";
+        area = values[0] * values[1] / 2;
+      } else if (selected === "circle") {
+        values = [get("radius")]; label = "cercle";
+        area = Math.PI * values[0] * values[0];
+      } else if (selected === "trapezoid") {
+        values = [get("base1"), get("base2"), get("trapHeight")]; label = "trapèze";
+        area = (values[0] + values[1]) * values[2] / 2;
+      } else {
+        return "Choisissez une figure valide.";
+      }
+      if (values.some((value) => !Number.isFinite(value) || value <= 0) || !Number.isFinite(area) || area <= 0) {
+        return "Saisissez des dimensions strictement positives et valides.";
+      }
+      return "<strong>Surface : " + area.toLocaleString("fr-FR", { maximumFractionDigits: 4 }) + " m²</strong><p>Aire calculée pour un " + label + ".</p>";
+    }
+  };
+})();
+</script>
+</body>
+</html>
