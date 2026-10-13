@@ -12,9 +12,10 @@ async function waitReady(){
   }
   throw new Error("Serveur HTTP non prêt après 10 s");
 }
+let browser;
 try{
   await waitReady();
-  const browser=await chromium.launch({headless:true});
+  browser=await chromium.launch({headless:true});
   for(const viewport of [{width:390,height:844},{width:1280,height:900}]){
     const page=await browser.newPage({viewport});
     const errors=[];
@@ -39,8 +40,8 @@ try{
     assert.deepEqual(errors,[],"aucune erreur JavaScript à "+viewport.width+" px");
     await page.close();
   }
-  await browser.close();
   console.log("jours-ouvres browser : mobile, desktop, formatage des dates, résultat, Entrée et validation vérifiés.");
 }finally{
+  await browser?.close();
   server.kill("SIGTERM");
 }
