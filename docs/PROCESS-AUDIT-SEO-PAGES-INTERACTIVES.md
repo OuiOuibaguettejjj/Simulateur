@@ -34,7 +34,7 @@ Examiner séparément le title, le H1 et la meta description. Selon l’intentio
 - « comparateur », « comparer » ;
 - les mots-clés métier et les formulations pertinentes pour les internautes.
 
-Ne pas imposer artificiellement tous les termes dans chaque balise. Une conversion d’unités, un simulateur de situation et un comparateur peuvent répondre à des intentions différentes. Préserver les mots-clés métier utiles ; éviter le bourrage, les formulations génériques et les répétitions qui nuisent à la lisibilité.
+Ne pas imposer artificiellement tous les termes dans chaque balise. Une conversion d’unités, un simulateur de situation et un comparateur peuvent répondre à des intentions différentes. Préserver les mots-clés métier utiles ; éviter le bourrage, les formulations génériques et les répétitions qui nuisent à la lisibilité. Pour les pages interactives, le contrôle de meta description accepte « calculer » ou « calculez » ; choisir la forme la plus naturelle pour l’intention de recherche, sans imposer les deux.
 
 ### Repères de longueur — lignes directrices, jamais des seuils bloquants
 
