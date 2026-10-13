@@ -41,8 +41,8 @@ Chaque calculateur appartient à une classe, qui détermine ce qui est permis.
 |---|---|---|---|
 | **A. Pur calcul** | Aucune valeur réglementaire ni valeur datée : conversions, mathématiques, pourcentages, statistiques | `pourcentage`, `moyenne`, `vitesse`, `conversion/*` | Autorisé |
 | **B. Réglementaire migré** | Rattaché à un jeu de `data/parametres.json` (champ `usedBy`) | `smic`, `rsa`, `frais-kilometriques` | Autorisé, avec les exigences du § 0.4 |
-| **C. Réglementaire verrouillé** | Slug présent dans `anneeAMigrer.slugs` de `data/parametres.json` | liste d'`anneeAMigrer` | **Interdit** : migrer d'abord le barème (§ 0.5) |
-| **D. À qualifier** | Manipule peut-être des taux, plafonds, durées légales ou barèmes sans être migré ni listé | à auditer au cas par cas | Interdit tant que le classement n'est pas tranché (§ 0.6) |
+| **C. Réglementaire non migré** | Slug présent dans `anneeAMigrer.slugs` de `data/parametres.json` | liste d'`anneeAMigrer` | SEO, contenu prudent et UX autorisés ; calcul et barème réglementaire inchangés avant migration (§ 0.5) |
+| **D. À qualifier** | Manipule peut-être des taux, plafonds, durées légales ou barèmes sans être migré ni listé | à auditer au cas par cas | SEO et améliorations de forme prudentes autorisés ; toute modification métier attend la qualification (§ 0.6) |
 
 Le classement se vérifie dans les fichiers, pas de mémoire :
 
@@ -61,7 +61,7 @@ Règles du cliquet, à respecter strictement :
 - la baseline ne **grossit jamais** : aucun nouvel écart n'est toléré, aucune entrée n'est ajoutée à la main ;
 - une entrée corrigée est **retirée** avec l'option `--update-baseline` de `scripts/check-pages.mjs`, jamais à la main ;
 - une entrée corrigée mais non retirée fait échouer la CI (« entrée périmée ») ;
-- les entrées `description`, `content-h2` et `formula` d'un outil verrouillé (classe C) ne peuvent pas être retirées tant que son slug figure dans `anneeAMigrer` : le cliquet les bloque volontairement. Les autres règles ne sont pas concernées par ce verrou, mais la classe C reste interdite d'enrichissement éditorial (§ 0.1) ;
+- `anneeAMigrer` ne bloque pas la correction des métadonnées SEO, du contenu éditorial, de la FAQ ou des sources. Le cliquet reste identique pour toutes les pages : aucun nouvel écart n'est autorisé et les entrées corrigées sont retirées par `--update-baseline` ;
 - seules les entrées **de l'outil traité** sont modifiées dans la baseline, dans la même PR que l'enrichissement ;
 - l'option `--seed-baseline` du script **ajoute** des entrées éditoriales : elle n'est jamais utilisée dans le cadre de ce processus.
 
@@ -102,9 +102,23 @@ Vérifier en particulier :
 - **Aucune valeur n'est inventée ni déduite d'une autre source** lorsque la source officielle n'est pas disponible. Dans ce cas, l'information est omise ou signalée comme non vérifiée, et la limite est écrite dans la page.
 - **L'année dans le titre ou le H1** n'est admise que si elle est cohérente avec le jeu de paramètres de l'outil ou avec `anneeAMigrer` : `scripts/check-params.mjs` contrôle cette cohérence.
 
-### 0.5 Outil verrouillé (classe C) : migration intégrée à l'enrichissement
+### 0.5 Outil non migré (classe C) : périmètre autorisé avant migration
 
-Un outil de `anneeAMigrer` ne peut pas être enrichi tant que sa migration n'est pas réalisée. La migration est toutefois **intégrée à la PR complète du calculateur** : elle doit être effectuée et vérifiée avant les changements qui en dépendent, mais elle ne nécessite pas de merge intermédiaire :
+Un outil de `anneeAMigrer` **peut être amélioré avant la migration**, à condition de ne pas modifier le calcul ni les valeurs réglementaires et de ne pas affirmer de règle légale non vérifiée. `anneeAMigrer` signale une dette technique de migration, pas une interdiction générale de travailler sur la page.
+
+Autorisés avant migration :
+- title, H1, meta description, Open Graph et autres métadonnées SEO ;
+- introduction, explications prudentes, structure éditoriale, FAQ, sources et liens internes ;
+- améliorations UX, accessibilité, responsive et présentation ;
+- corrections de langue ou de clarté qui ne changent pas le sens réglementaire.
+
+Garde-fous :
+- ne pas changer la formule, les constantes, les barèmes, les hypothèses de calcul ni le résultat produit ;
+- ne pas ajouter ou actualiser un âge, taux, plafond, durée, seuil ou droit légal sans source officielle vérifiée et sans traiter la dépendance réglementaire ;
+- lorsque l'enrichissement nécessite de modifier le calcul ou ses paramètres réglementaires, intégrer la migration dans **la même PR complète**, selon les étapes ci-dessous ;
+- conserver les limites de validité connues et expliciter les incertitudes plutôt que de présenter une règle non vérifiée comme certaine.
+
+La migration, lorsqu'elle est nécessaire, suit les étapes suivantes :
 
 1. créer ou compléter le jeu de paramètres correspondant dans `data/parametres.json`, avec source, validité et vérification ;
 2. régénérer et contrôler `public/parametres.js` (`scripts/generate-params.mjs`) ;
@@ -112,13 +126,11 @@ Un outil de `anneeAMigrer` ne peut pas être enrichi tant que sa migration n'est
 4. ajouter le cas de référence sourcé (§ 0.4) ;
 5. retirer le slug de `anneeAMigrer` **uniquement** lorsque la migration est réelle ;
 6. renseigner `docs/ECHEANCES.md` ;
-7. ne modifier aucun barème au passage : une migration est mécanique ; une revalorisation reste un changement distinct.
-
-L'enrichissement peut se poursuivre dans la même PR une fois la migration vérifiée.
+7. ne modifier aucun barème au passage sans source officielle et tests adaptés : une migration mécanique et une revalorisation réglementaire sont deux changements distincts.
 
 ### 0.6 Outil à qualifier (classe D)
 
-Le classement d'un outil douteux est une décision, pas un détail. Il se traite dans une PR ou une note dédiée, avant le chantier éditorial, et se documente dans `docs/DECISIONS.md`. Deux issues possibles :
+Le classement d'un outil douteux est nécessaire avant toute modification de sa logique métier ou de ses affirmations réglementaires ; il ne doit pas empêcher une correction SEO ou une amélioration de forme factuelle et prudente. Toute intervention qui dépend d'une règle légale non vérifiée attend la qualification. Le classement se documente dans `docs/DECISIONS.md`. Deux issues possibles :
 
 - l'outil ne contient aucune valeur réglementaire : il passe en classe A ;
 - l'outil en contient : il doit être migré vers un jeu de paramètres (classe B), ou inscrit à `anneeAMigrer` si les contrôles actuels le permettent. Le mécanisme exact se décide au cas par cas, car `scripts/check-params.mjs` impose des règles sur la présence d'une année dans le titre ou le H1 des outils listés.
@@ -236,8 +248,8 @@ L'ordre de traitement suit cette priorité :
 
 1. les outils réglementaires **déjà migrés et vérifiés** (classe B), où le terrain est sûr et les paramètres sourcés ;
 2. les outils de **pur calcul** (classe A), sans risque de contenu réglementaire inexact ;
-3. les outils verrouillés (classe C), avec migration intégrée à leur enrichissement ;
-4. les outils à qualifier (classe D), **après** leur classement.
+3. les outils non migrés (classe C), pour les améliorations éditoriales et UX sans changement du calcul ; la migration est intégrée à la même PR dès qu'un changement métier l'exige ;
+4. les outils à qualifier (classe D), pour les changements de calcul ou les affirmations réglementaires ; les améliorations SEO prudentes restent possibles.
 
 À l'intérieur d'une classe, privilégier les outils dont la demande est la plus forte (données de recherche si disponibles, sinon pertinence de l'intention) et ceux qui ont le plus d'entrées de baseline à résorber.
 
@@ -493,8 +505,8 @@ Exécuter sur la branche, avant ouverture de la PR, `npm test -- --pr` : c'est e
 
 Commandes du cliquet :
 
-- `node scripts/check-pages.mjs --ratchet` vérifie l'état courant par rapport à la baseline. Il échoue en cas de nouvel écart, d'entrée périmée ou d'entrée bloquée par `anneeAMigrer`. À lancer avant d'ouvrir la PR, et après chaque correction ;
-- `node scripts/check-pages.mjs --update-baseline` retire de la baseline les entrées corrigées. Il refuse de s'exécuter si un nouvel écart existe ou si l'outil est verrouillé par `anneeAMigrer` ; la baseline ne peut que perdre des entrées.
+- `node scripts/check-pages.mjs --ratchet` vérifie l'état courant par rapport à la baseline. Il échoue en cas de nouvel écart ou d'entrée périmée non traitée selon le contrat de la PR. À lancer avant d'ouvrir la PR, et après chaque correction ;
+- `node scripts/check-pages.mjs --update-baseline` retire de la baseline les entrées corrigées. Il refuse de s'exécuter si un nouvel écart existe ; la baseline ne peut que perdre des entrées. La présence d'un slug dans `anneeAMigrer` ne bloque pas les corrections éditoriales.
 
 Ordre d'usage pour un chantier : corriger la page, lancer `--ratchet` (il signale les entrées périmées), lancer `--update-baseline`, relancer `--ratchet` (il doit être vert), puis committer la baseline avec la page.
 
@@ -592,7 +604,7 @@ Un calculateur n'est « terminé » que lorsque **tous** les points ci-dessous s
 - [ ] les valeurs vivent dans `data/parametres.json`, avec source officielle, validité et `verifiedOn` ;
 - [ ] `docs/ECHEANCES.md` mentionne l'échéance ;
 - [ ] une note de sources existe pour l'outil ;
-- [ ] le slug n'est plus dans `anneeAMigrer`, ou n'y a jamais été.
+- [ ] le calcul et le barème ont été migrés si la PR les a modifiés ; la présence dans `anneeAMigrer` n'interdit pas un enrichissement SEO/éditorial sans changement réglementaire.
 
 **Socle et baseline**
 - [ ] le socle structurel est conforme (§ 1) ;
@@ -692,7 +704,7 @@ Ce processus privilégie la qualité, l'exactitude, l'originalité et la satisfa
 - [ ] Aucune entrée ajoutée à `scripts/check-pages.baseline.json`
 - [ ] Entrées de baseline de l'outil retirées avec `--update-baseline`
 - [ ] Aucune exception ajoutée à `tests/generic-calcs-exceptions.json`
-- [ ] Slug absent de `anneeAMigrer` (migration réalisée dans la même PR si nécessaire)
+- [ ] migration réalisée dans la même PR si le calcul ou le barème réglementaire a été modifié ; sinon, le slug peut rester dans `anneeAMigrer`
 
 ## Fiabilité
 - [ ] Cas normaux, limites, invalides et virgule décimale vérifiés
