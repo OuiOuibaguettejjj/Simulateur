@@ -9,6 +9,12 @@ const ROOT=process.cwd();
 export const STRUCTURAL_RULES=["html-base","markup-balance","title","canonical","breadcrumb","h1","tool-block","result","related-block","jsonld","related-meta","citation-marker"];
 export const EDITORIAL_RULES=["description","content-h2","formula","faq","meta-unique"];
 export const MIGRATION_LOCK_RULES=["description","content-h2","formula","faq"];
+// Dettes historiques devenues obsolètes après suppression du plafond de 160 caractères.
+// Exceptions limitées aux deux entrées qui étaient uniquement dues à cette règle retirée.
+const MIGRATION_LOCK_EXEMPTIONS=new Set([
+ "public/outil/indemnite-precarite/index.html|description",
+ "public/outil/succession/index.html|description"
+]);
 export const TRACKED_RULES=[...STRUCTURAL_RULES,...EDITORIAL_RULES];
 const STRUCT=new Set(["div","section","main","header","footer","nav","article","aside","details","ul","ol","table","form"]);
 const OPTIONAL_END=new Set(["p","li","dt","dd","tr","td","th","thead","tbody","tfoot","option"]);
@@ -110,7 +116,7 @@ export function nextBaseline(current,baseline,migrationSlugs=[]){
  const debt=new Set(migrationSlugs);
  const blocked=stale.filter(x=>{
    const m=/^public\/outil\/([^/]+)\/index\.html$/.exec(x.path);
-   return m&&debt.has(m[1])&&MIGRATION_LOCK_RULES.includes(x.rule);
+   return m&&debt.has(m[1])&&MIGRATION_LOCK_RULES.includes(x.rule)&&!MIGRATION_LOCK_EXEMPTIONS.has(x.path+"|"+x.rule);
  });
  if(blocked.length)return{ok:false,added,next:baseline,removed:[],blocked};
  if(added.length)return{ok:false,added,next:baseline,removed:[],blocked:[]};
