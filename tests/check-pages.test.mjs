@@ -5,7 +5,7 @@ import {execFileSync} from "node:child_process";
 import path from "node:path";
 import { buildRatchetMessages,checkPage,checkAll,loadToolsMeta,parseHtml,summarize,STRUCTURAL_RULES,EDITORIAL_RULES,TRACKED_RULES,toolDirsWithoutIndex,trackedPairs,parseBaseline,compareToBaseline,nextBaseline,seedBaseline,interactivePagesFromChangedFiles,changedMandatoryFailures} from "../scripts/check-pages.mjs";
 
-const DESC="Utilisez cet outil en ligne pour effectuer rapidement votre calcul et obtenir un résultat clair, pratique et adapté à votre situation.";
+const DESC="Pour calculer rapidement, utilisez cet outil en ligne et obtenez un résultat clair, pratique et adapté à votre situation.";
 const CATS={categorie:{label:"Catégorie",path:"/categorie/"}};
 const META={slug:{type:"calculateur",category:"categorie",relatedTools:["slug-1","slug-2"]},"slug-1":{},"slug-2":{}};
 const IDX=new Set(["outil/slug","outil/slug-1","outil/slug-2"]);
@@ -157,7 +157,9 @@ const faqWithTwoEditorialH2=oneEditorialH2.replace(
 );
 assert.equal(has(faqWithTwoEditorialH2,"content-h2"),false,"deux H2 éditoriaux hors FAQ restent valides");
 
-assert(has(fixture().replace("<title>Mot-clé | Simulateur</title>","<title>Mot-clé</title>"),"title"));
+assert.equal(only(fixture().replace("<title>Mot-clé | Simulateur</title>","<title>Mot-clé pertinent</title>"),"title").length,0,"un titre pertinent sans suffixe imposé est valide");
+assert(only(fixture().replace("<title>Mot-clé | Simulateur</title>","<title></title>"),"title").length>0,"un titre vide est refusé");
+assert(only(fixture(DESC.replace("Pour calculer","Pour estimer")),"seo-calculer").length>0,"la meta description doit contenir le mot exact calculer");
 for(const [n,bad] of [[119,true],[120,false],[160,false],[161,true]])assert.equal(has(fixture("x".repeat(n)),"description"),bad,"description "+n);
 for(const a of ["'","&#39;","&apos;","’"])assert.equal(has(fixture("x".repeat(118)+a+"."),"description"),false,"apostrophe "+a);
 assert(has(fixture().replace("<section class=\"tool\">","<div class=\"tool\">"),"tool-block"));
@@ -354,6 +356,8 @@ assert(mandatoryFailures.some(x=>x.rule==="faq"),"contrôle complet : une FAQ ab
 assert.deepEqual(changedMandatoryFailures(mandatoryFailures,["public/outil/slug/index.html"]),[],"contrat ciblé titres : la dette FAQ historique ne bloque pas une modification limitée au titre");
 const titleFailure={path:"public/outil/slug/index.html",rule:"title",message:"title invalide"};
 assert.deepEqual(changedMandatoryFailures([...mandatoryFailures,titleFailure],["public/outil/slug/index.html"]),[titleFailure],"contrat ciblé titres : un titre invalide sur une page modifiée reste bloquant");
+const seoFailure={path:"public/outil/slug/index.html",rule:"seo-calculer",message:"mot exact calculer absent"};
+assert.deepEqual(changedMandatoryFailures([...mandatoryFailures,seoFailure],["public/outil/slug/index.html"]),[seoFailure],"contrat SEO : calculer absent de la meta description bloque une page modifiée");
 assert.deepEqual(changedMandatoryFailures([...mandatoryFailures,titleFailure],["public/outil/autre/index.html"]),[],"contrat ciblé titres : une page non modifiée n'est pas contrôlée");
 assert.deepEqual(changedMandatoryFailures(errs(fixture()),["public/outil/slug/index.html"]),[],"contrat ciblé titres : une page modifiée conforme est verte");
 assert.deepEqual(
