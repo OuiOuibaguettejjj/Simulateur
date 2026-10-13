@@ -51,3 +51,5 @@ await import("./remise.test.mjs");
 await import("./temps-calcul.test.mjs");
 await import("./promotions.test.mjs");
 await import("./cash-flow-immobilier.test.mjs");
+
+await import("./perimetre.test.mjs");
