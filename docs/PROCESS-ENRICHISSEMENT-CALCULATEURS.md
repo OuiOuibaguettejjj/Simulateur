@@ -72,7 +72,7 @@ Cette table est tirée du code de `scripts/check-pages.mjs`. En cas de doute ou 
 | Règle | Exigence vérifiée par `check-pages` |
 |---|---|
 | `title` | un seul `<title>`, de la forme « Mot-clé \| Simulateur », avec un mot-clé non vide |
-| `description` | une seule meta description, de 120 à 160 caractères. Elle doit aussi être identique à `WebApplication.description` du JSON-LD (règle `jsonld`) |
+| `description` | une seule meta description de 120 à 160 caractères. Le mot exact « calculer » est obligatoire. Elle doit aussi être identique à `WebApplication.description` du JSON-LD (règle `jsonld`) |
 | `content-h2` | au moins 2 titres h2 éditoriaux, situés dans des `.content-section` et hors `.related-tools` |
 | `formula` | un bloc `.formula` ou `.source-links` contenant un lien externe http(s) (hors simulateur.site) |
 | `faq` | un bloc `.calculator-faq` unique en accordéon natif `<details>/<summary>`, avec au moins une question et une réponse non vide |
