@@ -272,26 +272,6 @@
     "rule": "formula"
   },
   {
-    "path": "public/outil/perimetre/index.html",
-    "rule": "content-h2"
-  },
-  {
-    "path": "public/outil/perimetre/index.html",
-    "rule": "description"
-  },
-  {
-    "path": "public/outil/perimetre/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/perimetre/index.html",
-    "rule": "formula"
-  },
-  {
-    "path": "public/outil/perimetre/index.html",
-    "rule": "result"
-  },
-  {
     "path": "public/outil/plus-value-immobiliere/index.html",
     "rule": "description"
   },
