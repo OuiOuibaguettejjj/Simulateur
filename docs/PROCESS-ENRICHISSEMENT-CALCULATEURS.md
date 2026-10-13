@@ -72,7 +72,7 @@ Cette table est tirée du code de `scripts/check-pages.mjs`. En cas de doute ou 
 | Règle | Exigence vérifiée par `check-pages` |
 |---|---|
 | `title` | un seul `<title>` non vide ; aucun suffixe ou format fixe n’est imposé. Les consignes éditoriales sur le terme à privilégier sont détaillées dans « Consignes SEO éditoriales pour les pages interactives » (§ 1) |
-| `description` | une seule meta description de 120 à 160 caractères. Le mot exact « calculer » est obligatoire. Elle doit aussi être identique à `WebApplication.description` du JSON-LD (règle `jsonld`) |
+| `description` | une seule meta description d'au moins 120 caractères, sans plafond maximal fixe. Le mot exact « calculer » est obligatoire. Elle doit aussi être identique à `WebApplication.description` du JSON-LD (règle `jsonld`) |
 | `content-h2` | au moins 2 titres h2 éditoriaux, situés dans des `.content-section` et hors `.related-tools` |
 | `formula` | un bloc `.formula` ou `.source-links` contenant un lien externe http(s) (hors simulateur.site) |
 | `faq` | un bloc `.calculator-faq` unique en accordéon natif `<details>/<summary>`, avec au moins une question et une réponse non vide |
@@ -183,7 +183,7 @@ Ces consignes s'appliquent à chaque enrichissement de page interactive (`/outil
 
 ### Meta description
 
-- Respecter les contraintes techniques actuelles : une seule meta description de **120 à 160 caractères** et présence du terme exact **« calculer »**. La description doit rester identique à `WebApplication.description` dans le JSON-LD lorsque cette règle s'applique.
+- Respecter les contraintes techniques actuelles : une seule meta description d'**au moins 120 caractères**, sans plafond maximal fixe, et présence du terme exact **« calculer »**. La description doit rester identique à `WebApplication.description` dans le JSON-LD lorsque cette règle s'applique.
 - Le vocabulaire cible comprend **« calculateur », « calculer », « calcul », « simulateur » et « simulation »**. « Calculer » est obligatoire ; intégrer les autres termes lorsqu'ils décrivent utilement la page et peuvent être employés naturellement.
 - Ne pas chercher à faire entrer artificiellement les cinq termes dans chaque description. La formulation doit répondre à l'intention de recherche, conserver le mot-clé métier et expliquer concrètement ce que l'utilisateur peut faire.
 - Ne pas répéter les mêmes mots-clés ni remplacer une expression métier précise par une formulation générique uniquement pour satisfaire cette consigne.
