@@ -2019,5 +2019,83 @@
     "sortie": "\\d+\\s+jours? ouvrés?",
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2405",
     "note": "Valeur attendue calculée indépendamment : du 13 au 17 juillet 2026, cinq jours du lundi au vendredi moins le 14 juillet, fête légale nationale confirmée par le calendrier officiel Service-Public."
+  },
+  {
+    "outil": "calculatrice",
+    "entrees": {
+      "a": "10",
+      "b": "5",
+      "op": "+"
+    },
+    "attendu": 15,
+    "tolerance": 0,
+    "sortie": "=\\s*15",
+    "source": "https://fr.khanacademy.org/math/arithmetic",
+    "note": "Vérification indépendante : 10 + 5 = 15."
+  },
+  {
+    "outil": "calculatrice",
+    "entrees": {
+      "a": "10",
+      "b": "5",
+      "op": "-"
+    },
+    "attendu": 5,
+    "tolerance": 0,
+    "sortie": "=\\s*5",
+    "source": "https://fr.khanacademy.org/math/arithmetic",
+    "note": "Vérification indépendante : 10 − 5 = 5."
+  },
+  {
+    "outil": "calculatrice",
+    "entrees": {
+      "a": "10",
+      "b": "5",
+      "op": "×"
+    },
+    "attendu": 50,
+    "tolerance": 0,
+    "sortie": "=\\s*50",
+    "source": "https://fr.khanacademy.org/math/arithmetic",
+    "note": "Vérification indépendante : 10 × 5 = 50."
+  },
+  {
+    "outil": "calculatrice",
+    "entrees": {
+      "a": "10",
+      "b": "5",
+      "op": "÷"
+    },
+    "attendu": 2,
+    "tolerance": 0,
+    "sortie": "=\\s*2",
+    "source": "https://fr.khanacademy.org/math/arithmetic",
+    "note": "Vérification indépendante : 10 ÷ 5 = 2."
+  },
+  {
+    "outil": "calculatrice",
+    "entrees": {
+      "a": "10",
+      "b": "5",
+      "op": "^"
+    },
+    "attendu": 100000,
+    "tolerance": 0,
+    "sortie": "=\\s*100\\s*000",
+    "source": "https://fr.khanacademy.org/math/arithmetic",
+    "note": "Vérification indépendante : 10 puissance 5 = 100 000."
+  },
+  {
+    "outil": "calculatrice",
+    "entrees": {
+      "a": "10",
+      "b": "5",
+      "op": "%"
+    },
+    "attendu": 0,
+    "tolerance": 0,
+    "sortie": "=\\s*0",
+    "source": "https://fr.khanacademy.org/math/arithmetic",
+    "note": "Vérification indépendante : le reste de 10 ÷ 5 est 0."
   }
 ]
