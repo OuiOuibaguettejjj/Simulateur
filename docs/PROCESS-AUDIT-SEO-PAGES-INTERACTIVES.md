@@ -36,13 +36,22 @@ Examiner séparément le title, le H1 et la meta description. Selon l’intentio
 
 Ne pas imposer artificiellement tous les termes dans chaque balise. Une conversion d’unités, un simulateur de situation et un comparateur peuvent répondre à des intentions différentes. Préserver les mots-clés métier utiles ; éviter le bourrage, les formulations génériques et les répétitions qui nuisent à la lisibilité.
 
+### Repères de longueur — lignes directrices, jamais des seuils bloquants
+
+- **Title : viser environ 60 caractères**, lorsque cela permet de conserver une formulation claire et précise.
+- **Meta description : viser environ 160 caractères**, lorsque cela permet de décrire utilement la page et son bénéfice.
+- Ces repères sont des objectifs éditoriaux indicatifs, pas des limites imposées par Google : l’affichage peut être tronqué selon l’appareil et la largeur disponible, et Google peut générer un titre ou un extrait différent.
+- Ne pas dégrader la pertinence, la précision, la lisibilité ou le mot-clé métier pour respecter le nombre de caractères. Un dépassement justifié n’est pas un défaut en soi.
+- **Ne jamais faire échouer la CI ni demander une modification uniquement parce que le title dépasse 60 caractères ou la meta description dépasse 160 caractères.** Les contrôles automatiques se limitent aux exigences techniques réellement définies dans le dépôt ; les repères de longueur servent à guider la rédaction.
+
 Pour chaque balise, préciser quels termes sont utiles, déjà présents, absents mais potentiellement pertinents, ou artificiels dans ce contexte. Toute recommandation doit être liée à l’intention de recherche et au sujet précis de la page.
 
 ## 3. Vérifier la cohérence technique
 
 Contrôler, selon ce qui s’applique :
 - présence et unicité du title et de la meta description ;
-- longueur de description exigée par les contrôles actuels du projet ;
+- exigences techniques de longueur réellement imposées par les contrôles actuels du projet ;
+- à titre éditorial uniquement, proximité des repères indicatifs de 60 caractères pour le title et de 160 pour la meta description, sans traiter un dépassement comme une non-conformité ;
 - cohérence entre la meta description et WebApplication.description lorsque la règle du projet l’exige ;
 - canonical, directives d’indexation et métadonnées sociales ;
 - cohérence entre title, H1, description et contenu réel ;

@@ -186,6 +186,7 @@ Ces consignes s'appliquent à chaque enrichissement de page interactive (`/outil
 - S'il est réellement inadapté à l'intention ou à la nature de la page, employer le terme le plus juste : « simulateur », « convertisseur », « comparateur » ou une autre formulation métier pertinente. L'exception doit être justifiée par la page, pas par une préférence de rédaction.
 - Préserver le mot-clé métier principal et les termes qui expriment précisément ce que l'utilisateur cherche.
 - Aucun format rigide ni suffixe générique n'est imposé. Le title doit rester clair, spécifique à la page et naturel.
+- **Longueur indicative : viser environ 60 caractères** lorsque cela reste naturel et permet de préserver le sujet et les termes utiles. Ce repère n'est ni une limite Google ni une règle de CI ; un title plus long est acceptable s'il décrit mieux la page.
 
 ### H1
 
@@ -196,6 +197,7 @@ Ces consignes s'appliquent à chaque enrichissement de page interactive (`/outil
 ### Meta description
 
 - Respecter les contraintes techniques actuelles : une seule meta description d'**au moins 120 caractères**, sans plafond maximal fixe, et présence du terme exact **« calculer »**. La description doit rester identique à `WebApplication.description` dans le JSON-LD lorsque cette règle s'applique.
+- **Longueur indicative : viser environ 160 caractères** lorsque cela permet une description claire, spécifique et utile. Ce repère n'est ni une limite Google ni une règle de CI : ne pas raccourcir artificiellement une description pertinente uniquement pour atteindre 160 caractères.
 - Le vocabulaire cible comprend **« calculateur », « calculer », « calcul », « simulateur » et « simulation »**. « Calculer » est obligatoire ; intégrer les autres termes lorsqu'ils décrivent utilement la page et peuvent être employés naturellement.
 - Ne pas chercher à faire entrer artificiellement les cinq termes dans chaque description. La formulation doit répondre à l'intention de recherche, conserver le mot-clé métier et expliquer concrètement ce que l'utilisateur peut faire.
 - Ne pas répéter les mêmes mots-clés ni remplacer une expression métier précise par une formulation générique uniquement pour satisfaire cette consigne.
