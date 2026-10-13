@@ -28,6 +28,9 @@ const count = (start, end, holidays = true) => context.countBusinessDays(date(st
 assert.equal(count("13/07/2026", "17/07/2026", true), 4, "le 14 juillet est exclu");
 assert.equal(count("13/07/2026", "17/07/2026", false), 5, "option jours fériés désactivée");
 assert.equal(count("04/05/2026", "08/05/2026", true), 4, "le 8 mai est exclu");
+assert.equal(count("06/04/2026", "06/04/2026", true), 0, "le lundi de Pâques est exclu");
+assert.equal(count("14/05/2026", "14/05/2026", true), 0, "l’Ascension est exclue");
+assert.equal(count("25/05/2026", "25/05/2026", true), 0, "le lundi de Pentecôte est exclu");
 assert.equal(count("11/07/2026", "12/07/2026", true), 0, "période limitée au week-end");
 assert.equal(count("31/12/2026", "04/01/2027", false), 3, "période traversant deux années");
 assert.equal(count("07/04/2026", "07/04/2026", true), 1, "un jour ouvré ordinaire compte une fois");
