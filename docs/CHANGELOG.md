@@ -1,3 +1,9 @@
+## 2026-10-13 — SEO de la page âge de retraite : titre, description, FAQ
+- Titre raccourci à 57 caractères (`Calculateur âge de départ à la retraite 2026 | Simulateur`) : « âge de départ » est la formulation des pages concurrentes ; « âge légal » reste dans le H1, la description et le premier H2. `og:title` et `WebApplication.name` alignés.
+- Meta description ramenée à 155 caractères, avec « calculer » et la date d'application du barème avant la coupure de l'affichage ; `og:description` et `WebApplication.description` identiques.
+- Légende du tableau « selon l'année de naissance » ; nouvelle question de FAQ sur la suspension de la réforme, qui reprend uniquement ce que la page indique déjà ; date de mise à jour visible portée au 13 octobre 2026.
+- Aucun calcul, barème ni valeur réglementaire modifié.
+
 ## 2026-10-13 — Enrichissement SEO et éditorial sans migration préalable
 - `anneeAMigrer` reste un signal de dette technique sur le calcul/barème, mais ne bloque plus les métadonnées SEO, le contenu éditorial prudent, la FAQ, les sources ni l'UX.
 - Suppression du verrou spécifique dans le cliquet de baseline ; les nouveaux écarts restent bloquants et la baseline ne peut toujours que perdre des entrées.
