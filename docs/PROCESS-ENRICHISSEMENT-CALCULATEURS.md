@@ -558,7 +558,7 @@ Joindre les sorties à la PR.
 
 ## 12. Revue et Pull Request
 
-- Une branche par calculateur : `feat/enrichissement-<slug>`. Pour un outil verrouillé, la migration est réalisée dans cette même branche et cette même PR.
+- Une branche par calculateur : `feat/enrichissement-<slug>`. Pour un outil non migré, la migration est intégrée à cette même branche et cette même PR si le calcul ou le barème doit évoluer ; un enrichissement SEO/éditorial indépendant n'attend pas cette migration.
 - Un titre de PR explicite : `feat(<slug>): enrichir le calculateur <nom>`.
 - Des messages de commit en français, au format `type: description` ou `type(scope): description`.
 - Une PR par chantier de calculateur. Les changements réellement indépendants restent séparés (§ 0.7).
@@ -794,7 +794,7 @@ Ce processus privilégie la qualité, l'exactitude, l'originalité et la satisfa
 ```markdown
 # Suivi de l'enrichissement des calculateurs
 
-Statuts : À qualifier · Verrouillé (migration requise) · À faire · En cours · Terminé · Rouvert
+Statuts : À qualifier · Migration métier requise · À faire · En cours · Terminé · Rouvert
 
 | Slug | Classe | Statut | Date | PR | Dernière vérification des sources | Remarques |
 |---|---|---|---|---|---|---|
