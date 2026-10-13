@@ -18,7 +18,7 @@
     const selected=shape.value;
     let values,result,label;
     if(selected==="rectangle"){values=[number("a"),number("b")];if(values.some(v=>!Number.isFinite(v)||v<=0))return "Saisissez une longueur et une largeur strictement positives.";result=2*(values[0]+values[1]);label="Périmètre du rectangle";}
-    else if(selected==="triangle"){values=[number("side1"),number("side2"),number("side3")];if(values.some(v=>!Number.isFinite(v)||v<=0))return "Saisissez trois côtés strictement positifs.";if(values[0]+values[1]<=values[2]||values[0]+values[2]<=values[1]||values[1]+values[2]<=values[0])return "Ces longueurs ne forment pas un triangle valide.";result=values.reduce((sum,v)=>sum+v,0);label="Périmètre du triangle";}
+    else if(selected==="triangle"){values=[number("side1"),number("side2"),number("side3")];if(values.some(v=>!Number.isFinite(v)||v<=0))return "Saisissez trois côtés strictement positifs.";const sorted=[...values].sort((a,b)=>a-b);const sum=sorted[0]+sorted[1];const tolerance=Number.EPSILON*Math.max(sum,sorted[2])*4;if(sum-sorted[2]<=tolerance)return "Ces longueurs ne forment pas un triangle valide.";result=values.reduce((sum,v)=>sum+v,0);label="Périmètre du triangle";}
     else if(selected==="circle"){values=[number("radius")];if(!Number.isFinite(values[0])||values[0]<=0)return "Saisissez un rayon strictement positif.";result=2*Math.PI*values[0];label="Circonférence du cercle";}
     else return "Choisissez une figure valide.";
     if(!Number.isFinite(result)||result<=0)return "Impossible de calculer ce résultat avec ces valeurs.";
