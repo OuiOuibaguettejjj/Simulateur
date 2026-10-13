@@ -217,7 +217,7 @@ const L=x=>"<a class=\"related-link\" href=\"/outil/"+x+"/\">"+({"slug-1":"Outil
 const NEG={
  "html-base":fixture().replace("<html lang=\"fr\">","<html lang=\"en\">"),
  "markup-balance":fixture().replace("</section></main>","</main>"),
- "title":fixture().replace("<title>Mot-clé | Simulateur</title>","<title>Mot-clé</title>"),
+ "title":fixture().replace("<title>Mot-clé | Simulateur</title>","<title></title>"),
  "canonical":fixture().replace("rel=\"canonical\" href=\"https://simulateur.site/outil/slug/\"","rel=\"canonical\" href=\"https://simulateur.site/outil/autre/\""),
  "breadcrumb":fixture().replace("<a href=\"/\">Accueil</a> ·","<a href=\"/\">Home</a> ·"),
  "h1":fixture().replace("<h1>Nom de l'outil</h1>","<h1></h1>"),
