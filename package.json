@@ -1,0 +1,17 @@
+{
+  "name": "simulateur",
+  "private": true,
+  "description": "Outils de développement du site simulateur.site (aucune dépendance d'exécution : le site est statique).",
+  "scripts": {
+    "test": "node scripts/run-tests.mjs",
+    "test:fast": "node scripts/run-tests.mjs --skip-browser",
+    "test:list": "node scripts/run-tests.mjs --list",
+    "browsers": "playwright install chromium"
+  },
+  "devDependencies": {
+    "playwright": "1.55.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

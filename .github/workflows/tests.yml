@@ -15,162 +15,30 @@ jobs:
   tests:
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    env:
+      # Base de comparaison du cliquet et du contrat des pages modifiées (lue par scripts/run-tests.mjs).
+      CHECK_PAGES_BASE_REF: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha || github.event.before }}
     steps:
       - name: Checkout
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
           fetch-depth: 0
 
-      - name: Pre-production security and architecture gate
-        run: node scripts/check-security.mjs
+      # Playwright est épinglé dans package.json (version exacte) : une seule source de vérité, en local comme en CI.
+      - name: Installer les dépendances de test
+        run: npm install --no-audit --no-fund
 
-      - name: Verify committed build is canonical
-        run: |
-          node scripts/generate-sitemap.mjs --check
-          node scripts/normalize-layout.mjs --check
-          node scripts/prepare-adsense.mjs --check
+      - name: Restaurer le cache de Chromium
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('package.json') }}
 
-      - name: Test sitemap lastmod validation
-        run: node tests/sitemap.test.mjs
+      - name: Installer Chromium
+        run: npx playwright install chromium
 
-      - name: Validation statique complète du site
-        run: node scripts/check-static-site.mjs
-
-      - name: Test garde-fou du layout
-        run: node tests/check-layout.test.mjs
-
-      - name: Check layout
-        run: node scripts/check-layout.mjs
-
-      - name: Test calculateur de droits de donation
-        run: node tests/donation.test.mjs
-
-      - name: Test calculateur IFI
-        run: node tests/ifi.test.js
-
-      - name: Test calculateur impôt
-        run: node tests/impot.test.js
-
-      - name: Test calculateur RSA
-        run: node tests/rsa.test.js
-
-      - name: Test calculateur retraite
-        run: node tests/retraite.test.js
-
-      - name: Test calculateur âge de retraite
-        run: node tests/age-retraite.test.js
-
-      - name: Test SEO âge de retraite
-        run: node tests/age-retraite-seo.test.js
-
-      - name: Test garde des résultats
-        run: node tests/simulateurs.test.js
-
-      - name: Test calculateur salaire horaire
-        run: node tests/salaire-horaire.test.mjs
-
-      - name: Test calculateur salaire brut net
-        run: node tests/salaire-brut-net.test.js
-
-      - name: Test calculateur SMIC
-        run: node tests/smic.test.mjs
-
-      - name: Test calculateur PTZ
-        run: node tests/ptz.test.mjs
-
-      - name: Test filtre publicitaire
-        run: node tests/ad-filter.test.mjs
-
-      - name: Test des formes de résultat invalide
-        run: node tests/invalid-result.test.mjs
-
-      - name: Préparer Chromium pour le smoke des résultats
-        run: |
-          npm init -y >/dev/null 2>&1
-          npm install --no-save playwright@1.55.0 >/dev/null 2>&1
-          npx playwright install chromium >/dev/null 2>&1
-
-      - name: Smoke bloquant des résultats invalides
-        run: node tests/smoke-results.test.mjs
-
-      - name: Test calculateur intérêts composés
-        run: node tests/interets-composes.test.mjs
-
-      - name: Smoke-test du site de déploiement en local
-        run: node scripts/smoke-site.mjs --base-url http://127.0.0.1:4173 --mode local
-
-      - name: Test navigateur Promotions (virgule, Entrée, responsive)
-        run: node tests/promotions-browser.test.mjs
-
-      - name: Test navigateur cash-flow immobilier (calcul, Entrée, responsive)
-        run: node tests/cash-flow-immobilier.browser.test.mjs
-
-      - name: Test régression ratio
-        run: node tests/ratio.test.mjs
-
-      - name: Tests génériques des calculateurs
-        run: node tests/generic-calcs.test.mjs
-
-      - name: Test métier du signe astrologique
-        run: node tests/signe-astrologique.test.mjs
-
-      - name: Tests de référence sourcés
-        run: node tests/reference-calcs.test.mjs
-
-      - name: Test calculateur rendement locatif
-        run: node tests/rendement-locatif.test.mjs
-
-      - name: Test paramètres réglementaires
-        run: node tests/params.test.mjs
-
-      - name: Contrôle des paramètres réglementaires (génération, péremption, année)
-        run: |
-          node scripts/generate-params.mjs --check
-          node scripts/check-params.mjs
-
-      - name: Anticipation des échéances des paramètres (60 jours, non bloquant)
-        run: |
-          set +e
-          output="$(node scripts/check-params.mjs --horizon 60 2>&1)"
-          status=$?
-          printf '%s\n' "$output"
-          if [ "$status" -ne 0 ]; then
-            while IFS= read -r line; do
-              case "$line" in
-                *"ERREUR [horizon]"*) echo "::warning::$line" ;;
-              esac
-            done <<< "$output"
-          fi
-          exit 0
-
-      - name: Test check-pages
-        run: node tests/check-pages.test.mjs
-
-      - name: Vérifier la régénération de la baseline depuis main
-        if: github.event_name == 'pull_request'
-        run: |
-          cp scripts/check-pages.baseline.json "$RUNNER_TEMP/check-pages-baseline.expected.json"
-          trap 'cp "$RUNNER_TEMP/check-pages-baseline.expected.json" scripts/check-pages.baseline.json' EXIT
-          git show origin/main:scripts/check-pages.baseline.json > scripts/check-pages.baseline.json
-          node scripts/check-pages.mjs --update-baseline
-          diff -u "$RUNNER_TEMP/check-pages-baseline.expected.json" scripts/check-pages.baseline.json
-
-      - name: Test normalisation du layout
-        run: node tests/normalize-layout.test.mjs
-
-      - name: Test classification des pages interactives
-        run: node tests/interactive-families.test.mjs
-
-      - name: Test workflow de déploiement
-        run: node tests/deploy-workflow.test.mjs
-
-      - name: Contrôle du contrat final des pages modifiées
-        if: github.event_name == 'pull_request'
-        env:
-          CHECK_PAGES_BASE_REF: ${{ github.event.pull_request.base.sha }}
-        run: node scripts/check-pages.mjs --check-changed-contract
-
-      - name: Contrôle des pages (cliquet bloquant)
-        env:
-          CHECK_PAGES_BASE_REF: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha || github.event.before }}
-        run: node scripts/check-pages.mjs --ratchet --check-changed-contract
+      # Toutes les vérifications du dépôt : sécurité, build canonique, tests, navigateur, paramètres, pages, cliquet.
+      # Le script exécute chaque étape puis liste tous les échecs ; la liste des étapes est dans scripts/run-tests.mjs.
+      # Le même contrôle se lance en local avec : npm test
+      - name: Exécuter tous les contrôles (npm test)
+        run: npm test

@@ -443,7 +443,7 @@ Règles de rédaction techniques :
 
 ### 11.1 Contrôles automatiques
 
-Exécuter sur la branche, avant ouverture de la PR, les contrôles de `.github/workflows/tests.yml` (liste à jour dans ce fichier). Parmi eux :
+Exécuter sur la branche, avant ouverture de la PR, `npm test -- --pr` : c'est exactement ce que lance `.github/workflows/tests.yml`, tous les échecs sont listés à la fin (`npm run test:fast` ignore les étapes Chromium ; `npm test -- --only=<étape>` relance une seule étape). Parmi les contrôles exécutés :
 
 - `node tests/simulateurs.test.js` (garde des résultats) ;
 - `node tests/invalid-result.test.mjs` ;
