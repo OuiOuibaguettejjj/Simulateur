@@ -377,6 +377,16 @@ assert.deepEqual(
  "détection : JavaScript propre au calculateur référencé par la page"
 );
 
+// Exception étroite : deux dettes description provenaient uniquement du plafond de 160 caractères retiré.
+for(const obsoletePath of ["public/outil/indemnite-precarite/index.html","public/outil/succession/index.html"]){
+ const obsolete=nextBaseline([], [P(obsoletePath,"description")], [obsoletePath.split("/")[2]]);
+ assert.equal(obsolete.ok,true,"la dette description rendue obsolète par la suppression du plafond peut être retirée : "+obsoletePath);
+ assert.deepEqual(obsolete.removed,[P(obsoletePath,"description")]);
+}
+const unrelatedDescription=nextBaseline([], [P("public/outil/autre/index.html","description")], ["autre"]);
+assert.equal(unrelatedDescription.ok,false,"le verrou conserve les autres dettes description anneeAMigrer");
+assert.deepEqual(unrelatedDescription.blocked,[P("public/outil/autre/index.html","description")]);
+
 // anneeAMigrer : les écarts éditoriaux ne peuvent pas être résorbés avant migration.
 const debtPath="public/outil/ancien/index.html";
 const lockedBaseline=[P(debtPath,"description"),P(debtPath,"content-h2"),P(debtPath,"formula"),P(debtPath,"faq"),P(debtPath,"result")];
