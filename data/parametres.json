@@ -1075,6 +1075,62 @@
           "2AnsEtPlus": 1
         }
       }
+    },
+    "jours-ouvres": {
+      "label": "Calendrier des jours fériés nationaux français",
+      "year": 2026,
+      "usedBy": [
+        "jours-ouvres"
+      ],
+      "source": {
+        "label": "Service-Public — jours fériés en France",
+        "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2405"
+      },
+      "effectiveFrom": "1900-01-01",
+      "effectiveTo": "2100-12-31",
+      "verifiedOn": "2026-10-13",
+      "notes": "Calendrier national métropolitain : huit dates fixes et trois dates mobiles calculées à partir du dimanche de Pâques. Les jours fériés locaux, notamment ceux d’Alsace-Moselle, ne sont pas inclus. Source consultée le 13 octobre 2026 ; revalider en cas d’évolution légale.",
+      "values": {
+        "fixedHolidays": [
+          [
+            1,
+            1
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            5,
+            8
+          ],
+          [
+            7,
+            14
+          ],
+          [
+            8,
+            15
+          ],
+          [
+            11,
+            1
+          ],
+          [
+            11,
+            11
+          ],
+          [
+            12,
+            25
+          ]
+        ],
+        "easterOffsetsFromSunday": [
+          1,
+          39,
+          50
+        ]
+      }
     }
   },
   "anneeAMigrer": {
