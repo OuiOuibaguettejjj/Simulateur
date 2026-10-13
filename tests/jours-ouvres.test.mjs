@@ -6,6 +6,10 @@ const html = fs.readFileSync("public/outil/jours-ouvres/index.html", "utf8");
 const match = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].at(-1);
 assert.ok(match, "script fonctionnel du calculateur introuvable");
 const context = vm.createContext({window: {}, Date, Math, Number, String, Array, Set, Map, RegExp});
+const paramsScript = fs.readFileSync("public/parametres.js", "utf8");
+vm.runInContext(paramsScript, context);
+assert.deepEqual(JSON.parse(JSON.stringify(context.window.Parametres.get("jours-ouvres").values.fixedHolidays)), [[1,1],[5,1],[5,8],[7,14],[8,15],[11,1],[11,11],[12,25]], "calendrier fixe centralisé");
+assert.deepEqual(JSON.parse(JSON.stringify(context.window.Parametres.get("jours-ouvres").values.easterOffsetsFromSunday)), [1,39,50], "jours mobiles centralisés");
 vm.runInContext(match[1], context);
 
 const date = value => context.parseFrenchDate(value);
