@@ -112,7 +112,7 @@ La taxonomie des outils repose désormais sur une seule déclaration par outil d
 
 La forme du site est désormais documentée autour d'un gabarit HTML-first unique, avec `public/outil/tva/index.html` comme référence concrète et `public/outil/_template.html` comme point de copie non public.
 
-Le contrat documentaire impose notamment un `<title>` de la forme « Mot-clé principal | Simulateur », une meta description de 120 à 160 caractères, un résultat initial non vide, un `WebApplication` JSON-LD et un `BreadcrumbList` JSON-LD cohérent avec la canonique.
+À cette date, le contrat documentaire imposait notamment un `<title>` de la forme « Mot-clé principal | Simulateur », une meta description de 120 à 160 caractères, un résultat initial non vide, un `WebApplication` JSON-LD et un `BreadcrumbList` JSON-LD cohérent avec la canonique. Cette règle de longueur a depuis été remplacée par la décision du 13 octobre 2026 ci-dessous.
 
 La documentation a été corrigée pour refléter le flux réel : header et footer commités dans les pages, `normalize-layout.mjs --check` et `check-layout.mjs` bloquants, et absence de `scripts/prerender-tools.mjs`. Cette phase ne modifie aucune URL, logique métier, règle de calcul, CSP, en-tête de sécurité, pinning GitHub Actions ou mécanisme de rollback.
 
@@ -233,4 +233,4 @@ Le calculateur `salaire-brut-net` est retiré de `data/parametres.json > anneeAM
 
 ## 2026-10-13 — Contrat SEO souple pour les pages interactives
 
-Le `<title>` doit être unique et non vide, mais aucun format fixe ni suffixe `| Simulateur` n’est imposé. Le titre et le H1 sont rédigés selon l’intention de recherche de la page : calculateur, calcul, conversion, comparaison ou simulation selon le cas, sans supprimer le mot-clé métier utile. La meta description conserve la plage de 120 à 160 caractères et doit contenir le mot exact « calculer » ; `WebApplication.description`, Open Graph et Twitter restent synchronisés via le contrôle JSON-LD et `normalize-layout.mjs`. Le contrat bloquant s’applique aux pages interactives nouvelles ou modifiées afin de permettre la mise en conformité progressive des pages historiques, sans refonte massive automatique ni changement des calculs métier.
+Le `<title>` doit être unique et non vide, mais aucun format fixe ni suffixe `| Simulateur` n’est imposé. Le titre et le H1 sont rédigés selon l’intention de recherche de la page : calculateur, calcul, conversion, comparaison ou simulation selon le cas, sans supprimer le mot-clé métier utile. La meta description doit contenir au moins 120 caractères, sans plafond maximal fixe, et le mot exact « calculer » ; `WebApplication.description`, Open Graph et Twitter restent synchronisés via le contrôle JSON-LD et `normalize-layout.mjs`. Le contrat bloquant s’applique aux pages interactives nouvelles ou modifiées afin de permettre la mise en conformité progressive des pages historiques, sans refonte massive automatique ni changement des calculs métier.
