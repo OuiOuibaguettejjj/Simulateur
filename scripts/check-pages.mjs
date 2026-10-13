@@ -162,7 +162,6 @@ function main(){
  }
  if(process.argv.includes("--ratchet")){
   let base;try{base=parseBaseline(fs.readFileSync(baselinePath,"utf8"))}catch(e){console.error(e.code==="ENOENT"?BASELINE_FILE+" introuvable : lancez --update-baseline une première fois.":e.message);process.exit(1)}
-  const r=nextBaseline(pairs,base);
   const {added,stale}=compareToBaseline(pairs,base);
   let addedForRatchet=added,staleForRatchet=stale;
   if(process.argv.includes("--check-changed-contract")){
