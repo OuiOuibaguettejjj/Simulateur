@@ -202,15 +202,9 @@
         // Parcourt les identifiants de lignes : compatible avec le harnais de tests
         // sans DOM complet et avec les suppressions de lignes intermédiaires.
         const values = [];
-        let consecutiveMissing = 0;
-        for (let index = 1; index <= 1000 && consecutiveMissing < 10; index++) {
+        for (let index = 1; index <= 1000; index++) {
           const valueInput = document.getElementById("v" + index);
           const weightInput = document.getElementById("w" + index);
-          if (!valueInput && !weightInput) {
-            consecutiveMissing++;
-            continue;
-          }
-          consecutiveMissing = 0;
           if (valueInput && weightInput) {
             values.push({
               value: parseDecimal(valueInput.value),
