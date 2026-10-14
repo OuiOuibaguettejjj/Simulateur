@@ -9,6 +9,9 @@ assert.match(standard.text, /Moyenne\s*:\s*16,25/, "la moyenne de 12, 15, 18 et 
 const decimalComma = await run({ s: "12,5; 15,5; 18" });
 assert.match(decimalComma.text, /Moyenne\s*:\s*15,3333333333/, "les décimales avec virgule sont acceptées avec des points-virgules");
 
+const ambiguousDecimalComma = await run({ s: "12,5 15,5 18" });
+assert.match(ambiguousDecimalComma.text, /Format ambigu[\s\S]*points-virgules/i, "les décimales ambiguës séparées par des espaces sont refusées");
+
 const negative = await run({ s: "-10; 2; 8" });
 assert.match(negative.text, /Moyenne\s*:\s*0/, "les nombres négatifs sont traités correctement");
 
