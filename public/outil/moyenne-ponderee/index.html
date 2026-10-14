@@ -46,24 +46,14 @@
   <meta name="twitter:card" content="summary">
 </head>
 <body>
-  <header>
-    <div class="wrap nav">
-      <a class="logo" href="/">Simulateur<span>.</span></a>
-      <nav class="navlinks" aria-label="Navigation principale">
-        <a href="/calculateurs/">Calculateurs</a>
-        <a href="/simulateurs/">Simulateurs</a>
-        <a class="nav-extra" href="/conversions/">Conversions</a>
-        <a class="nav-extra" href="/comparateurs/">Comparateurs</a>
-      </nav>
-    </div>
-  </header>
+  <header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header>
   <main>
     <div class="wrap">
       <div class="breadcrumb"><a href="/">Accueil</a> · <a href="/maths/">Maths</a> · Calculateur de moyenne pondérée</div>
       <section class="tool">
         <div class="eyebrow">STATISTIQUES</div>
         <h1>Calculateur de moyenne pondérée</h1>
-        <p class="tool-intro">Calculez une moyenne qui tient compte de l’importance de chaque valeur. Saisissez jusqu’à deux valeurs et leurs poids ; les poids peuvent représenter des coefficients ou des effectifs.</p>
+        <p class="tool-intro">Calculez une moyenne qui tient compte de l’importance de chaque valeur. Saisissez deux valeurs et leurs poids ; les poids peuvent représenter des coefficients ou des effectifs.</p>
         <div id="fields">
           <div class="field">
             <label for="v1">Valeur 1</label>
@@ -145,13 +135,7 @@
       <p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="/maths/">Maths</a>.</p>
     </section>
   </main>
-  <footer>
-    <div class="wrap">
-      <div class="footerlinks">
-        <a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a>
-      </div>
-    </div>
-  </footer>
+  <footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer>
   <script>
     window.TOOL = {
       calc: function () {
@@ -171,7 +155,7 @@
         const weightedSum = v1 * w1 + v2 * w2;
         const result = weightedSum / totalWeight;
         if (!Number.isFinite(result)) return "Le résultat est trop grand pour être calculé. Vérifiez les valeurs saisies.";
-        return "<strong>" + result.toLocaleString("fr-FR", { maximumFractionDigits: 2 }) + "</strong>";
+        return "<strong>" + result.toLocaleString("fr-FR", { maximumFractionDigits: 10 }) + "</strong> | Moyenne pondérée";
       }
     };
   </script>
