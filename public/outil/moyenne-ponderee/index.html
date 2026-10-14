@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="calculator-rendering" content="static">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="google-adsense-account" content="ca-pub-2924580037451268">
+<meta name="google-adsense-account" content="ca-pub-2924580037451268">
   <title>Calculateur de moyenne pondérée</title>
   <meta name="description" content="Utilisez ce calculateur de moyenne pondérée pour calculer le résultat de plusieurs valeurs selon leurs poids, coefficients ou effectifs. Formule, exemple et limites expliqués.">
   <link rel="canonical" href="https://simulateur.site/outil/moyenne-ponderee/">
@@ -155,7 +155,7 @@
         const weightedSum = v1 * w1 + v2 * w2;
         const result = weightedSum / totalWeight;
         if (!Number.isFinite(result)) return "Le résultat est trop grand pour être calculé. Vérifiez les valeurs saisies.";
-        return "<strong>" + result.toLocaleString("fr-FR", { maximumFractionDigits: 10 }) + "</strong> | Moyenne pondérée";
+        return "<strong>" + result.toLocaleString("fr-FR", { maximumFractionDigits: 3 }) + "</strong> | Moyenne pondérée";
       }
     };
   </script>
