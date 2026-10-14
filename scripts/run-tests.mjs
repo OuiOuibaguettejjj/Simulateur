@@ -58,6 +58,7 @@ export const STEPS=[
 
   step("ratio","unit","tests/ratio.test.mjs"),
   step("arrondi","unit","tests/arrondi.test.mjs"),
+  step("fractions","unit","tests/fractions.test.mjs"),
   step("calculs-generiques","unit","tests/generic-calcs.test.mjs"),
   step("perimetre","unit","tests/perimetre.test.mjs"),
   step("signe-astrologique","unit","tests/signe-astrologique.test.mjs"),
