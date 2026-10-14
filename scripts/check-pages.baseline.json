@@ -148,26 +148,6 @@
     "rule": "result"
   },
   {
-    "path": "public/outil/moyenne/index.html",
-    "rule": "content-h2"
-  },
-  {
-    "path": "public/outil/moyenne/index.html",
-    "rule": "description"
-  },
-  {
-    "path": "public/outil/moyenne/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/moyenne/index.html",
-    "rule": "formula"
-  },
-  {
-    "path": "public/outil/moyenne/index.html",
-    "rule": "result"
-  },
-  {
     "path": "public/outil/per/index.html",
     "rule": "content-h2"
   },
