@@ -74,6 +74,7 @@
 <footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer>
 <script>
 window.TOOL={calc:function(){
+  try {
   const read=id=>{const raw=this.$(id).value;if(raw===undefined||raw===null||String(raw).trim()==="")throw new Error("Saisissez un entier dans chaque champ.");const value=Number(raw);if(!Number.isSafeInteger(value))throw new Error("Saisissez uniquement des entiers dans la plage autorisée.");return BigInt(value);};
   const a=read("a"),b=read("b"),c=read("c"),d=read("d"),op=this.$("operation").value;
   if(b===0n||d===0n)throw new Error("Un dénominateur ne peut pas être égal à zéro.");
@@ -92,6 +93,7 @@ window.TOOL={calc:function(){
   const symbol={add:"+",subtract:"−",multiply:"×",divide:"÷"}[op];
   const left=String(a)+"/"+String(b),right=String(c)+"/"+String(d);
   return "<p><strong>"+left+" "+symbol+" "+right+" = "+fraction+"</strong></p><p>Valeur décimale : "+decimalText+"</p>";
+  } catch(error) { return "<p>"+(error instanceof Error ? error.message : "Vérifiez les valeurs saisies.")+"</p>"; }
 }};
 </script>
 </body>
