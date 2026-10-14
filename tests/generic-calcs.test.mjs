@@ -46,6 +46,7 @@ if(failures.length){console.error("Échecs couche 1 hors exceptions :");for(cons
 console.log("Couche 1 : tous les cas passent ou correspondent exactement à une exception documentée.");
 
 // Les régressions métier ciblées de l’épargne mensuelle sont exécutées dans cette suite CI.
+await import("./moyenne.test.mjs");
 await import("./epargne-mensuelle.test.mjs");
 await import("./remise.test.mjs");
 await import("./temps-calcul.test.mjs");
