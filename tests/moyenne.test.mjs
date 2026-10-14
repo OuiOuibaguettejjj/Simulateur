@@ -15,6 +15,9 @@ assert.match(ambiguousDecimalComma.text, /Format ambigu[\s\S]*points-virgules/i,
 const ambiguousDecimalCommaWithSeparators = await run({ s: "12,5, 15,5, 18" });
 assert.match(ambiguousDecimalCommaWithSeparators.text, /Format ambigu[\s\S]*points-virgules/i, "les décimales avec virgules et séparateurs mélangés sont refusées");
 
+const ambiguousMultiDigitDecimalComma = await run({ s: "12,55, 15,55, 18" });
+assert.match(ambiguousMultiDigitDecimalComma.text, /Format ambigu[\\s\\S]*points-virgules/i, "les décimales à plusieurs chiffres avec séparateurs mélangés sont refusées");
+
 const repeatedSeparators = await run({ s: "12,,18" });
 assert.match(repeatedSeparators.text, /Format ambigu|séparateurs répétés/i, "les séparateurs répétés sont refusés");
 
