@@ -25,6 +25,11 @@ try{
  let result=(await page.locator("#result").innerText()).replace(/[\u00a0\u202f]/g," ");
  assert.match(result,/39,74 € brut par jour/,"montant journalier arrondi");
  assert.match(result,/Allocation mensuelle indicative[\s\S]*1\s?192,20 € brut/,"mensuel calculé sur le journalier affiché");
+ await page.locator("#ref").fill("60000");
+ await page.locator(".button-main").click();
+ result=(await page.locator("#result").innerText()).replace(/[\u00a0\u202f]/g," ");
+ assert.match(result,/46,85 € brut par jour/,"recalcul journalier après modification des entrées");
+ assert.match(result,/Allocation mensuelle indicative[\s\S]*1\s?405,50 € brut/,"recalcul mensuel après modification des entrées");
  assert.doesNotMatch(result,/Durée après coefficient/,"ne pas présenter une durée réglementaire simplifiée");
  await page.locator("#ref").fill("0");
  await page.locator(".button-main").click();
