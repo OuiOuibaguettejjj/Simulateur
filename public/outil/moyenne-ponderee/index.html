@@ -214,8 +214,10 @@
         if (maxWeight === 0) return "La somme des poids doit être supérieure à zéro.";
         const normalizedWeights = values.map(item => item.weight / maxWeight);
         const totalWeight = normalizedWeights.reduce((sum, weight) => sum + weight, 0);
-        const weightedSum = values.reduce((sum, item, index) => sum + item.value * normalizedWeights[index], 0);
-        const result = weightedSum / totalWeight;
+        const result = values.reduce(
+          (sum, item, index) => sum + item.value * (normalizedWeights[index] / totalWeight),
+          0
+        );
         if (!Number.isFinite(result)) return "Le résultat est trop grand pour être calculé. Vérifiez les valeurs saisies.";
         return "<strong>" + result.toLocaleString("fr-FR", { maximumFractionDigits: 3 }) + "</strong> | Moyenne pondérée";
       }
