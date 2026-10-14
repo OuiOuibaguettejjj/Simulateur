@@ -60,26 +60,6 @@
     "rule": "formula"
   },
   {
-    "path": "public/outil/fractions/index.html",
-    "rule": "content-h2"
-  },
-  {
-    "path": "public/outil/fractions/index.html",
-    "rule": "description"
-  },
-  {
-    "path": "public/outil/fractions/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/fractions/index.html",
-    "rule": "formula"
-  },
-  {
-    "path": "public/outil/fractions/index.html",
-    "rule": "result"
-  },
-  {
     "path": "public/outil/heures-supplementaires/index.html",
     "rule": "content-h2"
   },
