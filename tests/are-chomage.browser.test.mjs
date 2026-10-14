@@ -35,7 +35,7 @@ try{
  await page.locator(".button-main").click();
  assert.equal(await page.locator("#are-error").isVisible(),true,"une entrée invalide doit afficher une erreur");
  assert.match(await page.locator("#are-error").innerText(),/salaire de référence positif/i);
- result=(await page.locator("#result").innerText()).replace(/[\\u00a0\\u202f]/g," ");
+ result=(await page.locator("#result").innerText()).replace(/[\u00a0\u202f]/g," ");
  assert.match(result,/Votre estimation apparaîtra ici/i,"une entrée invalide neutralise le résultat précédent");
  assert.doesNotMatch(result,/46,85 € brut par jour|1\s?405,50 € brut/,"ne pas conserver une estimation obsolète après erreur");
  for(const width of [320,360,375,390,768,1280]){
