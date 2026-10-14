@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import {runInlineCalculator} from "./calculator-harness.mjs";
 async function calculate(s){return (await runInlineCalculator({slug:"median-mode",inputs:{s}})).text}
 assert.match(await calculate("10,12,20"),/Médiane : 12/);
+assert.match(await calculate("10 12 20"),/Médiane : 12/);
 assert.match(await calculate("20, 10, 12"),/Médiane : 12/);
 assert.match(await calculate("-5, 0, -2"),/Médiane : -2/);
 assert.match(await calculate("0,0,0"),/Mode : 0/);
@@ -17,4 +18,4 @@ assert.match(await calculate("1, nope, 3"),/Valeur invalide/);
 assert.match(await calculate("1e309,2"),/Valeur invalide/);
 assert.match(await calculate("1.1234567890123, 1.1234567890123"),/Médiane : 1,1234567890123/);
 assert.match(await calculate("1e308, 1.7e308"),/Médiane : 1,35000000000000e\+308/);
-console.log("median-mode: 16 scénarios validés.");
+console.log("median-mode: 17 scénarios validés.");
