@@ -88,8 +88,15 @@ window.TOOL={calc:function(){
   const gcd=(x,y)=>{x=x<0n?-x:x;y=y<0n?-y:y;while(y!==0n){const r=x%y;x=y;y=r;}return x;};
   const divisor=gcd(n,den);n/=divisor;den/=divisor;
   const fraction=den===1n?String(n):String(n)+"/"+String(den);
-  const decimal=Number(n)/Number(den);
-  const decimalText=Number.isFinite(decimal)?decimal.toLocaleString("fr-FR",{maximumFractionDigits:6}):"non disponible pour cette valeur";
+  // Arrondi décimal exact à six chiffres : aucun passage par Number, qui perdrait
+  // des chiffres significatifs pour les fractions très grandes.
+  const scale=1_000_000n;
+  const negative=n<0n;
+  const absNumerator=negative?-n:n;
+  const rounded=(absNumerator*scale*2n+den)/(2n*den);
+  const whole=rounded/scale;
+  const fractional=String(rounded%scale).padStart(6,"0").replace(/0+$/,"");
+  const decimalText=(negative&&rounded!==0n?"-":"")+whole.toLocaleString("fr-FR")+(fractional?","+fractional:"");
   const symbol={add:"+",subtract:"−",multiply:"×",divide:"÷"}[op];
   const left=String(a)+"/"+String(b),right=String(c)+"/"+String(d);
   return "<p><strong>"+left+" "+symbol+" "+right+" = "+fraction+"</strong></p><p>Valeur décimale : "+decimalText+"</p>";
