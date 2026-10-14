@@ -12,4 +12,6 @@ assert.match(await calculate("1.5, 2.5, 3"),/Médiane : 2,5/);
 assert.match(await calculate(""),/Saisissez au moins un nombre/);
 assert.match(await calculate("1, nope, 3"),/Valeur invalide/);
 assert.match(await calculate("1e309,2"),/Valeur invalide/);
-console.log("median-mode: 11 scénarios validés.");
+assert.match(await calculate("1.1234567890123, 1.1234567890123"),/Médiane : 1,1234567890123/);
+assert.match(await calculate("1e308, 1.7e308"),/Médiane : 1,3500000000e\\+308/);
+console.log("median-mode: 13 scénarios validés.");
