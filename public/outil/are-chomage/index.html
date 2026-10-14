@@ -49,10 +49,11 @@
 function calculateARE(salary,days){
 if(!Number.isFinite(salary)||!Number.isFinite(days)||salary<=0||days<=0||!Number.isInteger(days))return null;
 const sjr=salary/days,formulaA=.404*sjr+13.18,formulaB=.57*sjr;
-const daily=Math.min(Math.max(formulaA,formulaB,32.13),.75*sjr);
+const dailyExact=Math.min(Math.max(formulaA,formulaB,32.13),.75*sjr);
+const daily=Math.round((dailyExact+Number.EPSILON)*100)/100;
 const monthly=daily*30;
-if(![sjr,formulaA,formulaB,daily,monthly].every(Number.isFinite)||daily<=0||monthly<=0)return null;
-return{sjr,formulaA,formulaB,daily,monthly,durationAfterCoefficient:Math.round(days*.75)};
+if(![sjr,formulaA,formulaB,dailyExact,daily,monthly].every(Number.isFinite)||daily<=0||monthly<=0)return null;
+return{sjr,formulaA,formulaB,dailyExact,daily,monthly};
 }
 const euro=n=>new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR'}).format(n);
 window.TOOL={calc:function(){
@@ -65,7 +66,7 @@ form.addEventListener('submit',e=>{
 e.preventDefault();error.hidden=true;
 const salary=Number(document.getElementById('ref').value),days=Number(document.getElementById('duree').value),data=calculateARE(salary,days);
 if(!data){error.textContent='Saisissez un salaire de référence positif et une durée entière supérieure à zéro, avec des valeurs permettant une estimation finie.';error.hidden=false;return}
-result.innerHTML='<p><strong>'+euro(data.daily)+' brut par jour</strong></p><div class="are-detail"><div><strong>Salaire journalier de référence (SJR)</strong>'+euro(data.sjr)+'</div><div><strong>Allocation mensuelle indicative</strong>'+euro(data.monthly)+' brut (base de 30 jours)</div><div><strong>Formule 40,4 % + partie fixe</strong>'+euro(data.formulaA)+'/jour avant bornes</div><div><strong>Formule à 57 %</strong>'+euro(data.formulaB)+'/jour avant bornes</div><div><strong>Durée après coefficient de 0,75</strong>'+data.durationAfterCoefficient.toLocaleString('fr-FR')+' jours à titre indicatif</div><div><strong>Plafond de 75 % du SJR</strong>'+euro(.75*data.sjr)+'/jour</div></div><p class="are-small">Estimation brute indicative. Le calcul de la durée réelle, l’éligibilité, les proratisations, les règles particulières et les prélèvements ne sont pas modélisés. La durée après coefficient affichée est une simple illustration mathématique, pas une détermination de droits.</p>';
+result.innerHTML='<p><strong>'+euro(data.daily)+' brut par jour</strong></p><div class="are-detail"><div><strong>Salaire journalier de référence (SJR)</strong>'+euro(data.sjr)+'</div><div><strong>Allocation mensuelle indicative</strong>'+euro(data.monthly)+' brut (base de 30 jours)</div><div><strong>Formule 40,4 % + partie fixe</strong>'+euro(data.formulaA)+'/jour avant bornes</div><div><strong>Formule à 57 %</strong>'+euro(data.formulaB)+'/jour avant bornes</div><div><strong>Plafond de 75 % du SJR</strong>'+euro(.75*data.sjr)+'/jour</div></div><p class="are-small">Estimation brute indicative. Le calcul de la durée réelle, l’éligibilité, les proratisations, les règles particulières et les prélèvements ne sont pas modélisés. La durée après coefficient affichée est une simple illustration mathématique, pas une détermination de droits.</p>';
 });
 })();
 </script><script src="/enter-calcul.js" defer></script></body></html>
