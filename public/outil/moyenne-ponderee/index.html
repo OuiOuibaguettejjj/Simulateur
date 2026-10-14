@@ -9,6 +9,13 @@
   <meta name="description" content="Calculez une moyenne pondérée avec autant de valeurs que nécessaire : saisissez notes, coefficients ou effectifs, puis consultez la formule et un exemple.">
   <link rel="canonical" href="https://simulateur.site/outil/moyenne-ponderee/">
   <link rel="stylesheet" href="/styles.css">
+  <style>
+    .weighted-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;gap:14px;align-items:end}
+    .weighted-row .field{min-width:0}
+    .weighted-row .remove-weighted-row{margin-bottom:16px;font:inherit;font-size:.82rem;padding:10px}
+    .weighted-row .remove-weighted-row:disabled{opacity:.45;cursor:not-allowed}
+    @media(max-width:650px){.weighted-row{grid-template-columns:1fr}.weighted-row .remove-weighted-row{margin-bottom:0}}
+  </style>
   <script src="/simulateurs.js" defer></script>
   <script src="/enter-calcul.js" defer></script>
   <script type="application/ld+json">
