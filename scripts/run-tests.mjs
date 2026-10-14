@@ -54,6 +54,7 @@ export const STEPS=[
   step("smoke-site","browser","scripts/smoke-site.mjs",["--base-url","http://127.0.0.1:4173","--mode","local"],{browser:true}),
   step("promotions-navigateur","browser","tests/promotions-browser.test.mjs",[],{browser:true}),
   step("cash-flow-navigateur","browser","tests/cash-flow-immobilier.browser.test.mjs",[],{browser:true}),
+  step("are-chomage-navigateur","browser","tests/are-chomage.browser.test.mjs",[],{browser:true}),
 
   step("ratio","unit","tests/ratio.test.mjs"),
   step("calculs-generiques","unit","tests/generic-calcs.test.mjs"),

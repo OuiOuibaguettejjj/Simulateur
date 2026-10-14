@@ -1,13 +1,5 @@
 [
   {
-    "path": "public/outil/are-chomage/index.html",
-    "rule": "description"
-  },
-  {
-    "path": "public/outil/are-chomage/index.html",
-    "rule": "faq"
-  },
-  {
     "path": "public/outil/arrondi/index.html",
     "rule": "content-h2"
   },
