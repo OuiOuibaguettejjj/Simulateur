@@ -111,7 +111,8 @@
     "attendu": 12,
     "tolerance": 0,
     "sortie": "Médiane",
-    "source": "https://calculette.org/calculateurs/statistiques"
+    "source": "https://www.britannica.com/science/median-statistics",
+    "note": "Calcul indépendant : les trois valeurs ordonnées sont 10, 12 et 20 ; la valeur centrale est 12."
   },
   {
     "outil": "moyenne-ponderee",
