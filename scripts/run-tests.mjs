@@ -27,6 +27,8 @@ export const STEPS=[
   step("layout-canonique","static","scripts/normalize-layout.mjs",["--check"]),
   step("adsense-canonique","static","scripts/prepare-adsense.mjs",["--check"]),
   step("sitemap-test","static","tests/sitemap.test.mjs"),
+  step("lastmod-guard-test","static","tests/check-lastmod.test.mjs"),
+  step("lastmod-coherence","pages","scripts/check-lastmod.mjs",[],{pr:true,base:true}),
   step("site-statique","static","scripts/check-static-site.mjs"),
   step("layout-garde-test","static","tests/check-layout.test.mjs"),
   step("layout","static","scripts/check-layout.mjs"),
