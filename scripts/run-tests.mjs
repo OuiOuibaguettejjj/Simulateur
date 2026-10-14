@@ -57,6 +57,7 @@ export const STEPS=[
   step("are-chomage-navigateur","browser","tests/are-chomage.browser.test.mjs",[],{browser:true}),
 
   step("ratio","unit","tests/ratio.test.mjs"),
+  step("arrondi","unit","tests/arrondi.test.mjs"),
   step("calculs-generiques","unit","tests/generic-calcs.test.mjs"),
   step("perimetre","unit","tests/perimetre.test.mjs"),
   step("signe-astrologique","unit","tests/signe-astrologique.test.mjs"),
