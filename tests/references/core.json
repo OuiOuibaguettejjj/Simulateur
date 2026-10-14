@@ -2097,5 +2097,17 @@
     "sortie": "=\\s*0",
     "source": "https://fr.khanacademy.org/math/arithmetic",
     "note": "Vérification indépendante : le reste de 10 ÷ 5 est 0."
+  },
+  {
+    "outil": "are-chomage",
+    "entrees": {
+      "ref": "48000",
+      "duree": "730"
+    },
+    "attendu": 39.74465753424658,
+    "tolerance": 0.02,
+    "sortie": "39,74",
+    "source": "https://www.francetravail.fr/candidat/mes-droits-aux-aides-et-allocati/lessentiel-a-savoir-sur-lallocat/quelle-somme-vais-je-recevoir/comment-est-calcule-le-montant-d.html",
+    "note": "Cas arithmétique indépendant : SJR = 48 000 / 730 ; max(40,4 % × SJR + 13,18 €, 57 % × SJR, 32,13 €), plafonné à 75 % du SJR. Valeur attendue calculée directement à partir de la formule officielle, sans exécuter le calculateur testé."
   }
 ]
