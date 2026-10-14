@@ -104,7 +104,7 @@ function main() {
     for (const error of errors) console.error(" - " + error);
     process.exit(1);
   }
-  console.log(`Lastmod guard passed : ${changed.length} page(s) HTML vérifiée(s).`);
+  console.log(`Lastmod guard passed : ${changes.length} page(s) HTML vérifiée(s).`);
 }
 
 if (import.meta.url === pathToFileURL(path.resolve(process.argv[1] || "")).href) main();
