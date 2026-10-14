@@ -12,6 +12,12 @@ assert.match(decimalComma.text, /Moyenne\s*:\s*15,3333333333/, "les décimales a
 const ambiguousDecimalComma = await run({ s: "12,5 15,5 18" });
 assert.match(ambiguousDecimalComma.text, /Format ambigu[\s\S]*points-virgules/i, "les décimales ambiguës séparées par des espaces sont refusées");
 
+const ambiguousDecimalCommaWithSeparators = await run({ s: "12,5, 15,5, 18" });
+assert.match(ambiguousDecimalCommaWithSeparators.text, /Format ambigu[\s\S]*points-virgules/i, "les décimales avec virgules et séparateurs mélangés sont refusées");
+
+const repeatedSeparators = await run({ s: "12,,18" });
+assert.match(repeatedSeparators.text, /Format ambigu|séparateurs répétés/i, "les séparateurs répétés sont refusés");
+
 const negative = await run({ s: "-10; 2; 8" });
 assert.match(negative.text, /Moyenne\s*:\s*0/, "les nombres négatifs sont traités correctement");
 
