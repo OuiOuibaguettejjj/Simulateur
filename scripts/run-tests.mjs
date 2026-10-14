@@ -39,6 +39,7 @@ export const STEPS=[
   step("age-retraite","unit","tests/age-retraite.test.js"),
   step("age-retraite-seo","unit","tests/age-retraite-seo.test.js"),
   step("simulateurs","unit","tests/simulateurs.test.js"),
+  step("median-mode","unit","tests/median-mode.test.mjs"),
   step("salaire-horaire","unit","tests/salaire-horaire.test.mjs"),
   step("salaire-brut-net","unit","tests/salaire-brut-net.test.js"),
   step("smic","unit","tests/smic.test.mjs"),
