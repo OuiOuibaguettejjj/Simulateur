@@ -97,11 +97,15 @@ Le contrôle `normalize-layout.mjs --check` est fail-closed : une divergence ou 
 
 Avant chaque MEP, le workflow enregistre la version Cloudflare actuellement active. Si le déploiement ou une vérification de production échoue après cette étape, le workflow tente automatiquement de rétablir cette version précédente. Ce rollback ne modifie ni le dépôt ni les fichiers locaux.
 
-## Lastmod du sitemap versionné avec le contenu — 2026-10-03
+## Lastmod du sitemap versionné avec le contenu — 2026-10-03, contrôle CI renforcé le 2026-10-14
 
-Les dates `lastmod` du sitemap sont désormais définies dans `data/lastmod.json`, versionné avec le contenu, et ne dépendent plus de l'historique Git. Elles ne dépendent donc ni des commits ignorés, ni de la date du committeur qui peut changer lors d'un rebase. La génération du sitemap valide la couverture exacte des routes, les dates et l'absence de doublons avant de produire la sortie committée.
+Les dates `lastmod` du sitemap sont définies dans `data/lastmod.json`, versionné avec le contenu. Elles ne sont pas calculées à partir de l'historique Git : leur valeur reste une décision explicite, stable en cas de rebase.
 
-Cette décision remplace en partie l'entrée « Durcissement post-audit P0 » ci-dessus sur les `lastmod` : l'historique Git complet et les commits ignorés ne sont plus nécessaires pour déterminer les dates.
+La génération du sitemap valide la couverture exacte des routes, les dates et l'absence de doublons avant de produire la sortie committée. En complément, `scripts/check-lastmod.mjs` compare les pages HTML modifiées d'une PR à leur version de base : si le HTML change au-delà des seules métadonnées Open Graph/Twitter, la date `lastmod` de cette route doit aussi changer. Le contrôle échoue sinon. Toute mise à jour de date doit être répercutée dans `public/sitemap.xml`, vérifié par le contrôle canonique du sitemap.
+
+Les changements limités aux métadonnées Open Graph/Twitter sont exclus du contrôle car ils ne constituent pas une modification éditoriale visible. Les autres modifications techniques du HTML restent soumises au contrôle ; toute exception supplémentaire devra être explicitement justifiée et testée.
+
+Cette décision complète l'entrée « Durcissement post-audit P0 » ci-dessus : l'historique Git complet n'est pas utilisé pour déterminer les dates, mais l'historique de la PR est utilisé pour vérifier qu'une modification éditoriale n'est pas oubliée dans `lastmod`.
 
 ## Source de vérité unique de la taxonomie — 2026-10-03
 
