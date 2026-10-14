@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="calculator-rendering" content="static">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="google-adsense-account" content="ca-pub-2924580037451268">
+<meta name="google-adsense-account" content="ca-pub-2924580037451268">
   <title>Calculateur de moyenne pondérée avec coefficients</title>
   <meta name="description" content="Calculez une moyenne pondérée avec autant de valeurs que nécessaire : saisissez notes, coefficients ou effectifs, puis consultez la formule et un exemple.">
   <link rel="canonical" href="https://simulateur.site/outil/moyenne-ponderee/">
@@ -194,16 +194,30 @@
 
     window.TOOL = {
       calc: function () {
-        const rows = Array.from(document.querySelectorAll("#fields .weighted-row"));
         const parseDecimal = value => {
           const normalized = String(value).trim().replace(/\s/g, "").replace(",", ".");
           if (!normalized || !/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)$/.test(normalized)) return NaN;
           return Number(normalized);
         };
-        const values = rows.map(row => ({
-          value: parseDecimal(row.querySelector('input[id^="v"]').value),
-          weight: parseDecimal(row.querySelector('input[id^="w"]').value)
-        }));
+        // Parcourt les identifiants de lignes : compatible avec le harnais de tests
+        // sans DOM complet et avec les suppressions de lignes intermédiaires.
+        const values = [];
+        let consecutiveMissing = 0;
+        for (let index = 1; index <= 1000 && consecutiveMissing < 10; index++) {
+          const valueInput = document.getElementById("v" + index);
+          const weightInput = document.getElementById("w" + index);
+          if (!valueInput && !weightInput) {
+            consecutiveMissing++;
+            continue;
+          }
+          consecutiveMissing = 0;
+          if (valueInput && weightInput) {
+            values.push({
+              value: parseDecimal(valueInput.value),
+              weight: parseDecimal(weightInput.value)
+            });
+          }
+        }
         if (values.length < 2) return "Saisissez au moins deux couples valeur-poids.";
         if (!values.every(item => Number.isFinite(item.value) && Number.isFinite(item.weight))) {
           return "Renseignez une valeur et un poids valides pour chaque ligne.";
