@@ -39,11 +39,7 @@ function git(...args) {
 }
 
 function readAt(ref, file) {
-  try {
-    return git("show", `${ref}:${file}`);
-  } catch {
-    return null;
-  }
+  return git("show", `${ref}:${file}`);
 }
 
 function main() {
@@ -52,39 +48,55 @@ function main() {
     process.exit(1);
   }
 
-  let changed;
+  let changes;
   try {
-    changed = git("diff", "--name-only", "--diff-filter=ACMR", `${BASE_REF}...HEAD`)
+    changes = git("diff", "--no-renames", "--name-status", "--diff-filter=ACMR", `${BASE_REF}...HEAD`)
       .split(/\r?\n/)
-      .filter(file => HTML_PATH.test(file) || file === "public/index.html");
+      .filter(Boolean)
+      .map(line => {
+        const [status, file] = line.split("\t");
+        return { status, file };
+      })
+      .filter(change => HTML_PATH.test(change.file) || change.file === "public/index.html");
   } catch (error) {
     console.error("Impossible de comparer les pages avec la base de la PR : " + error.message);
     process.exit(1);
   }
 
-  if (!changed.length) {
+  if (!changes.length) {
     console.log("Lastmod guard : aucune page HTML indexable modifiée.");
     return;
   }
 
-  const baseDataRaw = readAt(BASE_REF, "data/lastmod.json");
-  const currentDataRaw = fs.readFileSync(path.join(ROOT, "data/lastmod.json"), "utf8");
   let baseRoutes;
   let currentRoutes;
   try {
-    baseRoutes = JSON.parse(baseDataRaw ?? "{}").routes ?? {};
-    currentRoutes = JSON.parse(currentDataRaw).routes ?? {};
+    const baseData = JSON.parse(readAt(BASE_REF, "data/lastmod.json"));
+    const currentData = JSON.parse(fs.readFileSync(path.join(ROOT, "data/lastmod.json"), "utf8"));
+    if (!baseData || typeof baseData !== "object" || !baseData.routes || typeof baseData.routes !== "object" || Array.isArray(baseData.routes)) {
+      throw new Error("la version de base de data/lastmod.json ne contient pas d'objet routes valide");
+    }
+    if (!currentData || typeof currentData !== "object" || !currentData.routes || typeof currentData.routes !== "object" || Array.isArray(currentData.routes)) {
+      throw new Error("la version courante de data/lastmod.json ne contient pas d'objet routes valide");
+    }
+    baseRoutes = baseData.routes;
+    currentRoutes = currentData.routes;
   } catch (error) {
-    console.error("Impossible de lire data/lastmod.json : " + error.message);
+    console.error("Impossible de lire ou valider data/lastmod.json dans la base et la PR : " + error.message);
     process.exit(1);
   }
 
   const errors = [];
-  for (const file of changed) {
-    const baseHtml = readAt(BASE_REF, file);
-    const currentHtml = fs.readFileSync(path.join(ROOT, file), "utf8");
-    if (baseHtml === null) continue; // Nouvelle page : le contrôle de couverture du sitemap vérifie son entrée.
-    errors.push(...checkPageLastmod({ file, baseHtml, currentHtml, baseRoutes, currentRoutes }));
+  try {
+    for (const { status, file } of changes) {
+      if (status === "A") continue; // Nouvelle page : la couverture exacte du sitemap vérifie son entrée.
+      const baseHtml = readAt(BASE_REF, file);
+      const currentHtml = fs.readFileSync(path.join(ROOT, file), "utf8");
+      errors.push(...checkPageLastmod({ file, baseHtml, currentHtml, baseRoutes, currentRoutes }));
+    }
+  } catch (error) {
+    console.error("Impossible de vérifier une page modifiée pour lastmod : " + error.message);
+    process.exit(1);
   }
 
   if (errors.length) {
