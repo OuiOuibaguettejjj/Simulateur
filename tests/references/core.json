@@ -2104,10 +2104,17 @@
       "ref": "48000",
       "duree": "730"
     },
-    "attendu": 39.74465753424658,
-    "tolerance": 0.02,
+    "attendu": 39.74,
+    "tolerance": 0.001,
     "sortie": "39,74",
+    "verifications": [
+      {
+        "sortie": "Allocation mensuelle indicative",
+        "attendu": 1192.2,
+        "tolerance": 0.001
+      }
+    ],
     "source": "https://www.francetravail.fr/candidat/mes-droits-aux-aides-et-allocati/lessentiel-a-savoir-sur-lallocat/quelle-somme-vais-je-recevoir/comment-est-calcule-le-montant-d.html",
-    "note": "Cas arithmétique indépendant : SJR = 48 000 / 730 ; max(40,4 % × SJR + 13,18 €, 57 % × SJR, 32,13 €), plafonné à 75 % du SJR. Valeur attendue calculée directement à partir de la formule officielle, sans exécuter le calculateur testé."
+    "note": "Calcul indépendant : SJR = 48 000 / 730 ; montant journalier exact ≈ 39,74438 €, arrondi à 39,74 € avant mensualisation. La base forfaitaire mensuelle est 39,74 × 30 = 1 192,20 €. Valeurs calculées directement à partir de la formule officielle, sans exécuter le calculateur testé."
   }
 ]
