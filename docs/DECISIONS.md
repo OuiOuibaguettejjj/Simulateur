@@ -1,6 +1,6 @@
 ## 2026-10-15 — Qualification du calculateur de congés payés
 
-Le calculateur `/outil/conges-payes/` est classé **D — à qualifier** pour sa logique métier : il compare les deux méthodes prévues pour l’indemnité de congés payés, mais son maintien de salaire repose sur une approximation mensuelle et la page ne modélise pas les éléments de rémunération, les horaires réels ou les situations particulières. La source officielle Service-Public a été consultée le 15 octobre 2026. Cet enrichissement améliore le contenu, le SEO et l’explication des limites sans modifier la formule ni les résultats du calculateur. Toute évolution de la logique métier devra être auditée séparément et s’appuyer sur des règles officielles et des cas de référence indépendants.
+Le calculateur `/outil/conges-payes/` est classé **D — à qualifier** : il compare les deux méthodes d’indemnisation, mais ne modélise pas les éléments de rémunération, les horaires réels ou les situations particulières. La source officielle Service-Public a été consultée le 15 octobre 2026. Le maintien de salaire utilise désormais un champ distinct pour les jours de travail qui auraient été effectués pendant l’absence, afin de ne pas réutiliser directement le nombre de jours ouvrés/ouvrables décomptés pour le 1/10e. La méthode mensuelle reste indicative et doit être vérifiée avec l’horaire réel. Des tests de référence indépendants couvrent l’exemple officiel (2 000 € mensuels, 10 jours ouvrés sur 21 jours travaillés : maintien 952,38 €, 1/10e 960 €).
 
 # Décisions d’architecture
 
