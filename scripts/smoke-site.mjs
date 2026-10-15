@@ -32,7 +32,7 @@ try{
    if(!(await page.title()))errors.push(file+": "+(mode==="production"?"production ":"")+"empty title");
    if(isInteractivePage(file.slice("public/".length))){
     await populate(page);const buttons=page.locator("button"),n=await buttons.count();if(n===0)errors.push(file+": "+(mode==="production"?"production ":"")+"no button");
-    const initialButtons=await buttons.all();for(let i=0;i<initialButtons.length;i++)try{const button=initialButtons[i];if(await button.isDisabled())continue;await button.click({timeout:mode==="local"?1500:2000});await page.waitForTimeout(mode==="local"?30:50)}catch(e){errors.push(file+": "+(mode==="production"?"production ":"")+"button "+i+" click failed: "+e.message)}
+    const initialButtons=await buttons.elementHandles();for(let i=0;i<initialButtons.length;i++)try{const button=initialButtons[i];if(await button.isDisabled())continue;await button.click({timeout:mode==="local"?1500:2000});await page.waitForTimeout(mode==="local"?30:50)}catch(e){errors.push(file+": "+(mode==="production"?"production ":"")+"button "+i+" click failed: "+e.message)}
     if(file==="public/outil/prix-unitaire/index.html"){
      const result=page.locator("#result");
      try{
