@@ -15,4 +15,4 @@ La source confirme le principe général de comparaison et les bases usuelles de
 - Le calculateur ne détermine pas quels éléments de rémunération doivent entrer dans la base.
 - Il ne modélise pas les absences, les périodes assimilées, les horaires variables ou toutes les dispositions conventionnelles.
 - Les résultats sont des estimations brutes et ne constituent pas un calcul de paie opposable.
-- Aucune modification de la formule métier n’est incluse dans cet enrichissement.
+- La formule de maintien de salaire est une estimation mensuelle simplifiée : la source officielle confirme le principe du maintien, mais ne valide pas cette approximation pour chaque situation individuelle.
