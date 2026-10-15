@@ -52,5 +52,6 @@ await import("./remise.test.mjs");
 await import("./temps-calcul.test.mjs");
 await import("./promotions.test.mjs");
 await import("./pourcentage.test.mjs");
+await import("./conges-payes.test.mjs");
 await import("./cash-flow-immobilier.test.mjs");
 
