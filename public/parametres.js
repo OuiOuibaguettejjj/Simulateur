@@ -23,6 +23,22 @@
         "tauxEffortMax": 35
       }
     },
+    "conges-payes": {
+      "label": "Méthodes de calcul de l’indemnité de congés payés",
+      "year": 2026,
+      "effectiveFrom": "2026-01-01",
+      "effectiveTo": "2026-12-31",
+      "verifiedOn": "2026-10-15",
+      "source": {
+        "label": "Service-Public — calcul de l’indemnité de congés payés",
+        "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F33359"
+      },
+      "values": {
+        "joursBaseOuvrables": 30,
+        "joursBaseOuvres": 25,
+        "tauxDixieme": 0.1
+      }
+    },
     "donation": {
       "label": "Droits de donation — abattements et barèmes",
       "year": 2026,
