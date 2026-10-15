@@ -60,18 +60,6 @@
     "rule": "formula"
   },
   {
-    "path": "public/outil/heures-supplementaires/index.html",
-    "rule": "content-h2"
-  },
-  {
-    "path": "public/outil/heures-supplementaires/index.html",
-    "rule": "description"
-  },
-  {
-    "path": "public/outil/heures-supplementaires/index.html",
-    "rule": "faq"
-  },
-  {
     "path": "public/outil/indemnite-precarite/index.html",
     "rule": "faq"
   },
