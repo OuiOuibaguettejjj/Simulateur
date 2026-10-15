@@ -8,7 +8,7 @@ Dernière vérification : 15 octobre 2026.
 
 ## Portée de la vérification
 
-La source confirme le principe général de comparaison et les bases usuelles de 25 jours ouvrés ou 30 jours ouvrables pour une période complète. Elle ne valide pas chaque cas particulier couvert par le calculateur. Le maintien de salaire actuellement implémenté utilise le salaire mensuel brut multiplié par le rapport entre les jours de congé et les jours travaillés du mois ; il s’agit d’une approximation qui ne reconstitue pas l’horaire réel.
+La source confirme le principe général de comparaison et les bases usuelles de 25 jours ouvrés ou 30 jours ouvrables pour une période complète. Elle ne valide pas chaque cas particulier couvert par le calculateur. Le maintien de salaire utilise le salaire mensuel brut rapporté aux jours travaillés du mois, puis multiplié par le nombre de jours de travail qui auraient été effectués pendant l’absence. Ce nombre est saisi séparément des jours de congés décomptés afin d’éviter de mélanger jours ouvrés et jours ouvrables. La méthode reste une approximation : elle ne reconstitue pas l’horaire réel ni les éléments de paie.
 
 ## Limites
 
