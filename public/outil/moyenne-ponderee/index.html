@@ -1,3 +1,235 @@
-<!doctype html><html lang="fr"><head><meta name="calculator-rendering" content="static"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="google-adsense-account" content="ca-pub-2924580037451268"><title>Calculateur de moyenne pondérée | Simulateur</title><meta name="description" content="Calculez une moyenne avec deux valeurs et leurs poids."><link rel="canonical" href="https://simulateur.site/outil/moyenne-ponderee/"><link rel="stylesheet" href="/styles.css"><script src="/simulateurs.js" defer></script><script src="/enter-calcul.js" defer></script><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Moyenne pondérée","url":"https://simulateur.site/outil/moyenne-ponderee/","description":"Calculez une moyenne avec deux valeurs et leurs poids.","inLanguage":"fr-FR","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"price":"0","priceCurrency":"EUR"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Maths","item":"https://simulateur.site/maths/"},{"@type":"ListItem","position":3,"name":"Moyenne pondérée","item":"https://simulateur.site/outil/moyenne-ponderee/"}]}</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta property="og:type" content="website"><meta property="og:site_name" content="Simulateur"><meta property="og:locale" content="fr_FR"><meta property="og:title" content="Moyenne pondérée"><meta property="og:description" content="Calculez une moyenne avec deux valeurs et leurs poids."><meta property="og:url" content="https://simulateur.site/outil/moyenne-ponderee/"><meta name="twitter:card" content="summary"></head><body><header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header><main><div class="wrap"><div class="breadcrumb"><a href="/">Accueil</a> · <a href="/maths/">Maths</a> · Moyenne pondérée</div><section class="tool"><div class="eyebrow">STATISTIQUES</div><h1>Moyenne pondérée</h1><p class="tool-intro">Calculez une moyenne avec deux valeurs et leurs poids.</p><div id="fields"><div class="field"><label for="v1">Valeur 1</label><input id="v1" type="number" value="12"></div><div class="field"><label for="w1">Poids 1</label><input id="w1" type="number" value="2"></div><div class="field"><label for="v2">Valeur 2</label><input id="v2" type="number" value="16"></div><div class="field"><label for="w2">Poids 2</label><input id="w2" type="number" value="1"></div></div><button class="button-main" onclick="Simulateurs.calc()">Calculer</button><div class="result" id="result" aria-live="polite"></div><div class="formula"><p>Calculez une moyenne avec deux valeurs et leurs poids.</p></div></section></div><section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Outils associés</h2><div class="related-links"><a class="related-link" href="/outil/moyenne/"><strong>Moyenne</strong><span>Calculer la moyenne arithmétique d'une série de valeurs.</span></a><a class="related-link" href="/outil/median-mode/"><strong>Médiane et mode</strong><span>Calculer la médiane et le mode d'une série de valeurs.</span></a><a class="related-link" href="/outil/proportion/"><strong>Proportion et règle de trois</strong><span>Résoudre une proportion simplement.</span></a></div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="/maths/">Maths</a>.</p></div></section>
-</main><footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer><script>window.TOOL={calc:function(){const a=+this.$("v1").value,b=+this.$("w1").value,c=+this.$("v2").value,d=+this.$("w2").value;if(b+d===0)return"Poids invalides.";return"<strong>"+((a*b+c*d)/(b+d)).toLocaleString("fr-FR")+"</strong>"}};</script></body></html>
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="calculator-rendering" content="static">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="google-adsense-account" content="ca-pub-2924580037451268">
+  <title>Calculateur de moyenne pondérée avec coefficients</title>
+  <meta name="description" content="Calculez une moyenne pondérée avec plusieurs valeurs et leurs coefficients. Ajoutez des lignes, consultez la formule et vérifiez le calcul grâce à un exemple.">
+  <link rel="canonical" href="https://simulateur.site/outil/moyenne-ponderee/">
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    .weighted-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;gap:14px;align-items:end}
+    .weighted-row .field{min-width:0}
+    .weighted-row .remove-weighted-row{margin-bottom:16px;font:inherit;font-size:.82rem;padding:10px}
+    .weighted-row .remove-weighted-row:disabled{opacity:.45;cursor:not-allowed}
+    @media(max-width:650px){.weighted-row{grid-template-columns:1fr}.weighted-row .remove-weighted-row{margin-bottom:0}}
+  </style>
+  <script src="/simulateurs.js" defer></script>
+  <script src="/enter-calcul.js" defer></script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Calculateur de moyenne pondérée avec coefficients",
+      "url": "https://simulateur.site/outil/moyenne-ponderee/",
+      "description": "Calculez une moyenne pondérée avec plusieurs valeurs et leurs coefficients. Ajoutez des lignes, consultez la formule et vérifiez le calcul grâce à un exemple.",
+      "inLanguage": "fr-FR",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript",
+      "offers": {"price": "0", "priceCurrency": "EUR"}
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},
+        {"@type":"ListItem","position":2,"name":"Maths","item":"https://simulateur.site/maths/"},
+        {"@type":"ListItem","position":3,"name":"Calculateur de moyenne pondérée avec coefficients","item":"https://simulateur.site/outil/moyenne-ponderee/"}
+      ]
+    }
+  </script>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Simulateur">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:title" content="Calculateur de moyenne pondérée avec coefficients">
+  <meta property="og:description" content="Calculez une moyenne pondérée avec plusieurs valeurs et leurs coefficients. Ajoutez des lignes, consultez la formule et vérifiez le calcul grâce à un exemple.">
+  <meta property="og:url" content="https://simulateur.site/outil/moyenne-ponderee/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Calculateur de moyenne pondérée avec coefficients">
+  <meta name="twitter:description" content="Calculez une moyenne pondérée avec plusieurs valeurs et leurs coefficients. Ajoutez des lignes, consultez la formule et vérifiez le calcul grâce à un exemple.">
+</head>
+<body>
+  <header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header>
+  <main>
+    <div class="wrap">
+      <div class="breadcrumb"><a href="/">Accueil</a> · <a href="/maths/">Maths</a> · Calculateur de moyenne pondérée avec coefficients</div>
+      <section class="tool">
+        <div class="eyebrow">STATISTIQUES</div>
+        <h1>Calculateur de moyenne pondérée avec coefficients</h1>
+        <p class="tool-intro">Calculez une moyenne pondérée pour autant de valeurs que nécessaire. Ajoutez une ligne pour chaque note, coefficient, valeur ou effectif à prendre en compte.</p>
+        <div id="fields" aria-describedby="values-help weights-help">
+          <div class="weighted-row row" data-row="1">
+            <div class="field">
+              <label for="v1">Valeur 1</label>
+              <input id="v1" name="value-1" type="text" inputmode="decimal" value="12" autocomplete="off">
+            </div>
+            <div class="field">
+              <label for="w1">Poids de la valeur 1</label>
+              <input id="w1" name="weight-1" type="text" inputmode="decimal" value="2" autocomplete="off">
+            </div>
+            <button class="button remove-weighted-row" type="button" aria-label="Supprimer la ligne 1" disabled>Supprimer cette ligne</button>
+          </div>
+          <div class="weighted-row row" data-row="2">
+            <div class="field">
+              <label for="v2">Valeur 2</label>
+              <input id="v2" name="value-2" type="text" inputmode="decimal" value="16" autocomplete="off">
+            </div>
+            <div class="field">
+              <label for="w2">Poids de la valeur 2</label>
+              <input id="w2" name="weight-2" type="text" inputmode="decimal" value="1" autocomplete="off">
+            </div>
+            <button class="button remove-weighted-row" type="button" aria-label="Supprimer la ligne 2" disabled>Supprimer cette ligne</button>
+          </div>
+        </div>
+        <p id="values-help">Les valeurs peuvent être entières, décimales ou négatives. La virgule et le point sont acceptés comme séparateurs décimaux.</p>
+        <p id="weights-help">Les poids doivent être positifs ou nuls. Leur somme doit être strictement supérieure à zéro.</p>
+        <button class="button" id="add-weighted-row" type="button">Ajouter une valeur</button>
+        <button class="button-main" type="button" onclick="Simulateurs.calc()">Calculer</button>
+        <div class="result" id="result" aria-live="polite">Avec les valeurs 12 et 16 et les poids 2 et 1, la moyenne pondérée est 13,33.</div>
+        <div class="formula">
+          <strong>Formule et source</strong>
+          <p>La moyenne pondérée est la somme des produits de chaque valeur par son poids, divisée par la somme des poids.</p>
+          <p><strong>Formule :</strong> moyenne pondérée = somme (valeur × poids) ÷ somme des poids.</p>
+          <p>Référence mathématique : <a href="https://mathworld.wolfram.com/WeightedMean.html" target="_blank" rel="noopener noreferrer">Wolfram MathWorld — Weighted Mean</a>.</p>
+        </div>
+      </section>
+    </div>
+    <section class="content-section">
+      <h2>Comment calculer une moyenne pondérée ?</h2>
+      <p>Contrairement à une moyenne arithmétique simple, une moyenne pondérée donne à chaque valeur une importance déterminée par son poids. Multipliez chaque valeur par son poids, additionnez les produits, puis divisez cette somme par le total des poids.</p>
+      <p>Les poids peuvent représenter des coefficients, des effectifs ou toute autre mesure de l’importance relative des valeurs. Ils doivent être exprimés sur une base cohérente. Si tous les poids sont égaux, la moyenne pondérée est identique à la moyenne arithmétique.</p>
+      <h2>Exemple de moyenne avec coefficients</h2>
+      <p>Une note de 12 compte coefficient 2 et une note de 16 compte coefficient 1. Le calcul donne (12 × 2 + 16 × 1) ÷ (2 + 1), soit 40 ÷ 3 = 13,333… La moyenne arrondie à deux décimales est donc 13,33.</p>
+      <p>La note 12 pèse deux fois plus que la note 16 dans le résultat final. La moyenne se rapproche donc davantage de 12 que de 16. L’arrondi affiché ne change pas la valeur utilisée dans le calcul.</p>
+      <h2>Bien choisir les poids et comprendre les limites</h2>
+      <p>Un poids nul signifie que la valeur correspondante ne contribue pas à la moyenne. Des poids négatifs ne sont pas acceptés par ce calculateur, car les poids usuels d’une moyenne pondérée représentent une importance ou un effectif non négatif. Si tous les poids sont nuls, la moyenne est indéfinie : il n’existe aucun poids total permettant de normaliser le résultat.</p>
+      <p>Ajoutez une ligne pour chaque valeur de votre série. Pour un grand nombre de données, la formule reste la même : additionnez chaque produit valeur × poids, puis divisez par la somme de tous les poids.</p>
+    </section>
+    <section class="calculator-faq" aria-labelledby="faq-title">
+      <h2 id="faq-title">FAQ</h2>
+      <details>
+        <summary>Quelle est la différence entre moyenne simple et moyenne pondérée ?</summary>
+        <div class="calculator-faq-answer">
+          <p>La moyenne simple donne la même importance à chaque valeur. La moyenne pondérée attribue une importance différente à chacune grâce à son poids. Si tous les poids sont égaux, les deux moyennes sont identiques.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Comment calculer une moyenne avec des coefficients ?</summary>
+        <div class="calculator-faq-answer">
+          <p>Multipliez chaque note par son coefficient, additionnez les produits et divisez le total par la somme des coefficients. Par exemple, 12 coefficient 2 et 16 coefficient 1 donnent (12 × 2 + 16 × 1) ÷ 3, soit environ 13,33.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Un poids peut-il être égal à zéro ?</summary>
+        <div class="calculator-faq-answer">
+          <p>Oui. Un poids nul signifie que la valeur ne contribue pas au résultat. En revanche, la somme de tous les poids doit être supérieure à zéro ; si elle est nulle, la moyenne pondérée n’est pas définie.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Peut-on calculer une moyenne pondérée avec plus de deux valeurs ?</summary>
+        <div class="calculator-faq-answer">
+          <p>Oui. Ajoutez une ligne par valeur, puis renseignez son poids. Le calcul additionne tous les produits valeur × poids et divise le total par la somme de tous les poids.</p>
+        </div>
+      </details>
+    </section>
+    <section class="related-tools">
+      <div>
+        <div class="eyebrow">À VOIR AUSSI</div>
+        <h2>Outils associés</h2>
+        <div class="related-links">
+          <a class="related-link" href="/outil/moyenne/"><strong>Moyenne</strong><span>Calculer la moyenne arithmétique d’une série de valeurs.</span></a>
+          <a class="related-link" href="/outil/median-mode/"><strong>Médiane et mode</strong><span>Calculer la médiane et le mode d’une série de valeurs.</span></a>
+          <a class="related-link" href="/outil/proportion/"><strong>Proportion et règle de trois</strong><span>Résoudre une proportion simplement.</span></a>
+        </div>
+      </div>
+      <p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="/maths/">Maths</a>.</p>
+    </section>
+  </main>
+  <footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer>
+  <script>
+    (function () {
+      let nextRow = 3;
+      const fields = document.getElementById("fields");
+      const addButton = document.getElementById("add-weighted-row");
+
+      function refreshRemoveButtons() {
+        const rows = fields.querySelectorAll(".weighted-row");
+        rows.forEach(row => {
+          const button = row.querySelector(".remove-weighted-row");
+          button.disabled = rows.length <= 2;
+        });
+      }
+
+      addButton.addEventListener("click", function () {
+        const number = nextRow++;
+        const row = document.createElement("div");
+        row.className = "weighted-row row";
+        row.dataset.row = String(number);
+        row.innerHTML =
+          '<div class="field"><label for="v' + number + '">Valeur ' + number + '</label>' +
+          '<input id="v' + number + '" name="value-' + number + '" type="text" inputmode="decimal" autocomplete="off"></div>' +
+          '<div class="field"><label for="w' + number + '">Poids de la valeur ' + number + '</label>' +
+          '<input id="w' + number + '" name="weight-' + number + '" type="text" inputmode="decimal" autocomplete="off"></div>' +
+          '<button class="button remove-weighted-row" type="button" aria-label="Supprimer la ligne ' + number + '">Supprimer cette ligne</button>';
+        fields.appendChild(row);
+        refreshRemoveButtons();
+        row.querySelector("input").focus();
+      });
+
+      fields.addEventListener("click", function (event) {
+        const button = event.target.closest(".remove-weighted-row");
+        if (!button || button.disabled) return;
+        button.closest(".weighted-row").remove();
+        refreshRemoveButtons();
+      });
+
+      refreshRemoveButtons();
+    })();
+
+    window.TOOL = {
+      calc: function () {
+        const parseDecimal = value => {
+          const normalized = String(value).trim().replace(/\s/g, "").replace(",", ".");
+          if (!normalized || !/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)$/.test(normalized)) return NaN;
+          return Number(normalized);
+        };
+        // Parcourt les identifiants de lignes : compatible avec le harnais de tests
+        // sans DOM complet et avec les suppressions de lignes intermédiaires.
+        const values = [];
+        for (let index = 1; index <= 1000; index++) {
+          const valueInput = document.getElementById("v" + index);
+          const weightInput = document.getElementById("w" + index);
+          if (valueInput && weightInput) {
+            values.push({
+              value: parseDecimal(valueInput.value),
+              weight: parseDecimal(weightInput.value)
+            });
+          }
+        }
+        if (values.length < 2) return "Saisissez au moins deux couples valeur-poids.";
+        if (!values.every(item => Number.isFinite(item.value) && Number.isFinite(item.weight))) {
+          return "Renseignez une valeur et un poids valides pour chaque ligne.";
+        }
+        if (values.some(item => item.weight < 0)) return "Les poids doivent être positifs ou nuls.";
+
+        const maxWeight = Math.max(...values.map(item => item.weight));
+        if (maxWeight === 0) return "La somme des poids doit être supérieure à zéro.";
+        const normalizedWeights = values.map(item => item.weight / maxWeight);
+        const totalWeight = normalizedWeights.reduce((sum, weight) => sum + weight, 0);
+        const result = values.reduce(
+          (sum, item, index) => sum + item.value * (normalizedWeights[index] / totalWeight),
+          0
+        );
+        if (!Number.isFinite(result)) return "Le résultat est trop grand pour être calculé. Vérifiez les valeurs saisies.";
+        return "<strong>" + result.toLocaleString("fr-FR", { maximumFractionDigits: 3 }) + "</strong> | Moyenne pondérée";
+      }
+    };
+  </script>
+</body>
+</html>
