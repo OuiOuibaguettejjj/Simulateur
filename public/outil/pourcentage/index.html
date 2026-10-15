@@ -56,7 +56,7 @@ const result=a/b*100;if(!Number.isFinite(result))return"Le résultat dépasse le
 return"<strong>"+fmt(result)+" %</strong><p>"+fmt(a)+" représente "+fmt(result)+" % de "+fmt(b)+".</p>";
 }
 if(mode.value==="variation"){
-if(a===0)return"La valeur initiale doit être différente de zéro pour calculer une évolution.";
+if(a<=0)return"La valeur initiale doit être positive et différente de zéro pour interpréter correctement une hausse ou une baisse.";
 const result=(b-a)/a*100;if(!Number.isFinite(result))return"Le résultat dépasse les limites de calcul.";
 const word=result>0?"hausse":result<0?"baisse":"aucune variation";
 return"<strong>"+fmt(result)+" %</strong><p>De "+fmt(a)+" à "+fmt(b)+", l’évolution correspond à "+word+".</p>";
