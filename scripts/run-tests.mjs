@@ -43,6 +43,7 @@ export const STEPS=[
   step("simulateurs","unit","tests/simulateurs.test.js"),
   step("median-mode","unit","tests/median-mode.test.mjs"),
   step("salaire-horaire","unit","tests/salaire-horaire.test.mjs"),
+  step("heures-supplementaires","unit","tests/heures-supplementaires.test.mjs"),
   step("salaire-brut-net","unit","tests/salaire-brut-net.test.js"),
   step("smic","unit","tests/smic.test.mjs"),
   step("ptz","unit","tests/ptz.test.mjs"),
