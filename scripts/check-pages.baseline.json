@@ -188,22 +188,6 @@
     "rule": "formula"
   },
   {
-    "path": "public/outil/pourcentage/index.html",
-    "rule": "description"
-  },
-  {
-    "path": "public/outil/pourcentage/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/pourcentage/index.html",
-    "rule": "formula"
-  },
-  {
-    "path": "public/outil/pourcentage/index.html",
-    "rule": "result"
-  },
-  {
     "path": "public/outil/sasu-vs-ei-micro/index.html",
     "rule": "content-h2"
   },
