@@ -4,7 +4,7 @@ import {runInlineCalculator} from "./calculator-harness.mjs";
 const cases=[
   {name:"part d'une valeur",inputs:{mode:"part",v:"250",p:"20"},expected:"20 % de 250 = 50"},
   {name:"pourcentage représenté",inputs:{mode:"ratio",v:"30",p:"150"},expected:"30 représente 20 % de 150"},
-  {name:"hausse",inputs:{mode:"variation",v:"80",p:"100"},expected:"31,25 %"},
+  {name:"hausse",inputs:{mode:"variation",v:"80",p:"100"},expected:"25 %"},
   {name:"baisse",inputs:{mode:"variation",v:"100",p:"80"},expected:"-20 %"},
   {name:"division par zéro pour une proportion",inputs:{mode:"ratio",v:"30",p:"0"},expected:"différente de zéro"},
   {name:"valeur initiale nulle",inputs:{mode:"variation",v:"0",p:"80"},expected:"différente de zéro"},
