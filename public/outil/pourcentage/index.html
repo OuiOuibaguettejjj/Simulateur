@@ -1,13 +1,66 @@
 <!doctype html><html lang="fr"><head><meta name="calculator-rendering" content="static"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="google-adsense-account" content="ca-pub-2924580037451268"><title>Calculateur de pourcentage | Simulateur</title><meta name="description" content="Calculez un pourcentage d'une valeur."><link rel="canonical" href="https://simulateur.site/outil/pourcentage/"><link rel="stylesheet" href="/styles.css"><script src="/simulateurs.js" defer></script><script src="/enter-calcul.js" defer></script><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Pourcentage","url":"https://simulateur.site/outil/pourcentage/","description":"Calculez un pourcentage d\u0027une valeur.","inLanguage":"fr-FR","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"price":"0","priceCurrency":"EUR"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Maths","item":"https://simulateur.site/maths/"},{"@type":"ListItem","position":3,"name":"Pourcentage","item":"https://simulateur.site/outil/pourcentage/"}]}</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta property="og:type" content="website"><meta property="og:site_name" content="Simulateur"><meta property="og:locale" content="fr_FR"><meta property="og:title" content="Pourcentage"><meta property="og:description" content="Calculez un pourcentage d'une valeur."><meta property="og:url" content="https://simulateur.site/outil/pourcentage/"><meta name="twitter:card" content="summary"></head><body><header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header><main><div class="wrap"><div class="breadcrumb"><a href="/">Accueil</a> · <a href="/maths/">Maths</a> · Pourcentage</div><section class="tool"><div class="eyebrow">Pourcentage</div><h1>Pourcentage</h1><p class="tool-intro">Calculez un pourcentage d'une valeur.</p><div id="fields"><div class="field"><label for="v">Valeur</label><input id="v" type="number" value="250"></div><div class="field"><label for="p">Pourcentage</label><input id="p" type="number" value="20"></div></div><button class="button-main" onclick="Simulateurs.calc()">Calculer</button><div class="result" id="result" aria-live="polite"></div><div class="formula"><p>Calculez un pourcentage d'une valeur.</p></div></section></div>
+<meta name="google-adsense-account" content="ca-pub-2924580037451268"><title>Calculateur de pourcentage : part et évolution | Simulateur</title><meta name="description" content="Utilisez ce calculateur de pourcentage pour calculer une part, trouver quel pourcentage représente une valeur ou mesurer une hausse et une baisse. Exemples et formules expliqués."><link rel="canonical" href="https://simulateur.site/outil/pourcentage/"><link rel="stylesheet" href="/styles.css"><script src="/simulateurs.js" defer></script><script src="/enter-calcul.js" defer></script><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Pourcentage","url":"https://simulateur.site/outil/pourcentage/","description":"Utilisez ce calculateur de pourcentage pour calculer une part, trouver quel pourcentage représente une valeur ou mesurer une hausse et une baisse. Exemples et formules expliqués.","inLanguage":"fr-FR","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"price":"0","priceCurrency":"EUR"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Maths","item":"https://simulateur.site/maths/"},{"@type":"ListItem","position":3,"name":"Pourcentage","item":"https://simulateur.site/outil/pourcentage/"}]}</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta property="og:type" content="website"><meta property="og:site_name" content="Simulateur"><meta property="og:locale" content="fr_FR"><meta property="og:title" content="Calculateur de pourcentage : part et évolution"><meta property="og:description" content="Utilisez ce calculateur de pourcentage pour calculer une part, trouver quel pourcentage représente une valeur ou mesurer une hausse et une baisse. Exemples et formules expliqués."><meta property="og:url" content="https://simulateur.site/outil/pourcentage/"><meta name="twitter:card" content="summary"></head><body><header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header><main><div class="wrap"><div class="breadcrumb"><a href="/">Accueil</a> · <a href="/maths/">Maths</a> · Calculateur de pourcentage</div><section class="tool">
+<div class="eyebrow">MATHS · POURCENTAGES</div>
+<h1>Calculateur de pourcentage</h1>
+<p class="tool-intro">Calculez un pourcentage d’une valeur, déterminez la part que représente un nombre ou mesurez une évolution entre deux valeurs.</p>
+<div id="fields">
+<div class="field"><label for="mode">Type de calcul</label><select id="mode" onchange="Simulateurs.calc()"><option value="part">Calculer X % d’une valeur</option><option value="ratio">Quel pourcentage représente une valeur ?</option><option value="variation">Calculer une hausse ou une baisse (%)</option></select></div>
+<div class="field"><label for="v" id="label-v">Valeur de référence</label><input id="v" type="number" value="250" step="any" inputmode="decimal" aria-describedby="hint-v"><small id="hint-v">Exemple : 250</small></div>
+<div class="field"><label for="p" id="label-p">Pourcentage (%)</label><input id="p" type="number" value="20" step="any" inputmode="decimal" aria-describedby="hint-p"><small id="hint-p">Exemple : 20 pour calculer 20 % de la valeur.</small></div>
+</div>
+<button class="button-main" type="button" onclick="Simulateurs.calc()">Calculer le pourcentage</button>
+<div class="result" id="result" aria-live="polite">20 % de 250 = 50.</div>
+<div class="formula"><p><strong>Formule :</strong> part = valeur × pourcentage ÷ 100. Pour trouver un pourcentage, divisez la partie par la valeur de référence puis multipliez par 100. Pour une évolution, calculez (valeur finale − valeur initiale) ÷ valeur initiale × 100.</p><p>Pour une définition et des exemples complémentaires, consultez l’article <a href="https://fr.wikipedia.org/wiki/Pourcentage" target="_blank" rel="noopener noreferrer">Pourcentage</a>.</p></div>
+</section></div>
 <section class="content-section">
-<h2>Comment calculer un pourcentage ?</h2>
-<p>Pour calculer <strong>x % d'une valeur</strong>, on multiplie cette valeur par x puis on divise par 100. Par exemple, 20 % de 150 € correspondent à 30 €.</p>
-<h2>Les calculs de pourcentage les plus courants</h2>
-<ul><li>trouver une part d'un montant ;</li><li>calculer quel pourcentage représente une valeur par rapport à une autre ;</li><li>calculer une augmentation ou une diminution en pourcentage ;</li><li>retrouver la valeur initiale après une variation.</li></ul>
-<h2>Attention aux variations successives</h2>
-<p>Une hausse de 20 % suivie d'une baisse de 20 % ne ramène pas au montant initial : les deux pourcentages s'appliquent à des bases différentes. Pour les promotions et variations successives, utilisez le calculateur de remise ou l'outil adapté.</p>
-<h2>Exemple</h2>
-<p>Si un prix passe de 80 € à 100 €, l'augmentation est de 25 %, car l'écart de 20 € représente 25 % de la valeur initiale de 80 €.</p>
+<h2>Comment calculer un pourcentage d’une valeur ?</h2>
+<p>Pour calculer X % d’un montant, multipliez ce montant par X puis divisez par 100. Par exemple, 20 % de 150 € donnent 150 × 20 ÷ 100 = 30 €. Vous pouvez utiliser le premier mode du calculateur pour obtenir directement cette part.</p>
+<h2>Comment savoir quel pourcentage représente une valeur ?</h2>
+<p>Divisez la partie par la valeur de référence, puis multipliez le résultat par 100. Par exemple, 30 représente 20 % de 150, car 30 ÷ 150 × 100 = 20 %. La valeur de référence ne doit pas être nulle pour que ce calcul ait un sens.</p>
+<h2>Comment calculer une hausse ou une baisse en pourcentage ?</h2>
+<p>Soustrayez la valeur initiale de la valeur finale, divisez l’écart par la valeur initiale, puis multipliez par 100. Si un prix passe de 80 € à 100 €, l’évolution est de (100 − 80) ÷ 80 × 100 = 25 %. Un résultat négatif indique une baisse. La valeur initiale doit être différente de zéro.</p>
+<h2>À retenir : les pourcentages successifs</h2>
+<p>Une hausse de 20 % puis une baisse de 20 % ne ramène pas à la valeur de départ : la seconde variation s’applique à une nouvelle base. Pour les remises commerciales, utilisez aussi le <a href="/outil/remise/">calculateur de remise</a>, qui calcule le prix après réduction.</p>
+</section>
+<section class="calculator-faq" aria-labelledby="faq-title"><h2 id="faq-title">FAQ</h2>
+<details><summary>Comment calculer 20 % d’un montant ?</summary><div class="calculator-faq-answer"><p>Multipliez le montant par 20 puis divisez par 100. Par exemple, 20 % de 150 € correspondent à 30 €.</p></div></details>
+<details><summary>Comment calculer le pourcentage entre deux nombres ?</summary><div class="calculator-faq-answer"><p>Pour connaître la part, divisez la valeur étudiée par la valeur de référence et multipliez par 100. Pour mesurer une évolution, utilisez plutôt (valeur finale − valeur initiale) ÷ valeur initiale × 100.</p></div></details>
+<details><summary>Comment calculer une augmentation de 10 % ?</summary><div class="calculator-faq-answer"><p>Multipliez la valeur initiale par 1,10. Par exemple, une valeur de 80 € après une hausse de 10 % devient 88 €.</p></div></details>
+<details><summary>Une variation négative correspond-elle à une baisse ?</summary><div class="calculator-faq-answer"><p>Oui. Dans le calcul de variation, un pourcentage négatif signifie que la valeur finale est inférieure à la valeur initiale.</p></div></details>
+<details><summary>Peut-on calculer une évolution à partir de zéro ?</summary><div class="calculator-faq-answer"><p>Non, le pourcentage d’évolution n’est pas défini lorsque la valeur initiale est nulle, car le calcul nécessite une division par cette valeur.</p></div></details>
 </section><section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Outils associés</h2><div class="related-links"><a class="related-link" href="/outil/tva/"><strong>TVA : HT ↔ TTC</strong><span>Passer du HT au TTC et retrouver le montant de TVA.</span></a><a class="related-link" href="/outil/remise/"><strong>Calcul de remise</strong><span>Calculer rapidement un prix après réduction.</span></a><a class="related-link" href="/outil/marge/"><strong>Marge et taux de marge</strong><span>Calculer marge, taux de marge et prix de vente.</span></a></div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="/maths/">Maths</a>.</p></div></section>
-</main><footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer><script>window.TOOL={calc:function(){const v=+this.$("v").value,p=+this.$("p").value;if(v<0||p<0)return"Valeurs invalides.";return"<strong>"+this.euro(v*p/100)+"</strong>"}};</script></body></html>
+</main><footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer><script>
+(function(){
+const mode=document.getElementById("mode"),v=document.getElementById("v"),p=document.getElementById("p");
+const lv=document.getElementById("label-v"),lp=document.getElementById("label-p"),hv=document.getElementById("hint-v"),hp=document.getElementById("hint-p");
+function updateLabels(){
+if(mode.value==="part"){lv.textContent="Valeur de référence";lp.textContent="Pourcentage (%)";hv.textContent="Exemple : 250";hp.textContent="Exemple : 20 pour calculer 20 % de la valeur."}
+else if(mode.value==="ratio"){lv.textContent="Valeur étudiée (partie)";lp.textContent="Valeur de référence";hv.textContent="Exemple : 30";hp.textContent="Exemple : 150, la valeur totale de référence."}
+else{lv.textContent="Valeur initiale";lp.textContent="Valeur finale";hv.textContent="Exemple : 80";hp.textContent="Exemple : 100, après la hausse ou la baisse."}
+}
+mode.addEventListener("change",updateLabels);updateLabels();
+window.TOOL={calc:function(){
+const rawV=String(v.value??"").trim().replace(/\s/g,"").replace(",",".");
+const rawP=String(p.value??"").trim().replace(/\s/g,"").replace(",",".");
+const a=rawV===""?NaN:Number(rawV),b=rawP===""?NaN:Number(rawP);
+if(!Number.isFinite(a)||!Number.isFinite(b))return"Renseignez les deux valeurs avec des nombres valides.";
+if(!Number.isFinite(a*b))return"Les valeurs saisies sont trop grandes pour être calculées.";
+if(mode.value==="part"){
+const result=a*b/100;if(!Number.isFinite(result))return"Le résultat dépasse les limites de calcul.";
+return"<strong>"+this.euro(result)+"</strong><p>"+this.euro(b)+" % de "+this.euro(a)+" = "+this.euro(result)+".</p>";
+}
+if(mode.value==="ratio"){
+if(b===0)return"La valeur de référence doit être différente de zéro.";
+const result=a/b*100;if(!Number.isFinite(result))return"Le résultat dépasse les limites de calcul.";
+return"<strong>"+this.euro(result)+" %</strong><p>"+this.euro(a)+" représente "+this.euro(result)+" % de "+this.euro(b)+".</p>";
+}
+if(mode.value==="variation"){
+if(a===0)return"La valeur initiale doit être différente de zéro pour calculer une évolution.";
+const result=(b-a)/a*100;if(!Number.isFinite(result))return"Le résultat dépasse les limites de calcul.";
+const word=result>0?"hausse":result<0?"baisse":"aucune variation";
+return"<strong>"+this.euro(result)+" %</strong><p>De "+this.euro(a)+" à "+this.euro(b), l’évolution correspond à "+word+".</p>";
+}
+return"Choisissez un type de calcul valide.";
+}};
+})();
+</script></body></html>
