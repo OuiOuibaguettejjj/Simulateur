@@ -1,3 +1,7 @@
+## 2026-10-15 — Qualification du calculateur de congés payés
+
+Le calculateur `/outil/conges-payes/` est classé **D — à qualifier** pour sa logique métier : il compare les deux méthodes prévues pour l’indemnité de congés payés, mais son maintien de salaire repose sur une approximation mensuelle et la page ne modélise pas les éléments de rémunération, les horaires réels ou les situations particulières. La source officielle Service-Public a été consultée le 15 octobre 2026. Cet enrichissement améliore le contenu, le SEO et l’explication des limites sans modifier la formule ni les résultats du calculateur. Toute évolution de la logique métier devra être auditée séparément et s’appuyer sur des règles officielles et des cas de référence indépendants.
+
 # Décisions d’architecture
 
 ## 2026-10-15 — Qualification du calculateur d’heures supplémentaires
