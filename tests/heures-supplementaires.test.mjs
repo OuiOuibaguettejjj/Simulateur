@@ -31,7 +31,7 @@ const overflow=await runInlineCalculator({
   slug:"heures-supplementaires",
   inputs:{horaire:"1.79e308",heures:"1.79e308"}
 });
-assert.ok(/valeur invalide|Renseignez un taux horaire|trop grand|∞/.test(overflow.text),
-  "un calcul débordant doit être refusé ou signalé ; obtenu : "+overflow.text);
+assert.ok(overflow.text.includes("Le montant calculé est trop élevé"),
+  "un calcul débordant doit être refusé explicitement ; obtenu : "+overflow.text);
 
 console.log("Heures supplémentaires : "+validCases.length+" cas de référence et "+(invalidCases.length+1)+" cas invalides/limites vérifiés.");
