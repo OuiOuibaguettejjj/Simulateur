@@ -32,18 +32,6 @@
     "rule": "formula"
   },
   {
-    "path": "public/outil/conges-payes/index.html",
-    "rule": "description"
-  },
-  {
-    "path": "public/outil/conges-payes/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/conges-payes/index.html",
-    "rule": "formula"
-  },
-  {
     "path": "public/outil/epargne-reglementee/index.html",
     "rule": "content-h2"
   },
