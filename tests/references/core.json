@@ -2130,7 +2130,7 @@
     },
     "attendu": 960,
     "tolerance": 0.01,
-    "sortie": "1/10e",
+    "sortie": "960,00\\s*€",
     "verifications": [
       {
         "sortie": "maintien de salaire",
