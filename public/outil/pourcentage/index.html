@@ -45,7 +45,7 @@ const rawV=String(v.value??"").trim().replace(/\s/g,"").replace(",",".");
 const rawP=String(p.value??"").trim().replace(/\s/g,"").replace(",",".");
 const a=rawV===""?NaN:Number(rawV),b=rawP===""?NaN:Number(rawP);
 if(!Number.isFinite(a)||!Number.isFinite(b))return"Renseignez les deux valeurs avec des nombres valides.";
-if(!Number.isFinite(a*b))return"Les valeurs saisies sont trop grandes pour être calculées.";
+
 if(mode.value==="part"){
 const result=a*b/100;if(!Number.isFinite(result))return"Le résultat dépasse les limites de calcul.";
 return"<strong>"+fmt(result)+"</strong><p>"+fmt(b)+" % de "+fmt(a)+" = "+fmt(result)+".</p>";
