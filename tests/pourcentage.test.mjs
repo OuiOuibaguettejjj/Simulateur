@@ -8,6 +8,8 @@ const cases=[
   {name:"baisse",inputs:{mode:"variation",v:"100",p:"80"},expected:"-20 %"},
   {name:"division par zéro pour une proportion",inputs:{mode:"ratio",v:"30",p:"0"},expected:"différente de zéro"},
   {name:"valeur initiale nulle",inputs:{mode:"variation",v:"0",p:"80"},expected:"différente de zéro"},
+  {name:"valeur initiale négative avec remontée",inputs:{mode:"variation",v:"-100",p:"-50"},expected:"doit être positive"},
+  {name:"valeur initiale négative avec baisse",inputs:{mode:"variation",v:"-100",p:"-150"},expected:"doit être positive"},
   {name:"champ vide",inputs:{mode:"part",v:"",p:"20"},expected:"nombres valides"}
 ];
 for(const item of cases){
