@@ -39,6 +39,7 @@ else if(mode.value==="ratio"){lv.textContent="Valeur étudiée (partie)";lp.text
 else{lv.textContent="Valeur initiale";lp.textContent="Valeur finale";hv.textContent="Exemple : 80";hp.textContent="Exemple : 100, après la hausse ou la baisse."}
 }
 mode.addEventListener("change",updateLabels);updateLabels();
+const fmt=x=>new Intl.NumberFormat("fr-FR",{maximumFractionDigits:2}).format(x);
 window.TOOL={calc:function(){
 const rawV=String(v.value??"").trim().replace(/\s/g,"").replace(",",".");
 const rawP=String(p.value??"").trim().replace(/\s/g,"").replace(",",".");
@@ -47,18 +48,18 @@ if(!Number.isFinite(a)||!Number.isFinite(b))return"Renseignez les deux valeurs a
 if(!Number.isFinite(a*b))return"Les valeurs saisies sont trop grandes pour être calculées.";
 if(mode.value==="part"){
 const result=a*b/100;if(!Number.isFinite(result))return"Le résultat dépasse les limites de calcul.";
-return"<strong>"+this.euro(result)+"</strong><p>"+this.euro(b)+" % de "+this.euro(a)+" = "+this.euro(result)+".</p>";
+return"<strong>"+fmt(result)+"</strong><p>"+fmt(b)+" % de "+fmt(a)+" = "+fmt(result)+".</p>";
 }
 if(mode.value==="ratio"){
 if(b===0)return"La valeur de référence doit être différente de zéro.";
 const result=a/b*100;if(!Number.isFinite(result))return"Le résultat dépasse les limites de calcul.";
-return"<strong>"+this.euro(result)+" %</strong><p>"+this.euro(a)+" représente "+this.euro(result)+" % de "+this.euro(b)+".</p>";
+return"<strong>"+fmt(result)+" %</strong><p>"+fmt(a)+" représente "+fmt(result)+" % de "+fmt(b)+".</p>";
 }
 if(mode.value==="variation"){
 if(a===0)return"La valeur initiale doit être différente de zéro pour calculer une évolution.";
 const result=(b-a)/a*100;if(!Number.isFinite(result))return"Le résultat dépasse les limites de calcul.";
 const word=result>0?"hausse":result<0?"baisse":"aucune variation";
-return"<strong>"+this.euro(result)+" %</strong><p>De "+this.euro(a)+" à "+this.euro(b)+", l’évolution correspond à "+word+".</p>";
+return"<strong>"+fmt(result)+" %</strong><p>De "+fmt(a)+" à "+fmt(b)+", l’évolution correspond à "+word+".</p>";
 }
 return"Choisissez un type de calcul valide.";
 }};
