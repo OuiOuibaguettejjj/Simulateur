@@ -194,17 +194,5 @@
   {
     "path": "public/outil/succession/index.html",
     "rule": "tool-block"
-  },
-  {
-    "path": "public/outil/temps-partiel/index.html",
-    "rule": "content-h2"
-  },
-  {
-    "path": "public/outil/temps-partiel/index.html",
-    "rule": "description"
-  },
-  {
-    "path": "public/outil/temps-partiel/index.html",
-    "rule": "faq"
   }
 ]
