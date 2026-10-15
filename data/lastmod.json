@@ -35,8 +35,9 @@
     "/outil/capacite-emprunt/": "2026-10-13",
     "/outil/cash-flow-immobilier/": "2026-10-13",
     "/outil/charges-independant/": "2026-10-03",
+    "/outil/coefficient/": "2026-10-13",
     "/outil/comparateur-placements/": "2026-10-13",
-    "/outil/conges-payes/": "2026-10-03",
+    "/outil/conges-payes/": "2026-10-15",
     "/outil/consommation-carburant/": "2026-10-13",
     "/outil/cout-km/": "2026-10-13",
     "/outil/difference-dates/": "2026-10-13",
@@ -45,6 +46,7 @@
     "/outil/epargne-mensuelle/": "2026-10-13",
     "/outil/epargne-reglementee/": "2026-10-03",
     "/outil/epargne/": "2026-10-13",
+    "/outil/etes-vous-riche/": "2026-10-13",
     "/outil/fractions/": "2026-10-14",
     "/outil/frais-de-notaire/": "2026-10-13",
     "/outil/frais-kilometriques/": "2026-10-13",
@@ -74,6 +76,7 @@
     "/outil/preavis-demission/": "2026-10-13",
     "/outil/prelevement-source/": "2026-10-13",
     "/outil/pret-immobilier/": "2026-10-13",
+    "/outil/prime-activite/": "2026-10-13",
     "/outil/prix-unitaire/": "2026-10-13",
     "/outil/promotions/": "2026-10-13",
     "/outil/proportion/": "2026-10-13",
@@ -106,10 +109,6 @@
     "/simulateurs/": "2026-10-13",
     "/temps/": "2026-10-13",
     "/travail/": "2026-10-13",
-    "/vie-quotidienne/": "2026-10-13",
-    "/outil/etes-vous-riche/": "2026-10-13",
-    "/outil/prime-activite/": "2026-10-13",
-    "/outil/coefficient/": "2026-10-13"
-  },
-  "/outil/conges-payes/": "2026-10-15"
+    "/vie-quotidienne/": "2026-10-13"
+  }
 }
