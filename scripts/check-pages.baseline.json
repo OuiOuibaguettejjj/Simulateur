@@ -128,26 +128,6 @@
     "rule": "formula"
   },
   {
-    "path": "public/outil/moyenne-ponderee/index.html",
-    "rule": "content-h2"
-  },
-  {
-    "path": "public/outil/moyenne-ponderee/index.html",
-    "rule": "description"
-  },
-  {
-    "path": "public/outil/moyenne-ponderee/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/moyenne-ponderee/index.html",
-    "rule": "formula"
-  },
-  {
-    "path": "public/outil/moyenne-ponderee/index.html",
-    "rule": "result"
-  },
-  {
     "path": "public/outil/per/index.html",
     "rule": "content-h2"
   },
