@@ -1131,6 +1131,26 @@
           50
         ]
       }
+    },
+    "conges-payes": {
+      "label": "Méthodes de calcul de l’indemnité de congés payés",
+      "year": 2026,
+      "usedBy": [
+        "conges-payes"
+      ],
+      "source": {
+        "label": "Service-Public — calcul de l’indemnité de congés payés",
+        "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F33359"
+      },
+      "effectiveFrom": "2026-01-01",
+      "effectiveTo": "2026-12-31",
+      "verifiedOn": "2026-10-15",
+      "notes": "Méthodes et bases de calcul vérifiées le 15 octobre 2026 sur Service-Public. Vérifier annuellement et à chaque évolution du Code du travail. Le maintien mensuel de la page reste une estimation simplifiée, non équivalente au calcul à partir de l’horaire réel.",
+      "values": {
+        "tauxDixieme": 0.1,
+        "joursBaseOuvres": 25,
+        "joursBaseOuvrables": 30
+      }
     }
   },
   "anneeAMigrer": {
