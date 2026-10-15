@@ -1,5 +1,10 @@
 # Décisions d’architecture
 
+## 2026-10-15 — Qualification du calculateur d’heures supplémentaires
+
+Le calculateur `/outil/heures-supplementaires/` est classé **C — réglementaire non migré** : sa formule applique des majorations liées au droit du travail qui restent codées dans la page. La source officielle Service-Public a été vérifiée le 15 octobre 2026 ; à défaut d’accord collectif, elle indique 25 % pour les huit premières heures supplémentaires de la semaine puis 50 % pour les suivantes, tandis qu’un accord peut prévoir d’autres taux avec un minimum de 10 %. La page présente ces valeurs comme un barème par défaut et demande de vérifier la convention collective. Le slug reste dans `anneeAMigrer.slugs` jusqu’à la migration du calcul et des paramètres vers `data/parametres.json`. La formule métier n’est pas modifiée par cette qualification. La note de sources est conservée dans `docs/heures-supplementaires/SOURCES.md`.
+
+
 ## 2026-10-09 — Migration et enrichissement de la rupture conventionnelle
 
 Le calculateur de rupture conventionnelle est migré vers `data/parametres.json`. Les taux légaux (1/4 de mois par année jusqu’à 10 ans, puis 1/3 au-delà), le palier et la convention de mois sont centralisés, sourcés sur Service-Public et suivis jusqu’au 31 décembre 2026. Le calcul reste limité au minimum légal brut ; il ne recherche pas automatiquement la convention collective ni son indemnité potentiellement plus favorable, et ne calcule pas les prélèvements fiscaux et sociaux. Le cas de référence est indépendant du code testé et utilise 4 ans d’ancienneté et un salaire de référence de 2 000 €.
