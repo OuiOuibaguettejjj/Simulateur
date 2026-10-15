@@ -58,7 +58,7 @@ if(mode.value==="variation"){
 if(a===0)return"La valeur initiale doit être différente de zéro pour calculer une évolution.";
 const result=(b-a)/a*100;if(!Number.isFinite(result))return"Le résultat dépasse les limites de calcul.";
 const word=result>0?"hausse":result<0?"baisse":"aucune variation";
-return"<strong>"+this.euro(result)+" %</strong><p>De "+this.euro(a)+" à "+this.euro(b), l’évolution correspond à "+word+".</p>";
+return"<strong>"+this.euro(result)+" %</strong><p>De "+this.euro(a)+" à "+this.euro(b)+", l’évolution correspond à "+word+".</p>";
 }
 return"Choisissez un type de calcul valide.";
 }};
