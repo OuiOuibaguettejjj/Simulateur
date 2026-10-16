@@ -25,7 +25,7 @@ for (const invalid of ["", "bonjour", "micro", "Sasu"]) {
   assert.doesNotMatch(out.text,/rémunération du président|taux 2026 affichés/i,"une structure invalide ne doit pas être présentée comme un résultat valide");
 }
 assert.match(page,/<input id="s" name="structure" type="text" list="structures"[^>]*required/,"la saisie doit proposer une liste de valeurs reconnues");
-assert.match(page,/<datalist id="structures">[\\s\\S]*<option value="Micro"[^>]*>[\\s\\S]*<option value="EI"[^>]*>[\\s\\S]*<option value="SASU"[^>]*>/,"la liste doit proposer les trois structures prises en charge");
+assert.match(page,/<datalist id="structures">[\s\S]*<option value="Micro"[^>]*>[\s\S]*<option value="EI"[^>]*>[\s\S]*<option value="SASU"[^>]*>/,"la liste doit proposer les trois structures prises en charge");
 assert.match(page,/if\(!\["Micro","EI","SASU"\]\.includes\(s\)\)/,"toute valeur hors liste doit être refusée explicitement");
 assert.match(page,/urssaf\.fr\/accueil\/actualites\/taux-cotisations-autoentrepeneur\.html/,"les taux doivent pointer vers la source officielle Urssaf");
 console.log("Comparateur SASU/EI/micro : 3 branches valides et 4 entrées invalides testées.");
