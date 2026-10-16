@@ -73,11 +73,10 @@ const readSalary=id=>{const s=raw(id);if(s==="")return NaN;const n=Number(s);ret
 const salaries=["s1","s2","s3"].map(readSalary);
 const daysRaw=raw("jours"),days=daysRaw===""?NaN:Number(daysRaw);
 if(salaries.some(n=>!Number.isFinite(n))||!Number.isInteger(days)||days<1)return"Renseignez trois salaires bruts mensuels valides et une durée entière d’arrêt d’au moins un jour.";
-const totalSalary=salaries.reduce((sum,n)=>sum+n,0);
-if(!Number.isFinite(totalSalary)||totalSalary<=0)return"Le total des salaires de référence doit être supérieur à zéro.";
 const id="indemnites-maladie",set=window.Parametres.get(id);
 if(!window.Parametres.isEffective(id))return"Les paramètres réglementaires de cette estimation doivent être actualisés. Consultez les sources officielles.";
 const p=set.values,retained=salaries.reduce((sum,n)=>sum+Math.min(n,p.plafondMensuel),0);
+if(!Number.isFinite(retained)||retained<=0)return"Le total des salaires de référence doit être supérieur à zéro.";
 const base=retained/p.diviseurSalaireJournalier;
 const rawDaily=base*p.tauxIndemnisation;
 const daily=Math.round(Math.min(rawDaily,p.indemniteJournaliereMaximale)*100)/100;
