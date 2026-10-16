@@ -1,0 +1,28 @@
+name: Régénération temporaire de la baseline
+on:
+  push:
+    branches:
+      - feat/enrichissement-sasu-ei-micro
+permissions:
+  contents: write
+jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          fetch-depth: 0
+      - name: Régénérer la baseline avec la commande officielle
+        run: node scripts/check-pages.mjs --update-baseline
+      - name: Committer uniquement la sortie générée
+        run: |
+          if git diff --quiet -- scripts/check-pages.baseline.json; then
+            echo "La baseline est déjà à jour."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/check-pages.baseline.json
+          git commit -m "chore: régénérer la baseline des pages"
+          git push
