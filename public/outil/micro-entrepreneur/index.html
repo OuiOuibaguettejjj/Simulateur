@@ -11,7 +11,7 @@ const ca=raw===""?NaN:Number(raw),activity=this.$("act").value,acre=this.$("acre
 const allowed=["vente","tourisme","bic","bnc","cipav"];
 if(!Number.isFinite(ca)||ca<0||ca>Number.MAX_SAFE_INTEGER)return "Saisissez un chiffre d’affaires encaissé valide, positif ou nul, inférieur ou égal à 9 007 199 254 740 991 €.";
 if(!allowed.includes(activity))return "Sélectionnez une catégorie d’activité valide.";
-const p=window.Parametres.get("micro-entrepreneur").values,normal=p.rates[activity];
+const set=window.Parametres.get("micro-entrepreneur"),p=set.values,normal=p.rates[activity];
 if(!Number.isFinite(normal))return "Le taux de cette activité n’est pas disponible dans les paramètres.";
 let rate=normal;
 if(acre){
