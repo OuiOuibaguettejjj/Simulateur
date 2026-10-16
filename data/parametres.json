@@ -1235,8 +1235,8 @@
         },
         "acreChangeYear": 2026,
         "acreChangeMonth": 7,
-        "acreCreationFrom": "2025-01-01",
-        "acreCreationTo": "2026-12-31"
+        "acreCreationFrom": 20250101,
+        "acreCreationTo": 20261231
       }
     }
   },
