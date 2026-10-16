@@ -32,22 +32,6 @@
     "rule": "formula"
   },
   {
-    "path": "public/outil/per/index.html",
-    "rule": "content-h2"
-  },
-  {
-    "path": "public/outil/per/index.html",
-    "rule": "description"
-  },
-  {
-    "path": "public/outil/per/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/per/index.html",
-    "rule": "formula"
-  },
-  {
     "path": "public/outil/plus-value-mobiliere/index.html",
     "rule": "description"
   },

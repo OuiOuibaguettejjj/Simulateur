@@ -38,6 +38,7 @@ export const STEPS=[
   step("impot","unit","tests/impot.test.js"),
   step("rsa","unit","tests/rsa.test.js"),
   step("retraite","unit","tests/retraite.test.js"),
+  step("per","unit","tests/per.test.mjs"),
   step("age-retraite","unit","tests/age-retraite.test.js"),
   step("age-retraite-seo","unit","tests/age-retraite-seo.test.js"),
   step("simulateurs","unit","tests/simulateurs.test.js"),
