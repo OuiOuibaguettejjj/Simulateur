@@ -87,11 +87,14 @@ Les sources et barèmes devront être ouverts et revérifiés au moment de la mo
 - [ ] FAQ conforme au contrat du dépôt.
 - [ ] H1 et introduction dans la section `.tool`.
 - [ ] Aucun nouvel écart dans la baseline ; écarts corrigés retirés uniquement via le script prévu.
-- [ ] Contrôles de sécurité, structure, sitemap, layout, paramètres, tests de calcul et cliquet exécutés.
-- [ ] Audit mobile et desktop effectué.
-- [ ] CI GitHub Actions verte avant fusion.
+- [x] FAQ et contrat structurel de page contrôlés par GitHub Actions sur le commit précédent.
+- [x] Contrôle de baseline régénérée passé sur le commit précédent ; la nouvelle exécution doit reconfirmer le résultat après les tests ajoutés.
+- [x] Un test ciblé couvre maintenant le champ principal vide et vérifie que zéro reste une valeur valide.
+- [ ] Contrôles complets et tests de la tête actuelle de la PR : attendre la CI déclenchée par les derniers commits.
+- [ ] Audit visuel manuel mobile et desktop effectué.
+- [x] Aucune modification du moteur de calcul ni des barèmes.
 - [ ] Aucune fusion ni mise en production sans demande explicite.
 
 ## 7. Portée et statut
 
-Ce document suit l’enrichissement de la page dans la branche. Il ne constitue pas un certificat de conformité du calculateur. Les formules métier n’ont pas été changées. Les tests sont exécutés via GitHub Actions. La baseline doit encore être validée par le contrôle CI qui rejoue le script officiel ; l’audit visuel mobile et desktop n’a pas été réalisé. Aucune réussite finale de test n’est revendiquée tant que la dernière CI n’est pas terminée.
+Ce document suit l’enrichissement de la page dans la branche et ne constitue pas un certificat de conformité fiscale exhaustive. Les formules métier et les barèmes n’ont pas été modifiés. La validation du champ principal vide est maintenant explicitement testée dans `tests/succession.test.mjs`, ajouté au runner officiel `scripts/run-tests.mjs`. Les contrôles complets doivent être confirmés sur le dernier commit GitHub Actions. L’audit visuel manuel mobile et desktop reste à effectuer ; aucune réussite de ce contrôle visuel n’est revendiquée. Aucune fusion ni mise en production n’est effectuée par ce chantier.
