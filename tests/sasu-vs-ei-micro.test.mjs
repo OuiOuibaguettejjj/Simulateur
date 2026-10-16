@@ -13,7 +13,8 @@ const metaDescription=page.match(/<meta name="description" content="([^"]+)"/)?.
 assert.ok(metaDescription.length <= 160,"la meta description doit rester concise");
 const ogDescription=page.match(/<meta property="og:description" content="([^"]+)"/)?.[1] ?? "";
 assert.equal(ogDescription,metaDescription,"la description Open Graph doit rester alignée sur la meta description");
-assert.match(page,/Taux de cotisations micro vérifiés le 16 octobre 2026[\\s\\S]*?fiche officielle Service-Public Entreprendre/,"la date de vérification des taux et la source officielle doivent être visibles");
+assert.ok(page.includes("Taux de cotisations micro vérifiés le 16 octobre 2026"),"la date de vérification des taux doit être visible");
+assert.ok(page.includes("fiche officielle Service-Public Entreprendre"),"la source officielle des taux doit être visible");
 assert.match(page,/<h2>Comparatif rapide<\/h2>[\s\S]*?<table\b[^>]*>[\s\S]*?<th scope="col">Micro-entreprise<\/th>[\s\S]*?<th scope="col">EI au régime réel<\/th>[\s\S]*?<th scope="col">SASU<\/th>/,"le comparatif visible doit couvrir les trois structures");
 for (const url of ["vosdroits/F36232","vosdroits/F23844?language=fr","vosdroits/F36240","vosdroits/F36380"]) {
   assert.ok(page.includes(url),"une source officielle dédiée doit être liée : "+url);
