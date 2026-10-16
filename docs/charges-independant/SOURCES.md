@@ -5,7 +5,7 @@
 ## Sources officielles
 
 - [Urssaf — Réforme de l’assiette et du barème des cotisations des travailleurs indépendants](https://www.urssaf.fr/accueil/independant/comprendre-payer-cotisations/reforme-cotisations-independants.html)  
-  Source de référence pour expliquer l’évolution de l’assiette sociale des travailleurs indépendants hors micro-entreprise et l’abattement forfaitaire de 26 % évoqué dans la page.
+  Source de référence pour le périmètre de l’abattement forfaitaire de 26 % : travailleurs non salariés concernés par la réforme, à l’exclusion des indépendants relevant du régime micro-fiscal (hors auto-entrepreneurs, pour lesquels l’abattement propre à l’activité de 71 %, 50 % ou 34 % est utilisé) et des auto-entrepreneurs, dont les cotisations restent calculées sur le chiffre d’affaires.
 - [Service-Public Entreprendre — Simulateur de cotisations sociales pour les indépendants hors micro-entrepreneurs](https://entreprendre.service-public.gouv.fr/vosdroits/R61365)  
   Outil officiel à privilégier pour une estimation qui tient compte d’éléments propres à la situation.
 - [Urssaf — Comprendre et payer ses cotisations](https://www.urssaf.fr/accueil/independant/comprendre-payer-cotisations/vos-cotisations.html)  
@@ -21,7 +21,7 @@ La formule propre à cette page reste volontairement simplifiée :
 2. estimation = base illustrative × taux choisi par l’utilisateur ÷ 100 ;
 3. montant restant affiché = revenu saisi − estimation.
 
-Le coefficient de 0,74 illustre mathématiquement un abattement de 26 %. Le résultat chiffré de cette page n'est **pas** une estimation officielle du montant dû : l'outil ne détermine pas le statut, le revenu légalement retenu, les taux, plafonds, cotisations minimales, exonérations ni les autres paramètres individuels. Le taux est saisi librement et n'est pas fourni par une source réglementaire.
+Le coefficient de 0,74 illustre mathématiquement un abattement de 26 % pour les seuls travailleurs non salariés concernés par la réforme, hors régime micro-fiscal et hors auto-entrepreneurs. Pour les indépendants relevant du régime micro-fiscal (hors auto-entrepreneurs), l’Urssaf applique l’abattement propre à l’activité (71 %, 50 % ou 34 %) ; les auto-entrepreneurs restent calculés sur leur chiffre d’affaires. Le coefficient de 0,74 ne doit donc pas être présenté comme applicable à tous les indépendants. Le résultat chiffré de cette page n'est **pas** une estimation officielle du montant dû : l'outil ne détermine pas le statut, le revenu légalement retenu, les taux, plafonds, cotisations minimales, exonérations ni les autres paramètres individuels. Le taux est saisi librement et n'est pas fourni par une source réglementaire.
 
 ## Limites et renouvellement
 
