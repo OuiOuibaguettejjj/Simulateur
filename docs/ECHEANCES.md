@@ -28,6 +28,14 @@ Ce document recense les échéances actuellement suivies par `data/parametres.js
 | Indemnité de précarité (CDD et intérim) | 31/12/2026 | [Service-Public — prime de précarité](https://www.service-public.gouv.fr/particuliers/vosdroits/F803), [intérim](https://www.service-public.fr/particuliers/vosdroits/F11215) et [Code du travail — article L1243-8](https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006901219/2026-04-26) |
 | Indemnité de rupture conventionnelle | 31/12/2026 | [Service-Public — indemnité spécifique de rupture conventionnelle](https://www.service-public.gouv.fr/particuliers/vosdroits/F31539) et [Code du travail](https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006072050/LEGISCTA000006195624/) |
 
+## Revue des pages réglementaires non migrées
+
+Ces échéances sont des dates de revue éditoriale des sources, et non des dates d'expiration de paramètres dans `data/parametres.json`.
+
+| Page | Prochaine revue | Sources à recontrôler |
+|---|---|---|
+| Charges sociales indépendant — formule simplifiée non migrée | 31/12/2026 | [Urssaf — réforme de l’assiette et du barème](https://www.urssaf.fr/accueil/independant/comprendre-payer-cotisations/reforme-cotisations-independants.html), [Service-Public — simulateur hors micro-entrepreneurs](https://entreprendre.service-public.gouv.fr/vosdroits/R61365) |
+
 ## Procédure de renouvellement
 
 1. Consulter la source officielle correspondant au jeu.
