@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import {runInlineCalculator} from "./calculator-harness.mjs";
 
-const run=inputs=>runInlineCalculator({family:"outil",slug:"micro-entrepreneur",inputs});
-const normal=await run({ca:"1000",act:"vente",acre:"non",creation:"01/07/2026"});
+const run=inputs=>runInlineCalculator({family:"outil",slug:"micro-entrepreneur",inputs:{periodStart:"01/07/2026",periodEnd:"30/09/2026",...inputs}});
+const normal=await run({ca:"1000",act:"vente",acre:"non",creation:"01/07/2026",periodStart:"01/07/2026",periodEnd:"30/09/2026"});
 assert.match(normal.text,/Chiffre d’affaires restant après cotisations[\s\S]*877[,.]00\s*€/i,
   "micro-entrepreneur : 1 000 € de CA vente donnent 877 € après cotisations ordinaires");
 assert.match(normal.text,/Cotisations estimées[\s\S]*123[,.]00\s*€/i,
@@ -13,7 +13,7 @@ assert.match(tourism.text,/Cotisations estimées[\s\S]*60[,.]00\s*€/i,
 const acre=await run({ca:"1000",act:"bic",acre:"oui",creation:"01/07/2026"});
 assert.match(acre.text,/Cotisations estimées[\s\S]*159[,.]00\s*€/i,
   "micro-entrepreneur : taux ACRE BIC de 15,9 % à compter du 1er juillet 2026");
-const acreOld=await run({ca:"1000",act:"vente",acre:"oui",creation:"30/06/2026"});
+const acreOld=await run({ca:"1000",act:"vente",acre:"oui",creation:"30/06/2026",periodStart:"01/07/2026",periodEnd:"30/09/2026"});
 assert.match(acreOld.text,/Cotisations estimées[\s\S]*62[,.]00\s*€/i,
   "micro-entrepreneur : taux ACRE vente de 6,2 % avant le 1er juillet 2026");
 const negative=await run({ca:"-1000",act:"vente",acre:"non",creation:"01/07/2026"});
@@ -25,7 +25,7 @@ assert.match(empty.text,/chiffre d’affaires encaissé valide/i,
 const invalidDate=await run({ca:"1000",act:"vente",acre:"oui",creation:"31/02/2026"});
 assert.match(invalidDate.text,/date de début d’activité valide/i,
   "micro-entrepreneur : refuser une date impossible");
-const priorYear=await run({ca:"1000",act:"bic",acre:"oui",creation:"01/10/2025"});
+const priorYear=await run({ca:"1000",act:"bic",acre:"oui",creation:"01/10/2025",periodStart:"01/01/2026",periodEnd:"31/03/2026"});
 assert.match(priorYear.text,/Cotisations estimées[\s\S]*106[,.]00\s*€/i,
   "micro-entrepreneur : taux ACRE antérieur au 1er juillet 2026 pour une création en 2025, si les droits sont encore actifs");
 const missingDate=await run({ca:"1000",act:"vente",acre:"oui",creation:""});
@@ -51,3 +51,13 @@ for(const [activity,cents] of Object.entries(expectedAcreAfter)){
 }
 
 console.log("Micro-entrepreneur : taux ordinaires, ACRE par activité, périodes partielles et entrées invalides validés.");
+
+const partialPeriod=await run({ca:"1000",act:"vente",acre:"oui",creation:"05/10/2025",periodStart:"01/06/2026",periodEnd:"31/07/2026"});
+assert.match(partialPeriod.text,/dépasse la fin théorique des droits ACRE/i,
+  "micro-entrepreneur : refuser une période qui déborde la fin des droits ACRE");
+const afterExpiry=await run({ca:"1000",act:"vente",acre:"oui",creation:"01/07/2026",periodStart:"01/07/2027",periodEnd:"31/07/2027"});
+assert.match(afterExpiry.text,/commence après la fin théorique des droits ACRE/i,
+  "micro-entrepreneur : refuser l’ACRE après la fin théorique des droits");
+const invalidPeriod=await run({ca:"1000",act:"vente",acre:"oui",creation:"01/07/2026",periodStart:"01/09/2026",periodEnd:"01/08/2026"});
+assert.match(invalidPeriod.text,/fin de la période estimée doit être postérieure/i,
+  "micro-entrepreneur : refuser une période inversée");
