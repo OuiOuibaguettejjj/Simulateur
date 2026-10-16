@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import {runInlineCalculator} from "./calculator-harness.mjs";
 
-const run=inputs=>runInlineCalculator({family:"outil",slug:"indemnites-maladie",inputs});
+const run=inputs=>runInlineCalculator({family:"outil",slug:"indemnites-maladie",inputs:{"date-debut":"01/07/2026",...inputs}});
 const highMixed=await run({s1:"6000",s2:"1000",s3:"1000",jours:"10"});
 assert.match(highMixed.text,/176,96\s*€\s*d’IJSS brutes estimées/i,
   "le plafond doit être appliqué séparément à chacun des trois salaires");
@@ -20,7 +20,7 @@ const carence=await run({s1:"2500",s2:"2500",s3:"2500",jours:"3"});
 assert.match(carence.text,/0,00\s*€\s*d’IJSS brutes estimées/i,
   "un arrêt de trois jours ne doit produire aucun jour indemnisé dans le cas général");
 
-const negative=await run({s1:"-1",s2:"2500",s3:"2500",jours:"10"});
+const invalidDate=await run({"date-debut":"31/02/2026",s1:"2500",s2:"2500",s3:"2500",jours:"10"});\nassert.match(invalidDate.text,/date.*valide/i,"une date impossible doit être refusée");\nconst oldDate=await run({"date-debut":"30/06/2026",s1:"2500",s2:"2500",s3:"2500",jours:"10"});\nassert.match(oldDate.text,/uniquement.*01\\/07\\/2026.*31\\/12\\/2026/i,"les arrêts hors période couverte doivent être refusés");\nconst badFormat=await run({"date-debut":"2026-07-01",s1:"2500",s2:"2500",s3:"2500",jours:"10"});\nassert.match(badFormat.text,/format jj\\/mm\\/aaaa/i,"le format de date doit être explicite");\n\nconst negative=await run({s1:"-1",s2:"2500",s3:"2500",jours:"10"});
 assert.match(negative.text,/salaires bruts mensuels valides/i,"un salaire négatif doit être refusé");
 const empty=await run({s1:"",s2:"2500",s3:"2500",jours:"10"});
 assert.match(empty.text,/salaires bruts mensuels valides/i,"un salaire manquant doit être refusé");
