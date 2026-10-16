@@ -1210,7 +1210,7 @@
       "effectiveFrom": "2026-01-01",
       "effectiveTo": "2026-12-31",
       "verifiedOn": "2026-10-16",
-      "notes": "Taux sociaux 2026 vérifiés sur Service-Public Entreprendre. Taux ACRE avant et à compter du 1er juillet 2026 contrôlés sur le guide Urssaf « Vous souhaitez devenir auto-entrepreneur » et la fiche ACRE Service-Public. La CFP est une contribution distincte versée en sus des cotisations sociales, selon l’activité (0,1 % commerce, 0,3 % artisanat, 0,2 % libéral) ; elle n’est pas déduite par ce calculateur. Les locations de meublés de tourisme classés disposent d’un taux distinct. Sources complémentaires : https://www.service-public.gouv.fr/particuliers/vosdroits/F11677 et https://www.urssaf.fr/files/live/sites/urssaffr/files/autres/Diaporama_Auto-entrepreneur.pdf",
+      "notes": "Taux sociaux 2026 vérifiés sur Service-Public Entreprendre. Taux ACRE avant et à compter du 1er juillet 2026 contrôlés sur le guide Urssaf « Vous souhaitez devenir auto-entrepreneur » et la fiche ACRE Service-Public. La CFP est une contribution distincte versée en sus des cotisations sociales, selon l’activité (0,1 % commerce, 0,3 % artisanat, 0,2 % libéral) ; elle n’est pas déduite par ce calculateur. Les locations de meublés de tourisme classés disposent d’un taux distinct. Sources complémentaires : https://www.service-public.gouv.fr/particuliers/vosdroits/F11677 et https://www.urssaf.fr/files/live/sites/urssaffr/files/autres/Diaporama_Auto-entrepreneur.pdf Le taux ACRE saisi peut concerner une création en 2025 si les droits sont toujours actifs pendant la période estimée ; la durée effective des droits reste à vérifier auprès de l’Urssaf.",
       "values": {
         "rates": {
           "vente": 0.123,
@@ -1234,7 +1234,9 @@
           "tourisme": 0.045
         },
         "acreChangeYear": 2026,
-        "acreChangeMonth": 7
+        "acreChangeMonth": 7,
+        "acreCreationFrom": "2025-01-01",
+        "acreCreationTo": "2026-12-31"
       }
     }
   },
