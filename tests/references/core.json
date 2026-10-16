@@ -2155,5 +2155,20 @@
     "sortie": "Total estimé",
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2265",
     "note": "Calcul indépendant : chaque salaire de 3 000 € est sous le plafond mensuel ; (3 000 + 3 000 + 3 000) / 91,25 × 0,79 ≈ 77,9178 €, arrondi à 77,92 € par jour avant multiplication ; 77,92 × 10 = 779,20 €. Le résultat attendu est calculé manuellement à partir de la formule officielle, pas depuis l’outil testé."
+  },
+  {
+    "outil": "indemnites-maladie",
+    "entrees": {
+      "s1": "6000",
+      "s2": "1000",
+      "s3": "1000",
+      "jours": "10"
+    },
+    "attendu": 176.96,
+    "tolerance": 0.01,
+    "sortie": "176,96\\\\s*€\\\\s*d’IJSS brutes estimées",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3053",
+    "verificationSource": "https://www.ameli.fr/assure/remboursements/indemnites-journalieres-maladie-maternite-paternite/indemnites-journalieres-pour-maladie/arret-maladie-salarie",
+    "note": "Calcul indépendant : plafonnement individuel à 2 613,82 €, 1 000 € et 1 000 € ; somme retenue 4 613,82 € / 91,25 × 50 % = 25,2812 €, arrondis à 25,28 € par jour ; 10 jours d’arrêt moins 3 jours de carence = 7 jours, soit 176,96 €. La valeur attendue est calculée manuellement à partir des sources officielles, sans exécuter le calculateur."
   }
 ]
