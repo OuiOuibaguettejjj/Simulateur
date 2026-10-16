@@ -25,7 +25,13 @@ assert.match(empty.text,/chiffre d’affaires encaissé valide/i,
 const invalidDate=await run({ca:"1000",act:"vente",acre:"oui",creation:"31/02/2026"});
 assert.match(invalidDate.text,/date de début d’activité valide/i,
   "micro-entrepreneur : refuser une date impossible");
-const outOfScope=await run({ca:"1000",act:"vente",acre:"oui",creation:"01/07/2025"});
-assert.match(outOfScope.text,/uniquement les créations ou reprises intervenues en 2026/i,
-  "micro-entrepreneur : ne pas extrapoler les taux ACRE hors du périmètre vérifié");
+const priorYear=await run({ca:"1000",act:"bic",acre:"oui",creation:"01/10/2025"});
+assert.match(priorYear.text,/Cotisations estimées[\\s\\S]*106[,.]00\\s*€/i,
+  "micro-entrepreneur : taux ACRE antérieur au 1er juillet 2026 pour une création en 2025, si les droits sont encore actifs");
+const missingDate=await run({ca:"1000",act:"vente",acre:"oui",creation:""});
+assert.match(missingDate.text,/date de début d’activité valide/i,
+  "micro-entrepreneur : demander une date réelle si l’ACRE est sélectionnée");
+const outOfScope=await run({ca:"1000",act:"vente",acre:"oui",creation:"01/07/2024"});
+assert.match(outOfScope.text,/du 1er janvier 2025 au 31 décembre 2026/i,
+  "micro-entrepreneur : refuser les dates antérieures au périmètre de taux vérifié");
 console.log("Micro-entrepreneur : taux ordinaires, ACRE, activité tourisme et entrées invalides validés.");
