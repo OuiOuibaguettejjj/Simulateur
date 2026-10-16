@@ -23,12 +23,15 @@ export function normalizePageForLastmod(html) {
     .trim();
 }
 
-export function checkPageLastmod({ file, baseHtml, currentHtml, baseRoutes, currentRoutes }) {
+export function checkPageLastmod({ file, baseHtml, currentHtml, baseRoutes, currentRoutes, today = new Date().toISOString().slice(0, 10) }) {
   const route = routeFromHtmlPath(file);
   if (!route || normalizePageForLastmod(baseHtml) === normalizePageForLastmod(currentHtml)) return [];
   const before = baseRoutes?.[route];
   const after = currentRoutes?.[route];
   if (before !== after) return [];
+  // Une date lastmod ne distingue pas plusieurs changements survenus le même jour.
+  // Si la date est celle du jour courant, elle peut donc légitimement être identique à la base.
+  if (after && after === today) return [];
   return [
     `${route} : le HTML a changé hors métadonnées Open Graph/Twitter, mais lastmod reste ${after ?? "absent"} (base : ${before ?? "absent"}). Mettez à jour data/lastmod.json et régénérez public/sitemap.xml.`
   ];
