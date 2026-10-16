@@ -8,6 +8,14 @@ const page=fs.readFileSync("public/outil/"+slug+"/index.html","utf8");
 assert.ok(!/id=["']ca["']/.test(page),"la page pédagogique ne doit pas afficher un champ de chiffre d’affaires inutilisé");
 assert.match(page,/Aucun montant de cotisations ou de revenu net n’est calculé/,"la limite du comparateur doit être visible avant interaction");
 assert.match(page,/Afficher les points clés/,"le bouton doit décrire l’action réelle, pas promettre un calcul");
+assert.match(page,/<meta name="description" content="([^"]+)"/,"la page doit avoir une meta description");
+const metaDescription=page.match(/<meta name="description" content="([^"]+)"/)?.[1] ?? "";
+assert.ok(metaDescription.length <= 160,"la meta description doit rester concise");
+assert.match(page,/<h2>Comparatif rapide<\/h2>[\\s\\S]*?<table>[\\s\\S]*?<th scope="col">Micro-entreprise<\/th>[\\s\\S]*?<th scope="col">EI au régime réel<\/th>[\\s\\S]*?<th scope="col">SASU<\/th>/,"le comparatif visible doit couvrir les trois structures");
+for (const url of ["vosdroits/F36232","vosdroits/F23844?language=fr","vosdroits/F36240","vosdroits/F36380"]) {
+  assert.ok(page.includes(url),"une source officielle dédiée doit être liée : "+url);
+}
+
 
 const cases=[
   {structure:"Micro",expected:/cotisations généralement calculées sur le chiffre d’affaires encaissé/i},
