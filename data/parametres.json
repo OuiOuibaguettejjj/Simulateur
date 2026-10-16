@@ -1173,6 +1173,29 @@
         "indemniteJournaliereMinimale": 11.12,
         "indemniteJournaliereMaximale": 104.02
       }
+    },
+    "indemnites-maladie": {
+      "label": "Indemnités journalières maladie — salarié mensualisé du cas général",
+      "year": 2026,
+      "usedBy": [
+        "indemnites-maladie"
+      ],
+      "source": {
+        "label": "Service-Public — arrêt maladie et indemnités journalières",
+        "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3053"
+      },
+      "effectiveFrom": "2026-07-01",
+      "effectiveTo": "2026-12-31",
+      "verifiedOn": "2026-10-16",
+      "notes": "Plafond de salaire mensuel de 2 613,82 € et indemnité journalière maximale de 42,97 € vérifiés le 16 octobre 2026 sur Service-Public ; la divergence d’un centime avec ameli est documentée dans docs/indemnites-maladie/SOURCES.md. Le plafond de salaire s'applique séparément à chacun des trois mois. Pour le cas général, l'estimation limite le versement à 360 jours indemnisés sur trois années consécutives ; elle suppose qu'aucune autre IJ n'a déjà été versée sur cette période et ne traite pas les règles spécifiques aux ALD. Estimation du salarié mensualisé, sans contrôle des conditions d'ouverture des droits ni des exceptions au délai de carence ; revalider en cas d'évolution réglementaire.",
+      "values": {
+        "plafondMensuel": 2613.82,
+        "diviseurSalaireJournalier": 91.25,
+        "tauxIndemnisation": 0.5,
+        "indemniteJournaliereMaximale": 42.97,
+        "joursCarence": 3,
+        "maxJoursIndemnisesCasGeneral": 360
+      }
     }
   },
   "anneeAMigrer": {
@@ -1184,7 +1207,6 @@
       "epargne-reglementee",
       "heures-supplementaires",
       "indemnite-precarite",
-      "indemnites-maladie",
       "micro-entrepreneur",
       "per",
       "plus-value-immobiliere",
