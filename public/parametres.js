@@ -498,6 +498,24 @@
         }
       }
     },
+    "indemnites-maladie": {
+      "label": "Indemnités journalières maladie — salarié mensualisé du cas général",
+      "year": 2026,
+      "effectiveFrom": "2026-07-01",
+      "effectiveTo": "2026-12-31",
+      "verifiedOn": "2026-10-16",
+      "source": {
+        "label": "Service-Public — arrêt maladie et indemnités journalières",
+        "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3053"
+      },
+      "values": {
+        "diviseurSalaireJournalier": 91.25,
+        "indemniteJournaliereMaximale": 42.97,
+        "joursCarence": 3,
+        "plafondMensuel": 2613.82,
+        "tauxIndemnisation": 0.5
+      }
+    },
     "indemnites-maternite-paternite": {
       "label": "Indemnités journalières maternité et paternité — salarié du cas général",
       "year": 2026,
