@@ -9,6 +9,15 @@
 <meta name="description" content="Comparez SASU, EI et micro-entreprise : cotisations, frais et revenu disponible. Le chiffre d’affaires seul ne suffit pas pour estimer vos revenus.">
 <link rel="canonical" href="https://simulateur.site/outil/sasu-vs-ei-micro/">
 <link rel="stylesheet" href="/styles.css">
+<style>
+.comparison-table-wrap{margin:24px 0;overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+.comparison-table{width:100%;min-width:700px;border-collapse:collapse}
+.comparison-table th,.comparison-table td{padding:13px 15px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);line-height:1.5}
+.comparison-table thead th{background:var(--surface,var(--card));font-size:.9rem}
+.comparison-table tbody th{min-width:145px;font-weight:800}
+.comparison-table tbody tr:last-child th,.comparison-table tbody tr:last-child td{border-bottom:0}
+@media(max-width:700px){.comparison-table th,.comparison-table td{padding:11px 12px}}
+</style>
 <script src="/simulateurs.js" defer></script>
 <script src="/enter-calcul.js" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Comparateur SASU, EI ou micro-entreprise","url":"https://simulateur.site/outil/sasu-vs-ei-micro/","description":"Comparez SASU, EI et micro-entreprise : cotisations, frais et revenu disponible. Le chiffre d’affaires seul ne suffit pas pour estimer vos revenus.","inLanguage":"fr-FR","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"price":"0","priceCurrency":"EUR"}}</script>
@@ -48,7 +57,7 @@
 <p>La SASU est une société à associé unique. L’entreprise individuelle (EI) permet d’exercer en nom propre ; la micro-entreprise est un régime simplifié de l’entreprise individuelle, et non une société distincte. Les formalités, la fiscalité et le mode de calcul des cotisations ne sont donc pas identiques.</p>
 <p>En micro-entreprise, les cotisations sociales sont généralement calculées à partir du chiffre d’affaires encaissé et du type d’activité. En EI au régime réel, les cotisations dépendent notamment du revenu professionnel. En SASU, le traitement social dépend en particulier de la rémunération versée au président ; les dividendes suivent un régime différent.</p>
 <h2>Comparatif rapide</h2>
-<div class="table-wrap"><table>
+<div class="comparison-table-wrap"><table class="comparison-table">
 <thead><tr><th scope="col">Critère</th><th scope="col">Micro-entreprise</th><th scope="col">EI au régime réel</th><th scope="col">SASU</th></tr></thead>
 <tbody>
 <tr><th scope="row">Nature</th><td>Entreprise individuelle avec régimes micro-fiscal et micro-social, sous conditions</td><td>Entreprise individuelle imposée selon un régime réel</td><td>Société par actions simplifiée à associé unique</td></tr>
