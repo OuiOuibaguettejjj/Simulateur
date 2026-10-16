@@ -19,12 +19,12 @@ assert.match(max.text,/300,79\s*€\s*d’IJSS brutes estimées/i,
   "l’indemnité maximale de 42,97 € doit être multipliée par les 7 jours après carence");
 
 const longStop=await run({s1:"2000",s2:"2000",s3:"2000",jours:"400"});
-assert.match(longStop.text,/11.?833,20\\s*€\\s*d’IJSS brutes estimées/i,
+assert.match(longStop.text,/11.?833,20\s*€\s*d’IJSS brutes estimées/i,
   "un arrêt de 400 jours doit limiter le calcul à 360 jours indemnisés à 32,87 € par jour");
 assert.match(longStop.text,/plafonnée à 360 jours indemnisés/i,
   "le dépassement de la limite générale doit afficher un avertissement");
 const limitStop=await run({s1:"2000",s2:"2000",s3:"2000",jours:"363"});
-assert.match(limitStop.text,/11.?833,20\\s*€\\s*d’IJSS brutes estimées/i,
+assert.match(limitStop.text,/11.?833,20\s*€\s*d’IJSS brutes estimées/i,
   "après trois jours de carence, 363 jours d’arrêt correspondent à 360 jours indemnisés");
 
 const comma=await run({s1:"2 500,50",s2:"2500",s3:"2500",jours:"10"});
