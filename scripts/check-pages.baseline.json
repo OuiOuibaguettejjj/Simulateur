@@ -64,18 +64,6 @@
     "rule": "tool-block"
   },
   {
-    "path": "public/outil/indemnites-maladie/index.html",
-    "rule": "description"
-  },
-  {
-    "path": "public/outil/indemnites-maladie/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/indemnites-maladie/index.html",
-    "rule": "formula"
-  },
-  {
     "path": "public/outil/micro-entrepreneur/index.html",
     "rule": "description"
   },
