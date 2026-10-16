@@ -30,4 +30,7 @@ assert.ok(thirteenMonths.text.includes("au terme"),"une durée saisie avec une p
 const overflow=await runInlineCalculator({slug:"per",inputs:{capital:"1e308",versement:"0",rendement:"3",annees:"100"}});
 assert.ok(overflow.text.includes("dépasse la plage calculable"),"un résultat non fini doit être traité proprement");
 
-console.log("PER : projection de référence, rendement nul, champs vides, rendement négatif, périodes mensuelles et dépassement vérifiés.");
+const overflowContributions=await runInlineCalculator({slug:"per",inputs:{capital:"0",versement:"1e307",rendement:"-100",annees:"1000000"}});
+assert.ok(overflowContributions.text.includes("dépasse la plage calculable"),"un total de versements non fini doit être rejeté même si le capital final reste fini");
+
+console.log("PER : projection de référence, rendement nul, champs vides, rendement négatif, périodes mensuelles et dépassements vérifiés.");
