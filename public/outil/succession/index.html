@@ -187,7 +187,9 @@ function taxFor(l,base){
 }
 
 window.TOOL={calc:function(){
-   const part=Number(document.getElementById("part").value)||0;
+   const partRaw=document.getElementById("part").value;
+   if(String(partRaw).trim()==="") return "Renseignez une part nette valide.";
+   const part=Number(partRaw);
    const lien=document.getElementById("lien").value;
    const representationCount=Math.max(1,Math.floor(Number(document.getElementById("representationCount").value)||1));
    const handicap=document.getElementById("handicap").value==="oui";
