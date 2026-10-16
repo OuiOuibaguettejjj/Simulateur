@@ -52,7 +52,7 @@ for(const [activity,cents] of Object.entries(expectedAcreAfter)){
 
 console.log("Micro-entrepreneur : taux ordinaires, ACRE par activité, périodes partielles et entrées invalides validés.");
 
-const partialPeriod=await run({ca:"1000",act:"vente",acre:"oui",creation:"05/10/2025",periodStart:"01/06/2026",periodEnd:"31/07/2026"});
+const partialPeriod=await run({ca:"1000",act:"vente",acre:"oui",creation:"05/10/2025",periodStart:"01/09/2026",periodEnd:"31/10/2026"});
 assert.match(partialPeriod.text,/dépasse la fin théorique des droits ACRE/i,
   "micro-entrepreneur : refuser une période qui déborde la fin des droits ACRE");
 const afterExpiry=await run({ca:"1000",act:"vente",acre:"oui",creation:"01/07/2026",periodStart:"01/07/2027",periodEnd:"31/07/2027"});
