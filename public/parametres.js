@@ -498,6 +498,24 @@
         }
       }
     },
+    "indemnites-maternite-paternite": {
+      "label": "Indemnités journalières maternité et paternité — salarié du cas général",
+      "year": 2026,
+      "effectiveFrom": "2026-01-01",
+      "effectiveTo": "2026-12-31",
+      "verifiedOn": "2026-10-16",
+      "source": {
+        "label": "Service-Public — congé de maternité d’une salariée du secteur privé",
+        "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2265"
+      },
+      "values": {
+        "deductionForfaitaire": 0.21,
+        "diviseurSalaireJournalier": 91.25,
+        "indemniteJournaliereMaximale": 104.02,
+        "indemniteJournaliereMinimale": 11.12,
+        "plafondMensuel": 4005
+      }
+    },
     "jours-ouvres": {
       "label": "Calendrier des jours fériés nationaux français",
       "year": 2026,

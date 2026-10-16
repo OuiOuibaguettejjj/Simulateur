@@ -1151,6 +1151,28 @@
         "joursBaseOuvres": 25,
         "joursBaseOuvrables": 30
       }
+    },
+    "indemnites-maternite-paternite": {
+      "label": "Indemnités journalières maternité et paternité — salarié du cas général",
+      "year": 2026,
+      "usedBy": [
+        "indemnites-maternite-paternite"
+      ],
+      "source": {
+        "label": "Service-Public — congé de maternité d’une salariée du secteur privé",
+        "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2265"
+      },
+      "effectiveFrom": "2026-01-01",
+      "effectiveTo": "2026-12-31",
+      "verifiedOn": "2026-10-16",
+      "notes": "Plafond mensuel de salaire, coefficient de division, déduction forfaitaire et bornes minimale/maximale vérifiés le 16 octobre 2026 sur Service-Public pour le cas général salarié. Chaque salaire mensuel est plafonné séparément. Le calculateur suppose les droits ouverts et ne contrôle pas les conditions d’éligibilité ni les situations particulières ; vérifier annuellement et à chaque changement de règle.",
+      "values": {
+        "plafondMensuel": 4005,
+        "diviseurSalaireJournalier": 91.25,
+        "deductionForfaitaire": 0.21,
+        "indemniteJournaliereMinimale": 11.12,
+        "indemniteJournaliereMaximale": 104.02
+      }
     }
   },
   "anneeAMigrer": {
@@ -1163,7 +1185,6 @@
       "heures-supplementaires",
       "indemnite-precarite",
       "indemnites-maladie",
-      "indemnites-maternite-paternite",
       "micro-entrepreneur",
       "per",
       "plus-value-immobiliere",

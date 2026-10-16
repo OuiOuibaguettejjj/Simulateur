@@ -2140,5 +2140,20 @@
     ],
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F33359",
     "note": "Exemple officiel : 2 000 € mensuels, 10 jours ouvrés sur 21 jours travaillés. Le maintien estimé est 2 000 × 10 / 21 = 952,38 € ; le dixième est 2 400 × 10 / 25 = 960 €. Attendus calculés indépendamment de l’outil."
+  },
+  {
+    "outil": "indemnites-maternite-paternite",
+    "entrees": {
+      "s1": "3000",
+      "s2": "3000",
+      "s3": "3000",
+      "jours": "10",
+      "type": "maternite"
+    },
+    "attendu": 779.18,
+    "tolerance": 0.01,
+    "sortie": "estimés",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2265",
+    "note": "Calcul indépendant : chaque salaire de 3 000 € est sous le plafond mensuel ; (3 000 + 3 000 + 3 000) / 91,25 × 0,79 = 77,9178 € par jour, soit 77,92 € par jour et 779,18 € pour 10 jours. Le résultat attendu est calculé manuellement à partir de la formule officielle, pas depuis l’outil testé."
   }
 ]
