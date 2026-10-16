@@ -1,27 +1,37 @@
 # Benchmark concurrentiel — calculateur de plus-value mobilière
 
 - Date de vérification : 16 octobre 2026.
-- Périmètre : pages officielles de référence et parcours de calcul fiscal ; aucune affirmation de classement SEO ni de mesure de trafic concurrent n'est faite.
+- Périmètre : comparaison documentaire de pages officielles et de ressources financières accessibles publiquement. Il ne s'agit ni d'un audit exhaustif des résultats Google, ni d'une mesure des positions, du trafic ou des conversions des concurrents.
+- Méthode : ne retenir que les fonctionnalités et informations visibles dans les pages consultées ; distinguer les calculateurs directs des pages d'explication.
 
-## Sources consultées
+## Références consultées
 
-1. [impots.gouv.fr — Les cessions mobilières](https://www.impots.gouv.fr/particulier/les-cessions-mobilieres) : règles de calcul, PFU, option globale pour le barème, abattements conditionnels et moins-values.
-2. [impots.gouv.fr — Imposition d'une plus-value mobilière](https://www.impots.gouv.fr/particulier/questions/jai-realise-une-plus-value-mobiliere-comment-est-elle-imposee) : synthèse du régime et des taux en vigueur.
-3. [Service-Public — Impôt sur le revenu, plus-values sur valeurs mobilières](https://www.service-public.gouv.fr/particuliers/vosdroits/F21618) : explication destinée au grand public, cas d'exonération et choix du barème.
-4. [Simulateur officiel de l'impôt 2026](https://simulateur-ir-ifi.impots.gouv.fr/calcul_impot/2026/complet/index.htm) : parcours déclaratif, case 2OP et rubriques de plus-values.
+1. [Service-Public — Impôt sur le revenu, plus-values sur valeurs mobilières](https://www.service-public.gouv.fr/particuliers/vosdroits/F21618) — fiche officielle grand public. Elle explique le calcul du gain, l'imputation des moins-values, leur report possible sur dix ans, le PFU, l'option pour le barème et le traitement des titres acquis avant 2018.
+2. [impots.gouv.fr — Les cessions mobilières](https://www.impots.gouv.fr/particulier/les-cessions-mobilieres) — référence fiscale pour les règles de calcul, les frais, les moins-values et les situations particulières.
+3. [impots.gouv.fr — J'ai réalisé une plus-value mobilière, comment est-elle imposée ?](https://www.impots.gouv.fr/particulier/questions/jai-realise-une-plus-value-mobiliere-comment-est-elle-imposee) — synthèse officielle du régime fiscal.
+4. [BoursoBank — Calcul de la plus ou moins-value avec option à l'impôt sur le revenu](https://www.boursobank.com/aide-en-ligne/fiscalite/declaration-d-impot/question/quel-est-le-calcul-de-la-value-des-cessions-de-valeur-mobilieres-avec-option-a-l-impot-sur-le-revenu-26826) — ressource d'aide d'un acteur financier, avec exemples de calcul et explications sur les abattements et l'imputation des moins-values ; ce n'est pas un calculateur autonome.
+5. [Boursorama — page de présentation des simulateurs](https://www.boursorama.com/simulateurs/) — catalogue général de simulateurs financiers. La page consultée ne permet pas, à elle seule, de confirmer l'existence d'un calculateur dédié à la plus-value mobilière.
+6. [Simulateur officiel de l'impôt 2026](https://simulateur-ir-ifi.impots.gouv.fr/calcul_impot/2026/complet/index.htm) — parcours déclaratif officiel ; utile pour orienter vers la déclaration, mais ne constitue pas un comparateur direct de notre estimation simplifiée.
 
-## Constats utiles pour l'enrichissement
+## Comparaison utile pour l'expérience utilisateur
 
-| Besoin utilisateur | Référence observée | Décision sur Simulateur |
+| Besoin | Ce que montrent les références consultées | Réponse retenue sur Simulateur |
 |---|---|---|
-| Comprendre le taux et ses composantes | Les sources officielles distinguent impôt sur le revenu et prélèvements sociaux | Afficher les composantes et le taux total, avec une date/référence 2026 |
-| Comprendre PFU vs barème | L'option au barème porte globalement sur les revenus et gains mobiliers concernés | Expliquer explicitement le caractère global et éviter de prétendre calculer l'option optimale |
-| Comprendre les titres anciens | Les abattements de durée ne s'appliquent qu'à certains titres acquis avant 2018 et sous conditions | Expliquer l'exception sans l'appliquer automatiquement au résultat |
-| Éviter une estimation trompeuse | Les sources officielles détaillent moins-values, exonérations et cas particuliers | Décrire les éléments non pris en compte et orienter vers les sources officielles |
-| Accéder à l'information de référence | Le simulateur fiscal officiel sépare les rubriques de déclaration et propose des aides | Fournir les liens officiels dans le bloc méthode et une FAQ répondant aux questions fréquentes |
+| Obtenir rapidement un ordre de grandeur | Les pages officielles expliquent les règles, mais la fiche Service-Public est avant tout informative. | Calcul immédiat à partir du prix d'achat, du prix de vente et des frais saisis. |
+| Comprendre la composition de l'impôt | La fiche Service-Public distingue le PFU, l'impôt sur le revenu et les prélèvements sociaux. | Ventilation explicite des composantes à 12,8 % et 18,6 %, et affichage du total indicatif à 31,4 % pour le régime général 2026. |
+| Comprendre une perte | Service-Public explique que les moins-values peuvent, sous conditions, compenser des plus-values de même nature et être reportées. | Afficher une moins-value quand le résultat est négatif, sans prétendre calculer son imputation sur d'autres gains. |
+| Évaluer PFU ou barème | Les sources officielles et l'aide BoursoBank rappellent que l'option pour le barème et les abattements dépendent de la situation et peuvent impliquer d'autres revenus. | Expliquer le caractère global de l'option et ne pas présenter le résultat PFU comme une comparaison personnalisée. |
+| Éviter une estimation trompeuse | Les références listent des exceptions : PEA, abattements conditionnels, moins-values, exonérations et régimes particuliers. | Afficher les limites près du résultat et fournir des liens vers les sources officielles. |
+| Accéder aux outils associés | Les ressources financières regroupent plusieurs sujets fiscaux et patrimoniaux. | Proposer le calculateur d'impôt sur le revenu, le calculateur de TVA, les droits de donation et le lien vers la rubrique Fiscalité. |
 
-## Limites de la comparaison
+## Différenciation et limites
 
-- Le benchmark est qualitatif et documentaire ; il ne prétend pas comparer exhaustivement les interfaces, les performances ou le positionnement de tous les calculateurs commerciaux.
-- Les règles officielles constituent la référence fiscale ; les sites tiers ne sont pas utilisés comme sources de taux ou de barèmes.
-- L'outil reste une estimation simple à partir des prix d'achat, de vente et des frais saisis. Il ne calcule pas le barème progressif, les moins-values, les abattements, le PEA ni les régimes particuliers.
+- La valeur ajoutée visée est une estimation courte, immédiatement lisible et ventilée, accompagnée d'explications sur les limites fiscales.
+- Les pages consultées ne permettent pas de conclure qu'un site concurrent précis possède un calculateur autonome équivalent avec les mêmes champs. Aucun concurrent direct n'est donc présenté comme testé ou battu.
+- Aucun classement SEO, volume de recherche, score de performance, taux de conversion ou qualité d'interface mobile concurrente n'a été mesuré.
+- Le taux affiché est un paramètre réglementaire 2026 encore codé dans la page : le slug doit rester dans `anneeAMigrer` jusqu'à une migration réelle vers `data/parametres.json`. Le titre et le H1 doivent donc conserver explicitement l'année.
+- Le calculateur n'effectue pas une liquidation fiscale complète : les frais saisis ne sont pas contrôlés, les moins-values ne sont pas imputées, les abattements ne sont pas appliqués et l'option pour le barème n'est pas simulée.
+
+## Sources officielles à privilégier
+
+Pour trancher une situation fiscale individuelle, consulter en priorité les pages d'impots.gouv.fr et de Service-Public ci-dessus. Les exemples et ressources d'acteurs financiers servent à comprendre les besoins d'explication, pas à remplacer la doctrine fiscale officielle.
