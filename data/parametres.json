@@ -1196,6 +1196,48 @@
         "joursCarence": 3,
         "maxJoursIndemnisesCasGeneral": 360
       }
+    },
+    "micro-entrepreneur": {
+      "label": "Cotisations sociales micro-entrepreneur et taux ACRE",
+      "year": 2026,
+      "usedBy": [
+        "micro-entrepreneur"
+      ],
+      "source": {
+        "label": "Service-Public Entreprendre — régime micro-social et ACRE; Urssaf — guide auto-entrepreneur",
+        "url": "https://entreprendre.service-public.gouv.fr/vosdroits/F36232"
+      },
+      "effectiveFrom": "2026-01-01",
+      "effectiveTo": "2026-12-31",
+      "verifiedOn": "2026-10-16",
+      "notes": "Taux sociaux 2026 vérifiés sur Service-Public Entreprendre. Taux ACRE avant et à compter du 1er juillet 2026 contrôlés sur le guide Urssaf « Vous souhaitez devenir auto-entrepreneur » et la fiche ACRE Service-Public. La CFP est une contribution distincte versée en sus des cotisations sociales, selon l’activité (0,1 % commerce, 0,3 % artisanat, 0,2 % libéral) ; elle n’est pas déduite par ce calculateur. Les locations de meublés de tourisme classés disposent d’un taux distinct. Sources complémentaires : https://www.service-public.gouv.fr/particuliers/vosdroits/F11677 et https://www.urssaf.fr/files/live/sites/urssaffr/files/autres/Diaporama_Auto-entrepreneur.pdf Le calculateur estime la fin théorique des droits ACRE à la fin du troisième trimestre civil suivant le trimestre de début d’activité et vérifie que la période estimée est entièrement couverte. La date théorique ne confirme ni l’éligibilité ni l’acceptation de la demande ; les droits effectifs restent à confirmer auprès de l’Urssaf.",
+      "values": {
+        "rates": {
+          "vente": 0.123,
+          "bic": 0.212,
+          "bnc": 0.256,
+          "cipav": 0.232,
+          "tourisme": 0.06
+        },
+        "acreBeforeJuly2026": {
+          "vente": 0.062,
+          "bic": 0.106,
+          "bnc": 0.128,
+          "cipav": 0.134,
+          "tourisme": 0.03
+        },
+        "acreFromJuly2026": {
+          "vente": 0.093,
+          "bic": 0.159,
+          "bnc": 0.192,
+          "cipav": 0.174,
+          "tourisme": 0.045
+        },
+        "acreChangeYear": 2026,
+        "acreChangeMonth": 7,
+        "acreCreationFrom": 20250101,
+        "acreCreationTo": 20261231
+      }
     }
   },
   "anneeAMigrer": {
@@ -1207,7 +1249,6 @@
       "epargne-reglementee",
       "heures-supplementaires",
       "indemnite-precarite",
-      "micro-entrepreneur",
       "per",
       "plus-value-immobiliere",
       "plus-value-mobiliere",

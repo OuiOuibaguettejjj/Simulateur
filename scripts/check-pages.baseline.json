@@ -48,18 +48,6 @@
     "rule": "formula"
   },
   {
-    "path": "public/outil/micro-entrepreneur/index.html",
-    "rule": "description"
-  },
-  {
-    "path": "public/outil/micro-entrepreneur/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/micro-entrepreneur/index.html",
-    "rule": "formula"
-  },
-  {
     "path": "public/outil/per/index.html",
     "rule": "content-h2"
   },
