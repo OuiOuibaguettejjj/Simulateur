@@ -66,6 +66,7 @@ export const STEPS=[
   step("fractions","unit","tests/fractions.test.mjs"),
   step("calculs-generiques","unit","tests/generic-calcs.test.mjs"),
   step("micro-entrepreneur","unit","tests/micro-entrepreneur.test.mjs"),
+  step("charges-independant","unit","tests/charges-independant.test.mjs"),
   step("perimetre","unit","tests/perimetre.test.mjs"),
   step("signe-astrologique","unit","tests/signe-astrologique.test.mjs"),
   step("references-sourcees","unit","tests/reference-calcs.test.mjs"),
