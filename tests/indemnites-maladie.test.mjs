@@ -13,6 +13,8 @@ assert.match(officialExample.text,/230,09\s*€\s*d’IJSS brutes estimées/i,
   "l’exemple officiel à 2 000 € par mois doit donner 32,87 € par jour");
 
 const max=await run({s1:"6000",s2:"6000",s3:"6000",jours:"10"});
+assert.match(max.text,/IJ journalière\s*:\s*42,97\s*€/i,
+  "le plafond journalier doit rester à 42,97 € malgré la troncature des montants non plafonnés");
 assert.match(max.text,/300,79\s*€\s*d’IJSS brutes estimées/i,
   "l’indemnité maximale de 42,97 € doit être multipliée par les 7 jours après carence");
 
