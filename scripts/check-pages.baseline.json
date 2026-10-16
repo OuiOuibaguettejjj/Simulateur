@@ -32,18 +32,6 @@
     "rule": "formula"
   },
   {
-    "path": "public/outil/plus-value-mobiliere/index.html",
-    "rule": "description"
-  },
-  {
-    "path": "public/outil/plus-value-mobiliere/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/plus-value-mobiliere/index.html",
-    "rule": "formula"
-  },
-  {
     "path": "public/outil/succession/index.html",
     "rule": "faq"
   },
