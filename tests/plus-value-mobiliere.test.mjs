@@ -2,8 +2,6 @@ import assert from "node:assert/strict";
 import {runInlineCalculator} from "./calculator-harness.mjs";
 
 const slug="plus-value-mobiliere";
-const euro=/\d[\d\s\u00a0\u202f]*,\d{2}\s*€/;
-
 // Référence arithmétique du régime simplifié affiché par la page :
 // (15 000 - 10 000 - 0) × 31,4 % = 1 570 €.
 const gain=await runInlineCalculator({slug,inputs:{achat:"10000",vente:"15000",frais:"0"}});
