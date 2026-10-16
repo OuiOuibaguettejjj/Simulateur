@@ -1238,6 +1238,26 @@
         "acreCreationFrom": 20250101,
         "acreCreationTo": 20261231
       }
+    },
+    "plus-value-mobiliere": {
+      "label": "Plus-values mobilières — PFU de référence",
+      "year": 2026,
+      "usedBy": [
+        "plus-value-mobiliere"
+      ],
+      "source": {
+        "label": "impots.gouv.fr — Imposition des plus-values mobilières",
+        "url": "https://www.impots.gouv.fr/particulier/questions/jai-realise-une-plus-value-mobiliere-comment-est-elle-imposee"
+      },
+      "effectiveFrom": "2026-01-01",
+      "effectiveTo": "2026-12-31",
+      "verifiedOn": "2026-10-16",
+      "notes": "Taux du régime général des cessions privées vérifiés le 16 octobre 2026 sur impots.gouv.fr et recoupés avec Service-Public. Le calculateur applique le PFU indicatif au gain positif simplifié ; il ne modélise pas les moins-values imputables, les abattements, les exonérations, l'option globale pour le barème ni les régimes particuliers. Revalider les taux avant l'année fiscale suivante.",
+      "values": {
+        "tauxImpotRevenu": 0.128,
+        "tauxPrelevementsSociaux": 0.186,
+        "tauxPFU": 0.314
+      }
     }
   },
   "anneeAMigrer": {
@@ -1251,7 +1271,6 @@
       "indemnite-precarite",
       "per",
       "plus-value-immobiliere",
-      "plus-value-mobiliere",
       "succession"
     ]
   }

@@ -29,7 +29,7 @@
 - La valeur ajoutée visée est une estimation courte, immédiatement lisible et ventilée, accompagnée d'explications sur les limites fiscales.
 - Les pages consultées ne permettent pas de conclure qu'un site concurrent précis possède un calculateur autonome équivalent avec les mêmes champs. Aucun concurrent direct n'est donc présenté comme testé ou battu.
 - Aucun classement SEO, volume de recherche, score de performance, taux de conversion ou qualité d'interface mobile concurrente n'a été mesuré.
-- Le taux affiché est un paramètre réglementaire 2026 encore codé dans la page : le slug doit rester dans `anneeAMigrer` jusqu'à une migration réelle vers `data/parametres.json`. Le titre et le H1 doivent donc conserver explicitement l'année.
+- Les taux réglementaires de référence 2026 sont centralisés dans `data/parametres.json`, avec source officielle, période de validité et date de vérification. La page charge `/parametres.js` généré ; le slug est retiré de `anneeAMigrer` après cette migration.
 - Le calculateur n'effectue pas une liquidation fiscale complète : les frais saisis ne sont pas contrôlés, les moins-values ne sont pas imputées, les abattements ne sont pas appliqués et l'option pour le barème n'est pas simulée.
 
 ## Sources officielles à privilégier

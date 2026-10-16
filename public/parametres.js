@@ -625,6 +625,22 @@
         }
       }
     },
+    "plus-value-mobiliere": {
+      "label": "Plus-values mobilières — PFU de référence",
+      "year": 2026,
+      "effectiveFrom": "2026-01-01",
+      "effectiveTo": "2026-12-31",
+      "verifiedOn": "2026-10-16",
+      "source": {
+        "label": "impots.gouv.fr — Imposition des plus-values mobilières",
+        "url": "https://www.impots.gouv.fr/particulier/questions/jai-realise-une-plus-value-mobiliere-comment-est-elle-imposee"
+      },
+      "values": {
+        "tauxImpotRevenu": 0.128,
+        "tauxPFU": 0.314,
+        "tauxPrelevementsSociaux": 0.186
+      }
+    },
     "preavis-demission": {
       "label": "Préavis de démission — durées de conventions collectives",
       "year": 2026,
