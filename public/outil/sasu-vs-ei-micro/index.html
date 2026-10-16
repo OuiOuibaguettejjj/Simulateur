@@ -32,7 +32,7 @@
 <h1>Comparer SASU, EI et micro-entreprise</h1>
 <p class="tool-intro">Repérez les différences entre ces trois formes d’activité et les informations à réunir avant d’estimer vos cotisations. Le chiffre d’affaires seul ne suffit pas à établir une comparaison fiable.</p>
 <div id="fields">
-<div class="field"><label for="s">Structure à mettre en évidence</label><select id="s"><option value="Micro">Micro-entreprise</option><option value="EI">Entreprise individuelle au régime réel</option><option value="SASU">SASU</option></select><small>Choisissez une structure pour afficher ses points clés dans la comparaison ci-dessous. Aucun montant de cotisations ou de revenu net n’est calculé sur cette page.</small></div>
+<div class="field"><label for="s">Structure à mettre en évidence</label><input id="s" name="structure" list="structures" value="Micro" autocomplete="off" required><datalist id="structures"><option value="Micro">Micro-entreprise</option><option value="EI">Entreprise individuelle au régime réel</option><option value="SASU">SASU</option></datalist><small>Choisissez une structure pour afficher ses points clés dans la comparaison ci-dessous. Aucun montant de cotisations ou de revenu net n’est calculé sur cette page.</small></div>
 </div>
 <button class="button-main" type="button" onclick="Simulateurs.calc()">Afficher les points clés</button>
 <div class="result" id="result" aria-live="polite"><strong>Une comparaison qualitative, pas une simulation financière.</strong><p>Sélectionnez une structure puis affichez ses points clés. Pour chiffrer les cotisations, il faut des informations supplémentaires sur l’activité et la situation de l’entreprise.</p></div>
