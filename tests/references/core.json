@@ -2187,5 +2187,47 @@
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3053",
     "verificationSource": "https://www.ameli.fr/assure/remboursements/indemnites-journalieres-maladie-maternite-paternite/indemnites-journalieres-pour-maladie/arret-maladie-salarie",
     "note": "Référence indépendante : IJ de 32,87 € selon l'exemple officiel Service-Public ; 400 jours d'arrêt moins 3 jours de carence = 397 jours potentiellement indemnisables, ramenés au maximum général de 360 IJ sur trois années consécutives, soit 32,87 € × 360 = 11 833,20 €. L'estimation suppose qu'aucune autre IJ n'a déjà été versée sur la période et ne couvre pas les règles ALD."
+  },
+  {
+    "outil": "micro-entrepreneur",
+    "entrees": {
+      "ca": "1000",
+      "act": "vente",
+      "acre": "non",
+      "creation": "01/07/2026"
+    },
+    "attendu": 877,
+    "tolerance": 0.01,
+    "sortie": "Chiffre d’affaires restant après cotisations",
+    "source": "https://entreprendre.service-public.gouv.fr/vosdroits/F36232",
+    "verificationSource": "https://entreprendre.service-public.gouv.fr/vosdroits/F36232"
+  },
+  {
+    "outil": "micro-entrepreneur",
+    "entrees": {
+      "ca": "1000",
+      "act": "bic",
+      "acre": "oui",
+      "creation": "01/07/2026"
+    },
+    "attendu": 841,
+    "tolerance": 0.01,
+    "sortie": "Chiffre d’affaires restant après cotisations",
+    "source": "https://www.urssaf.fr/files/live/sites/urssaffr/files/autres/Diaporama_Auto-entrepreneur.pdf",
+    "verificationSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11677"
+  },
+  {
+    "outil": "micro-entrepreneur",
+    "entrees": {
+      "ca": "1000",
+      "act": "tourisme",
+      "acre": "non",
+      "creation": "01/07/2026"
+    },
+    "attendu": 940,
+    "tolerance": 0.01,
+    "sortie": "Chiffre d’affaires restant après cotisations",
+    "source": "https://entreprendre.service-public.gouv.fr/vosdroits/F36232",
+    "verificationSource": "https://entreprendre.service-public.gouv.fr/vosdroits/F36232"
   }
 ]
