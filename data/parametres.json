@@ -1261,7 +1261,7 @@
     }
   },
   "anneeAMigrer": {
-    "motif": "Barèmes encore codés en dur dans la page ou à auditer : l'année reste dans le titre jusqu'à la migration vers data/parametres.json. Retirer un slug de cette liste uniquement lorsque l'outil est réellement migré vers le jeu de paramètres correspondant.",
+    "motif": "Outils dont les barèmes ou paramètres réglementaires restent codés en dur ou doivent être audités. Les calculateurs purement mathématiques sans règle ni valeur réglementaire ne sont pas concernés ; toute qualification de ce type est documentée dans docs/DECISIONS.md. Pour un outil réglementaire, retirer le slug uniquement lorsque la migration vers le jeu de paramètres correspondant est réelle.",
     "slugs": [
       "age-retraite",
       "charges-independant",
