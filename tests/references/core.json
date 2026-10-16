@@ -2183,7 +2183,7 @@
     },
     "attendu": 11833.2,
     "tolerance": 0.01,
-    "sortie": "11.?833,20\\\\s*€\\\\s*d’IJSS brutes estimées",
+    "sortie": "11.?833,20\\s*€\\s*d’IJSS brutes estimées",
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3053",
     "verificationSource": "https://www.ameli.fr/assure/remboursements/indemnites-journalieres-maladie-maternite-paternite/indemnites-journalieres-pour-maladie/arret-maladie-salarie",
     "note": "Référence indépendante : IJ de 32,87 € selon l'exemple officiel Service-Public ; 400 jours d'arrêt moins 3 jours de carence = 397 jours potentiellement indemnisables, ramenés au maximum général de 360 IJ sur trois années consécutives, soit 32,87 € × 360 = 11 833,20 €. L'estimation suppose qu'aucune autre IJ n'a déjà été versée sur la période et ne couvre pas les règles ALD."
