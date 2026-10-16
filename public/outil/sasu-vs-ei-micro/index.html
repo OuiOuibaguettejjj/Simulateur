@@ -1,3 +1,102 @@
-<!doctype html><html lang="fr"><head><meta name="calculator-rendering" content="static"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="google-adsense-account" content="ca-pub-2924580037451268"><title>Calculateur et comparateur SASU, EI ou micro | Simulateur</title><meta name="description" content="Comparaison pédagogique de trois structures."><link rel="canonical" href="https://simulateur.site/outil/sasu-vs-ei-micro/"><link rel="stylesheet" href="/styles.css"><script src="/simulateurs.js" defer></script><script src="/enter-calcul.js" defer></script><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"SASU, EI ou micro","url":"https://simulateur.site/outil/sasu-vs-ei-micro/","description":"Comparaison pédagogique de trois structures.","inLanguage":"fr-FR","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"price":"0","priceCurrency":"EUR"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Travail","item":"https://simulateur.site/travail/"},{"@type":"ListItem","position":3,"name":"SASU, EI ou micro","item":"https://simulateur.site/outil/sasu-vs-ei-micro/"}]}</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta property="og:type" content="website"><meta property="og:site_name" content="Simulateur"><meta property="og:locale" content="fr_FR"><meta property="og:title" content="SASU, EI ou micro"><meta property="og:description" content="Comparaison pédagogique de trois structures."><meta property="og:url" content="https://simulateur.site/outil/sasu-vs-ei-micro/"><meta name="twitter:card" content="summary"></head><body><header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header><main><div class="wrap"><div class="breadcrumb"><a href="/">Accueil</a> · <a href="/travail/">Travail</a> · SASU, EI ou micro</div><section class="tool"><div class="eyebrow">ENTREPRENEURIAT</div><h1>SASU, EI ou micro</h1><p class="tool-intro">Comparaison pédagogique de trois structures.</p><div id="fields"><div class="field"><label for="ca">Chiffre d'affaires (€)</label><input id="ca" type="number" value="50000"></div><div class="field"><label for="s">Structure</label><select id="s"><option>Micro</option><option>EI</option><option>SASU</option></select></div></div><button class="button-main" onclick="Simulateurs.calc()">Calculer</button><div class="result" id="result" aria-live="polite"></div><div class="formula"><p>Comparaison pédagogique de trois structures.</p></div></section></div><section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Outils associés</h2><div class="related-links"><a class="related-link" href="/outil/micro-entrepreneur/"><strong>Micro-entrepreneur</strong><span>Estimer cotisations et revenu selon le chiffre d'affaires.</span></a><a class="related-link" href="/outil/charges-independant/"><strong>Charges indépendant</strong><span>Estimer les charges liées à une activité indépendante.</span></a><a class="related-link" href="/outil/impot-sur-le-revenu/"><strong>Impôt sur le revenu 2026</strong><span>Estimer l'impôt selon les règles du simulateur.</span></a></div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="/travail/">Travail</a>.</p></div></section>
-</main><footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer><script>window.TOOL={calc:function(){const ca=+this.$("ca").value,s=this.$("s").value;if(ca<0)return"Valeur invalide.";if(s==="Micro")return `<strong>La micro-entreprise applique des cotisations sociales calculées sur le chiffre d’affaires, selon la nature de l’activité.</strong><br><br>À titre d’exemple, le taux 2026 est de 12,3 % en vente, 21,2 % en prestations BIC, 25,6 % en BNC non réglementé et 23,2 % pour la Cipav.<p class="small">Le calculateur ne donne pas de montant pour l’EI ou la SASU à partir du seul chiffre d’affaires : les cotisations dépendent notamment du bénéfice ou de la rémunération. Utiliser un pourcentage fixe du CA serait trompeur.</p>`;return `<strong>${s} : le chiffre d’affaires seul ne permet pas de calculer correctement les cotisations.</strong><br><br>Il faut notamment connaître les charges de l’entreprise et, pour une SASU, la rémunération versée au dirigeant.<p class="small">Comparaison pédagogique, non substitutive aux simulateurs Urssaf.</p>`}};</script></body></html>
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="google-adsense-account" content="ca-pub-2924580037451268">
+<meta name="calculator-rendering" content="static">
+<title>Comparateur SASU, EI ou micro-entreprise | Simulateur</title>
+<meta name="description" content="Comparez SASU, EI et micro-entreprise : cotisations, frais et revenu disponible. Découvrez les données nécessaires pour calculer vos revenus.">
+<link rel="canonical" href="https://simulateur.site/outil/sasu-vs-ei-micro/">
+<link rel="stylesheet" href="/styles.css">
+<style>
+.comparison-table-wrap{margin:24px 0;overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+.comparison-table{width:100%;min-width:700px;border-collapse:collapse}
+.comparison-table th,.comparison-table td{padding:13px 15px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);line-height:1.5}
+.comparison-table thead th{background:var(--surface,var(--card));font-size:.9rem}
+.comparison-table tbody th{min-width:145px;font-weight:800}
+.comparison-table tbody tr:last-child th,.comparison-table tbody tr:last-child td{border-bottom:0}
+@media(max-width:700px){.comparison-table th,.comparison-table td{padding:11px 12px}}
+</style>
+<script src="/simulateurs.js" defer></script>
+<script src="/enter-calcul.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Comparateur SASU, EI ou micro-entreprise","url":"https://simulateur.site/outil/sasu-vs-ei-micro/","description":"Comparez SASU, EI et micro-entreprise : cotisations, frais et revenu disponible. Découvrez les données nécessaires pour calculer vos revenus.","inLanguage":"fr-FR","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"price":"0","priceCurrency":"EUR"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Travail","item":"https://simulateur.site/travail/"},{"@type":"ListItem","position":3,"name":"Comparateur SASU, EI ou micro-entreprise","item":"https://simulateur.site/outil/sasu-vs-ei-micro/"}]}</script>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Simulateur">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Comparateur SASU, EI ou micro-entreprise">
+<meta property="og:description" content="Comparez SASU, EI et micro-entreprise : cotisations, frais et revenu disponible. Découvrez les données nécessaires pour calculer vos revenus.">
+<meta property="og:url" content="https://simulateur.site/outil/sasu-vs-ei-micro/">
+<meta name="twitter:card" content="summary">
+</head>
+<body>
+<header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header>
+<main>
+<div class="wrap">
+<div class="breadcrumb"><a href="/">Accueil</a> · <a href="/travail/">Travail</a> · Comparateur SASU, EI ou micro-entreprise</div>
+<section class="tool">
+<div class="eyebrow">ENTREPRENEURIAT</div>
+<h1>Comparer SASU, EI et micro-entreprise</h1>
+<p class="tool-intro">Repérez les différences entre ces trois formes d’activité et les informations à réunir avant d’estimer vos cotisations. Le chiffre d’affaires seul ne suffit pas à établir une comparaison fiable.</p>
+<div id="fields">
+<div class="field"><label for="s">Structure à mettre en évidence</label><input id="s" name="structure" type="text" list="structures" value="Micro" placeholder="Saisir Micro, EI ou SASU" autocomplete="off" required aria-describedby="structure-help"><datalist id="structures"><option value="Micro" label="Micro-entreprise"></option><option value="EI" label="Entreprise individuelle au régime réel"></option><option value="SASU" label="Société par actions simplifiée unipersonnelle"></option></datalist><small id="structure-help">Saisissez ou choisissez exactement l’une des trois valeurs proposées : Micro, EI ou SASU. Aucun montant de cotisations ou de revenu net n’est calculé sur cette page.</small></div>
+</div>
+<button class="button-main" type="button" onclick="Simulateurs.calc()">Afficher les points clés</button>
+<div class="result" id="result" aria-live="polite"><strong>Une comparaison qualitative, pas une simulation financière.</strong><p>Sélectionnez une structure puis affichez ses points clés. Pour chiffrer les cotisations, il faut des informations supplémentaires sur l’activité et la situation de l’entreprise.</p></div>
+<div class="formula">
+<strong>Méthode et sources officielles</strong>
+<p>Le résultat présente les principales limites d’une estimation fondée sur le seul chiffre d’affaires. Les cotisations et le revenu disponible dépendent notamment de l’activité, des dépenses professionnelles, du régime fiscal et, en SASU, de la rémunération du président.</p>
+<p>Sources officielles à consulter : <a href="https://entreprendre.service-public.gouv.fr/vosdroits/F36232" rel="noopener noreferrer">cotisations du micro-entrepreneur</a>, <a href="https://entreprendre.service-public.gouv.fr/vosdroits/F23844?language=fr" rel="noopener noreferrer">choix de la forme juridique et régime social</a>, <a href="https://entreprendre.service-public.gouv.fr/vosdroits/F36240" rel="noopener noreferrer">cotisations sociales en SASU</a> et <a href="https://entreprendre.service-public.gouv.fr/vosdroits/F36380" rel="noopener noreferrer">régime fiscal de l’entrepreneur individuel</a>. Les règles peuvent évoluer : vérifiez la date de mise à jour de chaque fiche.</p>
+<p class="small">Taux de cotisations micro vérifiés le 16 octobre 2026 à partir de la <a href="https://entreprendre.service-public.gouv.fr/vosdroits/F36232" rel="noopener noreferrer">fiche officielle Service-Public Entreprendre</a>. Les taux affichés sont des repères : certains types d’activité et dispositifs particuliers relèvent de règles différentes.</p>
+</div>
+</section>
+</div>
+<section class="content-section">
+<h2>Quelle différence entre SASU, entreprise individuelle et micro-entreprise ?</h2>
+<p>La SASU est une société à associé unique. L’entreprise individuelle (EI) permet d’exercer en nom propre ; la micro-entreprise est un régime simplifié de l’entreprise individuelle, et non une société distincte. Les formalités, la fiscalité et le mode de calcul des cotisations ne sont donc pas identiques.</p>
+<p>En micro-entreprise, les cotisations sociales sont généralement calculées à partir du chiffre d’affaires encaissé et du type d’activité. En EI au régime réel, les cotisations dépendent notamment du revenu professionnel. En SASU, le traitement social dépend en particulier de la rémunération versée au président ; les dividendes suivent un régime différent.</p>
+<h2>Comparatif rapide</h2>
+<div class="comparison-table-wrap"><table class="comparison-table">
+<thead><tr><th scope="col">Critère</th><th scope="col">Micro-entreprise</th><th scope="col">EI au régime réel</th><th scope="col">SASU</th></tr></thead>
+<tbody>
+<tr><th scope="row">Nature</th><td>Entreprise individuelle avec régimes micro-fiscal et micro-social, sous conditions</td><td>Entreprise individuelle imposée selon un régime réel</td><td>Société par actions simplifiée à associé unique</td></tr>
+<tr><th scope="row">Base des cotisations sociales</th><td>Chiffre d’affaires ou recettes encaissés, selon l’activité</td><td>Revenu professionnel, selon les règles applicables</td><td>Rémunération du président ; les dividendes suivent des règles distinctes</td></tr>
+<tr><th scope="row">Dépenses professionnelles</th><td>Les frais réels ne sont généralement pas déduits pour le calcul forfaitaire micro</td><td>Les charges professionnelles sont prises en compte pour déterminer le résultat imposable, selon les règles applicables</td><td>Les dépenses de la société affectent son résultat ; le traitement dépend de leur nature</td></tr>
+<tr><th scope="row">À vérifier</th><td>Nature de l’activité, seuils et éventuelles options</td><td>Résultat, régime fiscal et situation sociale</td><td>Rémunération, dividendes, frais et fiscalité de la société</td></tr>
+</tbody></table></div>
+<p class="small">Ce tableau donne des repères généraux : les règles exactes dépendent de l’activité, des options et de la situation personnelle.</p>
+<h2>Comment interpréter cette comparaison ?</h2>
+<p>Le chiffre d’affaires n’est pas le revenu net. Pour comparer des situations équivalentes, il faut aussi connaître les frais professionnels, le bénéfice estimé, la rémunération souhaitée, la situation fiscale et les éventuelles aides applicables. Un taux unique appliqué au chiffre d’affaires pour les trois structures donnerait une comparaison trompeuse.</p>
+<p>Utilisez cette page comme un premier repère, pas comme une simulation complète de revenu net ou un conseil juridique, fiscal ou social. Pour une estimation adaptée, complétez les données manquantes et vérifiez les règles auprès des organismes officiels.</p>
+</section>
+<section class="calculator-faq" aria-labelledby="faq-title">
+<h2 id="faq-title">FAQ</h2>
+<details>
+<summary>La micro-entreprise est-elle un statut différent de l’EI ?</summary>
+<div class="calculator-faq-answer"><p>La micro-entreprise est un régime simplifié de l’entreprise individuelle. L’EI peut aussi relever d’un régime réel, selon la situation et les options exercées.</p></div>
+</details>
+<details>
+<summary>Peut-on comparer les cotisations avec le seul chiffre d’affaires ?</summary>
+<div class="calculator-faq-answer"><p>Pas de façon fiable pour les trois structures. Le calcul dépend notamment de l’activité, des dépenses et du revenu professionnel ; en SASU, la rémunération du président est également déterminante.</p></div>
+</details>
+<details>
+<summary>Les dividendes d’une SASU sont-ils équivalents à un salaire ?</summary>
+<div class="calculator-faq-answer"><p>Non. La rémunération et les dividendes obéissent à des traitements sociaux et fiscaux différents. Leur comparaison dépend de la situation de l’entreprise et du dirigeant.</p></div>
+</details>
+<details>
+<summary>Où vérifier les règles officielles ?</summary>
+<div class="calculator-faq-answer"><p>Consultez Service-Public et l’Urssaf, puis vérifiez les conditions qui correspondent à votre activité et à votre situation avant de prendre une décision.</p></div>
+</details>
+</section>
+<section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Outils associés</h2><div class="related-links">
+<a class="related-link" href="/outil/micro-entrepreneur/"><strong>Calculateur micro-entrepreneur</strong><span>Estimer les cotisations selon l’activité et le chiffre d’affaires.</span></a>
+<a class="related-link" href="/outil/charges-independant/"><strong>Charges d’indépendant</strong><span>Tester une estimation simplifiée à partir d’un revenu et d’un taux choisi.</span></a>
+<a class="related-link" href="/outil/impot-sur-le-revenu/"><strong>Impôt sur le revenu 2026</strong><span>Estimer l’impôt selon les données renseignées.</span></a>
+</div><p class="status-note">Retrouvez aussi les outils de la rubrique <a href="/travail/">Travail</a>.</p></div></section>
+</main>
+<footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer>
+<script>window.TOOL={calc:function(){const s=this.$("s").value;if(!["Micro","EI","SASU"].includes(s))return "<strong>Choisissez une structure parmi les trois options proposées.</strong>";if(s==="Micro")return `<strong>Micro-entreprise : des cotisations généralement calculées sur le chiffre d’affaires encaissé.</strong><ul><li>Taux 2026 affichés à titre de repère : 12,3 % en vente, 21,2 % en prestations BIC, 25,6 % en BNC non réglementé et 23,2 % pour les professions relevant de la Cipav. Ces taux ne couvrent pas toutes les situations, notamment certains cas de location meublée ; vérifiez le taux correspondant à votre activité sur la <a href="https://entreprendre.service-public.gouv.fr/vosdroits/F36232" rel="noopener noreferrer">fiche officielle des cotisations micro-entrepreneur</a>.</li><li>Les dépenses réelles ne sont généralement pas déduites du chiffre d’affaires pour calculer les cotisations du régime micro.</li><li>Le régime est simplifié, mais il faut vérifier les plafonds et les règles applicables à l’activité.</li></ul><p class="small">Pour une estimation chiffrée, utilisez le <a href="/outil/micro-entrepreneur/">calculateur micro-entrepreneur</a> et sélectionnez votre activité.</p>`;if(s==="EI")return `<strong>Entreprise individuelle au régime réel : les cotisations dépendent du revenu professionnel.</strong><ul><li>Le chiffre d’affaires doit être rapproché des dépenses professionnelles pour déterminer le résultat.</li><li>Le régime fiscal et la situation personnelle peuvent modifier l’estimation.</li><li>Le régime micro est une option distincte possible sous conditions : il ne faut pas confondre EI et micro-entreprise.</li></ul><p class="small">Pour tester une hypothèse simple de cotisations, consultez le <a href="/outil/charges-independant/">calculateur de charges d’indépendant</a>. Il ne remplace pas le simulateur officiel adapté à votre statut.</p>`;return `<strong>SASU : le résultat dépend notamment de la rémunération du président et des choix de distribution.</strong><ul><li>La rémunération du président et les dividendes ne suivent pas le même traitement social et fiscal.</li><li>Les frais de société, la rémunération et l’impôt doivent être considérés ensemble pour comparer le revenu disponible.</li><li>Un pourcentage unique appliqué au chiffre d’affaires ne permet pas d’estimer correctement les cotisations ou le revenu net.</li></ul><p class="small">Vérifiez votre situation avec les outils et informations officiels de l’<a href="https://www.urssaf.fr/" rel="noopener noreferrer">Urssaf</a> et de <a href="https://entreprendre.service-public.gouv.fr/" rel="noopener noreferrer">Service-Public Entreprendre</a>.</p>`}};</script>
+</body>
+</html>
