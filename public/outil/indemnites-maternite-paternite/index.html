@@ -45,5 +45,5 @@ const daily=Math.min(p.indemniteJournaliereMaximale,Math.max(p.indemniteJournali
 const total=daily*days;
 if(![retained,base,rawDaily,daily,total].every(Number.isFinite))return"Résultat impossible à calculer. Vérifiez les montants saisis.";
 const kind=this.$("type").value==="paternite"?"paternité / accueil de l’enfant":"maternité";
-return"<strong>"+this.euro(total)+" estimés</strong><br><br>Indemnité journalière estimée : "+this.euro(daily)+"<br>Congé : "+kind+"<br>Jours indemnisés : "+days+"<p class='small'>Cette estimation suppose que les droits à indemnisation sont ouverts. Elle ne vérifie pas les conditions d’affiliation, les heures ou cotisations requises, ni les situations particulières. Le montant effectivement dû est déterminé par la CPAM.</p>";
+return"<strong>Total estimé : "+this.euro(total)+"</strong><br><br>Indemnité journalière estimée : "+this.euro(daily)+"<br>Congé : "+kind+"<br>Jours indemnisés : "+days+"<p class='small'>Cette estimation suppose que les droits à indemnisation sont ouverts. Elle ne vérifie pas les conditions d’affiliation, les heures ou cotisations requises, ni les situations particulières. Le montant effectivement dû est déterminé par la CPAM.</p>";
 }};</script></body></html>

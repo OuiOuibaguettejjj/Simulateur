@@ -2152,7 +2152,7 @@
     },
     "attendu": 779.18,
     "tolerance": 0.01,
-    "sortie": "estimés",
+    "sortie": "Total estimé",
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2265",
     "note": "Calcul indépendant : chaque salaire de 3 000 € est sous le plafond mensuel ; (3 000 + 3 000 + 3 000) / 91,25 × 0,79 = 77,9178 € par jour, soit 77,92 € par jour et 779,18 € pour 10 jours. Le résultat attendu est calculé manuellement à partir de la formule officielle, pas depuis l’outil testé."
   }
