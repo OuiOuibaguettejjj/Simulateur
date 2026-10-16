@@ -68,7 +68,7 @@
 </main>
 <footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer>
 <script>window.TOOL={calc:function(){
-const raw=id=>String(this.$(id)?.value??"").trim().replace(/[\\s\\u00a0\\u202f]/g,"").replace(",",".");
+const raw=id=>String(this.$(id)?.value??"").trim().replace(/[\s\u00a0\u202f]/g,"").replace(",",".");
 const readSalary=id=>{const s=raw(id);if(s==="")return NaN;const n=Number(s);return Number.isFinite(n)&&n>=0?n:NaN;};
 const salaries=["s1","s2","s3"].map(readSalary);
 const daysRaw=raw("jours"),days=daysRaw===""?NaN:Number(daysRaw);
