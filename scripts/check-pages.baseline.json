@@ -1,21 +1,5 @@
 [
   {
-    "path": "public/outil/comparateur-placements/index.html",
-    "rule": "content-h2"
-  },
-  {
-    "path": "public/outil/comparateur-placements/index.html",
-    "rule": "description"
-  },
-  {
-    "path": "public/outil/comparateur-placements/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/comparateur-placements/index.html",
-    "rule": "formula"
-  },
-  {
     "path": "public/outil/succession/index.html",
     "rule": "faq"
   },
