@@ -67,6 +67,7 @@ export const STEPS=[
   step("perimetre","unit","tests/perimetre.test.mjs"),
   step("signe-astrologique","unit","tests/signe-astrologique.test.mjs"),
   step("references-sourcees","unit","tests/reference-calcs.test.mjs"),
+  step("indemnites-maternite-paternite","unit","tests/indemnites-maternite-paternite.test.mjs"),
   step("rendement-locatif","unit","tests/rendement-locatif.test.mjs"),
 
   step("parametres-test","params","tests/params.test.mjs"),

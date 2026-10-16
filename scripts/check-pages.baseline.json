@@ -76,22 +76,6 @@
     "rule": "formula"
   },
   {
-    "path": "public/outil/indemnites-maternite-paternite/index.html",
-    "rule": "content-h2"
-  },
-  {
-    "path": "public/outil/indemnites-maternite-paternite/index.html",
-    "rule": "description"
-  },
-  {
-    "path": "public/outil/indemnites-maternite-paternite/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/indemnites-maternite-paternite/index.html",
-    "rule": "formula"
-  },
-  {
     "path": "public/outil/micro-entrepreneur/index.html",
     "rule": "description"
   },
