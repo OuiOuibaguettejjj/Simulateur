@@ -2194,7 +2194,9 @@
       "ca": "1000",
       "act": "vente",
       "acre": "non",
-      "creation": "01/07/2026"
+      "creation": "01/07/2026",
+      "periodStart": "01/07/2026",
+      "periodEnd": "30/09/2026"
     },
     "attendu": 877,
     "tolerance": 0.01,
@@ -2208,7 +2210,9 @@
       "ca": "1000",
       "act": "bic",
       "acre": "oui",
-      "creation": "01/07/2026"
+      "creation": "01/07/2026",
+      "periodStart": "01/07/2026",
+      "periodEnd": "30/09/2026"
     },
     "attendu": 841,
     "tolerance": 0.01,
@@ -2222,7 +2226,9 @@
       "ca": "1000",
       "act": "tourisme",
       "acre": "non",
-      "creation": "01/07/2026"
+      "creation": "01/07/2026",
+      "periodStart": "01/07/2026",
+      "periodEnd": "30/09/2026"
     },
     "attendu": 940,
     "tolerance": 0.01,
@@ -2236,7 +2242,9 @@
       "ca": "1000",
       "act": "bic",
       "acre": "oui",
-      "creation": "01/10/2025"
+      "creation": "01/10/2025",
+      "periodStart": "01/01/2026",
+      "periodEnd": "31/03/2026"
     },
     "attendu": 894,
     "tolerance": 0.01,
