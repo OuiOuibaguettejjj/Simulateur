@@ -26,7 +26,7 @@ const invalidDate=await run({ca:"1000",act:"vente",acre:"oui",creation:"31/02/20
 assert.match(invalidDate.text,/date de début d’activité valide/i,
   "micro-entrepreneur : refuser une date impossible");
 const priorYear=await run({ca:"1000",act:"bic",acre:"oui",creation:"01/10/2025"});
-assert.match(priorYear.text,/Cotisations estimées[\\s\\S]*106[,.]00\\s*€/i,
+assert.match(priorYear.text,/Cotisations estimées[\s\S]*106[,.]00\s*€/i,
   "micro-entrepreneur : taux ACRE antérieur au 1er juillet 2026 pour une création en 2025, si les droits sont encore actifs");
 const missingDate=await run({ca:"1000",act:"vente",acre:"oui",creation:""});
 assert.match(missingDate.text,/date de début d’activité valide/i,
