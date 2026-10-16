@@ -98,7 +98,8 @@ export const INDIRECT_TESTS=new Map([
   ["tests/cash-flow-immobilier.test.mjs","tests/generic-calcs.test.mjs"],
   ["tests/moyenne.test.mjs","tests/generic-calcs.test.mjs"],
   ["tests/pourcentage.test.mjs","tests/generic-calcs.test.mjs"],
-  ["tests/conges-payes.test.mjs","tests/generic-calcs.test.mjs"]
+  ["tests/conges-payes.test.mjs","tests/generic-calcs.test.mjs"],
+  ["tests/sasu-vs-ei-micro.test.mjs","tests/generic-calcs.test.mjs"]
 ]);
 
 function run(cmd,args,env={}){
