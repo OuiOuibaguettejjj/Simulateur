@@ -265,3 +265,8 @@ Le calculateur `jours-ouvres` manipule un calendrier de jours fériés nationaux
 ## ARE chômage — périmètre et limites de l'enrichissement (2026-10-14)
 
 Le calculateur ARE reste classé **D — à qualifier** : sa logique manipule des paramètres réglementaires d'assurance chômage, mais il n'était ni rattaché à un jeu de paramètres dans `data/parametres.json`, ni inscrit dans `anneeAMigrer`. Cette PR enrichit la présentation, les explications, les limites, les sources officielles et les contrôles de référence sans reconstituer l'éligibilité ni les jours réglementaires. La mensualisation indicative est corrigée sur la base forfaitaire de 30 jours. Les montants fixes et la formule générale affichés sont sourcés sur France Travail et doivent faire l'objet d'une migration réglementaire distincte avant toute évolution de barème ou prise en charge de cas particuliers. La page ne prétend pas fournir une décision de droits.
+
+
+## Indemnité de précarité — enrichissement éditorial (2026-10-16)
+
+La page `/outil/indemnite-precarite/` est enrichie sans modifier sa formule métier ni ses taux codés en dur : le slug reste dans `anneeAMigrer` jusqu’à une migration dédiée des paramètres. Les explications distinguent plus précisément les exclusions propres au CDD et à l’intérim, avec des sources officielles datées. L’outil reste une estimation arithmétique et ne détermine pas l’éligibilité juridique individuelle. Toute évolution des taux ou de la formule doit être précédée d’une migration réglementaire et de cas de référence indépendants.

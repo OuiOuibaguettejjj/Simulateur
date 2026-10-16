@@ -59,6 +59,7 @@ export const STEPS=[
   step("promotions-navigateur","browser","tests/promotions-browser.test.mjs",[],{browser:true}),
   step("cash-flow-navigateur","browser","tests/cash-flow-immobilier.browser.test.mjs",[],{browser:true}),
   step("are-chomage-navigateur","browser","tests/are-chomage.browser.test.mjs",[],{browser:true}),
+  step("indemnite-precarite-navigateur","browser","tests/indemnite-precarite.browser.test.mjs",[],{browser:true}),
 
   step("ratio","unit","tests/ratio.test.mjs"),
   step("arrondi","unit","tests/arrondi.test.mjs"),
