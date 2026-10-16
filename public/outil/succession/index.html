@@ -24,6 +24,7 @@
 .tax-note{margin-top:12px;font-size:.8rem;color:var(--muted)}
 .source-links{margin:8px 0 0;padding-left:18px}
 .source-links li{margin:4px 0}
+.succession-shell.tool{max-width:920px;margin:auto;padding:0;border-radius:24px;overflow:hidden;box-shadow:0 24px 70px rgba(23,23,19,.12);border:1px solid var(--ink);border-top:1px solid var(--ink);background:var(--card)}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculez vos droits de succession","url":"https://simulateur.site/outil/succession/","description":"Calculez une estimation détaillée des droits de succession 2026 selon le lien de parenté, les abattements, une éventuelle exonération et les donations antérieures de moins de 15 ans.","inLanguage":"fr-FR","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"price":"0","priceCurrency":"EUR"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Fiscalité","item":"https://simulateur.site/fiscalite/"},{"@type":"ListItem","position":3,"name":"Calculez vos droits de succession","item":"https://simulateur.site/outil/succession/"}]}</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta property="og:type" content="website"><meta property="og:site_name" content="Simulateur"><meta property="og:locale" content="fr_FR"><meta property="og:title" content="Calculateur droits de succession 2026 | Simulateur"><meta property="og:description" content="Calculez une estimation détaillée des droits de succession 2026 selon le lien de parenté, les abattements, une éventuelle exonération et les donations antérieures de moins de 15 ans."><meta property="og:url" content="https://simulateur.site/outil/succession/"><meta name="twitter:card" content="summary"></head>
 <body>
@@ -33,7 +34,7 @@
 <div class="wrap">
 <div class="breadcrumb"><a href="/">Accueil</a> · <a href="/fiscalite/">Fiscalité</a> · Calculez vos droits de succession</div>
 
-<div class="succession-shell"><div class="succession-hero"><div class="eyebrow">FISCALITÉ · 2026</div><h1>Calculez vos droits de succession</h1><p class="tool-intro">Une estimation claire, détaillée et instantanée de votre fiscalité successorale.</p><div class="trust-row"><span>✓ Barème 2026</span><span>✓ Calcul par tranches</span><span>✓ Sources officielles</span></div></div><div class="tool succession-tool"><div id="fields" hidden></div>
+<section class="tool succession-shell"><div class="succession-hero"><div class="eyebrow">FISCALITÉ · 2026</div><h1>Calculez vos droits de succession</h1><p class="tool-intro">Une estimation claire, détaillée et instantanée de votre fiscalité successorale.</p><div class="trust-row"><span>✓ Barème 2026</span><span>✓ Calcul par tranches</span><span>✓ Sources officielles</span></div></div><div class="succession-tool"><div id="fields" hidden></div>
 <div class="eyebrow">PATRIMOINE</div>
 <h2>Calculateur droits de succession 2026</h2>
 <p class="tool-intro">Estimez les droits à payer sur la part nette recueillie, avec le barème 2026, les principaux abattements et les exonérations les plus courantes.</p>
@@ -113,7 +114,7 @@
 <li><a href="https://bofip.impots.gouv.fr/bofip/1767-PGP.html/identifiant=BOI-ENR-DMTG-10-50-50-20230711" target="_blank" rel="noopener">BOFiP — Donations antérieures et rappel fiscal sur 15 ans</a></li>
 </ul>
 </div>
-</div></div>
+</div></section>
 
 <section class="content-section succession-content"><div class="content-intro"><div class="eyebrow">COMPRENDRE LE RÉSULTAT</div><h2>Un calcul lisible, pas une boîte noire</h2><p>Chaque montant est décomposé pour vous permettre de vérifier le raisonnement fiscal.</p></div>
 <h2>Comment sont calculés les droits de succession ?</h2>
@@ -132,6 +133,16 @@
 <p><a href="https://www.service-public.fr/particuliers/vosdroits/R47789" target="_blank" rel="noopener"><strong>Voir le simulateur officiel de Service-Public</strong></a></p>
 </section>
 </div>
+<section class="calculator-faq" aria-labelledby="faq-title">
+<div class="content-intro"><div class="eyebrow">QUESTIONS FRÉQUENTES</div><h2 id="faq-title">FAQ</h2></div>
+<details><summary>Le calcul porte-t-il sur tout le patrimoine du défunt ?</summary><div class="calculator-faq-answer"><p>Non. Renseignez la part nette revenant à un bénéficiaire, après prise en compte du passif concerné. Cette estimation ne répartit pas elle-même la succession entre les héritiers.</p></div></details>
+<details><summary>Quel abattement s’applique à un enfant ?</summary><div class="calculator-faq-answer"><p>L’abattement personnel en ligne directe est généralement de 100 000 € par parent et par enfant, sous réserve des abattements déjà utilisés et des règles applicables à la situation. Les montants affichés doivent être vérifiés auprès des sources officielles avant une déclaration.</p></div></details>
+<details><summary>Le conjoint survivant ou le partenaire de PACS paie-t-il des droits ?</summary><div class="calculator-faq-answer"><p>Le conjoint survivant et le partenaire de PACS sont exonérés de droits de succession. Cette exonération ne signifie pas que les éventuels frais de notaire ou autres frais civils sont nuls.</p></div></details>
+<details><summary>Comment fonctionne l’abattement pour une personne handicapée ?</summary><div class="calculator-faq-answer"><p>Un abattement spécifique peut s’ajouter à l’abattement lié à la parenté si les conditions légales sont remplies. Le simulateur vous demande de déclarer l’éligibilité, mais ne vérifie pas les justificatifs.</p></div></details>
+<details><summary>Que signifie la représentation d’un descendant ?</summary><div class="calculator-faq-answer"><p>Dans certaines situations, des descendants viennent à la place de leur parent prédécédé ou renonçant. L’abattement attaché à la souche représentée est alors réparti entre les représentants concernés. La situation civile exacte peut nécessiter une vérification notariale.</p></div></details>
+<details><summary>Les donations antérieures sont-elles automatiquement retrouvées ?</summary><div class="calculator-faq-answer"><p>Non. Les montants relatifs aux donations de moins de 15 ans sont saisis manuellement. Reportez-vous aux déclarations et justificatifs antérieurs ; le calcul ne reconstitue pas l’historique fiscal et ne vérifie pas l’exactitude des sommes renseignées.</p></div></details>
+<details><summary>Cette estimation suffit-elle pour régler une succession ?</summary><div class="calculator-faq-answer"><p>Non. Elle ne traite pas intégralement la dévolution civile, l’assurance-vie, le démembrement, les transmissions d’entreprise, les frais d’acte ni tous les régimes dérogatoires. Pour une succession réelle ou complexe, faites vérifier les données et le calcul par un notaire ou l’administration fiscale.</p></div></details>
+</section>
 <section class="related-tools"><div><div class="eyebrow">À VOIR AUSSI</div><h2>Outils associés</h2><div class="related-links"><a class="related-link" href="/outil/donation/"><strong>Droits de donation</strong><span>Estimer les droits selon le lien de parenté.</span></a><a class="related-link" href="/outil/impot-sur-le-revenu/"><strong>Impôt sur le revenu</strong><span>Estimer l’impôt sur le revenu.</span></a><a class="related-link" href="/outil/assurance-vie/"><strong>Assurance-vie</strong><span>Comprendre le traitement fiscal de l’assurance-vie.</span></a></div><p class="status-note">Retrouvez aussi tous les outils de la rubrique <a href="/fiscalite/">Fiscalité</a>.</p></div></section></main>
 
 <footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer>
@@ -176,7 +187,9 @@ function taxFor(l,base){
 }
 
 window.TOOL={calc:function(){
-   const part=Number(document.getElementById("part").value)||0;
+   const partRaw=document.getElementById("part").value;
+   if(String(partRaw).trim()==="") return "Renseignez une part nette valide.";
+   const part=Number(partRaw);
    const lien=document.getElementById("lien").value;
    const representationCount=Math.max(1,Math.floor(Number(document.getElementById("representationCount").value)||1));
    const handicap=document.getElementById("handicap").value==="oui";
