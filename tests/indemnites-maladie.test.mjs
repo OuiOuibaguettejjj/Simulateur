@@ -6,7 +6,7 @@ const highMixed=await run({s1:"6000",s2:"1000",s3:"1000",jours:"10"});
 assert.match(highMixed.text,/176,96\s*€\s*d’IJSS brutes estimées/i,
   "le plafond doit être appliqué séparément à chacun des trois salaires");
 assert.match(highMixed.text,/IJ journalière\s*:\s*25,28\s*€/i,
-  "l’indemnité journalière doit être arrondie au centime avant le total");
+  "le montant journalier doit suivre l’exemple officiel de Service-Public");
 
 const max=await run({s1:"6000",s2:"6000",s3:"6000",jours:"10"});
 assert.match(max.text,/300,79\s*€\s*d’IJSS brutes estimées/i,
