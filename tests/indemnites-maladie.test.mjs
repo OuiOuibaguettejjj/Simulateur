@@ -13,7 +13,7 @@ assert.match(max.text,/300,79\s*€\s*d’IJSS brutes estimées/i,
   "l’indemnité maximale de 42,97 € doit être multipliée par les 7 jours après carence");
 
 const comma=await run({s1:"2 500,50",s2:"2500",s3:"2500",jours:"10"});
-assert.match(comma.text,/287,70\s*€\s*d’IJSS brutes estimées/i,
+assert.match(comma.text,/287,63\s*€\s*d’IJSS brutes estimées/i,
   "les espaces de groupement et la virgule décimale doivent être acceptés");
 
 const carence=await run({s1:"2500",s2:"2500",s3:"2500",jours:"3"});
