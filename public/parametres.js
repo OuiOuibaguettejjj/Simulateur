@@ -607,6 +607,8 @@
         },
         "acreChangeMonth": 7,
         "acreChangeYear": 2026,
+        "acreCreationFrom": "2025-01-01",
+        "acreCreationTo": "2026-12-31",
         "acreFromJuly2026": {
           "bic": 0.159,
           "bnc": 0.192,
