@@ -11,7 +11,7 @@ assert.match(page,/Afficher les points clés/,"le bouton doit décrire l’actio
 assert.match(page,/<meta name="description" content="([^"]+)"/,"la page doit avoir une meta description");
 const metaDescription=page.match(/<meta name="description" content="([^"]+)"/)?.[1] ?? "";
 assert.ok(metaDescription.length <= 160,"la meta description doit rester concise");
-assert.match(page,/<h2>Comparatif rapide<\/h2>[\\s\\S]*?<table>[\\s\\S]*?<th scope="col">Micro-entreprise<\/th>[\\s\\S]*?<th scope="col">EI au régime réel<\/th>[\\s\\S]*?<th scope="col">SASU<\/th>/,"le comparatif visible doit couvrir les trois structures");
+assert.match(page,/<h2>Comparatif rapide<\/h2>[\s\S]*?<table>[\s\S]*?<th scope="col">Micro-entreprise<\/th>[\s\S]*?<th scope="col">EI au régime réel<\/th>[\s\S]*?<th scope="col">SASU<\/th>/,"le comparatif visible doit couvrir les trois structures");
 for (const url of ["vosdroits/F36232","vosdroits/F23844?language=fr","vosdroits/F36240","vosdroits/F36380"]) {
   assert.ok(page.includes(url),"une source officielle dédiée doit être liée : "+url);
 }
@@ -35,5 +35,5 @@ for (const invalid of ["", "bonjour", "micro", "Sasu"]) {
 assert.match(page,/<input id="s" name="structure" type="text" list="structures"[^>]*required/,"la saisie doit proposer une liste de valeurs reconnues");
 assert.match(page,/<datalist id="structures">[\s\S]*<option value="Micro"[^>]*>[\s\S]*<option value="EI"[^>]*>[\s\S]*<option value="SASU"[^>]*>/,"la liste doit proposer les trois structures prises en charge");
 assert.match(page,/if\(!\["Micro","EI","SASU"\]\.includes\(s\)\)/,"toute valeur hors liste doit être refusée explicitement");
-assert.match(page,/urssaf\.fr\/accueil\/actualites\/taux-cotisations-autoentrepeneur\.html/,"les taux doivent pointer vers la source officielle Urssaf");
+assert.match(page,/entreprendre\.service-public\.gouv\.fr\/vosdroits\/F36232/,"les taux doivent pointer vers la fiche officielle des cotisations micro-entrepreneur");
 console.log("Comparateur SASU/EI/micro : 3 branches valides et 4 entrées invalides testées.");
