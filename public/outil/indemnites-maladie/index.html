@@ -68,10 +68,10 @@
 </main>
 <footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer>
 <script>window.TOOL={calc:function(){
-const raw=id=>String(this.$(id)?.value??"").trim().replace(/[\\s\\u00a0\\u202f]/g,"").replace(/,/g,".");
-const readSalary=id=>{const s=raw(id);if(s===""||!/^\\d+(?:\\.\\d{1,2})?$/.test(s))return NaN;const n=Number(s);return Number.isFinite(n)&&n>=0?n:NaN;};
+const raw=id=>String(this.$(id)?.value??"").trim().replace(/[\s\u00a0\u202f]/g,"").replace(/,/g,".");
+const readSalary=id=>{const s=raw(id);if(s===""||!/^\d+(?:\.\d{1,2})?$/.test(s))return NaN;const n=Number(s);return Number.isFinite(n)&&n>=0?n:NaN;};
 const dateText=String(this.$("date-debut")?.value??"").trim();
-const match=dateText.match(/^(\\d{2})\\/(\\d{2})\\/(\\d{4})$/);
+const match=dateText.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
 if(!match)return"Renseignez la date de début de l’arrêt au format jj/mm/aaaa.";
 const day=Number(match[1]),month=Number(match[2]),year=Number(match[3]);
 const date=new Date(Date.UTC(year,month-1,day));
