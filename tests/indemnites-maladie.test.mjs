@@ -34,9 +34,9 @@ const badFormat=await run({"date-debut":"2026-07-01",s1:"2500",s2:"2500",s3:"250
 assert.match(badFormat.text,/format jj\/mm\/aaaa/i,"le format de date doit être explicite");
 
 const negative=await run({s1:"-1",s2:"2500",s3:"2500",jours:"10"});
-assert.match(negative.text,/salaires bruts mensuels valides/i,"un salaire négatif doit être refusé");
+assert.match(negative.text,/salaires bruts valides/i,"un salaire négatif doit être refusé");
 const empty=await run({s1:"",s2:"2500",s3:"2500",jours:"10"});
-assert.match(empty.text,/salaires bruts mensuels valides/i,"un salaire manquant doit être refusé");
+assert.match(empty.text,/salaires bruts valides/i,"un salaire manquant doit être refusé");
 const zero=await run({s1:"0",s2:"0",s3:"0",jours:"10"});
 assert.match(zero.text,/total des salaires.*supérieur à zéro/i,"trois salaires nuls ne doivent pas produire une indemnité fictive");
 const fractional=await run({s1:"2500",s2:"2500",s3:"2500",jours:"1.5"});
