@@ -13,7 +13,7 @@ Dernière vérification : 16 octobre 2026.
 
 ## Périmètre de l'outil
 
-L'outil estime les IJSS brutes du cas général d'un salarié mensualisé. Il applique le plafond mensuel séparément à chacun des trois salaires saisis, divise leur somme retenue par 91,25, applique le taux de 50 % puis le plafond journalier de 42,97 €. Il retire trois jours de carence à titre indicatif. La date de début est saisie au format jj/mm/aaaa et sert à refuser les arrêts hors de la période de validité des paramètres.
+L'outil estime les IJSS brutes du cas général d'un salarié mensualisé. Il applique le plafond mensuel séparément à chacun des trois salaires saisis, divise leur somme retenue par 91,25, applique le taux de 50 % puis le plafond journalier de 42,97 €. Il retire trois jours de carence à titre indicatif puis plafonne l'estimation à 360 jours indemnisés sur trois années consécutives dans le cas général, conformément à Service-Public et ameli. Le plafond réel peut être inférieur si des IJ ont déjà été versées au cours de cette période. Les règles spécifiques aux affections de longue durée (ALD) ne sont pas calculées. La date de début est saisie au format jj/mm/aaaa et sert à refuser les arrêts hors de la période de validité des paramètres.
 
 Il ne contrôle pas les conditions d'ouverture des droits, les exceptions au délai de carence, les périodes de référence particulières, les situations saisonnières ou discontinues, les retenues sociales/fiscales, ni un éventuel complément de salaire employeur. Le résultat ne remplace pas la décision de la CPAM.
 
