@@ -8,6 +8,10 @@ assert.match(highMixed.text,/176,96\s*€\s*d’IJSS brutes estimées/i,
 assert.match(highMixed.text,/IJ journalière\s*:\s*25,28\s*€/i,
   "le montant journalier doit suivre l’exemple officiel de Service-Public");
 
+const officialExample=await run({s1:"2000",s2:"2000",s3:"2000",jours:"10"});
+assert.match(officialExample.text,/230,09\\s*€\\s*d’IJSS brutes estimées/i,
+  "l’exemple officiel à 2 000 € par mois doit donner 32,87 € par jour");
+
 const max=await run({s1:"6000",s2:"6000",s3:"6000",jours:"10"});
 assert.match(max.text,/300,79\s*€\s*d’IJSS brutes estimées/i,
   "l’indemnité maximale de 42,97 € doit être multipliée par les 7 jours après carence");
