@@ -37,7 +37,7 @@ La page n’est pas encore migrée vers `data/parametres.json`. Avant toute modi
 
 L’audit initial a identifié deux entrées pour cette page dans `scripts/check-pages.baseline.json` : `faq` et `tool-block`. La branche ajoute maintenant une section `.calculator-faq` avec sept questions et place le H1 ainsi que l’introduction dans une section `.tool` englobante, sans supprimer la structure métier existante.
 
-La baseline n’a pas été modifiée. Le processus du dépôt impose d’exécuter `node scripts/check-pages.mjs --update-baseline` pour retirer les écarts effectivement corrigés, jamais de modifier ce fichier manuellement. L’environnement utilisé pour cet audit ne permet pas de cloner le dépôt et d’exécuter les scripts localement ; cette étape reste donc à faire dans un environnement de travail avec le dépôt, puis à vérifier dans la CI. Ne pas déclarer la page conforme tant que le script et les tests ne sont pas passés.
+La baseline de la branche a été réduite à `[]` après correction des deux écarts suivis pour cette page. Sur le commit précédent, la CI avait exécuté le script officiel et confirmé que `tool-block` était déjà corrigé, mais que la FAQ ne respectait pas encore sa structure attendue. La FAQ a depuis été remise au niveau du contrat (`h2` exact « FAQ » et `<details>` enfants directs du bloc `.calculator-faq`). Le contrôle `baseline-regeneree` du nouveau commit doit confirmer que la baseline correspond exactement au résultat de `node scripts/check-pages.mjs --update-baseline` ; ne pas déclarer la conformité avant ce résultat.
 
 ## 4. Enrichissement éditorial et UX réalisé dans la branche
 
@@ -94,4 +94,4 @@ Les sources et barèmes devront être ouverts et revérifiés au moment de la mo
 
 ## 7. Portée et statut
 
-Ce document suit l’enrichissement de la page dans la branche. Il ne constitue pas un certificat de conformité du calculateur. Les formules métier n’ont pas été changées. Les contrôles locaux n’ont pas pu être exécutés dans l’environnement de travail ; la correction de la baseline via le script officiel, l’exécution des tests et la vérification du statut GitHub Actions restent obligatoires. Aucune réussite de test n’est revendiquée.
+Ce document suit l’enrichissement de la page dans la branche. Il ne constitue pas un certificat de conformité du calculateur. Les formules métier n’ont pas été changées. Les tests sont exécutés via GitHub Actions. La baseline doit encore être validée par le contrôle CI qui rejoue le script officiel ; l’audit visuel mobile et desktop n’a pas été réalisé. Aucune réussite finale de test n’est revendiquée tant que la dernière CI n’est pas terminée.
