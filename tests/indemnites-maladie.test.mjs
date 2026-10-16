@@ -36,6 +36,6 @@ assert.match(zero.text,/total des salaires.*supérieur à zéro/i,"trois salaire
 const fractional=await run({s1:"2500",s2:"2500",s3:"2500",jours:"1.5"});
 assert.match(fractional.text,/durée entière/i,"une durée fractionnaire doit être refusée");
 const huge=await run({s1:"1e308",s2:"1e308",s3:"1e308",jours:"1e308"});
-assert.match(huge.text,/Résultat impossible/i,"les entrées extrêmes doivent rester contrôlées");
+assert.match(huge.text,/salaires bruts mensuels valides/i,"les montants extrêmes hors format monétaire doivent être refusés");
 
 console.log("indemnites-maladie tests passed.");
