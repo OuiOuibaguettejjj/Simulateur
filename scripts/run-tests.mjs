@@ -71,6 +71,7 @@ export const STEPS=[
   step("plus-value-mobiliere","unit","tests/plus-value-mobiliere.test.mjs"),
   step("perimetre","unit","tests/perimetre.test.mjs"),
   step("signe-astrologique","unit","tests/signe-astrologique.test.mjs"),
+  step("succession","unit","tests/succession.test.mjs"),
   step("references-sourcees","unit","tests/reference-calcs.test.mjs"),
   step("indemnites-maternite-paternite","unit","tests/indemnites-maternite-paternite.test.mjs"),
   step("indemnites-maladie","unit","tests/indemnites-maladie.test.mjs"),
