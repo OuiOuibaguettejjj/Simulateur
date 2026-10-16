@@ -34,4 +34,20 @@ assert.match(missingDate.text,/date de début d’activité valide/i,
 const outOfScope=await run({ca:"1000",act:"vente",acre:"oui",creation:"01/07/2024"});
 assert.match(outOfScope.text,/du 1er janvier 2025 au 31 décembre 2026/i,
   "micro-entrepreneur : refuser les dates antérieures au périmètre de taux vérifié");
-console.log("Micro-entrepreneur : taux ordinaires, ACRE, activité tourisme et entrées invalides validés.");
+
+const expectedAcreBefore={vente:62,tourisme:30,bic:106,bnc:128,cipav:134};
+const expectedAcreAfter={vente:93,tourisme:45,bic:159,bnc:192,cipav:174};
+for(const [activity,cents] of Object.entries(expectedAcreBefore)){
+  const result=await run({ca:"1000",act:activity,acre:"oui",creation:"30/06/2026"});
+  assert.match(result.text,new RegExp("Cotisations estimées[\\s\\S]*"+cents.toFixed(2).replace(".", "[,.]")+"\\s*€","i"),
+    "micro-entrepreneur : taux ACRE avant juillet 2026 pour "+activity);
+}
+for(const [activity,cents] of Object.entries(expectedAcreAfter)){
+  const result=await run({ca:"1000",act:activity,acre:"oui",creation:"01/07/2026"});
+  assert.match(result.text,new RegExp("Cotisations estimées[\\s\\S]*"+cents.toFixed(2).replace(".", "[,.]")+"\\s*€","i"),
+    "micro-entrepreneur : taux ACRE à compter de juillet 2026 pour "+activity);
+  assert.match(result.text,/toute la période/i,
+    "micro-entrepreneur : rappeler que les droits ACRE doivent couvrir toute la période");
+}
+
+console.log("Micro-entrepreneur : taux ordinaires, ACRE par activité, périodes partielles et entrées invalides validés.");
