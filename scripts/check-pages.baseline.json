@@ -16,22 +16,6 @@
     "rule": "formula"
   },
   {
-    "path": "public/outil/epargne-reglementee/index.html",
-    "rule": "content-h2"
-  },
-  {
-    "path": "public/outil/epargne-reglementee/index.html",
-    "rule": "description"
-  },
-  {
-    "path": "public/outil/epargne-reglementee/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/epargne-reglementee/index.html",
-    "rule": "formula"
-  },
-  {
     "path": "public/outil/succession/index.html",
     "rule": "faq"
   },
