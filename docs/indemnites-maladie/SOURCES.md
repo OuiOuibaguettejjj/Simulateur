@@ -1,11 +1,15 @@
 # Sources réglementaires — indemnités journalières maladie
 
-Dernière vérification : 16 octobre 2026.\n\n**Période couverte par le calculateur :** arrêts débutant du 1er juillet au 31 décembre 2026. Les arrêts hors de cette période sont explicitement refusés tant que les paramètres historiques ou futurs ne sont pas ajoutés et vérifiés.
+Dernière vérification : 16 octobre 2026.
+
+**Période couverte par le calculateur :** arrêts débutant du 1er juillet au 31 décembre 2026. Les arrêts hors de cette période sont explicitement refusés tant que les paramètres historiques ou futurs ne sont pas ajoutés et vérifiés.
 
 ## Sources officielles
 
 - [Service-Public — Arrêt maladie : indemnités journalières versées au salarié](https://www.service-public.gouv.fr/particuliers/vosdroits/F3053) : formule du salaire journalier de base (somme des trois salaires bruts / 91,25), taux de 50 %, plafond mensuel de salaire retenu de 2 613,82 € et IJ maximale de 42,97 € pour les règles en vigueur depuis le 1er juillet 2026 ; délai de carence général de trois jours.
 - [ameli — Indemnités journalières pour maladie, salarié](https://www.ameli.fr/assure/remboursements/indemnites-journalieres-maladie-maternite-paternite/indemnites-journalieres-pour-maladie/arret-maladie-salarie) : recoupement des règles et plafonds applicables au salarié.
+
+**Écart constaté entre sources officielles :** la fiche Service-Public citée ci-dessus indique un plafond mensuel de 2 613,82 € et donne cet exemple de calcul, tandis que la page ameli indique 2 613,83 € à compter du 1er juillet 2026. Le calculateur conserve 2 613,82 €, valeur explicitement reprise dans l'exemple Service-Public ; cette divergence d’un centime est documentée et doit être revérifiée lors de la prochaine mise à jour réglementaire. Le plafond journalier de 42,97 € est appliqué explicitement dans les deux sources.
 
 ## Périmètre de l'outil
 
