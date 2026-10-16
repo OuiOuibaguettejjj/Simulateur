@@ -32,7 +32,7 @@
 <h1>Calculateur d’indemnités maladie : estimez vos IJSS</h1>
 <p class="tool-intro">Calculez une estimation des indemnités journalières brutes de l’Assurance maladie à partir de la date de début de l’arrêt, de vos trois derniers salaires bruts et de sa durée. Les paramètres disponibles concernent les arrêts débutés entre le 1er juillet et le 31 décembre 2026. Le résultat est indicatif : il ne vaut pas décision de la CPAM.</p>
 <div id="fields">
-<div class="field"><label for="date-debut">Date de début de l’arrêt (jj/mm/aaaa)</label><input id="date-debut" type="text" inputmode="numeric" autocomplete="off" placeholder="01/07/2026" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" aria-describedby="date-help" oninput="const p=this.selectionStart??this.value.length;const n=this.value.slice(0,p).replace(/\D/g,'').length;const d=this.value.replace(/\D/g,'').slice(0,8);this.value=d.slice(0,2)+(d.length>2?'/'+d.slice(2,4):'')+(d.length>4?'/'+d.slice(4):'');let i=0,k=0;while(i<this.value.length&&k<n){if(/\d/.test(this.value[i]))k++;i++;}this.setSelectionRange(i,i);" required></div>
+<div class="field"><label for="date-debut">Date de début de l’arrêt (jj/mm/aaaa)</label><input id="date-debut" type="text" inputmode="numeric" autocomplete="off" placeholder="01/07/2026" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" aria-describedby="date-help" required></div>
 <p id="date-help">Cette estimation utilise les paramètres applicables du 1er juillet au 31 décembre 2026. Les arrêts débutés en dehors de cette période nécessitent un barème différent.</p>
 <div class="field"><label for="s1">Salaire brut du mois précédent l’arrêt (€)</label><input id="s1" type="text" inputmode="decimal" autocomplete="off" placeholder="3000,00" aria-describedby="salary-help"></div>
 <div class="field"><label for="s2">Salaire brut du 2e mois précédent (€)</label><input id="s2" type="text" inputmode="decimal" autocomplete="off" placeholder="3000,00"></div>
@@ -94,6 +94,16 @@ const payableDays=Math.max(0,days-p.joursCarence),total=daily*payableDays;
 if(![retained,base,rawDaily,daily,total].every(Number.isFinite))return"Résultat impossible à calculer. Vérifiez les montants saisis.";
 return"<strong>"+this.euro(total)+" d’IJSS brutes estimées</strong><br><small>IJ journalière : "+this.euro(daily)+" · jours indemnisés après "+p.joursCarence+" jours de carence : "+payableDays+".</small>";
 }};</script>
-<script src="/enter-calcul.js" defer></script>
+<script>
++document.getElementById("date-debut")?.addEventListener("input",function(){
++const before=this.value.slice(0,this.selectionStart??this.value.length).replace(/\D/g,"").length;
++const digits=this.value.replace(/\D/g,"").slice(0,8);
++this.value=digits.slice(0,2)+(digits.length>2?"/"+digits.slice(2,4):"")+(digits.length>4?"/"+digits.slice(4):"");
++let position=0,count=0;
++while(position<this.value.length&&count<before){if(/\d/.test(this.value[position]))count++;position++;}
++this.setSelectionRange(position,position);
++});
++</script>
++<script src="/enter-calcul.js" defer></script>
 </body>
 </html>
