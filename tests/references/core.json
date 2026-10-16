@@ -2252,5 +2252,19 @@
     "source": "https://www.urssaf.fr/files/live/sites/urssaffr/files/autres/Diaporama_Auto-entrepreneur.pdf",
     "verificationSource": "https://entreprendre.service-public.gouv.fr/vosdroits/F11677",
     "note": "Référence indépendante pour une création antérieure au 1er juillet 2026 : taux ACRE BIC de 10,6 %, soit 106 € sur 1 000 € de chiffre d’affaires. À utiliser uniquement si les droits ACRE sont encore actifs pendant la période estimée."
+  },
+  {
+    "outil": "plus-value-mobiliere",
+    "entrees": {
+      "achat": "10000",
+      "vente": "15000",
+      "frais": "0"
+    },
+    "attendu": 1570,
+    "tolerance": 0.01,
+    "sortie": "Imposition totale estimée",
+    "source": "https://www.impots.gouv.fr/particulier/questions/jai-realise-une-plus-value-mobiliere-comment-est-elle-imposee",
+    "verificationSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21618",
+    "note": "Cas de référence indépendant : gain simplifié de 5 000 € × PFU de référence 31,4 % = 1 570 €. Les taux officiels utilisés sont centralisés dans data/parametres.json."
   }
 ]
