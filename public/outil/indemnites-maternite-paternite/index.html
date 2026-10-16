@@ -41,7 +41,7 @@ const p=set.values;
 const retained=salaries.reduce((sum,n)=>sum+Math.min(n,p.plafondMensuel),0);
 const base=retained/p.diviseurSalaireJournalier;
 const rawDaily=base*(1-p.deductionForfaitaire);
-const daily=Math.min(p.indemniteJournaliereMaximale,Math.max(p.indemniteJournaliereMinimale,rawDaily));
+const daily=Math.round(Math.min(p.indemniteJournaliereMaximale,Math.max(p.indemniteJournaliereMinimale,rawDaily))*100)/100;
 const total=daily*days;
 if(![retained,base,rawDaily,daily,total].every(Number.isFinite))return"Résultat impossible à calculer. Vérifiez les montants saisis.";
 const kind=this.$("type").value==="paternite"?"paternité / accueil de l’enfant":"maternité";
