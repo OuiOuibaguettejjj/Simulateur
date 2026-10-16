@@ -28,6 +28,13 @@ assert.equal(amountAfter("Placement A · 10 ans", zeroRate.text), 34000,
 assert.equal(amountAfter("Gains estimés", zeroRate.text), 0,
   "à taux net nul, les gains estimés doivent être nuls");
 
+const negativeReturn = await runInlineCalculator({
+  slug: "comparateur-placements",
+  inputs: {...inputs, "capital-a": "10000", "versement-a": "0", "rendement-a": "-10", "frais-a": "0", "horizon-a": "1"}
+});
+assert.equal(amountAfter("Placement A · 1 ans", negativeReturn.text), 9000,
+  "un rendement annuel négatif doit être accepté et refléter une perte sur un an");
+
 const differentHorizons = await runInlineCalculator({
   slug: "comparateur-placements",
   inputs: {...inputs, "horizon-b": "15"}
@@ -49,4 +56,4 @@ const negative = await runInlineCalculator({
 assert.match(negative.text, /Vérifiez vos hypothèses/i,
   "un capital négatif doit être refusé");
 
-console.log("Comparateur de placements : scénario de référence, taux net nul, horizons différents et saisies invalides validés.");
+console.log("Comparateur de placements : scénario de référence, taux net nul, horizons différents et saisies invalides et rendement négatif validés.");
