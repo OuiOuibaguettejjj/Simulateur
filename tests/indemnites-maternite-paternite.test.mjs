@@ -22,6 +22,10 @@ assert.match(empty,/salaires bruts mensuels valides/i,"un salaire manquant doit 
 const zero=await textFor({s1:"0",s2:"0",s3:"0",jours:"1",type:"maternite"});
 assert.match(zero,/supérieur à zéro/i,"trois salaires nuls ne doivent pas produire une indemnité minimale fictive");
 
+const rounding=await textFor({s1:"3000",s2:"3000",s3:"3000",jours:"10",type:"maternite"});
+assert.match(rounding,/Total estimé\s*:\s*779,20\s*€/,"le total doit utiliser l’indemnité journalière arrondie au centime avant multiplication par les jours");
+assert.match(rounding,/Indemnité journalière estimée\s*:\s*77,92\s*€/,"l’indemnité journalière affichée doit être celle utilisée pour calculer le total");
+
 const fractionalDays=await textFor({s1:"3000",s2:"3000",s3:"3000",jours:"1.5",type:"maternite"});
 assert.match(fractionalDays,/nombre entier de jours/i,"les jours indemnisés doivent être un entier positif");
 
