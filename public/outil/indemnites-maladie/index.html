@@ -88,6 +88,7 @@ const p=set.values,retained=salaries.reduce((sum,n)=>sum+Math.min(n,p.plafondMen
 if(!Number.isFinite(retained)||retained<=0)return"Le total des salaires de référence doit être supérieur à zéro.";
 const base=retained/p.diviseurSalaireJournalier;
 const rawDaily=base*p.tauxIndemnisation;
+// Service-Public publie 42,97 € au plafond ; les IJ non plafonnées suivent l'exemple à 32,87 €.
 const daily=rawDaily>=p.indemniteJournaliereMaximale-0.005?p.indemniteJournaliereMaximale:Math.floor(rawDaily*100+1e-8)/100;
 const payableDays=Math.max(0,days-p.joursCarence),total=daily*payableDays;
 if(![retained,base,rawDaily,daily,total].every(Number.isFinite))return"Résultat impossible à calculer. Vérifiez les montants saisis.";
