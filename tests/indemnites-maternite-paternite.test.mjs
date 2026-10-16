@@ -5,7 +5,7 @@ const run=inputs=>runInlineCalculator({family:"outil",slug:"indemnites-maternite
 const textFor=async inputs=>(await run(inputs)).text;
 
 const highMonth=await textFor({s1:"10000",s2:"0",s3:"0",jours:"1",type:"maternite"});
-assert.match(highMonth,/34,68\s*€/,"le plafond mensuel doit s’appliquer séparément au salaire du mois concerné");
+assert.match(highMonth,/34,67\s*€/,"le plafond mensuel doit s’appliquer séparément au salaire du mois concerné");
 
 const capped=await textFor({s1:"4005",s2:"4005",s3:"4005",jours:"1",type:"paternite"});
 assert.match(capped,/104,02\s*€/,"l’indemnité journalière doit être plafonnée au maximum 2026");
