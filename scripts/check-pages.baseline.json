@@ -1,21 +1,5 @@
 [
   {
-    "path": "public/outil/charges-independant/index.html",
-    "rule": "content-h2"
-  },
-  {
-    "path": "public/outil/charges-independant/index.html",
-    "rule": "description"
-  },
-  {
-    "path": "public/outil/charges-independant/index.html",
-    "rule": "faq"
-  },
-  {
-    "path": "public/outil/charges-independant/index.html",
-    "rule": "formula"
-  },
-  {
     "path": "public/outil/comparateur-placements/index.html",
     "rule": "content-h2"
   },

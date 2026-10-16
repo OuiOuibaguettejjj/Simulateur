@@ -270,3 +270,8 @@ Le calculateur ARE reste classé **D — à qualifier** : sa logique manipule de
 ## Indemnité de précarité — enrichissement éditorial (2026-10-16)
 
 La page `/outil/indemnite-precarite/` est enrichie sans modifier sa formule métier ni ses taux codés en dur : le slug reste dans `anneeAMigrer` jusqu’à une migration dédiée des paramètres. Les explications distinguent plus précisément les exclusions propres au CDD et à l’intérim, avec des sources officielles datées. L’outil reste une estimation arithmétique et ne détermine pas l’éligibilité juridique individuelle. Toute évolution des taux ou de la formule doit être précédée d’une migration réglementaire et de cas de référence indépendants.
+
+
+## Charges sociales indépendant — enrichissement prudent (2026-10-16)
+
+La page `/outil/charges-independant/` reste un calculateur réglementaire non migré : sa formule et ses paramètres métier ne sont pas remplacés par un barème officiel. La saisie précise désormais que le revenu de scénario est à considérer après charges d’exploitation et avant cotisations, tout en rappelant que l’assiette légale dépend du statut. Les champs vides, valeurs non finies, revenus négatifs et taux hors de 0 à 100 % sont rejetés ; zéro reste accepté. Les limites, sources et prochaine date de revue sont documentées dans `docs/charges-independant/SOURCES.md` et `docs/ECHEANCES.md`. Un test spécifique couvre la formule illustrative et ses bornes ; il n'est pas placé dans `tests/references/core.json`, car ce fichier interdit explicitement les références des outils toujours classés dans `anneeAMigrer`. Toute migration future doit être traitée séparément avec des paramètres réglementaires et des attendus officiellement justifiés.
