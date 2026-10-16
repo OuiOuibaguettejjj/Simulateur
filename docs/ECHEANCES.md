@@ -4,6 +4,7 @@ Ce document recense les échéances actuellement suivies par `data/parametres.js
 
 | Jeu | Expiration actuelle | Source officielle à consulter |
 |---|---|---|
+| Cotisations micro-entrepreneur et taux ACRE | 31/12/2026 | [Service-Public — régime micro-social](https://entreprendre.service-public.gouv.fr/vosdroits/F36232), [Service-Public — ACRE](https://www.service-public.gouv.fr/particuliers/vosdroits/F11677), [Urssaf — guide auto-entrepreneur](https://www.urssaf.fr/files/live/sites/urssaffr/files/autres/Diaporama_Auto-entrepreneur.pdf) |
 | Calendrier national des jours fériés — jours ouvrés | 31/12/2100 | [Service-Public — jours fériés en France](https://www.service-public.gouv.fr/particuliers/vosdroits/F2405) |
 | Retraite simplifiée | 31/03/2027 | [Assurance retraite — âge légal et durée d’assurance](https://www.lassuranceretraite.fr/portail-info/home/actif/age-depart/age-depart-retraite.html) et [Légifrance — loi n° 2025-1403, article 105](https://www.legifrance.gouv.fr/jorf/article_jo/JORFARTI000053227007) |
 | SMIC | 31/12/2026 | [Service-Public — SMIC](https://www.service-public.gouv.fr/particuliers/vosdroits/F2300) |
