@@ -512,6 +512,7 @@
         "diviseurSalaireJournalier": 91.25,
         "indemniteJournaliereMaximale": 42.97,
         "joursCarence": 3,
+        "maxJoursIndemnisesCasGeneral": 360,
         "plafondMensuel": 2613.82,
         "tauxIndemnisation": 0.5
       }
