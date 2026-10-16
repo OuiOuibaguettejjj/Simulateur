@@ -587,6 +587,42 @@
         ]
       }
     },
+    "micro-entrepreneur": {
+      "label": "Cotisations sociales micro-entrepreneur et taux ACRE",
+      "year": 2026,
+      "effectiveFrom": "2026-01-01",
+      "effectiveTo": "2026-12-31",
+      "verifiedOn": "2026-10-16",
+      "source": {
+        "label": "Service-Public Entreprendre — régime micro-social et ACRE; Urssaf — guide auto-entrepreneur",
+        "url": "https://entreprendre.service-public.gouv.fr/vosdroits/F36232"
+      },
+      "values": {
+        "acreBeforeJuly2026": {
+          "bic": 0.106,
+          "bnc": 0.128,
+          "cipav": 0.134,
+          "tourisme": 0.03,
+          "vente": 0.062
+        },
+        "acreChangeMonth": 7,
+        "acreChangeYear": 2026,
+        "acreFromJuly2026": {
+          "bic": 0.159,
+          "bnc": 0.192,
+          "cipav": 0.174,
+          "tourisme": 0.045,
+          "vente": 0.093
+        },
+        "rates": {
+          "bic": 0.212,
+          "bnc": 0.256,
+          "cipav": 0.232,
+          "tourisme": 0.06,
+          "vente": 0.123
+        }
+      }
+    },
     "preavis-demission": {
       "label": "Préavis de démission — durées de conventions collectives",
       "year": 2026,
