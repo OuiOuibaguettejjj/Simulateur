@@ -24,6 +24,7 @@ Ce document recense les échéances actuellement suivies par `data/parametres.js
 | Indemnités maternité / paternité | 31/12/2026 | [Service-Public — congé de maternité](https://www.service-public.gouv.fr/particuliers/vosdroits/F2265) et [congé de paternité](https://www.service-public.gouv.fr/particuliers/vosdroits/F3156) |
 | Temps de travail | 31/12/2026 | [Service-Public — durée du travail](https://www.service-public.gouv.fr/particuliers/vosdroits/F1911) et [Ministère du Travail — durée légale du travail](https://travail-emploi.gouv.fr/la-duree-legale-du-travail) |
 
+| Indemnité de précarité (CDD et intérim) | 31/12/2026 | [Service-Public — prime de précarité](https://www.service-public.gouv.fr/particuliers/vosdroits/F803), [intérim](https://www.service-public.fr/particuliers/vosdroits/F11215) et [Code du travail — article L1243-8](https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006901219/2026-04-26) |
 | Indemnité de rupture conventionnelle | 31/12/2026 | [Service-Public — indemnité spécifique de rupture conventionnelle](https://www.service-public.gouv.fr/particuliers/vosdroits/F31539) et [Code du travail](https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006072050/LEGISCTA000006195624/) |
 
 ## Procédure de renouvellement
