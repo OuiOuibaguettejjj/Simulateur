@@ -11,7 +11,7 @@ assert.match(page,/Afficher les points clés/,"le bouton doit décrire l’actio
 assert.match(page,/<meta name="description" content="([^"]+)"/,"la page doit avoir une meta description");
 const metaDescription=page.match(/<meta name="description" content="([^"]+)"/)?.[1] ?? "";
 assert.ok(metaDescription.length <= 160,"la meta description doit rester concise");
-assert.match(page,/<h2>Comparatif rapide<\/h2>[\s\S]*?<table>[\s\S]*?<th scope="col">Micro-entreprise<\/th>[\s\S]*?<th scope="col">EI au régime réel<\/th>[\s\S]*?<th scope="col">SASU<\/th>/,"le comparatif visible doit couvrir les trois structures");
+assert.match(page,/<h2>Comparatif rapide<\/h2>[\s\S]*?<table\b[^>]*>[\s\S]*?<th scope="col">Micro-entreprise<\/th>[\s\S]*?<th scope="col">EI au régime réel<\/th>[\s\S]*?<th scope="col">SASU<\/th>/,"le comparatif visible doit couvrir les trois structures");
 for (const url of ["vosdroits/F36232","vosdroits/F23844?language=fr","vosdroits/F36240","vosdroits/F36380"]) {
   assert.ok(page.includes(url),"une source officielle dédiée doit être liée : "+url);
 }
