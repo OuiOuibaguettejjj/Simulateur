@@ -33,16 +33,19 @@ Avant toute modification du calcul :
 
 La page n’est pas encore migrée vers `data/parametres.json`. Avant toute modification de barème, qualifier la migration réglementaire et, si elle est nécessaire, la faire dans la même PR complète : paramètres sourcés, dates de validité, date de vérification, génération de `public/parametres.js`, cas de référence sourcé et échéance documentée. Aucun barème ne doit être actualisé simplement au passage.
 
-## 3. Constats bloquants relevés dans la baseline
+## 3. Écarts de baseline et état après enrichissement
 
-Au moment de l’audit, `scripts/check-pages.baseline.json` contient encore deux entrées pour cette page :
+L’audit initial a identifié deux entrées pour cette page dans `scripts/check-pages.baseline.json` : `faq` et `tool-block`. La branche ajoute maintenant une section `.calculator-faq` avec sept questions et place le H1 ainsi que l’introduction dans une section `.tool` englobante, sans supprimer la structure métier existante.
 
-- `faq` : le bloc FAQ obligatoire `.calculator-faq` manque ;
-- `tool-block` : le contrat structurel exige une section `.tool` contenant le H1 et un `p.tool-intro`.
+La baseline n’a pas été modifiée. Le processus du dépôt impose d’exécuter `node scripts/check-pages.mjs --update-baseline` pour retirer les écarts effectivement corrigés, jamais de modifier ce fichier manuellement. L’environnement utilisé pour cet audit ne permet pas de cloner le dépôt et d’exécuter les scripts localement ; cette étape reste donc à faire dans un environnement de travail avec le dépôt, puis à vérifier dans la CI. Ne pas déclarer la page conforme tant que le script et les tests ne sont pas passés.
 
-Ces écarts doivent être traités dans la PR d’enrichissement. Le processus du dépôt impose de retirer les entrées corrigées en exécutant `node scripts/check-pages.mjs --update-baseline`, jamais en éditant la baseline manuellement. Il faut ensuite contrôler qu’aucune entrée nouvelle n’a été créée et que le cliquet est vert. Ne pas déclarer la page conforme tant que ce contrôle n’a pas été exécuté.
+## 4. Enrichissement éditorial et UX réalisé dans la branche
 
-## 4. Enrichissement éditorial et UX proposé
+- Le H1 et l’introduction sont maintenant contenus dans une section `.tool` tout en conservant le design spécifique de la succession.
+- Une FAQ native de sept questions a été ajoutée avant le bloc des outils associés.
+- Le calculateur et ses formules JavaScript n’ont pas été modifiés.
+
+Les améliorations supplémentaires listées ci-dessous restent les points de contrôle de l’audit, notamment l’accessibilité, le rendu mobile, la validation des sources et l’exécution de la suite de tests.
 
 ### Priorité 1 — contrat de page et résultat
 
@@ -89,6 +92,6 @@ Les sources et barèmes devront être ouverts et revérifiés au moment de la mo
 - [ ] CI GitHub Actions verte avant fusion.
 - [ ] Aucune fusion ni mise en production sans demande explicite.
 
-## 7. Portée de cet audit
+## 7. Portée et statut
 
-Ce document est un audit préalable et un plan d’intervention, pas un certificat de conformité du calculateur. À la date de rédaction, les contrôles de la CI n’ont pas été exécutés dans cette branche ; aucune réussite de test n’est revendiquée.
+Ce document suit l’enrichissement de la page dans la branche. Il ne constitue pas un certificat de conformité du calculateur. Les formules métier n’ont pas été changées. Les contrôles locaux n’ont pas pu être exécutés dans l’environnement de travail ; la correction de la baseline via le script officiel, l’exécution des tests et la vérification du statut GitHub Actions restent obligatoires. Aucune réussite de test n’est revendiquée.
