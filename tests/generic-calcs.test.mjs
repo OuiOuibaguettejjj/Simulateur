@@ -55,4 +55,5 @@ await import("./pourcentage.test.mjs");
 await import("./conges-payes.test.mjs");
 await import("./cash-flow-immobilier.test.mjs");
 await import("./sasu-vs-ei-micro.test.mjs");
+await import("./comparateur-placements.test.mjs");
 
