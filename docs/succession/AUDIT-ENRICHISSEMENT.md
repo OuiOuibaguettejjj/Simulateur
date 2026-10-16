@@ -37,11 +37,11 @@ La page n’est pas encore migrée vers `data/parametres.json`. Avant toute modi
 
 L’audit initial a identifié deux entrées pour cette page dans `scripts/check-pages.baseline.json` : `faq` et `tool-block`. La branche ajoute maintenant une section `.calculator-faq` avec sept questions et place le H1 ainsi que l’introduction dans une section `.tool` englobante, sans supprimer la structure métier existante.
 
-La baseline de la branche a été réduite à `[]` après correction des deux écarts suivis pour cette page. Sur le commit précédent, la CI avait exécuté le script officiel et confirmé que `tool-block` était déjà corrigé, mais que la FAQ ne respectait pas encore sa structure attendue. La FAQ a depuis été remise au niveau du contrat (`h2` exact « FAQ » et `<details>` enfants directs du bloc `.calculator-faq`). Le contrôle `baseline-regeneree` du nouveau commit doit confirmer que la baseline correspond exactement au résultat de `node scripts/check-pages.mjs --update-baseline` ; ne pas déclarer la conformité avant ce résultat.
+La baseline de la branche est `[]` après correction des deux écarts suivis pour cette page. La FAQ respecte le contrat (`h2` exact « FAQ » et `<details>` enfants directs du bloc `.calculator-faq`). La structure HTML a été unifiée : une seule section `.tool` contient le H1, l’interface, le résultat et le bloc méthode/sources. Le contrôle `baseline-regeneree` doit confirmer cette conformité sur le commit final.
 
 ## 4. Enrichissement éditorial et UX réalisé dans la branche
 
-- Le H1 et l’introduction sont maintenant contenus dans une section `.tool` tout en conservant le design spécifique de la succession.
+- Le H1, l’introduction, le formulaire, le résultat et les sources sont maintenant réunis dans une section `.tool` unique, conformément à `docs/FORME.md`, tout en conservant le design spécifique de la succession.
 - Une FAQ native de sept questions a été ajoutée avant le bloc des outils associés.
 - Le calculateur et ses formules JavaScript n’ont pas été modifiés.
 
@@ -85,10 +85,10 @@ Les sources et barèmes devront être ouverts et revérifiés au moment de la mo
 - [ ] Le calcul existant est conservé, ou chaque changement métier est justifié par un cas reproductible et une source officielle.
 - [ ] Les cas de référence couvrent les liens de parenté, les exonérations et la représentation.
 - [ ] FAQ conforme au contrat du dépôt.
-- [ ] H1 et introduction dans la section `.tool`.
+- [x] H1, formulaire, résultat et sources réunis dans une section `.tool` unique.
 - [ ] Aucun nouvel écart dans la baseline ; écarts corrigés retirés uniquement via le script prévu.
 - [x] FAQ et contrat structurel de page contrôlés par GitHub Actions sur le commit précédent.
-- [x] Contrôle de baseline régénérée passé sur le commit précédent ; la nouvelle exécution doit reconfirmer le résultat après les tests ajoutés.
+- [ ] Contrôle de baseline régénérée à confirmer sur le commit final.
 - [x] Un test ciblé couvre maintenant le champ principal vide et vérifie que zéro reste une valeur valide.
 - [ ] Contrôles complets et tests de la tête actuelle de la PR : attendre la CI déclenchée par les derniers commits.
 - [ ] Audit visuel manuel mobile et desktop effectué.
