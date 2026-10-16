@@ -6,19 +6,19 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="google-adsense-account" content="ca-pub-2924580037451268">
 <title>Calcul indemnités maladie (IJSS) 2026 | Simulateur</title>
-<meta name="description" content="Estimez vos IJSS maladie en 2026 à partir de la date de début de l’arrêt, de vos trois salaires bruts et de sa durée.">
+<meta name="description" content="Calculez vos indemnités journalières maladie (IJSS) en 2026 selon la date de début, vos trois salaires bruts et la durée de l’arrêt.">
 <link rel="canonical" href="https://simulateur.site/outil/indemnites-maladie/">
 <link rel="stylesheet" href="/styles.css">
 <script src="/parametres.js" defer></script>
 <script src="/simulateurs.js" defer></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calcul indemnités maladie (IJSS) 2026 | Simulateur","url":"https://simulateur.site/outil/indemnites-maladie/","description":"Estimez vos IJSS maladie en 2026 à partir de la date de début de l’arrêt, de vos trois salaires bruts et de sa durée.","inLanguage":"fr-FR","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"price":"0","priceCurrency":"EUR"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calcul indemnités maladie (IJSS) 2026 | Simulateur","url":"https://simulateur.site/outil/indemnites-maladie/","description":"Calculez vos indemnités journalières maladie (IJSS) en 2026 selon la date de début, vos trois salaires bruts et la durée de l’arrêt.","inLanguage":"fr-FR","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"price":"0","priceCurrency":"EUR"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur.site/"},{"@type":"ListItem","position":2,"name":"Travail","item":"https://simulateur.site/travail/"},{"@type":"ListItem","position":3,"name":"Calculateur indemnités maladie","item":"https://simulateur.site/outil/indemnites-maladie/"}]}</script>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Simulateur">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:title" content="Calcul indemnités maladie (IJSS) 2026 | Simulateur">
-<meta property="og:description" content="Estimez vos IJSS maladie en 2026 à partir de la date de début de l’arrêt, de vos trois salaires bruts et de sa durée.">
+<meta property="og:description" content="Calculez vos indemnités journalières maladie (IJSS) en 2026 selon la date de début, vos trois salaires bruts et la durée de l’arrêt.">
 <meta property="og:url" content="https://simulateur.site/outil/indemnites-maladie/">
 <meta name="twitter:card" content="summary">
 </head>
@@ -32,7 +32,7 @@
 <h1>Calculateur d’indemnités maladie : estimez vos IJSS</h1>
 <p class="tool-intro">Calculez une estimation des indemnités journalières brutes de l’Assurance maladie à partir de la date de début de l’arrêt, de vos trois derniers salaires bruts et de sa durée. Les paramètres disponibles concernent les arrêts débutés entre le 1er juillet et le 31 décembre 2026. Le résultat est indicatif : il ne vaut pas décision de la CPAM.</p>
 <div id="fields">
-<div class="field"><label for="date-debut">Date de début de l’arrêt (jj/mm/aaaa)</label><input id="date-debut" type="text" inputmode="numeric" autocomplete="off" placeholder="01/07/2026" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" aria-describedby="date-help" required></div>
+<div class="field"><label for="date-debut">Date de début de l’arrêt (jj/mm/aaaa)</label><input id="date-debut" type="text" inputmode="numeric" autocomplete="off" placeholder="01/07/2026" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" aria-describedby="date-help" oninput="const p=this.selectionStart??this.value.length;const n=this.value.slice(0,p).replace(/\D/g,\u0027\u0027).length;const d=this.value.replace(/\D/g,\u0027\u0027).slice(0,8);this.value=d.slice(0,2)+(d.length>2?\u0027/\u0027+d.slice(2,4):\u0027\u0027)+(d.length>4?\u0027/\u0027+d.slice(4):\u0027\u0027);let i=0,k=0;while(i<this.value.length&&k<n){if(/\d/.test(this.value[i]))k++;i++;}this.setSelectionRange(i,i);" required></div>
 <p id="date-help">Cette estimation utilise les paramètres applicables du 1er juillet au 31 décembre 2026. Les arrêts débutés en dehors de cette période nécessitent un barème différent.</p>
 <div class="field"><label for="s1">Salaire brut du mois précédent l’arrêt (€)</label><input id="s1" type="text" inputmode="decimal" autocomplete="off" placeholder="3000,00" aria-describedby="salary-help"></div>
 <div class="field"><label for="s2">Salaire brut du 2e mois précédent (€)</label><input id="s2" type="text" inputmode="decimal" autocomplete="off" placeholder="3000,00"></div>
@@ -88,7 +88,7 @@ const p=set.values,retained=salaries.reduce((sum,n)=>sum+Math.min(n,p.plafondMen
 if(!Number.isFinite(retained)||retained<=0)return"Le total des salaires de référence doit être supérieur à zéro.";
 const base=retained/p.diviseurSalaireJournalier;
 const rawDaily=base*p.tauxIndemnisation;
-const daily=Math.floor(Math.min(rawDaily,p.indemniteJournaliereMaximale)*100+1e-8)/100;
+const daily=rawDaily>=p.indemniteJournaliereMaximale?p.indemniteJournaliereMaximale:Math.floor(rawDaily*100+1e-8)/100;
 const payableDays=Math.max(0,days-p.joursCarence),total=daily*payableDays;
 if(![retained,base,rawDaily,daily,total].every(Number.isFinite))return"Résultat impossible à calculer. Vérifiez les montants saisis.";
 return"<strong>"+this.euro(total)+" d’IJSS brutes estimées</strong><br><small>IJ journalière : "+this.euro(daily)+" · jours indemnisés après "+p.joursCarence+" jours de carence : "+payableDays+".</small>";
