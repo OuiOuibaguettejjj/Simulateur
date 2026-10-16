@@ -43,6 +43,32 @@ assert.deepEqual(
   "une modification éditoriale avec date lastmod actualisée passe"
 );
 
+assert.deepEqual(
+  checkPageLastmod({
+    file: "public/outil/exemple/index.html",
+    baseHtml: "<title>Avant</title><main>Texte</main>",
+    currentHtml: "<title>Après</title><main>Texte</main>",
+    baseRoutes: { "/outil/exemple/": "2026-10-16" },
+    currentRoutes: { "/outil/exemple/": "2026-10-16" },
+    today: "2026-10-16"
+  }),
+  [],
+  "une modification éditoriale le même jour peut conserver la date lastmod du jour"
+);
+
+assert.deepEqual(
+  checkPageLastmod({
+    file: "public/outil/exemple/index.html",
+    baseHtml: "<title>Avant</title><main>Texte</main>",
+    currentHtml: "<title>Après</title><main>Texte</main>",
+    baseRoutes: { "/outil/exemple/": "2026-10-15" },
+    currentRoutes: { "/outil/exemple/": "2026-10-15" },
+    today: "2026-10-16"
+  }).length,
+  1,
+  "une modification éditoriale ancienne sans changement de lastmod échoue toujours"
+);
+
 assert.equal(
   normalizePageForLastmod('<meta name="twitter:card" content="summary"><p>Texte</p>'),
   "<p>Texte</p>"
