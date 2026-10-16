@@ -95,15 +95,15 @@ if(![retained,base,rawDaily,daily,total].every(Number.isFinite))return"Résultat
 return"<strong>"+this.euro(total)+" d’IJSS brutes estimées</strong><br><small>IJ journalière : "+this.euro(daily)+" · jours indemnisés après "+p.joursCarence+" jours de carence : "+payableDays+".</small>";
 }};</script>
 <script>
-+document.getElementById("date-debut")?.addEventListener("input",function(){
-+const before=this.value.slice(0,this.selectionStart??this.value.length).replace(/\D/g,"").length;
-+const digits=this.value.replace(/\D/g,"").slice(0,8);
-+this.value=digits.slice(0,2)+(digits.length>2?"/"+digits.slice(2,4):"")+(digits.length>4?"/"+digits.slice(4):"");
-+let position=0,count=0;
-+while(position<this.value.length&&count<before){if(/\d/.test(this.value[position]))count++;position++;}
-+this.setSelectionRange(position,position);
-+});
-+</script>
+document.getElementById("date-debut")?.addEventListener("input",function(){
+const before=this.value.slice(0,this.selectionStart??this.value.length).replace(/\D/g,"").length;
+const digits=this.value.replace(/\D/g,"").slice(0,8);
+this.value=digits.slice(0,2)+(digits.length>2?"/"+digits.slice(2,4):"")+(digits.length>4?"/"+digits.slice(4):"");
+let position=0,count=0;
+while(position<this.value.length&&count<before){if(/\d/.test(this.value[position]))count++;position++;}
+this.setSelectionRange(position,position);
+});
+</script>
 +<script src="/enter-calcul.js" defer></script>
 </body>
 </html>
