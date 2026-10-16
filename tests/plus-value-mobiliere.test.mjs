@@ -39,8 +39,8 @@ for(const inputs of [
 // Les lignes fiscales affichées sont arrondies au centime ; le total doit
 // être la somme exacte de ces lignes visibles, pas l'arrondi de la somme brute.
 const centime=await runInlineCalculator({slug,inputs:{achat:"100",vente:"101",frais:"0"}});
-assert.match(centime.text,/Impôt sur le revenu \(12,8 %\)<\/small><strong>0,13\s*€/);
-assert.match(centime.text,/Prélèvements sociaux \(18,6 %\)<\/small><strong>0,19\s*€/);
-assert.match(centime.text,/Imposition totale estimée<\/small><strong>0,32\s*€/,"le total affiché doit correspondre à la somme des deux lignes arrondies");
+assert.match(centime.text,/Impôt sur le revenu \(12,8 %\)\s*0,13\s*€/);
+assert.match(centime.text,/Prélèvements sociaux \(18,6 %\)\s*0,19\s*€/);
+assert.match(centime.text,/Imposition totale estimée\s*0,32\s*€/,"le total affiché doit correspondre à la somme des deux lignes arrondies");
 
 console.log("Plus-value mobilière : gain, moins-value, zéro, arrondis et validations vérifiés.");
