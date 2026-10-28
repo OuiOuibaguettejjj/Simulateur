@@ -30,12 +30,26 @@ function cacheStaticAsset(response, pathname) {
 }
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
 
-    if (url.pathname === "/okx" || url.pathname === "/okx/" || url.pathname === "/go" || url.pathname === "/go/") {
+    if (url.pathname === "/go" || url.pathname === "/go/") {
       if (request.method !== "GET" && request.method !== "HEAD") {
         return secure(new Response("Method Not Allowed", { status: 405 }), { Allow: "GET, HEAD" });
+      }
+
+      if (request.method === "GET" && env.CLICK_COUNTS) {
+        const recordClick = async () => {
+          try {
+            const current = Number(await env.CLICK_COUNTS.get("clicks:go") || "0");
+            if (!Number.isSafeInteger(current) || current < 0) throw new Error("Invalid clicks:go counter value");
+            await env.CLICK_COUNTS.put("clicks:go", String(current + 1));
+          } catch (error) {
+            console.error({ event: "referral_click_counter_failed", message: error instanceof Error ? error.message : String(error) });
+          }
+        };
+        if (ctx?.waitUntil) ctx.waitUntil(recordClick());
+        else await recordClick();
       }
 
       return secure(

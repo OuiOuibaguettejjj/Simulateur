@@ -10,8 +10,11 @@
     "binding": "ASSETS",
     "html_handling": "force-trailing-slash",
     "not_found_handling": "404-page",
-    "run_worker_first": ["/api/devises", "/okx", "/okx/", "/go", "/go/"]
+    "run_worker_first": ["/api/devises", "/go", "/go/"]
   },
+  "kv_namespaces": [
+    { "binding": "CLICK_COUNTS", "id": "e9eeb9e0462b414c90ec9e4b980eea68" }
+  ],
   "observability": {
     "enabled": true,
     "head_sampling_rate": 1
