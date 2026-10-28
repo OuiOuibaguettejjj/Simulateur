@@ -33,7 +33,7 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
-    if (url.pathname === "/okx" || url.pathname === "/okx/") {
+    if (url.pathname === "/okx" || url.pathname === "/okx/" || url.pathname === "/go" || url.pathname === "/go/") {
       if (request.method !== "GET" && request.method !== "HEAD") {
         return secure(new Response("Method Not Allowed", { status: 405 }), { Allow: "GET, HEAD" });
       }
