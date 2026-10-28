@@ -6,8 +6,10 @@ const SECURITY_HEADERS = {
   "Referrer-Policy": "strict-origin-when-cross-origin",
   "Permissions-Policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), accelerometer=(), gyroscope=(), magnetometer=()",
   "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
-  "Content-Security-Policy": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://pagead2.googlesyndication.com https://*.adtrafficquality.google https://fundingchoices.google.com https://fundingchoicesmessages.google.com https://www.google.com; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://www.googletagservices.com https://partner.googleadservices.com https://tpc.googlesyndication.com https://fundingchoices.google.com https://fundingchoicesmessages.google.com https://*.adtrafficquality.google; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://www.google.com https://*.safeframe.googlesyndication.com https://fundingchoices.google.com https://fundingchoicesmessages.google.com"
+  "Content-Security-Policy": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://pagead2.googlesyndication.com https://*.adtrafficquality.google https://fundingchoices.google.com https://fundingchoicesmessages.google.com https://www.google.com; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://www.googletagservices.com https://partner.googleadservices.com https://tpc.googlesyndication.com https://fundingchoices.google.com https://fundingchoicesmessages.google.com https://*.adtrafficquality.google; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://www.google.com https://*.safeframe.googlesyndication.com https://fundingchoices.google.com https://fundingchoicesmessages.google"
 };
+
+const OKX_REFERRAL_URL = "https://my.okx.com/fr-fr/join/F3DWAQV3";
 
 function secure(response, extra = {}) {
   const headers = new Headers(response.headers);
@@ -30,6 +32,22 @@ function cacheStaticAsset(response, pathname) {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+
+    if (url.pathname === "/okx" || url.pathname === "/okx/") {
+      if (request.method !== "GET" && request.method !== "HEAD") {
+        return secure(new Response("Method Not Allowed", { status: 405 }), { Allow: "GET, HEAD" });
+      }
+
+      return secure(
+        new Response(null, {
+          status: 302,
+          headers: {
+            Location: OKX_REFERRAL_URL,
+            "Cache-Control": "no-store"
+          }
+        })
+      );
+    }
 
     if (url.pathname === "/api/devises") {
       if (request.method !== "GET" && request.method !== "HEAD") {
