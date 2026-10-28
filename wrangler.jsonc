@@ -10,8 +10,11 @@
     "binding": "ASSETS",
     "html_handling": "force-trailing-slash",
     "not_found_handling": "404-page",
-    "run_worker_first": ["/api/devises", "/okx", "/okx/", "/go", "/go/"]
+    "run_worker_first": ["/api/devises", "/go", "/go/"]
   },
+  "analytics_engine_datasets": [
+    { "binding": "CLICK_ANALYTICS", "dataset": "simulateur_clicks" }
+  ],
   "observability": {
     "enabled": true,
     "head_sampling_rate": 1
