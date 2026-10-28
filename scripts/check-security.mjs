@@ -80,7 +80,7 @@ if (!/"run_worker_first"\s*:\s*\[\s*"\/api\/devises"\s*,\s*"\/okx"\s*,\s*"\/okx\
 
 const worker = read("worker.js");
 if (!/request\.method !== "GET" && request\.method !== "HEAD"/.test(worker)) fail("worker: API method allow-list missing");
-if (!/url\.pathname === "\/okx" \|\| url\.pathname === "\/okx\//.test(worker)) fail("worker: exact OKX redirect paths missing");
+if (!/url\.pathname === "\/okx" \|\| url\.pathname === "\/okx\/" \|\| url\.pathname === "\/go" \|\| url\.pathname === "\/go\//.test(worker)) fail("worker: exact referral redirect paths missing");
 if (!/const OKX_REFERRAL_URL = "https:\/\/my\.okx\.com\/fr-fr\/join\/F3DWAQV3"/.test(worker) || !/Location: OKX_REFERRAL_URL/.test(worker)) fail("worker: OKX redirect destination must remain fixed and explicit");
 if (!/Access-Control-Allow-Origin": "https:\/\/simulateur\.site"/.test(worker)) fail("worker: API CORS origin is not locked to simulateur.site");
 if (/Access-Control-Allow-Origin": "\*"/.test(worker)) fail("worker: wildcard CORS is forbidden");
