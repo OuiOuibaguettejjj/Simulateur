@@ -77,13 +77,13 @@ const wrangler = read("wrangler.jsonc");
 if (!/"workers_dev"\s*:\s*false/.test(wrangler)) fail("wrangler: workers_dev must remain disabled");
 if (!/"preview_urls"\s*:\s*false/.test(wrangler)) fail("wrangler: preview_urls must remain disabled");
 if (!/"run_worker_first"\s*:\s*\[\s*"\/api\/devises"\s*,\s*"\/go"\s*,\s*"\/go\/"\s*\]/.test(wrangler)) fail("wrangler: run_worker_first must include only the API and /go referral redirect paths");
-if (!/"binding"\s*:\s*"CLICK_ANALYTICS"\s*,\s*"dataset"\s*:\s*"simulateur_clicks"/.test(wrangler)) fail("wrangler: referral click analytics binding missing");
+if (!/"binding"\s*:\s*"CLICK_COUNTS"\s*,\s*"id"\s*:\s*"e9eeb9e0462b414c90ec9e4b980eea68"/.test(wrangler)) fail("wrangler: referral click counter KV binding missing");
 
 const worker = read("worker.js");
 if (!/request\.method !== "GET" && request\.method !== "HEAD"/.test(worker)) fail("worker: API method allow-list missing");
 if (!/url\.pathname === "\/go" \|\| url\.pathname === "\/go\//.test(worker)) fail("worker: exact /go referral redirect paths missing");
 if (/url\.pathname === "\/okx\/?"/.test(worker) || /"\/okx\/?"/.test(wrangler)) fail("legacy /okx route must be removed");
-if (!/env\.CLICK_ANALYTICS\?\.writeDataPoint/.test(worker)) fail("worker: referral click analytics write missing");
+if (!/env\.CLICK_COUNTS\.get\("clicks:go"\)/.test(worker) || !/env\.CLICK_COUNTS\.put\("clicks:go"/.test(worker)) fail("worker: referral click counter KV read/write missing");
 if (!/const OKX_REFERRAL_URL = "https:\/\/my\.okx\.com\/fr-fr\/join\/F3DWAQV3"/.test(worker) || !/Location: OKX_REFERRAL_URL/.test(worker)) fail("worker: OKX redirect destination must remain fixed and explicit");
 if (!/Access-Control-Allow-Origin": "https:\/\/simulateur\.site"/.test(worker)) fail("worker: API CORS origin is not locked to simulateur.site");
 if (/Access-Control-Allow-Origin": "\*"/.test(worker)) fail("worker: wildcard CORS is forbidden");
