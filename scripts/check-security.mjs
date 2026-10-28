@@ -76,7 +76,7 @@ try {
 const wrangler = read("wrangler.jsonc");
 if (!/"workers_dev"\s*:\s*false/.test(wrangler)) fail("wrangler: workers_dev must remain disabled");
 if (!/"preview_urls"\s*:\s*false/.test(wrangler)) fail("wrangler: preview_urls must remain disabled");
-if (!/"run_worker_first"\s*:\s*\[\s*"\/api\/devises"\s*,\s*"\/okx"\s*,\s*"\/okx\/"\s*\]/.test(wrangler)) fail("wrangler: run_worker_first must include only the API and explicit OKX redirect paths");
+if (!/"run_worker_first"\s*:\s*\[\s*"\/api\/devises"\s*,\s*"\/okx"\s*,\s*"\/okx\/"\s*,\s*"\/go"\s*,\s*"\/go\/"\s*\]/.test(wrangler)) fail("wrangler: run_worker_first must include only the API and explicit referral redirect paths");
 
 const worker = read("worker.js");
 if (!/request\.method !== "GET" && request\.method !== "HEAD"/.test(worker)) fail("worker: API method allow-list missing");
