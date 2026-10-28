@@ -76,10 +76,12 @@ try {
 const wrangler = read("wrangler.jsonc");
 if (!/"workers_dev"\s*:\s*false/.test(wrangler)) fail("wrangler: workers_dev must remain disabled");
 if (!/"preview_urls"\s*:\s*false/.test(wrangler)) fail("wrangler: preview_urls must remain disabled");
-if (!/"run_worker_first"\s*:\s*\[\s*"\/api\/devises"\s*\]/.test(wrangler)) fail("wrangler: run_worker_first must stay limited to /api/devises");
+if (!/"run_worker_first"\s*:\s*\[\s*"\/api\/devises"\s*,\s*"\/okx"\s*,\s*"\/okx\/"\s*\]/.test(wrangler)) fail("wrangler: run_worker_first must include only the API and explicit OKX redirect paths");
 
 const worker = read("worker.js");
 if (!/request\.method !== "GET" && request\.method !== "HEAD"/.test(worker)) fail("worker: API method allow-list missing");
+if (!/url\.pathname === "\/okx" \|\| url\.pathname === "\/okx\//.test(worker)) fail("worker: exact OKX redirect paths missing");
+if (!/const OKX_REFERRAL_URL = "https:\/\/my\.okx\.com\/fr-fr\/join\/F3DWAQV3"/.test(worker) || !/Location: OKX_REFERRAL_URL/.test(worker)) fail("worker: OKX redirect destination must remain fixed and explicit");
 if (!/Access-Control-Allow-Origin": "https:\/\/simulateur\.site"/.test(worker)) fail("worker: API CORS origin is not locked to simulateur.site");
 if (/Access-Control-Allow-Origin": "\*"/.test(worker)) fail("worker: wildcard CORS is forbidden");
 if (/eval\s*\(|new Function\s*\(/.test(worker)) fail("worker: dynamic code execution is forbidden");
