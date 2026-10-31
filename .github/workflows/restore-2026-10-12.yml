@@ -37,9 +37,9 @@ jobs:
     steps:
       - name: Validate requested action
         env:
-          MODE: ${ inputs.mode }}
-          CONFIRMATION: ${ inputs.confirmation }}
-          ROLLBACK_VERSION_ID: ${ inputs.rollback_version_id }}
+          MODE: ${{ inputs.mode }}
+          CONFIRMATION: ${{ inputs.confirmation }}
+          ROLLBACK_VERSION_ID: ${{ inputs.rollback_version_id }}
         run: |
           set -euo pipefail
           case "$MODE" in
@@ -61,43 +61,43 @@ jobs:
           esac
 
       - name: Checkout exact historical snapshot
-        if: ${ inputs.mode != 'rollback' }}
+        if: ${{ inputs.mode != 'rollback' }}
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
           ref: 31207185be3727065f6a9d943d298363fd51e8d9
           fetch-depth: 0
 
       - name: Checkout current config for manual rollback
-        if: ${ inputs.mode == 'rollback' }}
+        if: ${{ inputs.mode == 'rollback' }}
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
           ref: main
 
       - name: Set up Node.js
-        if: ${ inputs.mode != 'rollback' }}
+        if: ${{ inputs.mode != 'rollback' }}
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 20
 
       - name: Install historical test dependencies
-        if: ${ inputs.mode != 'rollback' }}
+        if: ${{ inputs.mode != 'rollback' }}
         run: |
           npm init -y
           npm install --no-audit --no-fund --no-save playwright@1.55.0
           npx playwright install --with-deps chromium
 
       - name: Verify historical commit identity
-        if: ${ inputs.mode != 'rollback' }}
+        if: ${{ inputs.mode != 'rollback' }}
         run: |
           test "$(git rev-parse HEAD)" = "31207185be3727065f6a9d943d298363fd51e8d9"
           echo "Exact historical snapshot checked out."
 
       - name: Security and architecture gate
-        if: ${ inputs.mode != 'rollback' }}
+        if: ${{ inputs.mode != 'rollback' }}
         run: node scripts/check-security.mjs
 
       - name: Validate sitemap, regulatory parameters and layout
-        if: ${ inputs.mode != 'rollback' }}
+        if: ${{ inputs.mode != 'rollback' }}
         run: |
           node scripts/generate-sitemap.mjs --check
           node scripts/generate-params.mjs --check
@@ -112,7 +112,7 @@ jobs:
           node tests/invalid-result.test.mjs
 
       - name: Verify AdSense marker on every historical HTML page
-        if: ${ inputs.mode != 'rollback' }}
+        if: ${{ inputs.mode != 'rollback' }}
         run: |
           node --input-type=module <<'NODE'
           import fs from 'node:fs';
@@ -138,7 +138,7 @@ jobs:
           NODE
 
       - name: Run historical calculator tests
-        if: ${ inputs.mode != 'rollback' }}
+        if: ${{ inputs.mode != 'rollback' }}
         run: |
           node tests/ifi.test.js
           node tests/impot.test.js
@@ -160,22 +160,22 @@ jobs:
           node tests/deploy-workflow.test.mjs
 
       - name: Smoke-test all historical pages locally
-        if: ${ inputs.mode != 'rollback' }}
+        if: ${{ inputs.mode != 'rollback' }}
         run: node scripts/smoke-site.mjs --base-url http://127.0.0.1:4173 --mode local
 
       - name: Record current production version for rollback
-        if: ${ inputs.mode == 'deploy' }}
+        if: ${{ inputs.mode == 'deploy' }}
         id: current-production
         uses: cloudflare/wrangler-action@953926a2e2182532811c01a25e53647d93bf07c0 # v4
         with:
-          apiToken: ${ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: deployments list --json
 
       - name: Save previous production version ID
-        if: ${ inputs.mode == 'deploy' }}
+        if: ${{ inputs.mode == 'deploy' }}
         env:
-          DEPLOYMENTS_JSON: ${ steps.current-production.outputs.command-output }}
+          DEPLOYMENTS_JSON: ${{ steps.current-production.outputs.command-output }}
         run: |
           set -euo pipefail
           node <<'NODE'
@@ -189,20 +189,20 @@ jobs:
           NODE
 
       - name: Add historical build fingerprint
-        if: ${ inputs.mode == 'deploy' }}
+        if: ${{ inputs.mode == 'deploy' }}
         run: printf '%s\n' "31207185be3727065f6a9d943d298363fd51e8d9" > public/__build-sha.txt
 
       - name: Deploy exact historical snapshot
-        if: ${ inputs.mode == 'deploy' }}
+        if: ${{ inputs.mode == 'deploy' }}
         id: deploy
         uses: cloudflare/wrangler-action@953926a2e2182532811c01a25e53647d93bf07c0 # v4
         with:
-          apiToken: ${ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: deploy --config wrangler.jsonc
 
       - name: Verify production fingerprint
-        if: ${ inputs.mode == 'deploy' }}
+        if: ${{ inputs.mode == 'deploy' }}
         run: |
           set -euo pipefail
           expected="31207185be3727065f6a9d943d298363fd51e8d9"
@@ -219,7 +219,7 @@ jobs:
           exit 1
 
       - name: Verify homepage and ads.txt after deployment
-        if: ${ inputs.mode == 'deploy' }}
+        if: ${{ inputs.mode == 'deploy' }}
         run: |
           set -euo pipefail
           curl -fsS https://simulateur.site/ -o /tmp/home.html
@@ -232,21 +232,21 @@ jobs:
           test "$(cat /tmp/ads.txt)" = "google.com, pub-2924580037451268, DIRECT, f08c47fec0942fa0"
 
       - name: Smoke-test production after deployment
-        if: ${ inputs.mode == 'deploy' }}
+        if: ${{ inputs.mode == 'deploy' }}
         run: node scripts/smoke-site.mjs --base-url https://simulateur.site --mode production
 
       - name: Automatic rollback if post-deployment verification fails
-        if: ${ inputs.mode == 'deploy' && failure() && steps.deploy.outcome != 'skipped' && env.PREVIOUS_VERSION_ID != '' }}
+        if: ${{ inputs.mode == 'deploy' && failure() && steps.deploy.outcome != 'skipped' && env.PREVIOUS_VERSION_ID != '' }}
         uses: cloudflare/wrangler-action@953926a2e2182532811c01a25e53647d93bf07c0 # v4
         with:
-          apiToken: ${ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: rollback ${ env.PREVIOUS_VERSION_ID }} --message "Automatic rollback after failed historical restore verification"
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: rollback ${{ env.PREVIOUS_VERSION_ID }} --message "Automatic rollback after failed historical restore verification"
 
       - name: Manually roll back to a saved Cloudflare version
-        if: ${ inputs.mode == 'rollback' }}
+        if: ${{ inputs.mode == 'rollback' }}
         uses: cloudflare/wrangler-action@953926a2e2182532811c01a25e53647d93bf07c0 # v4
         with:
-          apiToken: ${ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: rollback ${ env.ROLLBACK_VERSION_ID }} --message "Manual rollback from historical SEO test"
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: rollback ${{ env.ROLLBACK_VERSION_ID }} --message "Manual rollback from historical SEO test"
