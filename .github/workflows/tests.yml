@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   tests:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 5
     env:
       # Base de comparaison du cliquet et du contrat des pages modifiées (lue par scripts/run-tests.mjs).
