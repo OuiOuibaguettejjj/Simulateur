@@ -51,7 +51,7 @@ jobs:
               }
               ;;
             rollback)
-              printf '%s' "$ROLLBACK_VERSION_ID" | grep -Eq '^[0-9a-fA-F-]{36}$' || {
+              printf '%s' "$ROLLBACK_VERSION_ID" | grep -Eq '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12} || {
                 echo "Rollback refused: a valid Cloudflare version UUID is required."
                 exit 1
               }
@@ -66,6 +66,12 @@ jobs:
         with:
           ref: 31207185be3727065f6a9d943d298363fd51e8d9
           fetch-depth: 0
+
+      - name: Checkout current configuration for manual rollback
+        if: ${{ inputs.mode == 'rollback' }}
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: main
 
       - name: Set up Node.js
         if: ${{ inputs.mode != 'rollback' }}
@@ -128,11 +134,11 @@ jobs:
           const errors = [];
           for (const file of files) {
             const html = fs.readFileSync(file, 'utf8');
-            const head = (html.match(/<head\\b[^>]*>[\\s\\S]*?<\\/head>/i) || [''])[0];
-            const count = (head.match(/<meta\\b[^>]*name=["']google-adsense-account["'][^>]*>/gi) || []).length;
+            const head = (html.match(/<head\b[^>]*>[\s\\S]*?<\\/head>/i) || [''])[0];
+            const count = (head.match(/<meta\b[^>]*name=["']google-adsense-account["'][^>]*>/gi) || []).length;
             if (count !== 1) errors.push(file + ': expected one AdSense account meta, found ' + count);
           }
-          if (errors.length) throw new Error(errors.join('\\n'));
+          if (errors.length) throw new Error(errors.join('\n'));
           console.log('AdSense markers verified on ' + files.length + ' HTML files.');
           NODE
 
@@ -189,13 +195,13 @@ jobs:
           const deployments = Array.isArray(data) ? data : (data.result?.deployments ?? data.deployments);
           const active = deployments?.[0]?.versions?.find(v => v.percentage === 100);
           if (!active?.version_id) throw new Error('Unable to identify the active 100% production version.');
-          fs.appendFileSync(process.env.GITHUB_ENV, 'PREVIOUS_VERSION_ID=' + active.version_id + '\\n');
+          fs.appendFileSync(process.env.GITHUB_ENV, 'PREVIOUS_VERSION_ID=' + active.version_id + '\n');
           console.log('PREVIOUS_VERSION_ID=' + active.version_id);
           NODE
 
       - name: Add historical build fingerprint
         if: ${{ inputs.mode == 'deploy' }}
-        run: printf '%s\\n' "31207185be3727065f6a9d943d298363fd51e8d9" > public/__build-sha.txt
+        run: printf '%s\n' "31207185be3727065f6a9d943d298363fd51e8d9" > public/__build-sha.txt
 
       - name: Deploy exact historical snapshot to production
         if: ${{ inputs.mode == 'deploy' }}
@@ -228,7 +234,221 @@ jobs:
         run: |
           set -euo pipefail
           curl -fsS https://simulateur.site/ -o /tmp/home.html
-          grep -Eiq '<meta[^>]+name=["']google-adsense-account["']' /tmp/home.html
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const html = fs.readFileSync('/tmp/home.html', 'utf8');
+          if (!/<meta\\b[^>]*name=["']google-adsense-account["']/i.test(html)) throw new Error('AdSense account meta missing on production homepage');
+          NODE
+          curl -fsS https://simulateur.site/ads.txt -o /tmp/ads.txt
+          test "$(cat /tmp/ads.txt)" = "google.com, pub-2924580037451268, DIRECT, f08c47fec0942fa0"
+
+      - name: Smoke-test production after historical deployment
+        if: ${{ inputs.mode == 'deploy' }}
+        run: node scripts/smoke-site.mjs --base-url https://simulateur.site --mode production
+
+      - name: Automatic rollback if post-deployment verification fails
+        if: ${{ inputs.mode == 'deploy' && failure() && steps.deploy.outcome != 'skipped' && env.PREVIOUS_VERSION_ID != '' }}
+        uses: cloudflare/wrangler-action@953926a2e2182532811c01a25e53647d93bf07c0 # v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: rollback ${{ env.PREVIOUS_VERSION_ID }} --message "Automatic rollback after failed historical restore verification"
+
+      - name: Manually roll back to a saved Cloudflare version
+        if: ${{ inputs.mode == 'rollback' }}
+        uses: cloudflare/wrangler-action@953926a2e2182532811c01a25e53647d93bf07c0 # v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: rollback ${{ env.ROLLBACK_VERSION_ID }} --message "Manual rollback from historical SEO test"
+ || {
+                echo "Rollback refused: a valid Cloudflare version UUID is required."
+                exit 1
+              }
+              echo "ROLLBACK_VERSION_ID=$ROLLBACK_VERSION_ID" >> "$GITHUB_ENV"
+              ;;
+            *) echo "Unknown mode"; exit 1 ;;
+          esac
+
+      - name: Checkout exact historical snapshot
+        if: ${{ inputs.mode != 'rollback' }}
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: 31207185be3727065f6a9d943d298363fd51e8d9
+          fetch-depth: 0
+
+      - name: Checkout current configuration for manual rollback
+        if: ${{ inputs.mode == 'rollback' }}
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: main
+
+      - name: Set up Node.js
+        if: ${{ inputs.mode != 'rollback' }}
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 20
+
+      - name: Install historical test dependencies
+        if: ${{ inputs.mode != 'rollback' }}
+        run: |
+          npm init -y
+          npm install --no-audit --no-fund --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Verify historical commit identity
+        if: ${{ inputs.mode != 'rollback' }}
+        run: |
+          test "$(git rev-parse HEAD)" = "31207185be3727065f6a9d943d298363fd51e8d9"
+          echo "Exact 2026-10-12 snapshot checked out."
+
+      - name: Security and architecture gate
+        if: ${{ inputs.mode != 'rollback' }}
+        run: node scripts/check-security.mjs
+
+      - name: Validate generated sitemap and regulatory parameters
+        if: ${{ inputs.mode != 'rollback' }}
+        run: |
+          node scripts/generate-sitemap.mjs --check
+          node scripts/generate-params.mjs --check
+          node scripts/check-params.mjs
+
+      - name: Validate layout, static site and AdSense preparation
+        if: ${{ inputs.mode != 'rollback' }}
+        run: |
+          node scripts/normalize-layout.mjs --check
+          node scripts/prepare-adsense.mjs --check
+          node tests/check-layout.test.mjs
+          node scripts/check-layout.mjs
+          node scripts/check-static-site.mjs
+          node tests/sitemap.test.mjs
+          node tests/ad-filter.test.mjs
+          node tests/invalid-result.test.mjs
+
+      - name: Validate AdSense markers on all historical HTML pages
+        if: ${{ inputs.mode != 'rollback' }}
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import path from 'node:path';
+          const root = 'public';
+          const files = [];
+          function walk(dir) {
+            for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+              const file = path.join(dir, entry.name);
+              if (entry.isDirectory()) walk(file);
+              else if (entry.isFile() && (entry.name === 'index.html' || (dir === root && entry.name === '404.html'))) files.push(file);
+            }
+          }
+          walk(root);
+          const errors = [];
+          for (const file of files) {
+            const html = fs.readFileSync(file, 'utf8');
+            const head = (html.match(/<head\b[^>]*>[\s\\S]*?<\\/head>/i) || [''])[0];
+            const count = (head.match(/<meta\b[^>]*name=["']google-adsense-account["'][^>]*>/gi) || []).length;
+            if (count !== 1) errors.push(file + ': expected one AdSense account meta, found ' + count);
+          }
+          if (errors.length) throw new Error(errors.join('\n'));
+          console.log('AdSense markers verified on ' + files.length + ' HTML files.');
+          NODE
+
+      - name: Run historical deterministic calculator tests
+        if: ${{ inputs.mode != 'rollback' }}
+        run: |
+          node tests/ifi.test.js
+          node tests/impot.test.js
+          node tests/rsa.test.js
+          node tests/retraite.test.js
+          node tests/age-retraite.test.js
+          node tests/age-retraite-seo.test.js
+          node tests/age-retraite-final.test.js
+          node tests/simulateurs.test.js
+          node tests/ratio.test.mjs
+          node tests/params.test.mjs
+
+      - name: Run historical browser and reference tests
+        if: ${{ inputs.mode != 'rollback' }}
+        run: |
+          node tests/smoke-results.test.mjs
+          node tests/generic-calcs.test.mjs
+          node tests/signe-astrologique.test.mjs
+          node tests/reference-calcs.test.mjs
+          node tests/check-pages.test.mjs
+          node tests/normalize-layout.test.mjs
+          node tests/interactive-families.test.mjs
+          node tests/deploy-workflow.test.mjs
+
+      - name: Smoke-test every historical calculator locally
+        if: ${{ inputs.mode != 'rollback' }}
+        run: node scripts/smoke-site.mjs --base-url http://127.0.0.1:4173 --mode local
+
+      - name: Record current Cloudflare production version
+        if: ${{ inputs.mode == 'deploy' }}
+        id: current-production
+        uses: cloudflare/wrangler-action@953926a2e2182532811c01a25e53647d93bf07c0 # v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deployments list --json
+
+      - name: Save current production version ID for automatic/manual rollback
+        if: ${{ inputs.mode == 'deploy' }}
+        env:
+          DEPLOYMENTS_JSON: ${{ steps.current-production.outputs.command-output }}
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const fs = require('fs');
+          const raw = process.env.DEPLOYMENTS_JSON;
+          if (!raw) throw new Error('Cloudflare deployments list returned no output.');
+          const data = JSON.parse(raw);
+          const deployments = Array.isArray(data) ? data : (data.result?.deployments ?? data.deployments);
+          const active = deployments?.[0]?.versions?.find(v => v.percentage === 100);
+          if (!active?.version_id) throw new Error('Unable to identify the active 100% production version.');
+          fs.appendFileSync(process.env.GITHUB_ENV, 'PREVIOUS_VERSION_ID=' + active.version_id + '\n');
+          console.log('PREVIOUS_VERSION_ID=' + active.version_id);
+          NODE
+
+      - name: Add historical build fingerprint
+        if: ${{ inputs.mode == 'deploy' }}
+        run: printf '%s\n' "31207185be3727065f6a9d943d298363fd51e8d9" > public/__build-sha.txt
+
+      - name: Deploy exact historical snapshot to production
+        if: ${{ inputs.mode == 'deploy' }}
+        id: deploy
+        uses: cloudflare/wrangler-action@953926a2e2182532811c01a25e53647d93bf07c0 # v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy --config wrangler.jsonc
+
+      - name: Verify production fingerprint
+        if: ${{ inputs.mode == 'deploy' }}
+        run: |
+          set -euo pipefail
+          expected="31207185be3727065f6a9d943d298363fd51e8d9"
+          actual=""
+          for attempt in $(seq 1 30); do
+            actual="$(curl -fsSL --retry 2 --retry-delay 1 https://simulateur.site/__build-sha.txt 2>/dev/null || true)"
+            if [ "$actual" = "$expected" ]; then
+              echo "Historical production fingerprint verified."
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "Production fingerprint mismatch. Expected $expected, received $actual"
+          exit 1
+
+      - name: Verify production homepage and ads.txt
+        if: ${{ inputs.mode == 'deploy' }}
+        run: |
+          set -euo pipefail
+          curl -fsS https://simulateur.site/ -o /tmp/home.html
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const html = fs.readFileSync('/tmp/home.html', 'utf8');
+          if (!/<meta\\b[^>]*name=["']google-adsense-account["']/i.test(html)) throw new Error('AdSense account meta missing on production homepage');
+          NODE
           curl -fsS https://simulateur.site/ads.txt -o /tmp/ads.txt
           test "$(cat /tmp/ads.txt)" = "google.com, pub-2924580037451268, DIRECT, f08c47fec0942fa0"
 
