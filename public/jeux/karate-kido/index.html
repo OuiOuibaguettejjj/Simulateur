@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#241321">
+  <meta name="google-adsense-account" content="ca-pub-2924580037451268">
+  <link rel="canonical" href="https://simulateur.site/jeux/karate-kido/">
+  <meta name="description" content="Jouez à un prototype 2D de jeu d’arcade inspiré de Karate Kido 2 : réflexes, branches à éviter et progression.">
+  <title>Karate Kido 2 — Prototype 2D</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="hud">
+      <button class="brand" id="home-button" aria-label="Accueil"><span class="brand-icon">拳</span><span>KARATE KIDO <b>2</b></span></button>
+      <div class="hud-stat"><small>SCORE</small><strong id="score">0</strong></div>
+      <div class="hud-stat"><small>MULTI</small><strong id="multiplier">x1.0</strong></div>
+      <div class="hud-stat"><small>RECORD</small><strong id="best">0</strong></div>
+      <div class="hud-stat coins"><small>PIÈCES</small><strong id="coins">0</strong></div>
+    </header>
+
+    <section class="game-frame" aria-label="Jeu">
+      <canvas id="game" width="240" height="360" aria-label="Zone de jeu en pixel art"></canvas>
+      <div class="timer"><span id="timer-fill"></span></div>
+
+      <section class="screen active" id="home-screen">
+        <div class="panel home-panel">
+          <p class="kicker">LE DÉFI DU DOJO</p>
+          <h1>KARATE<br><em>KIDO 2</em></h1>
+          <p class="intro">Enchaîne les frappes. Change de côté avant que les branches ne te barrent la route.</p>
+          <button class="primary" id="play-button">JOUER</button>
+          <div class="home-links">
+            <button class="secondary" data-screen="dojo-screen">DOJO</button>
+            <button class="secondary" data-screen="profile-screen">PROFIL</button>
+          </div>
+          <p class="micro">MODE SOLO · SAUVEGARDE LOCALE</p>
+        </div>
+      </section>
+
+      <section class="screen" id="dojo-screen">
+        <div class="panel sub-panel">
+          <button class="back" data-screen="home-screen">← RETOUR</button>
+          <p class="kicker">ENTRAÎNEMENT</p>
+          <h2>LE DOJO</h2>
+          <p class="intro">Améliore tes capacités avec les pièces gagnées en jeu.</p>
+          <div class="upgrade-list">
+            <article class="upgrade">
+              <div><b>Souffle</b><small>Augmente le temps de départ</small></div>
+              <strong id="breath-level">Niv. 0</strong>
+              <button class="buy" id="buy-breath">AMÉLIORER · 50</button>
+            </article>
+            <article class="upgrade">
+              <div><b>Concentration</b><small>Augmente les pièces gagnées</small></div>
+              <strong id="focus-level">Niv. 0</strong>
+              <button class="buy" id="buy-focus">AMÉLIORER · 75</button>
+            </article>
+          </div>
+          <p class="wallet">TON PORTE-MONNAIE : <b id="dojo-coins">0</b> pièces</p>
+        </div>
+      </section>
+
+      <section class="screen" id="profile-screen">
+        <div class="panel sub-panel">
+          <button class="back" data-screen="home-screen">← RETOUR</button>
+          <p class="kicker">IDENTITÉ DU COMBATTANT</p>
+          <h2>MON PROFIL</h2>
+          <div class="profile-card">
+            <div class="avatar" id="avatar">忍</div>
+            <div><b id="rank-name">Débutant</b><small id="profile-xp">0 XP</small></div>
+          </div>
+          <p class="section-label">CHOISIS TON KIMONO</p>
+          <div class="skins" id="skins">
+            <button class="skin selected" data-skin="yellow" aria-label="Kimono jaune"></button>
+            <button class="skin" data-skin="blue" aria-label="Kimono bleu"></button>
+            <button class="skin" data-skin="green" aria-label="Kimono vert"></button>
+            <button class="skin" data-skin="red" aria-label="Kimono rouge"></button>
+          </div>
+          <p class="wallet">MEILLEUR SCORE : <b id="profile-best">0</b></p>
+        </div>
+      </section>
+
+      <section class="screen" id="pause-screen">
+        <div class="panel result-panel">
+          <p class="kicker">PAUSE</p><h2>ON REPREND ?</h2>
+          <button class="primary" id="resume-button">CONTINUER</button>
+          <button class="secondary wide" id="quit-button">QUITTER LA PARTIE</button>
+        </div>
+      </section>
+
+      <section class="screen" id="over-screen">
+        <div class="panel result-panel">
+          <p class="kicker">FIN DE PARTIE</p>
+          <h2 id="result-title">BIEN JOUÉ</h2>
+          <div class="result-score"><small>SCORE</small><strong id="result-score">0</strong></div>
+          <p id="result-copy" class="intro">Continue l'entraînement pour battre ton record.</p>
+          <div class="reward-line">+<b id="earned-coins">0</b> pièces</div>
+          <button class="primary" id="retry-button">REJOUER</button>
+          <button class="secondary wide" data-screen="home-screen">ACCUEIL</button>
+        </div>
+      </section>
+
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </section>
+
+    <footer class="controls">
+      <button class="hit hit-left" id="left-button"><span>◀</span><b>GAUCHE</b></button>
+      <button class="hit hit-right" id="right-button"><b>DROITE</b><span>▶</span></button>
+    </footer>
+    <p class="help">Tape à gauche ou à droite · Clavier : ← → · Échap : pause</p>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>
