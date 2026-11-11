@@ -3,22 +3,32 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#241321">
   <meta name="google-adsense-account" content="ca-pub-2924580037451268">
-  <link rel="canonical" href="https://simulateur.site/jeux/karate-kido/">
+  <meta name="theme-color" content="#241321">
+    <link rel="canonical" href="https://simulateur.site/jeux/karate-kido/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <meta name="description" content="Jouez à un prototype 2D de jeu d’arcade inspiré de Karate Kido 2 : réflexes, branches à éviter et progression.">
   <title>Karate Kido 2 — Prototype 2D</title>
+  <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="style.css">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Simulateur">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:title" content="Karate Kido 2 — Prototype 2D">
+  <meta property="og:description" content="Jouez à un prototype 2D de jeu d’arcade inspiré de Karate Kido 2 : réflexes, branches à éviter et progression.">
+  <meta property="og:url" content="https://simulateur.site/jeux/karate-kido/">
+  <meta name="twitter:card" content="summary">
 </head>
 <body>
+  <header><div class="wrap nav"><a class="logo" href="/">Simulateur<span>.</span></a><nav class="navlinks" aria-label="Navigation principale"><a href="/calculateurs/">Calculateurs</a><a href="/simulateurs/">Simulateurs</a><a class="nav-extra" href="/conversions/">Conversions</a><a class="nav-extra" href="/comparateurs/">Comparateurs</a></nav></div></header>
   <main class="app">
-    <header class="hud">
+    <div class="hud">
       <button class="brand" id="home-button" aria-label="Accueil"><span class="brand-icon">拳</span><span>KARATE KIDO <b>2</b></span></button>
       <div class="hud-stat"><small>SCORE</small><strong id="score">0</strong></div>
       <div class="hud-stat"><small>MULTI</small><strong id="multiplier">x1.0</strong></div>
       <div class="hud-stat"><small>RECORD</small><strong id="best">0</strong></div>
       <div class="hud-stat coins"><small>PIÈCES</small><strong id="coins">0</strong></div>
-    </header>
+    </div>
 
     <section class="game-frame" aria-label="Jeu">
       <canvas id="game" width="240" height="360" aria-label="Zone de jeu en pixel art"></canvas>
@@ -103,12 +113,13 @@
       <div class="toast" id="toast" role="status" aria-live="polite"></div>
     </section>
 
-    <footer class="controls">
+    <div class="controls">
       <button class="hit hit-left" id="left-button"><span>◀</span><b>GAUCHE</b></button>
       <button class="hit hit-right" id="right-button"><b>DROITE</b><span>▶</span></button>
-    </footer>
+    </div>
     <p class="help">Tape à gauche ou à droite · Clavier : ← → · Échap : pause</p>
   </main>
+  <footer><div class="wrap"><div class="footerlinks"><a href="/">Accueil</a><a href="/a-propos/">À propos</a><a href="/contact/">Contact</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/cookies/">Cookies</a><a href="/cgu/">CGU</a></div></div></footer>
   <script src="game.js"></script>
 </body>
 </html>
