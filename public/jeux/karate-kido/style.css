@@ -1,9 +1,9 @@
 :root{color-scheme:dark;--ink:#fff4dc;--muted:#d6b6b4;--gold:#ffd45c;--red:#e94c45;--panel:#281b2b}
 *{box-sizing:border-box}
 html,body{margin:0;min-height:100%;background:#160f1d;color:var(--ink);font-family:Arial,Helvetica,sans-serif}
-body{min-height:100vh;min-height:100svh;display:grid;place-items:center;padding:12px;background:radial-gradient(ellipse at 50% 12%,#5d2639 0,#261626 48%,#120d18 100%)}
+body{min-height:100vh;min-height:100svh;display:block;padding:0;background:radial-gradient(ellipse at 50% 12%,#5d2639 0,#261626 48%,#120d18 100%)}
 button{font:inherit;color:inherit;cursor:pointer}
-.app{width:min(100%,420px);display:flex;flex-direction:column;gap:9px}
+.app{width:min(100%,420px);margin:12px auto;display:flex;flex-direction:column;gap:9px}
 .hud{height:54px;display:grid;grid-template-columns:1fr auto auto auto auto;align-items:center;gap:11px;padding:0 10px;background:linear-gradient(180deg,#42283a,#211725);border:2px solid #986044;box-shadow:0 4px 0 #100b13}
 .brand{display:flex;align-items:center;gap:7px;padding:0;border:0;background:none;font-size:10px;font-weight:900;letter-spacing:.8px;white-space:nowrap}
 .brand b{color:var(--gold)}
